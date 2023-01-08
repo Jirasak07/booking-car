@@ -7,3 +7,6 @@ DB_PORT=1433
 DB_DATABASE=bookingcar
 DB_USERNAME=jirasak
 DB_PASSWORD=Lanna1234
+
+
+composer require laravel/ui
