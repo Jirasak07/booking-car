@@ -1,9 +1,7 @@
 <?php
 
-use App\Http\Controllers\APi\CarControllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\DriverController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +17,3 @@ use App\Http\Controllers\Api\DriverController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-Route::get("cars",[CarControllers::class,'index']);
-Route::get("drive",[DriverController::class,'index']);
