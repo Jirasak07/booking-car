@@ -92,7 +92,7 @@
         </div>
     </div>
 </div>
-<div class="text-uppercase fw-bolder h4 text-test p-3" style="color:#495579">
+<div class="text-uppercase fw-bolder h4 text-test p-3" style="color:#8392bd">
     <label  id="name-head"></label>
 </div>
 <script>

@@ -30,8 +30,9 @@ Route::get('users/booking', [\App\Http\Controllers\frontend\UserController::clas
 Route::get('admin/dashboard', [\App\Http\Controllers\frontend\AdminController::class, 'index'])->name('admin.dashboard');
 Route::get('admin/request', [\App\Http\Controllers\frontend\AdminController::class, 'bookingRequest'])->name('admin.booking_request');
 Route::get('admin/manage-driver', [\App\Http\Controllers\frontend\AdminController::class, 'manageDriver'])->name('admin.manageDriver');
+Route::get('admin/manage-car', [\App\Http\Controllers\frontend\AdminController::class, 'manageCar'])->name('admin.manageCar');
 Route::post('admin/GG',function(Request $request){
 
-    dd($request);
+    dd($request->all());
 
 })->name('GG');

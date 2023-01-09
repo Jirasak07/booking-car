@@ -4,10 +4,10 @@
     @include('layouts.admin.header')
     <div class="container-sm ">
         <div class="container p-md-2 p-1 mt-sm-2 mt-sm-1 mt-2">
-            <div class="card shadow-sm p-3 overflow-auto">
+            <div class="card-dark shadow-b overflow-auto">
 
-                <table class="overflow-auto table table-md table-hover fw-bold table-responsive-xl">
-                    <thead class="table-light">
+                <table class="rounded table table-md  table-light fw-bold table-responsive-xl">
+                    <thead class="table-dark table-hover">
                         <tr>
                             <td class="fw-bold">ลำดับ</td>
                             <td>ผู้จอง</td>
@@ -156,10 +156,11 @@
                     ' </div>' +
                     ' <div class="mb-3 col-5">' +
                     '   <label for="exampleInputEmail1" class="form-label">เบอร์โทรศัพท์</label>' +
-                    ' <input type="text" class="form-control" name="out_name" />' +
+                    ' <input type="text" class="form-control" name="out_tell" />' +
                     ' </div>' +
                     '     </div>' +
                     ' <div class="modal-footer">' +
+                        // '<input name="date" type="datetime-local" data-date-format="yyyy-mm-dd" />'+
                     ' <input type="submit" name="submit" class="btn btn-success" value="อนุมัติ" />' +
                     ' <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ปิด</button>' +
                     ' </div>' +
