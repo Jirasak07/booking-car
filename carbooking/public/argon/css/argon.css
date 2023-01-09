@@ -1599,7 +1599,7 @@ pre code {
 .table {
     width: 100%;
     margin-bottom: 1rem;
-
+  
     background-color: transparent;
 }
 .table th,
@@ -2887,6 +2887,42 @@ fieldset:disabled a.btn {
 .show > .btn-neutral.dropdown-toggle:focus {
     box-shadow: none, 0 0 0 0 rgba(255, 255, 255, 0.5);
 }
+/* btn yellow */
+.btn-yellow {
+    color: #111;
+    border-color: yellow;
+    background-color: yellow;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+.btn-yellow:hover {
+    color: #fff;
+    border-color: black;
+    background-color: black;
+}
+.btn-yellow:focus,
+.btn-yellow.focus {
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08),
+        0 0 0 0 rgba(0, 0, 0, 0.5);
+}
+.btn-yellow.disabled,
+.btn-yellow:disabled {
+    color: #fff;
+    border-color: black;
+    background-color: black;
+}
+.btn-yellow:not(:disabled):not(.disabled):active,
+.btn-yellow:not(:disabled):not(.disabled).active,
+.show > .btn-yellow.dropdown-toggle {
+    color: #fff;
+    border-color: black;
+    background-color: black;
+}
+.btn-yellow:not(:disabled):not(.disabled):active:focus,
+.btn-yellow:not(:disabled):not(.disabled).active:focus,
+.show > .btn-yellow.dropdown-toggle:focus {
+    box-shadow: none, 0 0 0 0 rgba(0, 0, 0, 0.5);
+}
+/* end yellow*/
 
 .btn-darker {
     color: #fff;
