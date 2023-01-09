@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -19,7 +20,9 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
+Route::post('user/send',function(Request $request){
+    dd($request->all());
+})->name('sendRe');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('users/dashboard', [\App\Http\Controllers\frontend\UserController::class, 'index'])->name('user.dashboard');
 Route::get('users/booking', [\App\Http\Controllers\frontend\UserController::class, 'viewBooking'])->name('users.view-booking');

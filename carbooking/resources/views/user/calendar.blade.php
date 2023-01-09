@@ -52,7 +52,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
     <!-- Modal -->
     <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
-    
+
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.0.2/index.global.min.js'></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -138,70 +138,74 @@
 <div class="modal fade" id="bookingModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="bookingModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="bookingModalLabel">กรอกรายละเอียดการจองรถ</h1>
-                <button type="button" class="close" onclick="window.location.reload()" data-dismiss="modal"
-                    aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row g-3">
-                    <div class="col-md-3">
-                        <strong for="validationCustom03">วันเดินทางไป</strong>
-                    </div>
-                    <div class="col-md-4">
-                        <label class="plaintext" id="booking_start" name="booking_start"></label>
-                    </div>
-                    <div class="col-md-5">
-                        <input type="date" data-date="" class="datetimepicker" data-date-format="DD MM YYYY"
-                            id="date_start">
-                        <input type="time" data-date="" class="datetimepicker" data-date-format="" id="time_start">
-                    </div>
-                    <br />
-                    <br />
-                    <div class="col-md-3">
-                        <strong for="validationCustom03">วันเดินทางกลับ</strong>
-                    </div>
-                    <div class="col-md-4">
-                        <label class="plaintext" id="booking_end" name="booking_end"></label>
-                    </div>
-                    <div class="col-md-5">
-                        <input type="date" data-date="" class="datetimepicker" data-date-format="DD MM YYYY"
-                            id="date_end">
-                        <input type="time" data-date="" class="datetimepicker" data-date-format="" id="time_end">
-                    </div>
-                    <br />
-                    <br />
+        <form method="POST" action="{{ route('sendRe') }}">
+            @csrf
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="bookingModalLabel">กรอกรายละเอียดการจองรถ</h1>
+                    <button type="button" class="close" onclick="window.location.reload()" data-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <strong for="validationCustom03">วันเดินทางไป</strong>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="plaintext" id="booking_start" name="booking_start"></label>
+                        </div>
+                        <div class="col-md-5">
+                            <input type="date" data-date="" class="datetimepicker" data-date-format="DD MM YYYY" name="date_start"
+                                id="date_start">
+                            <input type="time" data-date="" class="datetimepicker" data-date-format=""
+                                id="time_start" name="time_start">
+                        </div>
+                        <br />
+                        <br />
+                        <div class="col-md-3">
+                            <strong for="validationCustom03">วันเดินทางกลับ</strong>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="plaintext" id="booking_end" name="booking_end"></label>
+                        </div>
+                        <div class="col-md-5">
+                            <input type="date" data-date="" class="datetimepicker" data-date-format="DD MM YYYY"
+                                id="date_end" name="date_end">
+                            <input type="time" data-date="" class="datetimepicker" data-date-format=""
+                                id="time_end" name="time_end">
+                        </div>
+                        <br />
+                        <br />
 
-                    <div class="col-md-12 mb-3">
-                        <strong class="form-label">ชื่อผู้จอง</strong>
-                        <input type="text" class="form-control" id="name" name="name"
-                            placeholder="ชื่อผู้จอง">
-                    </div>
+                        <div class="col-md-12 mb-3">
+                            <strong class="form-label">ชื่อผู้จอง</strong>
+                            <input type="text" class="form-control" id="name" name="name"
+                                placeholder="ชื่อผู้จอง">
+                        </div>
 
-                    <div class="col-md-12">
-                        <strong class="form-label">รายละเอียดการจอง</strong>
-                        <textarea name="location" id="location" class="form-control" rows="5">
+                        <div class="col-md-12">
+                            <strong class="form-label">รายละเอียดการจอง</strong>
+                            <textarea name="location" id="location" class="form-control" rows="5">
                         </textarea>
+                        </div>
                     </div>
                 </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn grey btn-danger" onclick="window.location.reload()"
+                        data-dismiss="modal">{{ __('ย้อนกลับ') }}</button>
+                    {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> --}}
+                    <input type="submit" name="saveBooking" value="ยืนยัน" id="saveBooking" class="btn btn-primary">
+                </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn grey btn-danger" onclick="window.location.reload()"
-                    data-dismiss="modal">{{ __('ย้อนกลับ') }}</button>
-                {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> --}}
-                <button type="button" name="saveBooking" id="saveBooking" class="btn btn-primary">ยืนยัน</button>
-            </div>
-        </div>
+        </form>
+
     </div>
 </div>
 
 
 <div class="container-fluid">
-    <br />
 
-    <br />
     <div id='calendar'></div>
 </div>

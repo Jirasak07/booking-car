@@ -6,58 +6,84 @@
     <div class="container-fluid mt--7">
         <div class="row mb-3">
             <div class="col-xl-12">
-                <div class="card">
-                    <div class="card-header bg-transparent">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <h6 class="text-uppercase text-darker ls-1 mb-1 fw-bolder">การจอง</h6>
+                <div class="card shadow-sm p-3 overflow-auto">
+                    <table class="overflow-auto table  table-hover fw-bold table-responsive-xl">
+                        <thead class="table-light">
+                            <tr align="center">
+                                <td class="fw-bolder">ลำดับ</td>
+                                <td class="fw-bolder">ช่วงวันที่</td>
+                                <td class="fw-bolder">รายละเอียดการจอง</td>
+                                <td class="fw-bolder">สถานะการจอง</td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td align="center">1</td>
+                                <td>วันที่เดินทางไป ถึง วันที่เดินทางกลับ</td>
+                                <td align="center">
+                                    <button class="btn btn-neutral btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#viewde">ดู</button>
+                                </td>
+                                <td align="center">
+                                    <button class="btn btn-dark btn-sm me-2">ดำเนินการเสร็จสิ้น</button>
+                                    <button class="btn btn-yellow btn-sm">กำลังดำเนินการ</button>
+                                </td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal view detail -->
+        <div class="modal fade" id="viewde" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="viewdeLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content ">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="viewdeLabel">รายละเอียดการจอง</h1>
+                        <button type="button" class="close" onclick="window.location.reload()" data-dismiss="modal"
+                            aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row mb-3">
+                            <label for="" class="col-sm-2 col-form-label">ชื่อผู้จอง</label>
+                            <div class="col-sm-10">
+                                <input type="text" disabled value="ตัวแปรชื่อผู้จอง" readonly
+                                    class="form-control-plaintext" id="user_book" name="user_book">
                             </div>
                         </div>
+                        <div class="row mb-1">
+                            <label for="" class="col-sm-2 col-form-label">ช่วงวันที่</label>
+                            <div class="col-sm-10">
+                                <input type="text" disabled value="วันที่เดินทางไป ถึง วันที่เดินทางกลับ" readonly
+                                    class="form-control-plaintext" id="">
+                            </div>
+                        </div>
+                        <div class="row mb-1">
+                            <label for="" class="col-form-label">รายละเอียดการจอง</label>
+                        </div>
+                        <div class="row mb-3">
+                            <textarea rows="5" type="text" class="form-control-plaintext" disabled readonly id="location" name="location">
+                                -สถานที่การเดินทาง
+                                -ชื่อผู้ร่วมเดินทาง
+                            </textarea>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <table class="table" border="1">
-                            <thead class="table-dark ">
-                                <tr>
-                                    <th></th>
-                                    <th>ช่วงวันที่</th>
-                                    <th>รายละเอียดการจอง</th>
-                                    <th>สถานะการจอง</th>
-                                    <th>จัดการ</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th>1</th>
-                                    <td></td>
-                                    <td>
-                                        <button class="btn btn-yellow">
-                                            รอดำเนินการ
-                                        </button>
-                                    </td>
-                                    <td></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary text-uppercase" onclick="window.location.reload()"
+                            {{--  data-bs-dismiss="modal" --}}>ok</button>
                     </div>
                 </div>
             </div>
         </div>
-        {{--  <div class="row">
-            <div class="col-xl-12">
-                <div class="card">
-                    <div class="card-header bg-transparent">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <h6 class="text-uppercase text-darker ls-1 mb-1 fw-bolder">ประวัติการจอง</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-
-                    </div>
-                </div>
-            </div>
-        </div> --}}
+        @push('js')
+            <script></script>
+        @endpush
         @include('layouts.footers.auth')
     </div>
 @endsection
