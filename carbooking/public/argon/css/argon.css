@@ -49,7 +49,7 @@
     --breakpoint-lg: 992px;
     --breakpoint-xl: 1200px;
     --font-family-sans-serif: Open Sans, sans-serif;
-    --font-family-monospace: 'Kanit', sans-serif;
+    --font-family-monospace: "Kanit", sans-serif;
 }
 
 *,
@@ -86,7 +86,7 @@ section {
 }
 
 body {
-    font-family: 'Kanit', sans-serif;
+    font-family: "Kanit", sans-serif;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
@@ -6790,7 +6790,14 @@ button.close {
 .align-text-top {
     vertical-align: text-top !important;
 }
+.bg-test{
+    background-color: #21D4FD;
+    background-image: linear-gradient(19deg, #21D4FD 0%, #B721FF 100%);
 
+}
+.bg-test-100{
+    background-color: #C539B4 !important;
+}
 .bg-primary {
     background-color: #5e72e4 !important;
 }
@@ -6883,7 +6890,7 @@ button.bg-dark:focus {
     background-color: #ffffff !important;
 }
 .bg-head {
-    background-color: #59CE8F;
+    background-color: #59ce8f;
 }
 
 a.bg-default:hover,
@@ -7420,8 +7427,8 @@ button.bg-darker:focus {
 .align-self-end {
     align-self: flex-end !important;
 }
-.text-lanna{
-    color: #3C4048;
+.text-lanna {
+    color: #3c4048;
     font-size: 1.5rem;
     font-weight: 500;
 }
@@ -12490,7 +12497,6 @@ button.bg-lighter:focus {
 .bg-gradient-secondary {
     background: linear-gradient(87deg, #f7fafc 0, #f7f8fc 100%) !important;
 }
-
 .bg-gradient-success {
     background: linear-gradient(87deg, #2dce89 0, #2dcecc 100%) !important;
 }
@@ -13451,7 +13457,9 @@ button.section-darker:focus {
 [class*="shadow"] {
     transition: all 0.15s ease;
 }
-
+.shadow-bottom{
+    box-shadow: 4px 6px 12px 1px rgba(0, 0, 0, 0.24) !important;
+}
 .shadow-sm--hover:hover {
     box-shadow: 0 0 0.5rem rgba(136, 152, 170, 0.075) !important;
 }
@@ -13933,7 +13941,7 @@ a.text-lighter:focus {
 
     will-change: transform;
 }
-.btn-lanna{
+.btn-lanna {
     color: var(--white);
     background-color: var(--warning);
 }
@@ -15171,7 +15179,7 @@ textarea[resize="horizontal"] {
     font-size: 4.25rem;
 }
 .icon-xl + .icon-text {
-    width: calc(100% - $icon-size-xl - 1);
+    width: calc(100% - icon-size-xl - 1);
 }
 
 .icon-lg {
@@ -15183,7 +15191,7 @@ textarea[resize="horizontal"] {
     font-size: 3.25rem;
 }
 .icon-lg + .icon-text {
-    width: calc(100% - $icon-size-lg - 1);
+    width: calc(100% - icon-size-lg - 1);
 }
 
 .icon-sm {
@@ -15195,7 +15203,7 @@ textarea[resize="horizontal"] {
     font-size: 1.25rem;
 }
 .icon-sm + .icon-text {
-    width: calc(100% - $icon-size-sm - 1);
+    width: calc(100% - icon-size-sm - 1);
 }
 
 .icon-shape {
