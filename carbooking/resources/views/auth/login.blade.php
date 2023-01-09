@@ -3,16 +3,20 @@
 @section('content')
     @include('layouts.headers.guest')
     <div class="container mt--8 pb-5">
-        <div class="row justify-content-center ">
-            <div class="col-lg-5 col-md-7 ">
-                <div class="card bg-secondary shadow-b rounded border-0">
-                    <div class="card-header bg-transparent pb-2">
-                        <div class=" text-center mt-2  ">
-                            <h1 class="text-success">เข้าสู่ระบบ</h1>
+        <div class="row justify-content-center  ">
+            <div class="col-lg-5 col-md-7  ">
+                <div class="card bg-secondary shadow-b rounded border-3">
+                    <div class="card-header bg-transparent">
+                        <div class="text-center mt-2">
+                            <div class="mt-3 text-center ">
+                                <img src="{{ asset('assets/img/lanna-removebg-preview.png') }}" width="150px" />
+                            </div>
                         </div>
-
                     </div>
-                    <div class="card-body px-lg-5 py-lg-5">
+                    <div class="card-body px-lg-5 py-lg-3">
+                        <div class=" text-center mb-4  ">
+                            <div class="text-lanna ">ระบบจองคิวรถ</div>
+                        </div>
 
                         <form role="form" method="POST" action="{{ route('login') }}">
                             @csrf
@@ -38,8 +42,7 @@
                                         <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                                     </div>
                                     <input class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
-                                        name="password" placeholder="{{ __('Password') }}" type="password" value="secret"
-                                        required>
+                                        name="password" placeholder="{{ __('Password') }}" type="password" required>
                                 </div>
                                 @if ($errors->has('password'))
                                     <span class="invalid-feedback" style="display: block;" role="alert">
@@ -55,7 +58,7 @@
                                 </label>
                             </div>
                             <div class="text-center">
-                                <button type="submit" class="btn btn-primary my-4">{{ __('Sign in') }}</button>
+                                <button type="submit" class="btn btn-lanna my-4">{{ __('เข้าสู่ระบบ') }}</button>
                             </div>
                         </form>
                     </div>
