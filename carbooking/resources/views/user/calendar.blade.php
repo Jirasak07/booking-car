@@ -52,9 +52,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
     <!-- Modal -->
     <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
-    </script>
+    
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.0.2/index.global.min.js'></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -203,9 +201,7 @@
 
 <div class="container-fluid">
     <br />
-    <h3 style="font-size: 30px" class="fw-bold" align="center">
-        เลือกวันเวลาที่ต้องการทำการจอง
-    </h3>
+
     <br />
     <div id='calendar'></div>
 </div>

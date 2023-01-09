@@ -1,3 +1,4 @@
+@section('title', 'Dashboard')
 @extends('layouts.user.users')
 @section('content')
     @include('layouts.user.header')

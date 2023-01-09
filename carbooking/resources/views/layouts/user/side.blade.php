@@ -95,7 +95,7 @@ background: linear-gradient(87deg, rgba(248,249,255,1) 0%, rgba(210,247,255,1) 1
             <!-- Navigation -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link text-darker" href="">
+                    <a class="nav-link text-darker" href="{{ route('user.dashboard') }}">
                         <i class="ni ni-tv-2 text-primary"></i>Dashboard
                     </a>
                 </li>
