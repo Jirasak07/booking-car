@@ -14,7 +14,7 @@
                                 <td class="fw-bolder">ช่วงวันที่</td>
                                 <td class="fw-bolder">รายละเอียดการจอง</td>
                                 <td class="fw-bolder">สถานะการจอง</td>
-                                <td></td>
+                                <td class="fw-bolder">จัดการ</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -26,10 +26,27 @@
                                         data-bs-target="#viewde">ดู</button>
                                 </td>
                                 <td align="center">
-                                    <button class="btn btn-dark btn-sm me-2">ดำเนินการเสร็จสิ้น</button>
+
                                     <button class="btn btn-yellow btn-sm">กำลังดำเนินการ</button>
                                 </td>
-                                <td></td>
+                                <td align="center">
+                                    <button class="btn btn-danger btn-sm">ยกเลิก</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center">2</td>
+                                <td>วันที่เดินทางไป ถึง วันที่เดินทางกลับ</td>
+                                <td align="center">
+                                    <button class="btn btn-neutral btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#viewde">ดู</button>
+                                </td>
+                                <td align="center">
+                                    <button class="btn btn-dark btn-sm me-2">ดำเนินการเสร็จสิ้น</button>
+                                    <button class="btn btn-danger btn-sm me-2">ถูกยกเลิกโดยผู้ใช้</button>
+                                    <button class="btn btn-danger btn-sm me-2">ถูกยกเลิกโดยแอดมิน</button>
+                                </td>
+                                <td>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -65,18 +82,26 @@
                             </div>
                         </div>
                         <div class="row mb-1">
-                            <label for="" class="col-form-label">รายละเอียดการจอง</label>
+                            <label for="" class="col col-form-label">รายละเอียดรถและคนขับ</label>
+                        </div>
+                        <div class="d-flex justify-content-end mb-3">
+                            <input type="text" disabled value="ทะเบียนรถ ยี่ห้อและชื่อคนขับ" readonly
+                                class="form-control-plaintext" id="user_book" name="user_book">
+                        </div>
+                        <div class="row mb-1">
+                            <label for="" class="col col-form-label">รายละเอียดการจอง</label>
                         </div>
                         <div class="row mb-3">
-                            <textarea rows="5" type="text" class="form-control-plaintext" disabled readonly id="location" name="location">
+                            <textarea type="text" class="form-control-plaintext" disabled readonly id="location" name="location">
                                 -สถานที่การเดินทาง
                                 -ชื่อผู้ร่วมเดินทาง
                             </textarea>
                         </div>
+
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary text-uppercase" onclick="window.location.reload()"
-                            {{--  data-bs-dismiss="modal" --}}>ok</button>
+                        <button type="button" class="btn btn-primary text-uppercase"
+                            onclick="window.location.reload()">ok</button>
                     </div>
                 </div>
             </div>
