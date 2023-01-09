@@ -100,15 +100,17 @@
                     }); */
                 },
                 select: function(info) {
-                    var booking_start = moment(info.startStr).format('YYYY-MM-DD');
-                    var booking_end = moment(info.endStr).format('YYYY-MM-DD');
+                    var booking_start = moment(info.startStr).format('YYYY-MM-DD hh:mm:ss');
+                    var booking_end = moment(info.endStr).format('YYYY-MM-DD hh:mm:ss');
                     var time_start = moment(info.startStr).format('LTS');
                     var time_end = moment(info.endStr).format('LTS');
                     $('#bookingModal').modal('toggle');
                     document.getElementById('booking_start').innerHTML = booking_start;
                     document.getElementById('booking_end').innerHTML = booking_end;
+
                     document.getElementById('date_start').value = booking_start;
                     document.getElementById('time_start').value = time_start;
+
                     document.getElementById('date_end').value = booking_end;
                     document.getElementById('time_end').value = time_end;
                     /* if (ty_car1.checked == true) {
@@ -151,28 +153,25 @@
                         <div class="col-md-3">
                             <strong for="validationCustom03">วันเดินทางไป</strong>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-4">
                             <label class="plaintext" id="booking_start" name="booking_start"></label>
                         </div>
-                        <div class="col-md-6">
-                            <input type="date" data-date="" class="datetimepicker" data-date-format="DD MM YYYY" name="date_start"
-                                id="date_start">
-                            <input type="time" data-date="" class="datetimepicker" data-date-format=""
-                                id="time_start" name="time_start">
+                        <div class="col-md-5">
+                            <input type="datetime-local" data-date="" class="datetimepicker"
+                                data-date-format="DD MM YYYY hh:mm:ss" name="date_start" id="date_start">
+
                         </div>
                         <br />
                         <br />
                         <div class="col-md-3">
                             <strong for="validationCustom03">วันเดินทางกลับ</strong>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-4">
                             <label class="plaintext" id="booking_end" name="booking_end"></label>
                         </div>
-                        <div class="col-md-6">
-                            <input type="date" data-date="" class="datetimepicker" data-date-format="DD MM YYYY"
-                                id="date_end" name="date_end">
-                            <input type="time" data-date="" class="datetimepicker" data-date-format=""
-                                id="time_end" name="time_end">
+                        <div class="col-md-5">
+                            <input type="datetime-local" data-date="" class="datetimepicker"
+                                data-date-format="DD MM YYYY hh:mm:ss" id="date_end" name="date_end">
                         </div>
                         <br />
                         <br />
@@ -202,8 +201,6 @@
     </div>
 </div>
 
-
 <div class="container-fluid">
-
     <div id='calendar'></div>
 </div>

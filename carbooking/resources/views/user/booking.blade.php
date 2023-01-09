@@ -42,8 +42,8 @@
                                 </td>
                                 <td align="center">
                                     <button class="btn btn-dark btn-sm me-2">ดำเนินการเสร็จสิ้น</button>
-                                    <button class="btn btn-danger btn-sm me-2">ถูกยกเลิกโดยผู้ใช้</button>
-                                    <button class="btn btn-danger btn-sm me-2">ถูกยกเลิกโดยแอดมิน</button>
+                                    <button class="btn btn-danger btn-sm me-2">ถูกยกเลิก</button>
+                                    
                                 </td>
                                 <td>
                                 </td>
