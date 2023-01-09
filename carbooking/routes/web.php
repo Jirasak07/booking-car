@@ -21,11 +21,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('users/dashboard',[\App\Http\Controllers\frontend\UserController::class,'index'])->name('user.dashboard');
-Route::get('users/booking',[\App\Http\Controllers\frontend\UserController::class,'viewBooking'])->name('users.view-booking');
-
-Route::get('admin/dashboard',[\App\Http\Controllers\frontend\AdminController::class,'index'])->name('admin.dashboard');
 Route::get('users/dashboard', [\App\Http\Controllers\frontend\UserController::class, 'index'])->name('user.dashboard');
+Route::get('users/booking', [\App\Http\Controllers\frontend\UserController::class, 'viewBooking'])->name('users.view-booking');
+
 Route::get('admin/dashboard', [\App\Http\Controllers\frontend\AdminController::class, 'index'])->name('admin.dashboard');
 Route::get('admin/request', [\App\Http\Controllers\frontend\AdminController::class, 'bookingRequest'])->name('admin.booking_request');
 Route::get('admin/manage-driver', [\App\Http\Controllers\frontend\AdminController::class, 'manageDriver'])->name('admin.manageDriver');
