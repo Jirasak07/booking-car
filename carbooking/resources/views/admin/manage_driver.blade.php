@@ -3,7 +3,7 @@
 @section('content')
     @include('layouts.admin.header')
     <div class="container ">
-        <div class="container-md p-md-5 p-1 mt-sm-5 mt-sm-1 mt-4">
+        <div class="container-md p-md-2 p-1 mt-sm-2 mt-sm-1 mt-4">
             <div class="card shadow-sm p-3 overflow-auto">
                 <table class="overflow-auto table  table-hover fw-bold table-responsive-xl">
                     <thead class="table-light">

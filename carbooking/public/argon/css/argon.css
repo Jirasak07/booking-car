@@ -15,6 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+@import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 :root {
     --blue: #5e72e4;
     --indigo: #5603ad;
@@ -56,10 +57,11 @@
 *::before,
 *::after {
     box-sizing: border-box;
+    font-family: "Kanit", sans-serif !important;
 }
 
 html {
-    font-family: sans-serif;
+    font-family: "Kanit", sans-serif;
     line-height: 1.15;
 
     -webkit-text-size-adjust: 100%;
@@ -97,6 +99,9 @@ body {
 
     color: #525f7f;
     background-color: #f8f9fe;
+}
+.gap{
+    gap: 20px;
 }
 
 [tabindex="-1"]:focus {
@@ -6790,13 +6795,12 @@ button.close {
 .align-text-top {
     vertical-align: text-top !important;
 }
-.bg-test{
-    background-color: #21D4FD;
-    background-image: linear-gradient(19deg, #21D4FD 0%, #B721FF 100%);
-
+.bg-test {
+    background-color: #21d4fd;
+    background-image: linear-gradient(19deg, #21d4fd 0%, #b721ff 100%);
 }
-.bg-test-100{
-    background-color: #C539B4 !important;
+.bg-test-100 {
+    background-color: #c539b4 !important;
 }
 .bg-primary {
     background-color: #5e72e4 !important;
@@ -13457,7 +13461,7 @@ button.section-darker:focus {
 [class*="shadow"] {
     transition: all 0.15s ease;
 }
-.shadow-bottom{
+.shadow-bottom {
     box-shadow: 4px 6px 12px 1px rgba(0, 0, 0, 0.24) !important;
 }
 .shadow-sm--hover:hover {
