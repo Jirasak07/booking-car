@@ -85,12 +85,17 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{url('/admin/request')}}">
-                        <i class="fa-regular fa-calendar"></i> {{ __('Booking request') }}
+                        <i class="fa-regular fa-calendar"></i> {{ __('รายการจอง') }}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{url('/admin/manage-driver')}}">
-                        <i class="fa-regular fa-calendar"></i> {{ __('จัดการข้อมูลคนขับ') }}
+                        <i class="fa-regular fa-calendar"></i> {{ __('จัดการข้อมูลพนักงานขับรถ') }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url('/admin/manage-driver')}}">
+                        <i class="fa-regular fa-calendar"></i> {{ __('จัดการข้อมูลรถภายใน') }}
                     </a>
                 </li>
                 {{-- <li class="nav-item">
