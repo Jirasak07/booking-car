@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,3 +25,7 @@ Route::get('users/dashboard',[\App\Http\Controllers\frontend\UserController::cla
 Route::get('users/booking',[\App\Http\Controllers\frontend\UserController::class,'viewBooking'])->name('users.view-booking');
 
 Route::get('admin/dashboard',[\App\Http\Controllers\frontend\AdminController::class,'index'])->name('admin.dashboard');
+Route::get('users/dashboard', [\App\Http\Controllers\frontend\UserController::class, 'index'])->name('user.dashboard');
+Route::get('admin/dashboard', [\App\Http\Controllers\frontend\AdminController::class, 'index'])->name('admin.dashboard');
+Route::get('admin/request', [\App\Http\Controllers\frontend\AdminController::class, 'bookingRequest'])->name('admin.booking_request');
+Route::get('admin/manage-driver', [\App\Http\Controllers\frontend\AdminController::class, 'manageDriver'])->name('admin.manageDriver');
