@@ -9,17 +9,17 @@
                     <div class="row">
                         @foreach ($car as $cars)
                             <div class=" col-12 col-sm-6 col-lg-6 col-md-12 p-1  ">
-                                <div class="bg-dark-2 card box p-2">
+                                <div class=" box-1 bg-dark-2 card box p-2">
                                     <div class="d-flex row ">
                                         <div class="col ">
                                             <div class="d-flex flex-row align-items-center">
-                                                <div class="text-primary" style="font-size: 2.5rem">0 </div>
-                                                <div class="margin-left" style="font-size: 0.6rem">รายการ</div>
+                                                <div class="text-info" style="font-size: 2.5rem">0 </div>
+                                                <div class="margin-left text-white" style="font-size: 0.6rem">รายการ</div>
                                             </div>
-                                            <div class="text-primary text-capitalize" style="font-size: 0.7rem">
+                                            <div class="text-info text-capitalize" style="font-size: 0.7rem">
                                                 {{ $cars['car_model'] }}
                                             </div>
-                                            <div class="text-light" style="font-size: 0.5rem">{{ $cars['car_license'] }}
+                                            <div class="text-white" style="font-size: 0.5rem">{{ $cars['car_license'] }}
                                             </div>
                                         </div>
                                         <div class=" w-100 col-5 d-flex align-items-center justify-content-center  ">
