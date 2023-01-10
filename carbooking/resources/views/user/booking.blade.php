@@ -3,7 +3,8 @@
 @extends('layouts.user.users')
 @section('content')
     @include('layouts.user.header')
-    <div class="container-fluid mt-5">
+    @include('layouts.user.hea-booking')
+    <div class="container-fluid mt-3">
         <div class="row mb-3">
             <div class="col-xl-12">
                 <div class="card shadow-sm p-3 overflow-auto">

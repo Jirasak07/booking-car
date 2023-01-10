@@ -8,7 +8,7 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'User Dashboard') }}</title>
+    <title>ระบบจองคิวรถ</title>
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
     <!-- Fonts -->
