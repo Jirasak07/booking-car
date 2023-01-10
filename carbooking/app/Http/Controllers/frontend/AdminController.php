@@ -3,24 +3,30 @@
 namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\CarModel;
 
 class AdminController extends Controller
 {
     //
-    public function index(){
-        return view('admin.dashboard');
+    public function index()
+    {
+        $car = CarModel::All();
+        return view('admin.dashboard')->with(['car' => $car]);
     }
-    public function bookingRequest(){
+    public function bookingRequest()
+    {
         return view('admin.booking_request');
     }
-    public function manageDriver(){
+    public function manageDriver()
+    {
         return view('admin.manage_driver');
     }
-    public function manageCar(){
+    public function manageCar()
+    {
         return view('admin.manage_car');
     }
-    public function manageUser(){
+    public function manageUser()
+    {
         return view('admin.manage_user');
     }
 }
