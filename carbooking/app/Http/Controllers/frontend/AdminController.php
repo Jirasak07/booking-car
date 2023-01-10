@@ -17,4 +17,7 @@ class AdminController extends Controller
     public function manageDriver(){
         return view('admin.manage_driver');
     }
+    public function manageCar(){
+        return view('admin.manage_car');
+    }
 }

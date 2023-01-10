@@ -100,7 +100,7 @@ body {
     color: #525f7f;
     background-color: #f8f9fe;
 }
-.gap{
+.gap {
     gap: 20px;
 }
 
@@ -214,6 +214,7 @@ a {
 
     -webkit-text-decoration-skip: objects;
 }
+
 a:hover {
     text-decoration: none;
 
@@ -6832,8 +6833,14 @@ button.close {
     vertical-align: text-top !important;
 }
 .bg-test {
-    background-color: #21d4fd;
-    background-image: linear-gradient(19deg, #21d4fd 0%, #b721ff 100%);
+    background-image: radial-gradient(
+        circle 610px at -5.2% -51.6%,
+        rgba(5, 8, 114, 1) 0%,
+        rgba(7, 3, 53, 1) 97.5%
+    );
+}
+.bg-test-2 {
+    background-image: linear-gradient( 110.3deg,  rgba(73,93,109,1) 4.3%, rgba(49,55,82,1) 96.7% );
 }
 .bg-test-100 {
     background-color: #c539b4 !important;
@@ -12016,6 +12023,9 @@ button.bg-darker:focus {
     .mx-xl-auto {
         margin-left: auto !important;
     }
+}
+.dash {
+    font-size: 5em !important;
 }
 
 .text-monospace {
