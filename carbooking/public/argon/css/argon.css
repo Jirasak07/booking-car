@@ -7551,6 +7551,10 @@ button.bg-light:focus {
     background-color: #343a40 !important;
 
 }
+.box{
+    min-height: 100px;
+
+}
 .box-card{
     min-height: 200px;
     box-shadow: 2px 2px 9px 3px rgba(255, 63, 15, 0.07);
@@ -7567,9 +7571,22 @@ button.bg-light:focus {
    top: 0;
 }
 .car-icon{
-    filter: opacity(0.1) drop-shadow(0 0 0 #EAE0DA) ;
+    filter: opacity(0.8) drop-shadow(1px 1px 1px blue);
     position: absolute;
     z-index: 1;
+}
+.car-icon-2{
+    width: 50px;
+    height: 50px;
+    max-width: fit-content;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    background-color: #212529;
+    border: 1px solid var(--primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 .self{
    justify-content: space-around;
@@ -13756,6 +13773,12 @@ button.bg-darker:focus {
 
 .text-white {
     color: #fff !important;
+}
+.text-model{
+    color: #6D67E4 !important;
+}
+.margin-left{
+    margin-left: 0.5rem;
 }
 
 .text-primary {
