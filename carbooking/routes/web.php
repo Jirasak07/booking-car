@@ -5,7 +5,7 @@ use App\Http\Controllers\CarsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
+use RealRashid\SweetAlert\Facades\Alert;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,6 +23,10 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::post('user/send',function(Request $request){
+    if ($request->location=="") {
+        Alert::error('โปรดใส่ข้อมูลรายละเอียดการจอง');
+        return redirect()->back();
+    }
     dd($request->all());
 })->name('sendRe');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -44,6 +44,7 @@
             </form>
 
         @endauth --}}
+    @include('sweetalert::alert')
     @include('layouts.user.side')
     <div class="main-content">
         @include('layouts.user.nav')
