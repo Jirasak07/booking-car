@@ -1,7 +1,7 @@
 <style>
     .bg-side {
-        background: rgb(91, 184, 254);
-        background: linear-gradient(180deg, rgba(91, 184, 254, 1) 0%, rgba(22, 129, 208, 1) 100%);
+        background: rgb(29, 166, 130);
+        background: linear-gradient(180deg, rgba(29, 166, 130, 1) 15%, rgba(0, 110, 95, 1) 94%);
     }
 </style>
 <nav class="navbar navbar-vertical fixed-left bg-side navbar-expand-md navbar-light" id="sidenav-main">
@@ -28,7 +28,8 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
                     <a href="" class="dropdown-item">
-                        <i class="ni ni-single-02"></i>
+                        <img src="{{ asset('argon/img/icons/user-1.svg') }}" style="width: 1rem">
+                        &nbsp;&nbsp;
                         <span>{{ __('My profile') }}</span>
                     </a>
 
@@ -36,7 +37,8 @@
                     <a href="{{ route('logout') }}" class="dropdown-item"
                         onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">
-                        <i class="ni ni-user-run"></i>
+                        <img src="{{ asset('argon/img/icons/sign-out-alt.svg') }}" style="width: 1rem">
+                        &nbsp;&nbsp;
                         <span>{{ __('Logout') }}</span>
                     </a>
                 </div>
@@ -77,13 +79,17 @@
             <!-- Navigation -->
             <ul class="navbar-nav" id="nav">
                 <li class="nav-item">
-                    <a class="nav-link text-lighter" href="{{ route('user.dashboard') }}" style="font-size: 16px;">
-                        <i class="ni ni-tv-2 text-primary"></i>Dashboard
+                    <a class="nav-link text-white" href="{{ route('user.dashboard') }}" style="font-size: 18px;">
+                        <img src="{{ asset('argon/img/icons/home-w.svg') }}" style="width: 1rem">
+                        &nbsp;&nbsp;
+                        <span>Dashboard</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-lighter" style="font-size: 16px;"href="{{ route('users.view-booking') }}">
-                        <i class="fa-regular fa-calendar text-primary"></i>Booking
+                    <a class="nav-link text-white" style="font-size: 18px;"href="{{ route('users.view-booking') }}">
+                        <img src="{{ asset('argon/img/icons/calendar.svg') }}" style="width: 1rem">
+                        &nbsp;&nbsp;
+                        <span>การจอง</span>
                     </a>
                 </li>
             </ul>

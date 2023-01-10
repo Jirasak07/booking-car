@@ -10,7 +10,9 @@
             <div class="form-group mb-0 pt-2">
                 <div class="input-group input-group-alternative">
                     <div class="input-group-prepend ">
-                        <span class="input-group-text"><i class="fas fa-search"></i></span>
+                        <span class="input-group-text">
+                            <img src="{{ asset('argon/img/icons/search.svg') }}" style="width: 1rem">
+                            &nbsp;&nbsp;</span>
                     </div>
                     <input class="form-control" placeholder="Search" type="text">
                 </div>
@@ -31,17 +33,19 @@
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
-                    
+
                     <a href="" class="dropdown-item">
-                        <i class="ni ni-single-02"></i>
+                        <img src="{{ asset('argon/img/icons/user-1.svg') }}" style="width: 1rem">
+                        &nbsp;&nbsp;
                         <span>{{ __('My profile') }}</span>
                     </a>
-                    
+
                     <div class="dropdown-divider"></div>
                     <a href="{{ route('logout') }}" class="dropdown-item"
                         onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">
-                        <i class="ni ni-user-run"></i>
+                        <img src="{{ asset('argon/img/icons/sign-out-alt.svg') }}" style="width: 1rem">
+                        &nbsp;&nbsp;
                         <span>{{ __('Logout') }}</span>
                     </a>
                 </div>

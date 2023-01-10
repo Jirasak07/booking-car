@@ -8,7 +8,7 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'User Dashboard') }}</title>
+    <title>ระบบจองคิวรถ</title>
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
     <!-- Fonts -->
@@ -37,7 +37,7 @@
 
 </head>
 
-<body class="{{ $class ?? '' }}" style="background-color: #e5e5e5">
+<body class="{{ $class ?? '' }}" style="background-color: #353535">
     {{--  @auth()
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
