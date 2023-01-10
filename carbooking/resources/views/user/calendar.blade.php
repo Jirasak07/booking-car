@@ -102,17 +102,17 @@
                 select: function(info) {
                     var booking_start = moment(info.startStr).format('YYYY-MM-DD hh:mm:ss');
                     var booking_end = moment(info.endStr).format('YYYY-MM-DD hh:mm:ss');
-                    var time_start = moment(info.startStr).format('LTS');
-                    var time_end = moment(info.endStr).format('LTS');
+                    /* var time_start = moment(info.startStr).format('LTS');
+                    var time_end = moment(info.endStr).format('LTS'); */
                     $('#bookingModal').modal('toggle');
                     document.getElementById('booking_start').innerHTML = booking_start;
                     document.getElementById('booking_end').innerHTML = booking_end;
 
                     document.getElementById('date_start').value = booking_start;
-                    document.getElementById('time_start').value = time_start;
+                    /* document.getElementById('time_start').value = time_start; */
 
                     document.getElementById('date_end').value = booking_end;
-                    document.getElementById('time_end').value = time_end;
+                    /* document.getElementById('time_end').value = time_end; */
                     /* if (ty_car1.checked == true) {
                         console.log(ty_car1.value);
                         fill_driver.style.display = "none";
