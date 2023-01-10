@@ -12,6 +12,10 @@ class DriverController extends Controller
     function index(){
         $driver = DriverModel::All();
         return response()->json($driver);
+    }   
+    function changestatus($id)
+    {
+        
     }
 
 }

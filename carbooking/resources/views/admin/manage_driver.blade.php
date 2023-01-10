@@ -15,13 +15,20 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($driver as $item)
                         <tr>
-                            <td>1</td>
-                            <td>จิรศักดิ์ สิงหบุตร</td>
+                            <td>{{$item['id']}}</td>
+                            <td>{{$item['driver_fullname']}}</td>
+                           
                             <td>
-                                <div class="btn btn-danger btn-sm">"ตัวแปรชื่อ สถานะ"</div>
+                            @if($item['driver_status'] == 1)
+                                <a class="btn btn-success btn-sm" href="{{route("driverstatus",$item['id'])}}">{{__('ว่าง')}}</a>
+                                @elseif($item['driver_status'] == 2)
+                                <a class="btn btn-danger btn-sm" href="{{route("driverstatus",$item['id'])}}">{{__('ไม่ว่าง')}}</a>
+                                @endif
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
