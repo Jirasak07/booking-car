@@ -7567,7 +7567,7 @@ button.bg-light:focus {
    top: 0;
 }
 .car-icon{
-    filter: opacity(0.3) ;
+    filter: opacity(0.1) drop-shadow(0 0 0 #EAE0DA) ;
     position: absolute;
     z-index: 1;
 }
