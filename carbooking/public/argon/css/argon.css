@@ -7588,6 +7588,10 @@ button.bg-light:focus {
     align-items: center;
 
 }
+.box-chart{
+    display: flex;
+    background-color: #00f7b5 !important;
+}
 .self{
    justify-content: space-around;
 }
@@ -17026,49 +17030,52 @@ textarea[resize="horizontal"] {
     padding-left: 1rem;
 }
 
-.icon-xl {
+.icon-xl
+{
     width: 5rem;
     height: 5rem;
 }
-
 .icon-xl i,
-.icon-xl svg {
+.icon-xl svg
+{
     font-size: 4.25rem;
 }
-
-.icon-xl+.icon-text {
-    width: calc(100% - icon-size-xl - 1);
+.icon-xl + .icon-text
+{
+    width: calc(100% - $icon-size-xl - 1);
 }
 
-.icon-lg {
+.icon-lg
+{
     width: 4rem;
     height: 4rem;
 }
-
 .icon-lg i,
-.icon-lg svg {
+.icon-lg svg
+{
     font-size: 3.25rem;
 }
-
-.icon-lg+.icon-text {
-    width: calc(100% - icon-size-lg - 1);
+.icon-lg + .icon-text
+{
+    width: calc(100% - $icon-size-lg - 1);
 }
 
-.icon-sm {
+.icon-sm
+{
     width: 2rem;
     height: 2rem;
 }
-
 .icon-sm i,
-.icon-sm svg {
+.icon-sm svg
+{
     font-size: 1.25rem;
 }
-
-.icon-sm+.icon-text {
-    width: calc(100% - icon-size-sm - 1);
+.icon-sm + .icon-text
+{
+    width: calc(100% - $icon-size-sm - 1);
 }
 
-.icon-shape {
+.icon-shape{
     display: inline-flex;
 
     padding: 12px;
