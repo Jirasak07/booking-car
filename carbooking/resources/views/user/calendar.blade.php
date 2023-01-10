@@ -102,17 +102,17 @@
                 select: function(info) {
                     var booking_start = moment(info.startStr).format('YYYY-MM-DD hh:mm:ss');
                     var booking_end = moment(info.endStr).format('YYYY-MM-DD hh:mm:ss');
-                    var time_start = moment(info.startStr).format('LTS');
-                    var time_end = moment(info.endStr).format('LTS');
+                    /* var time_start = moment(info.startStr).format('LTS');
+                    var time_end = moment(info.endStr).format('LTS'); */
                     $('#bookingModal').modal('toggle');
                     document.getElementById('booking_start').innerHTML = booking_start;
                     document.getElementById('booking_end').innerHTML = booking_end;
 
                     document.getElementById('date_start').value = booking_start;
-                    document.getElementById('time_start').value = time_start;
+                    /* document.getElementById('time_start').value = time_start; */
 
                     document.getElementById('date_end').value = booking_end;
-                    document.getElementById('time_end').value = time_end;
+                    /* document.getElementById('time_end').value = time_end; */
                     /* if (ty_car1.checked == true) {
                         console.log(ty_car1.value);
                         fill_driver.style.display = "none";
@@ -178,22 +178,24 @@
 
                         <div class="col-md-12 mb-3">
                             <strong class="form-label">ชื่อผู้จอง</strong>
+                            <span class=" text-danger">*</span>
                             <input type="text" class="form-control" id="name" name="name"
-                                placeholder="ชื่อผู้จอง">
+                                placeholder="ชื่อผู้จอง" required>
                         </div>
 
                         <div class="col-md-12">
                             <strong class="form-label">รายละเอียดการจอง</strong>
-                            <textarea name="location" id="location" class="form-control" rows="5">
+                            <span class=" text-danger">*</span>
+                            <textarea name="location" id="location" class="form-control" rows="5" required>
                         </textarea>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn grey btn-danger" onclick="window.location.reload()"
-                        data-dismiss="modal">{{ __('ย้อนกลับ') }}</button>
                     {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> --}}
                     <input type="submit" name="saveBooking" value="ยืนยัน" id="saveBooking" class="btn btn-primary">
+                    <button type="button" class="btn grey btn-danger" onclick="window.location.reload()"
+                        data-dismiss="modal">{{ __('ย้อนกลับ') }}</button>
                 </div>
             </div>
         </form>
@@ -201,6 +203,6 @@
     </div>
 </div>
 
-<div class="container-fluid">
+<div class="container-fluid pt-5">
     <div id='calendar'></div>
 </div>

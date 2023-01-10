@@ -10,7 +10,7 @@ class CarModel extends Model
     use HasFactory;
     protected $table = "tb_cars";
     protected $fileable = [
-        'car_id',
+        'id',
         'car_license',
         'car_model',
         'car_status'

@@ -2,7 +2,7 @@
 @extends('layouts.user.users')
 @section('content')
     @include('layouts.user.header')
-    <div class="container-fluid mt--7">
+    <div class="container-fluid mt-3">
         <div class="row">
             <div class="col-xl-12">
                 <div class="card">
@@ -10,6 +10,6 @@
                 </div>
             </div>
         </div>
-        @include('layouts.footers.auth')
+       
     </div>
 @endsection

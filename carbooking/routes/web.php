@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\DriverController;
+use App\Http\Controllers\CarsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -29,17 +31,12 @@ Route::get('users/booking', [\App\Http\Controllers\frontend\UserController::clas
 
 Route::get('admin/dashboard', [\App\Http\Controllers\frontend\AdminController::class, 'index'])->name('admin.dashboard');
 Route::get('admin/request', [\App\Http\Controllers\frontend\AdminController::class, 'bookingRequest'])->name('admin.booking_request');
-Route::get('admin/manage-driver', [\App\Http\Controllers\frontend\AdminController::class, 'manageDriver'])->name('admin.manageDriver');
-Route::get('admin/manage-car', [\App\Http\Controllers\frontend\AdminController::class, 'manageCar'])->name('admin.manageCar');
-Route::get('admin/manage-user', [\App\Http\Controllers\frontend\AdminController::class, 'manageUser'])->name('admin.manageUser');
+Route::get('admin/manage-driver', [DriverController::class,'index'])->name('admin.manageDriver');
+Route::get('admin/manage-driver/{id}',[DriverController::class,'changestatus'])->name('driverstatus');
+Route::get('admin/manage-car', [CarsController::class,'index'])->name('admin.manageCar');
+Route::get('admin/manage-car/{id}',[CarsController::class,'changestatus'])->name('changestatus');
 Route::post('admin/GG',function(Request $request){
 
     dd($request->all());
 
 })->name('GG');
-
-Route::get('admin/test{id}',function(Request $request,$id){
-
-    dd($id);
-
-})->name('Test');
