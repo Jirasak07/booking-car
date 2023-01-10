@@ -37,7 +37,7 @@
 
 </head>
 
-<body class="{{ $class ?? '' }}">
+<body class="{{ $class ?? '' }}" style="background-color: #e5e5e5">
     {{--  @auth()
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
@@ -49,7 +49,7 @@
         @include('layouts.user.nav')
         @yield('content')
     </div>
-   
+
     {{--  @guest()
             @include('layouts.footers.guest')
         @endguest --}}
@@ -63,6 +63,7 @@
 
     <!-- Argon JS -->
     <script src="{{ asset('argon') }}/js/argon.js?v=1.0.0"></script>
+
 </body>
 
 </html>
