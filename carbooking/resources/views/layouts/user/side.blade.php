@@ -1,7 +1,7 @@
 <style>
     .bg-side {
-        background: rgb(91, 184, 254);
-        background: linear-gradient(180deg, rgba(91, 184, 254, 1) 0%, rgba(22, 129, 208, 1) 100%);
+        background: rgb(29, 166, 130);
+        background: linear-gradient(180deg, rgba(29, 166, 130, 1) 15%, rgba(0, 110, 95, 1) 94%);
     }
 </style>
 <nav class="navbar navbar-vertical fixed-left bg-side navbar-expand-md navbar-light" id="sidenav-main">

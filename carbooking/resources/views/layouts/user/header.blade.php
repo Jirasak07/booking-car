@@ -1,8 +1,8 @@
 <style>
     .bg-1 {
-        height: 10%;
-        background: rgb(91, 184, 254);
-        background: linear-gradient(90deg, rgba(91, 184, 254, 1) 0%, rgba(22, 129, 208, 1) 100%);
+
+        background: rgb(29, 166, 130);
+        background: linear-gradient(90deg, rgba(29, 166, 130, 1) 15%, rgba(0, 110, 95, 1) 94%);
     }
 </style>
 <div class="header bg-1 p-5">
