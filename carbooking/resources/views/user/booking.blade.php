@@ -3,7 +3,7 @@
 @extends('layouts.user.users')
 @section('content')
     @include('layouts.user.header')
-    <div class="container-fluid mt--7">
+    <div class="container-fluid mt-5">
         <div class="row mb-3">
             <div class="col-xl-12">
                 <div class="card shadow-sm p-3 overflow-auto">
@@ -112,7 +112,7 @@
                     swal.fire({
                         title: "Cancel?",
                         icon: 'question',
-                        text: "คุณต้องการยกเลิกการจองคอวรถนี้ใช่หรือไม่",
+                        text: "คุณต้องการยกเลิกการจองคิวรถนี้ใช่หรือไม่",
                         /* type: "warning", */
                         showCancelButton: !0,
                         confirmButtonText: "ใช่",

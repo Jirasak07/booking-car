@@ -18519,11 +18519,11 @@ textarea[resize="horizontal"] {
 }
 
 .navbar-search-dark .form-control::-ms-input-placeholder {
-    color: rgba(150, 150, 150, 1);
+    color: rgba(250, 250, 250, 0.85);
 }
 
 .navbar-search-dark .form-control::placeholder {
-    color: rgba(150, 150, 150, 0.6);
+    color: rgba(250, 250, 250, 0.85);
 }
 
 .navbar-search-dark .focused .input-group {

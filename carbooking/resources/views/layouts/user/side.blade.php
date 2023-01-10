@@ -1,23 +1,7 @@
 <style>
-    .text-link1 {
-        color: #000;
-    }
-
-    .nav-link:hover {
-        background: rgb(248, 249, 255);
-        background: linear-gradient(87deg, rgba(248, 249, 255, 1) 0%, rgba(210, 247, 255, 1) 100%, rgba(196, 175, 255, 1) 100%);
-    }
-
     .bg-side {
-        background: hsla(139, 72%, 83%, 1);
-
-        background: linear-gradient(180deg, hsla(139, 72%, 83%, 1) 0%, hsla(229, 89%, 62%, 1) 100%);
-
-        background: -moz-linear-gradient(180deg, hsla(139, 72%, 83%, 1) 0%, hsla(229, 89%, 62%, 1) 100%);
-
-        background: -webkit-linear-gradient(180deg, hsla(139, 72%, 83%, 1) 0%, hsla(229, 89%, 62%, 1) 100%);
-
-        filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#B6F3C9", endColorstr="#4766F4", GradientType=1);
+        background: rgb(116, 166, 251);
+        background: linear-gradient(180deg, rgba(116, 166, 251, 1) 0%, rgba(85, 132, 212, 1) 100%);
     }
 </style>
 <nav class="navbar navbar-vertical fixed-left bg-side navbar-expand-md navbar-light" id="sidenav-main">
@@ -105,39 +89,17 @@
                 </div>
             </form>
             <!-- Navigation -->
-            <ul class="navbar-nav">
+            <ul class="navbar-nav" id="nav">
                 <li class="nav-item">
-                    <a class="nav-link text-darker" href="{{ route('user.dashboard') }}">
+                    <a class="nav-link text-lighter" href="{{ route('user.dashboard') }}" style="font-size: 16px;">
                         <i class="ni ni-tv-2 text-primary"></i>Dashboard
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-darker" href="{{ route('users.view-booking') }}">
+                    <a class="nav-link text-lighter" style="font-size: 16px;"href="{{ route('users.view-booking') }}">
                         <i class="fa-regular fa-calendar text-primary"></i>Booking
                     </a>
                 </li>
-                {{-- <li class="nav-item">
-                    <a class="nav-link " href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples">
-                        <i class="fab fa-laravel" style="color: #f4645f;"></i>
-                        <span class="nav-link-text" style="color: #f4645f;">{{ __('Laravel Examples') }}</span>
-                    </a>
-
-                    <div class="collapse show" id="navbar-examples">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a class="nav-link" href="">
-                                    {{ __('User profile') }}
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="">
-                                    {{ __('User Management') }}
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li> --}}
-
             </ul>
         </div>
     </div>
