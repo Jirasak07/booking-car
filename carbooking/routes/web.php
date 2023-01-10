@@ -40,7 +40,3 @@ Route::post('admin/GG',function(Request $request){
     dd($request->all());
 
 })->name('GG');
-
-
-
-

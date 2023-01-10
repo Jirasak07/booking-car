@@ -7547,7 +7547,33 @@ button.bg-light:focus {
 .bg-dark {
     background-color: #212529 !important;
 }
+.bg-dark-2 {
+    background-color: #343a40 !important;
 
+}
+.box-card{
+    min-height: 200px;
+    box-shadow: 2px 2px 9px 3px rgba(255, 63, 15, 0.07);
+    position: relative;
+
+}
+.booking-count{
+    font-size: 5rem;
+}
+.box-card >.text-data{
+    position:absolute ;
+    left: 10%;
+    right: 0;
+   top: 0;
+}
+.car-icon{
+    filter: opacity(0.3) ;
+    position: absolute;
+    z-index: 1;
+}
+.self{
+   justify-content: space-around;
+}
 a.bg-dark:hover,
 a.bg-dark:focus,
 button.bg-dark:hover,
@@ -8859,7 +8885,6 @@ button.bg-darker:focus {
 .shadow-b {
     box-shadow: 2px 2px 15px 5px rgba(0, 0, 0, 0.19);
 }
-
 .shadow,
 .card-profile-image img {
     box-shadow: 0 0 2rem 0 rgba(136, 152, 170, 0.15) !important;

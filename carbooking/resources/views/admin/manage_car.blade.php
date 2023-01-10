@@ -18,6 +18,9 @@
                     <tbody>
                     @foreach($car as $cars)
                         <tr>
+                            <td>1</td>
+                            <td>1กงฏ ตาก 34554</td>
+                            <td>Honda CIVIC EL+</td>
                             <td>{{$cars['id']}}</td>
                             <td>{{$cars['car_license']}}</td>
                             <td>{{$cars['car_model']}}</td>

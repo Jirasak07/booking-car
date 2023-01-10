@@ -20,4 +20,7 @@ class AdminController extends Controller
     public function manageCar(){
         return view('admin.manage_car');
     }
+    public function manageUser(){
+        return view('admin.manage_user');
+    }
 }
