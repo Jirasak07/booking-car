@@ -8,20 +8,21 @@
                 <table class=" rounded table table-light  fw-bold table-responsive-sm">
                     <thead class="table-dark">
                         <tr>
-                            <td class="fw-bold">ลำดับ</td>
-                            <td>หมายเลขทะเบียน</td>
-                            <td>รายละเอียดรถ</td>
-                            <td>สถานะ</td>
-
+                            <th class="fw-bold">ลำดับ</th>
+                            <th>ชื่อ</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>จัดการ</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>1</td>
-                            <td>1กงฏ ตาก 34554</td>
-                            <td>Honda CIVIC EL+</td>
+                            <td>tr-Jirasak Singhabutr</td>
+                            <td>tr-jirasaks@lanna.com</td>
+                            <td>Admin</td>
                             <td>
-                                <div class="btn btn-danger btn-sm">"ตัวแปรชื่อ สถานะ"</div>
+                                <div class="btn btn-warning btn-sm">แก้ไขบทบาท</div>
                             </td>
                         </tr>
                     </tbody>

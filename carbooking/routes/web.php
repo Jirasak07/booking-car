@@ -31,8 +31,15 @@ Route::get('admin/dashboard', [\App\Http\Controllers\frontend\AdminController::c
 Route::get('admin/request', [\App\Http\Controllers\frontend\AdminController::class, 'bookingRequest'])->name('admin.booking_request');
 Route::get('admin/manage-driver', [\App\Http\Controllers\frontend\AdminController::class, 'manageDriver'])->name('admin.manageDriver');
 Route::get('admin/manage-car', [\App\Http\Controllers\frontend\AdminController::class, 'manageCar'])->name('admin.manageCar');
+Route::get('admin/manage-user', [\App\Http\Controllers\frontend\AdminController::class, 'manageUser'])->name('admin.manageUser');
 Route::post('admin/GG',function(Request $request){
 
     dd($request->all());
 
 })->name('GG');
+
+Route::get('admin/test{id}',function(Request $request,$id){
+
+    dd($id);
+
+})->name('Test');

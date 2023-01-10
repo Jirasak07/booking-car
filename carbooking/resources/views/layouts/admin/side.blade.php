@@ -98,6 +98,11 @@
                         <i class="fa-regular fa-calendar"></i> {{ __('จัดการข้อมูลรถภายใน') }}
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="{{url('/admin/manage-user')}}">
+                        <i class="fa-regular fa-calendar"></i> {{ __('จัดการข้อมูลผู้ใช้') }}
+                    </a>
+                </li>
                 {{-- <li class="nav-item">
                     <a class="nav-link " href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples">
                         <i class="fab fa-laravel" style="color: #f4645f;"></i>
