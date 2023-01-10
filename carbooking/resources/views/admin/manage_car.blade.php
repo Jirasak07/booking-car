@@ -16,14 +16,21 @@
                         </tr>
                     </thead>
                     <tbody>
+                    @foreach($car as $cars)
                         <tr>
-                            <td>1</td>
-                            <td>1กงฏ ตาก 34554</td>
-                            <td>Honda Wave125i</td>
+                            <td>{{$cars['id']}}</td>
+                            <td>{{$cars['car_license']}}</td>
+                            <td>{{$cars['car_model']}}</td>
+
                             <td>
-                                <div class="btn btn-danger btn-sm">"ตัวแปรชื่อ สถานะ"</div>
+                                @if($cars['car_status']==1)
+                                <a class="btn btn-success btn-sm" href="{{route("changestatus",$cars['id'])}}">{{__('ว่าง')}}</a>
+                                @elseif($cars['car_status'] ==2)
+                                <a class="btn btn-danger btn-sm" href="{{route("changestatus",$cars['id'])}}">{{__('ไม่ว่าง')}}</a>
+                                @endif
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
