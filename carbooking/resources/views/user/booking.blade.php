@@ -10,40 +10,40 @@
                     <table class="overflow-auto table  table-hover fw-bold table-responsive-xl">
                         <thead class="table-light">
                             <tr align="center">
-                                <td class="fw-bolder">ลำดับ</td>
-                                <td class="fw-bolder">ช่วงวันที่</td>
-                                <td class="fw-bolder">รายละเอียดการจอง</td>
-                                <td class="fw-bolder">สถานะการจอง</td>
-                                <td class="fw-bolder">จัดการ</td>
+                                <td class="fw-bolder" style="font-size: 18px">ลำดับ</td>
+                                <td class="fw-bolder" style="font-size: 18px">ช่วงวันที่</td>
+                                <td class="fw-bolder" style="font-size: 18px">รายละเอียดการจอง</td>
+                                <td class="fw-bolder" style="font-size: 18px">สถานะการจอง</td>
+                                <td class="fw-bolder" style="font-size: 18px">จัดการ</td>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td align="center">1</td>
-                                <td>วันที่เดินทางไป ถึง วันที่เดินทางกลับ</td>
+                                <td align="center" style="font-size: 18px">1</td>
+                                <td style="font-size: 15px">วันที่เดินทางไป ถึง วันที่เดินทางกลับ</td>
                                 <td align="center">
-                                    <button class="btn btn-neutral btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#viewde">ดู</button>
+                                    <button class="btn btn-neutral btn-sm" data-bs-toggle="modal" data-bs-target="#viewde"
+                                        style="font-size: 15px">ดู</button>
                                 </td>
-                                <td align="center">
-
-                                    <button class="btn btn-yellow btn-sm">กำลังดำเนินการ</button>
+                                <td align="center" style="font-size: 14px">
+                                    <button class="btn btn-yellow btn-sm" style="font-size: 13px">กำลังดำเนินการ</button>
                                 </td>
-                                <td align="center">
-                                    <button class="btn btn-danger btn-sm">ยกเลิก</button>
+                                <td align="center" style="font-size: 16px">
+                                    <button class="btn btn-danger btn-sm" style="font-size: 13px"
+                                        onclick="alertCancel(3)">ยกเลิก</button>
                                 </td>
                             </tr>
                             <tr>
-                                <td align="center">2</td>
-                                <td>วันที่เดินทางไป ถึง วันที่เดินทางกลับ</td>
+                                <td align="center" style="font-size: 18px">2</td>
+                                <td style="font-size: 15px">วันที่เดินทางไป ถึง วันที่เดินทางกลับ</td>
                                 <td align="center">
-                                    <button class="btn btn-neutral btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#viewde">ดู</button>
+                                    <button class="btn btn-neutral btn-sm" data-bs-toggle="modal" data-bs-target="#viewde"
+                                        style="font-size: 15px">ดู</button>
                                 </td>
                                 <td align="center">
-                                    <button class="btn btn-dark btn-sm me-2">ดำเนินการเสร็จสิ้น</button>
-                                    <button class="btn btn-danger btn-sm me-2">ถูกยกเลิก</button>
-                                    
+                                    <button class="btn btn-dark btn-sm me-2"
+                                        style="font-size: 13px">ดำเนินการเสร็จสิ้น</button>
+                                    <button class="btn btn-danger btn-sm me-2" style="font-size: 13px">ถูกยกเลิก</button>
                                 </td>
                                 <td>
                                 </td>
@@ -107,8 +107,69 @@
             </div>
         </div>
         @push('js')
-            <script></script>
+            <script>
+                function alertCancel(id) {
+                    swal.fire({
+                        title: "Cancel?",
+                        icon: 'question',
+                        text: "คุณต้องการยกเลิกการจองคอวรถนี้ใช่หรือไม่",
+                        /* type: "warning", */
+                        showCancelButton: !0,
+                        confirmButtonText: "ใช่",
+                        cancelButtonText: "ไม่",
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d11',
+                        
+                    }).then(function(e) {
+
+                        if (e.value === true) {
+                            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+                            $.ajax({
+                                type: 'POST',
+                                url: "{{ url('/users/cancel') }}/" + id,
+                                data: {
+                                    _token: CSRF_TOKEN
+                                },
+                                dataType: 'JSON',
+                                success: function(results) {
+                                    if (results.success === true) {
+                                        swal.fire("Done!", results.message, "success");
+                                        // refresh page after 2 seconds
+                                        setTimeout(function() {
+                                            location.reload();
+                                        }, 2000);
+                                    } else {
+                                        swal.fire("Error!", results.message, "error");
+                                    }
+                                }
+                            });
+
+                        } else {
+                            e.dismiss;
+                        }
+
+                    }, function(dismiss) {
+                        return false;
+                    })
+                    /*Swal.fire({
+                        icon: 'question',
+                        text: 'คุณต้องการยกเลิกการจองคอวรถนี้ใช่หรือไม่',
+                        showCancelButton: true,
+                        confirmButtonText: 'ใช่',
+                        cancelButtonText: 'ยกเลิก',
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+
+                            Swal.fire('ยกเลิกการจองสำเร็จ', '', 'success')
+                        } /* else if (result.isDenied) {
+                            Swal.fire('Changes are not saved', '', 'info')
+                        } */
+                }
+            </script>
         @endpush
-        @include('layouts.footers.auth')
+
     </div>
 @endsection

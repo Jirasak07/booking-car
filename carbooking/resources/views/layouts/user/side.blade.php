@@ -1,14 +1,26 @@
 <style>
-    .text-link1{
+    .text-link1 {
         color: #000;
     }
 
     .nav-link:hover {
-        background: rgb(248,249,255);
-background: linear-gradient(87deg, rgba(248,249,255,1) 0%, rgba(210,247,255,1) 100%, rgba(196,175,255,1) 100%);
+        background: rgb(248, 249, 255);
+        background: linear-gradient(87deg, rgba(248, 249, 255, 1) 0%, rgba(210, 247, 255, 1) 100%, rgba(196, 175, 255, 1) 100%);
+    }
+
+    .bg-side {
+        background: hsla(139, 72%, 83%, 1);
+
+        background: linear-gradient(180deg, hsla(139, 72%, 83%, 1) 0%, hsla(229, 89%, 62%, 1) 100%);
+
+        background: -moz-linear-gradient(180deg, hsla(139, 72%, 83%, 1) 0%, hsla(229, 89%, 62%, 1) 100%);
+
+        background: -webkit-linear-gradient(180deg, hsla(139, 72%, 83%, 1) 0%, hsla(229, 89%, 62%, 1) 100%);
+
+        filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#B6F3C9", endColorstr="#4766F4", GradientType=1);
     }
 </style>
-<nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
+<nav class="navbar navbar-vertical fixed-left bg-side navbar-expand-md navbar-light" id="sidenav-main">
     <div class="container-fluid">
         <!-- Toggler -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main"
