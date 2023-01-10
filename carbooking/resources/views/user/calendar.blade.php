@@ -3,47 +3,6 @@
         max-width: 100%;
         margin: 20px auto;
     }
-
-    .datetimepicker {
-        display: inline-flex;
-        align-items: center;
-        background-color: #fff;
-        border: 4px solid;
-        border-radius: 8px;
-
-        &:focus-within {
-            border-color: teal;
-        }
-
-        input {
-            font: inherit;
-            color: inherit;
-            appearance: none;
-            outline: none;
-            border: 0;
-            background-color: transparent;
-
-            &[type=date] {
-                width: 10rem;
-                padding: .25rem 0 .25rem .5rem;
-                border-right-width: 0;
-
-            }
-
-            &[type=time] {
-                width: 5.5rem;
-                padding: .25rem .5rem .25rem 0;
-                border-left-width: 0;
-            }
-        }
-
-        span {
-            height: 1rem;
-            margin-right: .25rem;
-            margin-left: .25rem;
-            border-right: 1px solid #ddd;
-        }
-    }
 </style>
 
 @push('js')
@@ -78,7 +37,7 @@
                     center: 'title',
                     right: 'timeGridDay,timeGridFourDay,dayGridMonth,listMonth'
                 },
-                // events: 'https://fullcalendar.io/api/demo-feeds/events.json',
+                events: 'https://fullcalendar.io/api/demo-feeds/events.json',
                 views: {
                     timeGridFourDay: {
                         type: 'timeGrid',
@@ -122,7 +81,7 @@
                         var booking_start = info.startStr;
                         var booking_end = info.endStr;
                         var name = $('#name').val();
-
+                       
                     });
                     /* Swal.fire({
                         icon: 'question',
@@ -156,8 +115,8 @@
                         <div class="col-md-4">
                             <label class="plaintext" id="booking_start" name="booking_start"></label>
                         </div>
-                        <div class="col-md-5">
-                            <input type="datetime-local" data-date="" class="datetimepicker"
+                        <div class="col-md-3">
+                            <input type="datetime-local" data-date="" class="form-control"
                                 data-date-format="DD MM YYYY hh:mm:ss" name="date_start" id="date_start">
 
                         </div>
@@ -169,8 +128,8 @@
                         <div class="col-md-4">
                             <label class="plaintext" id="booking_end" name="booking_end"></label>
                         </div>
-                        <div class="col-md-5">
-                            <input type="datetime-local" data-date="" class="datetimepicker"
+                        <div class="col-md-3">
+                            <input type="datetime-local" data-date="" class="form-control"
                                 data-date-format="DD MM YYYY hh:mm:ss" id="date_end" name="date_end">
                         </div>
                         <br />
