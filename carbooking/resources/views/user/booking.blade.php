@@ -44,7 +44,7 @@
                                     </button>
                                 </td>
                                 <td align="center">
-                                    <button class="btn btn-dark btn-sm me-2"
+                                    <button class="btn btn-success btn-sm me-2"
                                         style="font-size: 13px">ดำเนินการเสร็จสิ้น</button>
                                     <button class="btn btn-danger btn-sm me-2" style="font-size: 13px">ถูกยกเลิก</button>
                                 </td>

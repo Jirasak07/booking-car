@@ -66,19 +66,22 @@
                     var booking_end = moment(info.endStr).format('YYYY-MM-DD hh:mm:ss');
                     /* var time_start = moment(info.startStr).format('LTS');
                     var time_end = moment(info.endStr).format('LTS'); */
+                    var today = new Date().toISOString().split('T')[0];
+                    console.log(today);
                     $('#bookingModal').modal('toggle');
                     document.getElementById('booking_start').innerHTML = booking_start;
                     document.getElementById('booking_end').innerHTML = booking_end;
 
                     document.getElementById('date_start').value = booking_start;
-                    /* document.getElementById('time_start').value = time_start; */
-
                     document.getElementById('date_end').value = booking_end;
-                    /* document.getElementById('time_end').value = time_end; */
-                    /* if (ty_car1.checked == true) {
-                        console.log(ty_car1.value);
-                        fill_driver.style.display = "none";
-                    } */
+                    var now_utc = Date.now() // 지금 날짜를 밀리초로
+                    // getTimezoneOffset()은 현재 시간과의 차이를 분 단위로 반환
+                    var timeOff = new Date().getTimezoneOffset() * 60000; // 분단위를 밀리초로 변환
+                    // new Date(today-timeOff).toISOString()은 '2022-05-11T18:09:38.134Z'를 반환
+                    var today = new Date(now_utc - timeOff).toISOString().substring(0, 16);
+
+                    document.getElementById("date_start").setAttribute("min", today);
+                    document.getElementById("date_end").setAttribute("min", today);
 
                     $('#saveBooking').click(function() {
                         var booking_start = info.startStr;
@@ -86,10 +89,6 @@
                         var name = $('#name').val();
 
                     });
-                    /* Swal.fire({
-                        icon: 'question',
-                        text: 'selected ' + info.startStr + ' to ' + info.endStr
-                    }); */
                 }
             });
 
@@ -120,8 +119,8 @@
                             <label class="plaintext" id="booking_start" name="booking_start"></label>
                         </div>
                         <div class="col-md-3">
-                            <input type="datetime-local" data-date="" class="form-control"
-                                data-date-format="DD MM YYYY hh:mm:ss" name="date_start" id="date_start">
+                            <input type="datetime-local" data-date="" class="form-control" {{-- data-date-format="DD MM YYYY hh:mm:ss" --}}
+                                name="date_start" id="date_start">
 
                         </div>
                         <br />
