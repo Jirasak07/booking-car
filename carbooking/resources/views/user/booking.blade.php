@@ -23,8 +23,9 @@
                                 <td align="center" style="font-size: 18px">1</td>
                                 <td style="font-size: 15px">วันที่เดินทางไป ถึง วันที่เดินทางกลับ</td>
                                 <td align="center">
-                                    <button class="btn btn-neutral btn-sm" data-bs-toggle="modal" data-bs-target="#viewde"
-                                        style="font-size: 15px">ดู</button>
+                                    <button class="btn btn-neutral btn-sm text-darker" data-bs-toggle="modal" data-bs-target="#viewde">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
                                 </td>
                                 <td align="center" style="font-size: 14px">
                                     <button class="btn btn-yellow btn-sm" style="font-size: 13px">กำลังดำเนินการ</button>
@@ -38,8 +39,9 @@
                                 <td align="center" style="font-size: 18px">2</td>
                                 <td style="font-size: 15px">วันที่เดินทางไป ถึง วันที่เดินทางกลับ</td>
                                 <td align="center">
-                                    <button class="btn btn-neutral btn-sm" data-bs-toggle="modal" data-bs-target="#viewde"
-                                        style="font-size: 15px">ดู</button>
+                                    <button class="btn btn-neutral btn-sm text-darker" data-bs-toggle="modal" data-bs-target="#viewde">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
                                 </td>
                                 <td align="center">
                                     <button class="btn btn-dark btn-sm me-2"
