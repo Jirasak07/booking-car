@@ -31,7 +31,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body class="" style="background-color: #181818">
+<body class="" style="background-color: #eceef2">
     {{--  @auth()
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf

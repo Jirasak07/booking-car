@@ -3,13 +3,13 @@
     @include('layouts.admin.header')
     <div class="container-fulid mx-5  ">
         <div class="d-flex flex-column justify-content-center align-items-center">
-            <div class=" col-12 flex-md-row flex-column d-flex justify-content-between align-items-center ">
+            <div  class=" col-12  flex-column d-flex justify-content-between align-items-center ">
                 {{-- ///////////////////// --}}
-                <div class="box  col-md-6 align-self-start">
-                    <div class="row">
+                <div class="box h-100 col-md col align-self-start p-3">
+                    <div class="row p-2" style="gap: 10px">
                         @foreach ($car as $cars)
-                            <div class=" col-12 col-sm-6 col-lg-6 col-md-12 p-1  ">
-                                <div class=" box-1 bg-dark-2 card box p-2">
+                            <div class=" col-12 col-sm-5 col-lg col-md-12 shadow-box rounded ">
+                                <div class=" box-1 bg-dark-2 box p-3">
                                     <div class="d-flex row ">
                                         <div class="col ">
                                             <div class="d-flex flex-row align-items-center">
@@ -37,7 +37,7 @@
                     </div>
                 </div>
                 {{-- ////////////////////////////// --}}
-                <div class=" col-md-6 col-12 row w-100 " style="height: 100%; max-height:350px">
+                <div class=" col-md-4 col-12 row w-100 " style="height: 100%; max-height:350px">
                     <div class=" col-12 bg-dark-2 h-100 w-100 rounded ">
                         <div class="  rounded h-100 w-100 " style=" height:100%; width:100%; ">
                             <canvas id="myChart"></canvas>
