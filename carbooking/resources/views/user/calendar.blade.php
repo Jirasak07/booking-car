@@ -37,7 +37,7 @@
                     center: 'title',
                     right: 'timeGridDay,timeGridFourDay,dayGridMonth,listMonth'
                 },
-                events: 'https://fullcalendar.io/api/demo-feeds/events.json',
+                //events: 'https://fullcalendar.io/api/demo-feeds/events.json',
                 views: {
                     timeGridFourDay: {
                         type: 'timeGrid',

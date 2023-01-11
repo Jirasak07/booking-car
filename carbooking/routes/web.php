@@ -39,6 +39,7 @@ Route::get('admin/manage-driver', [DriverController::class,'index'])->name('admi
 Route::get('admin/manage-driver/{id}',[DriverController::class,'changestatus'])->name('driverstatus');
 Route::get('admin/manage-car', [CarsController::class,'index'])->name('admin.manageCar');
 Route::get('admin/manage-car/{id}',[CarsController::class,'changestatus'])->name('changestatus');
+Route::get('/admin/manage-user',[App\Http\Controllers\frontend\AdminController::class,'manageUser'])->name('admin/manage-user');
 Route::post('admin/GG',function(Request $request){
 
     dd($request->all());

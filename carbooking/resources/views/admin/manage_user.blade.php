@@ -5,14 +5,14 @@
     <div class="container-fulid mx-5 ">
         <div class="container-md p-md-2 p-1 mt-sm-2 mt-sm-1 mt-4">
             <div class="card-dark shadow-sm ">
-                <table class=" rounded table table-light  fw-bold table-responsive-sm">
+                <table class=" rounded table table-light fw-bold table-responsive-sm">
                     <thead class="table-dark">
                         <tr>
-                            <th class="fw-bold">ลำดับ</th>
-                            <th>ชื่อ</th>
-                            <th>Email</th>
-                            <th>Role</th>
-                            <th>จัดการ</th>
+                            <th class="fw-bold" align="center">ลำดับ</th>
+                            <th align="center">ชื่อ</th>
+                            <th align="center">Email</th>
+                            <th align="center">Role</th>
+                            <th align="center">จัดการ</th>
                         </tr>
                     </thead>
                     <tbody>
