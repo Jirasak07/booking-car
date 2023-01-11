@@ -20,7 +20,20 @@
                             <td>1</td>
                             <td>tr-Jirasak Singhabutr</td>
                             <td>tr-jirasaks@lanna.com</td>
-                            <td>Admin</td>
+                            <td>
+                                <button class="btn btn-danger text-uppercase btn-sm">admin</button>
+                            </td>
+                            <td>
+                                <div class="btn btn-warning btn-sm">แก้ไขบทบาท</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>tr-Patcharawan Gedpun</td>
+                            <td>tr-patcharawang@lanna.com</td>
+                            <td>
+                                <button class="btn btn-default text-uppercase btn-sm">user</button>
+                            </td>
                             <td>
                                 <div class="btn btn-warning btn-sm">แก้ไขบทบาท</div>
                             </td>
