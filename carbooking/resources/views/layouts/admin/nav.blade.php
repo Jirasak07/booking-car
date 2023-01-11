@@ -2,18 +2,10 @@
 <nav class="navbar navbar-top navbar-expand-md navbar-dark " id="navbar-main">
     <div class="container-fluid">
         <!-- Brand -->
-        <div class="h4 mb-0  text-uppercase d-none d-lg-inline-block text-capitalize admin rounded text-success ">ADMIN</div>
+        <div class="h4 mb-0  text-uppercase d-none d-lg-inline-block text-capitalize admin rounded text-success ">ADMIN
+        </div>
         <!-- Form -->
-        <form class="navbar-search navbar-search-light form-inline mr-3 d-none d-md-flex ml-lg-auto text-dark">
-            <div class="form-group mb-0 ">
-                <div class="input-group input-group-alternative ">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fas fa-search"></i></span>
-                    </div>
-                    <input class="form-control " placeholder="Search" type="text">
-                </div>
-            </div>
-        </form>
+
         <!-- User -->
         <ul class="navbar-nav align-items-center d-none d-md-flex">
             <li class="nav-item dropdown">
@@ -60,4 +52,3 @@
         </ul>
     </div>
 </nav>
-
