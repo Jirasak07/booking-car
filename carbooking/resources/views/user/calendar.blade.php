@@ -17,7 +17,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
-            //var booking = @json('http://127.0.0.1:8000/api/booking');
+
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 themeSystem: 'bootstrap5',
                 selectable: true,
@@ -40,7 +40,6 @@
                     right: 'timeGridDay,timeGridFourDay,dayGridMonth,listMonth'
                 },
                 //events: booking,
-                events: booking,
                 views: {
                     timeGridFourDay: {
                         type: 'timeGrid',

@@ -11,8 +11,7 @@ class UserController extends Controller
     //
     public function index()
     {
-        $url = ('http://127.0.0.1:8000/api/booking');
-        dd($url);
+       
         return view('user.dashboard');
     }
 
