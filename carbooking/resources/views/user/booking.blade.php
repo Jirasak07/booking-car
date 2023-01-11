@@ -62,7 +62,7 @@
                 <div class="modal-content ">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="viewdeLabel">รายละเอียดการจอง</h1>
-                        <button type="button" class="close" onclick="window.location.reload()" data-dismiss="modal"
+                        <button type="button" class="close" data-bs-dismiss="modal" {{-- onclick="window.location.reload()" --}}
                             aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -101,8 +101,8 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary text-uppercase"
-                            onclick="window.location.reload()">ok</button>
+                        <button type="button" class="btn btn-primary text-uppercase"data-bs-dismiss="modal"
+                            {{-- onclick="window.location.reload()" --}}>ok</button>
                     </div>
                 </div>
             </div>
@@ -120,7 +120,7 @@
                         cancelButtonText: "ไม่",
                         confirmButtonColor: '#3085d6',
                         cancelButtonColor: '#d11',
-                        
+
                     }).then(function(e) {
 
                         if (e.value === true) {
