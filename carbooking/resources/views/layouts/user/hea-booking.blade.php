@@ -16,7 +16,7 @@
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
-                                        <img src="{{ asset('argon/img/icons/calendar.svg') }}" style="width: 1rem">
+                                        <i class="fa-solid fa-calendar-check"></i>
                                     </div>
                                 </div>
                             </div>
@@ -37,7 +37,7 @@
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
-                                        <i class="fas fa-chart-pie"></i>
+                                        <i class="fa-solid fa-ban"></i>
                                     </div>
                                 </div>
                             </div>
@@ -55,7 +55,7 @@
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
-                                        <i class="fas fa-users"></i>
+                                        <i class="fa-regular fa-calendar-days"></i>
                                     </div>
                                 </div>
                             </div>

@@ -28,8 +28,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
                     <a href="" class="dropdown-item">
-                        <img src="{{ asset('argon/img/icons/user-1.svg') }}" style="width: 1rem">
-                        &nbsp;&nbsp;
+                        <i class="fa-solid fa-user"></i>
                         <span>{{ __('My profile') }}</span>
                     </a>
 
@@ -37,8 +36,7 @@
                     <a href="{{ route('logout') }}" class="dropdown-item"
                         onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">
-                        <img src="{{ asset('argon/img/icons/sign-out-alt.svg') }}" style="width: 1rem">
-                        &nbsp;&nbsp;
+                        <i class="fa-solid fa-right-from-bracket"></i>
                         <span>{{ __('Logout') }}</span>
                     </a>
                 </div>
@@ -80,15 +78,13 @@
             <ul class="navbar-nav" id="nav">
                 <li class="nav-item">
                     <a class="nav-link text-white" href="{{ route('user.dashboard') }}" style="font-size: 18px;">
-                        <img src="{{ asset('argon/img/icons/home-w.svg') }}" style="width: 1rem">
-                        &nbsp;&nbsp;
+                        <i class="fa-solid fa-house"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" style="font-size: 18px;"href="{{ route('users.view-booking') }}">
-                        <img src="{{ asset('argon/img/icons/calendar.svg') }}" style="width: 1rem">
-                        &nbsp;&nbsp;
+                        <i class="fa-regular fa-calendar"></i>
                         <span>การจอง</span>
                     </a>
                 </li>

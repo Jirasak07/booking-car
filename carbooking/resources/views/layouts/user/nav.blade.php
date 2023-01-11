@@ -11,8 +11,8 @@
                 <div class="input-group input-group-alternative">
                     <div class="input-group-prepend ">
                         <span class="input-group-text">
-                            <img src="{{ asset('argon/img/icons/search.svg') }}" style="width: 1rem">
-                            &nbsp;&nbsp;</span>
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </span>
                     </div>
                     <input class="form-control" placeholder="Search" type="text">
                 </div>
@@ -35,8 +35,7 @@
                 <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
 
                     <a href="" class="dropdown-item">
-                        <img src="{{ asset('argon/img/icons/user-1.svg') }}" style="width: 1rem">
-                        &nbsp;&nbsp;
+                        <i class="fa-solid fa-user"></i>
                         <span>{{ __('My profile') }}</span>
                     </a>
 
@@ -44,8 +43,7 @@
                     <a href="{{ route('logout') }}" class="dropdown-item"
                         onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">
-                        <img src="{{ asset('argon/img/icons/sign-out-alt.svg') }}" style="width: 1rem">
-                        &nbsp;&nbsp;
+                        <i class="fa-solid fa-right-from-bracket"></i>
                         <span>{{ __('Logout') }}</span>
                     </a>
                 </div>
