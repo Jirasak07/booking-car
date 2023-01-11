@@ -14,12 +14,14 @@
                                     <div class="d-flex row ">
                                         <div class="col ">
                                             <div class="d-flex flex-row align-items-center">
-                                                <div class="text-success" style="font-size: 2.5rem">0 </div>
+                                                <div class="text-success" style="font-size: 2.5rem; font-weight:600">0
+                                                </div>
                                                 <div class="margin-left text-dark"
                                                     style="font-size: 0.8rem; font-weight:bolder; margin-left:5px">รายการ
                                                 </div>
                                             </div>
-                                            <div class="text-success text-capitalize" style="font-size: 0.8rem">
+                                            <div class="text-success text-capitalize"
+                                                style="font-size: 0.8rem; font-weight:600">
                                                 {{ $cars['car_model'] }}
                                             </div>
                                             <div class="text-dark" style="font-size: 0.7rem">{{ $cars['car_license'] }}
@@ -27,8 +29,7 @@
                                         </div>
                                         <div class=" w-100 col-2 d-flex align-items-center justify-content-center  ">
                                             <div class="car-icon-2  ">
-                                                <img src="{{ asset('assets/img/car.png') }}" width="40px"
-                                                    class="car-icon" />
+                                                <i class="fa-solid fa-car-side text-light" style="font-size: 3rem"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -51,7 +52,8 @@
                 <div class="rounded shadow-box box-1 box col-md-12 col-sm-12 col-lg-5 col-12 row w-100 chart  "
                     style="height: 100%; max-height:350px;  ">
                     <div class=" col-12   rounded ">
-                        <div class=" text-capitalize rounded d-flex align-items-center " style=" min-height:300px; width:100%;  ">
+                        <div class=" text-capitalize rounded d-flex align-items-center "
+                            style=" min-height:300px; width:100%;  ">
                             <canvas id="Chart"></canvas>
                         </div>
                     </div>
@@ -60,8 +62,8 @@
         </div>
         <div class="d-flex row flex-lg-row flex-column justify-content-center align-items-center p-3 ">
         </div>
-        <div class="rounded shadow-box-1 bg-new mb-5 text-center p-2 " style="height: 50vh">
-            รายการปฏิทิน
+        <div class="rounded shadow-box-1 bg-new mb-5 text-center p-2 " style="height: 100%;font-weight:700;">
+            @include('admin.calendar_show')
         </div>
     </div>
 
@@ -102,7 +104,7 @@
                             '#fb6340',
 
                         ],
-                        borderColor: ['#2dce89',  '#fb6340'],
+                        borderColor: ['#2dce89', '#fb6340'],
                         hoverOffset: 4
                     }]
                 },
