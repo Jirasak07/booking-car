@@ -14,7 +14,7 @@ class TbOutCars extends Migration
     public function up()
     {
         Schema::create('tb_out_cars',function(Blueprint $table){
-            $table->increments('car_out_id');
+            $table->string('id')->primary();
             $table->string('car_out_license');//ทะเบียนรถภายนอกPK
             $table->string('car_out_model');//รายระเอียดยี่ห้อ รุ่นรถภายนอก
             $table->string('car_out_driver');//ชื่อคนขับหรือชื่อบริษัทรถภายนอก

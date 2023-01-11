@@ -14,7 +14,7 @@ class TbCars extends Migration
     public function up()
     {
         Schema::create('tb_cars',function(Blueprint $table){
-            $table->id();
+            $table->string('id')->primary();
             $table->string('car_license'); //ทะเบียนรถภายในPK
             $table->string('car_model'); //รายระเอียดยี่ห้อรถ รุ่นรถ
             $table->string('car_status');//สถานะรถ
