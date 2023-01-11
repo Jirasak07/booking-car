@@ -18,66 +18,70 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($booking as $item)
-                        <tr>
-                            <td>1</td>
-                            <td>จิรศักดิ์ สิงหบุตร</td>
-                            <td>{{$item->booking_start}}</td>
-                            <td>{{$item->booking_end}}</td>
-                            <td>{{$item->booking_detail}}</td>
-                            <td>
-                                <div class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                    อนุมัติ</div>
-                                <a class="text-white btn btn-danger btn-sm " href="{{ route('Test',2)}}">ยกเลิกคำขอ</a>
-                            </td>
-                        </tr>
+                        @foreach ($booking as $item)
+                            <tr>
+                                <td>1</td>
+                                <td>จิรศักดิ์ สิงหบุตร</td>
+                                <td>{{ $item->booking_start }}</td>
+                                <td>{{ $item->booking_end }}</td>
+                                <td>{{ $item->booking_detail }}</td>
+                                <td>
+                                    <div class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        อนุมัติ</div>
+                                    <a class="text-white btn btn-danger btn-sm " href="{{ route('Test', 2) }}">ยกเลิกคำขอ</a>
+                                </td>
+                            </tr>
                         @endforeach
-                        
-                    </tbody>
-                </table>
 
-                <table class="rounded table table-md  table-light table-striped fw-bold table-responsive-xl">
-                    <thead class="table-dark table-hover">
-                        <tr>
-                            <td class="fw-bold">ลำดับ</td>
-                            <td>ผู้จอง</td>
-                            <td>วันเวลาเริ่มต้น</td>
-                            <td>วันเวลาสิ้นสุด</td>
-                            <td>รายละเอียด</td>
-                            <td>ทะเบียนรถ</td>
-                            <td>สถานะ</td>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($booking as $item)
-                        <tr>
-                            <td>1</td>
-                            <td>จิรศักดิ์ สิงหบุตร</td>
-                            <td>{{$item->booking_start}}</td>
-                            <td>{{$item->booking_end}}</td>
-                            <td>{{$item->booking_detail}}</td>
-                            <td>
-                            @if($item->type_car ==1)
-                                <button class="btn-success btn-sm">{{$item->car_license}}
-                                @elseif($item->type_car ==2)
-                                <button class="btn-warning btn-sm">{{$item->car_out_license}}</button>
-                              @endif
-                            </td>
-                            <td>
-                            @if($item->booking_status ==1)
-                            <span class="text-primary">{{__('กำลังกำเนินการ')}}</span>
-                                @elseif($item->booking_status ==2)
-                                <span class="text-success">{{__('เสร็จสิ้น')}}</span>
-                              @endif
-                            </td>
-                        </tr>
-                        @endforeach
-                        
                     </tbody>
                 </table>
             </div>
         </div>
+        <div class="ml-5 mt-5"> รายการที่เสร็จสิ้น</div>
+        <div class=" shadow-box rounded p-2 ">
+
+            <table class="rounded table table-md  table-light table-striped fw-bold table-responsive-xl">
+                <thead class="table-dark table-hover">
+                    <tr>
+                        <td class="fw-bold">ลำดับ</td>
+                        <td>ผู้จอง</td>
+                        <td>วันเวลาเริ่มต้น</td>
+                        <td>วันเวลาสิ้นสุด</td>
+                        <td>รายละเอียด</td>
+                        <td>ทะเบียนรถ</td>
+                        <td>สถานะ</td>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($booking as $item)
+                        <tr>
+                            <td>1</td>
+                            <td>จิรศักดิ์ สิงหบุตร</td>
+                            <td>{{ $item->booking_start }}</td>
+                            <td>{{ $item->booking_end }}</td>
+                            <td>{{ $item->booking_detail }}</td>
+                            <td>
+                                @if ($item->type_car == 1)
+                                    <button class="btn-success btn-sm">{{ $item->car_license }}
+                                    @elseif($item->type_car == 2)
+                                        <button class="btn-warning btn-sm">{{ $item->car_out_license }}</button>
+                                @endif
+                            </td>
+                            <td>
+                                @if ($item->booking_status == 1)
+                                    <span class="text-primary">{{ __('กำลังกำเนินการ') }}</span>
+                                @elseif($item->booking_status == 2)
+                                    <span class="text-success">{{ __('เสร็จสิ้น') }}</span>
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
+
+                </tbody>
+            </table>
+        </div>
+
         {{-- @include('layouts.footers.auth') --}}
     </div>
     <!-- Button trigger modal -->
