@@ -34,7 +34,7 @@ Route::get('users/dashboard', [\App\Http\Controllers\frontend\UserController::cl
 Route::get('users/booking', [\App\Http\Controllers\frontend\UserController::class, 'viewBooking'])->name('users.view-booking');
 
 Route::get('admin/dashboard', [\App\Http\Controllers\frontend\AdminController::class, 'index'])->name('admin.dashboard');
-Route::get('admin/request', [\App\Http\Controllers\frontend\AdminController::class, 'bookingRequest'])->name('admin.booking_request');
+Route::get('admin/request', [\App\Http\Controllers\backend\Bookingcontroller::class, 'index'])->name('admin.booking_request');
 Route::get('admin/manage-driver', [DriverController::class,'index'])->name('admin.manageDriver');
 Route::get('admin/manage-driver/{id}',[DriverController::class,'changestatus'])->name('driverstatus');
 Route::get('admin/manage-car', [CarsController::class,'index'])->name('admin.manageCar');

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\BookingController;
 use App\Http\Controllers\APi\CarControllers;
 use App\Http\Controllers\APi\DriverController;
 use Illuminate\Http\Request;
@@ -21,3 +22,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::get('car',[CarControllers::class,'index']);
 Route::get('driver',[DriverController::class,'index']);
+Route::get('booking',[BookingController::class,'index']);
