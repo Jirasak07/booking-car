@@ -18195,4 +18195,10 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 .shadow-box {
     box-shadow:  8px 8px 12px #d6d7db,
     -8px -8px 12px #ffffff;
+
+}
+.overflow{
+   overflow-y: scroll !important;
+   max-height: 200px !important;
+   background-color: #00f7b5 !important;
 }
