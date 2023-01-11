@@ -17,6 +17,17 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
+            /* var booking = [{
+                    title: 'simple event',
+                    start: '2023-01-12',
+                    end: '2023-01-20'
+                },
+                {
+                    title: 'event with URL',
+                    start: '2023-01-11',
+                    end: '2023-01-15'
+                }
+            ] */
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 themeSystem: 'bootstrap5',
                 selectable: true,
@@ -38,6 +49,7 @@
                     center: 'title',
                     right: 'timeGridDay,timeGridFourDay,dayGridMonth,listMonth'
                 },
+                //events: booking,
                 //events: 'https://fullcalendar.io/api/demo-feeds/events.json',
                 views: {
                     timeGridFourDay: {
