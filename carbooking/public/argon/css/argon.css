@@ -20986,3 +20986,6 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
 .margin-left{
     margin-left: 1rem !important;
 }
+.header-body{
+    background-color: #000;
+}
