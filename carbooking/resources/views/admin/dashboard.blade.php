@@ -1,28 +1,31 @@
 @extends('layouts.admin.admin')
 @section('content')
     @include('layouts.admin.header')
-    <div class="container-fulid mx-5  ">
-        <div class="d-flex flex-column justify-content-center align-items-center">
-            <div  class=" col-12  flex-column d-flex justify-content-between align-items-center ">
+    <div class="container ">
+        <div class="d-flex flex-column justify-content-center align-items-center ">
+            <div class=" col-12  flex-column d-flex justify-content-between align-items-center  ">
                 {{-- ///////////////////// --}}
-                <div class="box h-100 col-md col align-self-start p-3">
-                    <div class="row p-2" style="gap: 10px">
+                <div class="box h-100 col-md-12 col-12 align-self-start p-3">
+                    <div class="row p-2" style="gap: 20px">
                         @foreach ($car as $cars)
-                            <div class=" col-12 col-sm-5 col-lg col-md-12 shadow-box rounded ">
-                                <div class=" box-1 bg-dark-2 box p-3">
+                            <div class=" col-12 col-sm-12 col-lg col-md-12 shadow-box rounded font-w w-100 d-flex justify-content-center"
+                                style="font-size: larger">
+                                <div class=" box-1  box p-3">
                                     <div class="d-flex row ">
                                         <div class="col ">
                                             <div class="d-flex flex-row align-items-center">
-                                                <div class="text-info" style="font-size: 2.5rem">0 </div>
-                                                <div class="margin-left text-white" style="font-size: 0.6rem">รายการ</div>
+                                                <div class="text-success" style="font-size: 2.5rem">0 </div>
+                                                <div class="margin-left text-dark"
+                                                    style="font-size: 0.8rem; font-weight:bolder; margin-left:5px">รายการ
+                                                </div>
                                             </div>
-                                            <div class="text-info text-capitalize" style="font-size: 0.7rem">
+                                            <div class="text-success text-capitalize" style="font-size: 0.8rem">
                                                 {{ $cars['car_model'] }}
                                             </div>
-                                            <div class="text-white" style="font-size: 0.5rem">{{ $cars['car_license'] }}
+                                            <div class="text-dark" style="font-size: 0.7rem">{{ $cars['car_license'] }}
                                             </div>
                                         </div>
-                                        <div class=" w-100 col-5 d-flex align-items-center justify-content-center  ">
+                                        <div class=" w-100 col-2 d-flex align-items-center justify-content-center  ">
                                             <div class="car-icon-2  ">
                                                 <img src="{{ asset('assets/img/car.png') }}" width="40px"
                                                     class="car-icon" />
@@ -30,79 +33,134 @@
                                         </div>
                                     </div>
                                 </div>
-
-
                             </div>
                         @endforeach
                     </div>
                 </div>
-                {{-- ////////////////////////////// --}}
-                <div class=" col-md-4 col-12 row w-100 " style="height: 100%; max-height:350px">
-                    <div class=" col-12 bg-dark-2 h-100 w-100 rounded ">
-                        <div class="  rounded h-100 w-100 " style=" height:100%; width:100%; ">
+            </div>
+            <div class="col-12 d-flex flex-column  flex-xl-row  align-items-center p-1"
+                style="justify-content: space-evenly; gap:20px">
+                <div class="rounded shadow-box box-1 box col-md-12 col-sm-12 col-lg-5 col-12 row w-100 chart "
+                    style="height: 100%; max-height:350px; ">
+                    <div class=" col-12  h-100 w-100 rounded ">
+                        <div class="  rounded h-100 w-100 " style=" height:100%; width:100%;  ">
                             <canvas id="myChart"></canvas>
                         </div>
-
                     </div>
-
+                </div>
+                <div class="rounded shadow-box box-1 box col-md-12 col-sm-12 col-lg-5 col-12 row w-100 chart  "
+                    style="height: 100%; max-height:350px;  ">
+                    <div class=" col-12   rounded ">
+                        <div class=" text-capitalize rounded d-flex align-items-center " style=" min-height:300px; width:100%;  ">
+                            <canvas id="Chart"></canvas>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class=" col-12 flex-md-row flex-column d-flex justify-content-between align-items-center  mt-2 p-3 ">
-                <div class="p-2 col-12 col-md-8">
-                    <div class="bg-dark-2 rounded">
-                         <div id="Chart">cvcvc</div>
-                    </div>
-
-                </div>
-                <div class=" col p-2 ">
-                    <div class="bg-dark-2 rounded" >dgdg</div>
-                </div>
-            </div>
-            {{-- ///////////////////////////////////////////////////////////////////////////////////////// --}}
-
-
         </div>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const ctx = document.getElementById('myChart');
-                const bar = document.getElementById('Chart');
-                new Chart(ctx, {
-                    type: 'doughnut',
+        <div class="d-flex row flex-lg-row flex-column justify-content-center align-items-center p-3 ">
+        </div>
+        <div class="rounded shadow-box-1 bg-new mb-5 text-center p-2 " style="height: 50vh">
+            รายการปฏิทิน
+        </div>
+    </div>
 
-                    data: data = {
-                        labels: [
-                            'รถภายใน',
-                            'รถภายนอก',
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('myChart');
+
+            new Chart(ctx, {
+                type: 'doughnut',
+
+                data: data = {
+                    labels: [
+                        'รถภายใน',
+                        'รถภายนอก',
+
+                    ],
+                    datasets: [{
+                        label: 'มีการใช้งาน ครั้ง',
+                        data: [5, 2],
+                        backgroundColor: [
+                            '#2dce89',
+                            '#fb6340',
 
                         ],
-                        datasets: [{
-                            label: 'มีการใช้งาน ครั้ง',
-                            data: [5, 2],
-                            backgroundColor: [
-                                '#205295',
-                                '#EFEFEF',
+                        borderColor: ['#2dce89',  '#fb6340'],
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
 
-                            ],
-                            hoverOffset: 4
-                        }]
+                    maintainAspectRatio: false,
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
                     },
-                    options: {
-
-                        maintainAspectRatio: false,
-                        responsive: true,
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        },
-                        plugins: {
-                            title: {
-                                display: true,
-                                text: 'สัดส่วนการใช้งานของรถภายในและรถภายนอก'
-                            }
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'สัดส่วนการใช้งานของรถภายในและรถภายนอก'
                         }
                     }
-                });
-            })
-        </script>
-    @endsection
+                }
+            });
+
+
+        })
+        var ctx = document.getElementById('Chart');
+        const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep',
+            'Oct', 'Nov', 'Dec'
+        ];
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'รถภายใน',
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: '#2dce89',
+                    borderColor: '#2dce89',
+                    borderWidth: 1
+                }, {
+                    label: 'รถภายนอก',
+                    data: [22, 29, 13, 15, 12, 13],
+                    backgroundColor: '#fb6340',
+                    borderColor: '#fb6340',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'การใช้งานของรถภายในและรถภายนอกในปี 2565'
+                    }
+                }
+            }
+        });
+    </script>
+@endsection

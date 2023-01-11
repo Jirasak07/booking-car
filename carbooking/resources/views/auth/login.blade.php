@@ -1,8 +1,8 @@
-@extends('layouts.app', ['class' => 'bg-default'])
+@extends('layouts.app', ['class' => 'bg-warning'])
 
 @section('content')
     @include('layouts.headers.guest')
-    <div class="container mt--8 pb-5">
+    <div class="container mt--8 pb-5 ">
         <div class="row justify-content-center  ">
             <div class="col-lg-5 col-md-7  ">
                 <div class="card bg-secondary shadow-b rounded border-3">

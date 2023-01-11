@@ -20956,3 +20956,36 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
 
     height: 3px;
 }
+.bg-new {
+    background-color: #f1f2f6 !important;
+}
+.shadow-nav {
+    box-shadow: 7px 7px 14px #cacbcf, -7px -7px 14px #ffffff !important;
+}
+.admin {
+    padding: 10px;
+    background: #eceef2;
+    box-shadow: inset 5px 5px 4px #bfc1c4, inset -5px -5px 4px #ffffff;
+}
+.shadow-box {
+    box-shadow:  5px 5px 10px #d2d3d6,
+    -5px -5px 10px #ffffff;
+
+}
+.shadow-box-1 {
+    box-shadow: inset 5px 5px 10px #d2d3d6,
+    inset -5px -5px 10px #ffffff;
+
+
+}
+.overflow{
+   overflow-y: scroll !important;
+   max-height: 200px !important;
+   background-color: #00f7b5 !important;
+}
+.margin-left{
+    margin-left: 1rem !important;
+}
+.header-body{
+    background-color: #000;
+}

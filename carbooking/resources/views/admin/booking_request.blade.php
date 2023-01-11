@@ -5,7 +5,7 @@
     <div class="container-fulid mx-5  ">
         <div class=" shadow-box rounded p-2 ">
             <div class="">
-                <table class="rounded table table-md  table-light fw-bold table-responsive-xl">
+                <table class="rounded table table-md  table-light table-striped fw-bold table-responsive-xl">
                     <thead class="table-dark table-hover">
                         <tr>
                             <td class="fw-bold">ลำดับ</td>
@@ -18,6 +18,18 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>จิรศักดิ์ สิงหบุตร</td>
+                            <td>11/01/2566 16:00</td>
+                            <td>12/01/2565 09:30</td>
+                            <td>ส่งเอกสาร มช</td>
+                            <td>
+                                <div class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    อนุมัติ</div>
+                                <a class="text-white btn btn-danger btn-sm " href="{{ route('Test',2)}}">ยกเลิกคำขอ</a>
+                            </td>
+                        </tr>
                         <tr>
                             <td>1</td>
                             <td>จิรศักดิ์ สิงหบุตร</td>

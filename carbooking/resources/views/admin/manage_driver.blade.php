@@ -4,7 +4,7 @@
     @include('layouts.admin.header')
     <div class="container-fulid mx-5 ">
         <div class="container-md p-md-2 p-1 mt-sm-2 mt-sm-1 mt-4">
-            <div class="card-dark  shadow-b overflow-auto">
+            <div class="card-dark  shadow-box rounded">
                 <table class=" rounded table table-light  fw-bold table-md">
                     <thead class="table-dark table-hover">
                         <tr>
@@ -22,9 +22,9 @@
 
                             <td>
                             @if($item['driver_status'] == 1)
-                                <a class="btn btn-success btn-sm w-25" href="{{route("driverstatus",$item['id'])}}">{{__('ว่าง')}}</a>
+                                <a class="btn btn-success btn-sm " style="width: 80px" href="{{route("driverstatus",$item['id'])}}">{{__('ว่าง')}}</a>
                                 @elseif($item['driver_status'] == 2)
-                                <a class="btn btn-danger btn-sm w-25" href="{{route("driverstatus",$item['id'])}}">{{__('ไม่ว่าง')}}</a>
+                                <a class="btn btn-danger btn-sm " style="width: 80px" href="{{route("driverstatus",$item['id'])}}">{{__('ไม่ว่าง')}}</a>
                                 @endif
                             </td>
                         </tr>
