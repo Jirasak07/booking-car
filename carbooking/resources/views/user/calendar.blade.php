@@ -13,11 +13,12 @@
     <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
 
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.0.2/index.global.min.js'></script>
+    {{-- <script src='fullcalendar/dist/index.global.js'></script> --}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
-
+                themeSystem: 'bootstrap5',
                 selectable: true,
                 timeZone: 'Asia/bangkok',
                 locale: 'th',
@@ -58,6 +59,7 @@
                         text: 'clicked ' + info.dateStr
                     }); */
                 },
+
                 select: function(info) {
                     var booking_start = moment(info.startStr).format('YYYY-MM-DD hh:mm:ss');
                     var booking_end = moment(info.endStr).format('YYYY-MM-DD hh:mm:ss');
@@ -81,7 +83,7 @@
                         var booking_start = info.startStr;
                         var booking_end = info.endStr;
                         var name = $('#name').val();
-                       
+
                     });
                     /* Swal.fire({
                         icon: 'question',
@@ -94,6 +96,7 @@
         });
     </script>
 @endpush
+
 <div class="modal fade" id="bookingModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="bookingModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -102,7 +105,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="bookingModalLabel">กรอกรายละเอียดการจองรถ</h1>
-                    <button type="button" class="close" onclick="window.location.reload()" data-dismiss="modal"
+                    <button type="button" class="close" data-bs-dismiss="modal"{{-- onclick="window.location.reload()" --}}
                         aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -153,7 +156,7 @@
                 <div class="modal-footer">
                     {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> --}}
                     <input type="submit" name="saveBooking" value="ยืนยัน" id="saveBooking" class="btn btn-primary">
-                    <button type="button" class="btn grey btn-danger" onclick="window.location.reload()"
+                    <button type="button" class="btn grey btn-danger"data-bs-dismiss="modal" {{-- onclick="window.location.reload()" --}}
                         data-dismiss="modal">{{ __('ย้อนกลับ') }}</button>
                 </div>
             </div>
@@ -163,5 +166,5 @@
 </div>
 
 <div class="container-fluid pt-5">
-    <div id='calendar'></div>
+    <div id='calendar' {{-- class="table-responsive" --}}></div>
 </div>

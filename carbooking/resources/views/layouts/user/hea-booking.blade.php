@@ -3,7 +3,7 @@
 </style>
 <div class="pt-4">
     <div class="container-fluid">
-        <div class="header-body">
+        <div class="">
             <!-- Card stats -->
             <div class="row">
                 <div class="col-xl-3 col-lg-6">
@@ -50,7 +50,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
-                                    <h4 class="card-title text-uppercase text-muted mb-0">กำลังดำเนินการ</h4>
+                                    <h3 class="card-title text-uppercase text-muted mb-0">กำลังดำเนินการ</h3>
                                     <span class="h2 font-weight-bold mb-0">924</span>
                                 </div>
                                 <div class="col-auto">
@@ -71,7 +71,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
-                                    <h5 class="card-title text-uppercase text-muted mb-0">ดำเนินการเสร็จสิ้น</h5>
+                                    <h3 class="card-title text-uppercase text-muted mb-0">ดำเนินการเสร็จสิ้น</h3>
                                     <span class="h2 font-weight-bold mb-0">49,65%</span>
                                 </div>
                                 <div class="col-auto">
