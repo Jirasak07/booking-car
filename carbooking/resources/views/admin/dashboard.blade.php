@@ -6,9 +6,10 @@
             <div class=" col-12  flex-column d-flex justify-content-between align-items-center  ">
                 {{-- ///////////////////// --}}
                 <div class="box h-100 col-md-12 col-12 align-self-start p-3">
-                    <div class="row p-2" style="gap: 10px">
+                    <div class="row p-2" style="gap: 20px">
                         @foreach ($car as $cars)
-                            <div class=" col-12 col-sm-12 col-lg col-md-12 shadow-box rounded font-w ">
+                            <div class=" col-12 col-sm-12 col-lg col-md-12 shadow-box rounded font-w w-100 d-flex justify-content-center"
+                                style="font-size: larger">
                                 <div class=" box-1  box p-3">
                                     <div class="d-flex row ">
                                         <div class="col ">
@@ -18,13 +19,13 @@
                                                     style="font-size: 0.8rem; font-weight:bolder; margin-left:5px">รายการ
                                                 </div>
                                             </div>
-                                            <div class="text-success text-capitalize" style="font-size: 0.7rem">
+                                            <div class="text-success text-capitalize" style="font-size: 0.8rem">
                                                 {{ $cars['car_model'] }}
                                             </div>
-                                            <div class="text-dark" style="font-size: 0.5rem">{{ $cars['car_license'] }}
+                                            <div class="text-dark" style="font-size: 0.7rem">{{ $cars['car_license'] }}
                                             </div>
                                         </div>
-                                        <div class=" w-100 col-5 d-flex align-items-center justify-content-center  ">
+                                        <div class=" w-100 col-2 d-flex align-items-center justify-content-center  ">
                                             <div class="car-icon-2  ">
                                                 <img src="{{ asset('assets/img/car.png') }}" width="40px"
                                                     class="car-icon" />
@@ -47,10 +48,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="rounded shadow-box box-1 box col-md-12 col-sm-12 col-lg-5 col-12 row w-100 chart "
-                    style="height: 100%; max-height:350px; ">
+                <div class="rounded shadow-box box-1 box col-md-12 col-sm-12 col-lg-5 col-12 row w-100 chart  "
+                    style="height: 100%; max-height:350px;  ">
                     <div class=" col-12   rounded ">
-                        <div class=" text-capitalize rounded " style=" min-height:300px; width:100%;  ">
+                        <div class=" text-capitalize rounded d-flex align-items-center " style=" min-height:300px; width:100%;  ">
                             <canvas id="Chart"></canvas>
                         </div>
                     </div>
@@ -59,7 +60,9 @@
         </div>
         <div class="d-flex row flex-lg-row flex-column justify-content-center align-items-center p-3 ">
         </div>
-        <div class="rounded shadow-box bg-new mb-5 " style="height: 50vh">1</div>
+        <div class="rounded shadow-box-1 bg-new mb-5 text-center p-2 " style="height: 50vh">
+            รายการปฏิทิน
+        </div>
     </div>
 
 
@@ -95,10 +98,11 @@
                         label: 'มีการใช้งาน ครั้ง',
                         data: [5, 2],
                         backgroundColor: [
-                            '#205295',
-                            '#EFEFEF',
+                            '#2dce89',
+                            '#fb6340',
 
                         ],
+                        borderColor: ['#2dce89',  '#fb6340'],
                         hoverOffset: 4
                     }]
                 },
@@ -131,16 +135,16 @@
             data: {
                 labels: labels,
                 datasets: [{
-                    label: 'Data Set 1',
+                    label: 'รถภายใน',
                     data: [12, 19, 3, 5, 2, 3],
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: '#2dce89',
+                    borderColor: '#2dce89',
                     borderWidth: 1
                 }, {
-                    label: 'Data Set 2',
+                    label: 'รถภายนอก',
                     data: [22, 29, 13, 15, 12, 13],
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
+                    backgroundColor: '#fb6340',
+                    borderColor: '#fb6340',
                     borderWidth: 1
                 }]
             },
@@ -148,6 +152,12 @@
                 scales: {
                     y: {
                         beginAtZero: true
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'การใช้งานของรถภายในและรถภายนอกในปี 2565'
                     }
                 }
             }

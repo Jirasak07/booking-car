@@ -20957,7 +20957,7 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
     height: 3px;
 }
 .bg-new {
-    background-color: #f1f2f6;
+    background-color: #f1f2f6 !important;
 }
 .shadow-nav {
     box-shadow: 7px 7px 14px #cacbcf, -7px -7px 14px #ffffff !important;
@@ -20968,8 +20968,14 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
     box-shadow: inset 5px 5px 4px #bfc1c4, inset -5px -5px 4px #ffffff;
 }
 .shadow-box {
-    box-shadow:  8px 8px 12px #d6d7db,
-    -8px -8px 12px #ffffff;
+    box-shadow:  5px 5px 10px #d2d3d6,
+    -5px -5px 10px #ffffff;
+
+}
+.shadow-box-1 {
+    box-shadow: inset 5px 5px 10px #d2d3d6,
+    inset -5px -5px 10px #ffffff;
+
 
 }
 .overflow{

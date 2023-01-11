@@ -57,7 +57,7 @@
                             <img src="{{ asset('assets/img/lanna-removebg-preview.png') }}" class="navbar-brand-img" alt="...">
                         </a>
                     </div>
-                    <div class="col-6 collapse-close">
+                    <div class="col-6 collapse-close ">
                         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle sidenav">
                             <span></span>
                             <span></span>
@@ -77,29 +77,29 @@
                 </div>
             </form>
             <!-- Navigation -->
-            <ul class="navbar-nav">
+            <ul class="navbar-nav ">
                 <li class="nav-item ">
-                    <a class="nav-link text-light " href="{{url('/admin/dashboard')}}">
+                    <a class="nav-link text-dark  " style="font-weight: 600"  href="{{url('/admin/dashboard')}}">
                         <i class="ni ni-tv-2 text-primary"></i> {{ __('Dashboard') }}
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="{{url('/admin/request')}}">
+                    <a class="nav-link text-dark "  style="font-weight: 600" href="{{url('/admin/request')}}">
                         <i class="fa-regular fa-calendar"></i> {{ __('รายการจอง') }}
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="{{url('/admin/manage-driver')}}">
-                        <i class="fa-regular fa-calendar"></i> {{ __('จัดการข้อมูลพนักงานขับรถ') }}
+                    <a class="nav-link text-dark "  style="font-weight: 600" href="{{url('/admin/manage-driver')}}">
+                        <i class="fa-regular fa-calendar"></i> {{ __('จัดการข้อมูลพนักงานขับ') }}
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="{{url('/admin/manage-car')}}">
+                    <a class="nav-link text-dark "  style="font-weight: 600" href="{{url('/admin/manage-car')}}">
                         <i class="fa-regular fa-calendar"></i> {{ __('จัดการข้อมูลรถภายใน') }}
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="{{url('/admin/manage-user')}}">
+                    <a class="nav-link text-dark "  style="font-weight: 600" href="{{url('/admin/manage-user')}}">
                         <i class="fa-regular fa-calendar"></i> {{ __('จัดการข้อมูลผู้ใช้') }}
                     </a>
                 </li>
