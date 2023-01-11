@@ -1,12 +1,17 @@
 <?php
 
 namespace App\Http\Controllers\frontend;
+
 use App\Http\Controllers\Controller;
 use App\Models\CarModel;
 
 class AdminController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $car = CarModel::All();

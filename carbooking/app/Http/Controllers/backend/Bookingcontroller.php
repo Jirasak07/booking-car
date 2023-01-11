@@ -10,7 +10,6 @@ class Bookingcontroller extends Controller
 {
     //
     function index(){
-
         $booking = DB::table('tb_booking')
         ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
         ->join('tb_out_cars', 'tb_booking.license_plate', '=', 'tb_out_cars.id')
