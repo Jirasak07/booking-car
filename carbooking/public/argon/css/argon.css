@@ -20977,3 +20977,6 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
    max-height: 200px !important;
    background-color: #00f7b5 !important;
 }
+.margin-left{
+    margin-left: 1rem !important;
+}
