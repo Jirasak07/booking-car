@@ -21,10 +21,10 @@
                             <td>tr-Jirasak Singhabutr</td>
                             <td>tr-jirasaks@lanna.com</td>
                             <td>
-                                <button class="btn btn-danger text-uppercase btn-sm">admin</button>
+                                <div class="text-danger  text-capitalize " style="width: 50px;font-weight:bold">admin</div>
                             </td>
                             <td>
-                                <div class="btn btn-warning btn-sm">แก้ไขบทบาท</div>
+                                <div class="btn btn-warning btn-sm"><i class="fa-solid fa-user-pen"></i></div>
                             </td>
                         </tr>
                         <tr>
@@ -32,10 +32,10 @@
                             <td>tr-Patcharawan Gedpun</td>
                             <td>tr-patcharawang@lanna.com</td>
                             <td>
-                                <button class="btn btn-default text-uppercase btn-sm">user</button>
+                                <div class="text-dark text-capitalize " style="width: 50px;font-weight:bold">user</div>
                             </td>
                             <td>
-                                <div class="btn btn-warning btn-sm">แก้ไขบทบาท</div>
+                                <div class="btn btn-warning btn-sm"><i class="fa-solid fa-user-pen"></i></div>
                             </td>
                         </tr>
                     </tbody>
