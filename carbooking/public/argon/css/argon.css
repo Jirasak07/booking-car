@@ -20879,3 +20879,8 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
 .header-body{
     background-color: #000;
 }
+.mxw{
+    max-width:530px;
+    height: 100%;
+    max-height: 400px;
+}
