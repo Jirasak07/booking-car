@@ -92,18 +92,3 @@
         </div>
     </div>
 </div>
-<div class="text-uppercase fw-bolder h4 text-test mx-4" style="color:#8392bd">
-    <label  id="name-head"></label>
-</div>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var path = window.location.pathname;
-
-        if (path == "/index.php/admin/request") {
-            document.getElementById('name-head').innerHTML = 'Booking Request';
-        } else if (path == "/index.php/admin/dashboard") {
-            document.getElementById('name-head').innerHTML = 'Dashboard';
-        }
-
-    })
-</script>

@@ -1,9 +1,24 @@
 <!-- Top navbar -->
 <nav class="navbar navbar-top navbar-expand-md navbar-dark " id="navbar-main">
-    <div class="container-fluid d-flex justify-content-end">
+    <div class="container-fluid d-flex justify-content-between">
         <!-- Brand -->
 
         <!-- Form -->
+        <div class="text-capitalize fw-normal h1 text-test mx-4" style="color:#8392bd;font-weight:normal;">
+            <label id="name-head"></label>
+        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var path = window.location.pathname;
+
+                if (path == "/index.php/admin/request") {
+                    document.getElementById('name-head').innerHTML = 'Booking Request';
+                } else if (path == "/index.php/admin/dashboard") {
+                    document.getElementById('name-head').innerHTML = 'Dashboard';
+                }
+
+            })
+        </script>
 
         <!-- User -->
         <ul class="navbar-nav align-items-center d-none d-md-flex">

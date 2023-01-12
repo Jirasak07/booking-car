@@ -2,19 +2,25 @@
 @section('content')
     @include('layouts.admin.header')
     <div class="container-fulid  ">
-        <div class="d-flex flex-row   mb-3" >
-            <div class="w-100 col-6 m-dash" >
-                <div class="bg-white">1</div>
+        <div class="d-flex flex-lg-row flex-column mx-3  mb-3" style="gap: 20px;min-height:120px" >
+            <div class="w-100  m-dash"  >
+                <div class="bg-white rounded h-100 booking-all p-2" style="min-height:120px">รายการจองทั้งหมด</div>
             </div>
-            <div class="w-100 col-6 m-dash" >
-                <div class="bg-white">1</div>
+            <div class="w-100  m-dash"  >
+                <div class="rounded bg-white h-100 confirm p-2 "style="min-height:120px">อนุมัติแล้ว</div>
+            </div>
+            <div class="w-100  m-dash"  >
+                <div class="rounded bg-white h-100 pending p-2 " style="min-height:120px">รอดำเนินการ</div>
+            </div>
+            <div class="w-100  m-dash"  >
+                <div class="rounded bg-white h-100 w-100 cancel p-2" style="min-height:120px">ยกเลิกแล้ว</div>
             </div>
         </div>
         <div class="d-flex flex-column justify-content-center align-items-center ">
             <div class=" col-12  flex-column d-flex  align-items-center ">
                 {{-- ///////////////////// --}}
                 <div class=" h-100 col-md-12 col-12 align-self-start ">
-                    <div class="row  d-flex justify-content-between" style="gap: 10px">
+                    <div class="row  d-flex justify-content-between" style="gap: 20px">
                         @foreach ($car as $cars)
                             <div class=" col-12 col-sm-12 col-lg col-md-12 shadow-lg bg-white rounded font-w w-100 d-flex justify-content-center"
                                 style="font-size: larger; gap:20px">

@@ -22,7 +22,7 @@
     --pink: #f3a4b5;
     --red: #f5365c;
     --orange: #fb6340;
-    --yellow: #ffd600;
+    --yellow: #FFB020;
     --green: #2dce89;
     --teal: #11cdef;
     --cyan: #2bffc6;
@@ -20260,8 +20260,11 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle {
     width: 800px !important;
 
 }
-div.m-dash{
+.m-dash{
     margin: 0px !important;
+    color: #00f7b5;
+    margin-left: 0px !important;
+    margin-right: 0px !important;
 }
 
 /* btn yellow */
@@ -20306,3 +20309,15 @@ div.m-dash{
 }
 
 /* end yellow*/
+.booking-all{
+    border-top: 6px solid var(--default);
+}
+.confirm{
+    border-top: 6px solid var(--success);
+}
+.pending{
+    border-top: 6px solid var(--yellow);
+}
+.cancel{
+    border-top: 6px solid var(--danger);
+}
