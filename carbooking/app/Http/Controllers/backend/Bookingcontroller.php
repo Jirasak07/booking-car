@@ -22,7 +22,7 @@ class Bookingcontroller extends Controller
     }
     
     function showcalendar(){
-        $response = Http::get('http://localhost:225/index.php/api/calendar');
+        $response = Http::get('http://localhost:2323/index.php/api/calendar');
         $event = array();
         $jsonData = $response->json();
         
@@ -35,7 +35,6 @@ class Bookingcontroller extends Controller
                 'title' => $item->booking_id,
                 'start' => $item->booking_start,
                 'end' => $item->booking_end,
-                
             ];
             
         }
