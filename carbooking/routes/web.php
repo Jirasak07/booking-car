@@ -32,7 +32,7 @@ Route::post('user/send', function (Request $request) {
 })->name('sendRe');
 Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('users/dashboard', [\App\Http\Controllers\frontend\UserController::class, 'index'])->name('user.dashboard');
+Route::get('users/dashboard', [\App\Http\Controllers\backend\Bookingcontroller::class, 'showcalendar'])->name('user.dashboard');
 Route::get('users/booking', [\App\Http\Controllers\frontend\UserController::class, 'viewBooking'])->name('users.view-booking');
 Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 

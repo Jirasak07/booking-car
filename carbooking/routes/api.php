@@ -23,3 +23,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('car',[CarControllers::class,'index']);
 Route::get('driver',[DriverController::class,'index']);
 Route::get('booking',[BookingController::class,'index']);
+Route::get('calendar',[BookingController::class,'showcalendar']);
