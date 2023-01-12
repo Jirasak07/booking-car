@@ -43,7 +43,10 @@
         </div>
         <div class="container d-flex flex-column justify-content-between flex-lg-row px-3 mb-3 pb-2">
             <canvas class="mt-3 rounded bg-white col-12 col-lg-6 " style="  max-height: 400px;" id="Chart"></canvas>
-            <canvas class="mt-3 rounded bg-white col-12 col-xl col-lg-5 mxw"  id="myChart"></canvas>
+            <canvas class="mt-3 rounded bg-white col-12 col-xl col-lg-5 mxw" id="myChart"></canvas>
+        </div>
+        <div class="card">
+            @include('admin.calendar_show')
         </div>
 
 
