@@ -23,10 +23,24 @@ class Bookingcontroller extends Controller
     
     function showcalendar(){
         $response = Http::get('http://localhost:225/index.php/api/calendar');
-    
+        $event = array();
         $jsonData = $response->json();
+        
+        
+        // $bookings = DB::table('tb_booking')
+        // ->select('booking_id',  'booking_start', 'booking_end',  'type_car')
+        // ->get();
+        foreach($jsonData as $item) {
+            $event[] = [
+                'title' => $item->booking_id,
+                'start' => $item->booking_start,
+                'end' => $item->booking_end,
+                
+            ];
+            
+        }
           
-       return view('user.dashboard')->with(['calendar' =>  $jsonData]);
+       return view('user.dashboard')->with(['calendar' =>  $event]);
     }
 
 }
