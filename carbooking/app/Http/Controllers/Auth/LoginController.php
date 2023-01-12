@@ -84,7 +84,7 @@ class LoginController extends Controller
                 $user->save();
             }
             $this->guard()->login($user, true);
-            
+
             return redirect()->route("admin.dashboard");
             //dd(auth()->user());
         } else {

@@ -10,11 +10,12 @@ class CarsController extends Controller
 {
     //
     function index(){
-      $response = Http::get('http://127.0.0.1:8000/api/car');
-    
+        $currentURL = request()->getHttpHost();
+      $response = Http::get('http://'.$currentURL.'/index.php/api/car');
+
       $jsonData = $response->json();
-        
-     
+
+
         return view('admin.manage_car')->with(['car' => $jsonData]);
     }
 

@@ -10,8 +10,10 @@ class DriverController extends Controller
 {
     //
     function index(){
-      $response = Http::get('http://localhost:225/index.php/api/driver');
-    
+        $currentURL = request()->getHttpHost();
+        $response = Http::get('http://'.$currentURL.'/index.php/api/driver');
+
+
       $jsonData = $response->json();
         return view('admin.manage_driver')->with(['driver' => $jsonData]);
     }

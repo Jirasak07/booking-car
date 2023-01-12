@@ -20423,21 +20423,28 @@ li {
     gap: 10px;
     opacity: 0.8;
 }
-.sub-menu{
+.sub-menu {
     display: flex;
     flex-direction: column;
     gap: 10px;
-
 }
-.nav-link{
-   
+.nav-link {
     margin: 0 15px;
     border-radius: 3px;
-
 }
-.sub-menu{
-
+.sub-menu {
     margin: 0 15px;
     color: white !important;
 }
+@media screen and (max-width: 380px) {
+    .fc-header-toolbar.fc-toolbar.fc-toolbar-ltr {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .fc-button-group {
+        max-width: fit-content !important;
+    }
 
+}

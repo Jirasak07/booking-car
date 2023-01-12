@@ -15,12 +15,13 @@
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.0.2/index.global.min.js'></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            var calendarEl = document.getElementById('calendar');
+            var calendarEl = document.getElementById('calendar-show');
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 themeSystem: 'jquery-ui',
-                selectable: true,
+                selectable: false,
                 timeZone: 'Asia/bangkok',
                 locale: 'th',
+                
                 initialView: 'timeGridFourDay',
                 allDaySlot: false,
                 nowIndicator: true,
@@ -46,84 +47,16 @@
                         },
                         buttonText: '7 day'
                     }
-                },
-                dateClick: function(info) {
 
                 },
+
             });
 
+            calendar.updateSize();
             calendar.render();
         });
     </script>
 @endpush
-<div class="modal fade" id="bookingModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="bookingModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <form method="POST" action="{{ route('sendRe') }}">
-            @csrf
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="bookingModalLabel">กรอกรายละเอียดการจองรถ</h1>
-                    <button type="button" class="close" onclick="window.location.reload()" data-dismiss="modal"
-                        aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row g-3">
-                        <div class="col-md-3">
-                            <strong for="validationCustom03">วันเดินทางไป</strong>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="plaintext" id="booking_start" name="booking_start"></label>
-                        </div>
-                        <div class="col-md-3">
-                            <input type="datetime-local" data-date="" class="form-control"
-                                data-date-format="DD MM YYYY hh:mm:ss" name="date_start" id="date_start">
-
-                        </div>
-                        <br />
-                        <br />
-                        <div class="col-md-3">
-                            <strong for="validationCustom03">วันเดินทางกลับ</strong>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="plaintext" id="booking_end" name="booking_end"></label>
-                        </div>
-                        <div class="col-md-3">
-                            <input type="datetime-local" data-date="" class="form-control"
-                                data-date-format="DD MM YYYY hh:mm:ss" id="date_end" name="date_end">
-                        </div>
-                        <br />
-                        <br />
-
-                        <div class="col-md-12 mb-3">
-                            <strong class="form-label">ชื่อผู้จอง</strong>
-                            <span class=" text-danger">*</span>
-                            <input type="text" class="form-control" id="name" name="name"
-                                placeholder="ชื่อผู้จอง" required>
-                        </div>
-
-                        <div class="col-md-12">
-                            <strong class="form-label">รายละเอียดการจอง</strong>
-                            <span class=" text-danger">*</span>
-                            <textarea name="location" id="location" class="form-control" rows="5" required>
-                        </textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> --}}
-                    <input type="submit" name="saveBooking" value="ยืนยัน" id="saveBooking" class="btn btn-primary">
-                    <button type="button" class="btn grey btn-danger" onclick="window.location.reload()"
-                        data-dismiss="modal">{{ __('ย้อนกลับ') }}</button>
-                </div>
-            </div>
-        </form>
-
-    </div>
-</div>
-
-<div class="container-fluid pt-5">
-    <div id='calendar'></div>
+<div class="calendar-container">
+    <div id='calendar-show'></div>
 </div>

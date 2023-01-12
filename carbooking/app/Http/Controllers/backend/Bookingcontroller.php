@@ -20,10 +20,12 @@ class Bookingcontroller extends Controller
             ->get();
         return view('admin.booking_request')->with(['booking' => $booking]);
     }
-    
+
     function showcalendar (){
-        $response = Http::get('http://localhost:225/index.php/api/calendar');
-        
+        $currentURL = request()->getHttpHost();
+ 
+        $response = Http::get('http://'.$currentURL.'/index.php/api/calendar');
+
         $jsonData = $response->json();
 
 // return dd($jsonData);
