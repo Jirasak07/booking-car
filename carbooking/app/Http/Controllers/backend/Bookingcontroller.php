@@ -22,16 +22,12 @@ class Bookingcontroller extends Controller
     }
     
     function showcalendar(){
-        $response = Http::get('http://localhost:2323/index.php/api/calendar');
-        $event = array();
+        $response = Http::get('http://localhost:225/index.php/api/calendar');
+        
         $jsonData = $response->json();
-        
-        
-        // $bookings = DB::table('tb_booking')
-        // ->select('booking_id',  'booking_start', 'booking_end',  'type_car')
-        // ->get();
+        $events = array();
         foreach($jsonData as $item) {
-            $event[] = [
+            $events[] = [
                 'title' => $item->booking_id,
                 'start' => $item->booking_start,
                 'end' => $item->booking_end,
@@ -40,8 +36,8 @@ class Bookingcontroller extends Controller
             ];
             
         }
-          
-       return view('user.dashboard')->with(['calendar' =>  $event]);
+          dd($jsonData);
+    //    return view('user.dashboard')->with(['calendar' =>  $events]);
     }
 
 }

@@ -10,7 +10,7 @@ class CarsController extends Controller
 {
     //
     function index(){
-      $response = Http::get('http://localhost:225/index.php/api/car');
+      $response = Http::get('http://127.0.0.1:8000/api/car');
     
       $jsonData = $response->json();
         

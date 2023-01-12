@@ -17,21 +17,10 @@ class BookingController extends Controller
     }
 
     function showcalendar(){
-        $event = array();
-        $bookings = BookingModel::all();
-        // $bookings = DB::table('tb_booking')
-        // ->select('booking_id',  'booking_start', 'booking_end',  'type_car')
-        // ->get();
-        foreach($bookings as $item) {
-            $event[] = [
-                'title' => $item->booking_id,
-                'start' => $item->booking_start,
-                'end' => $item->booking_end,
-                'type' =>$item->type_car
-                
-            ];
-            
-        }
-        return response()->json($event);
+        $bookings = DB::table('tb_booking')
+        ->select('booking_id', 'booking_start', 'booking_end',  'type_car')
+        ->get();
+        
+        return response()->json($bookings);
     }
 }
