@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
@@ -80,7 +81,13 @@ class LoginController extends Controller
                 $user->name = $data->FullName;
                 $user->email = $data->Email;
                 $user->username = $data->Username;
-                $user->role_user = "1";
+                $user_tb = DB::table('Users')->count();
+                if($user_tb < 1){
+                    $user->role_user = "1";
+                }else{
+                    $user->role_user = "2";
+                }
+                
                 $user->save();
             }
             $this->guard()->login($user, true);
