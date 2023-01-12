@@ -40,6 +40,65 @@
                     right: 'timeGridDay,timeGridFourDay,dayGridMonth,listMonth'
                 },
                 //events: booking,
+                eventColor: '#e63946',
+                events: [{
+                        title: 'All Day Event',
+                        description: 'description for All Day Event',
+                        start: '2023-01-01'
+                    },
+                    {
+                        title: 'Long Event',
+                        description: 'description for Long Event',
+                        start: '2023-01-07',
+                        end: '2023-01-10'
+                    },
+                    {
+                        groupId: '999',
+                        title: 'Repeating Event',
+                        description: 'description for Repeating Event',
+                        start: '2023-01-09T16:00:00'
+                    },
+                    {
+                        groupId: '999',
+                        title: 'Repeating Event',
+                        description: 'description for Repeating Event',
+                        start: '2023-01-16T16:00:00'
+                    },
+                    {
+                        title: 'Conference',
+                        description: 'description for Conference',
+                        start: '2023-01-11',
+                        end: '2023-01-13'
+                    },
+                    {
+                        title: 'Meeting',
+                        description: 'description for Meeting',
+                        start: '2023-01-12T10:30:00',
+                        end: '2023-01-12T12:30:00'
+                    },
+                    {
+                        title: 'Lunch',
+                        description: 'description for Lunch',
+                        start: '2023-01-12T12:00:00'
+                    },
+                    {
+                        title: 'Meeting',
+                        description: 'description for Meeting',
+                        start: '2023-01-12T14:30:00'
+                    },
+                    {
+                        title: 'Birthday Party',
+                        description: 'description for Birthday Party',
+                        start: '2023-01-13T07:00:00'
+                    },
+                    {
+                        title: 'Click for Google',
+                        description: 'description for Click for Google',
+                        url: 'http://google.com/',
+                        start: '2023-01-28'
+                    }
+                ],
+
                 views: {
                     timeGridFourDay: {
                         type: 'timeGrid',
