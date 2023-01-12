@@ -4,13 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\DriverModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class DriverController extends Controller
 {
     //
     function index(){
-        $driver = DriverModel::All();
-        return view('admin.manage_driver')->with(['driver' => $driver]);
+      $response = Http::get('http://localhost:225/index.php/api/calendar');
+    
+      $jsonData = $response->json();
+        return view('admin.manage_driver')->with(['driver' => $jsonData]);
     }
     public function changeStatus($id)
     {
