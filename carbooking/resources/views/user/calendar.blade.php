@@ -11,7 +11,9 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
     <!-- Modal -->
     <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/javascript.util/0.12.12/javascript.util.min.js"
+        integrity="sha512-oHBLR38hkpOtf4dW75gdfO7VhEKg2fsitvHZYHZjObc4BPKou2PGenyxA5ZJ8CCqWytBx5wpiSqwVEBy84b7tw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.0.2/index.global.min.js'></script>
     {{-- <script src='fullcalendar/dist/index.global.js'></script> --}}
     <script>
@@ -40,7 +42,7 @@
                     right: 'timeGridDay,timeGridFourDay,dayGridMonth,listMonth'
                 },
                 //events: booking,
-                eventColor: '#e63946',
+                eventColor: '#014f86',
                 events: [{
                         title: 'All Day Event',
                         description: 'description for All Day Event',
@@ -49,8 +51,8 @@
                     {
                         title: 'Long Event',
                         description: 'description for Long Event',
-                        start: '2023-01-07',
-                        end: '2023-01-10'
+                        start: '2023-01-07T07:00:00',
+                        end: '2023-01-10T07:00:00'
                     },
                     {
                         groupId: '999',
@@ -67,8 +69,9 @@
                     {
                         title: 'Conference',
                         description: 'description for Conference',
-                        start: '2023-01-11',
-                        end: '2023-01-13'
+                        start: '2023-01-15T16:00:00',
+                        end: '2023-01-20T16:00:00',
+                        //type:'1'
                     },
                     {
                         title: 'Meeting',
@@ -94,11 +97,14 @@
                     {
                         title: 'Click for Google',
                         description: 'description for Click for Google',
-                        url: 'http://google.com/',
-                        start: '2023-01-28'
+                        start: '2023-01-22T08:30:00',
+                        end: '2023-01-22T18:30:00'
                     }
                 ],
-
+                eventClick: function(info) {
+                    var eventObj = info.event;
+                    console.log(eventObj);
+                },
                 views: {
                     timeGridFourDay: {
                         type: 'timeGrid',
@@ -133,11 +139,14 @@
 
                     document.getElementById('date_start').value = booking_start;
                     document.getElementById('date_end').value = booking_end;
+
+                    //tag input datetime-local เลือกวันย้อนหลังไม่ได้
                     var now_utc = Date.now() // 지금 날짜를 밀리초로
                     // getTimezoneOffset()은 현재 시간과의 차이를 분 단위로 반환
                     var timeOff = new Date().getTimezoneOffset() * 60000; // 분단위를 밀리초로 변환
                     // new Date(today-timeOff).toISOString()은 '2022-05-11T18:09:38.134Z'를 반환
                     var today = new Date(now_utc - timeOff).toISOString().substring(0, 16);
+                    //close tag input datetime-local
 
                     document.getElementById("date_start").setAttribute("min", today);
                     document.getElementById("date_end").setAttribute("min", today);
@@ -155,7 +164,6 @@
         });
     </script>
 @endpush
-
 <div class="modal fade" id="bookingModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="bookingModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
