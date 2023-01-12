@@ -21,23 +21,24 @@
                 selectable: false,
                 timeZone: 'Asia/bangkok',
                 locale: 'th',
-                
                 initialView: 'timeGridFourDay',
                 allDaySlot: false,
                 nowIndicator: true,
+                // aspectRatio: 0.5,
                 titleFormat: {
                     month: 'long',
                     year: 'numeric',
                     day: 'numeric',
                     //weekday: 'long',
                     hour12: 'false',
-                    css: 'font-size:20px'
                 },
                 headerToolbar: {
                     left: 'prev,next',
                     center: 'title',
                     right: 'timeGridDay,timeGridFourDay,dayGridMonth,listMonth'
                 },
+
+    events: 'https://fullcalendar.io/api/demo-feeds/events.json',
                 //events: 'https://fullcalendar.io/api/demo-feeds/events.json',
                 views: {
                     timeGridFourDay: {
@@ -57,6 +58,6 @@
         });
     </script>
 @endpush
-<div class="calendar-container">
+<div class="calendar">
     <div id='calendar-show'></div>
 </div>
