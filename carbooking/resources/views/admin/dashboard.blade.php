@@ -3,13 +3,13 @@
     @include('layouts.admin.header')
     <div class="container ">
         <div class="d-flex flex-column justify-content-center align-items-center ">
-            <div class=" col-12  flex-column d-flex justify-content-between align-items-center  ">
+            <div class=" col-12  flex-column d-flex  align-items-center ">
                 {{-- ///////////////////// --}}
-                <div class="box h-100 col-md-12 col-12 align-self-start p-3">
-                    <div class="row p-2" style="gap: 20px">
+                <div class=" h-100 col-md-12 col-12 align-self-start ">
+                    <div class="row  d-flex justify-content-between" style="gap: 10px">
                         @foreach ($car as $cars)
-                            <div class=" col-12 col-sm-12 col-lg col-md-12 shadow-box rounded font-w w-100 d-flex justify-content-center"
-                                style="font-size: larger">
+                            <div class=" col-12 col-sm-12 col-lg col-md-12 shadow-lg bg-white rounded font-w w-100 d-flex justify-content-center"
+                                style="font-size: larger; gap:20px">
                                 <div class=" box-1  box p-3">
                                     <div class="d-flex row ">
                                         <div class="col ">
@@ -39,32 +39,17 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 d-flex flex-column  flex-xl-row  align-items-center p-1"
-                style="justify-content: space-evenly; gap:20px">
-                <div class="rounded shadow-box box-1 box col-md-12 col-sm-12 col-lg-5 col-12 row w-100 chart "
-                    style="height: 100%; max-height:350px; ">
-                    <div class=" col-12  h-100 w-100 rounded ">
-                        <div class="  rounded h-100 w-100 " style=" height:100%; width:100%;  ">
-                            <canvas id="myChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-                <div class="rounded shadow-box box-1 box col-md-12 col-sm-12 col-lg-5 col-12 row w-100 chart  "
-                    style="height: 100%; max-height:350px;  ">
-                    <div class=" col-12   rounded ">
-                        <div class=" text-capitalize rounded d-flex align-items-center "
-                            style=" min-height:300px; width:100%;  ">
-                            <canvas id="Chart"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
         </div>
-        <div class="d-flex row flex-lg-row flex-column justify-content-center align-items-center p-3 ">
+        <div class="container d-flex flex-column justify-content-between flex-lg-row px-3 mb-3 pb-2">
+            <canvas class="mt-3 rounded bg-white col-12 col-lg-6 " style="  max-height: 400px;" id="Chart"></canvas>
+            <canvas class="mt-3 rounded bg-white col-12 col-xl col-lg-5 mxw" id="myChart"></canvas>
         </div>
-        <div class="rounded shadow-box-1 bg-new mb-5 text-center p-2 " style="height: 100%;font-weight:700;">
+        <div class="card">
             @include('admin.calendar_show')
         </div>
+
+
     </div>
 
 
@@ -151,6 +136,7 @@
                 }]
             },
             options: {
+                responsive: true,
                 scales: {
                     y: {
                         beginAtZero: true
@@ -162,6 +148,55 @@
                         text: 'การใช้งานของรถภายในและรถภายนอกในปี 2565'
                     }
                 }
+            }
+        });
+        var ctx1 = document.getElementById('chart1').getContext('2d');
+        var chart1 = new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'รถภายใน',
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: '#2dce89',
+                    borderColor: '#2dce89',
+                    borderWidth: 1
+                }, {
+                    label: 'รถภายนอก',
+                    data: [22, 29, 13, 15, 12, 13],
+                    backgroundColor: '#fb6340',
+                    borderColor: '#fb6340',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                // other options
+            }
+        });
+
+        var ctx2 = document.getElementById('chart2').getContext('2d');
+        var chart2 = new Chart(ctx2, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'รถภายใน',
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: '#2dce89',
+                    borderColor: '#2dce89',
+                    borderWidth: 1
+                }, {
+                    label: 'รถภายนอก',
+                    data: [22, 29, 13, 15, 12, 13],
+                    backgroundColor: '#fb6340',
+                    borderColor: '#fb6340',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                // other options
             }
         });
     </script>
