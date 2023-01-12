@@ -19,7 +19,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
-            var booking =@json(calendar);
+            var bookings = @js($booking);
             console.log(booking);
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 themeSystem: 'bootstrap5',

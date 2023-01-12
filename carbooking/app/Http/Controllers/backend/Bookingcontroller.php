@@ -21,23 +21,13 @@ class Bookingcontroller extends Controller
         return view('admin.booking_request')->with(['booking' => $booking]);
     }
     
-    function showcalendar(){
+    function showcalendar (){
         $response = Http::get('http://localhost:225/index.php/api/calendar');
         
         $jsonData = $response->json();
-        $events = array();
-        foreach($jsonData as $item) {
-            $events[] = [
-                'title' => $item->booking_id,
-                'start' => $item->booking_start,
-                'end' => $item->booking_end,
-                'type' => $item->type_car
-                
-            ];
-            
-        }
-          dd($jsonData);
-    //    return view('user.dashboard')->with(['calendar' =>  $events]);
+
+// return dd($jsonData);
+        return view('user.dashboard')->with(['booking' => $jsonData]);
     }
 
 }
