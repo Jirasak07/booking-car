@@ -7,11 +7,11 @@ use App\Models\CarModel;
 
 class AdminController extends Controller
 {
-    //
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
     public function index()
     {
         $car = CarModel::All();

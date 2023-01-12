@@ -20257,9 +20257,11 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle {
 }
 .mxw{
 
-    width: 100%;
-    height: 100%;
+    width: 800px !important;
 
+}
+div.m-dash{
+    margin: 0px !important;
 }
 
 /* btn yellow */

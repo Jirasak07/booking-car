@@ -1,7 +1,15 @@
 @extends('layouts.admin.admin')
 @section('content')
     @include('layouts.admin.header')
-    <div class="container-fulid bg-danger ">
+    <div class="container-fulid  ">
+        <div class="d-flex flex-row   mb-3" >
+            <div class="w-100 col-6 m-dash" >
+                <div class="bg-white">1</div>
+            </div>
+            <div class="w-100 col-6 m-dash" >
+                <div class="bg-white">1</div>
+            </div>
+        </div>
         <div class="d-flex flex-column justify-content-center align-items-center ">
             <div class=" col-12  flex-column d-flex  align-items-center ">
                 {{-- ///////////////////// --}}
@@ -41,11 +49,17 @@
             </div>
 
         </div>
-        <div class=" d-flex flex-column justify-content-between flex-lg-row px-3 mb-3 pb-2 bg-warning w-100">
-            <canvas class="mt-3 rounded bg-white col-6 " style=" max-height: 400px;" id="Chart"></canvas>
-            <canvas class="mt-3 rounded bg-info col-6 mxw " id="myChart"></canvas>
+        <div class=" d-flex flex-column justify-content-between flex-lg-row mb-3 pb-2  w-100">
+            <div class="mt-3 rounded  col-12 col-lg-8 ">
+                <canvas class="bg-white rounded w-100 h-100 " style=" max-height: 400px;" id="Chart"></canvas>
+            </div>
+            <div class="mt-3 rounded col-12 col-lg-4">
+                <canvas class=" bg-white rounded w-100 " style=" max-height: 400px;"
+                    id="myChart"></canvas>
+            </div>
+
         </div>
-        <div class="card mx-3">
+        <div class="card mx-3 p-3">
             @include('admin.calendar_show')
         </div>
 
