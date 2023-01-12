@@ -27,6 +27,7 @@ class BookingController extends Controller
                 'title' => $item->booking_id,
                 'start' => $item->booking_start,
                 'end' => $item->booking_end,
+                'type' =>$item->type_car
                 
             ];
             
