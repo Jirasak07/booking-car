@@ -1,10 +1,11 @@
 <!-- Top navbar -->
-<nav class="navbar navbar-top navbar-expand-md navbar-dark  " id="navbar-main" style="max-height: 60px" >
+<nav class="navbar navbar-top navbar-expand-md navbar-dark  " id="navbar-main" style="max-height: 60px">
     <div class="container-fluid d-flex justify-content-between">
         <!-- Brand -->
 
         <!-- Form -->
-        <div class="text-capitalize fw-normal h1 text-test mx-4 d-md-flex d-none" style="color:#8392bd;font-weight:normal;">
+        <div class="text-capitalize fw-normal h1 text-test mx-4 d-md-flex d-none"
+            style="color:#8392bd;font-weight:normal;">
             <label id="name-head"></label>
         </div>
         <script>
@@ -25,9 +26,11 @@
             <li class="nav-item dropdown">
                 <a class=" pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
-                    <div class="media align-items-center">
-                        <span class="avatar avatar-sm rounded-circle">
-                            <img alt="Image placeholder" src="{{ asset('assets/img/lanna-removebg-preview.png') }}">
+                    <div class="media align-items-center ">
+                        <span class="avatar avatar-sm rounded-circle  bg-dark">
+                            {{-- <img alt="Image placeholder" src="{{ asset('assets/img/lanna-removebg-preview.png') }}"> --}}
+                            <i class="fa-solid fa-user-tie" style="font-size: 1.5rem"></i>
+
                         </span>
                         <div class="media-body ml-2 d-none d-lg-block">
                             <span class="mb-0 text-sm  font-weight-bold">{{-- {{ auth()->user()->name }} --}}</span>
@@ -55,8 +58,7 @@
                         <span>{{ __('Support') }}</span>
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a href="{{ url('/logout') }}" class="dropdown-item"
-                       >
+                    <a href="{{ url('/logout') }}" class="dropdown-item">
                         <i class="ni ni-user-run"></i>
                         <span>{{ __('Logout') }}</span>
                     </a>

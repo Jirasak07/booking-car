@@ -15,8 +15,10 @@
                 <a class="  nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
                     <div class="media align-items-center">
-                        <span class="avatar avatar-sm rounded-circle">
-                            <img alt="Image placeholder" src="{{ asset('argon') }}/img/theme/team-1-800x800.jpg">
+                        <span class="avatar avatar-sm rounded-circle  bg-dark">
+                            {{-- <img alt="Image placeholder" src="{{ asset('assets/img/lanna-removebg-preview.png') }}"> --}}
+                            <i class="fa-solid fa-user-tie" style="font-size: 1.5rem"></i>
+
                         </span>
                     </div>
                 </a>
@@ -41,9 +43,7 @@
                         <span>{{ __('Support') }}</span>
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a href="{{ route('logout') }}" class="dropdown-item"
-                        onclick="event.preventDefault();
-                    document.getElementById('logout-form').submit();">
+                    <a href="{{ route('logout') }}" class="dropdown-item">
                         <i class="ni ni-user-run"></i>
                         <span>{{ __('Logout') }}</span>
                     </a>
@@ -99,7 +99,7 @@
                             <a class="{{ 'admin/request' == request()->path() ? 'nav-link-sub text-success ' : 'nav-link-sub text-default ' }}"
                                 style="font-weight: 600" href="{{ url('/admin/request') }}">
                                 <i class="fa-sharp fa-solid fa-circle-dot" style="font-size: 50%"></i>
-                                {{ __('รายการจองที่มี') }}
+                                {{ __('รายการจองรถ') }}
                             </a>
                         </li>
 
@@ -107,7 +107,7 @@
                             <a class="{{ 'admin/history' == request()->path() ? 'nav-link-sub text-success ' : 'nav-link-sub text-default ' }}"
                                 style="font-weight: 600" href="{{ url('/admin/history') }}">
                                 <i class="fa-sharp fa-solid fa-circle-dot" style="font-size: 50%"></i>
-                                {{ __('ประวัติรายการจอง') }}
+                                {{ __('ประวัติรายการ') }}
                             </a>
                         </li>
                     </ul>

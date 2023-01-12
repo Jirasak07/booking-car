@@ -64,13 +64,13 @@
                                     <div class="d-flex row ">
                                         <div class="col ">
                                             <div class="d-flex flex-row align-items-center">
-                                                <div class="text-info" style="font-size: 2.5rem; font-weight:600">0
+                                                <div class="text-primary" style="font-size: 2.5rem; font-weight:600">0
                                                 </div>
                                                 <div class="margin-left text-dark"
                                                     style="font-size: 0.8rem; font-weight:bolder; margin-left:5px">รายการ
                                                 </div>
                                             </div>
-                                            <div class="text-info text-capitalize"
+                                            <div class="text-primary text-capitalize"
                                                 style="font-size: 0.8rem; font-weight:600">
                                                 {{ $cars['car_model'] }}
                                             </div>

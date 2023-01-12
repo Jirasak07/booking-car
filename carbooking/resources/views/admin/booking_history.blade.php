@@ -9,5 +9,6 @@
         <i class="fa-solid fa-transporter-empty"></i>
         <i class="fa-sharp fa-solid fa-transporter-empty"></i>
         <i class="fa-solid fa-transporter-empty"></i>
+        <i class="fa-solid fa-user-secret"></i>
     </div>
     @endsection
