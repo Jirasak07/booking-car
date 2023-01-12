@@ -1,7 +1,8 @@
 <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-new shadow-box-login " id="sidenav-main">
     <div class="container-fluid">
         <!-- Toggler -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main"
+            aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <!-- Brand -->
@@ -11,10 +12,11 @@
         <!-- User -->
         <ul class="nav align-items-center d-md-none">
             <li class="nav-item dropdown">
-                <a class="  nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="  nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
                     <div class="media align-items-center">
                         <span class="avatar avatar-sm rounded-circle">
-                        <img alt="Image placeholder" src="{{ asset('argon') }}/img/theme/team-1-800x800.jpg">
+                            <img alt="Image placeholder" src="{{ asset('argon') }}/img/theme/team-1-800x800.jpg">
                         </span>
                     </div>
                 </a>
@@ -39,7 +41,8 @@
                         <span>{{ __('Support') }}</span>
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault();
+                    <a href="{{ route('logout') }}" class="dropdown-item"
+                        onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">
                         <i class="ni ni-user-run"></i>
                         <span>{{ __('Logout') }}</span>
@@ -54,11 +57,14 @@
                 <div class="row">
                     <div class="col-6 collapse-brand">
                         <a href="{{ route('home') }}">
-                            <img src="{{ asset('assets/img/lanna-removebg-preview.png') }}" class="navbar-brand-img" alt="...">
+                            <img src="{{ asset('assets/img/lanna-removebg-preview.png') }}" class="navbar-brand-img"
+                                alt="...">
                         </a>
                     </div>
                     <div class="col-6 collapse-close ">
-                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle sidenav">
+                        <button type="button" class="navbar-toggler" data-toggle="collapse"
+                            data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false"
+                            aria-label="Toggle sidenav">
                             <span></span>
                             <span></span>
                         </button>
@@ -68,7 +74,8 @@
             <!-- Form -->
             <form class="mt-4 mb-3 d-md-none">
                 <div class="input-group input-group-rounded input-group-merge">
-                    <input type="search" class="form-control form-control-rounded form-control-prepended" placeholder="{{ __('Search') }}" aria-label="Search">
+                    <input type="search" class="form-control form-control-rounded form-control-prepended"
+                        placeholder="{{ __('Search') }}" aria-label="Search">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
                             <span class="fa fa-search"></span>
@@ -79,29 +86,37 @@
             <!-- Navigation -->
             <ul class="navbar-nav ">
                 <li class="nav-item ">
-                    <a class="nav-link text-dark  " style="font-weight: 600"  href="{{url('/admin/dashboard')}}">
+                    <a class="nav-link text-dark  " style="font-weight: 600" href="{{ url('/admin/dashboard') }}">
                         <i class="ni ni-tv-2 text-primary"></i> {{ __('Dashboard') }}
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark "  style="font-weight: 600" href="{{url('/admin/request')}}">
+                    <a class="nav-link text-dark " style="font-weight: 600" href="{{ url('/admin/request') }}">
                         <i class="fa-regular fa-calendar"></i> {{ __('รายการจอง') }}
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark "  style="font-weight: 600" href="{{url('/admin/manage-driver')}}">
+                    <a class="nav-link text-dark " style="font-weight: 600" href="{{ url('/admin/manage-driver') }}">
                         <i class="fa-regular fa-calendar"></i> {{ __('จัดการข้อมูลพนักงานขับ') }}
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark "  style="font-weight: 600" href="{{url('/admin/manage-car')}}">
+                    <a class="nav-link text-dark " style="font-weight: 600" href="{{ url('/admin/manage-car') }}">
                         <i class="fa-regular fa-calendar"></i> {{ __('จัดการข้อมูลรถภายใน') }}
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark "  style="font-weight: 600" href="{{url('/admin/manage-user')}}">
+                    <a class="nav-link text-dark " style="font-weight: 600" href="{{ url('/admin/manage-user') }}">
                         <i class="fa-regular fa-calendar"></i> {{ __('จัดการข้อมูลผู้ใช้') }}
                     </a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Submenu 1</a></li>
+                        <li><a href="#">Submenu 2</a></li>
+                    </ul>
                 </li>
                 {{-- <li class="nav-item">
                     <a class="nav-link " href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples">
@@ -128,4 +143,5 @@
             </ul>
         </div>
     </div>
+
 </nav>
