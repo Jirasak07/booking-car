@@ -10,7 +10,7 @@ class DriverController extends Controller
 {
     //
     function index(){
-      $response = Http::get('http://localhost:225/index.php/api/calendar');
+      $response = Http::get('http://localhost:225/index.php/api/driver');
     
       $jsonData = $response->json();
         return view('admin.manage_driver')->with(['driver' => $jsonData]);

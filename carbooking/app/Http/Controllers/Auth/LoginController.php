@@ -79,8 +79,8 @@ class LoginController extends Controller
                 //$user->username = $data->Username;
                 $user->name = $data->FullName;
                 $user->email = $data->Email;
-                $user->password = encrypt($request->password);
-                $user->lore_user = "1";
+                $user->username = $data->Username;
+                $user->role_user = "1";
                 $user->save();
             }
             $this->guard()->login($user, true);

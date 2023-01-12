@@ -10,7 +10,7 @@ class CarsController extends Controller
 {
     //
     function index(){
-      $response = Http::get('http://localhost:225/index.php/api/calendar');
+      $response = Http::get('http://localhost:225/index.php/api/car');
     
       $jsonData = $response->json();
         
