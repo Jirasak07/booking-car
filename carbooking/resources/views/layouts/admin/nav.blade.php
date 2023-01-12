@@ -1,5 +1,5 @@
 <!-- Top navbar -->
-<nav class="navbar navbar-top navbar-expand-md navbar-dark " id="navbar-main">
+<nav class="navbar navbar-top navbar-expand-md navbar-dark  " id="navbar-main" style="max-height: 60px" >
     <div class="container-fluid d-flex justify-content-between">
         <!-- Brand -->
 
@@ -21,9 +21,9 @@
         </script>
 
         <!-- User -->
-        <ul class="navbar-nav align-items-center d-none d-md-flex">
+        <ul class="navbar-nav  align-items-center d-none d-md-flex">
             <li class="nav-item dropdown">
-                <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                <a class=" pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
                     <div class="media align-items-center">
                         <span class="avatar avatar-sm rounded-circle">

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-new shadow-box-login " id="sidenav-main">
+<nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white shadow-box-login " id="sidenav-main">
     <div class="container-fluid">
         <!-- Toggler -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main"
@@ -84,39 +84,64 @@
                 </div>
             </form>
             <!-- Navigation -->
-            <ul class="navbar-nav ">
+            <ul class="navbar-nav  ">
                 <li class="nav-item ">
-                    <a class="nav-link text-dark  " style="font-weight: 600" href="{{ url('/admin/dashboard') }}">
-                        <i class="ni ni-tv-2 text-primary"></i> {{ __('Dashboard') }}
+                    <a class="{{ 'admin/dashboard' == request()->path() ? 'nav-link text-default  ' : 'nav-link text-default' }}"
+                        style="font-weight: 600" href="{{ url('/admin/dashboard') }}">
+                        <i class="fa-solid fa-gauge-high "></i> {{ __('Dashboard') }}
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark " style="font-weight: 600" href="{{ url('/admin/request') }}">
-                        <i class="fa-regular fa-calendar"></i> {{ __('รายการจอง') }}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark " style="font-weight: 600" href="{{ url('/admin/manage-driver') }}">
-                        <i class="fa-regular fa-calendar"></i> {{ __('จัดการข้อมูลพนักงานขับ') }}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark " style="font-weight: 600" href="{{ url('/admin/manage-car') }}">
-                        <i class="fa-regular fa-calendar"></i> {{ __('จัดการข้อมูลรถภายใน') }}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark " style="font-weight: 600" href="{{ url('/admin/manage-user') }}">
-                        <i class="fa-regular fa-calendar"></i> {{ __('จัดการข้อมูลผู้ใช้') }}
-                    </a>
-                </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1
-                        <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Submenu 1</a></li>
-                        <li><a href="#">Submenu 2</a></li>
+                    <a class="nav-link text-default" style="font-weight: 600" href="{{ url('/admin/request') }}">
+                        <i class="fa-solid fa-calendar-days"></i> {{ __('ข้อมูลการจอง') }} </a>
+                    <ul class="sub-menu py-2 ">
+                        <li class="nav-item">
+                            <a class="{{ 'admin/request' == request()->path() ? 'nav-link-sub text-success ' : 'nav-link-sub text-default ' }}"
+                                style="font-weight: 600" href="{{ url('/admin/request') }}">
+                                <i class="fa-sharp fa-solid fa-circle-dot" style="font-size: 50%"></i>
+                                {{ __('รายการจองที่มี') }}
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="{{ 'admin/history' == request()->path() ? 'nav-link-sub text-success ' : 'nav-link-sub text-default ' }}"
+                                style="font-weight: 600" href="{{ url('/admin/history') }}">
+                                <i class="fa-sharp fa-solid fa-circle-dot" style="font-size: 50%"></i>
+                                {{ __('ประวัติรายการจอง') }}
+                            </a>
+                        </li>
                     </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-default" style="font-weight: 600" href="{{ url('/admin/manage-car') }}">
+                        <i class="fa-regular fa-calendar"></i> {{ __('จัดการข้อมูลพื้นฐาน') }} </a>
+                    <ul class="sub-menu py-2">
+                        <li class="nav-item">
+                            <a class="{{ 'admin/manage-car' == request()->path() ? 'nav-link-sub text-success ' : 'nav-link-sub text-default ' }}"
+                                style="font-weight: 600" href="{{ url('/admin/manage-car') }}">
+                                <i class="fa-sharp fa-solid fa-circle-dot" style="font-size: 50%"></i>
+                                {{ __('จัดการข้อมูลรถภายใน') }}
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="{{ 'admin/manage-user' == request()->path() ? 'nav-link-sub text-success ' : 'nav-link-sub text-default ' }}"
+                                style="font-weight: 600" href="{{ url('/admin/manage-user') }}">
+                                <i class="fa-sharp fa-solid fa-circle-dot" style="font-size: 50%"></i>
+                                {{ __('จัดการข้อมูลผู้ใช้') }}
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="{{ 'admin/manage-driver' == request()->path() ? 'nav-link-sub text-success ' : 'nav-link-sub text-default ' }}"
+                                style="font-weight: 600" href="{{ url('/admin/manage-driver') }}">
+                                <i class="fa-sharp fa-solid fa-circle-dot" style="font-size: 50%"></i>
+                                {{ __('จัดการข้อมูลพนักงานขับ') }}
+                            </a>
+                        </li>
+                    </ul>
+
+                    {{-- {{ Request::routeIs('admin/manage-driver')? 'nav-link-sub text-white' : 'nav-link-sub active' }} --}}
                 </li>
                 {{-- <li class="nav-item">
                     <a class="nav-link " href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples">

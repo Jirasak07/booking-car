@@ -5,6 +5,8 @@ namespace App\Http\Controllers\frontend;
 use App\Http\Controllers\Controller;
 use App\Models\CarModel;
 
+
+
 class AdminController extends Controller
 {
 
@@ -32,5 +34,8 @@ class AdminController extends Controller
     public function manageUser()
     {
         return view('admin.manage_user');
+    }
+    public function history(){
+        return view('admin.booking_history');
     }
 }

@@ -1,7 +1,7 @@
 @extends('layouts.admin.admin')
 @section('content')
     @include('layouts.admin.header')
-    <div class="container-fulid  ">
+    <div class="container-fulid mt-3 ">
         <div class="d-flex flex-lg-row flex-column mx-3  mb-3" style="gap: 20px;min-height:120px">
             <div class="w-100  m-dash">
                 <div class="bg-white rounded h-100 booking-all p-2 d-flex flex-row align-items-center"

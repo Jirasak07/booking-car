@@ -20411,3 +20411,33 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 .bg-yellow {
     background-color: var(--yellow);
 }
+li {
+    list-style-type: none;
+}
+.nav-link-sub {
+    font-weight: 500 !important;
+    align-items: center;
+    display: flex;
+    font-size: 85%;
+    margin-left: 10px;
+    gap: 10px;
+    opacity: 0.8;
+}
+.sub-menu{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+.nav-link{
+   
+    margin: 0 15px;
+    border-radius: 3px;
+
+}
+.sub-menu{
+
+    margin: 0 15px;
+    color: white !important;
+}
+
