@@ -1,7 +1,7 @@
 @extends('layouts.admin.admin')
 @section('content')
     @include('layouts.admin.header')
-    <div class="container ">
+    <div class="container-fulid bg-danger ">
         <div class="d-flex flex-column justify-content-center align-items-center ">
             <div class=" col-12  flex-column d-flex  align-items-center ">
                 {{-- ///////////////////// --}}
@@ -41,11 +41,11 @@
             </div>
 
         </div>
-        <div class="container d-flex flex-column justify-content-between flex-lg-row px-3 mb-3 pb-2">
-            <canvas class="mt-3 rounded bg-white col-12 col-lg-6 " style="  max-height: 400px;" id="Chart"></canvas>
-            <canvas class="mt-3 rounded bg-white col-12 col-xl col-lg-5 mxw" id="myChart"></canvas>
+        <div class=" d-flex flex-column justify-content-between flex-lg-row px-3 mb-3 pb-2 bg-warning w-100">
+            <canvas class="mt-3 rounded bg-white col-6 " style=" max-height: 400px;" id="Chart"></canvas>
+            <canvas class="mt-3 rounded bg-info col-6 mxw " id="myChart"></canvas>
         </div>
-        <div class="card">
+        <div class="card mx-3">
             @include('admin.calendar_show')
         </div>
 
