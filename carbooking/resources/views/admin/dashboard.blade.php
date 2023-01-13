@@ -4,8 +4,7 @@
     <div class="container-sm mt-3 ">
         <div class="d-flex flex-lg-row flex-column mx-3  mb-3" style="gap: 20px;min-height:120px">
             <div class="w-100  m-dash">
-                <div class="bg-white  h-100 booking-all p-2 d-flex flex-row align-items-center"
-                    style="min-height:120px">
+                <div class="bg-white  h-100 booking-all p-2 d-flex flex-row align-items-center" style="min-height:120px">
                     <div class="col-8 ">
                         <div class="text-default ">รายการจองทั้งหมด</div>
                         <div style="font-size: 4rem;line-height: 80%;">0</div>
@@ -27,8 +26,7 @@
                 </div>
             </div>
             <div class="w-100  m-dash">
-                <div class=" bg-white h-100 pending p-2 d-flex flex-row align-items-center "
-                    style="min-height:120px">
+                <div class=" bg-white h-100 pending p-2 d-flex flex-row align-items-center " style="min-height:120px">
                     <div class="col-8 ">
                         <div>รอดำเนินการ</div>
                         <div style="font-size: 4rem;line-height: 80%;">0</div>
@@ -40,8 +38,7 @@
                 </div>
             </div>
             <div class="w-100  m-dash">
-                <div class=" bg-white h-100 w-100 cancel p-2 d-flex flex-row align-items-center"
-                    style="min-height:120px">
+                <div class=" bg-white h-100 w-100 cancel p-2 d-flex flex-row align-items-center" style="min-height:120px">
                     <div class="col-8  ">
                         <div>ยกเลิกแล้ว</div>
                         <div style="font-size: 4rem;line-height: 80%;">0</div>
@@ -87,8 +84,6 @@
         <div class="card mx-3 p-3 mb-3">
             @include('admin.calendar_show')
         </div>
-
-
     </div>
 
 
