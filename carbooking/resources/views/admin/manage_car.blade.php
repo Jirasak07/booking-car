@@ -24,9 +24,9 @@
 
                             <td>
                                 @if($cars['car_status']==1)
-                                <a class="btn btn-success btn-sm " style="width: 80px" href="{{route("changestatus",$cars['id'])}}">{{__('ว่าง')}}</a>
+                                <a class="btn btn-success btn-sm " style="width: 90px" href="{{route("changestatus",$cars['id'])}}">{{__('พร้อมใช้งาน')}}</a>
                                 @elseif($cars['car_status'] ==2)
-                                <a class="btn btn-danger btn-sm " style="width: 80px" href="{{route("changestatus",$cars['id'])}}">{{__('ไม่ว่าง')}}</a>
+                                <a class="btn btn-danger btn-sm " style="width: 90px" href="{{route("changestatus",$cars['id'])}}">{{__('ไม่พร้อมใช้งาน')}}</a>
                                 @endif
                             </td>
                         </tr>

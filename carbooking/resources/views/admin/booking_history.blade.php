@@ -18,32 +18,29 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @php
+                        $i = 1;
+                    @endphp
+                    @foreach ($history as $history)
+                        <tr>
+                            <td>{{$i++}}</td>
+                            <td>{{ $history['username'] }}</td>
+                            <td>{{ $history['booking_start'] }}</td>
+                            <td> {{ $history['booking_end'] }}</td>
+                            <td>
+                                @if ($history['booking_status']==2)
+                                    <div class="text-success">{{__('อนุมัติ')}}</div>
+                                @elseif ($history['booking_status']==3)
+                                <div class="text-danger">{{__('ยกเลิก')}}</div>
+                                @endif
+                            </td>
+                            <td>
+                                <div class="btn btn-sm bg-primary text-white"> <i class="fa-solid fa-eye"></i></div>
 
-                    <tr>
-                        <td>1</td>
-                        <td>จิรศักดิ์ สิงหบุตร</td>
-                        <td>item->booking_start</td>
-                        <td> item->booking_end</td>
-                        <td>$item->booking_detail</td>
-                        <td>
-                            <div class="btn btn-sm bg-primary text-white"> <i class="fa-solid fa-eye"></i></div>
+                            </td>
 
-                        </td>
-
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>จิรศักดิ์ สิงหบุตร</td>
-                        <td>item->booking_start</td>
-                        <td> item->booking_end</td>
-                        <td>$item->booking_detail</td>
-                        <td>
-                            <div class="btn btn-sm bg-primary text-white"> <i class="fa-solid fa-eye"></i></div>
-
-                        </td>
-
-                    </tr>
-
+                        </tr>
+                    @endforeach
 
                 </tbody>
             </table>

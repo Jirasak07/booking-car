@@ -8,7 +8,7 @@
             style="color:#8392bd;font-weight:normal;">
             <label id="name-head"></label>
         </div>
-        <script>
+        {{-- <script>
             document.addEventListener('DOMContentLoaded', function() {
                 var path = window.location.pathname;
 
@@ -19,7 +19,7 @@
                 }
 
             })
-        </script>
+        </script> --}}
 
         <!-- User -->
         <ul class="navbar-nav  align-items-center d-none d-md-flex">
@@ -41,22 +41,7 @@
                     <div class=" dropdown-header noti-title">
                         <h6 class="text-overflow m-0">{{ __('Welcome!') }}</h6>
                     </div>
-                    <a href="" class="dropdown-item">
-                        <i class="ni ni-single-02"></i>
-                        <span>{{ __('My profile') }}</span>
-                    </a>
-                    <a href="#" class="dropdown-item">
-                        <i class="ni ni-settings-gear-65"></i>
-                        <span>{{ __('Settings') }}</span>
-                    </a>
-                    <a href="#" class="dropdown-item">
-                        <i class="ni ni-calendar-grid-58"></i>
-                        <span>{{ __('Activity') }}</span>
-                    </a>
-                    <a href="#" class="dropdown-item">
-                        <i class="ni ni-support-16"></i>
-                        <span>{{ __('Support') }}</span>
-                    </a>
+                   
                     <div class="dropdown-divider"></div>
                     <a href="{{ route('logout') }}" class="dropdown-item">
                         <i class="ni ni-user-run"></i>
