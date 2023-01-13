@@ -28,10 +28,7 @@ class Bookingcontroller extends Controller
         $response = Http::get('http://'.$currentURL.'/index.php/api/calendar');
 
         $jsonData = $response->json();
-
         
-
-
 
         return view('user.dashboard')->with(['booking' => $jsonData]);
     }
