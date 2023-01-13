@@ -69,7 +69,8 @@
                                     style="font-size: 1.2em;font-weight:500"> {{ $cars['car_model'] }}</div>
                                 <div class="lc_car text-default" style="font-size: 0.8em;font-weight:500;">
                                     {{ $cars['car_license'] }}</div>
-                                <div class="res_car  ml-3" style="font-size:3rem;line-height:80%;">0</div>
+                                <div class="res_car  ml-3" style="font-size:3rem;line-height:80%;"
+                                    id="tcar-{{ $cars['id'] }}"></div>
                                 <div class="text-default ml-3" style="font-size: 0.8em"> รายการ</div>
                             </div>
                             <div class="logo-car  col-6" style="font-size: 6rem;line-height:80%;opacity:0.3"><i
@@ -104,6 +105,10 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            var car = @json($car);
+            console.log(car);
+            var total_car = 1;
+            $('#tcar-1').html(total_car);
             const ctx = document.getElementById('myChart');
 
             new Chart(ctx, {

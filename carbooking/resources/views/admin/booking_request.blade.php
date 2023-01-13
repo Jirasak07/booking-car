@@ -26,7 +26,7 @@
                             <tr>
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $bookings['username'] }}</td>
-                                <td>{{ $bookings['booking_start'] }}</td>
+                                <td>{{ date('d-m-Y H:i:s',strtotime($bookings['booking_start'])) }}</td>
                                 <td>{{ $bookings['booking_end'] }}</td>
                                 <td>{{ $bookings['booking_detail'] }}</td>
                                 <td>
