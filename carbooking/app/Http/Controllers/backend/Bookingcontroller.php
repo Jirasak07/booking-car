@@ -89,7 +89,7 @@ class Bookingcontroller extends Controller
         $bookingcar = new BookingModel();
         
         
-        $bookingcar->user_id = $request->username;
+        $bookingcar->username = $request->user_id;
         $bookingcar->booking_start = $request->booking_start;
         $bookingcar->booking_end = $request->booking_end;
         $bookingcar->booking_detail = $request->booking_detail;
