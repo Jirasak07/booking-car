@@ -19,27 +19,31 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td align="center" style="font-size: 18px">1</td>
-                                <td style="font-size: 15px">วันที่เดินทางไป ถึง วันที่เดินทางกลับ</td>
-                                <td align="center">
-                                    <button class="btn btn-neutral btn-sm text-darker" data-bs-toggle="modal" data-bs-target="#viewde">
-                                        <i class="fa-solid fa-eye"></i>
-                                    </button>
-                                </td>
-                                <td align="center" style="font-size: 14px">
-                                    <button class="btn btn-yellow btn-sm" style="font-size: 13px">กำลังดำเนินการ</button>
-                                </td>
-                                <td align="center" style="font-size: 16px">
-                                    <button class="btn btn-danger btn-sm" style="font-size: 13px"
-                                        onclick="alertCancel(3)">ยกเลิก</button>
-                                </td>
-                            </tr>
+                            {{ $booking }}
+<tr>
+                                    <td align="center" style="font-size: 18px">1</td>
+                                    <td style="font-size: 15px">วันที่เดินทางไป ถึง วันที่เดินทางกลับ</td>
+                                    <td align="center">
+                                        <button class="btn btn-neutral btn-sm text-darker" data-bs-toggle="modal"
+                                            data-bs-target="#viewde">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </button>
+                                    </td>
+                                    <td align="center" style="font-size: 14px">
+                                        <button class="btn btn-yellow btn-sm"
+                                            style="font-size: 13px">กำลังดำเนินการ</button>
+                                    </td>
+                                    <td align="center" style="font-size: 16px">
+                                        <button class="btn btn-danger btn-sm" style="font-size: 13px"
+                                            onclick="alertCancel(3)">ยกเลิก</button>
+                                    </td>
+                                </tr>
                             <tr>
                                 <td align="center" style="font-size: 18px">2</td>
                                 <td style="font-size: 15px">วันที่เดินทางไป ถึง วันที่เดินทางกลับ</td>
                                 <td align="center">
-                                    <button class="btn btn-neutral btn-sm text-darker" data-bs-toggle="modal" data-bs-target="#viewde">
+                                    <button class="btn btn-neutral btn-sm text-darker" data-bs-toggle="modal"
+                                        data-bs-target="#viewde">
                                         <i class="fa-solid fa-eye"></i>
                                     </button>
                                 </td>

@@ -32,7 +32,7 @@ Route::group(
     ],
     function () {
         Route::get('dashboard', [\App\Http\Controllers\backend\Bookingcontroller::class, 'showcalendar'])->name('users.dashboard');
-        Route::get('booking', [\App\Http\Controllers\frontend\UserController::class, 'viewBooking'])->name('users.view-booking');
+        Route::get('booking', [\App\Http\Controllers\backend\Bookingcontroller::class, 'booking_user'])->name('users.view-booking');
         Route::post('user/send', [\App\Http\Controllers\backend\Bookingcontroller::class, 'store'])->name('sendRe');
     }
 );
