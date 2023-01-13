@@ -90,9 +90,9 @@ class Bookingcontroller extends Controller
         
         
         $bookingcar->username = $request->user_id;
-        $bookingcar->booking_start = $request->booking_start;
-        $bookingcar->booking_end = $request->booking_end;
-        $bookingcar->booking_detail = $request->booking_detail;
+        $bookingcar->booking_start = $request->date_start;
+        $bookingcar->booking_end = $request->date_end;
+        $bookingcar->booking_detail = $request->location;
         $bookingcar->booking_status = '1';
         $bookingcar->save();
 
