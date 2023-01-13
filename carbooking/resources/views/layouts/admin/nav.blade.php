@@ -58,7 +58,7 @@
                         <span>{{ __('Support') }}</span>
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a href="{{ url('/logout') }}" class="dropdown-item">
+                    <a href="{{ route('logout') }}" class="dropdown-item">
                         <i class="ni ni-user-run"></i>
                         <span>{{ __('Logout') }}</span>
                     </a>
