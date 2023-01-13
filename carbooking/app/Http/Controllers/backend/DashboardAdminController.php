@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -14,7 +15,8 @@ class DashboardAdminController extends Controller
         
        
         
-
+        $date = Carbon::now()->format('d-m-Y H:i:s');
+        // // dd($date);
         $bookingcar1ad =DB::table('tb_booking')
         ->where('license_plate' ,'=', 1)
         ->where('type_car' ,'=', 1)
@@ -53,7 +55,7 @@ class DashboardAdminController extends Controller
         $bookingcarAllout =DB::table('tb_booking')
         ->where('type_car' ,'=', 2)->count();
        
-       return dd($bookingcar1ad);
+       return dd($date);
         
         // return view('admin.dashboard');
     }
