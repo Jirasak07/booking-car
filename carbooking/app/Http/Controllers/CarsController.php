@@ -28,6 +28,7 @@ class CarsController extends Controller
 
       if($car->car_status == 1){
         $car->car_status = ('2');
+       
         $car->save();
       }elseif($car->car_status == 2){
         $car->car_status = ('1');

@@ -11,17 +11,18 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
     <!-- Modal -->
     <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/javascript.util/0.12.12/javascript.util.min.js"
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/javascript.util/0.12.12/javascript.util.min.js"
         integrity="sha512-oHBLR38hkpOtf4dW75gdfO7VhEKg2fsitvHZYHZjObc4BPKou2PGenyxA5ZJ8CCqWytBx5wpiSqwVEBy84b7tw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.0.2/index.global.min.js'></script>
     {{-- <script src='fullcalendar/dist/index.global.js'></script> --}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
             var bookings = @json($booking);
-            console.log(bookings);
-            /*  for (let index = 0; index < bookings.length; index++) {
+            //console.log(bookings);
+            /*console.log(bookings);
+              for (let index = 0; index < bookings.length; index++) {
                             let re = bookings[index].type;
                             if (re == '1') {
                                 $(this).css('background-color', '#f72585');
@@ -53,25 +54,39 @@
                     center: 'title',
                     right: 'timeGridDay,timeGridFourDay,dayGridMonth,listMonth'
                 },
-                //events: booking,
-                //eventColor: '#014f86',
-                //events: bookings,
-                events: function(info, successCallback, failureCallback) {
-                    console.log(info.event);
-                    // ...
-                },
-                // function(info) {
-                //     var de = info.event.backgroundColor;
-                //     de = 'red';
-                //     console.log(info.event);
-                //     console.log(de /* ('# 000000 ') */ );
-                //     // alert('Event: ' + );
-                //     // alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
-                //     // alert('View: ' + info.view.type);
 
-                //     // change the border color just for fun
-                //     // info.el.style.borderColor = 'red';
-                // },
+                events: bookings,
+                 /* eventDidMount: function(info) {
+                    //console.log(bookings);
+                    var re=[];
+                    for (let i = 0; i < bookings.length; i++) {
+                        re[i] = bookings[i].type;
+                        switch (re[i]) {
+                            case '1':
+                                console.log('red' + re);
+                                break;
+                            case '2':
+                                console.log('black' + re);
+                                break;
+                        }
+                       if (re[i] == '1') {
+                            console.log('red'+re[i]);
+                        } else if (re[i] == '2') {
+                            
+                        
+
+                    }
+                },} */
+                /*  eventAfterAllRender: function(view) {
+                     $('.fc-event').each(function() {
+                         var event = $(this).data('event');
+                         if (event.type === '1') {
+                             $(this).css('background-color', 'green');
+                         } else if (event.type === '2') {
+                             $(this).css('background-color', 'blue');
+                         }
+                     });
+                 }, */
 
                 views: {
                     timeGridFourDay: {
@@ -126,6 +141,7 @@
 
                     });
                 }
+
             });
 
             calendar.render();
