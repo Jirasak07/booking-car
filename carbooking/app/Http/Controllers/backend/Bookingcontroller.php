@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\BookingModel;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -30,8 +31,10 @@ class Bookingcontroller extends Controller
 
         return view('user.dashboard')->with(['booking' => $jsonData]);
     }
-function cancle(Request $request){
+function cancle($id){
 
-    
+    $canclebooking = BookingModel::find($id);
+    $canclebooking->status_booking == "3";
+    $canclebooking->save();
 }
 }

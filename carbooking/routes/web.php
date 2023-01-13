@@ -53,3 +53,4 @@ Route::post('admin/GG', function (Request $request) {
 Route::post('admin/request/{id}', [\App\Http\Controllers\backend\Bookingcontroller::class, 'cancle'])->name('cancel.request');
 
 Route::get('countcar1', [DashboardAdminController::class, 'index']);
+Route::get('admin/request/{id}', [\App\Http\Controllers\backend\Bookingcontroller::class, 'cancle'])->name('cancle');
