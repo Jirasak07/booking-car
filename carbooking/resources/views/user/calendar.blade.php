@@ -172,7 +172,7 @@
                             <label class="plaintext" id="booking_start" name="booking_start"></label>
                         </div>
                         <div class="col-md-3">
-                            <input type="datetime-local" data-date="" class="form-control" {{-- data-date-format="DD MM YYYY hh:mm:ss" --}}
+                            <input type="datetime{{-- -local --}}" data-date="" class="form-control" {{-- data-date-format="DD MM YYYY hh:mm:ss" --}}
                                 name="date_start" id="date_start">
 
                         </div>
@@ -185,7 +185,7 @@
                             <label class="plaintext" id="booking_end" name="booking_end"></label>
                         </div>
                         <div class="col-md-3">
-                            <input type="datetime-local" data-date="" class="form-control"
+                            <input type="datetime{{-- -local --}}" data-date="" class="form-control"
                                 data-date-format="DD MM YYYY hh:mm:ss" id="date_end" name="date_end">
                         </div>
                         <br />
