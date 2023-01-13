@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
@@ -95,7 +95,9 @@ class LoginController extends Controller
             return redirect()->route("admin.dashboard");
             //dd(auth()->user());
         } else {
-            dd("false");
+            // dd("false");
+            Alert::error('Login Agian!!!');
+            return redirect('/');
         }
     }
     public function logout()
