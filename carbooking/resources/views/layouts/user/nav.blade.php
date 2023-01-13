@@ -40,9 +40,7 @@
                     </a>
 
                     <div class="dropdown-divider"></div>
-                    <a href="{{ route('logout') }}" class="dropdown-item"
-                        onclick="event.preventDefault();
-                    document.getElementById('logout-form').submit();">
+                    <a href="{{ url('/logout') }}" class="dropdown-item">
                         <i class="fa-solid fa-right-from-bracket"></i>
                         <span>{{ __('Logout') }}</span>
                     </a>

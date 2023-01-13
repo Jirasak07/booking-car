@@ -33,9 +33,7 @@
                     </a>
 
                     <div class="dropdown-divider"></div>
-                    <a href="{{ route('logout') }}" class="dropdown-item"
-                        onclick="event.preventDefault();
-                    document.getElementById('logout-form').submit();">
+                    <a href="{{ url('/logout') }}" class="dropdown-item">
                         <i class="fa-solid fa-right-from-bracket"></i>
                         <span>{{ __('Logout') }}</span>
                     </a>
@@ -77,7 +75,7 @@
             <!-- Navigation -->
             <ul class="navbar-nav" id="nav">
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ route('user.dashboard') }}" style="font-size: 18px;">
+                    <a class="nav-link text-white" href="{{ route('users.dashboard') }}" style="font-size: 18px;">
                         <i class="fa-solid fa-house"></i>
                         <span>Dashboard</span>
                     </a>
