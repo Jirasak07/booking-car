@@ -16,7 +16,7 @@ class Bookingcontroller extends Controller
     {
         $currentURL = request()->getHttpHost();
         $response = Http::get('http://'.$currentURL.'/index.php/api/booking');
-  
+
         $jsonData = $response->json();
         return view('admin.booking_request')->with(['booking' => $jsonData]);
     }
@@ -24,14 +24,14 @@ class Bookingcontroller extends Controller
     public function history(){
         $currentURL = request()->getHttpHost();
         $response = Http::get('http://'.$currentURL.'/index.php/api/booking');
-  
+
         $jsonData = $response->json();
-        return view('admin.booking_history');
+        return view('admin.booking_history')->with(['history'=>$jsonData]);
     }
 
     function showcalendar (){
         // $currentURL = request()->getHttpHost();
- 
+
         // $response = Http::get('http://'.$currentURL.'/index.php/api/calendar');
 
         // $jsonData = $response->json();

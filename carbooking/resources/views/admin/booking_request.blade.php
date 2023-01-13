@@ -20,11 +20,11 @@
                 <tbody>
 
                     @foreach ($booking as $bookings)
-                        @if ($bookings['booking_status'] == 2)
+                        @if ($bookings['booking_status'] == 1)
                             <tr>
                                 <td>1</td>
                                 <td>จิรศักดิ์ สิงหบุตร</td>
-                                <td>{{ $bookings['booking_start']->format('d-m-Y') }}</td>
+                                <td>{{ $bookings['booking_start'] }}</td>
                                 <td>{{ $bookings['booking_end'] }}</td>
                                 <td>{{ $bookings['booking_detail'] }}</td>
                                 <td>
