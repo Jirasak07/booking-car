@@ -28,8 +28,27 @@ class Bookingcontroller extends Controller
 
         $jsonData = $response->json();
         
+        $events = array();
+        foreach($jsonData as $booking){
+            $color =null;
+            if($booking->type == '1'){
+                $color = '#cc2255';
+            }
 
-        return view('user.dashboard')->with(['booking' => $jsonData]);
+            if($booking->type == '2'){
+                $color = '#aaff45';
+            }
+            
+            $events [] = [
+                'id' => $booking->id,
+                'start' => $booking->start,
+                'end' => $booking->end,
+                'type' => $booking->type,
+                'color' => $color
+            ];
+        }
+
+        // return view('user.dashboard')->with(['booking' => $jsonData]);
     }
 function cancle($id){
 
