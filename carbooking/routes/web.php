@@ -52,19 +52,19 @@ Route::group(
     function () {
         Route::get('dashboard', [\App\Http\Controllers\frontend\AdminController::class, 'index'])->name('admin.dashboard');
         Route::get('request', [\App\Http\Controllers\backend\Bookingcontroller::class, 'index'])->name('admin.booking_request');
-        Route::get('manage-driver', [DriverController::class, 'index'])->name('admin.manageDriver');
+        Route::get('manage-driver', [DriverController::class, 'index'])->name('admin.manage-driver');
         Route::get('manage-driver/{id}', [DriverController::class, 'changestatus'])->name('driverstatus');
-        Route::get('manage-car', [CarsController::class, 'index'])->name('admin.manageCar');
+        Route::get('manage-car', [CarsController::class, 'index'])->name('admin.manage-car');
         Route::get('manage-car/{id}', [CarsController::class, 'changestatus'])->name('changestatus');
-        Route::get('manage-user', [App\Http\Controllers\frontend\AdminController::class, 'manageUser'])->name('admin/manage-user');
-        Route::get('history', [App\Http\Controllers\frontend\AdminController::class, 'history'])->name('admin/history');
+        Route::get('manage-user', [App\Http\Controllers\frontend\AdminController::class, 'manageUser'])->name('admin.manage-user');
+        Route::get('history', [App\Http\Controllers\frontend\AdminController::class, 'history'])->name('admin.booking_history');
         Route::post('GG', function (Request $request) {
             dd($request->all());
         })->name('GG');
         Route::get('cancel_request', function (Request $request) {
             dd($request);
         })->name('cancel_request');
-        //Route::post('admin/request/{id}', [\App\Http\Controllers\backend\Bookingcontroller::class, 'cancle'])->name('cancel.request');
+       
 
         Route::get('countcar1', [DashboardAdminController::class, 'index']);
         Route::get('request/{id}', [\App\Http\Controllers\backend\Bookingcontroller::class, 'cancle'])->name('cancle');

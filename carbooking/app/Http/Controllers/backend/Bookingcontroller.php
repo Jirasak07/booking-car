@@ -53,7 +53,8 @@ class Bookingcontroller extends Controller
 function cancle($id){
 
     $canclebooking = BookingModel::find($id);
-    $canclebooking->status_booking == "3";
+    $canclebooking->booking_status = ('3');
     $canclebooking->save();
+    return redirect()->back();
 }
 }
