@@ -19,10 +19,21 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
-            var bookings = @js($booking);
-            console.log(booking);
+            var bookings = @json($booking);
+            console.log(bookings);
+            /*  for (let index = 0; index < bookings.length; index++) {
+                            let re = bookings[index].type;
+                            if (re == '1') {
+                                $(this).css('background-color', '#f72585');
+                            } else if (re == '2') {
+                                $(this).css('background-color', '#0a0908');
+                            } else {
+                                $(this).css('background-color', '#00bbf9');
+                            }
+                        }
+             */
             var calendar = new FullCalendar.Calendar(calendarEl, {
-                themeSystem: 'bootstrap5',
+                //themeSystem: 'bootstrap5',
                 selectable: true,
                 timeZone: 'Asia/bangkok',
                 locale: 'th',
@@ -43,69 +54,25 @@
                     right: 'timeGridDay,timeGridFourDay,dayGridMonth,listMonth'
                 },
                 //events: booking,
-                eventColor: '#014f86',
-                events: [{
-                        title: 'All Day Event',
-                        description: 'description for All Day Event',
-                        start: '2023-01-01'
-                    },
-                    {
-                        title: 'Long Event',
-                        description: 'description for Long Event',
-                        start: '2023-01-07T07:00:00',
-                        end: '2023-01-10T07:00:00'
-                    },
-                    {
-                        groupId: '999',
-                        title: 'Repeating Event',
-                        description: 'description for Repeating Event',
-                        start: '2023-01-09T16:00:00'
-                    },
-                    {
-                        groupId: '999',
-                        title: 'Repeating Event',
-                        description: 'description for Repeating Event',
-                        start: '2023-01-16T16:00:00'
-                    },
-                    {
-                        title: 'Conference',
-                        description: 'description for Conference',
-                        start: '2023-01-15T16:00:00',
-                        end: '2023-01-20T16:00:00',
-                        //type:'1'
-                    },
-                    {
-                        title: 'Meeting',
-                        description: 'description for Meeting',
-                        start: '2023-01-12T10:30:00',
-                        end: '2023-01-12T12:30:00'
-                    },
-                    {
-                        title: 'Lunch',
-                        description: 'description for Lunch',
-                        start: '2023-01-12T12:00:00'
-                    },
-                    {
-                        title: 'Meeting',
-                        description: 'description for Meeting',
-                        start: '2023-01-12T14:30:00'
-                    },
-                    {
-                        title: 'Birthday Party',
-                        description: 'description for Birthday Party',
-                        start: '2023-01-13T07:00:00'
-                    },
-                    {
-                        title: 'Click for Google',
-                        description: 'description for Click for Google',
-                        start: '2023-01-22T08:30:00',
-                        end: '2023-01-22T18:30:00'
-                    }
-                ],
-                eventClick: function(info) {
-                    var eventObj = info.event;
-                    console.log(eventObj);
+                //eventColor: '#014f86',
+                //events: bookings,
+                events: function(info, successCallback, failureCallback) {
+                    console.log(info.event);
+                    // ...
                 },
+                // function(info) {
+                //     var de = info.event.backgroundColor;
+                //     de = 'red';
+                //     console.log(info.event);
+                //     console.log(de /* ('# 000000 ') */ );
+                //     // alert('Event: ' + );
+                //     // alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
+                //     // alert('View: ' + info.view.type);
+
+                //     // change the border color just for fun
+                //     // info.el.style.borderColor = 'red';
+                // },
+
                 views: {
                     timeGridFourDay: {
                         type: 'timeGrid',

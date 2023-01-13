@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\backend\DashboardAdminController;
 use App\Http\Controllers\CarsController;
 use App\Http\Controllers\DriverController;
 use Illuminate\Http\Request;
@@ -54,3 +55,6 @@ Route::post('admin/Test', function (Request $request) {
     dd($request->all());
 
 })->name('Test');
+
+
+Route::get('countcar1',[DashboardAdminController::class,'index']);
