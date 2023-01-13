@@ -52,50 +52,7 @@
                 </div>
             </div>
         </div>
-        <div class="d-flex flex-column justify-content-center align-items-center ">
-            <div class=" col-12  flex-column d-flex  align-items-center ">
-                {{-- ///////////////////// --}}
-                <div class=" h-100 col-md-12 col-12 align-self-start ">
-                    <div class="row  d-flex justify-content-between" style="gap: 20px">
-                        @foreach ($car as $cars)
-                            <div class=" col-12 col-sm-12 col-lg col-md-12 shadow-lg bg-white rounded font-w w-100 d-flex justify-content-center car-dashboard"
-                                style="font-size: larger; gap:20px">
-                                <div class=" box-1  box p-3">
-                                    <div class="d-flex row ">
-                                        <div class="col ">
-                                            <div class="d-flex flex-row align-items-center">
-                                                <div class="text-primary" style="font-size: 2.5rem; font-weight:600">0
-                                                </div>
-                                                <div class="margin-left text-dark"
-                                                    style="font-size: 0.8rem; font-weight:bolder; margin-left:5px">รายการ
-                                                </div>
-                                            </div>
-                                            <div class="text-primary text-capitalize"
-                                                style="font-size: 0.8rem; font-weight:600">
-                                                {{ $cars['car_model'] }}
-                                            </div>
-                                            <div class="text-dark" style="font-size: 0.7rem">{{ $cars['car_license'] }}
-                                            </div>
-                                        </div>
-                                        <div class=" w-100 col-2 d-flex align-items-center justify-content-center  ">
-                                            <div class="car-icon-2  ">
-                                                <i class="fa-solid fa-car-side text-light" style="font-size: 3rem"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-
-
-
-
-
-            </div>
-        </div>
-        <div class=" d-flex flex-column justify-content-between flex-lg-row mb-3 pb-2  w-100">
+        <div class=" d-flex flex-column justify-content-between flex-lg-row pb-2  w-100">
             <div class="mt-3 rounded  col-12 col-lg-8 ">
                 <canvas class="bg-white rounded w-100 h-100 " style=" max-height: 400px;" id="Chart"></canvas>
             </div>
@@ -103,6 +60,29 @@
                 <canvas class=" bg-white rounded w-100 " style=" max-height: 400px;" id="myChart"></canvas>
             </div>
 
+        </div>
+        <div class="d-flex flex-column justify-content-center align-items-center mb-3 ">
+            <div class="flex-column flex-lg-row d-flex justify-content-between  w-100  ">
+                @foreach ($car as $cars)
+                    <div class="col-12 col-lg rounded mt-3 w-100 ">
+                        <div class="bg-white  rounded d-flex flex-row p-2  "
+                            style="min-height: 120px;border-left:5px solid var(--warning)">
+                            <div class="title-cars ml-3 col-6">
+                                <div class="brand-car text-warning text-capitalize"
+                                    style="font-size: 1.2em;font-weight:500"> {{ $cars['car_model'] }}</div>
+                                <div class="lc_car text-default" style="font-size: 0.8em;font-weight:500;">
+                                    {{ $cars['car_license'] }}</div>
+                                <div class="res_car  ml-3" style="font-size:3rem;line-height:80%;">0</div>
+                                <div class="text-default ml-3" style="font-size: 0.8em"> รายการ</div>
+                            </div>
+                            <div class="logo-car  col-6" style="font-size: 6rem;line-height:80%;opacity:0.3"><i
+                                    class="fa-solid fa-car-rear text-warning"></i></div>
+
+
+                        </div>
+                    </div>
+                @endforeach
+            </div>
         </div>
         <div class="card mx-3 p-3">
             @include('admin.calendar_show')

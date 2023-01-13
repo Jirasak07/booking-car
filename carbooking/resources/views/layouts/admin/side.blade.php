@@ -86,7 +86,7 @@
             <!-- Navigation -->
             <ul class="navbar-nav  ">
                 <li class="nav-item ">
-                    <a class="{{ 'admin/dashboard' == request()->path() ? 'nav-link text-default  ' : 'nav-link text-default' }}"
+                    <a class="{{ 'admin/dashboard' == request()->path() ? 'nav-link text-success  ' : 'nav-link text-default' }}"
                         style="font-weight: 600" href="{{ url('/admin/dashboard') }}">
                         <i class="fa-solid fa-gauge-high "></i> {{ __('Dashboard') }}
                     </a>

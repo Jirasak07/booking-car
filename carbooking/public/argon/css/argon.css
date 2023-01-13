@@ -87,7 +87,7 @@ section {
 }
 
 body {
-    font-family: "Kanit", sans-serif;
+    font-family: "Sarabun", sans-serif;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
@@ -20375,7 +20375,6 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
     box-shadow: none, 0 0 0 0 rgba(0, 0, 0, 0.5);
 }
 
-/* end yellow*/
 .booking-all {
     border-left: 6px solid var(--default);
     color: var(--default);
@@ -20457,4 +20456,13 @@ li {
 }
 ::-webkit-scrollbar {
     display: none;
+}
+.shadow-table{
+    box-shadow:
+  2.8px 2.8px 2.2px rgba(0, 0, 0, 0.038),
+  6.7px 6.7px 5.3px rgba(0, 0, 0, 0.046),
+  12.5px 12.5px 10px rgba(0, 0, 0, 0.049),
+  22.3px 22.3px 17.9px rgba(0, 0, 0, 0.052),
+  41.8px 41.8px 33.4px rgba(0, 0, 0, 0.055),
+  100px 100px 80px rgba(0, 0, 0, 0.07);
 }
