@@ -29,7 +29,7 @@
                                 <td>
                                     <div class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                         อนุมัติ</div>
-                                    <a class="text-white btn btn-danger btn-sm " href="{{ route('Test', 2) }}">ยกเลิกคำขอ</a>
+                                    <a class="text-white btn btn-danger btn-sm " href="{{ route('cancel_request',  $bookings['booking_id'] ) }}">ยกเลิกคำขอ</a>
                                 </td>
                             </tr>
                         @endforeach

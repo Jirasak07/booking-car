@@ -50,11 +50,10 @@ Route::post('admin/GG', function (Request $request) {
     dd($request->all());
 
 })->name('GG');
-Route::post('admin/Test', function (Request $request) {
+Route::get('admin/cancel_request', function (Request $request) {
 
     dd($request->all());
 
-})->name('Test');
+})->name('cancel_request');
 
-
-Route::get('countcar1',[DashboardAdminController::class,'index']);
+Route::get('countcar1', [DashboardAdminController::class, 'index']);
