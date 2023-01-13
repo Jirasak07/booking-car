@@ -68,4 +68,21 @@ class Bookingcontroller extends Controller
         $canclebooking->save();
         return redirect()->back();
     }
+    function store(Request $request){
+        $bookingcar = new BookingModel();
+        $bookingcar->bookingcar = $request->bookingcar;
+        
+        $bookingcar->user_id = $request->username;
+        $bookingcar->booking_start = $request->booking_start;
+        $bookingcar->booking_end = $request->booking_end;
+        $bookingcar->booking_detail = $request->booking_detail;
+        $bookingcar->booking_status = '1';
+        $bookingcar->save();
+
+        return redirect()->back();
+
+
+
+
+    }
 }
