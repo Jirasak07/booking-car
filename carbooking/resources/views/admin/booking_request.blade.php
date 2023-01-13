@@ -18,18 +18,21 @@
                     </tr>
                 </thead>
                 <tbody>
-
+                    @php
+                        $i = 1;
+                    @endphp
                     @foreach ($booking as $bookings)
-                        @if ($bookings['booking_status'] == 1)
+                        @if ($bookings['booking_status'] == 2)
                             <tr>
-                                <td>1</td>
-                                <td>จิรศักดิ์ สิงหบุตร</td>
+                                <td>{{ $i++ }}</td>
+                                <td>{{ $bookings['username'] }}</td>
                                 <td>{{ $bookings['booking_start'] }}</td>
                                 <td>{{ $bookings['booking_end'] }}</td>
                                 <td>{{ $bookings['booking_detail'] }}</td>
                                 <td>
-                                    <div class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                        อนุมัติ</div>
+                                    <a class="btn btn-success btn-sm" onclick="modal({{ $bookings['id'] }})"
+                                        data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        อนุมัติ</a>
                                     <a class="text-white btn btn-danger btn-sm "
                                         href="{{ route('cancle', $bookings['id']) }}">ยกเลิกคำขอ</a>
                                 </td>
@@ -57,6 +60,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+
                     <div class="mb-2  row">
                         <div class="col-6">
                             <label for="" class="form-label " style="line-height:50%">วันเวลาที่เริ่มต้น</label>
@@ -192,6 +196,10 @@
                     ' </div>' +
                     '</form>';
             }
+        }
+
+        function modal(val) {
+            alert(val);
         }
     </script>
 @endsection
