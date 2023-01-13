@@ -30,5 +30,8 @@ class Bookingcontroller extends Controller
 
         return view('user.dashboard')->with(['booking' => $jsonData]);
     }
+function cancle(Request $request){
 
+    
+}
 }

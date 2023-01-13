@@ -50,10 +50,6 @@ Route::post('admin/GG', function (Request $request) {
     dd($request->all());
 
 })->name('GG');
-Route::get('admin/cancel_request', function (Request $request) {
-
-    dd($request->all());
-
-})->name('cancel_request');
+Route::post('admin/request/{id}', [\App\Http\Controllers\backend\Bookingcontroller::class, 'cancle'])->name('cancel.request');
 
 Route::get('countcar1', [DashboardAdminController::class, 'index']);
