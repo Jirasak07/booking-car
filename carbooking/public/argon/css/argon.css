@@ -20448,3 +20448,13 @@ li {
     }
 
 }
+.calendar{
+    overflow: auto;
+
+}
+.fc-view-container{
+    aspect-ratio: 1/1;
+}
+::-webkit-scrollbar {
+    display: none;
+}
