@@ -33,13 +33,7 @@ Route::group(
     function () {
         Route::get('dashboard', [\App\Http\Controllers\backend\Bookingcontroller::class, 'showcalendar'])->name('users.dashboard');
         Route::get('booking', [\App\Http\Controllers\frontend\UserController::class, 'viewBooking'])->name('users.view-booking');
-        Route::post('user/send', function (Request $request) {
-            if ($request->location == "") {
-                Alert::error('โปรดใส่ข้อมูลรายละเอียดการจอง');
-                return redirect()->back();
-            }
-            dd($request->all());
-        })->name('sendRe');
+        Route::post('user/send', [\App\Http\Controllers\backend\Bookingcontroller::class, 'store'])->name('sendRe');
     }
 );
 

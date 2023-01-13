@@ -15,21 +15,23 @@ class Bookingcontroller extends Controller
     function index()
     {
         $currentURL = request()->getHttpHost();
-        $response = Http::get('http://'.$currentURL.'/index.php/api/booking');
+        $response = Http::get('http://' . $currentURL . '/index.php/api/booking');
 
         $jsonData = $response->json();
         return view('admin.booking_request')->with(['booking' => $jsonData]);
     }
 
-    public function history(){
+    public function history()
+    {
         $currentURL = request()->getHttpHost();
-        $response = Http::get('http://'.$currentURL.'/index.php/api/booking');
+        $response = Http::get('http://' . $currentURL . '/index.php/api/booking');
 
         $jsonData = $response->json();
-        return view('admin.booking_history')->with(['history'=>$jsonData]);
+        return view('admin.booking_history')->with(['history' => $jsonData]);
     }
 
-    function showcalendar (){
+    function showcalendar()
+    {
         // $currentURL = request()->getHttpHost();
 
         // $response = Http::get('http://'.$currentURL.'/index.php/api/calendar');
@@ -37,17 +39,17 @@ class Bookingcontroller extends Controller
         // $jsonData = $response->json();
         $bookings = BookingModel::all();
         $events = array();
-        foreach($bookings as $booking){
-            $color =null;
-            if($booking->type_car == '1'){
+        foreach ($bookings as $booking) {
+            $color = null;
+            if ($booking->type_car == '1') {
                 $color = '#00FF7F';
             }
 
-            if($booking->type_car == '2'){
+            if ($booking->type_car == '2') {
                 $color = '#FF9900';
             }
 
-            $events [] = [
+            $events[] = [
                 'id' => $booking->id,
                 'start' => $booking->booking_start,
                 'end' => $booking->booking_end,
@@ -58,11 +60,12 @@ class Bookingcontroller extends Controller
 
         return view('user.dashboard')->with(['booking' => $events]);
     }
-function cancle($id){
+    function cancle($id)
+    {
 
-    $canclebooking = BookingModel::find($id);
-    $canclebooking->booking_status = ('3');
-    $canclebooking->save();
-    return redirect()->back();
-}
+        $canclebooking = BookingModel::find($id);
+        $canclebooking->booking_status = ('3');
+        $canclebooking->save();
+        return redirect()->back();
+    }
 }
