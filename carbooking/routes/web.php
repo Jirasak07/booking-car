@@ -39,12 +39,12 @@ Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout
 
 Route::get('admin/dashboard', [\App\Http\Controllers\frontend\AdminController::class, 'index'])->name('admin.dashboard');
 Route::get('admin/request', [\App\Http\Controllers\backend\Bookingcontroller::class, 'index'])->name('admin.booking_request');
-Route::get('admin/manage-driver', [DriverController::class, 'index'])->name('admin.manageDriver');
+Route::get('admin/manage-driver', [DriverController::class, 'index'])->name('admin.manage-driver');
 Route::get('admin/manage-driver/{id}', [DriverController::class, 'changestatus'])->name('driverstatus');
-Route::get('admin/manage-car', [CarsController::class, 'index'])->name('admin.manageCar');
+Route::get('admin/manage-car', [CarsController::class, 'index'])->name('admin.manage-car');
 Route::get('admin/manage-car/{id}', [CarsController::class, 'changestatus'])->name('changestatus');
-Route::get('/admin/manage-user', [App\Http\Controllers\frontend\AdminController::class, 'manageUser'])->name('admin/manage-user');
-Route::get('/admin/history', [App\Http\Controllers\frontend\AdminController::class, 'history'])->name('admin/history');
+Route::get('/admin/manage-user', [App\Http\Controllers\frontend\AdminController::class, 'manageUser'])->name('admin.manage-user');
+Route::get('/admin/history', [App\Http\Controllers\frontend\AdminController::class, 'history'])->name('admin.booking_history');
 Route::post('admin/GG', function (Request $request) {
 
     dd($request->all());
