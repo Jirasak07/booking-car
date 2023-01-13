@@ -30,7 +30,7 @@ class Bookingcontroller extends Controller
         ->join('tb_out_cars', 'tb_booking.license_plate', '=', 'tb_out_cars.id')
         ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
         ->join('Users', 'tb_booking.username', '=', 'Users.id')
-        ->select( 'car_out_license', 'car_out_model', 'car_out_driver', 'car_out_tel',  'driver_fullname', 'car_license','tb_booking.*' ,'Users.username')
+        ->select( 'car_out_license', 'car_out_model', 'car_out_driver', 'car_out_tel',  'driver_fullname', 'car_license','tb_booking.*' ,'Username')
         ->where('username', '=', $User_id)
         ->get();
 
