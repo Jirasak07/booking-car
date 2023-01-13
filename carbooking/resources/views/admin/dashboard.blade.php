@@ -4,7 +4,7 @@
     <div class="container-fulid mt-3 ">
         <div class="d-flex flex-lg-row flex-column mx-3  mb-3" style="gap: 20px;min-height:120px">
             <div class="w-100  m-dash">
-                <div class="bg-white rounded h-100 booking-all p-2 d-flex flex-row align-items-center"
+                <div class="bg-white  h-100 booking-all p-2 d-flex flex-row align-items-center"
                     style="min-height:120px">
                     <div class="col-8 ">
                         <div class="text-default ">รายการจองทั้งหมด</div>
@@ -16,7 +16,7 @@
                 </div>
             </div>
             <div class="w-100  m-dash">
-                <div class="rounded bg-white h-100 confirm p-2 d-flex flex-row align-items-center"style="min-height:120px">
+                <div class=" bg-white h-100 confirm p-2 d-flex flex-row align-items-center"style="min-height:120px">
                     <div class="col-8 ">
                         <div>อนุมัติแล้ว</div>
                         <div style="font-size: 4rem;line-height: 80%;">0</div>
@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div class="w-100  m-dash">
-                <div class="rounded bg-white h-100 pending p-2 d-flex flex-row align-items-center "
+                <div class=" bg-white h-100 pending p-2 d-flex flex-row align-items-center "
                     style="min-height:120px">
                     <div class="col-8 ">
                         <div>รอดำเนินการ</div>
@@ -40,7 +40,7 @@
                 </div>
             </div>
             <div class="w-100  m-dash">
-                <div class="rounded bg-white h-100 w-100 cancel p-2 d-flex flex-row align-items-center"
+                <div class=" bg-white h-100 w-100 cancel p-2 d-flex flex-row align-items-center"
                     style="min-height:120px">
                     <div class="col-8  ">
                         <div>ยกเลิกแล้ว</div>
@@ -53,19 +53,19 @@
             </div>
         </div>
         <div class=" d-flex flex-column justify-content-between flex-lg-row pb-2  w-100">
-            <div class="mt-3 rounded  col-12 col-lg-8 ">
-                <canvas class="bg-white rounded w-100 h-100 " style=" max-height: 400px;" id="Chart"></canvas>
+            <div class="mt-3   col-12 col-lg-8 ">
+                <canvas class="bg-white  w-100 h-100 " style=" max-height: 400px;" id="Chart"></canvas>
             </div>
-            <div class="mt-3 rounded col-12 col-lg-4">
-                <canvas class=" bg-white rounded w-100 " style=" max-height: 400px;" id="myChart"></canvas>
+            <div class="mt-3  col-12 col-lg-4">
+                <canvas class=" bg-white  w-100 " style=" max-height: 400px;" id="myChart"></canvas>
             </div>
 
         </div>
         <div class="d-flex flex-column justify-content-center align-items-center mb-3 ">
             <div class="flex-column flex-lg-row d-flex justify-content-between  w-100  ">
                 @foreach ($car as $cars)
-                    <div class="col-12 col-lg rounded mt-3 w-100 ">
-                        <div class="bg-white  rounded d-flex flex-row p-2  "
+                    <div class="col-12 col-lg  mt-3 w-100 ">
+                        <div class="bg-white   d-flex flex-row p-2  "
                             style="min-height: 120px;border-left:5px solid var(--warning)">
                             <div class="title-cars ml-3 col-6">
                                 <div class="brand-car text-warning text-capitalize"

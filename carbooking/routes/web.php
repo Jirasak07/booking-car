@@ -52,7 +52,7 @@ Route::post('admin/GG', function (Request $request) {
 })->name('GG');
 Route::get('admin/cancel_request', function (Request $request) {
 
-    dd($request->all());
+    dd($request);
 
 })->name('cancel_request');
 

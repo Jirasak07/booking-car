@@ -24,6 +24,7 @@
                 initialView: 'timeGridFourDay',
                 allDaySlot: false,
                 nowIndicator: true,
+                eventColor: ['#fff','#000'],
                 // aspectRatio: 0.5,
                 titleFormat: {
                     month: 'long',

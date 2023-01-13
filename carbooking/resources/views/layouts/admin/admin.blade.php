@@ -38,7 +38,7 @@
     </style>
 </head>
 
-<body class="" style="background-color: #eceef2">
+<body class="" style="background-color: #ebebeb">
     {{--  @auth()
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
