@@ -20,6 +20,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
             var bookings = @json($booking);
+            //console.log(bookings);
             /*console.log(bookings);
               for (let index = 0; index < bookings.length; index++) {
                             let re = bookings[index].type;

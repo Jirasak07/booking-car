@@ -32,11 +32,11 @@ class Bookingcontroller extends Controller
         foreach($bookings as $booking){
             $color =null;
             if($booking->type_car == '1'){
-                $color = '#cc2255';
+                $color = '#00FF7F';
             }
 
             if($booking->type_car == '2'){
-                $color = '#aaff45';
+                $color = '#FF9900';
             }
 
             $events [] = [
