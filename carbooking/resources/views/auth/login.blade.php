@@ -1,8 +1,9 @@
 @extends('layouts.app', ['class' => 'bg-gray'])
 
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @section('content')
     @include('layouts.headers.guest')
-    <div class="container  pb-5 " >
+    <div class="container  pb-5 ">
         <div class="row justify-content-center  ">
             <div class="col-lg-5 col-md-7  ">
                 <div class="card bg-white shadow-sm rounded border-3">
@@ -13,6 +14,16 @@
                             </div>
                         </div>
                     </div>
+                    @if ($message = Session::get('error'))
+                        <script>
+                            Swal.fire({
+                                icon: 'error',
+                                /* title: 'Oops...', */
+                                text: 'Username or Password Incorrect!',
+                                /*  footer: '<a href="">Why do I have this issue?</a>' */
+                            });
+                        </script>
+                    @endif
                     <div class="card-body px-lg-5 py-lg-3">
                         <div class=" text-center mb-4  ">
                             <div class="text-lanna ">ระบบจองคิวรถ</div>
