@@ -22,28 +22,28 @@ class Bookingcontroller extends Controller
     }
 
     function showcalendar (){
-        $currentURL = request()->getHttpHost();
+        // $currentURL = request()->getHttpHost();
  
-        $response = Http::get('http://'.$currentURL.'/index.php/api/calendar');
+        // $response = Http::get('http://'.$currentURL.'/index.php/api/calendar');
 
-        $jsonData = $response->json();
-        
+        // $jsonData = $response->json();
+        $bookings = BookingModel::all();
         $events = array();
-        foreach($jsonData as $booking){
+        foreach($bookings as $booking){
             $color =null;
-            if($booking->type == '1'){
+            if($booking->type_car == '1'){
                 $color = '#cc2255';
             }
 
-            if($booking->type == '2'){
+            if($booking->type_car == '2'){
                 $color = '#aaff45';
             }
 
             $events [] = [
                 'id' => $booking->id,
-                'start' => $booking->start,
-                'end' => $booking->end,
-                'type' => $booking->type,
+                'start' => $booking->booking_start,
+                'end' => $booking->booking_end,
+                'type' => $booking->type_car,
                 'color' => $color
             ];
         }
