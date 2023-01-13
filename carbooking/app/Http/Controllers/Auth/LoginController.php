@@ -96,8 +96,8 @@ class LoginController extends Controller
             //dd(auth()->user());
         } else {
             // dd("false");
-            Alert::error('Login Agian!!!');
-            return redirect('/');
+            //Alert::error('โปรดใส่ข้อมูลรายละเอียดการจอง');
+            return redirect('/')->with('error', 'Email or password incorrect');
         }
     }
     public function logout()
