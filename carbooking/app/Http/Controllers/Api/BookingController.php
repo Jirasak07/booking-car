@@ -30,7 +30,7 @@ class BookingController extends Controller
         ->get();
         foreach($bookings as $item){
             $events[] = [
-                'id' => $item->booking_id,
+                'id' => $item->id,
                 'start' => $item->booking_start,
                 'end' => $item->booking_end,
                 'type' => $item->type_car
