@@ -4,8 +4,7 @@
     <div class="container-sm mt-3 ">
         <div class="d-flex flex-lg-row flex-column mx-3  mb-3" style="gap: 20px;min-height:120px">
             <div class="w-100  m-dash">
-                <div class="bg-white  h-100 booking-all p-2 d-flex flex-row align-items-center"
-                    style="min-height:120px">
+                <div class="bg-white  h-100 booking-all p-2 d-flex flex-row align-items-center" style="min-height:120px">
                     <div class="col-8 ">
                         <div class="text-default ">รายการจองทั้งหมด</div>
                         <div style="font-size: 4rem;line-height: 80%;">0</div>
@@ -27,8 +26,7 @@
                 </div>
             </div>
             <div class="w-100  m-dash">
-                <div class=" bg-white h-100 pending p-2 d-flex flex-row align-items-center "
-                    style="min-height:120px">
+                <div class=" bg-white h-100 pending p-2 d-flex flex-row align-items-center " style="min-height:120px">
                     <div class="col-8 ">
                         <div>รอดำเนินการ</div>
                         <div style="font-size: 4rem;line-height: 80%;">0</div>
@@ -40,8 +38,7 @@
                 </div>
             </div>
             <div class="w-100  m-dash">
-                <div class=" bg-white h-100 w-100 cancel p-2 d-flex flex-row align-items-center"
-                    style="min-height:120px">
+                <div class=" bg-white h-100 w-100 cancel p-2 d-flex flex-row align-items-center" style="min-height:120px">
                     <div class="col-8  ">
                         <div>ยกเลิกแล้ว</div>
                         <div style="font-size: 4rem;line-height: 80%;">0</div>
@@ -72,7 +69,8 @@
                                     style="font-size: 1.2em;font-weight:500"> {{ $cars['car_model'] }}</div>
                                 <div class="lc_car text-default" style="font-size: 0.8em;font-weight:500;">
                                     {{ $cars['car_license'] }}</div>
-                                <div class="res_car  ml-3" style="font-size:3rem;line-height:80%;">0</div>
+                                <div class="res_car  ml-3" style="font-size:3rem;line-height:80%;"
+                                    id="tcar-{{ $cars['id'] }}"></div>
                                 <div class="text-default ml-3" style="font-size: 0.8em"> รายการ</div>
                             </div>
                             <div class="logo-car  col-6" style="font-size: 6rem;line-height:80%;opacity:0.3"><i
@@ -87,8 +85,6 @@
         <div class="card mx-3 p-3 mb-3">
             @include('admin.calendar_show')
         </div>
-
-
     </div>
 
 
@@ -109,6 +105,10 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            var car = @json($car);
+            console.log(car);
+            var total_car = 1;
+            $('#tcar-1').html(total_car);
             const ctx = document.getElementById('myChart');
 
             new Chart(ctx, {

@@ -5,37 +5,43 @@
     <div class="container-sm mt-2 ">
         <div class=" shadow-table ">
 
-                <table class="rounded table table-md  table-white table-striped fw-bold table-responsive-xl">
-                    <thead class="table-dark table-hover">
-                        <tr>
-                            <td class="fw-bold">ลำดับ</td>
-                            <td>ผู้จอง</td>
-                            <td>วันเวลาเริ่มต้น</td>
-                            <td>วันเวลาสิ้นสุด</td>
-                            <td>รายละเอียด</td>
-                            <td>จัดการ</td>
+            <table class="rounded table table-md  table-white table-striped fw-bold table-responsive-xl">
+                <thead class="table-dark table-hover">
+                    <tr>
+                        <td class="fw-bold">ลำดับ</td>
+                        <td>ผู้จอง</td>
+                        <td>วันเวลาเริ่มต้น</td>
+                        <td>วันเวลาสิ้นสุด</td>
+                        <td>รายละเอียด</td>
+                        <td>จัดการ</td>
 
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        @foreach($booking as $bookings)
+                    </tr>
+                </thead>
+                <tbody>
+                    @php
+                        $i = 1;
+                    @endphp
+                    @foreach ($booking as $bookings)
+                        @if ($bookings['booking_status'] == 2)
                             <tr>
-                                <td>1</td>
-                                <td>จิรศักดิ์ สิงหบุตร</td>
-                                <td>{{ $bookings['booking_start'] }}</td>
+                                <td>{{ $i++ }}</td>
+                                <td>{{ $bookings['username'] }}</td>
+                                <td>{{ date('d-m-Y H:i:s',strtotime($bookings['booking_start'])) }}</td>
                                 <td>{{ $bookings['booking_end'] }}</td>
                                 <td>{{ $bookings['booking_detail'] }}</td>
                                 <td>
-                                    <div class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                        อนุมัติ</div>
-                                    <a class="text-white btn btn-danger btn-sm " href="{{route("cancle",$bookings['id'])}}">ยกเลิกคำขอ</a>
+                                    <a class="btn btn-success btn-sm" onclick="modal({{ $bookings['id'] }})"
+                                        data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        อนุมัติ</a>
+                                    <a class="text-white btn btn-danger btn-sm "
+                                        href="{{ route('cancle', $bookings['id']) }}">ยกเลิกคำขอ</a>
                                 </td>
                             </tr>
-                        @endforeach
+                        @endif
+                    @endforeach
 
-                    </tbody>
-                </table>
+                </tbody>
+            </table>
 
         </div>
 
@@ -54,11 +60,12 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+
                     <div class="mb-2  row">
                         <div class="col-6">
                             <label for="" class="form-label " style="line-height:50%">วันเวลาที่เริ่มต้น</label>
                             </br>
-                           <label class=" ml-2" style="font-size: 80%;color:#630606;" for="">11012543</label>
+                            <label class=" ml-2" style="font-size: 80%;color:#630606;" for="">11012543</label>
                         </div>
                         <div class="col-6">
                             <label for="" class="form-label" style="line-height:50%">วันเวลาที่สิ้นสุด</label>
@@ -189,6 +196,10 @@
                     ' </div>' +
                     '</form>';
             }
+        }
+
+        function modal(val) {
+            alert(val);
         }
     </script>
 @endsection

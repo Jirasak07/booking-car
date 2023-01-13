@@ -20,6 +20,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
             var bookings = @json($booking);
+            var g ="1234"
             //console.log(bookings);
             /*console.log(bookings);
               for (let index = 0; index < bookings.length; index++) {
@@ -72,8 +73,8 @@
                        if (re[i] == '1') {
                             console.log('red'+re[i]);
                         } else if (re[i] == '2') {
-                            
-                        
+
+
 
                     }
                 },} */
