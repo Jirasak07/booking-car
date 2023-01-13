@@ -38,7 +38,7 @@ class Bookingcontroller extends Controller
             if($booking->type == '2'){
                 $color = '#aaff45';
             }
-            
+
             $events [] = [
                 'id' => $booking->id,
                 'start' => $booking->start,
@@ -48,7 +48,7 @@ class Bookingcontroller extends Controller
             ];
         }
 
-        // return view('user.dashboard')->with(['booking' => $jsonData]);
+        return view('user.dashboard')->with(['booking' => $events]);
     }
 function cancle($id){
 
