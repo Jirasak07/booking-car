@@ -20,7 +20,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
             var bookings = @json($booking);
-            var g ="1234"
+            var g = "1234"
             //console.log(bookings);
             /*console.log(bookings);
               for (let index = 0; index < bookings.length; index++) {
@@ -57,27 +57,27 @@
                 },
 
                 events: bookings,
-                 /* eventDidMount: function(info) {
-                    //console.log(bookings);
-                    var re=[];
-                    for (let i = 0; i < bookings.length; i++) {
-                        re[i] = bookings[i].type;
-                        switch (re[i]) {
-                            case '1':
-                                console.log('red' + re);
-                                break;
-                            case '2':
-                                console.log('black' + re);
-                                break;
+                /* eventDidMount: function(info) {
+                        //console.log(bookings);
+                        var re=[];
+                        for (let i = 0; i < bookings.length; i++) {
+                            re[i] = bookings[i].type;
+                            switch (re[i]) {
+                                case '1':
+                                    console.log('red' + re);
+                                    break;
+                                case '2':
+                                    console.log('black' + re);
+                                    break;
+                            }
+                           if (re[i] == '1') {
+                                console.log('red'+re[i]);
+                            } else if (re[i] == '2') {
+
+
+
                         }
-                       if (re[i] == '1') {
-                            console.log('red'+re[i]);
-                        } else if (re[i] == '2') {
-
-
-
-                    }
-                },} */
+                    },} */
                 /*  eventAfterAllRender: function(view) {
                      $('.fc-event').each(function() {
                          var event = $(this).data('event');
@@ -154,6 +154,7 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <form method="POST" action="{{ route('sendRe') }}">
             @csrf
+            <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}" />
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="bookingModalLabel">กรอกรายละเอียดการจองรถ</h1>
@@ -171,7 +172,7 @@
                             <label class="plaintext" id="booking_start" name="booking_start"></label>
                         </div>
                         <div class="col-md-3">
-                            <input type="datetime-local" data-date="" class="form-control" {{-- data-date-format="DD MM YYYY hh:mm:ss" --}}
+                            <input type="datetime{{-- -local --}}" data-date="" class="form-control" {{-- data-date-format="DD MM YYYY hh:mm:ss" --}}
                                 name="date_start" id="date_start">
 
                         </div>
@@ -184,19 +185,11 @@
                             <label class="plaintext" id="booking_end" name="booking_end"></label>
                         </div>
                         <div class="col-md-3">
-                            <input type="datetime-local" data-date="" class="form-control"
+                            <input type="datetime{{-- -local --}}" data-date="" class="form-control"
                                 data-date-format="DD MM YYYY hh:mm:ss" id="date_end" name="date_end">
                         </div>
                         <br />
                         <br />
-
-                        <div class="col-md-12 mb-3">
-                            <strong class="form-label">ชื่อผู้จอง</strong>
-                            <span class=" text-danger">*</span>
-                            <input type="text" class="form-control" id="name" name="name"
-                                placeholder="ชื่อผู้จอง" required>
-                        </div>
-
                         <div class="col-md-12">
                             <strong class="form-label">รายละเอียดการจอง</strong>
                             <span class=" text-danger">*</span>
@@ -217,5 +210,6 @@
 </div>
 
 <div class="container-fluid pt-5">
+    {{-- <label class=" text-lighter">{{ Auth::user()->id }}</label> --}}
     <div id='calendar' {{-- class="table-responsive" --}}></div>
 </div>

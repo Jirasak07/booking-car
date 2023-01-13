@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\BookingModel;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
@@ -15,21 +16,40 @@ class Bookingcontroller extends Controller
     function index()
     {
         $currentURL = request()->getHttpHost();
-        $response = Http::get('http://'.$currentURL.'/index.php/api/booking');
+        $response = Http::get('http://' . $currentURL . '/index.php/api/booking');
 
         $jsonData = $response->json();
         return view('admin.booking_request')->with(['booking' => $jsonData]);
     }
 
-    public function history(){
-        $currentURL = request()->getHttpHost();
-        $response = Http::get('http://'.$currentURL.'/index.php/api/booking');
+    function booking_user(){
+        $User_id = Auth::user()->id;
 
-        $jsonData = $response->json();
-        return view('admin.booking_history')->with(['history'=>$jsonData]);
+        $booking = DB::table('tb_booking')
+        ->where('username', '=', $User_id)
+        ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
+        ->join('tb_out_cars', 'tb_booking.license_plate', '=', 'tb_out_cars.id')
+        ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
+        ->join('Users', 'tb_booking.username', '=', 'Users.id')
+        ->select( 'car_out_license', 'car_out_model', 'car_out_driver', 'car_out_tel',  'driver_fullname', 'car_license','tb_booking.*' ,'Username')
+        
+        ->get();
+
+        
+        return view('user.booking')->with(['booking' => $booking]);
     }
 
-    function showcalendar (){
+    public function history()
+    {
+        $currentURL = request()->getHttpHost();
+        $response = Http::get('http://' . $currentURL . '/index.php/api/booking');
+
+        $jsonData = $response->json();
+        return view('admin.booking_history')->with(['history' => $jsonData]);
+    }
+
+    function showcalendar()
+    {
         // $currentURL = request()->getHttpHost();
 
         // $response = Http::get('http://'.$currentURL.'/index.php/api/calendar');
@@ -37,17 +57,17 @@ class Bookingcontroller extends Controller
         // $jsonData = $response->json();
         $bookings = BookingModel::all();
         $events = array();
-        foreach($bookings as $booking){
-            $color =null;
-            if($booking->type_car == '1'){
+        foreach ($bookings as $booking) {
+            $color = null;
+            if ($booking->type_car == '1') {
                 $color = '#00FF7F';
             }
 
-            if($booking->type_car == '2'){
+            if ($booking->type_car == '2') {
                 $color = '#FF9900';
             }
 
-            $events [] = [
+            $events[] = [
                 'id' => $booking->id,
                 'start' => $booking->booking_start,
                 'end' => $booking->booking_end,
@@ -58,11 +78,29 @@ class Bookingcontroller extends Controller
 
         return view('user.dashboard')->with(['booking' => $events]);
     }
-function cancle($id){
+    function cancle($id)
+    {
 
-    $canclebooking = BookingModel::find($id);
-    $canclebooking->booking_status = ('3');
-    $canclebooking->save();
-    return redirect()->back();
-}
+        $canclebooking = BookingModel::find($id);
+        $canclebooking->booking_status = ('3');
+        $canclebooking->save();
+        return redirect()->back();
+    }
+    function store(Request $request){
+        $bookingcar = new BookingModel();
+        
+        
+        $bookingcar->username = $request->user_id;
+        $bookingcar->booking_start = $request->date_start;
+        $bookingcar->booking_end = $request->date_end;
+        $bookingcar->booking_detail = $request->location;
+        $bookingcar->booking_status = '1';
+        $bookingcar->save();
+
+        return redirect()->back();
+
+
+
+
+    }
 }

@@ -39,4 +39,5 @@ class BookingController extends Controller
         return response()->json($events);
     }
 
+   
 }
