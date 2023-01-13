@@ -35,7 +35,5 @@ class AdminController extends Controller
     {
         return view('admin.manage_user');
     }
-    public function history(){
-        return view('admin.booking_history');
-    }
+   
 }
