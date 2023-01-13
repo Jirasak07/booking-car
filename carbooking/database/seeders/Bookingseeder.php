@@ -16,7 +16,7 @@ class Bookingseeder extends Seeder
     {
         //
         $user = [
-            [
+            [   'id' => '1',
                 'booking_start' => '2023-01-15 03:20:24',
                 'booking_end'    => '2023-01-15 05:20:24',
                 'license_plate' => '1',
@@ -27,7 +27,7 @@ class Bookingseeder extends Seeder
                 'booking_status'    => '2'
           
             ],
-            [
+            ['id' => '2',
                 'booking_start' => '2023-01-15 03:20:24',
                 'booking_end'    => '2023-01-16 05:20:24',
                 'license_plate' => '1',
@@ -38,7 +38,7 @@ class Bookingseeder extends Seeder
                 'booking_status'    => '2'
           
             ],
-            [
+            ['id' => '3',
                 'booking_start' => '2023-01-18 03:20:24',
                 'booking_end'    => '2023-01-20 07:20:24',
                 'license_plate' => '2',

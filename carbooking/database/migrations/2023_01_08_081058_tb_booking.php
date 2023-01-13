@@ -14,7 +14,7 @@ class TbBooking extends Migration
     public function up()
     {
         Schema::create('tb_booking',function(Blueprint $table){
-            $table->id();//รหัสการจองรถ
+            $table->string('id');//รหัสการจองรถ
             $table->dateTime('booking_start');//ระยะเวลาเริ่มต้นการจอง
             $table->dateTime('booking_end');//ระยะเวลาสิ้นสุดการจอง
             $table->string('license_plate')->nullable();//ทะเบียนรถ
