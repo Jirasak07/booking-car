@@ -2,9 +2,9 @@
 
 @section('content')
     @include('layouts.admin.header')
-    <div class="container-fulid mx-5  ">
+    <div class="container-sm mt-2 ">
         <div class=" shadow-table ">
-            <div class="">
+
                 <table class="rounded table table-md  table-white table-striped fw-bold table-responsive-xl">
                     <thead class="table-dark table-hover">
                         <tr>
@@ -18,6 +18,7 @@
                         </tr>
                     </thead>
                     <tbody>
+
                         @foreach($booking as $bookings)
                             <tr>
                                 <td>1</td>
@@ -35,9 +36,9 @@
 
                     </tbody>
                 </table>
-            </div>
+
         </div>
-  
+
 
         {{-- @include('layouts.footers.auth') --}}
     </div>

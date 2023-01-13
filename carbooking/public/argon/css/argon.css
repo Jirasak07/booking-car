@@ -20454,7 +20454,7 @@ li {
 .fc-view-container{
     aspect-ratio: 1/1;
 }
-::-webkit-scrollbar {
+::-webkit-scrollbar-x {
     display: none;
 }
 .shadow-table{

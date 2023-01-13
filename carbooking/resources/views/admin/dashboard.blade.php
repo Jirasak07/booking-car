@@ -84,7 +84,7 @@
                 @endforeach
             </div>
         </div>
-        <div class="card mx-3 p-3">
+        <div class="card mx-3 p-3 mb-3">
             @include('admin.calendar_show')
         </div>
 

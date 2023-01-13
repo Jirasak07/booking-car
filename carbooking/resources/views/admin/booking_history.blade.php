@@ -2,10 +2,10 @@
 
 @section('content')
     @include('layouts.admin.header')
-    <div class="container">
+    <div class="container-sm">
         <div class="shadow-table">
 
-            <table class="rounded table table-md  table-white table-striped fw-bold table-responsive-xl">
+            <table class="rounded table table-md  table-white table-striped fw-bold table-responsive-lg">
                 <thead class="table-dark table-hover">
                     <tr>
                         <td class="fw-bold">ลำดับ</td>
