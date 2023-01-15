@@ -18,7 +18,7 @@ class TbBooking extends Migration
             $table->dateTime('booking_start');//ระยะเวลาเริ่มต้นการจอง
             $table->dateTime('booking_end');//ระยะเวลาสิ้นสุดการจอง
             $table->string('license_plate')->nullable();//ทะเบียนรถ
-            $table->string('username');//ชื่อผู้จอง
+            $table->integer('username');//ชื่อผู้จอง
             $table->string('driver')->nullable();//คนขับ
             $table->string('type_car')->nullable();//ประเภทรถภานนอก/ภายใน
             $table->text('booking_detail');//วัตถุประสงค์

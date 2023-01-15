@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
-
+use illuminate\auth\SessionGuard;
 class Bookingcontroller extends Controller
 {
     //
@@ -23,17 +23,26 @@ class Bookingcontroller extends Controller
     }
 
     function booking_user(){
-        $User_id = Auth::user()->id;
+        
+
+        // $User_booking = DB::table('Users')
+        // ->whereIn('Users.id', Auth::Users()->id)
+        // ->join('tb_booking', 'Users.id', '=', 'tb_booking_username')
+        // ->select('Users.Usrname', 'tb_booking.*')
+        // ->get();
 
         $booking = DB::table('tb_booking')
-        ->whereIn('username', $User_id)
+        
+        ->join('Users', 'tb_booking.username', '=', 'Users.id')
+        
         ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
         ->join('tb_out_cars', 'tb_booking.license_plate', '=', 'tb_out_cars.id')
         ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
-        ->join('Users', 'tb_booking.username', '=', 'Users.id')
+        ->whereIn('Users.id', Auth::Users()->id)
+        
         ->select( 'car_out_license', 'car_out_model', 'car_out_driver', 'car_out_tel',  'driver_fullname', 'car_license','tb_booking.*' ,'Username')
         ->get();
-
+        // return dd($booking);
         
         return view('user.booking')->with(['booking' => $booking]);
     }
