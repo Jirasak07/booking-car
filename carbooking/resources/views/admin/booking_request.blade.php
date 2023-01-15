@@ -26,16 +26,26 @@
                             <tr>
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $bookings['username'] }}</td>
-                                <td>{{ date('d-m-Y H:i:s',strtotime($bookings['booking_start'])) }}</td>
+                                <td>{{ date('d-m-Y H:i:s', strtotime($bookings['booking_start'])) }}</td>
                                 <td>{{ $bookings['booking_end'] }}</td>
                                 <td>{{ $bookings['booking_detail'] }}</td>
                                 <td>
-                                    <a class="btn btn-success btn-sm" onclick="modal({{ $bookings['id'] }})"
+                                    <div class="btn btn-success btn-sm"
+                                        onclick="modal({{ $bookings['id'], 1,2 }})"
                                         data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                        อนุมัติ</a>
+                                        อนุมัติ</div>
                                     <a class="text-white btn btn-danger btn-sm "
                                         href="{{ route('cancle', $bookings['id']) }}">ยกเลิกคำขอ</a>
                                 </td>
+                            </tr>
+                            @else
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                             </tr>
                         @endif
                     @endforeach
@@ -103,37 +113,40 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('myDiv').innerHTML =
-                ' <form action="{{ route('GG') }}" method="post">' +
-                '@csrf' +
-                '<div class="form-control py-5 h-100 d-flex flex-row justify-content-around">' +
-                ' <div class=" me-2 col-6">' +
-                ' <label class="form-label">เลือกรถที่ใช้</label>' +
-                '<select name="car" class="form-select rounded px-3 py-2 w-100 " aria-label="Default select example">' +
-                '  <option selected value="1">One</option>' +
-                ' <option value="2">Two</option>' +
-                '  <option value="3">Three</option>' +
-                '    </select>' +
-                '   </div>' +
-                '  <div class=" col-6">' +
-                ' <label class="form-label">เลือกพนักงานขับรถ</label>' +
-                '  <select name="driver" class="form-select rounded px-3 py-2 w-100 "aria-label="Default select example">' +
-                '<option selected value="1">One</option>' +
-                '  <option value="2">Two</option>' +
-                '  <option value="3">Three</option>' +
-                '     </select>' +
-                ' </div>' +
-                '    </div>' +
-                '   <div class="modal-footer">' +
-                ' <input type="submit" name="submit" class="btn btn-success" value="อนุมัติ" />' +
-                '  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ปิด</button>' +
-                '    </div>' +
-                '  </form>';
+
+            // document.getElementById('myDiv').innerHTML =
+            //     ' <form action="{{ route('GG') }}" method="post">' +
+            //     '@csrf' +
+            //     '<div class="form-control py-5 h-100 d-flex flex-row justify-content-around">' +
+            //     ' <div class=" me-2 col-6">' +
+            //     ' <label class="form-label">เลือกรถที่ใช้</label>' +
+            //     '<select name="car" class="form-select rounded px-3 py-2 w-100 " aria-label="Default select example">' +
+            //     '  <option selected value="1">One</option>' +
+            //     ' <option value="2">Two</option>' +
+            //     '  <option value="3">Three</option>' +
+            //     '    </select>' +
+            //     '   </div>' +
+            //     '  <div class=" col-6">' +
+            //     ' <label class="form-label">เลือกพนักงานขับรถ</label>' +
+            //     '  <select name="driver" class="form-select rounded px-3 py-2 w-100 "aria-label="Default select example">' +
+            //     '<option selected value="1">One</option>' +
+            //     '  <option value="2">Two</option>' +
+            //     '  <option value="3">Three</option>' +
+            //     '     </select>' +
+            //     ' </div>' +
+            //     '    </div>' +
+            //     '   <div class="modal-footer">' +
+            //     ' <input type="submit" name="submit" class="btn btn-success" value="อนุมัติ" />' +
+            //     '  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ปิด</button>' +
+            //     '    </div>' +
+            //     '  </form>';
+            chkform()
         })
 
-        function chkform() {
+        function chkform(bookid) {
             var rd1 = document.getElementById('car1');
             var rd2 = document.getElementById('car2');
+            var id = bookid;
             if (rd1.checked == true) {
                 var form = "1";
                 document.getElementById('myDiv').innerHTML =
@@ -197,9 +210,10 @@
                     '</form>';
             }
         }
-
         function modal(val) {
-            alert(val);
+            // document.getElementById('')
+            var data_approve = @json($booking);
+            console.log(data_approve);
         }
     </script>
 @endsection

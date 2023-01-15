@@ -22,7 +22,7 @@
                     <div class=" dropdown-header noti-title">
                         <h6 class="text-overflow m-0">{{ __('Welcome!') }}</h6>
                     </div>
-                    <a href="{{ route('profile.edit') }}" class="dropdown-item">
+                    <a href="" class="dropdown-item">
                         <i class="ni ni-single-02"></i>
                         <span>{{ __('My profile') }}</span>
                     </a>
@@ -92,12 +92,12 @@
                     <div class="collapse show" id="navbar-examples">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('profile.edit') }}">
+                                <a class="nav-link" href="">
                                     {{ __('User profile') }}
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('user.index') }}">
+                                <a class="nav-link" href="">
                                     {{ __('User Management') }}
                                 </a>
                             </li>
@@ -106,17 +106,17 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('icons') }}">
+                    <a class="nav-link" href="">
                         <i class="ni ni-planet text-blue"></i> {{ __('Icons') }}
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="{{ route('map') }}">
+                    <a class="nav-link" href="">
                         <i class="ni ni-pin-3 text-orange"></i> {{ __('Maps') }}
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('table') }}">
+                    <a class="nav-link" href="">
                       <i class="ni ni-bullet-list-67 text-default"></i>
                       <span class="nav-link-text">Tables</span>
                     </a>

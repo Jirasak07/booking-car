@@ -66,7 +66,7 @@
                             style="min-height: 120px;border-left:5px solid var(--warning)">
                             <div class="title-cars ml-3 col-6">
                                 <div class="brand-car text-warning text-capitalize"
-                                    style="font-size: 1.2em;font-weight:500"> {{ $cars['car_model'] }}</div>
+                                    style="font-size: 1em;font-weight:500"> {{ $cars['car_model'] }}</div>
                                 <div class="lc_car text-default" style="font-size: 0.8em;font-weight:500;">
                                     {{ $cars['car_license'] }}</div>
                                 <div class="res_car  ml-3" style="font-size:3rem;line-height:80%;"
