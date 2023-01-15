@@ -26,13 +26,12 @@ class Bookingcontroller extends Controller
         $User_id = Auth::user()->id;
 
         $booking = DB::table('tb_booking')
-        ->where('username', '=', $User_id)
+        ->whereIn('username', $User_id)
         ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
         ->join('tb_out_cars', 'tb_booking.license_plate', '=', 'tb_out_cars.id')
         ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
         ->join('Users', 'tb_booking.username', '=', 'Users.id')
         ->select( 'car_out_license', 'car_out_model', 'car_out_driver', 'car_out_tel',  'driver_fullname', 'car_license','tb_booking.*' ,'Username')
-        
         ->get();
 
         
