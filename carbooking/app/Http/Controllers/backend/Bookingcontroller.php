@@ -98,12 +98,18 @@ class Bookingcontroller extends Controller
     }
     function store(Request $request)
     {
+        //dd($request->all());
         $bookingcar = new BookingModel();
-
-
+        $cnt_booking = $bookingcar->count();
+        
+        if ($cnt_booking < 1) {
+            $bookingcar->id =1;
+        } else {
+            $bookingcar->id = $cnt_booking +1;
+        }
         $bookingcar->username = $request->user_id;
-        $bookingcar->booking_start = $request->date_start;
-        $bookingcar->booking_end = $request->date_end;
+        $bookingcar->booking_start = $request->start;
+        $bookingcar->booking_end = $request->end;
         $bookingcar->booking_detail = $request->location;
         $bookingcar->booking_status = '1';
         $bookingcar->save();

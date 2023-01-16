@@ -8,7 +8,7 @@
         <div class="row mb-3">
             <div class="col-xl-12">
                 <div class="card shadow-sm p-3 overflow-auto">
-                    <table class="overflow-auto table  table-hover fw-bold table-responsive-xl">
+                    <table class="overflow-auto table table-hover fw-bold table-responsive-xl">
                         <thead class="table-light">
                             <tr align="center">
                                 <td class="fw-bolder" style="font-size: 18px">ลำดับ</td>
@@ -19,25 +19,55 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{ $booking }}
-<tr>
-                                    <td align="center" style="font-size: 18px">1</td>
-                                    <td style="font-size: 15px">วันที่เดินทางไป ถึง วันที่เดินทางกลับ</td>
-                                    <td align="center">
+                            @php
+                                $i=1;
+                            @endphp
+                            @foreach ($booking as $item)
+                                <tr align="center">
+                                    <td style="font-size: 18px">{{ $i++ }}</td>
+                                    <td style="font-size: 16px">{{ $item->booking_start }} ถึง {{ $item->booking_end }}</td>
+                                    <td>
                                         <button class="btn btn-neutral btn-sm text-darker" data-bs-toggle="modal"
-                                            data-bs-target="#viewde">
+                                            data-bs-target="#viewde" data-id="{{ $item->id }}">
                                             <i class="fa-solid fa-eye"></i>
                                         </button>
                                     </td>
-                                    <td align="center" style="font-size: 14px">
-                                        <button class="btn btn-yellow btn-sm"
-                                            style="font-size: 13px">กำลังดำเนินการ</button>
+                                    <td>
+                                        @if ($item->booking_status == '1')
+                                            <label style="font-size: 13px">กำลังดำเนินการ</label>
+                                        @elseif ($item->booking_status == '2')
+                                            <i class="fa-solid fa-square-check" style="color: green;font-size:24px"></i>
+                                        @else
+                                            <i class="fa-sharp fa-solid fa-rectangle-xmark"
+                                                style="color: red;font-size:24px"></i>
+                                        @endif
                                     </td>
-                                    <td align="center" style="font-size: 16px">
-                                        <button class="btn btn-danger btn-sm" style="font-size: 13px"
-                                            onclick="alertCancel(3)">ยกเลิก</button>
+                                    <td>
+                                        @if ($item->booking_status == '1')
+                                            <button class="btn btn-danger btn-sm" style="font-size: 13px"
+                                                onclick="alertCancel(3)">ยกเลิก</button>
+                                        @else
+                                        @endif
                                     </td>
                                 </tr>
+                            @endforeach
+                            {{-- <tr>
+                                <td align="center" style="font-size: 18px">1</td>
+                                <td style="font-size: 15px">วันที่เดินทางไป ถึง วันที่เดินทางกลับ</td>
+                                <td align="center">
+                                    <button class="btn btn-neutral btn-sm text-darker" data-bs-toggle="modal"
+                                        data-bs-target="#viewde">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                </td>
+                                <td align="center" style="font-size: 14px">
+                                    <button class="btn btn-yellow btn-sm" style="font-size: 13px">กำลังดำเนินการ</button>
+                                </td>
+                                <td align="center" style="font-size: 16px">
+                                    <button class="btn btn-danger btn-sm" style="font-size: 13px"
+                                        onclick="alertCancel(3)">ยกเลิก</button>
+                                </td>
+                            </tr>
                             <tr>
                                 <td align="center" style="font-size: 18px">2</td>
                                 <td style="font-size: 15px">วันที่เดินทางไป ถึง วันที่เดินทางกลับ</td>
@@ -54,7 +84,7 @@
                                 </td>
                                 <td>
                                 </td>
-                            </tr>
+                            </tr> --}}
                         </tbody>
                     </table>
                 </div>
@@ -74,7 +104,9 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="row mb-3">
+
+                        
+                        {{-- <div class="row mb-3">
                             <label for="" class="col-sm-2 col-form-label">ชื่อผู้จอง</label>
                             <div class="col-sm-10">
                                 <input type="text" disabled value="ตัวแปรชื่อผู้จอง" readonly
@@ -103,7 +135,7 @@
                                 -สถานที่การเดินทาง
                                 -ชื่อผู้ร่วมเดินทาง
                             </textarea>
-                        </div>
+                        </div> --}}
 
                     </div>
                     <div class="modal-footer">
