@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use illuminate\auth\SessionGuard;
+
 class Bookingcontroller extends Controller
 {
     //
@@ -22,8 +23,9 @@ class Bookingcontroller extends Controller
         return view('admin.booking_request')->with(['booking' => $jsonData]);
     }
 
-    function booking_user(){
-        
+    function booking_user()
+    {
+
 
         // $User_booking = DB::table('Users')
         // ->whereIn('Users.id', Auth::Users()->id)
@@ -32,18 +34,18 @@ class Bookingcontroller extends Controller
         // ->get();
 
         $booking = DB::table('tb_booking')
-        
-        ->join('users', 'tb_booking.username', '=', 'users.id')
-        
-        ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
-        ->join('tb_out_cars', 'tb_booking.license_plate', '=', 'tb_out_cars.id')
-        ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
-        ->whereIn('users.id', Auth::user())
-        
-        ->select( 'car_out_license', 'car_out_model', 'car_out_driver', 'car_out_tel',  'driver_fullname', 'car_license','tb_booking.*' ,'users.username')
-        ->get();
+
+            ->join('users', 'tb_booking.username', '=', 'users.id')
+
+            ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
+            ->join('tb_out_cars', 'tb_booking.license_plate', '=', 'tb_out_cars.id')
+            ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
+            ->whereIn('tb_booking.username', Auth::user())
+
+            ->select('car_out_license', 'car_out_model', 'car_out_driver', 'car_out_tel',  'driver_fullname', 'car_license', 'tb_booking.*', 'users.username')
+            ->get();
         // return dd($booking);
-        
+        //dd($booking);
         return view('user.booking')->with(['booking' => $booking]);
     }
 
@@ -94,10 +96,11 @@ class Bookingcontroller extends Controller
         $canclebooking->save();
         return redirect()->back();
     }
-    function store(Request $request){
+    function store(Request $request)
+    {
         $bookingcar = new BookingModel();
-        
-        
+
+
         $bookingcar->username = $request->user_id;
         $bookingcar->booking_start = $request->date_start;
         $bookingcar->booking_end = $request->date_end;
@@ -106,9 +109,5 @@ class Bookingcontroller extends Controller
         $bookingcar->save();
 
         return redirect()->back();
-
-
-
-
     }
 }
