@@ -17,13 +17,16 @@ class Bookingcontroller extends Controller
     function index()
     {
         $currentURL = request()->getHttpHost();
-        $response = Http::get('http://' . $currentURL . '/index.php/api/booking');
-        $jsonData = $response->json();
+       
         $responsecar = Http::get('http://' . $currentURL . '/index.php/api/car');
         $jsonDatacar = $responsecar->json();
         $responsedriver = Http::get('http://' . $currentURL . '/index.php/api/driver');
         $jsonDatadriver = $responsedriver->json();
-        return view('admin.booking_request')->with(['booking' => $jsonData, 'car' => $jsonDatacar, 'driver' => $jsonDatadriver,]);
+        $booking_wait = DB::table('tb_booking')
+        ->join('users', 'tb_booking.username', '=', 'users.id')
+        ->select('tb_booking.*', 'users.username','booking_start', 'booking_end')
+        ->get();
+        return view('admin.booking_request')->with(['booking' => $booking_wait, 'car' => $jsonDatacar, 'driver' => $jsonDatadriver,]);
     }
 
     function booking_user()
