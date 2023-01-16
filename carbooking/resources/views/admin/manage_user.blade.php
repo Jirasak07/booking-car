@@ -2,10 +2,10 @@
 
 @section('content')
     @include('layouts.admin.header')
-    <div class="container-fulid mx-5 ">
+    <div class="container-fulid mx-3 ">
         <div class="container-md p-md-2 p-1 mt-sm-2 mt-sm-1 mt-4">
-            <div class="card-dark shadow-sm ">
-                <table class=" rounded table table-light fw-bold table-responsive-sm">
+            <div class="card-dark shadow-table ">
+                <table class=" rounded table table-white table-striped fw-bold table-responsive-sm">
                     <thead class="table-dark">
                         <tr>
                             <th class="fw-bold" align="center">ลำดับ</th>

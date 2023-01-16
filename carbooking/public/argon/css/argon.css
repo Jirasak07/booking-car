@@ -22,7 +22,7 @@
     --pink: #f3a4b5;
     --red: #f5365c;
     --orange: #fb6340;
-    --yellow: #ffb020;
+    --yellow: #F3B61F;
     --green: #2dce89;
     --teal: #11cdef;
     --cyan: #2bffc6;
@@ -33,10 +33,10 @@
     --lighter: #e9ecef;
     --primary: #5e72e4;
     --secondary: #f7fafc;
-    --success: #2dce89;
+    --success: #3CCF4E;
     --info: #11cdef;
     --warning: #fb6340;
-    --danger: #f5365c;
+    --danger: #EB1D36;
     --light: #adb5bd;
     --dark: #212529;
     --default: #172b4d;
@@ -20332,6 +20332,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
     color: #00f7b5;
     margin-left: 0px !important;
     margin-right: 0px !important;
+    box-shadow: 2px 2px 8px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* btn yellow */
@@ -20376,23 +20377,30 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 }
 
 .booking-all {
-    border-left: 6px solid var(--default);
-    color: var(--default);
+    background-color: #222a46;
+}
+.bg-bookall{
+    background-color: #181D31;
 }
 .confirm {
-    border-left: 6px solid var(--success);
-    color: var(--success);
+    background-color: #46cb3c !important;
+
+}
+.ic-success{
+    background-color: #3cbe32;
 }
 .pending {
-    border-left: 6px solid var(--yellow);
-    color: var(--yellow);
+background-color: #ffd464;
 }
-.cancel {
-    border-left: 6px solid var(--danger);
-    color: var(--danger);
+.bg-pending{
+    background-color: #FFC93C;
+}
+.bg-cancel {
+background-color:#d4132a ;
 }
 .icon-dashboard {
-    font-size: 2.5rem !important;
+    font-size: 5rem !important;
+
 }
 .icon-d-2 {
     display: flex;
@@ -20400,12 +20408,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
     align-items: center;
 }
 .icon-circle {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    aspect-ratio: 1/1;
     color: white;
-    opacity: 0.7;
 }
 .bg-yellow {
     background-color: var(--yellow);
@@ -20465,4 +20468,7 @@ li {
   22.3px 22.3px 17.9px rgba(0, 0, 0, 0.052),
   41.8px 41.8px 33.4px rgba(0, 0, 0, 0.055),
   100px 100px 80px rgba(0, 0, 0, 0.07);
+}
+.select-form{
+    font-size: 5rem !important;
 }

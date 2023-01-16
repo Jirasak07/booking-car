@@ -2,7 +2,7 @@
 
 @section('content')
     @include('layouts.admin.header')
-    <div class="container-sm">
+    <div class="container-sm mx-3 mt-2">
         <div class="shadow-table">
 
             <table class="rounded table table-md  table-white table-striped fw-bold table-responsive-lg">
