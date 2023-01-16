@@ -94,6 +94,7 @@
                                                                 name="username">
                                                         </div>
                                                     </div>
+
                                                     <div class="row mb-3">
                                                         <label for=""
                                                             class="col-sm-2 col-form-label">ช่วงวันที่</label>
@@ -101,12 +102,14 @@
                                                             <div class="row g-3">
                                                                 <div class="col-md-5">
                                                                     <input type="datetime-local" name="booking_start"
+                                                                        data-date-format="DD MM YYYY hh:mm:ss"
                                                                         id="booking_start"
                                                                         value="{{ $item->booking_start }}"
                                                                         class="form-control">
                                                                 </div>
                                                                 <div class="col-md-5">
                                                                     <input type="datetime-local" name="booking_end"
+                                                                        data-date-format="DD MM YYYY hh:mm:ss"
                                                                         id="booking_end" value="{{ $item->booking_end }}"
                                                                         class="form-control">
                                                                 </div>
@@ -121,8 +124,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <input type="submit" name="saveBooking" value="ยืนยัน" id="EditBooking"
-                                                        class="btn btn-primary">
+                                                    <input type="submit" name="saveBooking" value="ยืนยัน"
+                                                        id="EditBooking" class="btn btn-primary">
                                                     <button type="button"
                                                         class="btn grey btn-danger"data-bs-dismiss="modal"
                                                         {{-- onclick="window.location.reload()" --}}
@@ -323,12 +326,6 @@
 
         @push('js')
             <script>
-                function modalDetail(val) {
-                    $('#viewde').modal('toggle');
-                    //alert(val);
-                    document.getElementById('bk_id').innerHTML = val;
-                }
-
                 function alertCancel(id) {
                     swal.fire({
                         title: "Cancel?",
