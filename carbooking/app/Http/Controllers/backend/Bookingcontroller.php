@@ -23,7 +23,7 @@ class Bookingcontroller extends Controller
         $jsonDatacar = $responsecar->json();
         $responsedriver = Http::get('http://' . $currentURL . '/index.php/api/driver');
         $jsonDatadriver = $responsedriver->json();
-        return view('admin.booking_request')->with(['booking' => $jsonData,'car' => $jsonDatacar,'driver' => $jsonDatadriver,]);
+        return view('admin.booking_request')->with(['booking' => $jsonData, 'car' => $jsonDatacar, 'driver' => $jsonDatadriver,]);
     }
 
     function booking_user()
@@ -48,16 +48,16 @@ class Bookingcontroller extends Controller
             ->select('car_out_license', 'car_out_model', 'car_out_driver', 'car_out_tel',  'driver_fullname', 'car_license', 'tb_booking.*', 'users.username')
             ->get();
 
-            $booking_wait = DB::table('tb_booking')
+        $booking_wait = DB::table('tb_booking')
             ->join('users', 'tb_booking.username', '=', 'users.id')
             ->whereIn('tb_booking.username', Auth::user())
             ->orderBy('booking_status')
 
-            ->select( 'tb_booking.*', 'users.username')
+            ->select('tb_booking.*', 'users.username')
             ->get();
         // return dd($booking);
         //dd($booking);
-        return view('user.booking')->with(['booking' => $booking,'booking2' =>  $booking_wait]);
+        return view('user.booking')->with(['booking' => $booking, 'booking2' =>  $booking_wait]);
     }
 
     public function history()
@@ -77,9 +77,9 @@ class Bookingcontroller extends Controller
 
         // $jsonData = $response->json();
         $bookings = DB::table('tb_booking')
-        ->where('booking_status', '!=', '1')
-        
-        ->get();
+            ->where('booking_status', '!=', '1')
+
+            ->get();
         $events = array();
         foreach ($bookings as $booking) {
             $color = null;
@@ -115,11 +115,11 @@ class Bookingcontroller extends Controller
         //dd($request->all());
         $bookingcar = new BookingModel();
         $cnt_booking = $bookingcar->count();
-        
+
         if ($cnt_booking < 1) {
-            $bookingcar->id =1;
+            $bookingcar->id = 1;
         } else {
-            $bookingcar->id = $cnt_booking +1;
+            $bookingcar->id = $cnt_booking + 1;
         }
         $bookingcar->username = $request->user_id;
         $bookingcar->booking_start = $request->start;
@@ -128,6 +128,17 @@ class Bookingcontroller extends Controller
         $bookingcar->booking_status = '1';
         $bookingcar->save();
 
+        return redirect()->back();
+    }
+    function update(Request $request, $id)
+    {
+        $booking_update = BookingModel::find($id);
+
+        $booking_update->license_palte = $request->car_id;
+        $booking_update->driver = $request->driver_id;
+        $booking_update->type_car = $request->type;
+        $booking_update->booking_status = "2";
+        $booking_update->save();
         return redirect()->back();
     }
 }
