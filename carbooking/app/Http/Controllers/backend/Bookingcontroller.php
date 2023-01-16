@@ -56,7 +56,7 @@ class Bookingcontroller extends Controller
             ->get();
         // return dd($booking);
         //dd($booking);
-        return view('user.booking')->with(['booking' => $booking],['booking2' =>  $booking_wait]);
+        return view('user.booking')->with(['booking' => $booking,'booking2' =>  $booking_wait]);
     }
 
     public function history()
