@@ -2,81 +2,80 @@
 @section('content')
     @include('layouts.admin.header')
     <div class="container-sm mt-3 ">
-        <div class="d-flex flex-lg-row flex-column mx-3  mb-3" style="gap: 20px;min-height:120px">
-            <div class="w-100  m-dash">
-                <div class="bg-white  h-100 booking-all p-2 d-flex flex-row align-items-center" style="min-height:120px">
-                    <div class="col-8 ">
-                        <div class="text-default ">รายการจองทั้งหมด</div>
+        <div class="d-flex flex-xl-row flex-column mx-3   " style="gap: 10px;min-height:120px">
+            <div class="w-100 m-dash">
+                <div class=" h-100 booking-all d-flex flex-row align-items-center" style="min-height:120px">
+                    <div class="h-100 col text-white icon-d-2  icon-circle">
+                        <i class="fa-solid fa-clipboard-list  icon-dashboard "></i>
+                    </div>
+                    <div class="col d-flex flex-column align-items-center text-white">
+                        <div class="text-white ">รายการจองทั้งหมด</div>
                         <div style="font-size: 4rem;line-height: 80%;">0</div>
                         <div>รายการ</div>
                     </div>
-                    <div class="icon-d-2 icon-circle bg-default"><i class="fa-solid fa-clipboard-list  icon-dashboard "></i>
-                    </div>
                 </div>
             </div>
             <div class="w-100  m-dash">
-                <div class=" bg-white h-100 confirm p-2 d-flex flex-row align-items-center"style="min-height:120px">
-                    <div class="col-8 ">
+                <div class="text-white h-100 confirm d-flex flex-row align-items-center"style="min-height:120px">
+
+                    <div class="h-100  col icon-d-2 icon-circle  "><i class="fa-solid fa-circle-check icon-dashboard "></i>
+                    </div>
+                    <div class="col  d-flex flex-column align-items-center  ">
                         <div>อนุมัติแล้ว</div>
                         <div style="font-size: 4rem;line-height: 80%;">0</div>
-                        <div class="text-default">รายการ</div>
-                    </div>
-                    <div class="icon-d-2 icon-circle bg-success"><i class="fa-solid fa-circle-check icon-dashboard "></i>
+                        <div>รายการ</div>
                     </div>
                 </div>
             </div>
             <div class="w-100  m-dash">
-                <div class=" bg-white h-100 pending p-2 d-flex flex-row align-items-center " style="min-height:120px">
-                    <div class="col-8 ">
+                <div class="  h-100 pending  d-flex flex-row align-items-center " style="min-height:120px">
+                    <div class="h-100 col icon-d-2 icon-circle  "> <i class="fa-solid fa-hourglass-end icon-dashboard "></i>
+                    </div>
+                    <div class="col text-white d-flex flex-column align-items-center">
                         <div>รอดำเนินการ</div>
                         <div style="font-size: 4rem;line-height: 80%;">0</div>
-                        <div class="text-default">รายการ</div>
-                    </div>
-
-                    <div class="icon-d-2 icon-circle bg-yellow "> <i class="fa-solid fa-hourglass-end icon-dashboard "></i>
+                        <div>รายการ</div>
                     </div>
                 </div>
             </div>
             <div class="w-100  m-dash">
-                <div class=" bg-white h-100 w-100 cancel p-2 d-flex flex-row align-items-center" style="min-height:120px">
-                    <div class="col-8  ">
+                <div class=" bg-danger h-100 w-100 cancel  d-flex flex-row align-items-center" style="min-height:120px">
+
+                    <div class="h-100 icon-d-2 icon-circle col"><i class="fa-solid fa-circle-xmark icon-dashboard "></i>
+                    </div>
+                    <div class="col text-white d-flex flex-column align-items-center ">
                         <div>ยกเลิกแล้ว</div>
                         <div style="font-size: 4rem;line-height: 80%;">0</div>
-                        <div class="text-default ">รายการ</div>
-                    </div>
-                    <div class="icon-d-2 icon-circle bg-danger"><i class="fa-solid fa-circle-xmark icon-dashboard "></i>
+                        <div>รายการ</div>
                     </div>
                 </div>
             </div>
         </div>
         <div class=" d-flex flex-column justify-content-between flex-lg-row pb-2  w-100">
             <div class="mt-3   col-12 col-lg-8 ">
-                <canvas class="bg-white  w-100 h-100 " style=" max-height: 400px;" id="Chart"></canvas>
+                <canvas class="bg-white  w-100 h-100 " style=" max-height: 420px;" id="Chart"></canvas>
             </div>
             <div class="mt-3  col-12 col-lg-4">
-                <canvas class=" bg-white  w-100 " style=" max-height: 400px;" id="myChart"></canvas>
+                <canvas class=" bg-white  w-100 " style=" max-height: 420px;" id="myChart"></canvas>
             </div>
-
         </div>
         <div class="d-flex flex-column justify-content-center align-items-center mb-3 ">
             <div class="flex-column flex-lg-row d-flex justify-content-between  w-100  ">
                 @foreach ($car as $cars)
                     <div class="col-12 col-lg  mt-3 w-100 ">
-                        <div class="bg-white   d-flex flex-row p-2  "
-                            style="min-height: 120px;border-left:5px solid var(--warning)">
+                        <div class=" bg-info  d-flex flex-row p-2 m-dash " style="min-height: 120px;">
+
+                            <div class="logo-car  col-6 text-white" style="font-size: 6rem;line-height:80%;"><i
+                                    class="fa-solid fa-car-rear "></i></div>
                             <div class="title-cars ml-3 col-6">
-                                <div class="brand-car text-warning text-capitalize"
-                                    style="font-size: 1em;font-weight:500"> {{ $cars['car_model'] }}</div>
-                                <div class="lc_car text-default" style="font-size: 0.8em;font-weight:500;">
+                                <div class="brand-car text-white text-capitalize" style="font-size: 1em;font-weight:500">
+                                    {{ $cars['car_model'] }}</div>
+                                <div class="lc_car text-white" style="font-size: 0.8em;font-weight:500;">
                                     {{ $cars['car_license'] }}</div>
-                                <div class="res_car  ml-3" style="font-size:3rem;line-height:80%;"
+                                <div class="res_car  ml-3 text-white" style="font-size:3rem;line-height:80%;"
                                     id="tcar-{{ $cars['id'] }}"></div>
-                                <div class="text-default ml-3" style="font-size: 0.8em"> รายการ</div>
+                                <div class="text-white ml-3" style="font-size: 0.8em"> รายการ</div>
                             </div>
-                            <div class="logo-car  col-6" style="font-size: 6rem;line-height:80%;opacity:0.3"><i
-                                    class="fa-solid fa-car-rear text-warning"></i></div>
-
-
                         </div>
                     </div>
                 @endforeach
@@ -86,23 +85,6 @@
             @include('admin.calendar_show')
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var car = @json($car);
@@ -110,7 +92,6 @@
             var total_car = 1;
             $('#tcar-1').html(total_car);
             const ctx = document.getElementById('myChart');
-
             new Chart(ctx, {
                 type: 'doughnut',
 
