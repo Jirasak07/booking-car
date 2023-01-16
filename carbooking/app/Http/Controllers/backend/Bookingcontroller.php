@@ -48,16 +48,16 @@ class Bookingcontroller extends Controller
             ->select('car_out_license', 'car_out_model', 'car_out_driver', 'car_out_tel',  'driver_fullname', 'car_license', 'tb_booking.*', 'users.username')
             ->get();
 
-        $booking_wait = DB::table('tb_booking')
-            ->join('users', 'tb_booking.username', '=', 'users.id')
-            ->whereIn('tb_booking.username', Auth::user())
-            ->orderBy('booking_status')
+        // $booking_wait = DB::table('tb_booking')
+        //     ->join('users', 'tb_booking.username', '=', 'users.id')
+        //     ->whereIn('tb_booking.username', Auth::user())
+        //     ->orderBy('booking_status')
 
-            ->select('tb_booking.*', 'users.username')
-            ->get();
+        //     ->select('tb_booking.*', 'users.username')
+        //     ->get();
         // return dd($booking);
         //dd($booking);
-        return view('user.booking')->with(['booking' => $booking, 'booking2' =>  $booking_wait]);
+        return view('user.booking')->with(['booking' => $booking]);
     }
 
     public function history()
@@ -124,6 +124,9 @@ class Bookingcontroller extends Controller
         $bookingcar->username = $request->user_id;
         $bookingcar->booking_start = $request->start;
         $bookingcar->booking_end = $request->end;
+        $bookingcar->license_plate = "-";
+        $bookingcar->dirver = "-";
+        $bookingcar->type_car = "-";
         $bookingcar->booking_detail = $request->location;
         $bookingcar->booking_status = '1';
         $bookingcar->save();
