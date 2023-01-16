@@ -26,7 +26,7 @@
                             <tr>
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $bookings['username'] }}</td>
-                                <td>{{ date('d-M-Y' h:M, strtotime($bookings['booking_start'])) }}</td>
+                                <td>{{ date('d-M-Y', strtotime($bookings['booking_start'])) }}</td>
                                 <td>{{ $bookings['booking_end'] }}</td>
                                 <td>{{ $bookings['booking_detail'] }}</td>
                                 <td>
@@ -65,7 +65,8 @@
                         <div class="col-6">
                             <label for="" class="form-label " style="line-height:50%">วันเวลาที่เริ่มต้น</label>
                             </br>
-                            <label class=" ml-2" style="font-size: 80%;color:#630606;" for="" id="start_date"></label>
+                            <label class=" ml-2" style="font-size: 80%;color:#630606;" for=""
+                                id="start_date"></label>
                         </div>
                         <div class="col-6">
                             <label for="" class="form-label" style="line-height:50%">วันเวลาที่สิ้นสุด</label>
@@ -97,8 +98,11 @@
                                                 <label for="selectcar">เลือกรถที่ต้องการใช้</label>
                                                 <select name="select-car" id="selectcar" class="rounded form-control"
                                                     style="width: 250px; border:1px solid #6673af30 ">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
+                                                    @foreach ($car as $cars)
+                                                        <option value="{{ $cars['id'] }}">{{ $cars['car_model'] }}
+                                                            {{ $cars['car_license'] }} </option>
+                                                    @endforeach
+
 
                                                 </select>
                                             </div>
@@ -106,8 +110,10 @@
                                                 <label for="selectdriver">เลือกพนักงานขับรถ</label>
                                                 <select name="select-driver" id=" selectdriver" class="rounded form-control"
                                                     style="width: 250px;  border:1px solid #6673af30 ">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
+                                                  @foreach ($driver as $dv)
+                                                     <option value="{{$dv['id']}}">{{$dv['driver_fullname']}}</option>
+                                                  @endforeach
+
                                                 </select>
                                             </div>
                                         </div>
