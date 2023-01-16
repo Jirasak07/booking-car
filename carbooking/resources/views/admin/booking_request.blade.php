@@ -22,7 +22,7 @@
                         $i = 1;
                     @endphp
                     @foreach ($booking as $bookings)
-                        @if ($bookings['booking_status'] == 2)
+                        @if ($bookings['booking_status'] == 1)
                             <tr>
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $bookings['username'] }}</td>
@@ -71,12 +71,14 @@
                         <div class="col-6">
                             <label for="" class="form-label" style="line-height:50%">วันเวลาที่สิ้นสุด</label>
                             </br>
-                            <label class=" ml-2" style="font-size: 80%;color:#630606;" for="">11012543</label>
+                            <label class=" ml-2" style="font-size: 80%;color:#630606;" for=""
+                                id="end_date">11012543</label>
                         </div>
                         <div class="col-12 ">
                             <label for="" class="form-label" style="line-height:50%">รายละเอียดการจอง</label>
                             </br>
-                            <label class=" ml-2" style="font-size: 80%;color:#630606;" for="">11012543</label>
+                            <label class=" ml-2" style="font-size: 80%;color:#630606;" for=""
+                                id="detail">11012543</label>
                         </div>
                     </div>
                     <div class="d-grid  justify-content-center row gap">
@@ -92,36 +94,38 @@
 
                             <div class="tab-content">
                                 <div class="tab-pane active" id="tab1">
-                                    <form action="" method="POST">
-                                        <div class="d-flex flex-column align-items-center " style="gap:10px">
-                                            <div class=" mt-4">
-                                                <label for="selectcar">เลือกรถที่ต้องการใช้</label>
-                                                <select name="select-car" id="selectcar" class="rounded form-control"
-                                                    style="width: 250px; border:1px solid #6673af30 ">
-                                                    @foreach ($car as $cars)
-                                                        <option value="{{ $cars['id'] }}">{{ $cars['car_model'] }}
-                                                            {{ $cars['car_license'] }} </option>
-                                                    @endforeach
+                                    <form method="POST" action="{{ route('update') }}">
+                                        @csrf
+                                        <input type="hidden" id="idform" name="id_form">
+                                        <input type="hidden" name="type" value="1">
+                                        <div class=" mt-4">
+                                            <label for="selectcar">เลือกรถที่ต้องการใช้</label>
+                                            <select name="car_id" id="selectcar" class="rounded form-control"
+                                                style="width: 250px; border:1px solid #6673af30 ">
+                                                @foreach ($car as $cars)
+                                                    <option value="{{ $cars['id'] }}">{{ $cars['car_model'] }}
+                                                        {{ $cars['car_license'] }} </option>
+                                                @endforeach
 
 
-                                                </select>
-                                            </div>
-                                            <div>
-                                                <label for="selectdriver">เลือกพนักงานขับรถ</label>
-                                                <select name="select-driver" id=" selectdriver" class="rounded form-control"
-                                                    style="width: 250px;  border:1px solid #6673af30 ">
-                                                    @foreach ($driver as $dv)
-                                                        <option value="{{ $dv['id'] }}">{{ $dv['driver_fullname'] }}
-                                                        </option>
-                                                    @endforeach
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label for="selectdriver">เลือกพนักงานขับรถ</label>
+                                            <select name="driver_id" id=" selectdriver" class="rounded form-control"
+                                                style="width: 250px;  border:1px solid #6673af30 ">
+                                                @foreach ($driver as $dv)
+                                                    <option value="{{ $dv['id'] }}">{{ $dv['driver_fullname'] }}
+                                                    </option>
+                                                @endforeach
 
-                                                </select>
-                                            </div>
+                                            </select>
                                         </div>
 
 
+
                                         <div class="d-flex justify-content-end mt-2">
-                                            <div class="btn btn-sm btn-success w-25">บันทึก</div>
+                                            <input type="submit" value="บันทึก" class="btn btn-sm btn-success w-25" />
                                             <button type="button" class="btn btn-sm btn-outline-danger w-25 "
                                                 data-bs-dismiss="modal" aria-label="Close">ปิด</button>
                                         </div>
@@ -130,6 +134,7 @@
                                 </div>
                                 <div class="tab-pane" id="tab2">
                                     <form action="">
+                                        @csrf
                                         <div class="form-group row mt-2 d-flex flex-column flex-md-row ">
                                             <div class="col-12 col-md-6"> <label for="out-model">รถ</label>
                                                 <input type="text" id="out-model" class="form-control">
@@ -174,8 +179,15 @@
 
         function modal(val) {
             // document.getElementById('')
-            var id = document.getElementById('start_date');
-            document.getElementById('start_date').innerHTML = val
+            const data = @json($booking);
+            console.log(data[val - 1])
+            const start = data[val - 1];
+            console.log(start.booking_end);
+            document.getElementById('start_date').innerHTML = start.booking_start
+            document.getElementById('end_date').innerHTML = start.booking_end
+            document.getElementById('detail').innerHTML = start.booking_detail
+            document.getElementById('idform').value = val
+
         }
     </script>
 @endsection

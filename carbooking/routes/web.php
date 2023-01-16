@@ -6,7 +6,6 @@ use App\Http\Controllers\DriverController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use RealRashid\SweetAlert\Facades\Alert;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +36,6 @@ Route::group(
     }
 );
 
-
 Route::group(
     [
         'prefix' => 'admin',
@@ -55,17 +53,13 @@ Route::group(
         Route::post('GG', function (Request $request) {
             dd($request->all());
         })->name('GG');
-        Route::get('cancel_request', function (Request $request) {
-            dd($request);
-        })->name('cancel_request');
-
-
-        Route::get('countcar1', [DashboardAdminController::class, 'index']);
+        Route::post('approve', [\App\Http\Controllers\backend\Bookingcontroller::class, 'update'])->name('update');
+        Route::get('countcar1', [DashboardAdminController::class, 'index'])->name('test');
         Route::get('request/{id}', [\App\Http\Controllers\backend\Bookingcontroller::class, 'cancle'])->name('cancle');
     }
 );
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
 

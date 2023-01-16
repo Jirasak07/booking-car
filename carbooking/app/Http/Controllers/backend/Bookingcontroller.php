@@ -130,11 +130,13 @@ class Bookingcontroller extends Controller
 
         return redirect()->back();
     }
-    function update(Request $request, $id)
+    public function update(Request $request)
     {
+        // dd($request->all());
+        $id = $request->id_form;
         $booking_update = BookingModel::find($id);
 
-        $booking_update->license_palte = $request->car_id;
+        $booking_update->license_plate = $request->car_id;
         $booking_update->driver = $request->driver_id;
         $booking_update->type_car = $request->type;
         $booking_update->booking_status = "2";
