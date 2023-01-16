@@ -24,7 +24,7 @@
                                 <div class="text-danger  text-capitalize " style="width: 50px;font-weight:bold">admin</div>
                             </td>
                             <td>
-                                <div class="btn btn-warning btn-sm"><i class="fa-solid fa-user-pen"></i></div>
+                                <div class="btn text-white  btn-sm" style="background-color: #ffb500"><i class="fa-solid fa-user-pen"></i></div>
                             </td>
                         </tr>
                         <tr>
@@ -35,7 +35,7 @@
                                 <div class="text-dark text-capitalize " style="width: 50px;font-weight:bold">user</div>
                             </td>
                             <td>
-                                <div class="btn btn-warning btn-sm"><i class="fa-solid fa-user-pen"></i></div>
+                                <div class="btn text-white bg-yellow btn-sm"><i class="fa-solid fa-user-pen"></i></div>
                             </td>
                         </tr>
                     </tbody>

@@ -92,7 +92,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-default" style="font-weight: 600" href="{{ route('admin.booking_request') }}">
+                    <a class="nav-link text-default" style="font-weight: 600"
+                        href="{{ route('admin.booking_request') }}">
                         <i class="fa-solid fa-calendar-days"></i> {{ __('ข้อมูลการจอง') }} </a>
                     <ul class="sub-menu py-2 ">
                         <li class="nav-item">
@@ -124,19 +125,18 @@
                                 {{ __('จัดการข้อมูลรถภายใน') }}
                             </a>
                         </li>
-
-                        <li class="nav-item">
-                            <a class="{{ 'admin/manage-user' == request()->path() ? 'nav-link-sub text-success ' : 'nav-link-sub text-default ' }}"
-                                style="font-weight: 600" href="{{ route('admin.manage-user') }}">
-                                <i class="fa-sharp fa-solid fa-circle-dot" style="font-size: 50%"></i>
-                                {{ __('จัดการข้อมูลผู้ใช้') }}
-                            </a>
-                        </li>
                         <li class="nav-item">
                             <a class="{{ 'admin/manage-driver' == request()->path() ? 'nav-link-sub text-success ' : 'nav-link-sub text-default ' }}"
                                 style="font-weight: 600" href="{{ route('admin.manage-driver') }}">
                                 <i class="fa-sharp fa-solid fa-circle-dot" style="font-size: 50%"></i>
                                 {{ __('จัดการข้อมูลพนักงานขับ') }}
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="{{ 'admin/manage-user' == request()->path() ? 'nav-link-sub text-success ' : 'nav-link-sub text-default ' }}"
+                                style="font-weight: 600" href="{{ route('admin.manage-user') }}">
+                                <i class="fa-sharp fa-solid fa-circle-dot" style="font-size: 50%"></i>
+                                {{ __('จัดการข้อมูลผู้ใช้') }}
                             </a>
                         </li>
                     </ul>
