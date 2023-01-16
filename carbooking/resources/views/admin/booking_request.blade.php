@@ -110,9 +110,10 @@
                                                 <label for="selectdriver">เลือกพนักงานขับรถ</label>
                                                 <select name="select-driver" id=" selectdriver" class="rounded form-control"
                                                     style="width: 250px;  border:1px solid #6673af30 ">
-                                                  @foreach ($driver as $dv)
-                                                     <option value="{{$dv['id']}}">{{$dv['driver_fullname']}}</option>
-                                                  @endforeach
+                                                    @foreach ($driver as $dv)
+                                                        <option value="{{ $dv['id'] }}">{{ $dv['driver_fullname'] }}
+                                                        </option>
+                                                    @endforeach
 
                                                 </select>
                                             </div>
@@ -129,6 +130,28 @@
                                 </div>
                                 <div class="tab-pane" id="tab2">
                                     <form action="">
+                                        <div class="form-group row mt-2 d-flex flex-column flex-md-row ">
+                                            <div class="col-12 col-md-6"> <label for="out-model">รถ</label>
+                                                <input type="text" id="out-model" class="form-control">
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <label for="out-license">ป้ายทะเบียน</label>
+                                                <input type="text" id="out-license" class="form-control">
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <label for="out-own">เจ้าของรถ</label>
+                                                <input type="text" id="out-own" class="form-control">
+                                            </div>
+                                            <div class="col-12 col-md-6"> <label for="out-tell">เบอร์โทรติดต่อ</label>
+                                                <input type="text" id="out-tell" class="form-control">
+                                            </div>
+
+                                        </div>
+                                        <div class="d-flex justify-content-end mt-2">
+                                            <div class="btn btn-sm btn-success w-25">บันทึก</div>
+                                            <button type="button" class="btn btn-sm btn-outline-danger w-25 "
+                                                data-bs-dismiss="modal" aria-label="Close">ปิด</button>
+                                        </div>
 
                                     </form>
                                 </div>
