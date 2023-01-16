@@ -4,6 +4,7 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\BookingModel;
+use App\Models\CaroutModel;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -137,12 +138,34 @@ class Bookingcontroller extends Controller
     {
         // dd($request->all());
         $id = $request->id_form;
+        $car_out = CaroutModel::array();
+        $car_count = DB::table('tb_out_cars')->count();
         $booking_update = BookingModel::find($id);
-
-        $booking_update->license_plate = $request->car_id;
+        
+        if($request->type_car == 1){
+        $booking_update->license_plate = $request->license_plate;
         $booking_update->driver = $request->driver_id;
         $booking_update->type_car = $request->type;
         $booking_update->booking_status = "2";
+        }else{
+            if($car_count < 1){
+                $car_out->id = 1;
+            $car_out->car_out_license = $request->car_out_license;
+            $car_out->car_out_model = $request->car_out_model;
+            $car_out->driver =$request->car_out_driver;
+            $car_out->car_out_tel = $request->car_out_tel;
+            }else{
+                $car_out->id = $car_count + 1;
+                $car_out->car_out_license = $request->car_out_license;
+                $car_out->car_out_model = $request->car_out_model;
+                $car_out->car_out_tel = $request->car_out_tel;
+                $car_out->save();
+            }
+            $booking_update->license_plate = $request->license_plate;
+            $booking_update->driver = $car_out->car_out_driver;
+            $booking_update->type_car = $request->type_car;
+            $booking_update->booking_status = "2";
+        }
         $booking_update->save();
         return redirect()->back();
     }
