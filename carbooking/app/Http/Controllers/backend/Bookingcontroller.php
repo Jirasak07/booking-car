@@ -18,9 +18,12 @@ class Bookingcontroller extends Controller
     {
         $currentURL = request()->getHttpHost();
         $response = Http::get('http://' . $currentURL . '/index.php/api/booking');
-
         $jsonData = $response->json();
-        return view('admin.booking_request')->with(['booking' => $jsonData]);
+        $responsecar = Http::get('http://' . $currentURL . '/index.php/api/car');
+        $jsonDatacar = $responsecar->json();
+        $responsedriver = Http::get('http://' . $currentURL . '/index.php/api/driver');
+        $jsonDatadriver = $responsedriver->json();
+        return view('admin.booking_request')->with(['booking' => $jsonData,'car' => $jsonDatacar,'driver' => $jsonDatadriver,]);
     }
 
     function booking_user()
