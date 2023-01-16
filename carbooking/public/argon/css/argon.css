@@ -22,7 +22,7 @@
     --pink: #f3a4b5;
     --red: #f5365c;
     --orange: #fb6340;
-    --yellow: #F3B61F;
+    --yellow: #ffa000;
     --green: #2dce89;
     --teal: #11cdef;
     --cyan: #2bffc6;
@@ -13999,7 +13999,7 @@ button.bg-orange:focus {
 }
 
 .bg-yellow {
-    background-color: #ffd600 !important;
+    background-color: #ffa000 !important;
 }
 
 a.bg-yellow:hover,
