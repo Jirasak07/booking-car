@@ -48,16 +48,16 @@ class Bookingcontroller extends Controller
             ->select('car_out_license', 'car_out_model', 'car_out_driver', 'car_out_tel',  'driver_fullname', 'car_license', 'tb_booking.*', 'users.username')
             ->get();
 
-        // $booking_wait = DB::table('tb_booking')
-        //     ->join('users', 'tb_booking.username', '=', 'users.id')
-        //     ->whereIn('tb_booking.username', Auth::user())
-        //     ->orderBy('booking_status')
+        $booking_wait = DB::table('tb_booking')
+            ->join('users', 'tb_booking.username', '=', 'users.id')
+            ->whereIn('tb_booking.username', Auth::user())
+            ->orderBy('booking_status')
 
-        //     ->select('tb_booking.*', 'users.username')
-        //     ->get();
-        // return dd($booking);
+            ->select('tb_booking.*', 'users.username')
+            ->get();
+        return dd($booking);
         //dd($booking);
-        return view('user.booking')->with(['booking' => $booking]);
+        return view('user.booking')->with(['booking' => $booking,'booking2' => $booking_wait]);
     }
 
     public function history()
