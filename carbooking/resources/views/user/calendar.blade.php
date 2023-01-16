@@ -20,6 +20,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
             var bookings = @json($booking);
+            console.log(bookings);
             var g = "1234"
             //console.log(bookings);
             /*console.log(bookings);
@@ -37,8 +38,8 @@
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 //themeSystem: 'bootstrap5',
                 selectable: true,
-                /* timeZone: 'Asia/bangkok',
-                locale: 'th', */
+                timeZone: 'Asia/bangkok',
+                locale: 'th',
                 initialView: 'timeGridFourDay',
                 allDaySlot: false,
                 nowIndicator: true,
