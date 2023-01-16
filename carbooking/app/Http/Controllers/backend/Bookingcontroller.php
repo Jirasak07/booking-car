@@ -72,7 +72,10 @@ class Bookingcontroller extends Controller
         // $response = Http::get('http://'.$currentURL.'/index.php/api/calendar');
 
         // $jsonData = $response->json();
-        $bookings = BookingModel::all();
+        $bookings = DB::table('tb_booking')
+        ->where('booking_status', '=', '2')
+        ->where('booking_status', '=', '3')
+        ->get();
         $events = array();
         foreach ($bookings as $booking) {
             $color = null;
