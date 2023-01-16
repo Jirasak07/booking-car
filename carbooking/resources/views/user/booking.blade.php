@@ -2,7 +2,7 @@
 
 @extends('layouts.user.users')
 @section('content')
-    @include('layouts.user.header')
+    <!--@include('layouts.user.header')-->
     <!-- box header booking pages -->
     <div class="pt-4">
         <div class="container-fluid">

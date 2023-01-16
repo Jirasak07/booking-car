@@ -94,6 +94,7 @@ class Bookingcontroller extends Controller
 
             $events[] = [
                 'id' => $booking->id,
+                'title'=>$booking->booking_detail,
                 'start' => $booking->booking_start,
                 'end' => $booking->booking_end,
                 'type' => $booking->type_car,
