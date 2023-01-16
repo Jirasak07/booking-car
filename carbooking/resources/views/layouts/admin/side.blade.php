@@ -86,8 +86,8 @@
             <!-- Navigation -->
             <ul class="navbar-nav  ">
                 <li class="nav-item ">
-                    <a class="{{ 'admin/dashboard' == request()->path() ? 'nav-link text-success  ' : 'nav-link text-default' }}"
-                        style="font-weight: 600" href="{{ route('admin.dashboard') }}">
+                    <a class="{{ 'admin/dashboard' == request()->path() ? 'nav-link text-success  ' : 'nav-link ' }}"
+                        style="font-weight: 600;" href="{{ route('admin.dashboard') }}">
                         <i class="fa-solid fa-gauge-high "></i> {{ __('Dashboard') }}
                     </a>
                 </li>
@@ -97,7 +97,7 @@
                         <i class="fa-solid fa-calendar-days"></i> {{ __('ข้อมูลการจอง') }} </a>
                     <ul class="sub-menu py-2 ">
                         <li class="nav-item">
-                            <a class="{{ 'admin/request' == request()->path() ? 'nav-link-sub text-success ' : 'nav-link-sub text-default ' }}"
+                            <a class="{{ 'admin/request' == request()->path() ? 'nav-link-sub text-success ' : 'nav-link-sub  ' }}"
                                 style="font-weight: 600" href="{{ route('admin.booking_request') }}">
                                 <i class="fa-sharp fa-solid fa-circle-dot" style="font-size: 50%"></i>
                                 {{ __('รายการจองรถ') }}
@@ -117,9 +117,9 @@
                 <li class="nav-item">
                     <a class="nav-link text-default" style="font-weight: 600" href="{{ route('admin.manage-car') }}">
                         <i class="fa-regular fa-calendar"></i> {{ __('จัดการข้อมูลพื้นฐาน') }} </a>
-                    <ul class="sub-menu py-2">
+                    <ul class="sub-menu py-2 ">
                         <li class="nav-item">
-                            <a class="{{ 'admin/manage-car' == request()->path() ? 'nav-link-sub text-success ' : 'nav-link-sub text-default ' }}"
+                            <a class="{{ 'admin/manage-car' == request()->path() ? 'nav-link-sub text-success ' : 'nav-link-sub text-default  ' }}"
                                 style="font-weight: 600" href="{{ route('admin.manage-car') }}">
                                 <i class="fa-sharp fa-solid fa-circle-dot" style="font-size: 50%"></i>
                                 {{ __('จัดการข้อมูลรถภายใน') }}

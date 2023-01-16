@@ -20424,6 +20424,10 @@ li {
     margin-left: 10px;
     gap: 10px;
     opacity: 0.8;
+    color: var(--default) ;
+}
+a.nav-link-sub:hover{
+    color: var(--green) !important;
 }
 .sub-menu {
     display: flex;
