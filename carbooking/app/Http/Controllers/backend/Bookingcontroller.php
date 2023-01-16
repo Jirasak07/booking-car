@@ -17,13 +17,16 @@ class Bookingcontroller extends Controller
     function index()
     {
         $currentURL = request()->getHttpHost();
-        $response = Http::get('http://' . $currentURL . '/index.php/api/booking');
-        $jsonData = $response->json();
+       
         $responsecar = Http::get('http://' . $currentURL . '/index.php/api/car');
         $jsonDatacar = $responsecar->json();
         $responsedriver = Http::get('http://' . $currentURL . '/index.php/api/driver');
         $jsonDatadriver = $responsedriver->json();
-        return view('admin.booking_request')->with(['booking' => $jsonData, 'car' => $jsonDatacar, 'driver' => $jsonDatadriver,]);
+        $booking_wait = DB::table('tb_booking')
+        ->join('users', 'tb_booking.username', '=', 'users.id')
+        ->select('tb_booking.*', 'users.username','booking_start', 'booking_end')
+        ->get();
+        return view('admin.booking_request')->with(['booking' => $booking_wait, 'car' => $jsonDatacar, 'driver' => $jsonDatadriver,]);
     }
 
     function booking_user()
@@ -57,7 +60,7 @@ class Bookingcontroller extends Controller
             ->get();
         // return dd($booking);
         //dd($booking);
-        return view('user.booking')->with(['booking' => $booking, 'booking2' =>  $booking_wait]);
+        return view('user.booking')->with(['booking' => $booking,'booking2' => $booking_wait]);
     }
 
     public function history()
@@ -124,6 +127,9 @@ class Bookingcontroller extends Controller
         $bookingcar->username = $request->user_id;
         $bookingcar->booking_start = $request->start;
         $bookingcar->booking_end = $request->end;
+        $bookingcar->license_plate = '-';
+        $bookingcar->driver = '-';
+        $bookingcar->type_car = '-';
         $bookingcar->booking_detail = $request->location;
         $bookingcar->booking_status = '1';
         $bookingcar->save();
