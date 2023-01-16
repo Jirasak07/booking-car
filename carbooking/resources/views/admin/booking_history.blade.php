@@ -26,8 +26,8 @@
                             <tr>
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $history['username'] }}</td>
-                                <td>{{ $history['booking_start'] }}</td>
-                                <td> {{ $history['booking_end'] }}</td>
+                                <td>{{ thaidate('l ที่ j F Y เวลา G:i นาที', strtotime($history['booking_start'])) }}</td>
+                                <td>{{ thaidate('l ที่ j F Y เวลา G:i นาที', strtotime($history['booking_end'])) }}</td>
                                 <td>
                                     @if ($history['booking_status'] == 2)
                                         <div class="text-success">{{ __('อนุมัติ') }}</div>

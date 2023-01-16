@@ -26,8 +26,8 @@
                             <tr>
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $bookings['username'] }}</td>
-                                <td>{{ thaidate('l j F Y เวลา G:i', strtotime($bookings['booking_start'])) }}</td>
-                                <td>{{ thaidate('l j F Y เวลา G:i', strtotime($bookings['booking_end'])) }}</td>
+                                <td>{{ thaidate('l ที่ j F Y เวลา G:i นาที', strtotime($bookings['booking_start'])) }}</td>
+                                <td>{{ thaidate('l ที่ j F Y เวลา G:i นาที', strtotime($bookings['booking_end'])) }}</td>
                                 <td>{{ $bookings['booking_detail'] }}</td>
                                 <td>
                                     <div class="btn btn-success btn-sm" onclick="modal({{ $bookings['id'] }})"
@@ -72,7 +72,7 @@
                             <label for="" class="form-label" style="line-height:50%">วันเวลาที่สิ้นสุด</label>
                             </br>
                             <label class=" ml-2" style="font-size: 80%;color:#630606;" for=""
-                                id="end_date">11012543</label>
+                                id="end_date"></label>
                         </div>
                         <div class="col-12 ">
                             <label for="" class="form-label" style="line-height:50%">รายละเอียดการจอง</label>
@@ -94,7 +94,7 @@
 
                             <div class="tab-content">
                                 <div class="tab-pane active" id="tab1">
-                                    <form method="POST" action="{{ route('update') }}">
+                                    <form method="POST" action="{{ route('update') }}" class="d-flex flex-column align-items-center">
                                         @csrf
                                         <input type="hidden" id="idform" name="id_form">
                                         <input type="hidden" name="type" value="1">
@@ -124,7 +124,7 @@
 
 
 
-                                        <div class="d-flex justify-content-end mt-2">
+                                        <div class="d-flex align-self-end justify-content-end w-100 mt-4 ">
                                             <input type="submit" value="บันทึก" class="btn btn-sm btn-success w-25" />
                                             <button type="button" class="btn btn-sm btn-outline-danger w-25 "
                                                 data-bs-dismiss="modal" aria-label="Close">ปิด</button>
@@ -171,6 +171,7 @@
             </div>
         </div>
     </div>
+    <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
     <script>
         $('.nav-tabs a').on('click', function(e) {
             e.preventDefault()
@@ -180,14 +181,20 @@
         function modal(val) {
             // document.getElementById('')
             const data = @json($booking);
-            console.log(data[val - 1])
-            const start = data[val - 1];
-            console.log(start.booking_end);
-            document.getElementById('start_date').innerHTML = start.booking_start
-            document.getElementById('end_date').innerHTML = start.booking_end
-            document.getElementById('detail').innerHTML = start.booking_detail
-            document.getElementById('idform').value = val
+            moment.locale('th');
 
+            const start = data[val - 1];
+            const bookstart = moment(start.booking_start).add(543, 'year').format('ddd ที่ D MMM YY เวลา HH:mm นาที');
+            const bookend = moment(start.booking_end).add(543, 'year').format('ddd ที่ D MMM YY เวลา HH:mm นาที');
+            // console.log(typeof(bookstart));
+            // alert(bookstart);
+            // const da = moment().format('D-MM-YYYY');
+            // console.log(da);
+            document.getElementById('start_date').innerHTML = bookstart;
+            document.getElementById('end_date').innerHTML = bookend;
+            document.getElementById('detail').innerHTML = start.booking_detail;
+            document.getElementById('idform').value = val;
+            // {{ thaidate('l j F Y เวลา G:i', strtotime($bookings['booking_start'])) }}
         }
     </script>
 @endsection
