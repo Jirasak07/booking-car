@@ -15,7 +15,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <h3 class="card-title text-uppercase text-muted mb-0">การจองทั้งหมด</h3>
-                                        <span class="h2 font-weight-bold mb-0">350,897</span>
+                                        <span class="h2 font-weight-bold mb-0">232</span>
                                     </div>
                                     <div class="col-auto">
                                         <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
@@ -23,10 +23,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                {{-- <p class="mt-3 mb-0 text-muted text-sm">
-                                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                                    <span class="text-nowrap">Since last month</span>
-                                </p> --}}
+
                             </div>
                         </div>
                     </div>
@@ -62,10 +59,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                {{-- <p class="mt-3 mb-0 text-muted text-sm">
-                                    <span class="text-warning mr-2"><i class="fas fa-arrow-down"></i> 1.10%</span>
-                                    <span class="text-nowrap">Since yesterday</span>
-                                </p> --}}
+
                             </div>
                         </div>
                     </div>
@@ -75,18 +69,15 @@
                                 <div class="row">
                                     <div class="col">
                                         <h3 class="card-title text-uppercase text-muted mb-0">ดำเนินการเสร็จสิ้น</h3>
-                                        <span class="h2 font-weight-bold mb-0">49,65%</span>
+                                        <span class="h2 font-weight-bold mb-0">49</span>
                                     </div>
                                     <div class="col-auto">
                                         <div class="icon icon-shape bg-info text-white rounded-circle shadow">
-                                            <i class="fas fa-percent"></i>
+                                            <i class="fa-regular fa-circle-check" style="font-size: 24px"></i>
                                         </div>
                                     </div>
                                 </div>
-                                {{--  <p class="mt-3 mb-0 text-muted text-sm">
-                                    <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 12%</span>
-                                    <span class="text-nowrap">Since last month</span>
-                                </p> --}}
+
                             </div>
                         </div>
                     </div>
@@ -96,7 +87,7 @@
     </div>
     <!-- end box header booking pages -->
 
-    
+
     <div class="container-fluid mt-4">
         <div class="row mb-3">
             <div class="col-xl-12">
@@ -119,7 +110,11 @@
                                 <tr align="center">
                                     @if ($item->booking_status == 1)
                                         <td style="font-size: 18px">{{ $i++ }}</td>
-                                        <td style="font-size: 16px">{{ $item->booking_start }} ถึง {{ $item->booking_end }}
+                                        <td style="font-size: 16px">
+                                            @php
+                                                echo thaidate('l j F Y', $item->booking_start) . '&nbsp;ถึง&nbsp;' . thaidate('l j F Y', $item->booking_end);
+                                            @endphp
+
                                         </td>
                                         <td>
                                             <button class="btn btn-neutral btn-sm text-darker"data-toggle="modal"
@@ -141,7 +136,10 @@
                                         </td>
                                     @else
                                         <td style="font-size: 18px">{{ $i++ }}</td>
-                                        <td style="font-size: 16px">{{ $item->booking_start }} ถึง {{ $item->booking_end }}
+                                        <td style="font-size: 16px">
+                                            @php
+                                                echo thaidate('l j F Y', $item->booking_start) . '&nbsp;ถึง&nbsp;' . thaidate('l j F Y', $item->booking_end);
+                                            @endphp
                                         </td>
                                         <td>
                                             <button class="btn btn-neutral btn-sm text-darker"data-toggle="modal"
@@ -169,7 +167,7 @@
                                             <div class="modal-header">
                                                 <h1 class="modal-title fs-5" id="viewdeLabel">แก้ไขรายละเอียดการจอง</h1>
                                                 <button type="button" class="close" data-bs-dismiss="modal"
-                                                    onclick="window.location.reload()" aria-label="Close">
+                                                    {{-- onclick="window.location.reload()" --}} data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
@@ -239,12 +237,12 @@
                                             <div class="modal-header">
                                                 <h1 class="modal-title fs-5" id="viewdeLabel">รายละเอียดการจอง</h1>
                                                 <button type="button" class="close" data-bs-dismiss="modal"
-                                                    onclick="window.location.reload()" aria-label="Close">
+                                                    {{-- onclick="window.location.reload()" --}} data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                {{ $item->id }}
+                                                {{-- $item->id --}}
                                                 @if ($item->booking_status == 1)
                                                     <div class="row mb-3">
                                                         <label for=""
@@ -253,6 +251,12 @@
                                                             <input type="text" disabled value="{{ $item->username }}"
                                                                 readonly class="form-control-plaintext" id="user_book"
                                                                 name="user_book">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-3">
+                                                        <label class="col-sm-2 col-form-label">สถานะการจอง</label>
+                                                        <div class="col-sm-10">
+                                                            <label class=" text-danger form-control-plaintext">กำลังดำเนินการ</label>
                                                         </div>
                                                     </div>
                                                     <div class="row mb-1">
@@ -289,6 +293,12 @@
                                                             <input type="text" disabled value="{{ $item->username }}"
                                                                 readonly class="form-control-plaintext" id="user_book"
                                                                 name="user_book">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-3">
+                                                        <label class="col-sm-2 col-form-label">สถานะการจอง</label>
+                                                        <div class="col-sm-10">
+                                                            <label class=" text-green form-control-plaintext">ดำเนินการเสร็จสิ้น</label>
                                                         </div>
                                                     </div>
                                                     <div class="row mb-1">
@@ -349,6 +359,12 @@
                                                                 name="user_book">
                                                         </div>
                                                     </div>
+                                                    <div class="row mb-3">
+                                                        <label class="col-sm-2 col-form-label">สถานะการจอง</label>
+                                                        <div class="col-sm-10">
+                                                            <label class=" text-danger form-control-plaintext">ยกเลิกการจอง</label>
+                                                        </div>
+                                                    </div>
                                                     <div class="row mb-1">
                                                         <label for=""
                                                             class="col-sm-2 col-form-label">ช่วงวันที่</label>
@@ -402,7 +418,7 @@
                                             <div class="modal-footer">
                                                 <button type="button"
                                                     class="btn btn-primary text-uppercase"data-bs-dismiss="modal"
-                                                    onclick="window.location.reload()">ok</button>
+                                                    {{-- onclick="window.location.reload()" --}} data-dismiss="modal">ok</button>
                                             </div>
                                         </div>
                                     </div>
