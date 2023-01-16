@@ -26,8 +26,8 @@
                             <tr>
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $bookings['username'] }}</td>
-                                <td>{{ date('d-M-Y', strtotime($bookings['booking_start'])) }}</td>
-                                <td>{{ $bookings['booking_end'] }}</td>
+                                <td>{{ thaidate('l j F Y เวลา G:i', strtotime($bookings['booking_start'])) }}</td>
+                                <td>{{ thaidate('l j F Y เวลา G:i', strtotime($bookings['booking_end'])) }}</td>
                                 <td>{{ $bookings['booking_detail'] }}</td>
                                 <td>
                                     <div class="btn btn-success btn-sm" onclick="modal({{ $bookings['id'] }})"
