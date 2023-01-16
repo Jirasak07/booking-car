@@ -55,7 +55,7 @@ class Bookingcontroller extends Controller
 
             ->select('tb_booking.*', 'users.username')
             ->get();
-        return dd($booking);
+        // return dd($booking);
         //dd($booking);
         return view('user.booking')->with(['booking' => $booking,'booking2' => $booking_wait]);
     }
