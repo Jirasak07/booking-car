@@ -73,8 +73,8 @@ class Bookingcontroller extends Controller
 
         // $jsonData = $response->json();
         $bookings = DB::table('tb_booking')
-        ->where('booking_status', '=', '2')
-        ->where('booking_status', '=', '3')
+        ->where('booking_status', '!=', '1')
+        
         ->get();
         $events = array();
         foreach ($bookings as $booking) {
