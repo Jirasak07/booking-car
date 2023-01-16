@@ -24,7 +24,7 @@ class Bookingcontroller extends Controller
         $jsonDatadriver = $responsedriver->json();
         $booking_wait = DB::table('tb_booking')
         ->join('users', 'tb_booking.username', '=', 'users.id')
-        ->select('tb_booking.*', 'users.username','booking_start', 'booking_end')
+        ->select('tb_booking.*', 'users.username',)
         ->get();
         return view('admin.booking_request')->with(['booking' => $booking_wait, 'car' => $jsonDatacar, 'driver' => $jsonDatadriver,]);
     }
