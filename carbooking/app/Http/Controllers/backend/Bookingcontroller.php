@@ -51,6 +51,7 @@ class Bookingcontroller extends Controller
             $booking_wait = DB::table('tb_booking')
             ->join('users', 'tb_booking.username', '=', 'users.id')
             ->whereIn('tb_booking.username', Auth::user())
+            ->orderBy('booking_status')
 
             ->select( 'tb_booking.*', 'users.username')
             ->get();
