@@ -125,7 +125,7 @@ class Bookingcontroller extends Controller
         $bookingcar->booking_start = $request->start;
         $bookingcar->booking_end = $request->end;
         $bookingcar->license_plate = '-';
-        $bookingcar->dirver = '-';
+        $bookingcar->driver = '-';
         $bookingcar->type_car = '-';
         $bookingcar->booking_detail = $request->location;
         $bookingcar->booking_status = '1';
