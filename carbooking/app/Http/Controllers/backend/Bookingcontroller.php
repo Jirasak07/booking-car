@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use illuminate\auth\SessionGuard;
+
 class Bookingcontroller extends Controller
 {
     //
@@ -17,13 +18,17 @@ class Bookingcontroller extends Controller
     {
         $currentURL = request()->getHttpHost();
         $response = Http::get('http://' . $currentURL . '/index.php/api/booking');
-
         $jsonData = $response->json();
-        return view('admin.booking_request')->with(['booking' => $jsonData]);
+        $responsecar = Http::get('http://' . $currentURL . '/index.php/api/car');
+        $jsonDatacar = $responsecar->json();
+        $responsedriver = Http::get('http://' . $currentURL . '/index.php/api/driver');
+        $jsonDatadriver = $responsedriver->json();
+        return view('admin.booking_request')->with(['booking' => $jsonData,'car' => $jsonDatacar,'driver' => $jsonDatadriver,]);
     }
 
-    function booking_user(){
-        
+    function booking_user()
+    {
+
 
         // $User_booking = DB::table('Users')
         // ->whereIn('Users.id', Auth::Users()->id)
@@ -32,19 +37,26 @@ class Bookingcontroller extends Controller
         // ->get();
 
         $booking = DB::table('tb_booking')
-        
-        ->join('Users', 'tb_booking.username', '=', 'Users.id')
-        
-        ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
-        ->join('tb_out_cars', 'tb_booking.license_plate', '=', 'tb_out_cars.id')
-        ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
-        ->whereIn('Users.id', Auth::Users()->id)
-        
-        ->select( 'car_out_license', 'car_out_model', 'car_out_driver', 'car_out_tel',  'driver_fullname', 'car_license','tb_booking.*' ,'Username')
-        ->get();
+
+            ->join('users', 'tb_booking.username', '=', 'users.id')
+
+            ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
+            ->join('tb_out_cars', 'tb_booking.license_plate', '=', 'tb_out_cars.id')
+            ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
+            ->whereIn('tb_booking.username', Auth::user())
+
+            ->select('car_out_license', 'car_out_model', 'car_out_driver', 'car_out_tel',  'driver_fullname', 'car_license', 'tb_booking.*', 'users.username')
+            ->get();
+
+            $booking_wait = DB::table('tb_booking')
+            ->join('users', 'tb_booking.username', '=', 'users.id')
+            ->whereIn('tb_booking.username', Auth::user())
+
+            ->select( 'tb_booking.*', 'users.username')
+            ->get();
         // return dd($booking);
-        
-        return view('user.booking')->with(['booking' => $booking]);
+        //dd($booking);
+        return view('user.booking')->with(['booking' => $booking,'booking2' =>  $booking_wait]);
     }
 
     public function history()
@@ -63,7 +75,10 @@ class Bookingcontroller extends Controller
         // $response = Http::get('http://'.$currentURL.'/index.php/api/calendar');
 
         // $jsonData = $response->json();
-        $bookings = BookingModel::all();
+        $bookings = DB::table('tb_booking')
+        ->where('booking_status', '!=', '1')
+        
+        ->get();
         $events = array();
         foreach ($bookings as $booking) {
             $color = null;
@@ -94,21 +109,24 @@ class Bookingcontroller extends Controller
         $canclebooking->save();
         return redirect()->back();
     }
-    function store(Request $request){
+    function store(Request $request)
+    {
+        //dd($request->all());
         $bookingcar = new BookingModel();
+        $cnt_booking = $bookingcar->count();
         
-        
+        if ($cnt_booking < 1) {
+            $bookingcar->id =1;
+        } else {
+            $bookingcar->id = $cnt_booking +1;
+        }
         $bookingcar->username = $request->user_id;
-        $bookingcar->booking_start = $request->date_start;
-        $bookingcar->booking_end = $request->date_end;
+        $bookingcar->booking_start = $request->start;
+        $bookingcar->booking_end = $request->end;
         $bookingcar->booking_detail = $request->location;
         $bookingcar->booking_status = '1';
         $bookingcar->save();
 
         return redirect()->back();
-
-
-
-
     }
 }

@@ -20,6 +20,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
             var bookings = @json($booking);
+            console.log(bookings);
             var g = "1234"
             //console.log(bookings);
             /*console.log(bookings);
@@ -42,12 +43,14 @@
                 initialView: 'timeGridFourDay',
                 allDaySlot: false,
                 nowIndicator: true,
+                timeFormat: 'HH:mm',
+                //hour12: false,
                 titleFormat: {
                     month: 'long',
                     year: 'numeric',
                     day: 'numeric',
                     //weekday: 'long',
-                    hour12: 'false',
+
                     css: 'font-size:20px'
                 },
                 headerToolbar: {
@@ -57,37 +60,6 @@
                 },
 
                 events: bookings,
-                /* eventDidMount: function(info) {
-                        //console.log(bookings);
-                        var re=[];
-                        for (let i = 0; i < bookings.length; i++) {
-                            re[i] = bookings[i].type;
-                            switch (re[i]) {
-                                case '1':
-                                    console.log('red' + re);
-                                    break;
-                                case '2':
-                                    console.log('black' + re);
-                                    break;
-                            }
-                           if (re[i] == '1') {
-                                console.log('red'+re[i]);
-                            } else if (re[i] == '2') {
-
-
-
-                        }
-                    },} */
-                /*  eventAfterAllRender: function(view) {
-                     $('.fc-event').each(function() {
-                         var event = $(this).data('event');
-                         if (event.type === '1') {
-                             $(this).css('background-color', 'green');
-                         } else if (event.type === '2') {
-                             $(this).css('background-color', 'blue');
-                         }
-                     });
-                 }, */
 
                 views: {
                     timeGridFourDay: {
@@ -111,36 +83,34 @@
                 },
 
                 select: function(info) {
-                    var booking_start = moment(info.startStr).format('YYYY-MM-DD hh:mm:ss');
-                    var booking_end = moment(info.endStr).format('YYYY-MM-DD hh:mm:ss');
+                    var booking_start = moment(info.startStr).format('YYYY-MM-DD hh:mm:ss a');
+                    var booking_end = moment(info.endStr).format('YYYY-MM-DD hh:mm:ss a');
+                    var booking_s = moment(info.startStr).format('YYYY-MM-DD hh:mm:ss');
+                    var booking_e = moment(info.endStr).format('YYYY-MM-DD hh:mm:ss');
                     /* var time_start = moment(info.startStr).format('LTS');
                     var time_end = moment(info.endStr).format('LTS'); */
-                    var today = new Date().toISOString().split('T')[0];
+                    //var today = new Date().toISOString().split('T')[0];
                     console.log(today);
                     $('#bookingModal').modal('toggle');
                     document.getElementById('booking_start').innerHTML = booking_start;
                     document.getElementById('booking_end').innerHTML = booking_end;
-
-                    document.getElementById('date_start').value = booking_start;
-                    document.getElementById('date_end').value = booking_end;
+                    document.getElementById('start').value = booking_start;
+                    document.getElementById('end').value = booking_end;
+                    document.getElementById('date_start').value = booking_s;
+                    document.getElementById('date_end').value = booking_e;
 
                     //tag input datetime-local เลือกวันย้อนหลังไม่ได้
                     var now_utc = Date.now() // 지금 날짜를 밀리초로
                     // getTimezoneOffset()은 현재 시간과의 차이를 분 단위로 반환
-                    var timeOff = new Date().getTimezoneOffset() * 60000; // 분단위를 밀리초로 변환
+                    //var timeOff = new Date().getTimezoneOffset() * 60000; // 분단위를 밀리초로 변환
                     // new Date(today-timeOff).toISOString()은 '2022-05-11T18:09:38.134Z'를 반환
-                    var today = new Date(now_utc - timeOff).toISOString().substring(0, 16);
+                    var today = new Date(now_utc).toISOString().substring(0, 16);
                     //close tag input datetime-local
 
                     document.getElementById("date_start").setAttribute("min", today);
                     document.getElementById("date_end").setAttribute("min", today);
 
-                    $('#saveBooking').click(function() {
-                        var booking_start = info.startStr;
-                        var booking_end = info.endStr;
-                        var name = $('#name').val();
 
-                    });
                 }
 
             });
@@ -172,8 +142,9 @@
                             <label class="plaintext" id="booking_start" name="booking_start"></label>
                         </div>
                         <div class="col-md-3">
-                            <input type="datetime{{-- -local --}}" data-date="" class="form-control" {{-- data-date-format="DD MM YYYY hh:mm:ss" --}}
-                                name="date_start" id="date_start">
+                            <input type="hidden" name="start" id="start" value="">
+                            <input type="datetime" data-date="" class="form-control"
+                                data-date-format="DD MM YYYY hh:mm:ss" name="date_start" id="date_start">
 
                         </div>
                         <br />
@@ -185,7 +156,8 @@
                             <label class="plaintext" id="booking_end" name="booking_end"></label>
                         </div>
                         <div class="col-md-3">
-                            <input type="datetime{{-- -local --}}" data-date="" class="form-control"
+                            <input type="hidden" name="end" id="end">
+                            <input type="datetime" data-date="" class="form-control"
                                 data-date-format="DD MM YYYY hh:mm:ss" id="date_end" name="date_end">
                         </div>
                         <br />
