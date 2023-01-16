@@ -3,7 +3,100 @@
 @extends('layouts.user.users')
 @section('content')
     @include('layouts.user.header')
-    @include('layouts.user.hea-booking')
+    <!-- box header booking pages -->
+    <div class="pt-4">
+        <div class="container-fluid">
+            <div class="">
+                <!-- Card stats -->
+                <div class="row">
+                    <div class="col-xl-3 col-lg-6">
+                        <div class="card card-stats mb-4 mb-xl-0">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <h3 class="card-title text-uppercase text-muted mb-0">การจองทั้งหมด</h3>
+                                        <span class="h2 font-weight-bold mb-0">350,897</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                                            <i class="fa-solid fa-calendar-check"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- <p class="mt-3 mb-0 text-muted text-sm">
+                                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                                    <span class="text-nowrap">Since last month</span>
+                                </p> --}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6">
+                        <div class="card card-stats mb-4 mb-xl-0">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <h3 class="card-title text-uppercase text-muted mb-0">ยกเลิการจอง</h3>
+                                        <span class="h2 font-weight-bold mb-0">2,356</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
+                                            <i class="fa-solid fa-ban"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6">
+                        <div class="card card-stats mb-4 mb-xl-0">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <h3 class="card-title text-uppercase text-muted mb-0">กำลังดำเนินการ</h3>
+                                        <span class="h2 font-weight-bold mb-0">924</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
+                                            <i class="fa-regular fa-calendar-days"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- <p class="mt-3 mb-0 text-muted text-sm">
+                                    <span class="text-warning mr-2"><i class="fas fa-arrow-down"></i> 1.10%</span>
+                                    <span class="text-nowrap">Since yesterday</span>
+                                </p> --}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6">
+                        <div class="card card-stats mb-4 mb-xl-0">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <h3 class="card-title text-uppercase text-muted mb-0">ดำเนินการเสร็จสิ้น</h3>
+                                        <span class="h2 font-weight-bold mb-0">49,65%</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon icon-shape bg-info text-white rounded-circle shadow">
+                                            <i class="fas fa-percent"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{--  <p class="mt-3 mb-0 text-muted text-sm">
+                                    <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 12%</span>
+                                    <span class="text-nowrap">Since last month</span>
+                                </p> --}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end box header booking pages -->
+
+    
     <div class="container-fluid mt-4">
         <div class="row mb-3">
             <div class="col-xl-12">
@@ -29,30 +122,30 @@
                                         <td style="font-size: 16px">{{ $item->booking_start }} ถึง {{ $item->booking_end }}
                                         </td>
                                         <td>
-                                            <button class="btn btn-neutral btn-sm text-darker" data-bs-toggle="modal"
-                                                data-bs-target="#viewde" data-id="{{ $item->id }}">
+                                            <button class="btn btn-neutral btn-sm text-darker"data-toggle="modal"
+                                                data-target="#viewde{{ $item->id }}">
                                                 <i class="fa-solid fa-eye"></i>
                                             </button>
                                         </td>
                                         <td>
                                             @if ($item->booking_status == '1')
-                                                <button class="btn btn-yellow btn-sm" style="font-size: 14px">กำลังดำเนินการ</button>
+                                                <button class="btn bg-yellow btn-sm"
+                                                    style="font-size: 14px;color:#393E46">กำลังดำเนินการ</button>
                                             @endif
                                         </td>
                                         <td>
-                                            @if ($item->booking_status == '1')
-                                                <button class="btn btn-danger btn-sm" style="font-size: 13px"
-                                                    onclick="alertCancel(3)">ยกเลิก</button>
-                                            @else
-                                            @endif
+                                            <button class="btn btn-yellow btn-sm me-2" style="font-size: 13px"
+                                                data-toggle="modal" data-target="#editde{{ $item->id }}">แก้ไข</button>
+                                            <button class="btn btn-danger btn-sm" style="font-size: 13px"
+                                                onclick="alertCancel(3)">ยกเลิก</button>
                                         </td>
                                     @else
                                         <td style="font-size: 18px">{{ $i++ }}</td>
                                         <td style="font-size: 16px">{{ $item->booking_start }} ถึง {{ $item->booking_end }}
                                         </td>
                                         <td>
-                                            <button class="btn btn-neutral btn-sm text-darker" data-bs-toggle="modal"
-                                                data-bs-target="#viewde" data-id="{{ $item->id }}">
+                                            <button class="btn btn-neutral btn-sm text-darker"data-toggle="modal"
+                                                data-target="#viewde{{ $item->id }}">
                                                 <i class="fa-solid fa-eye"></i>
                                             </button>
                                         </td>
@@ -67,68 +160,263 @@
                                         <td></td>
                                     @endif
                                 </tr>
+
+                                <div class="modal fade" id="editde{{ $item->id }}" data-bs-backdrop="static"
+                                    data-bs-keyboard="false" tabindex="-1" aria-labelledby="viewdeLabel"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                                        <div class="modal-content ">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="viewdeLabel">แก้ไขรายละเอียดการจอง</h1>
+                                                <button type="button" class="close" data-bs-dismiss="modal"
+                                                    onclick="window.location.reload()" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <form method="POST" action="{{ route('user.edit.booking') }}">
+                                                @csrf
+                                                <div class="modal-body">
+                                                    <input type="hidden" name="id" id="id"
+                                                        value="{{ $item->id }}" />
+                                                    <div class="row mb-3">
+                                                        <label for=""
+                                                            class="col-sm-2 col-form-label">ชื่อผู้จอง</label>
+                                                        <div class="col-sm-10">
+                                                            <input type="text" disabled value="{{ $item->username }}"
+                                                                readonly class="form-control-plaintext" id="username"
+                                                                name="username">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row mb-3">
+                                                        <label for=""
+                                                            class="col-sm-2 col-form-label">ช่วงวันที่</label>
+                                                        <div class="col-sm-10">
+                                                            <div class="row g-3">
+                                                                <div class="col-md-5">
+                                                                    <input type="datetime-local" name="booking_start"
+                                                                        data-date-format="DD MM YYYY hh:mm:ss"
+                                                                        id="booking_start"
+                                                                        value="{{ $item->booking_start }}"
+                                                                        class="form-control">
+                                                                </div>
+                                                                <div class="col-md-5">
+                                                                    <input type="datetime-local" name="booking_end"
+                                                                        data-date-format="DD MM YYYY hh:mm:ss"
+                                                                        id="booking_end" value="{{ $item->booking_end }}"
+                                                                        class="form-control">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-3">
+                                                        <label class="col-sm-3 col-form-label">รายละเอียดการจอง</label>
+                                                        <div class="col-sm-9">
+                                                            <textarea name="booking_detail" id="booking_detail" cols="30" rows="3" class="form-control">{{ $item->booking_detail }}</textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <input type="submit" name="saveBooking" value="ยืนยัน"
+                                                        id="EditBooking" class="btn btn-primary">
+                                                    <button type="button"
+                                                        class="btn grey btn-danger"data-bs-dismiss="modal"
+                                                        {{-- onclick="window.location.reload()" --}}
+                                                        data-dismiss="modal">{{ __('ย้อนกลับ') }}</button>
+                                                </div>
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {{-- modal view detail --}}
+                                <div class="modal fade" id="viewde{{ $item->id }}" data-bs-backdrop="static"
+                                    data-bs-keyboard="false" tabindex="-1" aria-labelledby="viewdeLabel"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                                        <div class="modal-content ">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="viewdeLabel">รายละเอียดการจอง</h1>
+                                                <button type="button" class="close" data-bs-dismiss="modal"
+                                                    onclick="window.location.reload()" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                {{ $item->id }}
+                                                @if ($item->booking_status == 1)
+                                                    <div class="row mb-3">
+                                                        <label for=""
+                                                            class="col-sm-2 col-form-label">ชื่อผู้จอง</label>
+                                                        <div class="col-sm-10">
+                                                            <input type="text" disabled value="{{ $item->username }}"
+                                                                readonly class="form-control-plaintext" id="user_book"
+                                                                name="user_book">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-1">
+                                                        <label for=""
+                                                            class="col-sm-2 col-form-label">ช่วงวันที่</label>
+                                                        <div class="col-sm-10">
+                                                            <input type="text" disabled
+                                                                value="{{ $item->booking_start }} ถึง {{ $item->booking_end }}"
+                                                                readonly class="form-control-plaintext" id="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-1">
+                                                        <label for=""
+                                                            class="col-sm-3 col-form-label">รายละเอียดรถและคนขับ</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" disabled value="-" readonly
+                                                                class="form-control-plaintext" id="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-1">
+                                                        <label for=""
+                                                            class="col-sm-3 col-form-label">รายละเอียดการจอง</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" disabled
+                                                                value="{{ $item->booking_detail }}" readonly
+                                                                class="form-control-plaintext" id="">
+                                                        </div>
+                                                    </div>
+                                                @elseif ($item->booking_status == 2)
+                                                    <div class="row mb-3">
+                                                        <label for=""
+                                                            class="col-sm-2 col-form-label">ชื่อผู้จอง</label>
+                                                        <div class="col-sm-10">
+                                                            <input type="text" disabled value="{{ $item->username }}"
+                                                                readonly class="form-control-plaintext" id="user_book"
+                                                                name="user_book">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-1">
+                                                        <label for=""
+                                                            class="col-sm-2 col-form-label">ช่วงวันที่</label>
+                                                        <div class="col-sm-10">
+                                                            <input type="text" disabled
+                                                                value="{{ $item->booking_start }} ถึง {{ $item->booking_end }}"
+                                                                readonly class="form-control-plaintext" id="">
+                                                        </div>
+                                                    </div>
+                                                    @foreach ($booking as $data)
+                                                        @if ($data->id == $item->id)
+                                                            <div class="row mb-1">
+                                                                <label for=""
+                                                                    class="col-sm-3 col-form-label">รายละเอียดรถและคนขับ</label>
+                                                                <div class="col-sm-8">
+                                                                    @php
+                                                                        if ($item->type_car == 1) {
+                                                                            $type = 'รถภายในบริษัท';
+                                                                        } else {
+                                                                            $type = 'รถภายนอกบริษัท';
+                                                                        }
+                                                                        
+                                                                        if ($item->type_car == 1) {
+                                                                            $driver = $data->driver_fullname;
+                                                                            $car = $data->car_license;
+                                                                        } else {
+                                                                            $driver = $data->car_out_driver . ' ' . $data->car_out_tel;
+                                                                            $car = $data->car_out_license . ' ' . $data->car_out_model;
+                                                                        }
+                                                                    @endphp
+
+                                                                    <textarea name="" id="" cols="30" rows="3" readonly class="form-control-plaintext">
+คนขับรถ {{ $driver }}
+รถที่ใช้เดินทาง {{ $type }} {{ $car }}
+                                                                    </textarea>
+                                                                </div>
+                                                            </div>
+                                                        @endif
+                                                    @endforeach
+                                                    <div class="row mb-1">
+                                                        <label for=""
+                                                            class="col-sm-3 col-form-label">รายละเอียดการจอง</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" disabled
+                                                                value="{{ $item->booking_detail }}" readonly
+                                                                class="form-control-plaintext" id="">
+                                                        </div>
+                                                    </div>
+                                                @else
+                                                    <div class="row mb-3">
+                                                        <label for=""
+                                                            class="col-sm-2 col-form-label">ชื่อผู้จอง</label>
+                                                        <div class="col-sm-10">
+                                                            <input type="text" disabled value="{{ $item->username }}"
+                                                                readonly class="form-control-plaintext" id="user_book"
+                                                                name="user_book">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-1">
+                                                        <label for=""
+                                                            class="col-sm-2 col-form-label">ช่วงวันที่</label>
+                                                        <div class="col-sm-10">
+                                                            <input type="text" disabled
+                                                                value="{{ $item->booking_start }} ถึง {{ $item->booking_end }}"
+                                                                readonly class="form-control-plaintext" id="">
+                                                        </div>
+                                                    </div>
+                                                    @foreach ($booking as $data)
+                                                        @if ($data->id == $item->id)
+                                                            <div class="row mb-1">
+                                                                <label for=""
+                                                                    class="col-sm-3 col-form-label">รายละเอียดรถและคนขับ</label>
+                                                                <div class="col-sm-8">
+                                                                    @php
+                                                                        if ($item->type_car == 1) {
+                                                                            $type = 'รถภายในบริษัท';
+                                                                        } else {
+                                                                            $type = 'รถภายนอกบริษัท';
+                                                                        }
+                                                                        
+                                                                        if ($item->type_car == 1) {
+                                                                            $driver = $data->driver_fullname;
+                                                                            $car = $data->car_license;
+                                                                        } else {
+                                                                            $driver = $data->car_out_driver . ' ' . $data->car_out_tel;
+                                                                            $car = $data->car_out_license . ' ' . $data->car_out_model;
+                                                                        }
+                                                                    @endphp
+
+                                                                    <textarea name="" id="" cols="30" rows="3" readonly class="form-control-plaintext">
+คนขับรถ {{ $driver }}
+รถที่ใช้เดินทาง {{ $type }} {{ $car }}
+                                                                </textarea>
+                                                                </div>
+                                                            </div>
+                                                        @endif
+                                                    @endforeach
+                                                    <div class="row mb-1">
+                                                        <label for=""
+                                                            class="col-sm-3 col-form-label">รายละเอียดการจอง</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" disabled
+                                                                value="{{ $item->booking_detail }}" readonly
+                                                                class="form-control-plaintext" id="">
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button"
+                                                    class="btn btn-primary text-uppercase"data-bs-dismiss="modal"
+                                                    onclick="window.location.reload()">ok</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- end modal view detail --}}
                             @endforeach
-                            
+
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
 
-        <!-- Modal view detail -->
-        <div class="modal fade" id="viewde" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="viewdeLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content ">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="viewdeLabel">รายละเอียดการจอง</h1>
-                        <button type="button" class="close" data-bs-dismiss="modal" {{-- onclick="window.location.reload()" --}}
-                            aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
 
-
-                        {{-- <div class="row mb-3">
-                            <label for="" class="col-sm-2 col-form-label">ชื่อผู้จอง</label>
-                            <div class="col-sm-10">
-                                <input type="text" disabled value="ตัวแปรชื่อผู้จอง" readonly
-                                    class="form-control-plaintext" id="user_book" name="user_book">
-                            </div>
-                        </div>
-                        <div class="row mb-1">
-                            <label for="" class="col-sm-2 col-form-label">ช่วงวันที่</label>
-                            <div class="col-sm-10">
-                                <input type="text" disabled value="วันที่เดินทางไป ถึง วันที่เดินทางกลับ" readonly
-                                    class="form-control-plaintext" id="">
-                            </div>
-                        </div>
-                        <div class="row mb-1">
-                            <label for="" class="col col-form-label">รายละเอียดรถและคนขับ</label>
-                        </div>
-                        <div class="d-flex justify-content-end mb-3">
-                            <input type="text" disabled value="ทะเบียนรถ ยี่ห้อและชื่อคนขับ" readonly
-                                class="form-control-plaintext" id="user_book" name="user_book">
-                        </div>
-                        <div class="row mb-1">
-                            <label for="" class="col col-form-label">รายละเอียดการจอง</label>
-                        </div>
-                        <div class="row mb-3">
-                            <textarea type="text" class="form-control-plaintext" disabled readonly id="location" name="location">
-                                -สถานที่การเดินทาง
-                                -ชื่อผู้ร่วมเดินทาง
-                            </textarea>
-                        </div> --}}
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary text-uppercase"data-bs-dismiss="modal"
-                            {{-- onclick="window.location.reload()" --}}>ok</button>
-                    </div>
-                </div>
-            </div>
-        </div>
         @push('js')
             <script>
                 function alertCancel(id) {
@@ -175,21 +463,6 @@
                     }, function(dismiss) {
                         return false;
                     })
-                    /*Swal.fire({
-                        icon: 'question',
-                        text: 'คุณต้องการยกเลิกการจองคอวรถนี้ใช่หรือไม่',
-                        showCancelButton: true,
-                        confirmButtonText: 'ใช่',
-                        cancelButtonText: 'ยกเลิก',
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-
-                            Swal.fire('ยกเลิกการจองสำเร็จ', '', 'success')
-                        } /* else if (result.isDenied) {
-                            Swal.fire('Changes are not saved', '', 'info')
-                        } */
                 }
             </script>
         @endpush
