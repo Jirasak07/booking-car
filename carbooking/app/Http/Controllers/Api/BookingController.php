@@ -39,5 +39,14 @@ class BookingController extends Controller
         return response()->json($events);
     }
 
-   
+    function pageupdate(){
+        $booking = DB::table('tb_booking')
+     
+        ->join('users', 'tb_booking.username', '=', 'users.id')
+        ->select( 'tb_booking.*','users.username')
+        ->get();
+    
+        return response()->json($booking);
+
+    }
 }
