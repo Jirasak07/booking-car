@@ -93,7 +93,7 @@
             <div class="col-xl-12">
                 <div class="card shadow-sm p-3 overflow-auto">
 
-                    <table class="overflow-auto table table-hover fw-bold table-responsive-xl" id="booking_table">
+                    <table class="overflow-auto table table-hover fw-bold table-responsive-xl text-center" id="booking_table">
                         <thead class="table-light">
                             <tr align="center">
                                 <th class="fw-bolder" style="font-size: 18px">ลำดับ</th>
