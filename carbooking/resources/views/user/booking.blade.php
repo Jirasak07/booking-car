@@ -2,10 +2,10 @@
 
 @extends('layouts.user.users')
 @section('content')
-    @include('layouts.user.header')
+    <!--@include('layouts.user.header')-->
     <!-- box header booking pages -->
-    <div class="pt-4">
-        <div class="container-fluid">
+    <div class="pt-5">
+        <div class="container-fluid mt-5">
             <div class="">
                 <!-- Card stats -->
                 <div class="row">
@@ -92,7 +92,8 @@
         <div class="row mb-3">
             <div class="col-xl-12">
                 <div class="card shadow-sm p-3 overflow-auto">
-                    <table class="overflow-auto table table-hover fw-bold table-responsive-xl">
+
+                    <table class="overflow-auto table table-hover fw-bold table-responsive-xl" id="booking_table">
                         <thead class="table-light">
                             <tr align="center">
                                 <td class="fw-bolder" style="font-size: 18px">ลำดับ</td>
@@ -256,7 +257,8 @@
                                                     <div class="row mb-3">
                                                         <label class="col-sm-2 col-form-label">สถานะการจอง</label>
                                                         <div class="col-sm-10">
-                                                            <label class=" text-danger form-control-plaintext">กำลังดำเนินการ</label>
+                                                            <label
+                                                                class=" text-danger form-control-plaintext">กำลังดำเนินการ</label>
                                                         </div>
                                                     </div>
                                                     <div class="row mb-1">
@@ -298,7 +300,8 @@
                                                     <div class="row mb-3">
                                                         <label class="col-sm-2 col-form-label">สถานะการจอง</label>
                                                         <div class="col-sm-10">
-                                                            <label class=" text-green form-control-plaintext">ดำเนินการเสร็จสิ้น</label>
+                                                            <label
+                                                                class=" text-green form-control-plaintext">ดำเนินการเสร็จสิ้น</label>
                                                         </div>
                                                     </div>
                                                     <div class="row mb-1">
@@ -362,7 +365,8 @@
                                                     <div class="row mb-3">
                                                         <label class="col-sm-2 col-form-label">สถานะการจอง</label>
                                                         <div class="col-sm-10">
-                                                            <label class=" text-danger form-control-plaintext">ยกเลิกการจอง</label>
+                                                            <label
+                                                                class=" text-danger form-control-plaintext">ยกเลิกการจอง</label>
                                                         </div>
                                                     </div>
                                                     <div class="row mb-1">
@@ -434,7 +438,7 @@
 
 
         @push('js')
-            <script>
+        <script>
                 function alertCancel(id) {
                     swal.fire({
                         title: "Cancel?",

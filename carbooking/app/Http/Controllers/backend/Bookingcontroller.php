@@ -79,21 +79,22 @@ class Bookingcontroller extends Controller
         // $jsonData = $response->json();
         $bookings = DB::table('tb_booking')
             ->where('booking_status', '!=', '1')
-
+            ->where('booking_status', '!=', '3')
             ->get();
         $events = array();
         foreach ($bookings as $booking) {
             $color = null;
             if ($booking->type_car == '1') {
-                $color = '#00FF7F';
+                $color = '#59CE8F';
             }
 
             if ($booking->type_car == '2') {
-                $color = '#FF9900';
+                $color = '#D36B00';
             }
 
             $events[] = [
                 'id' => $booking->id,
+                'title'=>$booking->booking_detail,
                 'start' => $booking->booking_start,
                 'end' => $booking->booking_end,
                 'type' => $booking->type_car,
