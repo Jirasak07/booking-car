@@ -47,9 +47,10 @@ class DashboardAdminController extends Controller
             ->where('type_car', '=', 1)
             ->where('booking_status', '=', 3)->count();
 
-        $bookingcar1 = DB::table('tb_booking') //จำนวนรถภายในคันที่1 ทั้งหมด
-            ->where('license_plate', '=', 1)
-            ->where('type_car', '=', 1)->count();
+        $bookingcarin = DB::table('tb_booking') //จำนวนรถภายในคันที่1 ทั้งหมด
+            ->select(DB::raw('COUNT(id) suppercarcare'))
+            ->where('type_car', '=', 1)
+            ->groupBy('license_plate')->count();
 
         $bookingcar2 = DB::table('tb_booking') //จำนวนรถภายในคันที่2 ทั้งหมด
             ->where('license_plate', '=', 2)
@@ -87,7 +88,7 @@ class DashboardAdminController extends Controller
         // $data = BookingModel::all()->Groupby("MONTH(booking_start)")->count('id');
         //    return dd($data);
 
-        return view('admin.dashboard')->with(['data2' => $data2,'data1' => $data1,'allcar1'=>$allcar1,'allcar2'=>$allcar2, 'bookingcarAllin' => $bookingcarAllin, 'bookingcarAllout' => $bookingcarAllout, 'car' => $car, 'allbook' => $allbooking, 'pending' => $pending, 'approve' => $approve, 'cancel' => $cancel])
+        return view('admin.dashboard')->with(['data2' => $data2,'data1' => $data1,'allcar1'=>$allcar1,'allcar2'=>$allcar2, 'bookingcarAllin' => $bookingcarAllin, 'bookingcarAllout' => $bookingcarAllout, 'car' => $car, 'allbook' => $allbooking, 'pending' => $pending, 'approve' => $approve, 'cancel' => $cancel,'bookingcarin'=>$bookingcarin ])
 
         ;
     }
