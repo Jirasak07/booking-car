@@ -55,7 +55,7 @@
                                     </div>
                                     <div class="col-auto">
                                         <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
-                                            <i class="fa-regular fa-calendar-days"></i>
+                                            <i class="fa-solid fa-hourglass-start"></i>
                                         </div>
                                     </div>
                                 </div>
