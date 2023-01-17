@@ -2,33 +2,24 @@
 @section('content')
     @include('layouts.admin.header')
     <div class="container-sm mt-3 ">
+        <div class="mx-5 my-3 text-default" style="font-weight: 700;font-size:1.2rem"> รายการจอง</div>
         <div class="d-flex flex-xl-row flex-column mx-3   " style="gap: 10px;min-height:120px">
+
             <div class="w-100 m-dash">
-                <div class=" h-100 booking-all d-flex flex-row align-items-center" style="min-height:120px">
+                <div class=" rounded h-100 booking-all d-flex flex-row align-items-center" style="min-height:120px">
                     <div class="h-100 col text-white icon-d-2  icon-circle">
                         <i class="fa-solid fa-clipboard-list  icon-dashboard "></i>
                     </div>
                     <div class="col d-flex flex-column align-items-center text-white">
-                        <div class="text-white ">รายการจองทั้งหมด</div>
-                        <div style="font-size: 4rem;line-height: 80%;"id="all" >0</div>
+                        <div class="text-white ">ทั้งหมด</div>
+                        <div style="font-size: 4rem;line-height: 80%;"id="all">0</div>
                         <div>รายการ</div>
                     </div>
                 </div>
             </div>
-            <div class="w-100  m-dash">
-                <div class="text-white h-100 confirm d-flex flex-row align-items-center"style="min-height:120px">
 
-                    <div class="h-100  col icon-d-2 icon-circle  "><i class="fa-solid fa-circle-check icon-dashboard "></i>
-                    </div>
-                    <div class="col  d-flex flex-column align-items-center  ">
-                        <div>อนุมัติแล้ว</div>
-                        <div style="font-size: 4rem;line-height: 80%;" id="approve">0</div>
-                        <div>รายการ</div>
-                    </div>
-                </div>
-            </div>
             <div class="w-100  m-dash">
-                <div class="  h-100 pending  d-flex flex-row align-items-center " style="min-height:120px">
+                <div class=" rounded h-100 pending  d-flex flex-row align-items-center " style="min-height:120px">
                     <div class="h-100 col icon-d-2 icon-circle  "> <i class="fa-solid fa-hourglass-end icon-dashboard "></i>
                     </div>
                     <div class="col text-white d-flex flex-column align-items-center">
@@ -39,9 +30,23 @@
                 </div>
             </div>
             <div class="w-100  m-dash">
-                <div class=" bg-danger h-100 w-100 cancel  d-flex flex-row align-items-center" style="min-height:120px">
+                <div class="rounded text-white h-100 confirm d-flex flex-row align-items-center"style="min-height:120px">
 
-                    <div class="h-100 icon-d-2 icon-circle col"><i class="fa-solid fa-circle-xmark icon-dashboard "></i>
+                    <div class="h-100  col icon-d-2 icon-circle  "><i class="fa-solid fa-circle-check icon-dashboard "></i>
+                    </div>
+                    <div class="col  d-flex flex-column align-items-center  ">
+                        <div>อนุมัติแล้ว</div>
+                        <div style="font-size: 4rem;line-height: 80%;" id="approve">0</div>
+                        <div>รายการ</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-100  m-dash">
+                <div class=" bg-danger rounded h-100 w-100 cancel  d-flex flex-row align-items-center"
+                    style="min-height:120px">
+
+                    <div class=" h-100 icon-d-2 icon-circle col"><i class="fa-solid fa-circle-xmark icon-dashboard "></i>
                     </div>
                     <div class="col text-white d-flex flex-column align-items-center ">
                         <div>ยกเลิกแล้ว</div>
@@ -53,17 +58,18 @@
         </div>
         <div class=" d-flex flex-column justify-content-between flex-lg-row pb-2  w-100">
             <div class="mt-3   col-12 col-lg-8 ">
-                <canvas class="bg-white  w-100 h-100 " style=" max-height: 420px;" id="Chart"></canvas>
+                <canvas class="bg-white rounded  w-100 h-100 " style=" max-height: 420px;" id="Chart"></canvas>
             </div>
             <div class="mt-3  col-12 col-lg-4">
-                <canvas class=" bg-white  w-100 " style=" max-height: 420px;" id="myChart"></canvas>
+                <canvas class=" bg-white rounded  w-100 " style=" max-height: 420px;" id="myChart"></canvas>
             </div>
         </div>
         <div class="d-flex flex-column justify-content-center align-items-center mb-3 ">
             <div class="flex-column flex-lg-row d-flex justify-content-between  w-100  ">
                 @foreach ($car as $cars)
                     <div class="col-12 col-lg  mt-3 w-100 ">
-                        <div class=" bg-info  d-flex flex-row p-2 m-dash " style="min-height: 120px;">
+                        <div class="  rounded d-flex flex-row p-2 m-dash "
+                            style="min-height: 120px;background-image: linear-gradient( 110.7deg,  rgba(255,81,47,1) 1.7%, rgba(255,167,47,1) 8.2%, rgba(218,253,1,1) 16.2%, rgba(98,234,20,1) 23.4%, rgba(69,193,42,1) 32.8%, rgba(7,249,149,1) 43.7%, rgba(6,200,217,1) 55.3%, rgba(18,51,233,1) 65.5%, rgba(122,59,202,1) 74.5%, rgba(231,7,249,1) 82.3%, rgba(202,59,163,1) 91.4% );">
 
                             <div class="logo-car  col-6 text-white" style="font-size: 6rem;line-height:80%;"><i
                                     class="fa-solid fa-car-rear "></i></div>
