@@ -20,5 +20,10 @@ class UserBookingController extends Controller
         return redirect()->back();
     }
 
-    
+    function unapprove($id){
+        $unapprove = BookingModel::find($id);
+        $unapprove->booking_status = '3';
+        $unapprove->save();
+        return redirect()->back();
+    }
 }
