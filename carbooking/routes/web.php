@@ -52,7 +52,7 @@ Route::group(
         Route::get('manage-driver/{id}', [DriverController::class, 'changestatus'])->name('driverstatus');
         Route::get('manage-car', [CarsController::class, 'index'])->name('admin.manage-car');
         Route::get('manage-car/{id}', [CarsController::class, 'changestatus'])->name('changestatus');
-        Route::get('manage-user', [\App\Http\Controllers\frontend\AdminController::class, 'manageUser'])->name('admin.manage-user');
+        Route::get('manage-user', [\App\Http\Controllers\backend\ManagementAdminController::class, 'index'])->name('admin.manage-user');
         Route::get('history', [\App\Http\Controllers\backend\Bookingcontroller::class, 'history'])->name('admin.booking_history');
         Route::post('GG', function (Request $request) {
             dd($request->all());
@@ -69,4 +69,4 @@ Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->nam
 Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
 
 Route::get('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
-Route::get('countcar1/{id}', [UserBookingController::class, 'show_booking'])->name('test');
+Route::get('countcar1', [DashboardAdminController::class, 'index'])->name('test');

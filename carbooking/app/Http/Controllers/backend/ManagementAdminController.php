@@ -12,9 +12,12 @@ class ManagementAdminController extends Controller
     //
     function index(){
         $user = User::all();
+        
         return view('admin.manage_user',['user'=> $user]);
 
     }
+
+
     function edit_role($id){
         $user = User::find($id);
         if($user->role_user == 1){

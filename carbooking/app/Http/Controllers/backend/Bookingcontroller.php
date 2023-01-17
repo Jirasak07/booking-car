@@ -147,35 +147,46 @@ class Bookingcontroller extends Controller
     {
         // dd($request->all());
         $id = $request->id_form;
-        $car_out = CaroutModel::array();
-        $car_count = DB::table('tb_out_cars')->count();
+     
         $booking_update = BookingModel::find($id);
         
-        if($request->type_car == 1){
+        
         $booking_update->license_plate = $request->license_plate;
         $booking_update->driver = $request->driver_id;
         $booking_update->type_car = $request->type;
         $booking_update->booking_status = "2";
+        
+        $booking_update->save();
+        return redirect()->back();
+    
+    }
+     function updateout(Request $request,$id){
+        $id = $request->id_form;
+     
+        $booking_update = BookingModel::find($id);
+        $car_out = new CaroutModel;
+        $car_count = DB::table('tb_out_cars')->count();
+  
+        if($car_count < 1){
+            $car_out->id = 1;
+        $car_out->car_out_license = $request->car_out_license;
+        $car_out->car_out_model =$request->brand +  $request->car_out_model;
+        $car_out->driver =$request->car_out_driver;
+        $car_out->car_out_tel = $request->car_out_tel;
         }else{
-            if($car_count < 1){
-                $car_out->id = 1;
+            $car_out->id = $car_count + 1;
             $car_out->car_out_license = $request->car_out_license;
-            $car_out->car_out_model = $request->car_out_model;
-            $car_out->driver =$request->car_out_driver;
-            $car_out->car_out_tel = $request->car_out_tel;
-            }else{
-                $car_out->id = $car_count + 1;
-                $car_out->car_out_license = $request->car_out_license;
-                $car_out->car_out_model = $request->car_out_model;
-                $car_out->car_out_tel = $request->car_out_tel;
-                $car_out->save();
-            }
-            $booking_update->license_plate = $request->license_plate;
+            $car_out->car_out_model =$request->brand +  $request->car_out_model  ;
             $booking_update->driver = $car_out->car_out_driver;
-            $booking_update->type_car = $request->type_car;
-            $booking_update->booking_status = "2";
+            $car_out->car_out_tel = $request->car_out_tel;
+            $car_out->save();
         }
+        $booking_update->license_plate = $request->license_plate;
+        $booking_update->driver = $car_out->car_out_driver;
+        $booking_update->type_car = $request->type_car;
+        $booking_update->booking_status = "2";
         $booking_update->save();
         return redirect()->back();
     }
-}
+    
+    }

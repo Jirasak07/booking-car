@@ -16,10 +16,11 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($user as $Users)
                         <tr>
                             <td>1</td>
-                            <td>tr-Jirasak Singhabutr</td>
-                            <td>tr-jirasaks@lanna.com</td>
+                            <td>{{$Users->username}}</td>
+                            <td>{{$Users->email}}</td>
                             <td>
                                 <div class="btn-group dropend">
                                     <button type="button" class="btn btn-secondary">
@@ -34,7 +35,7 @@
                                     </ul>
                                 </div>
                             </td>
-
+                        </tr> @endforeach
                     </tbody>
                 </table>
             </div>
