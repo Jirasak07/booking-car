@@ -15,7 +15,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <h3 class="card-title text-uppercase text-muted mb-0">การจองทั้งหมด</h3>
-                                        <span class="h2 font-weight-bold mb-0">232</span>
+                                        <span class="h2 font-weight-bold mb-0">{{ $Alllist }}</span>
                                     </div>
                                     <div class="col-auto">
                                         <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
@@ -33,7 +33,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <h3 class="card-title text-uppercase text-muted mb-0">ยกเลิการจอง</h3>
-                                        <span class="h2 font-weight-bold mb-0">2,356</span>
+                                        <span class="h2 font-weight-bold mb-0">{{ $Alllistcancle }}</span>
                                     </div>
                                     <div class="col-auto">
                                         <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
@@ -51,7 +51,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <h3 class="card-title text-uppercase text-muted mb-0">กำลังดำเนินการ</h3>
-                                        <span class="h2 font-weight-bold mb-0">924</span>
+                                        <span class="h2 font-weight-bold mb-0">{{ $Alllistpending }}</span>
                                     </div>
                                     <div class="col-auto">
                                         <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
@@ -69,7 +69,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <h3 class="card-title text-uppercase text-muted mb-0">ดำเนินการเสร็จสิ้น</h3>
-                                        <span class="h2 font-weight-bold mb-0">49</span>
+                                        <span class="h2 font-weight-bold mb-0">{{ $Alllistapprove }}</span>
                                     </div>
                                     <div class="col-auto">
                                         <div class="icon icon-shape bg-info text-white rounded-circle shadow">
@@ -133,7 +133,7 @@
                                             <button class="btn btn-yellow btn-sm me-2" style="font-size: 13px"
                                                 data-toggle="modal" data-target="#editde{{ $item->id }}">แก้ไข</button>
                                             <button class="btn btn-danger btn-sm" style="font-size: 13px"
-                                                onclick="alertCancel(3)">ยกเลิก</button>
+                                                onclick="alertCancel({{ $item->id }})">ยกเลิก</button>
                                         </td>
                                     @else
                                         <td style="font-size: 18px">{{ $i++ }}</td>
@@ -438,13 +438,50 @@
 
 
         @push('js')
-        <script>
+            <script>
                 function alertCancel(id) {
-                    swal.fire({
-                        title: "Cancel?",
+                    //alert(id)
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'OK',
+                        cancelButtonText: 'Cancel'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+                            console.log('comfirm');
+                            $.ajax({
+                                type: 'GET',
+                                url: "{{ url('/users/cancel') }}/" + id,
+                                data: {
+                                    _token: CSRF_TOKEN
+                                },
+                                dataType: 'JSON',
+                                success: function(data) {
+                                    // Remove row from HTML Table
+                                    Swal.fire(
+                                        'Deleted!',
+                                        'Your file has been deleted.',
+                                        'success');
+                                    window.location.reload();
+                                },
+                               
+                            });
+                            /* Swal.fire(
+                                'Deleted!',
+                                'Your file has been deleted.',
+                                'success'
+                            ) */
+                        }
+                    })
+                    /* swal.fire({
                         icon: 'question',
                         text: "คุณต้องการยกเลิกการจองคิวรถนี้ใช่หรือไม่",
-                        /* type: "warning", */
+                        type: "warning", 
                         showCancelButton: !0,
                         confirmButtonText: "ใช่",
                         cancelButtonText: "ไม่",
@@ -457,14 +494,14 @@
                             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
                             $.ajax({
-                                type: 'POST',
+                                type: 'GET',
                                 url: "{{ url('/users/cancel') }}/" + id,
                                 data: {
                                     _token: CSRF_TOKEN
                                 },
                                 dataType: 'JSON',
                                 success: function(results) {
-                                    if (results.success === true) {
+                                    if (results.success == true) {
                                         swal.fire("Done!", results.message, "success");
                                         // refresh page after 2 seconds
                                         setTimeout(function() {
@@ -482,7 +519,7 @@
 
                     }, function(dismiss) {
                         return false;
-                    })
+                    })  */
                 }
             </script>
         @endpush

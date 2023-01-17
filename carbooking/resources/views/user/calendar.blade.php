@@ -181,7 +181,7 @@
     </div>
 </div>
 
-<div class="container-fluid pt-5">
+<div class="container-fluid pt-4">
     {{-- <label class=" text-lighter">{{ Auth::user()->id }}</label> --}}
     <div id='calendar' {{-- class="table-responsive" --}}></div>
 </div>

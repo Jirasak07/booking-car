@@ -4,6 +4,7 @@ use App\Http\Controllers\backend\DashboardAdminController;
 use App\Http\Controllers\CarsController;
 use App\Http\Controllers\DriverController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +35,7 @@ Route::group(
         Route::get('booking', [\App\Http\Controllers\backend\Bookingcontroller::class, 'booking_user'])->name('users.view-booking');
         Route::post('user/send', [\App\Http\Controllers\backend\Bookingcontroller::class, 'store'])->name('sendRe');
         Route::post('edit', [\App\Http\Controllers\backend\UserBookingcontroller::class, 'edit_booking'])->name('user.edit.booking');
+        Route::get('cancel/{id}',[\App\Http\Controllers\backend\Bookingcontroller::class,'cancle'])->name('users.booking_cancel');
     }
 );
 
