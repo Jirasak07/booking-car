@@ -29,7 +29,7 @@
 
                     <div class="dropdown-divider"></div>
                     <a href="{{ route('logout') }}" class="dropdown-item">
-                        <i class="ni ni-user-run"></i>
+                        <i class="fa-solid fa-right-from-bracket"></i>
                         <span>{{ __('Logout') }}</span>
                     </a>
                 </div>
