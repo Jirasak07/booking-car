@@ -70,13 +70,15 @@
                     <div class="col-12 col-lg  mt-3 w-100 ">
                         <div class=" p-1 rounded d-flex flex-row  m-dash info-car " style="height: 110px;">
 
-                            <div class="logo-car  col text-white d-flex flex-column align-items-center justify-content-center" style="margin:0;">
-                                <i class="fa-solid fa-car-rear icon-car-dashboard my-1 " style="font-size: 4rem;" ></i>
+                            <div class="logo-car  col text-white d-flex flex-column align-items-center justify-content-center"
+                                style="margin:0;">
+                                <i class="fa-solid fa-car-rear icon-car-dashboard my-1 " style="font-size: 4rem;"></i>
                                 <div class="lc_car text-white" style="font-size: 0.8em;font-weight:500;">
                                     {{ $cars['car_license'] }}</div>
                             </div>
                             <div class="title-cars col">
-                                <div class="brand-car text-white text-capitalize" style="font-size: 0.8em;font-weight:500;line-height:100%">
+                                <div class="brand-car text-white text-capitalize"
+                                    style="font-size: 0.8em;font-weight:500;line-height:100%">
                                     {{ $cars['car_model'] }}</div>
 
                                 <div class="res_car  ml-3 text-white" style="font-size:3rem;line-height:80%;"
@@ -88,17 +90,14 @@
                 @endforeach
             </div>
         </div>
-        <div class="card mx-3 mb-5" id="container-calen" >
+        <div class="card mx-3 mb-5" id="container-calen">
             @include('admin.calendar_show')
         </div>
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const countcar = @json($data);
-            console.log(countcar);
             var allbook = @json($allbook);
             var car = @json($car);
-            console.log(car);
             var total_car = 1;
             $('#tcar-1').html(total_car);
             const ctx = document.getElementById('myChart');
