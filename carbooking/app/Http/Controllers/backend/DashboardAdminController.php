@@ -73,10 +73,8 @@ class DashboardAdminController extends Controller
         // $data = BookingModel::all()->Groupby("MONTH(booking_start)")->count('id');
     //    return dd($data);
         
-        return view('admin.dashboard')
-        ->with(compact($data))
-        ->with(compact($bookingcarAllin))
-        ->with(compact($bookingcarAllout))
+        return view('admin.dashboard')->with(['data)'=>$data],['bookingcarAllin)'=>$bookingcarAllin],['bookingcarAllout)'=>$bookingcarAllout])
+
         ;
     }
 

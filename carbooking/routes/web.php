@@ -51,7 +51,7 @@ Route::group(
         Route::get('manage-driver/{id}', [DriverController::class, 'changestatus'])->name('driverstatus');
         Route::get('manage-car', [CarsController::class, 'index'])->name('admin.manage-car');
         Route::get('manage-car/{id}', [CarsController::class, 'changestatus'])->name('changestatus');
-        Route::get('manage-user', [App\Http\Controllers\frontend\AdminController::class, 'manageUser'])->name('admin.manage-user');
+        Route::get('manage-user', [\App\Http\Controllers\frontend\AdminController::class, 'manageUser'])->name('admin.manage-user');
         Route::get('history', [\App\Http\Controllers\backend\Bookingcontroller::class, 'history'])->name('admin.booking_history');
         Route::post('GG', function (Request $request) {
             dd($request->all());
