@@ -18,7 +18,7 @@ class BookingController extends Controller
         ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
         ->select( 'car_out_license', 'car_out_model', 'car_out_driver', 'car_out_tel',  'driver_fullname', 'car_license','tb_booking.*')
         ->get();
-    
+
         return response()->json($booking);
 
     }
@@ -41,12 +41,16 @@ class BookingController extends Controller
 
     function pageupdate(){
         $booking = DB::table('tb_booking')
-     
+
         ->join('users', 'tb_booking.username', '=', 'users.id')
         ->select( 'tb_booking.*','users.username')
         ->get();
-    
+
         return response()->json($booking);
 
+    }
+    function showhistory(){
+        $data = DB::table('tb_booking')->join('users', 'tb_booking.username', '=', 'users.id')->select('tb_booking.id', 'users.name', 'booking_start', 'booking_end', 'booking_status')->get();
+        return response()->json($data);
     }
 }

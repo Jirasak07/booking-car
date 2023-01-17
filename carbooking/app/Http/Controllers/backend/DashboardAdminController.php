@@ -3,13 +3,10 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\BookingModel;
 use App\Models\CarModel;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
-
-use function PHPSTORM_META\type;
 
 class DashboardAdminController extends Controller
 {
@@ -66,29 +63,29 @@ class DashboardAdminController extends Controller
             ->select(DB::raw('COUNT(id) data'), DB::raw('YEAR(booking_start) year, MONTH(booking_start) month'))
             ->groupByraw('YEAR(booking_start)')
             ->groupByraw('MONTH(booking_start)')
-            ->where('booking_status',2)
-            ->where('type_car',1)
+            ->where('booking_status', 2)
+            ->where('type_car', 1)
             ->get();
         $data2 = DB::table('tb_booking') //จำนวนการจองแยกตามเดือน ปี ทั้งหมด
             ->select(DB::raw('COUNT(id) data'), DB::raw('YEAR(booking_start) year, MONTH(booking_start) month'))
             ->groupByraw('YEAR(booking_start)')
             ->groupByraw('MONTH(booking_start)')
-            ->where('booking_status',2)
-            ->where('type_car',2)
+            ->where('booking_status', 2)
+            ->where('type_car', 2)
             ->get();
-        $allcar1 = DB::table('tb_booking')->select(DB::raw('COUNT(id) allcar1'))->where('booking_status',2)->where('type_car',1)->get();
-        $allcar2 = DB::table('tb_booking')->select(DB::raw('COUNT(id) allcar2'))->where('booking_status',2)->where('type_car',2)->get();
+        $allcar1 = DB::table('tb_booking')->select(DB::raw('COUNT(id) allcar1'))->where('booking_status', 2)->where('type_car', 1)->get();
+        $allcar2 = DB::table('tb_booking')->select(DB::raw('COUNT(id) allcar2'))->where('booking_status', 2)->where('type_car', 2)->get();
         $car = CarModel::All();
-        $allbooking = BookingModel::count();
-        $pending = BookingModel::where('booking_status', 1)->count();
-        $approve = BookingModel::where('booking_status', 2)->count();
-        $cancel = BookingModel::where('booking_status', 3)->count();
+        $allbooking = DB::table('tb_booking')->count('id');
+        $pending = DB::table('tb_booking')->where('booking_status', '=', 1)->count('id');
+        $approve = DB::table('tb_booking')->where('booking_status', '=', 2)->count('id');
+        $cancel = DB::table('tb_booking')->where('booking_status', '=', 3)->count('id');
         //return view('admin.dashboard')->with(['car' => $car,'allbook'=>$allbooking,'pending'=>$pending ,'approve'=>$approve ,'cancel'=>$cancel]);
 
         // $data = BookingModel::all()->Groupby("MONTH(booking_start)")->count('id');
         //  return dd($bookingcarin);
 
-        return view('admin.dashboard')->with(['data2' => $data2,'data1' => $data1,'allcar1'=>$allcar1,'allcar2'=>$allcar2, 'bookingcarAllin' => $bookingcarAllin, 'bookingcarAllout' => $bookingcarAllout, 'car' => $car, 'allbook' => $allbooking, 'pending' => $pending, 'approve' => $approve, 'cancel' => $cancel,'bookingcarin'=>$bookingcarin ])
+        return view('admin.dashboard')->with(['data2' => $data2, 'data1' => $data1, 'allcar1' => $allcar1, 'allcar2' => $allcar2, 'bookingcarAllin' => $bookingcarAllin, 'bookingcarAllout' => $bookingcarAllout, 'car' => $car, 'allbook' => $allbooking, 'pending' => $pending, 'approve' => $approve, 'cancel' => $cancel, 'bookingcarin' => $bookingcarin])
 
         ;
     }

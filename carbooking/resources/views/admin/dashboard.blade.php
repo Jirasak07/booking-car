@@ -100,6 +100,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             var allbook = @json($allbook);
             var car = @json($car);
+            console.log(car);
             var allcar1 = @json($allcar1);
             var allcar2 = @json($allcar2);
             console.log(allcar1[0].allcar1);
