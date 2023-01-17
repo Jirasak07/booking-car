@@ -1,5 +1,5 @@
 @section('title', 'ข้อมูลการจอง')
-
+<link href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet">
 @extends('layouts.layout')
 @section('content')
     @include('layouts.header')
@@ -96,11 +96,11 @@
                     <table class="overflow-auto table table-hover fw-bold table-responsive-xl" id="booking_table">
                         <thead class="table-light">
                             <tr align="center">
-                                <td class="fw-bolder" style="font-size: 18px">ลำดับ</td>
-                                <td class="fw-bolder" style="font-size: 18px">ช่วงวันที่</td>
-                                <td class="fw-bolder" style="font-size: 18px">รายละเอียดการจอง</td>
-                                <td class="fw-bolder" style="font-size: 18px">สถานะการจอง</td>
-                                <td class="fw-bolder" style="font-size: 18px">จัดการ</td>
+                                <th class="fw-bolder" style="font-size: 18px">ลำดับ</th>
+                                <th class="fw-bolder" style="font-size: 18px">ช่วงวันที่</th>
+                                <th class="fw-bolder" style="font-size: 18px">รายละเอียดการจอง</th>
+                                <th class="fw-bolder" style="font-size: 18px">สถานะการจอง</th>
+                                <th class="fw-bolder" style="font-size: 18px">จัดการ</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -438,7 +438,13 @@
 
 
         @push('js')
+            <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+
             <script>
+                $(document).ready(function() {
+                    $('#booking_table').DataTable();
+                });
+
                 function alertCancel(id) {
                     //alert(id)
                     Swal.fire({
