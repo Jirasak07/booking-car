@@ -58,13 +58,14 @@ class Bookingcontroller extends Controller
             ->get();
         // return dd($booking);
         //dd($booking);
-        $Alllist = DB::table('tb_booking')->count();
+        $Alllist = DB::table('tb_booking')
+        ->whereIn('tb_booking.username', Auth::user())->count();
         $Alllistpending = DB::table('tb_booking')
-        ->where('booking_status', '=', '1');
+        ->whereIn('tb_booking.username', Auth::user())->where('booking_status', '=', '1');
         $Alllistapprove = DB::table('tb_booking')
-        ->where('booking_status', '=', '2');
+        ->whereIn('tb_booking.username', Auth::user())->where('booking_status', '=', '2');
         $Alllistcancle = DB::table('tb_booking')
-        ->where('booking_status', '=', '3');
+        ->whereIn('tb_booking.username', Auth::user())->where('booking_status', '=', '3');
         return view('user.booking')->with(['booking' => $booking,'booking2' => $booking_wait,'Alllist' => $Alllist,'Alllistpending' => $Alllistpending,'Alllistapprove' => $Alllistapprove,'Alllistcancle' => $Alllistcancle]);
     }
 
