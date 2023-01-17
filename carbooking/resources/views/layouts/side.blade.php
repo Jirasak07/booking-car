@@ -24,7 +24,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
                     <div class=" dropdown-header noti-title">
-                        <h6 class="text-overflow m-0">{{ __('Welcome!') }}</h6>
+                        <h6 class="text-overflow m-0">{{ Auth::user()->name }}</h6>
                     </div>
 
                     <div class="dropdown-divider"></div>
@@ -77,10 +77,10 @@
                             <i class="fa-solid fa-gauge-high "></i> {{ __('Dashboard') }}
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-default" style="font-weight: 600"
-                            href="{{ route('users.view-booking',Auth::user()->id) }}">
-                            <i class="fa-solid fa-calendar-days"></i> {{ __('ข้อมูลการจอง') }} 
+                    <li class="nav-item ">
+                        <a class="{{ 'users/booking' == request()->path() ? 'nav-link text-success  ' : 'nav-link ' }}"
+                            style="font-weight: 600;" href="{{ route('users.view-booking', Auth::user()->id) }}">
+                            <i class="fa-solid fa-calendar-days"></i> {{ __('ข้อมูลการจอง') }}
                         </a>
                     </li>
                 </ul>
