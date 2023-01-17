@@ -57,7 +57,14 @@ class DashboardAdminController extends Controller
         $bookingcarAllout =DB::table('tb_booking')
         ->where('type_car' ,'=', 2)->count();
       
-        $data = BookingModel::all()->Groupby("MONTH(booking_start)")->count('id');
+        $data = DB::table('tb_booking')
+        ->select(DB::raw('COUNT(id) data'),DB::raw('YEAR(booking_start) year, MONTH(booking_start) month'))
+        ->groupByraw('YEAR(booking_start)')
+        ->groupByraw('MONTH(booking_start)')
+        ->get();
+
+               
+        // $data = BookingModel::all()->Groupby("MONTH(booking_start)")->count('id');
        return dd($data);
         
         // return view('admin.dashboard');
