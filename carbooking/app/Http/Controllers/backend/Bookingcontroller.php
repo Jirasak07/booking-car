@@ -118,7 +118,7 @@ class Bookingcontroller extends Controller
         $canclebooking = BookingModel::find($id);
         $canclebooking->booking_status = ('3');
         $canclebooking->save();
-        return redirect()->back();
+        return redirect()->back()->with('success','เรียบร้อย');
     }
     function store(Request $request)
     {

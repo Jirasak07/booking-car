@@ -55,7 +55,7 @@ Route::group(
             dd($request->all());
         })->name('GG');
         Route::post('approve', [\App\Http\Controllers\backend\Bookingcontroller::class, 'update'])->name('update');
-        Route::get('countcar1', [DashboardAdminController::class, 'index'])->name('test');
+        
         Route::get('request/{id}', [\App\Http\Controllers\backend\Bookingcontroller::class, 'cancle'])->name('cancle');
     }
 );
@@ -65,3 +65,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
 
 Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+Route::get('countcar1', [DashboardAdminController::class, 'index'])->name('test');

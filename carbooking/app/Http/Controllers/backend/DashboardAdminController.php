@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\BookingModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use PHPUnit\TextUI\XmlConfiguration\Group;
 
 class DashboardAdminController extends Controller
 {
@@ -54,8 +56,9 @@ class DashboardAdminController extends Controller
 
         $bookingcarAllout =DB::table('tb_booking')
         ->where('type_car' ,'=', 2)->count();
-       
-       return dd($date);
+      
+        $data = BookingModel::all()->Groupby("MONTH(booking_start)")->count('id');
+       return dd($data);
         
         // return view('admin.dashboard');
     }
