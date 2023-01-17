@@ -14,8 +14,6 @@ class CarsController extends Controller
       $response = Http::get('http://'.$currentURL.'/index.php/api/car');
 
       $jsonData = $response->json();
-
-
         return view('admin.manage_car')->with(['car' => $jsonData]);
     }
 
@@ -28,7 +26,7 @@ class CarsController extends Controller
 
       if($car->car_status == 1){
         $car->car_status = ('2');
-       
+
         $car->save();
       }elseif($car->car_status == 2){
         $car->car_status = ('1');
