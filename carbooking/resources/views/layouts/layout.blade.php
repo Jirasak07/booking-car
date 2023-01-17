@@ -48,9 +48,9 @@
             </form>
 
         @endauth --}}
-    @include('layouts.admin.side')
+    @include('layouts.side')
     <div class="main-content">
-        @include('layouts.admin.nav')
+        @include('layouts.nav')
 
         @yield('content')
 

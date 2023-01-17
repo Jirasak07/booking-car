@@ -1,6 +1,8 @@
-@extends('layouts.admin.admin')
+@section('title', 'Dashboard')
+
+@extends('layouts.layout')
 @section('content')
-    @include('layouts.admin.header')
+    @include('layouts.header')
     <div class="container mt-3 ">
         <div class="mx-5 my-3 text-default" style="font-weight: 700;font-size:1.2rem"> รายการจอง</div>
         <div class="d-flex flex-xl-row flex-column mx-3   " style="gap: 10px;min-height:120px">
