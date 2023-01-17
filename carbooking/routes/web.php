@@ -35,7 +35,7 @@ Route::group(
         Route::get('booking', [\App\Http\Controllers\backend\Bookingcontroller::class, 'booking_user'])->name('users.view-booking');
         Route::post('user/send', [\App\Http\Controllers\backend\Bookingcontroller::class, 'store'])->name('sendRe');
         Route::post('edit', [\App\Http\Controllers\backend\UserBookingcontroller::class, 'edit_booking'])->name('user.edit.booking');
-        Route::get('cancel/{id}',[\App\Http\Controllers\backend\Bookingcontroller::class,'cancle'])->name('users.booking_cancel');
+        Route::get('cancel/{id}', [\App\Http\Controllers\backend\Bookingcontroller::class, 'cancle'])->name('users.booking_cancel');
     }
 );
 
@@ -56,8 +56,9 @@ Route::group(
         Route::post('GG', function (Request $request) {
             dd($request->all());
         })->name('GG');
+
         Route::post('approve', [\App\Http\Controllers\backend\Bookingcontroller::class, 'update'])->name('update');
-        
+
         Route::get('request/{id}', [\App\Http\Controllers\backend\Bookingcontroller::class, 'cancle'])->name('cancle');
     }
 );
@@ -65,6 +66,5 @@ Route::group(
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
-
-Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+Route::get('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 Route::get('countcar1', [DashboardAdminController::class, 'index'])->name('test');
