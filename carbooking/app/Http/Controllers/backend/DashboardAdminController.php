@@ -19,7 +19,7 @@ class DashboardAdminController extends Controller
         
         $date = Carbon::now()->format('d-m-Y H:i:s');
         // // dd($date);
-        $bookingcar1ad =DB::table('tb_booking')
+        $bookingcar1ad =DB::table('tb_booking')//
         ->where('license_plate' ,'=', 1)
         ->where('type_car' ,'=', 1)
         ->where('booking_status','=', 2)->count();
