@@ -4,6 +4,7 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\BookingModel;
+use App\Models\CarModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -65,12 +66,17 @@ class DashboardAdminController extends Controller
         ->groupByraw('YEAR(booking_start)')
         ->groupByraw('MONTH(booking_start)')
         ->get();
-
+        $car = CarModel::All();
+        $allbooking = BookingModel::count();
+        $pending = BookingModel::where('booking_status',1)->count();
+        $approve = BookingModel::where('booking_status',2)->count();
+        $cancel = BookingModel::where('booking_status',3)->count();
+        //return view('admin.dashboard')->with(['car' => $car,'allbook'=>$allbooking,'pending'=>$pending ,'approve'=>$approve ,'cancel'=>$cancel]);
 
         // $data = BookingModel::all()->Groupby("MONTH(booking_start)")->count('id');
     //    return dd($data);
         
-        return view('admin.dashboard')->with(['data'=>$data],['bookingcarAllin'=>$bookingcarAllin],['bookingcarAllout'=>$bookingcarAllout])
+        return view('admin.dashboard')->with(['data'=>$data],['bookingcarAllin'=>$bookingcarAllin],['bookingcarAllout'=>$bookingcarAllout],['car' => $car,'allbook'=>$allbooking,'pending'=>$pending ,'approve'=>$approve ,'cancel'=>$cancel])
       
         ;
     }
