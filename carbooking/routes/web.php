@@ -69,4 +69,4 @@ Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->nam
 Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
 
 Route::get('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
-Route::get('countcar1/{id}', [UserBookingController::class, 'show_booking'])->name('test');
+Route::get('countcar1', [DashboardAdminController::class, 'index'])->name('test');
