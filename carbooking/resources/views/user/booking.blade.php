@@ -442,8 +442,8 @@
                 function alertCancel(id) {
                     //alert(id)
                     Swal.fire({
-                        title: 'Are you sure?',
-                        text: "You won't be able to revert this!",
+                        //title: 'Are you sure?',
+                        text: "คุณต้องการยกเลิกการจองใช่หรือไม่!",
                         icon: 'warning',
                         showCancelButton: true,
                         confirmButtonColor: '#3085d6',
@@ -453,7 +453,7 @@
                     }).then((result) => {
                         if (result.isConfirmed) {
                             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-                            console.log('comfirm');
+                            //console.log('comfirm');
                             $.ajax({
                                 type: 'GET',
                                 url: "{{ url('/users/cancel') }}/" + id,
@@ -461,15 +461,10 @@
                                     _token: CSRF_TOKEN
                                 },
                                 dataType: 'JSON',
-                                success: function(data) {
-                                    // Remove row from HTML Table
-                                    Swal.fire(
-                                        'Deleted!',
-                                        'Your file has been deleted.',
-                                        'success');
+                                success: function(result) {
+                                    console.log(result.success);
                                     window.location.reload();
                                 },
-                               
                             });
                             /* Swal.fire(
                                 'Deleted!',
