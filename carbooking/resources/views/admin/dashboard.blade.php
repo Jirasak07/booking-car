@@ -1,13 +1,13 @@
 @extends('layouts.admin.admin')
 @section('content')
     @include('layouts.admin.header')
-    <div class="container-sm mt-3 ">
+    <div class="container mt-3 ">
         <div class="mx-5 my-3 text-default" style="font-weight: 700;font-size:1.2rem"> รายการจอง</div>
         <div class="d-flex flex-xl-row flex-column mx-3   " style="gap: 10px;min-height:120px">
 
-            <div class="w-100 m-dash rounded">
+            <div class=" w-100 m-dash rounded">
                 <div class=" rounded h-100 booking-all d-flex flex-row align-items-center" style="min-height:120px">
-                    <div class="h-100 col text-white icon-d-2  icon-circle">
+                    <div class="h-100 col  text-white icon-d-2  icon-circle">
                         <i class="fa-solid fa-clipboard-list  icon-dashboard "></i>
                     </div>
                     <div class="col d-flex flex-column align-items-center text-white">
@@ -58,26 +58,27 @@
         </div>
         <div class=" d-flex flex-column justify-content-between flex-lg-row pb-2  w-100">
             <div class="mt-3   col-12 col-lg-8 ">
-                <canvas class="bg-white rounded  w-100 h-100 " style=" max-height: 420px;" id="Chart"></canvas>
+                <canvas class="bg-white rounded  w-100 h-100 " style=" max-height: 520px;" id="Chart"></canvas>
             </div>
             <div class="mt-3  col-12 col-lg-4">
                 <canvas class=" bg-white rounded  w-100 " style=" max-height: 420px;" id="myChart"></canvas>
             </div>
         </div>
         <div class="d-flex flex-column justify-content-center align-items-center mb-3 ">
-            <div class="flex-column flex-lg-row d-flex justify-content-between  w-100  ">
+            <div class="flex-column flex-lg-row  d-flex justify-content-between  w-100  ">
                 @foreach ($car as $cars)
                     <div class="col-12 col-lg  mt-3 w-100 ">
-                        <div class="  rounded d-flex flex-row p-2 m-dash info-car "
-                            style="min-height: 120px;">
+                        <div class=" p-1 rounded d-flex flex-row  m-dash info-car " style="height: 110px;">
 
-                            <div class="logo-car  col-6 text-white" style="font-size: 6rem;line-height:80%;margin:0;"><i
-                                    class="fa-solid fa-car-rear icon-car-dashboard"></i></div>
-                            <div class="title-cars ml-3 col-6">
-                                <div class="brand-car text-white text-capitalize" style="font-size: 1.3em;font-weight:500">
-                                    {{ $cars['car_model'] }}</div>
+                            <div class="logo-car  col text-white d-flex flex-column align-items-center justify-content-center" style="margin:0;">
+                                <i class="fa-solid fa-car-rear icon-car-dashboard my-1 " style="font-size: 4rem;" ></i>
                                 <div class="lc_car text-white" style="font-size: 0.8em;font-weight:500;">
                                     {{ $cars['car_license'] }}</div>
+                            </div>
+                            <div class="title-cars col">
+                                <div class="brand-car text-white text-capitalize" style="font-size: 0.8em;font-weight:500;line-height:100%">
+                                    {{ $cars['car_model'] }}</div>
+
                                 <div class="res_car  ml-3 text-white" style="font-size:3rem;line-height:80%;"
                                     id="tcar-{{ $cars['id'] }}"></div>
                                 <div class="text-white ml-3" style="font-size: 0.8em"> รายการ</div>
@@ -87,7 +88,7 @@
                 @endforeach
             </div>
         </div>
-        <div class="card mx-3 p-3 mb-3">
+        <div class="card mx-3 mb-5" id="container-calen" >
             @include('admin.calendar_show')
         </div>
     </div>

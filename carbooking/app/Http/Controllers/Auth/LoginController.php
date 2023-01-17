@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
@@ -87,7 +88,7 @@ class LoginController extends Controller
                 }else{
                     $user->role_user = "2";
                 }
-                
+
                 $user->save();
             }
             $this->guard()->login($user, true);
@@ -102,7 +103,8 @@ class LoginController extends Controller
     }
     public function logout()
     {
-        \Auth::logout();
+
+        Auth::logout();
         return redirect('/');
     }
 }
