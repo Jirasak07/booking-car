@@ -20383,20 +20383,20 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
     background-color: #181D31;
 }
 .confirm {
-    background-color: #46cb3c !important;
+    background-color: #3EC300 !important;
 
 }
 .ic-success{
     background-color: #3cbe32;
 }
 .pending {
-background-color: #ffd464;
+background-color: #FFB627 !important;
 }
 .bg-pending{
     background-color: #FFC93C;
 }
 .bg-cancel {
-background-color:#d4132a ;
+background-color:#E71D36 ;
 }
 .icon-dashboard {
     font-size: 5rem !important;
@@ -20476,4 +20476,7 @@ a.nav-link-sub:hover{
 .select-form{
     font-size: 5rem !important;
 }
-
+.info-car{
+    background-color: #3C4048;
+    border-left:5px solid var(--info)
+}
