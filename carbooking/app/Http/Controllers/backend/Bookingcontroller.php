@@ -150,7 +150,7 @@ class Bookingcontroller extends Controller
      
         $booking_update = BookingModel::find($id);
         
-        if($request->type_car == 1){
+        
         $booking_update->license_plate = $request->license_plate;
         $booking_update->driver = $request->driver_id;
         $booking_update->type_car = $request->type;
@@ -158,6 +158,7 @@ class Bookingcontroller extends Controller
         
         $booking_update->save();
         return redirect()->back();
+    
     }
      function updateout(Request $request,$id){
         $id = $request->id_form;
@@ -183,6 +184,8 @@ class Bookingcontroller extends Controller
         $booking_update->driver = $car_out->car_out_driver;
         $booking_update->type_car = $request->type_car;
         $booking_update->booking_status = "2";
+        $booking_update->save();
+        return redirect()->back();
     }
     
-    }}
+    }
