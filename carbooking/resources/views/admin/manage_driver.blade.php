@@ -1,7 +1,8 @@
-@extends('layouts.admin.admin')
+@section('title', 'ข้อมูลการจอง')
 
+@extends('layouts.layout')
 @section('content')
-    @include('layouts.admin.header')
+    @include('layouts.header')
     <div class="container-fulid mx-3 ">
         <div class="container-md p-md-2 p-1 mt-sm-2 mt-sm-1 mt-4">
             <div class="  shadow-table rounded">

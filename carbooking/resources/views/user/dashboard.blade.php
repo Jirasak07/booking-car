@@ -1,11 +1,11 @@
 @section('title', 'Dashboard')
-@extends('layouts.user.users')
+@extends('layouts.layout')
 @section('content')
-    <!--@include('layouts.user.header')-->
+    @include('layouts.header')
     <div class="container-fluid">
         <div class="row">
             <div class="col-xl-12">
-                <div class="card mt-8">
+                <div class="card mt-5">
                     @include('user.calendar')
                 </div>
             </div>

@@ -6,7 +6,7 @@
         <!-- Form -->
         <div class="text-capitalize fw-normal h1 text-test mx-4 d-md-flex d-none"
             style="color:#8392bd;font-weight:normal;">
-            <label id="name-head"></label>
+            <label id="name-head">@yield('title')</label>
         </div>
         {{-- <script>
             document.addEventListener('DOMContentLoaded', function() {

@@ -1,11 +1,11 @@
-@section('title', 'Booking')
+@section('title', 'ข้อมูลการจอง')
 
-@extends('layouts.user.users')
+@extends('layouts.layout')
 @section('content')
-    <!--@include('layouts.user.header')-->
+    @include('layouts.header')
     <!-- box header booking pages -->
     <div class="pt-5">
-        <div class="container-fluid mt-5">
+        <div class="container-fluid">
             <div class="">
                 <!-- Card stats -->
                 <div class="row">
