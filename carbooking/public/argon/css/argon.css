@@ -33,10 +33,10 @@
     --lighter: #e9ecef;
     --primary: #5e72e4;
     --secondary: #f7fafc;
-    --success: #3CCF4E;
+    --success: #3ccf4e;
     --info: #11cdef;
     --warning: #fb6340;
-    --danger: #EB1D36;
+    --danger: #eb1d36;
     --light: #adb5bd;
     --dark: #212529;
     --default: #172b4d;
@@ -20379,28 +20379,26 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 .booking-all {
     background-color: #222a46;
 }
-.bg-bookall{
-    background-color: #181D31;
+.bg-bookall {
+    background-color: #181d31;
 }
 .confirm {
-    background-color: #3EC300 !important;
-
+    background-color: #3ec300 !important;
 }
-.ic-success{
+.ic-success {
     background-color: #3cbe32;
 }
 .pending {
-background-color: #FFB627 !important;
+    background-color: #ffb627 !important;
 }
-.bg-pending{
-    background-color: #FFC93C;
+.bg-pending {
+    background-color: #ffc93c;
 }
 .bg-cancel {
-background-color:#E71D36 ;
+    background-color: #e71d36;
 }
 .icon-dashboard {
     font-size: 5rem !important;
-
 }
 .icon-d-2 {
     display: flex;
@@ -20424,9 +20422,9 @@ li {
     margin-left: 10px;
     gap: 10px;
     opacity: 0.8;
-    color: var(--default) ;
+    color: var(--default);
 }
-a.nav-link-sub:hover{
+a.nav-link-sub:hover {
     color: var(--green) !important;
 }
 .sub-menu {
@@ -20452,31 +20450,57 @@ a.nav-link-sub:hover{
     .fc-button-group {
         max-width: fit-content !important;
     }
-
 }
-.calendar{
+.calendar {
     overflow: auto;
-
 }
-.fc-view-container{
+.fc-view-container {
     aspect-ratio: 1/1;
 }
 ::-webkit-scrollbar-x {
     display: none;
 }
-.shadow-table{
-    box-shadow:
-  2.8px 2.8px 2.2px rgba(0, 0, 0, 0.038),
-  6.7px 6.7px 5.3px rgba(0, 0, 0, 0.046),
-  12.5px 12.5px 10px rgba(0, 0, 0, 0.049),
-  22.3px 22.3px 17.9px rgba(0, 0, 0, 0.052),
-  41.8px 41.8px 33.4px rgba(0, 0, 0, 0.055),
-  100px 100px 80px rgba(0, 0, 0, 0.07);
+.shadow-table {
+    box-shadow: 2.8px 2.8px 2.2px rgba(0, 0, 0, 0.038),
+        6.7px 6.7px 5.3px rgba(0, 0, 0, 0.046),
+        12.5px 12.5px 10px rgba(0, 0, 0, 0.049),
+        22.3px 22.3px 17.9px rgba(0, 0, 0, 0.052),
+        41.8px 41.8px 33.4px rgba(0, 0, 0, 0.055),
+        100px 100px 80px rgba(0, 0, 0, 0.07);
 }
-.select-form{
+.select-form {
     font-size: 5rem !important;
 }
-.info-car{
-    background-color: #3C4048;
-    border-left:5px solid var(--info)
+.info-car {
+    background-color: #3c4048;
+    border-left: 5px solid var(--info);
+}
+.title-cars {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+#container-calen{
+    height: 100vh;
+
+}
+
+#calendar-container {
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+
+
+}
+
+.fc-header-toolbar {
+    /*
+    the calendar will be butting up against the edges,
+    but let's scoot in the header's buttons
+    */
+    padding-top: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
 }

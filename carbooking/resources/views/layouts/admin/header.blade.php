@@ -1,4 +1,4 @@
-<div class="header  pt-md-6 shadow-bottom d-none d-md-flex" style="background-color: #072227">
+<div class="header  pt-md-6 shadow-bottom d-none d-md-flex" style="background-color: #222222fb">
     <div class="container-fluid">
         <div class="header-body">
             <!-- Card stats -->
