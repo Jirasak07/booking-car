@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\backend\DashboardAdminController;
+use App\Http\Controllers\backend\UserBookingController;
 use App\Http\Controllers\CarsController;
 use App\Http\Controllers\DriverController;
 use Illuminate\Http\Request;
@@ -32,7 +33,7 @@ Route::group(
     ],
     function () {
         Route::get('dashboard', [\App\Http\Controllers\backend\Bookingcontroller::class, 'showcalendar'])->name('users.dashboard');
-        Route::get('booking', [\App\Http\Controllers\backend\Bookingcontroller::class, 'booking_user'])->name('users.view-booking');
+        Route::get('booking/{id}', [\App\Http\Controllers\backend\UserBookingController::class, 'show_booking'])->name('users.view-booking');
         Route::post('user/send', [\App\Http\Controllers\backend\Bookingcontroller::class, 'store'])->name('sendRe');
         Route::post('edit', [\App\Http\Controllers\backend\UserBookingcontroller::class, 'edit_booking'])->name('user.edit.booking');
         Route::get('cancel/{id}', [\App\Http\Controllers\backend\Bookingcontroller::class, 'cancle'])->name('users.booking_cancel');
@@ -68,4 +69,4 @@ Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->nam
 Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
 
 Route::get('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
-Route::get('countcar1', [DashboardAdminController::class, 'index'])->name('test');
+Route::get('countcar1/{id}', [UserBookingController::class, 'show_booking'])->name('test');
