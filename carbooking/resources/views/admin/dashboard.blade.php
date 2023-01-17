@@ -94,6 +94,8 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            const countcar = @json($data);
+            console.log(countcar);
             var allbook = @json($allbook);
             var car = @json($car);
             console.log(car);

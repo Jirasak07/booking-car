@@ -14,9 +14,6 @@ class DashboardAdminController extends Controller
 {
     //
     function index(){
-        
-       
-        
         $date = Carbon::now()->format('d-m-Y H:i:s');
         // // dd($date);
         $bookingcar1ad =DB::table('tb_booking')//จำนวนรถภายในคันที่1 ที่อนุมัติแล้ว
@@ -43,7 +40,7 @@ class DashboardAdminController extends Controller
         ->where('type_car' ,'=', 1)
         ->where('booking_status','=', 3)->count();
 
-        
+
         $bookingcar2can =DB::table('tb_booking')//จำนวนรถภายในคันที่2 ที่ไม่อนุมัติ
         ->where('license_plate' ,'=', 2)
         ->where('type_car' ,'=', 1)
@@ -62,19 +59,21 @@ class DashboardAdminController extends Controller
 
         $bookingcarAllout =DB::table('tb_booking')//จำนวนรถภายนอก ทั้งหมด
         ->where('type_car' ,'=', 2)->count();
-      
+
         $data = DB::table('tb_booking')//จำนวนการจองแยกตามเดือน ปี ทั้งหมด
         ->select(DB::raw('COUNT(id) data'),DB::raw('YEAR(booking_start) year, MONTH(booking_start) month'))
         ->groupByraw('YEAR(booking_start)')
         ->groupByraw('MONTH(booking_start)')
         ->get();
 
-               
+
         // $data = BookingModel::all()->Groupby("MONTH(booking_start)")->count('id');
     //    return dd($data);
         
-        return view('admin.dashboard')->with(['data)'=>$data],['bookingcarAllin)'=>$bookingcarAllin],['bookingcarAllout)'=>$bookingcarAllout])
-
+        return view('admin.dashboard')
+        ->with(compact($data))
+        ->with(compact($bookingcarAllin))
+        ->with(compact($bookingcarAllout))
         ;
     }
 
