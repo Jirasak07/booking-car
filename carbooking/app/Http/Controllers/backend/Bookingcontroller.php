@@ -58,7 +58,14 @@ class Bookingcontroller extends Controller
             ->get();
         // return dd($booking);
         //dd($booking);
-        return view('user.booking')->with(['booking' => $booking,'booking2' => $booking_wait]);
+        $Alllist = DB::table('tb_booking')->count();
+        $Alllistpending = DB::table('tb_booking')
+        ->where('booking_status', '=', '1');
+        $Alllistapprove = DB::table('tb_booking')
+        ->where('booking_status', '=', '2');
+        $Alllistcancle = DB::table('tb_booking')
+        ->where('booking_status', '=', '3');
+        return view('user.booking')->with(['booking' => $booking,'booking2' => $booking_wait,'Alllist' => $Alllist,'Alllistpending' => $Alllistpending,'Alllistapprove' => $Alllistapprove,'Alllistcancle' => $Alllistcancle]);
     }
 
     public function history()

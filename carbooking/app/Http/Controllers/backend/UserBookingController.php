@@ -19,4 +19,6 @@ class UserBookingController extends Controller
         $booking->save();
         return redirect()->back();
     }
+
+    
 }
