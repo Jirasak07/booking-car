@@ -6,7 +6,7 @@
         <!-- Form -->
         <div class="text-capitalize fw-normal h1 text-test mx-4 d-md-flex d-none"
             style="color:#8392bd;font-weight:normal;">
-            <label id="name-head"></label>
+            <label id="name-head">@yield('title')</label>
         </div>
         {{-- <script>
             document.addEventListener('DOMContentLoaded', function() {
@@ -39,7 +39,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
                     <div class=" dropdown-header noti-title">
-                        <h6 class="text-overflow m-0">{{ __('Welcome!') }}</h6>
+                        <h6 class="text-overflow m-0">{{ Auth::user()->name }}</h6>
                     </div>
                    
                     <div class="dropdown-divider"></div>
