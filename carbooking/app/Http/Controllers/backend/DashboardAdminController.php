@@ -9,6 +9,8 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
+use function PHPSTORM_META\type;
+
 class DashboardAdminController extends Controller
 {
     //
@@ -59,11 +61,22 @@ class DashboardAdminController extends Controller
         $bookingcarAllout = DB::table('tb_booking') //จำนวนรถภายนอก ทั้งหมด
             ->where('type_car', '=', 2)->count();
 
-        $data = DB::table('tb_booking') //จำนวนการจองแยกตามเดือน ปี ทั้งหมด
+        $data1 = DB::table('tb_booking') //จำนวนการจองแยกตามเดือน ปี ทั้งหมด
             ->select(DB::raw('COUNT(id) data'), DB::raw('YEAR(booking_start) year, MONTH(booking_start) month'))
             ->groupByraw('YEAR(booking_start)')
             ->groupByraw('MONTH(booking_start)')
+            ->where('booking_status',2)
+            ->where('type_car',1)
             ->get();
+        $data2 = DB::table('tb_booking') //จำนวนการจองแยกตามเดือน ปี ทั้งหมด
+            ->select(DB::raw('COUNT(id) data'), DB::raw('YEAR(booking_start) year, MONTH(booking_start) month'))
+            ->groupByraw('YEAR(booking_start)')
+            ->groupByraw('MONTH(booking_start)')
+            ->where('booking_status',2)
+            ->where('type_car',2)
+            ->get();
+        $allcar1 = DB::table('tb_booking')->select(DB::raw('COUNT(id) allcar1'))->where('booking_status',2)->where('type_car',1)->get();
+        $allcar2 = DB::table('tb_booking')->select(DB::raw('COUNT(id) allcar2'))->where('booking_status',2)->where('type_car',2)->get();
         $car = CarModel::All();
         $allbooking = BookingModel::count();
         $pending = BookingModel::where('booking_status', 1)->count();
@@ -74,7 +87,7 @@ class DashboardAdminController extends Controller
         // $data = BookingModel::all()->Groupby("MONTH(booking_start)")->count('id');
         //    return dd($data);
 
-        return view('admin.dashboard')->with(['data' => $data, 'bookingcarAllin' => $bookingcarAllin, 'bookingcarAllout' => $bookingcarAllout, 'car' => $car, 'allbook' => $allbooking, 'pending' => $pending, 'approve' => $approve, 'cancel' => $cancel])
+        return view('admin.dashboard')->with(['data2' => $data2,'data1' => $data1,'allcar1'=>$allcar1,'allcar2'=>$allcar2, 'bookingcarAllin' => $bookingcarAllin, 'bookingcarAllout' => $bookingcarAllout, 'car' => $car, 'allbook' => $allbooking, 'pending' => $pending, 'approve' => $approve, 'cancel' => $cancel])
 
         ;
     }

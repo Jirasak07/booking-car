@@ -98,6 +98,9 @@
         document.addEventListener('DOMContentLoaded', function() {
             var allbook = @json($allbook);
             var car = @json($car);
+            var allcar1 = @json($allcar1);
+            var allcar2 = @json($allcar2);
+            console.log(allcar1[0].allcar1);
             var total_car = 1;
             $('#tcar-1').html(total_car);
             const ctx = document.getElementById('myChart');
@@ -116,7 +119,7 @@
                     ],
                     datasets: [{
                         label: 'มีการใช้งาน ครั้ง',
-                        data: [5, 2],
+                        data: [allcar1[0].allcar1, allcar2[0].allcar2],
                         backgroundColor: [
                             '#FF7D00',
                             '#0082FF',
@@ -149,19 +152,36 @@
         const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep',
             'Oct', 'Nov', 'Dec'
         ];
+        datab = [
+            '5',
+            '2'
+        ]
+        var countcar1 = @json($data1);
+        var countcar2 = @json($data2);
+        var car1 = [];
+        var car2 = [];
+        countcar1.forEach(c1 => {
+            // console.log(d)
+            car1.push(c1.data)
+        })
+        countcar2.forEach(c2 => {
+            // console.log(d)
+            car2.push(c2.data)
+        })
+        console.log(car1,car2)
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
                 labels: labels,
                 datasets: [{
                     label: 'รถภายใน',
-                    data: [12, 19, 3, 5, 2, 3],
+                    data: car1,
                     backgroundColor: '#FF7D00',
 
                     borderWidth: 1
                 }, {
                     label: 'รถภายนอก',
-                    data: [22, 29, 13, 15, 12, 13],
+                    data: car2,
                     backgroundColor: '#0082FF',
 
                     borderWidth: 1
