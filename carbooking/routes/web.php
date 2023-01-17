@@ -45,14 +45,14 @@ Route::group(
         'middleware' => ['IsAdmin'],
     ],
     function () {
-        Route::get('dashboard', [\App\Http\Controllers\frontend\AdminController::class, 'index'])->name('admin.dashboard');
+        Route::get('dashboard', [\App\Http\Controllers\backend\DashboardAdminController::class, 'index'])->name('admin.dashboard');
         Route::get('request', [\App\Http\Controllers\backend\Bookingcontroller::class, 'index'])->name('admin.booking_request');
         Route::get('manage-driver', [DriverController::class, 'index'])->name('admin.manage-driver');
         Route::get('manage-driver/{id}', [DriverController::class, 'changestatus'])->name('driverstatus');
         Route::get('manage-car', [CarsController::class, 'index'])->name('admin.manage-car');
         Route::get('manage-car/{id}', [CarsController::class, 'changestatus'])->name('changestatus');
         Route::get('manage-user', [App\Http\Controllers\frontend\AdminController::class, 'manageUser'])->name('admin.manage-user');
-        Route::get('history', [App\Http\Controllers\backend\Bookingcontroller::class, 'history'])->name('admin.booking_history');
+        Route::get('history', [\App\Http\Controllers\backend\Bookingcontroller::class, 'history'])->name('admin.booking_history');
         Route::post('GG', function (Request $request) {
             dd($request->all());
         })->name('GG');
@@ -62,9 +62,9 @@ Route::group(
     }
 );
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
+Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
 
-Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+Route::get('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 Route::get('countcar1', [DashboardAdminController::class, 'index'])->name('test');
