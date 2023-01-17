@@ -4,18 +4,16 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\BookingModel;
-use App\Models\CaroutModel;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
-use illuminate\auth\SessionGuard;
 
 class Bookingcontroller extends Controller
 {
     //
-    function index()
+    public function index()
     {
         $currentURL = request()->getHttpHost();
         $response = Http::get('http://' . $currentURL . '/index.php/api/pageupdate');
@@ -24,12 +22,11 @@ class Bookingcontroller extends Controller
         $jsonDatacar = $responsecar->json();
         $responsedriver = Http::get('http://' . $currentURL . '/index.php/api/driver');
         $jsonDatadriver = $responsedriver->json();
-        return view('admin.booking_request')->with(['booking' => $jsonData, 'car' => $jsonDatacar, 'driver' => $jsonDatadriver,]);
+        return view('admin.booking_request')->with(['booking' => $jsonData, 'car' => $jsonDatacar, 'driver' => $jsonDatadriver]);
     }
 
-    function booking_user()
+    public function booking_user()
     {
-
 
         // $User_booking = DB::table('Users')
         // ->whereIn('Users.id', Auth::Users()->id)
@@ -46,7 +43,7 @@ class Bookingcontroller extends Controller
             ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
             ->whereIn('tb_booking.username', Auth::user())
             ->orderBy('booking_status')
-            ->select('car_out_license', 'car_out_model', 'car_out_driver', 'car_out_tel',  'driver_fullname', 'car_license', 'tb_booking.*', 'users.username')
+            ->select('car_out_license', 'car_out_model', 'car_out_driver', 'car_out_tel', 'driver_fullname', 'car_license', 'tb_booking.*', 'users.username')
             ->get();
 
         $booking_wait = DB::table('tb_booking')
@@ -59,26 +56,31 @@ class Bookingcontroller extends Controller
         // return dd($booking);
         //dd($booking);
         $Alllist = DB::table('tb_booking')
-        ->whereIn('tb_booking.username', Auth::user())->count();
+            ->whereIn('tb_booking.username', Auth::user())->count();
         $Alllistpending = DB::table('tb_booking')
-        ->whereIn('tb_booking.username', Auth::user())->where('booking_status', '=', '1')->count();
+            ->whereIn('tb_booking.username', Auth::user())->where('booking_status', '=', '1')->count();
         $Alllistapprove = DB::table('tb_booking')
-        ->whereIn('tb_booking.username', Auth::user())->where('booking_status', '=', '2')->count();
+            ->whereIn('tb_booking.username', Auth::user())->where('booking_status', '=', '2')->count();
         $Alllistcancle = DB::table('tb_booking')
-        ->whereIn('tb_booking.username', Auth::user())->where('booking_status', '=', '3')->count();
-        return view('user.booking')->with(['booking' => $booking,'booking2' => $booking_wait,'Alllist' => $Alllist,'Alllistpending' => $Alllistpending,'Alllistapprove' => $Alllistapprove,'Alllistcancle' => $Alllistcancle]);
+            ->whereIn('tb_booking.username', Auth::user())->where('booking_status', '=', '3')->count();
+        return view('user.booking')->with(['booking' => $booking, 'booking2' => $booking_wait, 'Alllist' => $Alllist, 'Alllistpending' => $Alllistpending, 'Alllistapprove' => $Alllistapprove, 'Alllistcancle' => $Alllistcancle]);
     }
 
     public function history()
     {
         $currentURL = request()->getHttpHost();
         $response = Http::get('http://' . $currentURL . '/index.php/api/booking');
-
+        $his = Http::get('http://' . $currentURL . '/index.php/api/showhistory');
+        // $his2 = response()->json($his);
+        // dd($his2);
+        // dd($response->json());
         $jsonData = $response->json();
-        return view('admin.booking_history')->with(['history' => $jsonData]);
+        $datahis = $his->json();
+
+        return view('admin.booking_history')->with(['history' => $jsonData, 'hiss' => $datahis]);
     }
 
-    function showcalendar()
+    public function showcalendar()
     {
         // $currentURL = request()->getHttpHost();
 
@@ -102,25 +104,25 @@ class Bookingcontroller extends Controller
 
             $events[] = [
                 'id' => $booking->id,
-                'title'=>$booking->booking_detail,
+                'title' => $booking->booking_detail,
                 'start' => $booking->booking_start,
                 'end' => $booking->booking_end,
                 'type' => $booking->type_car,
-                'color' => $color
+                'color' => $color,
             ];
         }
 
         return view('user.dashboard')->with(['booking' => $events]);
     }
-    function cancle($id)
+    public function cancle($id)
     {
 
         $canclebooking = BookingModel::find($id);
         $canclebooking->booking_status = ('3');
         $canclebooking->save();
-        return redirect()->back()->with('success','เรียบร้อย');
+        return redirect()->back()->with('success', 'เรียบร้อย');
     }
-    function store(Request $request)
+    public function store(Request $request)
     {
         //dd($request->all());
         $bookingcar = new BookingModel();
@@ -147,34 +149,34 @@ class Bookingcontroller extends Controller
     {
         // dd($request->all());
         $id = $request->id_form;
-        $car_out = CaroutModel::array();
-        $car_count = DB::table('tb_out_cars')->count();
+        // $car_out = DB::table('tb_out_cars')->first();
+        // $car_count = DB::table('tb_out_cars')->count();
         $booking_update = BookingModel::find($id);
-        
-        if($request->type_car == 1){
+
+        // if($request->type_car == 1){
         $booking_update->license_plate = $request->license_plate;
         $booking_update->driver = $request->driver_id;
         $booking_update->type_car = $request->type;
         $booking_update->booking_status = "2";
-        }else{
-            if($car_count < 1){
-                $car_out->id = 1;
-            $car_out->car_out_license = $request->car_out_license;
-            $car_out->car_out_model = $request->car_out_model;
-            $car_out->driver =$request->car_out_driver;
-            $car_out->car_out_tel = $request->car_out_tel;
-            }else{
-                $car_out->id = $car_count + 1;
-                $car_out->car_out_license = $request->car_out_license;
-                $car_out->car_out_model = $request->car_out_model;
-                $car_out->car_out_tel = $request->car_out_tel;
-                $car_out->save();
-            }
-            $booking_update->license_plate = $request->license_plate;
-            $booking_update->driver = $car_out->car_out_driver;
-            $booking_update->type_car = $request->type_car;
-            $booking_update->booking_status = "2";
-        }
+        // }else{
+        // if($car_count < 1){
+        //     $car_out->id = 1;
+        // $car_out->car_out_license = $request->car_out_license;
+        // $car_out->car_out_model = $request->car_out_model;
+        // $car_out->driver =$request->car_out_driver;
+        // $car_out->car_out_tel = $request->car_out_tel;
+        // }else{
+        //     $car_out->id = $car_count + 1;
+        //     $car_out->car_out_license = $request->car_out_license;
+        //     $car_out->car_out_model = $request->car_out_model;
+        //     $car_out->car_out_tel = $request->car_out_tel;
+        //     $car_out->save();
+        // }
+        // $booking_update->license_plate = $request->license_plate;
+        // $booking_update->driver = $car_out->car_out_driver;
+        // $booking_update->type_car = $request->type_car;
+        // $booking_update->booking_status = "2";
+
         $booking_update->save();
         return redirect()->back();
     }

@@ -20,12 +20,13 @@
                 <tbody>
                     @php
                         $i = 1;
+
                     @endphp
-                    @foreach ($history as $history)
+                    @foreach ($hiss as $history)
                         @if ($history['booking_status'] == 2 || $history['booking_status'] == 3)
                             <tr>
                                 <td>{{ $i++ }}</td>
-                                <td>{{ $history['username'] }}</td>
+                                <td>{{ $history['name'] }}</td>
                                 <td>{{ thaidate('l ที่ j F Y เวลา G:i นาที', strtotime($history['booking_start'])) }}</td>
                                 <td>{{ thaidate('l ที่ j F Y เวลา G:i นาที', strtotime($history['booking_end'])) }}</td>
                                 <td>
@@ -43,12 +44,24 @@
                             </tr>
                         @endif
                     @endforeach
-
+                            {{-- @foreach ($hiss as $his)
+                                <tr>
+                                    <td>{{$his['name']}}</td>
+                                </tr>
+                            @endforeach --}}
                 </tbody>
             </table>
+
+            {{-- @foreach ($his as $his)
+            <div>{{$his['id']}}</div>
+            @endforeach --}}
         </div>
 
         {{-- @include('layouts.footers.auth') --}}
     </div>
     </div>
+    <script>
+        var his = @json($hiss);
+        console.log(his)
+    </script>
 @endsection
