@@ -10,7 +10,7 @@
                     </div>
                     <div class="col d-flex flex-column align-items-center text-white">
                         <div class="text-white ">รายการจองทั้งหมด</div>
-                        <div style="font-size: 4rem;line-height: 80%;">0</div>
+                        <div style="font-size: 4rem;line-height: 80%;"id="all" >0</div>
                         <div>รายการ</div>
                     </div>
                 </div>
@@ -22,7 +22,7 @@
                     </div>
                     <div class="col  d-flex flex-column align-items-center  ">
                         <div>อนุมัติแล้ว</div>
-                        <div style="font-size: 4rem;line-height: 80%;">0</div>
+                        <div style="font-size: 4rem;line-height: 80%;" id="approve">0</div>
                         <div>รายการ</div>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                     </div>
                     <div class="col text-white d-flex flex-column align-items-center">
                         <div>รอดำเนินการ</div>
-                        <div style="font-size: 4rem;line-height: 80%;">0</div>
+                        <div style="font-size: 4rem;line-height: 80%;" id="pending">0</div>
                         <div>รายการ</div>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                     </div>
                     <div class="col text-white d-flex flex-column align-items-center ">
                         <div>ยกเลิกแล้ว</div>
-                        <div style="font-size: 4rem;line-height: 80%;">0</div>
+                        <div style="font-size: 4rem;line-height: 80%;" id="cancel">0</div>
                         <div>รายการ</div>
                     </div>
                 </div>
@@ -87,11 +87,16 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            var allbook = @json($allbook);
             var car = @json($car);
             console.log(car);
             var total_car = 1;
             $('#tcar-1').html(total_car);
             const ctx = document.getElementById('myChart');
+            document.getElementById('all').innerHTML = allbook;
+            document.getElementById('pending').innerHTML = @json($pending);
+            document.getElementById('cancel').innerHTML = @json($cancel);
+            document.getElementById('approve').innerHTML = @json($approve);
             new Chart(ctx, {
                 type: 'doughnut',
 
@@ -168,55 +173,6 @@
                         text: 'การใช้งานของรถภายในและรถภายนอกในปี 2565'
                     }
                 }
-            }
-        });
-        var ctx1 = document.getElementById('chart1').getContext('2d');
-        var chart1 = new Chart(ctx1, {
-            type: 'bar',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'รถภายใน',
-                    data: [12, 19, 3, 5, 2, 3],
-                    backgroundColor: '#2dce89',
-                    borderColor: '#2dce89',
-                    borderWidth: 1
-                }, {
-                    label: 'รถภายนอก',
-                    data: [22, 29, 13, 15, 12, 13],
-                    backgroundColor: '#fb6340',
-                    borderColor: '#fb6340',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                // other options
-            }
-        });
-
-        var ctx2 = document.getElementById('chart2').getContext('2d');
-        var chart2 = new Chart(ctx2, {
-            type: 'line',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'รถภายใน',
-                    data: [12, 19, 3, 5, 2, 3],
-                    backgroundColor: '#2dce89',
-                    borderColor: '#2dce89',
-                    borderWidth: 1
-                }, {
-                    label: 'รถภายนอก',
-                    data: [22, 29, 13, 15, 12, 13],
-                    backgroundColor: '#fb6340',
-                    borderColor: '#fb6340',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                // other options
             }
         });
     </script>

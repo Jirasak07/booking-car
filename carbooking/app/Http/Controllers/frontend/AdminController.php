@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\BookingModel;
 use App\Models\CarModel;
 
 
@@ -17,7 +18,11 @@ class AdminController extends Controller
     public function index()
     {
         $car = CarModel::All();
-        return view('admin.dashboard')->with(['car' => $car]);
+        $allbooking = BookingModel::count();
+        $pending = BookingModel::where('booking_status',1)->count();
+        $approve = BookingModel::where('booking_status',2)->count();
+        $cancel = BookingModel::where('booking_status',3)->count();
+        return view('admin.dashboard')->with(['car' => $car,'allbook'=>$allbooking,'pending'=>$pending ,'approve'=>$approve ,'cancel'=>$cancel]);
     }
     public function bookingRequest()
     {
@@ -35,5 +40,5 @@ class AdminController extends Controller
     {
         return view('admin.manage_user');
     }
-   
+
 }

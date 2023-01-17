@@ -12,7 +12,6 @@
                             <th align="center">ชื่อ</th>
                             <th align="center">Email</th>
                             <th align="center">Role</th>
-                            <th align="center">จัดการ</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -21,23 +20,20 @@
                             <td>tr-Jirasak Singhabutr</td>
                             <td>tr-jirasaks@lanna.com</td>
                             <td>
-                                <div class="text-danger  text-capitalize " style="width: 50px;font-weight:bold">admin</div>
+                                <div class="btn-group dropend">
+                                    <button type="button" class="btn btn-secondary">
+                                        Split dropend
+                                    </button>
+                                    <button type="button" class="btn btn-secondary dropdown-toggle"
+                                        data-bs-toggle="dropdown" >
+
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <!-- Dropdown menu links -->
+                                    </ul>
+                                </div>
                             </td>
-                            <td>
-                                <div class="btn text-white  btn-sm" style="background-color: #ffb500"><i class="fa-solid fa-user-pen"></i></div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>tr-Patcharawan Gedpun</td>
-                            <td>tr-patcharawang@lanna.com</td>
-                            <td>
-                                <div class="text-dark text-capitalize " style="width: 50px;font-weight:bold">user</div>
-                            </td>
-                            <td>
-                                <div class="btn text-white bg-yellow btn-sm"><i class="fa-solid fa-user-pen"></i></div>
-                            </td>
-                        </tr>
+
                     </tbody>
                 </table>
             </div>
