@@ -28,9 +28,9 @@
                                     <tr>
                                         @if ($item->booking_status == 1)
                                             <td style="font-size: 18px" align="center">{{ $i++ }}</td>
-                                            <td style="font-size: 16px">{{ $item->id }}
+                                            <td style="font-size: 16px">
                                                 @php
-                                                    echo thaidate('d M Y เวลา H:i', $item->booking_start) . '&nbsp;-&nbsp;' . thaidate('d M Y เวลา H:i', $item->booking_end);
+                                                    echo thaidate('วันที่ d M Y เวลา H:i', $item->booking_start) . '&nbsp;-&nbsp;' . thaidate('วันที่ d M Y เวลา H:i', $item->booking_end);
                                                 @endphp
 
                                             </td>
@@ -59,7 +59,7 @@
                                             <td style="font-size: 18px" align="center">{{ $i++ }}</td>
                                             <td style="font-size: 16px">
                                                 @php
-                                                    echo thaidate('d M Y เวลา H:i', $item->booking_start) . '&nbsp;-&nbsp;' . thaidate('d M Y เวลา H:i', $item->booking_end);
+                                                    echo thaidate('วันที่ d M Y เวลา H:i', $item->booking_start) . '&nbsp;-&nbsp;' . thaidate('วันที่ d M Y เวลา H:i', $item->booking_end);
                                                 @endphp
                                             </td>
                                             <td class="text-wrap" style="font-size: 16px">{!! Str::limit("$item->booking_detail", 50, ' ...') !!}</td>
