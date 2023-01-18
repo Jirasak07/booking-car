@@ -124,12 +124,17 @@
                         label: 'มีการใช้งาน ครั้ง',
                         data: [allcar1[0].allcar1, allcar2[0].allcar2],
                         backgroundColor: [
-                            '#FF7D00',
-                            '#0082FF',
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
 
                         ],
+                        borderColor: [
+                            'rgb(255, 99, 132)',
+                            'rgb(54, 162, 235)',
+                        ],
                         hoverOffset: 4
-                    }]
+                    }],
+
                 },
                 options: {
 
@@ -171,7 +176,7 @@
             // console.log(d)
             car2.push(c2.data)
         })
-        console.log(car1,car2)
+        console.log(car1, car2)
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
@@ -179,15 +184,15 @@
                 datasets: [{
                     label: 'รถภายใน',
                     data: car1,
-                    backgroundColor: '#FF7D00',
-
-                    borderWidth: 1
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    borderWidth: 2
                 }, {
                     label: 'รถภายนอก',
                     data: car2,
-                    backgroundColor: '#0082FF',
-
-                    borderWidth: 1
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgb(54, 162, 235)',
+                    borderWidth: 2
                 }]
             },
             options: {

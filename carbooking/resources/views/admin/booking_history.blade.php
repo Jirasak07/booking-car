@@ -28,7 +28,6 @@
                             <tr>
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $history['name'] }}</td>
-                                <td>{{ $history['type_car'] }}</td>
                                 <td>{{ thaidate('l ที่ j F Y เวลา G:i นาที', strtotime($history['booking_start'])) }}</td>
                                 <td>{{ thaidate('l ที่ j F Y เวลา G:i นาที', strtotime($history['booking_end'])) }}</td>
                                 <td>
@@ -46,7 +45,7 @@
                             </tr>
                         @endif
                     @endforeach
-                            {{-- @foreach ($hiss as $his)
+                    {{-- @foreach ($hiss as $his)
                                 <tr>
                                     <td>{{$his['name']}}</td>
                                 </tr>

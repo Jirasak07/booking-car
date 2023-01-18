@@ -20377,25 +20377,25 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 }
 
 .booking-all {
-    background-color: #222a46;
+    background-color: #073b4c;
 }
 .bg-bookall {
     background-color: #181d31;
 }
 .confirm {
-    background-color: #3ec300 !important;
+    background-color: #06d6a0 !important;
 }
 .ic-success {
     background-color: #3cbe32;
 }
 .pending {
-    background-color: #ffb627 !important;
+    background-color: #ffd166 !important;
 }
 .bg-pending {
     background-color: #ffc93c;
 }
 .bg-cancel {
-    background-color: #e71d36;
+    background-color: #ef476f;
 }
 .icon-dashboard {
     font-size: 5rem !important;
@@ -20472,8 +20472,8 @@ a.nav-link-sub:hover {
     font-size: 5rem !important;
 }
 .info-car {
-    background-color: #3c4048;
-    border-left: 5px solid var(--info);
+    background-color: #073b4c;
+    border-left: 5px solid #118ab2;
 }
 .title-cars {
     display: flex;
@@ -20503,4 +20503,7 @@ a.nav-link-sub:hover {
     padding-top: 1em;
     padding-left: 1em;
     padding-right: 1em;
+}
+.shadowx{
+    box-shadow: 2px 2px 20px 5px rgba(53, 53, 53, 0.87);
 }
