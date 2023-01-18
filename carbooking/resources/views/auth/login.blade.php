@@ -11,13 +11,27 @@
                 </div>
             </div>
         </div>
-        @if ($message = Session::get('error'))
+        @if ($message = Session::get('errorpassword'))
             <script>
                 Swal.fire({
                     icon: 'error',
-                    /* title: 'Oops...', */
-                    text: 'Username or Password Incorrect!',
-                    /*  footer: '<a href="">Why do I have this issue?</a>' */
+                    text: 'Password Incorrect!',
+                });
+            </script>
+        @endif
+        @if ($message = Session::get('erroremail'))
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    text: 'Email Incorrect!',
+                });
+            </script>
+        @endif
+        @if ($message = Session::get('errornot'))
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    text: 'Email or Password Incorrect!',
                 });
             </script>
         @endif
