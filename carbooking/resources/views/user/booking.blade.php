@@ -340,7 +340,7 @@
                                                                             } else {
                                                                                 $type = 'รถภายนอกบริษัท';
                                                                             }
-
+                                                                            
                                                                             if ($item->type_car == 1) {
                                                                                 $driver = $data->driver_fullname;
                                                                                 $car = $data->car_license;
@@ -406,7 +406,7 @@
                                                                             } else {
                                                                                 $type = 'รถภายนอกบริษัท';
                                                                             }
-
+                                                                            
                                                                             if ($item->type_car == 1) {
                                                                                 $driver = $data->driver_fullname;
                                                                                 $car = $data->car_license;
@@ -476,69 +476,35 @@
                         cancelButtonText: 'Cancel'
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-                            //console.log('comfirm');
                             $.ajax({
                                 type: 'GET',
-                                url: "{{ url('/users/cancel') }}/" + id,
-                                data: {
-                                    _token: CSRF_TOKEN
-                                },
+                                url: '/users/cancel/' + id,
                                 dataType: 'JSON',
                                 success: function(result) {
-                                    console.log(result.success);
-                                    window.location.reload();
+                                    if (data.status == 'success') {
+                                        Swal.fire({
+                                            title: 'เสร็จสิ้น',
+                                            icon: 'success',
+                                            confirmButtonText: 'ok',
+                                        }).then((result) => {
+                                            /* Read more about isConfirmed, isDenied below */
+                                            if (result.isConfirmed) {
+                                                window.location.reload();
+                                            }
+                                        })
+
+                                    } else {
+                                        Swal.fire({
+                                            title: 'Error',
+                                            icon: 'error',
+                                        })
+                                    }
                                 },
                             });
-                            /* Swal.fire(
-                                'Deleted!',
-                                'Your file has been deleted.',
-                                'success'
-                            ) */
+
                         }
                     })
-                    /* swal.fire({
-                        icon: 'question',
-                        text: "คุณต้องการยกเลิกการจองคิวรถนี้ใช่หรือไม่",
-                        type: "warning",
-                        showCancelButton: !0,
-                        confirmButtonText: "ใช่",
-                        cancelButtonText: "ไม่",
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d11',
 
-                    }).then(function(e) {
-
-                        if (e.value === true) {
-                            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-
-                            $.ajax({
-                                type: 'GET',
-                                url: "{{ url('/users/cancel') }}/" + id,
-                                data: {
-                                    _token: CSRF_TOKEN
-                                },
-                                dataType: 'JSON',
-                                success: function(results) {
-                                    if (results.success == true) {
-                                        swal.fire("Done!", results.message, "success");
-                                        // refresh page after 2 seconds
-                                        setTimeout(function() {
-                                            location.reload();
-                                        }, 2000);
-                                    } else {
-                                        swal.fire("Error!", results.message, "error");
-                                    }
-                                }
-                            });
-
-                        } else {
-                            e.dismiss;
-                        }
-
-                    }, function(dismiss) {
-                        return false;
-                    })  */
                 }
             </script>
         @endpush
