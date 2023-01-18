@@ -3,7 +3,7 @@
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @section('content')
-    <div class="card  shadowx col-12 col-sm-8 col-md-5" style="background-color: #f1f2f6">
+    <div class="card  shadowx col-12 col-sm-8 col-md-5 col-lg-5" style="background-color: #f1f2f6; max-width:450px">
         <div class="card-header bg-transparent">
             <div class="text-center mt-2">
                 <div class="mt-3 text-center ">
