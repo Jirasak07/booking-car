@@ -28,7 +28,7 @@
                                     <tr>
                                         @if ($item->booking_status == 1)
                                             <td style="font-size: 18px" align="center">{{ $i++ }}</td>
-                                            <td style="font-size: 16px">
+                                            <td style="font-size: 16px">{{ $item->id }}
                                                 @php
                                                     echo thaidate('d M Y เวลา H:i', $item->booking_start) . '&nbsp;-&nbsp;' . thaidate('d M Y เวลา H:i', $item->booking_end);
                                                 @endphp
@@ -374,6 +374,11 @@
                     $('#booking_table').DataTable({
                         responsive: true
                     });
+                    //tag input datetime-local เลือกวันย้อนหลังไม่ได้
+                    var now_utc = Date.now() 
+                    var today = new Date(now_utc).toISOString().substring(0, 16);
+                    document.getElementById("booking_start").setAttribute("min", today);
+                    document.getElementById("booking_end").setAttribute("min", today);
                 });
                 function alertCancel(id) {
                     //alert(id)
