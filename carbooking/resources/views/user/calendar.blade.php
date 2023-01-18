@@ -137,7 +137,7 @@
                         </div>
                         <div class="col-md-3">
                             <input type="hidden" name="start" id="start" value="">
-                            <input type="datetime" data-date="" class="form-control"
+                            <input type="datetime-local" data-date="" class="form-control"
                                 data-date-format="DD MM YYYY HH:mm:ss a" name="date_start" id="date_start">
 
                         </div>
@@ -151,7 +151,7 @@
                         </div>
                         <div class="col-md-3">
                             <input type="hidden" name="end" id="end">
-                            <input type="datetime" data-date="" class="form-control"
+                            <input type="datetime-local" data-date="" class="form-control"
                                 data-date-format="DD MM YYYY HH:mm:ss a" id="date_end" name="date_end">
                         </div>
                         <br />

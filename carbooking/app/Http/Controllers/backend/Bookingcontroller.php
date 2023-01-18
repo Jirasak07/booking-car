@@ -127,7 +127,7 @@ class Bookingcontroller extends Controller
     public function store(Request $request)
     {
         
-        //dd($request->all());
+        dd($request->all());
         $bookingcar = new BookingModel();
         $cnt_booking = $bookingcar->count();
 
