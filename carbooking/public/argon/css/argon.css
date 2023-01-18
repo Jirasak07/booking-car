@@ -20482,15 +20482,6 @@ a.nav-link-sub:hover {
     justify-content: center;
     gap: 10px;
 }
-#container-calen {
-    height: 100vh;
-}
-
-#calendar-container {
-    padding: 10px;
-    width: 100%;
-    height: 100%;
-}
 
 .fc-header-toolbar {
     /*
