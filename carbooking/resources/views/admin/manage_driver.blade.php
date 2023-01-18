@@ -23,7 +23,7 @@
 
                             <td>
                             @if($item['driver_status'] == 1)
-                                <a class="btn btn-success btn-sm " style="width: 80px" href="{{route("driverstatus",$item['id'])}}">{{__('ว่าง')}}</a>
+                                <div class="btn btn-success btn-sm " style="width: 80px" onclick="clickGF({{$item['id']}})">{{__('ว่าง')}}</div>
                                 @elseif($item['driver_status'] == 2)
                                 <a class="btn btn-danger btn-sm " style="width: 80px" href="{{route("driverstatus",$item['id'])}}">{{__('ไม่ว่าง')}}</a>
                                 @endif
@@ -34,6 +34,10 @@
                 </table>
             </div>
         </div>
-
+<script>
+    function clickGF(e){
+        alert(e);
+    }
+</script>
     </div>
 @endsection

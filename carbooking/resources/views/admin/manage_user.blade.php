@@ -33,13 +33,15 @@
                                         <i class="fa-solid fa-pen-to-square btn btn-warning btn-sm" data-toggle="dropdown"
                                             aria-haspopup="true" aria-expanded="false">
                                         </i>
-                                        <div class="dropdown-menu" >
+                                        <div class="dropdown-menu">
                                             @if ($Users->role_user == 1)
-                                                <option value="1" class="option active"style="font-weight: 900" >Admin</option>
-                                                <option value="2" class="option">user</option>
-                                                @elseif ($Users->role_user == 2)
-                                                <option value="1" class="option">Admin</option>
-                                                <option value="2" class="option active" style="font-weight: 900">user</option>
+                                                <option value="1" class="option active"style="font-weight: 900">Admin
+                                                </option>
+                                                <option value="2" class="option" onclick='changeRole(2)'>user</option>
+                                            @elseif ($Users->role_user == 2)
+                                                <option value="1" class="option" onclick="changeRole(1)">Admin</option>
+                                                <option value="2" class="option active" style="font-weight: 900">User
+                                                </option>
                                             @endif
 
                                         </div>
@@ -51,6 +53,32 @@
                 </table>
             </div>
         </div>
-
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            function changeRole(e) {
+                const name = e;
+                if (e == 1) {
+                    var namerole = 'Admin';
+                } else if (e == 2) {
+                    var namerole = 'User';
+                }
+                Swal.fire({
+                    title: 'ต้องการเปลี่ยนเป็น' + namerole + 'หรือไม่ ?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#06d6a0',
+                    cancelButtonColor: '#ef476f',
+                    confirmButtonText: 'ตกลง',
+                    cancelButtonText: 'ยกเลิก'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: 'เสร็จสิ้น',
+                            icon: 'success',
+                        })
+                    }
+                })
+            }
+        </script>
     </div>
 @endsection
