@@ -84,10 +84,10 @@
                 },
                 
                 select: function(info) {
-                    var booking_start = moment(info.startStr).format('YYYY-MM-DD hh:mm:ss a');
-                    var booking_end = moment(info.endStr).format('YYYY-MM-DD hh:mm:ss a');
-                    var booking_s = moment(info.startStr).format('YYYY-MM-DD hh:mm:ss');
-                    var booking_e = moment(info.endStr).format('YYYY-MM-DD hh:mm:ss');
+                    var booking_start = moment(info.startStr).format('YYYY-MM-DD HH:mm:ss');
+                    var booking_end = moment(info.endStr).format('YYYY-MM-DD HH:mm:ss');
+                    var booking_s = moment(info.startStr).format('YYYY-MM-DD HH:mm:ss');
+                    var booking_e = moment(info.endStr).format('YYYY-MM-DD HH:mm:ss');
                     /* var time_start = moment(info.startStr).format('LTS');
                     var time_end = moment(info.endStr).format('LTS'); */
                     //var today = new Date().toISOString().split('T')[0];
@@ -137,8 +137,8 @@
                         </div>
                         <div class="col-md-3">
                             <input type="hidden" name="start" id="start" value="">
-                            <input type="datetime" data-date="" class="form-control"
-                                data-date-format="DD MM YYYY hh:mm:ss" name="date_start" id="date_start">
+                            <input type="datetime-local" data-date="" class="form-control"
+                                data-date-format="DD MM YYYY HH:mm:ss a" name="date_start" id="date_start">
 
                         </div>
                         <br />
@@ -151,8 +151,8 @@
                         </div>
                         <div class="col-md-3">
                             <input type="hidden" name="end" id="end">
-                            <input type="datetime" data-date="" class="form-control"
-                                data-date-format="DD MM YYYY hh:mm:ss" id="date_end" name="date_end">
+                            <input type="datetime-local" data-date="" class="form-control"
+                                data-date-format="DD MM YYYY HH:mm:ss a" id="date_end" name="date_end">
                         </div>
                         <br />
                         <br />

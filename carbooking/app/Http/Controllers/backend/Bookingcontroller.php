@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Carbon;
 
 class Bookingcontroller extends Controller
 {
@@ -90,7 +91,7 @@ class Bookingcontroller extends Controller
         // $jsonData = $response->json();
         $bookings = DB::table('tb_booking')
             ->where('booking_status', '!=', '3')
-            
+
             ->get();
         $events = array();
         foreach ($bookings as $booking) {
@@ -125,7 +126,8 @@ class Bookingcontroller extends Controller
     }
     public function store(Request $request)
     {
-        //dd($request->all());
+        
+        dd($request->all());
         $bookingcar = new BookingModel();
         $cnt_booking = $bookingcar->count();
 
@@ -135,8 +137,8 @@ class Bookingcontroller extends Controller
             $bookingcar->id = $cnt_booking + 1;
         }
         $bookingcar->username = $request->user_id;
-        $bookingcar->booking_start = $request->start;
-        $bookingcar->booking_end = $request->end;
+        $bookingcar->booking_start = $request->date_start;
+        $bookingcar->booking_end = $request->date_end;
         $bookingcar->license_plate = '-';
         $bookingcar->driver = '-';
         $bookingcar->type_car = '-';
@@ -144,7 +146,7 @@ class Bookingcontroller extends Controller
         $bookingcar->booking_status = '1';
         $bookingcar->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('success','การจองสำเร็จ');
     }
     public function update(Request $request)
     {
