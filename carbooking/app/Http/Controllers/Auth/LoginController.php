@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
+
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -44,7 +45,7 @@ class LoginController extends Controller
     public function login(Request $request)
     {
 
-//dd($request->all());
+        //dd($request->all());
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
@@ -83,9 +84,9 @@ class LoginController extends Controller
                 $user->email = $data->Email;
                 $user->username = $data->Username;
                 $user_tb = DB::table('Users')->count();
-                if($user_tb < 1){
+                if ($user_tb < 1) {
                     $user->role_user = "1";
-                }else{
+                } else {
                     $user->role_user = "2";
                 }
 
@@ -95,10 +96,10 @@ class LoginController extends Controller
 
             return redirect()->route("admin.dashboard");
             //dd(auth()->user());
-        } else {
-            // dd("false");
-            //Alert::error('โปรดใส่ข้อมูลรายละเอียดการจอง');
+        } elseif ($response->Result == "authenfailed") {
             return redirect('/')->with('error', 'Email or password incorrect');
+        } elseif ($response->Result == "failed") {
+            return redirect('/');
         }
     }
     public function logout()
