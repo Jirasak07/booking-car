@@ -76,20 +76,13 @@
                     };
                 },
                 dateClick: function(info) {
+
                     /* Swal.fire({
                         icon: 'question',
                         text: 'clicked ' + info.dateStr
                     }); */
                 },
-                eventConstraint: function(info) {
-                    // check if there is already an event scheduled in the selected time slot
-                    console.log(info.startStr);
-
-                    /* if (checkEventExists(start, end)) {
-                        return false; // this time slot is not valid for selection
-                    }
-                    return true; */ // this time slot is valid for selection
-                },
+                
                 select: function(info) {
                     var booking_start = moment(info.startStr).format('YYYY-MM-DD hh:mm:ss a');
                     var booking_end = moment(info.endStr).format('YYYY-MM-DD hh:mm:ss a');
