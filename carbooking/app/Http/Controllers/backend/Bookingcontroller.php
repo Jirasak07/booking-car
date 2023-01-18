@@ -126,8 +126,9 @@ class Bookingcontroller extends Controller
     }
     public function store(Request $request)
     {
-        
-        dd($request->all());
+        $date_start=Carbon::parse($request->date_start)->format('Y-m-d\TH:i:s');
+        $date_end=Carbon::parse($request->date_end)->format('Y-m-d\TH:i:s');
+        //dd($request->all(),$date_start,$date_end);
         $bookingcar = new BookingModel();
         $cnt_booking = $bookingcar->count();
 
@@ -137,8 +138,8 @@ class Bookingcontroller extends Controller
             $bookingcar->id = $cnt_booking + 1;
         }
         $bookingcar->username = $request->user_id;
-        $bookingcar->booking_start = $request->date_start;
-        $bookingcar->booking_end = $request->date_end;
+        $bookingcar->booking_start = $date_start;
+        $bookingcar->booking_end = $date_end;
         $bookingcar->license_plate = '-';
         $bookingcar->driver = '-';
         $bookingcar->type_car = '-';
