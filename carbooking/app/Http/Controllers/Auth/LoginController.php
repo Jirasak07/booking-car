@@ -102,7 +102,7 @@ class LoginController extends Controller
                 return redirect('/')->with('errorpassword', 'Password Incorrect');
             } elseif ($response->Result == "failed") { //email incorrect
                 return redirect('/')->with('erroremail', 'Email Incorrect');
-            } elseif ($response->Result == "notfound") { //password and email incorrect
+            } elseif ($response->Result == "notfound") { //password and email incorrect or email incorrect
                 return redirect('/')->with('errornot', 'Email or Password NotFound');
             }
         }
