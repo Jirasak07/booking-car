@@ -101,7 +101,7 @@
                                         <input type="hidden" name="type" value="1">
                                         <div class=" mt-4">
                                             <label for="selectcar">เลือกรถที่ต้องการใช้</label>
-                                            <select name="car_id" id="selectcar" class="rounded form-control"
+                                            <select name="car_id" id="selectcar" class="rounded form-control" required
                                                 style="width: 250px; border:1px solid #6673af30 ">
                                                 @foreach ($car as $cars)
                                                     <option value="{{ $cars['id'] }}">{{ $cars['car_model'] }}
@@ -113,7 +113,7 @@
                                         </div>
                                         <div>
                                             <label for="selectdriver">เลือกพนักงานขับรถ</label>
-                                            <select name="driver_id" id=" selectdriver" class="rounded form-control"
+                                            <select name="driver_id" id=" selectdriver" class="rounded form-control" required
                                                 style="width: 250px;  border:1px solid #6673af30 ">
                                                 @foreach ($driver as $dv)
                                                     <option value="{{ $dv['id'] }}">{{ $dv['driver_fullname'] }}
@@ -182,18 +182,27 @@
         function modal(val) {
             // document.getElementById('')
             const data = @json($booking);
+            const bookdata = [];
             moment.locale('th');
-
-            const start = data[val - 1];
-            const bookstart = moment(start.booking_start).add(543, 'year').format('ddd ที่ D MMM YY เวลา HH:mm นาที');
-            const bookend = moment(start.booking_end).add(543, 'year').format('ddd ที่ D MMM YY เวลา HH:mm นาที');
+            const start = [] ;
+            const end = [];
+            const detail = [];
+            data.forEach(d => {
+               if(d.id == val){
+                start.push(d.booking_start);
+                end.push(d.booking_end);
+                detail.push(d.booking_detail);
+               }
+            });
+            const bookstart = moment(JSON.stringify(start[0])).add(543, 'year').format('ddd ที่ D MMM YY เวลา HH:mm นาที');
+            const bookend = moment(JSON.stringify(end[0])).add(543, 'year').format('ddd ที่ D MMM YY เวลา HH:mm นาที');
             // console.log(typeof(bookstart));
             // alert(bookstart);
             // const da = moment().format('D-MM-YYYY');
             // console.log(da);
             document.getElementById('start_date').innerHTML = bookstart;
             document.getElementById('end_date').innerHTML = bookend;
-            document.getElementById('detail').innerHTML = start.booking_detail;
+            document.getElementById('detail').innerHTML = detail[0];
             document.getElementById('idform').value = val;
             // {{ thaidate('l j F Y เวลา G:i', strtotime($bookings['booking_start'])) }}
         }

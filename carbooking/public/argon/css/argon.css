@@ -20482,17 +20482,14 @@ a.nav-link-sub:hover {
     justify-content: center;
     gap: 10px;
 }
-#container-calen{
+#container-calen {
     height: 100vh;
-
 }
 
 #calendar-container {
     padding: 10px;
     width: 100%;
     height: 100%;
-
-
 }
 
 .fc-header-toolbar {
@@ -20504,6 +20501,15 @@ a.nav-link-sub:hover {
     padding-left: 1em;
     padding-right: 1em;
 }
-.shadowx{
+.shadowx {
     box-shadow: 2px 2px 20px 5px rgba(53, 53, 53, 0.87);
+}
+.option.active {
+    color: #ef476f;
+    border-radius: 5px;
+}
+.option:hover {
+    background-color: #e5e5e5;
+    cursor: pointer;
+    border-radius: 5px;
 }
