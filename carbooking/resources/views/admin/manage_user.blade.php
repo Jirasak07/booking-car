@@ -16,26 +16,37 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($user as $Users)
-                        <tr>
-                            <td>1</td>
-                            <td>{{$Users->username}}</td>
-                            <td>{{$Users->email}}</td>
-                            <td>
-                                <div class="btn-group dropend">
-                                    <button type="button" class="btn btn-secondary">
-                                        Split dropend
-                                    </button>
-                                    <button type="button" class="btn btn-secondary dropdown-toggle"
-                                        data-bs-toggle="dropdown" >
+                        @foreach ($user as $Users)
+                            <tr>
+                                <td>1</td>
+                                <td>{{ $Users->username }}</td>
+                                <td>{{ $Users->email }}</td>
+                                <td>
+                                    <div class="btn-group dropright" style="width: 30px">
+                                        <button type="button" class="btn btn-sm btn-default" style="width: 50px">
+                                            @if ($Users->role_user == 1)
+                                                Admin
+                                            @elseif ($Users->role_user == 2)
+                                                User
+                                            @endif
+                                        </button>
+                                        <i class="fa-solid fa-pen-to-square btn btn-warning btn-sm" data-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false">
+                                        </i>
+                                        <div class="dropdown-menu" >
+                                            @if ($Users->role_user == 1)
+                                                <option value="1" class="option active"style="font-weight: 900" >Admin</option>
+                                                <option value="2" class="option">user</option>
+                                                @elseif ($Users->role_user == 2)
+                                                <option value="1" class="option">Admin</option>
+                                                <option value="2" class="option active" style="font-weight: 900">user</option>
+                                            @endif
 
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <!-- Dropdown menu links -->
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr> @endforeach
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

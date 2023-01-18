@@ -84,7 +84,7 @@
                                     {{ $cars['car_model'] }}</div>
 
                                 <div class="res_car  ml-3 text-white" style="font-size:3rem;line-height:80%;"
-                                    id="tcar-{{ $cars['id'] }}"></div>
+                                    id="tcar-{{ $cars['id'] }}">0</div>
                                 <div class="text-white ml-3" style="font-size: 0.8em"> รายการ</div>
                             </div>
                         </div>
@@ -98,19 +98,29 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            const bookingcar1 = @json($bookingcarin);
+            console.log('car1 :', bookingcar1[0].suppercarcare)
             var allbook = @json($allbook);
             var car = @json($car);
             console.log(car);
             var allcar1 = @json($allcar1);
             var allcar2 = @json($allcar2);
-            console.log(allcar1[0].allcar1);
-            var total_car = 1;
-            $('#tcar-1').html(total_car);
+            let i = 1;
+            bookingcar1.forEach(element => {
+                console.log(element, i);
+                $('#tcar-'+i).html(bookingcar1[i-1].suppercarcare);
+                i++;
+            });
+
             const ctx = document.getElementById('myChart');
             document.getElementById('all').innerHTML = allbook;
             document.getElementById('pending').innerHTML = @json($pending);
             document.getElementById('cancel').innerHTML = @json($cancel);
             document.getElementById('approve').innerHTML = @json($approve);
+
+            // document.getElementById('car1').innerHTML = ;
+            // document.getElementById('car2').innerHTML = bookingcar1[1].suppercarcare;
+            // document.getElementById('car3').innerHTML = bookingcar1[2].suppercarcare;
             new Chart(ctx, {
                 type: 'doughnut',
 

@@ -154,7 +154,7 @@ class Bookingcontroller extends Controller
         $booking_update = BookingModel::find($id);
 
 
-        $booking_update->license_plate = $request->license_plate;
+        $booking_update->license_plate = $request->car_id;
         $booking_update->driver = $request->driver_id;
         $booking_update->type_car = $request->type;
         $booking_update->booking_status = "2";

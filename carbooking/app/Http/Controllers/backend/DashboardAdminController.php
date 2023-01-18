@@ -45,10 +45,12 @@ class DashboardAdminController extends Controller
             ->where('booking_status', '=', 3)->count();
 
         $bookingcarin = DB::table('tb_booking') //จำนวนรถภายในคันที่1 ทั้งหมด
-            ->select(DB::raw('COUNT(id) suppercarcare'),DB::raw('license_plate'))
+            ->select(DB::raw('COUNT(id) suppercarcare'), DB::raw('license_plate'))
+            ->where('booking_status', '=', 2)
             ->where('type_car', '=', 1)
-            ->groupBy('license_plate')->get();
 
+            ->groupBy('license_plate')->get();
+        // dd($bookingcarin);
         $bookingcar2 = DB::table('tb_booking') //จำนวนรถภายในคันที่2 ทั้งหมด
             ->where('license_plate', '=', 2)
             ->where('type_car', '=', 1)->count();
