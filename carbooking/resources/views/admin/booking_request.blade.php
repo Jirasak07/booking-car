@@ -1,12 +1,12 @@
 @section('title', 'ข้อมูลการจอง')
-
+<link href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet">
 @extends('layouts.layout')
 @section('content')
     @include('layouts.header')
     <div class="container-fulid mx-3 mt-2 ">
         <div class=" shadow-table ">
-
-            <table class="rounded table table-md  table-white table-striped fw-bold table-responsive-xl">
+            <table id="tableb"
+                class="rounded table table-md  table-white table-striped fw-bold table-responsive-xl display">
                 <thead class="table-dark table-hover">
                     <tr>
                         <td class="fw-bold">ลำดับ</td>
@@ -95,7 +95,8 @@
 
                             <div class="tab-content">
                                 <div class="tab-pane active" id="tab1">
-                                    <form method="POST" action="{{ route('update') }}" class="d-flex flex-column align-items-center">
+                                    <form method="POST" action="{{ route('update') }}"
+                                        class="d-flex flex-column align-items-center">
                                         @csrf
                                         <input type="hidden" id="idform" name="id_form">
                                         <input type="hidden" name="type" value="1">
@@ -113,8 +114,8 @@
                                         </div>
                                         <div>
                                             <label for="selectdriver">เลือกพนักงานขับรถ</label>
-                                            <select name="driver_id" id=" selectdriver" class="rounded form-control" required
-                                                style="width: 250px;  border:1px solid #6673af30 ">
+                                            <select name="driver_id" id=" selectdriver" class="rounded form-control"
+                                                required style="width: 250px;  border:1px solid #6673af30 ">
                                                 @foreach ($driver as $dv)
                                                     <option value="{{ $dv['id'] }}">{{ $dv['driver_fullname'] }}
                                                     </option>
@@ -173,26 +174,31 @@
         </div>
     </div>
     <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
     <script>
         $('.nav-tabs a').on('click', function(e) {
             e.preventDefault()
             $(this).tab('show')
-        })
+        });
+
+        $(document).ready(function() {
+            $('#tableb').DataTable();
+        });
 
         function modal(val) {
             // document.getElementById('')
             const data = @json($booking);
             const bookdata = [];
             moment.locale('th');
-            const start = [] ;
+            const start = [];
             const end = [];
             const detail = [];
             data.forEach(d => {
-               if(d.id == val){
-                start.push(d.booking_start);
-                end.push(d.booking_end);
-                detail.push(d.booking_detail);
-               }
+                if (d.id == val) {
+                    start.push(d.booking_start);
+                    end.push(d.booking_end);
+                    detail.push(d.booking_detail);
+                }
             });
             const bookstart = moment(JSON.stringify(start[0])).add(543, 'year').format('ddd ที่ D MMM YY เวลา HH:mm นาที');
             const bookend = moment(JSON.stringify(end[0])).add(543, 'year').format('ddd ที่ D MMM YY เวลา HH:mm นาที');

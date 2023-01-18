@@ -92,13 +92,13 @@
                 @endforeach
             </div>
         </div>
-        <div class="card mx-3 mb-5" id="container-calen">
+        <div class="bg-white mb-5 rounded" style="height:150vh"  >
             @include('admin.calendar_show')
         </div>
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            
+
             setInterval(() => {
 
                 $.ajax({
@@ -235,5 +235,6 @@
                 }
             }
         });
+        
     </script>
 @endsection
