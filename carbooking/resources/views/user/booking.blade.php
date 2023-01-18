@@ -443,10 +443,9 @@
 
         @push('js')
             <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js">
-                < /scrip>
+                </script>
 
-                <
-                script >
+                <script >
                     $(document).ready(function() {
                         $('#booking_table').DataTable();
                     });
