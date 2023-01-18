@@ -11,8 +11,19 @@ use Illuminate\Support\Facades\Http;
 class DashboardAdminController extends Controller
 {
     //
+    public function refresh()
+    {
+
+        return response()->json([
+            'allbooking' => DB::table('tb_booking')->count('id'),
+            'pending' => DB::table('tb_booking')->where('booking_status', '=', 1)->count('id'),
+            'approve' => DB::table('tb_booking')->where('booking_status', '=', 2)->count('id'),
+            'cancel' => DB::table('tb_booking')->where('booking_status', '=', 3)->count('id'),
+        ]);
+    }
     public function index()
     {
+
         $date = Carbon::now()->format('d-m-Y H:i:s');
         // // dd($date);
         $bookingcar1ad = DB::table('tb_booking') //จำนวนรถภายในคันที่1 ที่อนุมัติแล้ว

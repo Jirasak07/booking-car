@@ -98,6 +98,21 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            
+            setInterval(() => {
+
+                $.ajax({
+                    url: '/admin/dashboard/refresh',
+                    method: 'GET',
+                    success: function(data) {
+                        $('#all').html(data.allbooking);
+                        $('#pending').html(data.pending);
+                        $('#cancel').html(data.cancel);
+
+                        $('#approve').html(data.approve);
+                    }
+                })
+            }, 5000);
             const bookingcar1 = @json($bookingcarin);
             console.log('car1 :', bookingcar1[0].suppercarcare)
             var allbook = @json($allbook);
@@ -108,7 +123,7 @@
             let i = 1;
             bookingcar1.forEach(element => {
                 console.log(element, i);
-                $('#tcar-'+i).html(bookingcar1[i-1].suppercarcare);
+                $('#tcar-' + i).html(bookingcar1[i - 1].suppercarcare);
                 i++;
             });
 

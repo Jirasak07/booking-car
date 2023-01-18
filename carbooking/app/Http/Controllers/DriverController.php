@@ -24,10 +24,10 @@ class DriverController extends Controller
       if($driver->driver_status == 1){
         $driver->driver_status = ('2');
         $driver->save();
-      }elseif($driver->driver_status == 2){
+      }else if($driver->driver_status == 2){
         $driver->driver_status = ('1');
         $driver->save();
       }
-     return redirect()->back();
+     return response()->json(['status'=>'success']);
     }
 }
