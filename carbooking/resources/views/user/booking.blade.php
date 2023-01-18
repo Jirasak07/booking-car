@@ -3,6 +3,7 @@
 @extends('layouts.layout')
 @section('content')
     @include('layouts.header')
+
     <!-- box header booking pages -->
     <div class="pt-5">
         <div class="container-fluid">
@@ -93,11 +94,12 @@
             <div class="col-xl-12">
                 <div class="card shadow-sm p-3 overflow-auto">
 
-                    <table class="overflow-auto table table-hover fw-bold table-responsive-xl text-center" id="booking_table">
+                    <table class="table table-hover fw-bold table-responsive-xl overflow-hidden" id="booking_table">
                         <thead class="table-light">
                             <tr align="center">
                                 <th class="fw-bolder" style="font-size: 18px">ลำดับ</th>
                                 <th class="fw-bolder" style="font-size: 18px">ช่วงวันที่</th>
+                                <th class="fw-bolder text-wrap" style="font-size: 18px">สาเหตุ</th>
                                 <th class="fw-bolder" style="font-size: 18px">รายละเอียดการจอง</th>
                                 <th class="fw-bolder" style="font-size: 18px">สถานะการจอง</th>
                                 <th class="fw-bolder" style="font-size: 18px">จัดการ</th>
@@ -108,49 +110,54 @@
                                 $i = 1;
                             @endphp
                             @foreach ($booking2 as $item)
-                                <tr align="center">
+                                <tr>
                                     @if ($item->booking_status == 1)
-                                        <td style="font-size: 18px">{{ $i++ }}</td>
+                                        <td style="font-size: 18px" align="center">{{ $i++ }}</td>
                                         <td style="font-size: 16px">
                                             @php
-                                                echo thaidate('l j F Y', $item->booking_start) . '&nbsp;ถึง&nbsp;' . thaidate('l j F Y', $item->booking_end);
+                                                echo thaidate('j F Y เวลา H:i', $item->booking_start) . '&nbsp;-&nbsp;' . thaidate('j F Y เวลา H:i', $item->booking_end);
                                             @endphp
 
                                         </td>
-                                        <td>
+                                        <td class="text-wrap" style="font-size: 16px">
+                                            {!! Str::limit("$item->booking_detail", 50, ' ...') !!}
+                                        </td>
+                                        <td align="center">
                                             <button class="btn btn-neutral btn-sm text-darker"data-toggle="modal"
                                                 data-target="#viewde{{ $item->id }}">
                                                 <i class="fa-solid fa-eye"></i>
                                             </button>
                                         </td>
-                                        <td>
-                                            @if ($item->booking_status == '1')
-                                                <button class="btn bg-yellow btn-sm"
-                                                    style="font-size: 14px;color:#393E46">กำลังดำเนินการ</button>
-                                            @endif
+                                        <td align="center">
+                                            <button class="btn bg-yellow btn-sm"
+                                                style="font-size: 14px;color:#393E46">กำลังดำเนินการ</button>
                                         </td>
-                                        <td>
+                                        <td align="center">
                                             <button class="btn btn-yellow btn-sm me-2" style="font-size: 13px"
-                                                data-toggle="modal" data-target="#editde{{ $item->id }}">แก้ไข</button>
+                                                data-toggle="modal" data-target="#editde{{ $item->id }}">
+                                                <i class="fa-regular fa-pen-to-square"></i><span>แก้ไข</span></button>
                                             <button class="btn btn-danger btn-sm" style="font-size: 13px"
-                                                onclick="alertCancel({{ $item->id }})">ยกเลิก</button>
+                                                onclick="alertCancel({{ $item->id }})">
+                                                <i class="fa-solid fa-rectangle-xmark"></i><span>ยกเลิก</span></button>
                                         </td>
                                     @else
-                                        <td style="font-size: 18px">{{ $i++ }}</td>
+                                        <td style="font-size: 18px" align="center">{{ $i++ }}</td>
                                         <td style="font-size: 16px">
                                             @php
-                                                echo thaidate('l j F Y', $item->booking_start) . '&nbsp;ถึง&nbsp;' . thaidate('l j F Y', $item->booking_end);
+                                                echo thaidate('j F Y เวลา H:i', $item->booking_start) . '&nbsp;-&nbsp;' . thaidate('j F Y เวลา H:i', $item->booking_end);
                                             @endphp
                                         </td>
-                                        <td>
+                                        <td class="text-wrap" style="font-size: 16px">{!! Str::limit("$item->booking_detail", 50, ' ...') !!}</td>
+                                        <td align="center">
                                             <button class="btn btn-neutral btn-sm text-darker"data-toggle="modal"
                                                 data-target="#viewde{{ $item->id }}">
                                                 <i class="fa-solid fa-eye"></i>
                                             </button>
                                         </td>
-                                        <td>
+                                        <td align="center">
                                             @if ($item->booking_status == '2')
-                                                <i class="fa-solid fa-square-check" style="color: green;font-size:24px"></i>
+                                                <i class="fa-solid fa-square-check"
+                                                    style="color: green;font-size:24px"></i>
                                             @else
                                                 <i class="fa-sharp fa-solid fa-rectangle-xmark"
                                                     style="color: red;font-size:24px"></i>
@@ -282,9 +289,8 @@
                                                         <label for=""
                                                             class="col-sm-3 col-form-label">รายละเอียดการจอง</label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" disabled
-                                                                value="{{ $item->booking_detail }}" readonly
-                                                                class="form-control-plaintext" id="">
+                                                            <textarea name="" id="" cols="30" disabled rows="5"value="" readonly
+                                                                class="form-control-plaintext">{{ $item->booking_detail }}</textarea>
                                                         </div>
                                                     </div>
                                                 @elseif ($item->booking_status == 2)
@@ -347,9 +353,8 @@
                                                         <label for=""
                                                             class="col-sm-3 col-form-label">รายละเอียดการจอง</label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" disabled
-                                                                value="{{ $item->booking_detail }}" readonly
-                                                                class="form-control-plaintext" id="">
+                                                            <textarea name="" id="" cols="30" disabled rows="5"value="" readonly
+                                                                class="form-control-plaintext">{{ $item->booking_detail }}</textarea>
                                                         </div>
                                                     </div>
                                                 @else
@@ -412,9 +417,8 @@
                                                         <label for=""
                                                             class="col-sm-3 col-form-label">รายละเอียดการจอง</label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" disabled
-                                                                value="{{ $item->booking_detail }}" readonly
-                                                                class="form-control-plaintext" id="">
+                                                            <textarea name="" id="" cols="30" disabled rows="5"value="" readonly
+                                                                class="form-control-plaintext">{{ $item->booking_detail }}</textarea>
                                                         </div>
                                                     </div>
                                                 @endif
@@ -438,12 +442,14 @@
 
 
         @push('js')
-            <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+            <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js">
+                < /scrip>
 
-            <script>
-                $(document).ready(function() {
-                    $('#booking_table').DataTable();
-                });
+                <
+                script >
+                    $(document).ready(function() {
+                        $('#booking_table').DataTable();
+                    });
 
                 function alertCancel(id) {
                     //alert(id)
