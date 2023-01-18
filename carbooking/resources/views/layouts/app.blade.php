@@ -36,8 +36,7 @@
         @include('layouts.navbars.sidebar')
     @endauth
 
-    <div class="main-content">
-        @include('layouts.navbars.navbar')
+    <div class="d-flex justify-content-center align-items-center  h-100 " style="background-color: #16425b" >
         @yield('content')
     </div>
 
