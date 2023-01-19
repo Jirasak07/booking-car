@@ -27,7 +27,7 @@ class Bookingcontroller extends Controller
         return view('admin.booking_request')->with(['booking' => $jsonData, 'car' => $jsonDatacar, 'driver' => $jsonDatadriver]);
     }
 
-   
+
 
     public function history()
     {
@@ -50,21 +50,27 @@ class Bookingcontroller extends Controller
         // $response = Http::get('http://'.$currentURL.'/index.php/api/calendar');
 
         // $jsonData = $response->json();
+
         $bookings = DB::table('tb_booking')
             ->where('booking_status', '!=', '3')
-
+            ->select('tb_booking.*')
             ->get();
         $events = array();
         foreach ($bookings as $booking) {
             $color = null;
+            
+            if ($booking->type_car == '1') {
+                $car = "รถภายใน";
+            } elseif ($booking->type_car == '2') {
+                $car = "รถภายนอก";
+            }
             if ($booking->booking_status == '1') {
                 $color = 'rgba(245,147,0,0.4)';
                 $events[] = [
                     'id' => $booking->id,
-                    'title' => $booking->booking_detail .'('.$booking->type_car.')',
+                    'title' => $booking->booking_detail,
                     'start' => $booking->booking_start,
                     'end' => $booking->booking_end,
-                  
                     'color' => $color,
                 ];
             }
@@ -73,10 +79,9 @@ class Bookingcontroller extends Controller
                 $color = 'rgba(0,245,36,0.4)';
                 $events[] = [
                     'id' => $booking->id,
-                    'title' => $booking->booking_detail .'('.$booking->type_car.')',
+                    'title' => $booking->booking_detail . '(' . $car.')',
                     'start' => $booking->booking_start,
                     'end' => $booking->booking_end,
-                  
                     'color' => $color,
                 ];
             }
@@ -90,7 +95,7 @@ class Bookingcontroller extends Controller
         $canclebooking = BookingModel::find($id);
         $canclebooking->booking_status = ('3');
         $canclebooking->save();
-        return redirect()->back()->with('success', 'เรียบร้อย');
+        return response()->json(['status'=>'success']);
     }
     public function store(Request $request)
     {

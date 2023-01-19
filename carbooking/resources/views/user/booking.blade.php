@@ -8,6 +8,14 @@
         <div class="row mb-3">
             <div class="col-xl-12">
                 <div class="card shadow-sm p-3 overflow-auto">
+                    @if ($message = Session::get('success_edit'))
+                        <script>
+                            Swal.fire({
+                                icon: 'success',
+                                text: 'แก้ไขการจองสำเร็จ',
+                            });
+                        </script>
+                    @endif
                     <div class="table-responsive">
                         <table class="table table-hover fw-bold w-100  " id="booking_table">
                             <thead class="table-light">
@@ -191,8 +199,8 @@
                                                                 class="col-sm-2 col-form-label">ช่วงวันที่</label>
                                                             <div class="col-sm-10">
                                                                 <label class="form-control-plaintext">
-                                                                    @php 
-                                                                        echo thaidate('วันที่ d M Y เวลา H:i', $item->booking_start) . '&nbsp;-&nbsp;' . thaidate('วันที่ d M Y เวลา H:i', $item->booking_end); 
+                                                                    @php
+                                                                        echo thaidate('วันที่ d M Y เวลา H:i', $item->booking_start) . '&nbsp;-&nbsp;' . thaidate('วันที่ d M Y เวลา H:i', $item->booking_end);
                                                                     @endphp
                                                                 </label>
                                                             </div>
@@ -236,8 +244,8 @@
                                                                 class="col-sm-2 col-form-label">ช่วงวันที่</label>
                                                             <div class="col-sm-10">
                                                                 <label class="form-control-plaintext">
-                                                                    @php 
-                                                                        echo thaidate('วันที่ d M Y เวลา H:i', $item->booking_start) . '&nbsp;-&nbsp;' . thaidate('วันที่ d M Y เวลา H:i', $item->booking_end); 
+                                                                    @php
+                                                                        echo thaidate('วันที่ d M Y เวลา H:i', $item->booking_start) . '&nbsp;-&nbsp;' . thaidate('วันที่ d M Y เวลา H:i', $item->booking_end);
                                                                     @endphp
                                                                 </label>
                                                             </div>
@@ -303,8 +311,8 @@
                                                                 class="col-sm-2 col-form-label">ช่วงวันที่</label>
                                                             <div class="col-sm-10">
                                                                 <label class="form-control-plaintext">
-                                                                    @php 
-                                                                        echo thaidate('วันที่ d M Y เวลา H:i', $item->booking_start) . '&nbsp;-&nbsp;' . thaidate('วันที่ d M Y เวลา H:i', $item->booking_end); 
+                                                                    @php
+                                                                        echo thaidate('วันที่ d M Y เวลา H:i', $item->booking_start) . '&nbsp;-&nbsp;' . thaidate('วันที่ d M Y เวลา H:i', $item->booking_end);
                                                                     @endphp
                                                                 </label>
                                                             </div>
@@ -400,13 +408,13 @@
                                 type: 'GET',
                                 url: '/users/cancel/' + id,
                                 dataType: 'JSON',
-                                success: function(result) {
+                                success: function(data) {
                                     if (data.status == 'success') {
                                         Swal.fire({
                                             title: 'เสร็จสิ้น',
                                             icon: 'success',
                                             confirmButtonText: 'ok',
-                                        }).then((result) => {
+                                        }).then((data) => {
                                             /* Read more about isConfirmed, isDenied below */
                                             if (result.isConfirmed) {
                                                 window.location.reload();
