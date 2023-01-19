@@ -84,26 +84,26 @@ class Bookingcontroller extends Controller
             $car = "รถภายใน";
             $events[] = [
                 'id' => $item->id,
-                'title' => $item->booking_detail . '(' . $car . ' ' . $item->car_license . ')',
+                'title' => $item->booking_detail . '(ทะเบียนรถ' . $car . ' ' . $item->car_license . ' คนขับรถ ' . $item->driver_fullname . ')',
                 'start' => $item->booking_start,
                 'end' => $item->booking_end,
                 'color' => $color,
             ];
         }
         $booking_join2 = DB::table('tb_booking')
-                ->join('tb_out_cars', 'tb_booking.license_plate', '=', 'tb_out_cars.id')
-                ->where('tb_booking.type_car', '=', '2')
-                ->where('tb_booking.booking_status', '!=', '3')
-                ->where('tb_booking.booking_status', '!=', '1')
-                ->select('car_out_license', 'car_out_model', 'car_out_driver', 'car_out_tel', 'tb_booking.*')
-                ->get();
+            ->join('tb_out_cars', 'tb_booking.license_plate', '=', 'tb_out_cars.id')
+            ->where('tb_booking.type_car', '=', '2')
+            ->where('tb_booking.booking_status', '!=', '3')
+            ->where('tb_booking.booking_status', '!=', '1')
+            ->select('car_out_license', 'car_out_model', 'car_out_driver', 'car_out_tel', 'tb_booking.*')
+            ->get();
         $car = "รถภายนอก";
         foreach ($booking_join2 as $item2) {
             $color = 'rgba(0,245,36,0.4)';
             $car = "รถภายใน";
             $events[] = [
                 'id' => $item2->id,
-                'title' => $item2->booking_detail . '(' . $car . ' ' . $item2->car_license . ')',
+                'title' => $item2->booking_detail . '(ทะเบียนรถ' . $car . ' ' . $item2->car_license . ' คนขับรถ ' . $item2->car_out_driver . ' เบอร์โทร ' . $item2->car_out_tel . ')',
                 'start' => $item2->booking_start,
                 'end' => $item2->booking_end,
                 'color' => $color,

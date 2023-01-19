@@ -381,6 +381,9 @@
             <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
             <script>
                 $(document).ready(function() {
+                    setInterval(() => {
+                        console.log('refresh');
+                    }, 5000);
                     $('#booking_table').DataTable({
                         responsive: true
                     });
