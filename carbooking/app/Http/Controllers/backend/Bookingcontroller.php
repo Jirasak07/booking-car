@@ -56,14 +56,9 @@ class Bookingcontroller extends Controller
             ->select('tb_booking.*')
             ->get();
         $events = array();
+
         foreach ($bookings as $booking) {
             $color = null;
-            
-            if ($booking->type_car == '1') {
-                $car = "รถภายใน";
-            } elseif ($booking->type_car == '2') {
-                $car = "รถภายนอก";
-            }
             if ($booking->booking_status == '1') {
                 $color = 'rgba(245,147,0,0.4)';
                 $events[] = [
@@ -74,19 +69,50 @@ class Bookingcontroller extends Controller
                     'color' => $color,
                 ];
             }
-
-            if ($booking->booking_status == '2') {
-                $color = 'rgba(0,245,36,0.4)';
-                $events[] = [
-                    'id' => $booking->id,
-                    'title' => $booking->booking_detail . '(' . $car.')',
-                    'start' => $booking->booking_start,
-                    'end' => $booking->booking_end,
-                    'color' => $color,
-                ];
-            }
+        }
+        $booking_join1 = DB::table('tb_booking')
+            ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
+            ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
+            ->where('tb_booking.type_car', '=', '1')
+            ->where('tb_booking.booking_status', '!=', '3')
+            ->where('tb_booking.booking_status', '!=', '1')
+            //->orderBy('booking_status')
+            ->select('driver_fullname', 'car_license', 'car_model', 'tb_booking.*')
+            ->get();
+        foreach ($booking_join1 as $item) {
+            $color = 'rgba(0,245,36,0.4)';
+            $car = "รถภายใน";
+            $events[] = [
+                'id' => $item->id,
+                'title' => $item->booking_detail . '(' . $car . ' ' . $item->car_license . ')',
+                'start' => $item->booking_start,
+                'end' => $item->booking_end,
+                'color' => $color,
+            ];
+        }
+        $booking_join2 = DB::table('tb_booking')
+                ->join('tb_out_cars', 'tb_booking.license_plate', '=', 'tb_out_cars.id')
+                ->where('tb_booking.type_car', '=', '2')
+                ->where('tb_booking.booking_status', '!=', '3')
+                ->where('tb_booking.booking_status', '!=', '1')
+                ->select('car_out_license', 'car_out_model', 'car_out_driver', 'car_out_tel', 'tb_booking.*')
+                ->get();
+        $car = "รถภายนอก";
+        foreach ($booking_join2 as $item2) {
+            $color = 'rgba(0,245,36,0.4)';
+            $car = "รถภายใน";
+            $events[] = [
+                'id' => $item2->id,
+                'title' => $item2->booking_detail . '(' . $car . ' ' . $item2->car_license . ')',
+                'start' => $item2->booking_start,
+                'end' => $item2->booking_end,
+                'color' => $color,
+            ];
         }
 
+
+        //dd($booking->)
+        //dd($events, $booking_join1,$booking_join2, $booking->id);
         return view('user.dashboard')->with(['booking' => $events]);
     }
     public function cancle($id)
@@ -95,7 +121,7 @@ class Bookingcontroller extends Controller
         $canclebooking = BookingModel::find($id);
         $canclebooking->booking_status = ('3');
         $canclebooking->save();
-        return response()->json(['status'=>'success']);
+        return response()->json(['status' => 'success']);
     }
     public function store(Request $request)
     {
