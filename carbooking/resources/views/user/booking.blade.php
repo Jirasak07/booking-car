@@ -104,9 +104,8 @@
                                                             <label for=""
                                                                 class="col-sm-2 col-form-label">ชื่อผู้จอง</label>
                                                             <div class="col-sm-10">
-                                                                <input type="text" disabled
-                                                                    value="{{ $item->username }}" readonly
-                                                                    class="form-control-plaintext" id="username"
+                                                                <input type="text" disabled value="{{ $item->username }}"
+                                                                    readonly class="form-control-plaintext" id="username"
                                                                     name="username">
                                                             </div>
                                                         </div>
@@ -191,10 +190,11 @@
                                                             <label for=""
                                                                 class="col-sm-2 col-form-label">ช่วงวันที่</label>
                                                             <div class="col-sm-10">
-                                                                <input type="text" disabled
-                                                                    value="{{ $item->booking_start }} ถึง {{ $item->booking_end }}"
-                                                                    readonly class="form-control-plaintext"
-                                                                    id="">
+                                                                <label class="form-control-plaintext">
+                                                                    @php 
+                                                                        echo thaidate('วันที่ d M Y เวลา H:i', $item->booking_start) . '&nbsp;-&nbsp;' . thaidate('วันที่ d M Y เวลา H:i', $item->booking_end); 
+                                                                    @endphp
+                                                                </label>
                                                             </div>
                                                         </div>
                                                         <div class="row mb-1">
@@ -235,10 +235,11 @@
                                                             <label for=""
                                                                 class="col-sm-2 col-form-label">ช่วงวันที่</label>
                                                             <div class="col-sm-10">
-                                                                <input type="text" disabled
-                                                                    value="{{ $item->booking_start }} ถึง {{ $item->booking_end }}"
-                                                                    readonly class="form-control-plaintext"
-                                                                    id="">
+                                                                <label class="form-control-plaintext">
+                                                                    @php 
+                                                                        echo thaidate('วันที่ d M Y เวลา H:i', $item->booking_start) . '&nbsp;-&nbsp;' . thaidate('วันที่ d M Y เวลา H:i', $item->booking_end); 
+                                                                    @endphp
+                                                                </label>
                                                             </div>
                                                         </div>
                                                         @foreach ($booking as $data)
@@ -301,10 +302,11 @@
                                                             <label for=""
                                                                 class="col-sm-2 col-form-label">ช่วงวันที่</label>
                                                             <div class="col-sm-10">
-                                                                <input type="text" disabled
-                                                                    value="{{ $item->booking_start }} ถึง {{ $item->booking_end }}"
-                                                                    readonly class="form-control-plaintext"
-                                                                    id="">
+                                                                <label class="form-control-plaintext">
+                                                                    @php 
+                                                                        echo thaidate('วันที่ d M Y เวลา H:i', $item->booking_start) . '&nbsp;-&nbsp;' . thaidate('วันที่ d M Y เวลา H:i', $item->booking_end); 
+                                                                    @endphp
+                                                                </label>
                                                             </div>
                                                         </div>
                                                         @foreach ($booking as $data)
@@ -375,11 +377,12 @@
                         responsive: true
                     });
                     //tag input datetime-local เลือกวันย้อนหลังไม่ได้
-                    var now_utc = Date.now() 
+                    var now_utc = Date.now()
                     var today = new Date(now_utc).toISOString().substring(0, 16);
                     document.getElementById("booking_start").setAttribute("min", today);
                     document.getElementById("booking_end").setAttribute("min", today);
                 });
+
                 function alertCancel(id) {
                     //alert(id)
                     Swal.fire({
