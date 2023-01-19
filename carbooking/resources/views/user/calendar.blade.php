@@ -63,7 +63,11 @@
                 },
                 eventClick: function(info) {
                     var eventObj = info.event;
-                    alert('Clicked ' + eventObj.title);
+                    //alert('Clicked ' + );
+                    Swal.fire({
+                        title: eventObj.title,
+                        text:'ช่วงเวลา ' +eventObj.start+' - '+eventObj.end,
+                    });
                 },
                 events: bookings,
 
