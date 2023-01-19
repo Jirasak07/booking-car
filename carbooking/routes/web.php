@@ -52,9 +52,11 @@ Route::group(
         Route::get('request', [\App\Http\Controllers\backend\Bookingcontroller::class, 'index'])->name('admin.booking_request');
         Route::get('manage-driver', [DriverController::class, 'index'])->name('admin.manage-driver');
         Route::get('manage-driver/{id}', [DriverController::class, 'changestatus'])->name('driverstatus');
+
         Route::get('manage-car', [CarsController::class, 'index'])->name('admin.manage-car');
         Route::get('manage-car/{id}', [CarsController::class, 'changestatus'])->name('changestatus');
         Route::get('manage-user', [\App\Http\Controllers\backend\ManagementAdminController::class, 'index'])->name('admin.manage-user');
+        Route::get('manage-role/{id}', [\App\Http\Controllers\backend\ManagementAdminController::class, 'edit_role']);
         Route::get('history', [\App\Http\Controllers\backend\Bookingcontroller::class, 'history'])->name('admin.booking_history');
         Route::post('GG', function (Request $request) {
             dd($request->all());

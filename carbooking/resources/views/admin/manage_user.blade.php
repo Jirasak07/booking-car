@@ -24,27 +24,26 @@
                                 <td>
                                     <div class="btn-group dropright" style="width: 30px">
                                         <button type="button" class="btn btn-sm btn-default" style="width: 50px">
-                                            @if ($Users->role_user == 1)
-                                                Admin
-                                            @elseif ($Users->role_user == 2)
-                                                User
-                                            @endif
+                                            {{ $Users->role_user == 1 ? 'Admin' : 'User' }}
+
                                         </button>
                                         <i class="fa-solid fa-pen-to-square btn btn-warning btn-sm" data-toggle="dropdown"
-                                            aria-haspopup="true" aria-expanded="false">
+                                            aria-haspopup="true" aria-expanded="false"
+                                            onclick='changeRole({{ $Users->role_user }},{{ $Users->id }})'>
                                         </i>
-                                        <div class="dropdown-menu">
+                                        {{-- <div class="dropdown-menu">
+
                                             @if ($Users->role_user == 1)
-                                                <option value="1" class="option active"style="font-weight: 900">Admin
+                                                <option value="1" class="option active"style="font-weight: 900" disabled >Admin
                                                 </option>
-                                                <option value="2" class="option" onclick='changeRole(2)'>user</option>
+                                                <option value="2" class="option" '>user</option>
                                             @elseif ($Users->role_user == 2)
                                                 <option value="1" class="option" onclick="changeRole(1)">Admin</option>
-                                                <option value="2" class="option active" style="font-weight: 900">User
+                                                <option value="2" class="option active" style="font-weight: 900" disabled>User
                                                 </option>
                                             @endif
 
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </td>
                             </tr>
@@ -55,12 +54,15 @@
         </div>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
-            function changeRole(e) {
+            function changeRole(e, val2) {
                 const name = e;
-                if (e == 1) {
+                var role = 0;
+                if (e == 2) {
                     var namerole = 'Admin';
-                } else if (e == 2) {
+                    role = 1;
+                } else if (e == 1) {
                     var namerole = 'User';
+                    role = 2;
                 }
                 Swal.fire({
                     title: 'ต้องการเปลี่ยนเป็น' + namerole + 'หรือไม่ ?',
@@ -72,11 +74,34 @@
                     cancelButtonText: 'ยกเลิก'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        Swal.fire({
-                            title: 'เสร็จสิ้น',
-                            icon: 'success',
+                        $.ajax({
+                            url: '/admin/manage-role/' + val2,
+                            method: 'GET',
+                            success: function(data) {
+                                if (data.status == 'success') {
+                                    Swal.fire({
+                                        title: 'เสร็จสิ้น',
+                                        icon: 'success',
+                                        confirmButtonText: 'ok',
+                                    }).then((result) => {
+                                        /* Read more about isConfirmed, isDenied below */
+                                        if (result.isConfirmed) {
+                                            window.location.reload();
+                                        }
+                                    })
+
+                                } else if (data.status == 'error') {
+                                    Swal.fire({
+                                        title: 'ไม่สามารถเปลี่ยนได้',
+                                        icon: 'error',
+                                    })
+                                }
+                            }
                         })
+                    }else {
+
                     }
+
                 })
             }
         </script>

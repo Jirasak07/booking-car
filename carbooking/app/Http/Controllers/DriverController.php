@@ -19,8 +19,8 @@ class DriverController extends Controller
     }
     public function changeStatus($id)
     {
+       
       $driver = DriverModel::find($id);
-
       if($driver->driver_status == 1){
         $driver->driver_status = ('2');
         $driver->save();
