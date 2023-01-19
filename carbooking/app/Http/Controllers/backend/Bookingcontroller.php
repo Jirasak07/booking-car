@@ -98,20 +98,27 @@ class Bookingcontroller extends Controller
             $color = null;
             if ($booking->booking_status == '1') {
                 $color = 'rgba(245,147,0,0.4)';
+                $events[] = [
+                    'id' => $booking->id,
+                    'title' => $booking->booking_detail .'('.$booking->type_car.')',
+                    'start' => $booking->booking_start,
+                    'end' => $booking->booking_end,
+                  
+                    'color' => $color,
+                ];
             }
 
             if ($booking->booking_status == '2') {
                 $color = 'rgba(0,245,36,0.4)';
+                $events[] = [
+                    'id' => $booking->id,
+                    'title' => $booking->booking_detail .'('.$booking->type_car.')',
+                    'start' => $booking->booking_start,
+                    'end' => $booking->booking_end,
+                  
+                    'color' => $color,
+                ];
             }
-
-            $events[] = [
-                'id' => $booking->id,
-                'title' => $booking->booking_detail,
-                'start' => $booking->booking_start,
-                'end' => $booking->booking_end,
-                'type' => $booking->type_car,
-                'color' => $color,
-            ];
         }
 
         return view('user.dashboard')->with(['booking' => $events]);
@@ -126,8 +133,8 @@ class Bookingcontroller extends Controller
     }
     public function store(Request $request)
     {
-        $date_start=Carbon::parse($request->date_start)->format('Y-m-d\TH:i:s');
-        $date_end=Carbon::parse($request->date_end)->format('Y-m-d\TH:i:s');
+        $date_start = Carbon::parse($request->date_start)->format('Y-m-d\TH:i:s');
+        $date_end = Carbon::parse($request->date_end)->format('Y-m-d\TH:i:s');
         //dd($request->all(),$date_start,$date_end);
         $bookingcar = new BookingModel();
         $cnt_booking = $bookingcar->count();
@@ -147,7 +154,7 @@ class Bookingcontroller extends Controller
         $bookingcar->booking_status = '1';
         $bookingcar->save();
 
-        return redirect()->back()->with('success','การจองสำเร็จ');
+        return redirect()->back()->with('success', 'การจองสำเร็จ');
     }
     public function update(Request $request)
     {
