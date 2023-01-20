@@ -7,17 +7,20 @@ use App\Models\BookingModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Carbon;
 class UserBookingController extends Controller
 {
     //
     function edit_booking(Request $request)
     {
         $id = $request->id;
+        $date_start = Carbon::parse($request->booking_start)->format('Y-m-d\TH:i:s');
+        $date_end = Carbon::parse($request->booking_end)->format('Y-m-d\TH:i:s');
         $booking = BookingModel::find($id);
-        $booking->booking_start = date('Y-m-d', strtotime($request->booking_start));
-        $booking->booking_end = date('Y-m-d', strtotime($request->booking_end));
+        $booking->booking_start = $date_start;
+        $booking->booking_end = $date_end;
         $booking->booking_detail = $request->booking_detail;
+        //dd($booking);
         $booking->save();
         return redirect()->back()->with('success_edit','complete');
     }

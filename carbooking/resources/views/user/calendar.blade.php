@@ -6,38 +6,26 @@
 </style>
 
 @push('js')
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
-        integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
-    <!-- Modal -->
     <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/javascript.util/0.12.12/javascript.util.min.js"
-        integrity="sha512-oHBLR38hkpOtf4dW75gdfO7VhEKg2fsitvHZYHZjObc4BPKou2PGenyxA5ZJ8CCqWytBx5wpiSqwVEBy84b7tw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.0.2/index.global.min.js'></script>
-    {{-- <script src='fullcalendar/dist/index.global.js'></script> --}}
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             setInterval(() => {
-                console.log('refresh');
+
+                $.ajax({
+                    url: '/users/dashboard/refresh',
+                    method: 'GET',
+                    success: function(data) {
+                        $('#calendar').html(data.calendar);
+                        
+                    }
+                })
             }, 5000);
             var calendarEl = document.getElementById('calendar');
             var bookings = @json($booking);
             //console.log(bookings);
-            var g = "1234"
-            //console.log(bookings);
-            /*console.log(bookings);
-              for (let index = 0; index < bookings.length; index++) {
-                            let re = bookings[index].type;
-                            if (re == '1') {
-                                $(this).css('background-color', '#f72585');
-                            } else if (re == '2') {
-                                $(this).css('background-color', '#0a0908');
-                            } else {
-                                $(this).css('background-color', '#00bbf9');
-                            }
-                        }
-             */
+
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 //themeSystem: 'bootstrap5',
                 selectable: true,
@@ -66,7 +54,8 @@
                     //alert('Clicked ' + );
                     Swal.fire({
                         title: eventObj.title,
-                        text:'ช่วงเวลา ' +eventObj.start+' - '+eventObj.end,
+                        text: 'ช่วงเวลา ' + moment(eventObj.start).format(
+                            'YYYY-MM-DD HH:mm:ss') + ' - ' + eventObj.end,
                     });
                 },
                 events: bookings,
@@ -87,10 +76,6 @@
                 },
                 dateClick: function(info) {
 
-                    /* Swal.fire({
-                        icon: 'question',
-                        text: 'clicked ' + info.dateStr
-                    }); */
                 },
 
                 select: function(info) {
@@ -98,10 +83,7 @@
                     var booking_end = moment(info.endStr).format('YYYY-MM-DD HH:mm:ss');
                     var booking_s = moment(info.startStr).format('YYYY-MM-DD HH:mm:ss');
                     var booking_e = moment(info.endStr).format('YYYY-MM-DD HH:mm:ss');
-                    /* var time_start = moment(info.startStr).format('LTS');
-                    var time_end = moment(info.endStr).format('LTS'); */
-                    //var today = new Date().toISOString().split('T')[0];
-                    //console.log(today);
+
                     $('#bookingModal').modal('toggle');
                     $('#booking_start').html(booking_start);
                     $('#booking_end').html(booking_end);
@@ -174,7 +156,6 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> --}}
                     <input type="submit" name="saveBooking" value="ยืนยัน" id="saveBooking" class="btn btn-primary">
                     <button type="button" class="btn grey btn-danger"data-bs-dismiss="modal" {{-- onclick="window.location.reload()" --}}
                         data-dismiss="modal">{{ __('ย้อนกลับ') }}</button>
@@ -186,6 +167,6 @@
 </div>
 
 <div class="container-fluid">
-    {{-- <label class=" text-lighter">{{ Auth::user()->id }}</label> --}}
-    <div id='calendar' {{-- class="table-responsive" --}}></div>
+
+    <div id='calendar'></div>
 </div>

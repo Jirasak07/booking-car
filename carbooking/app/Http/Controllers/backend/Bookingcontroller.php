@@ -130,7 +130,6 @@ class Bookingcontroller extends Controller
         //dd($request->all(),$date_start,$date_end);
         $bookingcar = new BookingModel();
         $cnt_booking = $bookingcar->count();
-
         if ($cnt_booking < 1) {
             $bookingcar->id = 1;
         } else {

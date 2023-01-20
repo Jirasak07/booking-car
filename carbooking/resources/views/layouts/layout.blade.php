@@ -3,10 +3,10 @@
 
 <head>
 
-{{-- DataTable --}}
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
-<link rel="stylesheet" href="shttps://cdn.datatables.net/responsive/2.4.0/css/responsive.dataTables.min.css">
-{{-- //////////////////////////////////////// --}}
+    {{-- DataTable --}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="shttps://cdn.datatables.net/responsive/2.4.0/css/responsive.dataTables.min.css">
+    {{-- //////////////////////////////////////// --}}
 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -65,7 +65,9 @@
     {{--  @guest()
             @include('layouts.footers.guest')
         @endguest --}}
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
+        integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{ asset('argon') }}/vendor/jquery/dist/jquery.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
