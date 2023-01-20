@@ -18,13 +18,13 @@
                     method: 'GET',
                     success: function(data) {
                         $('#calendar').html(data.calendar);
-                        
+
                     }
                 })
             }, 5000);
             var calendarEl = document.getElementById('calendar');
             var bookings = @json($booking);
-            //console.log(bookings);
+            console.log(bookings);
 
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 //themeSystem: 'bootstrap5',
@@ -49,17 +49,22 @@
                     center: 'title',
                     right: 'timeGridDay,timeGridFourDay,dayGridMonth,listMonth'
                 },
-                eventClick: function(info) {
-                    var eventObj = info.event;
+                eventClick: function(e) {
+                    moment.locale('th');
+                    var newdate = new Date().getTimezoneOffset();
+                    var newdate2 = new Date(e.event.start);
+                    alert(JSON.stringify(newdate2.getDay()))
+                    var eventObj = e.event;
+                    var startb = JSON.stringify(eventObj.start)
+                    var endb = JSON.stringify(eventObj.end)
+                    var date = new Date(eventObj.start)
+                    // alert(date.getUTCHours())
                     //alert('Clicked ' + );
                     Swal.fire({
-                        title: eventObj.title,
-                        text: 'ช่วงเวลา ' + moment(eventObj.start).format(
-                            'YYYY-MM-DD HH:mm:ss') + ' - ' + eventObj.end,
+                        title: date.getUTCDate() +'-'+(date.getUTCMonth()+1)+'-'+(date.getUTCFullYear()+543)+'เวลา'+date.getUTCHours()+':'+date.getUTCMinutes(),
                     });
                 },
                 events: bookings,
-
                 views: {
                     timeGridFourDay: {
                         type: 'timeGrid',
