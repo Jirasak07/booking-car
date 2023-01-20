@@ -146,28 +146,8 @@
 
                                         </form>
                                     </div>
-                                    <div class="tab-pane p-5" id="tab2">
-                                        <div class="collapse" id="collapseExample2">
-                                            <label for="selectOut">เลือกพนักงานขับรถ</label>
-                                            <div class=" d-flex justify-content-center align-items-center "
-                                                style="gap:5px">
-                                                <div style="width: 350px;">
+                                    <div class="tab-pane pt-5" id="tab2">
 
-                                                    <select name="out_car" class="rounded form-control" id="selectOut">
-                                                        <option value="1">1</option>
-                                                        <option value="1">1</option>
-                                                        <option value="1">1</option>
-                                                        <option value="1">1</option>
-                                                    </select>
-                                                </div>
-
-                                                <div class="ml-3 btn btn-success btn-sm">บันทึก</div>
-                                                <div onclick="open_modal();" class="btn btn-primary btn-sm">
-                                                    <i class="fa-solid fa-plus"> </i> เพิ่มใหม่
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="collapse" id="collapseExample">
                                             <div class="card card-body">
                                                 <form action="">
                                                     @csrf <div class="form-group row mt-2 d-flex flex-column flex-md-row ">
@@ -202,7 +182,7 @@
 
                                                 </form>
                                             </div>
-                                        </div>
+
 
                                     </div>
                                 </div>
@@ -222,17 +202,6 @@
 
 
     </div>
-    <script type="text/javascript">
-        function open_modal() {
-            // $('#theModal').modal('show');
-            $('#collapseExample').collapse('toggle');
-            $('#collapseExample2').collapse('toggle');
-
-            // e.preventDefault()
-            //     $(this).tab('show')
-        }
-    </script>
-
     @push('js')
         <script src="https://momentjs.com/downloads/moment-with-locales.js">
             < /scrip> <
@@ -242,13 +211,9 @@
         <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
 
         <script>
-            function close() {
-                alert(1234)
-            }
             $('.nav-tabs a').on('click', function(e) {
                 e.preventDefault()
                 $(this).tab('show')
-                $('#collapseExample2').collapse('toggle');
             });
 
             $(document).ready(function() {
