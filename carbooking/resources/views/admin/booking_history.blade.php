@@ -96,6 +96,7 @@
                     method: 'GET',
                     success: function(data) {
                         var detail = data.detail;
+                        console.log(detail)
                         console.log(detail[0]);
                         Swal.fire({
                             title: '',
