@@ -17,11 +17,8 @@
                     url: '/users/dashboard/refresh',
                     method: 'GET',
                     success: function(data) {
-                        $('#all').html(data.allbooking);
-                        $('#pending').html(data.pending);
-                        $('#cancel').html(data.cancel);
-
-                        $('#approve').html(data.approve);
+                        $('#calendar').html(data.calendar);
+                        
                     }
                 })
             }, 5000);
