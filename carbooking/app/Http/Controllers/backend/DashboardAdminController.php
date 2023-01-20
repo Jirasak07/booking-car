@@ -110,7 +110,7 @@ class DashboardAdminController extends Controller
         if($booking->type_car == '1'){
             $detail = DB::table('tb_booking')
             ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
-            
+
             ->join('users', 'tb_booking.username', '=', 'users.id')
             ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
             ->where('tb_booking.id','=', $id)
@@ -118,7 +118,7 @@ class DashboardAdminController extends Controller
             ->get();
         }else if($booking->type_car == 2){
             $detail = DB::table('tb_booking')
-           
+
             ->join('users', 'tb_booking.username', '=', 'users.id')
             ->join('tb_out_cars', 'tb_booking.license_plate', '=', 'tb_out_cars.id')
             ->where('tb_booking.id','=', $id)
@@ -131,10 +131,10 @@ class DashboardAdminController extends Controller
             ->select('booking_start as sdate','booking_end as edate','booking_detail','type_car','driver','license_plate as car','users.name as name_user')
             ->get();
         }
-dd($detail);
-        // return response()->json([
-        //     'detail' =>$detail
-        // ]);
+
+        return response()->json([
+            'detail' =>$detail
+        ]);
 
     }
 

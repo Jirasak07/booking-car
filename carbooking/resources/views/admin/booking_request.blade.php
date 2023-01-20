@@ -281,7 +281,6 @@
                 const detail = [];
                 data.forEach(showBooking => {
                     if (showBooking.id == val) {
-
                         start.push(showBooking.booking_start);
                         end.push(showBooking.booking_end);
                         detail.push(showBooking.booking_detail);

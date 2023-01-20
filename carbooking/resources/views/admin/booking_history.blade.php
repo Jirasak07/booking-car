@@ -51,6 +51,8 @@
         <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://momentjs.com/downloads/moment.min.js"></script>
+        <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
         <script>
             $(document).ready(function() {
                 $('#tablehistory').DataTable({
@@ -90,17 +92,17 @@
         </script>
         <script>
             function showDetailHistory(id) {
-
+                moment.locale('th');
                 $.ajax({
-                    url: '/admin/history/'+id,
+                    url: '/admin/history/' + id,
                     method: 'GET',
                     success: function(data) {
                         var detail = data.detail;
-                        console.log(detail)
-                        console.log(detail[0]);
+                        var end = new Date(detail[0].edate)
+
                         Swal.fire({
-                            title: '',
-                            html: 'bb'+detail[0].booking_detail+'ครับ',
+                            title: JSON.stringify(moment(end).format(
+                                'ddd ที่ D MMM '+ (new Date(detail[0].edate).getFullYear()+543) +' เวลา HH:mm นาที')),
                         })
                     }
                 })
