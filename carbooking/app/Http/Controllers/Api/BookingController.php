@@ -43,14 +43,17 @@ class BookingController extends Controller
         $booking = DB::table('tb_booking')
 
         ->join('users', 'tb_booking.username', '=', 'users.id')
-        ->select( 'tb_booking.*','users.username')
+        ->select( 'tb_booking.*','users.name')
         ->get();
 
         return response()->json($booking);
 
     }
     function showhistory(){
-        $data = DB::table('tb_booking')->join('users', 'tb_booking.username', '=', 'users.id')->select('tb_booking.id','type_car', 'users.name', 'booking_start', 'booking_end', 'booking_status')->get();
+        $data = DB::table('tb_booking')
+        ->join('users', 'tb_booking.username', '=', 'users.id')
+        ->orderBy('updated_at', 'desc')
+        ->select('tb_booking.id','type_car', 'users.name', 'booking_start', 'booking_end', 'booking_status')->get();
         return response()->json($data);
     }
 }
