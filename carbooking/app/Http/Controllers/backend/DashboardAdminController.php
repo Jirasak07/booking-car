@@ -113,7 +113,7 @@ class DashboardAdminController extends Controller
             ->join('users', 'tb_booking.username', '=', 'users.id')
             ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
             ->where('tb_booking.id','=', $id)
-            ->select('driver_fullname', 'car_license','tb_booking.*','users.name')
+            ->select('tb.driver.driver_fullname', 'tb_cars.car_license','tb_booking.*','users.name')
             ->get();
         }elseif($booking->typecar ==2){
             $detail = DB::table('tb_booking')
