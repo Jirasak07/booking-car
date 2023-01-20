@@ -11,17 +11,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            setInterval(() => {
 
-                $.ajax({
-                    url: '/users/dashboard/refresh',
-                    method: 'GET',
-                    success: function(data) {
-                        $('#calendar').html(data.calendar);
-
-                    }
-                })
-            }, 5000);
             var calendarEl = document.getElementById('calendar');
             var bookings = @json($booking);
             console.log(bookings);
@@ -61,7 +51,9 @@
                     // alert(date.getUTCHours())
                     //alert('Clicked ' + );
                     Swal.fire({
-                        title: date.getUTCDate() +'-'+(date.getUTCMonth()+1)+'-'+(date.getUTCFullYear()+543)+'เวลา'+date.getUTCHours()+':'+date.getUTCMinutes(),
+                        title: date.getUTCDate() + '-' + (date.getUTCMonth() + 1) + '-' + (date
+                                .getUTCFullYear() + 543) + 'เวลา' + date.getUTCHours() + ':' +
+                            date.getUTCMinutes(),
                     });
                 },
                 events: bookings,
