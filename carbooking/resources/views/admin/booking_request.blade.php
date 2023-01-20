@@ -29,7 +29,7 @@
                                 <tr>
                                     <td class="control d-grid d-sm-none"></td>
                                     <td>{{ $i++ }}</td>
-                                    <td>{{ $bookings['username'] }}</td>
+                                    <td>{{ $bookings['name'] }}</td>
 
                                     <td class="text-truncate" style="max-width: 250px">
                                         {{ thaidate('l ที่ j F Y เวลา G:i นาที', strtotime($bookings['booking_start'])) }}
@@ -43,7 +43,7 @@
                                             data-bs-toggle="modal" data-bs-target="#exampleModal">
                                             อนุมัติ</div>
                                         <a class="text-white btn btn-danger btn-sm "
-                                            href="{{ route('cancle', $bookings['id']) }}">ยกเลิกคำขอ</a>
+                                           onclick="alertCancel({{$bookings['id']}})">ยกเลิกคำขอ</a>
                                     </td>
 
                                 </tr>
@@ -311,6 +311,48 @@
                 document.getElementById('end_date').innerHTML = bookend;
                 document.getElementById('detail').innerHTML = detail[0];
                 document.getElementById('idform').value = val;
+            }
+        </script>
+        <script>
+            function alertCancel(id) {
+                //alert(id)
+                Swal.fire({
+                    //title: 'Are you sure?',
+                    text: "คุณต้องการยกเลิกการจองใช่หรือไม่!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'OK',
+                    cancelButtonText: 'Cancel'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            type: 'GET',
+                            url: '/admin/cancel/' + id,
+                            dataType: 'JSON',
+                            success: function(data) {
+                                if (data.status == 'success') {
+                                    Swal.fire({
+                                        title: 'เสร็จสิ้น',
+                                        icon: 'success',
+                                        confirmButtonText: 'ok',
+                                    }).then((data) => {
+                                        /* Read more about isConfirmed, isDenied below */
+                                        if (result.isConfirmed) {
+                                            window.location.reload();
+                                        }
+                                    })
+                                } else {
+                                    Swal.fire({
+                                        title: 'Error',
+                                        icon: 'error',
+                                    })
+                                }
+                            },
+                        });
+                    }
+                })
             }
         </script>
     @endpush
