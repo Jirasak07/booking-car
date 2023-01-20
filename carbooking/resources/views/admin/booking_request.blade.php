@@ -1,50 +1,59 @@
 @section('title', 'ข้อมูลการจอง')
-<link href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/responsive/2.4.0/css/responsive.dataTables.min.css" rel="stylesheet">
+
 @extends('layouts.layout')
 @section('content')
     @include('layouts.header')
-    <div class="container-fulid mx-3 mt-2 ">
-        <div class=" shadow-table ">
-            <table id="tableb"
-                class="rounded table table-md  table-white table-striped fw-bold table-responsive-xl display">
-                <thead class="table-dark table-hover">
-                    <tr>
-                        <td class="fw-bold">ลำดับ</td>
-                        <td>ผู้จอง</td>
-                        <td>วันเวลาเริ่มต้น</td>
-                        <td>วันเวลาสิ้นสุด</td>
-                        <td>รายละเอียด</td>
-                        <td>จัดการ</td>
+    <div class="container-fulid mx-3 ">
+        <div class="container-md pt-3 pb-3 ">
+            <div class=" card shadow-table  ">
+                <table id="tablerequest" class="display responsive nowrap " style="width:100%;font-size:0.8em">
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="d-grid d-sm-none" style="max-width: 20px"></th>
+                            <th style="max-width: 30px">ลำดับ</th>
+                            <th>ผู้จอง</th>
+                            <th>วันเวลาเริ่มต้น</th>
+                            <th>วันเวลาสิ้นสุด</th>
+                            <th>รายละเอียด</th>
+                            <th>จัดการ</th>
 
-                    </tr>
-                </thead>
-                <tbody>
-                    @php
-                        $i = 1;
-                    @endphp
-                    @foreach ($booking as $bookings)
-                        @if ($bookings['booking_status'] == 1)
-                            <tr>
-                                <td>{{ $i++ }}</td>
-                                <td>{{ $bookings['username'] }}</td>
-                                <td>{{ thaidate('l ที่ j F Y เวลา G:i นาที', strtotime($bookings['booking_start'])) }}</td>
-                                <td>{{ thaidate('l ที่ j F Y เวลา G:i นาที', strtotime($bookings['booking_end'])) }}</td>
-                                <td>{{ $bookings['booking_detail'] }}</td>
-                                <td>
-                                    <div class="btn btn-success btn-sm" onclick="modal({{ $bookings['id'] }})"
-                                        data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                        อนุมัติ</div>
-                                    <a class="text-white btn btn-danger btn-sm "
-                                        href="{{ route('cancle', $bookings['id']) }}">ยกเลิกคำขอ</a>
-                                </td>
-                            </tr>
-                        @endif
-                    @endforeach
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php
+                            $i = 1;
+                        @endphp
+                        @foreach ($booking as $bookings)
+                            @if ($bookings['booking_status'] == 1)
+                                <tr>
+                                    <td class="control d-grid d-sm-none"></td>
+                                    <td>{{ $i++ }}</td>
+                                    <td>{{ $bookings['username'] }}</td>
 
-                </tbody>
-            </table>
+                                    <td class="text-truncate" style="max-width: 250px">
+                                        {{ thaidate('l ที่ j F Y เวลา G:i นาที', strtotime($bookings['booking_start'])) }}
+                                    </td>
+                                    <td class="text-truncate" style="max-width: 300px">
+                                        {{ thaidate('l ที่ j F Y เวลา G:i นาที', strtotime($bookings['booking_end'])) }}
+                                    </td>
+                                    <td>{{ $bookings['booking_detail'] }}</td>
+                                    <td>
+                                        <div class="btn btn-success btn-sm" onclick="modal({{ $bookings['id'] }})"
+                                            data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                            อนุมัติ</div>
+                                        <a class="text-white btn btn-danger btn-sm "
+                                            href="{{ route('cancle', $bookings['id']) }}">ยกเลิกคำขอ</a>
+                                    </td>
 
+                                </tr>
+                            @endif
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
+
 
 
         {{-- @include('layouts.footers.auth') --}}
@@ -135,32 +144,42 @@
                                     </form>
                                 </div>
                                 <div class="tab-pane" id="tab2">
-                                    <form action="">
-                                        @csrf
-                                        <div class="form-group row mt-2 d-flex flex-column flex-md-row ">
-                                            <div class="col-12 col-md-6"> <label for="out-model">รถ</label>
-                                                <input type="text" id="out-model" class="form-control">
-                                            </div>
-                                            <div class="col-12 col-md-6">
-                                                <label for="out-license">ป้ายทะเบียน</label>
-                                                <input type="text" id="out-license" class="form-control">
-                                            </div>
-                                            <div class="col-12 col-md-6">
-                                                <label for="out-own">เจ้าของรถ</label>
-                                                <input type="text" id="out-own" class="form-control">
-                                            </div>
-                                            <div class="col-12 col-md-6"> <label for="out-tell">เบอร์โทรติดต่อ</label>
-                                                <input type="text" id="out-tell" class="form-control">
-                                            </div>
+                                    <button onclick="open_modal();" class="btn btn-primary btn-sm"> <i class="fa-solid fa-plus"> </i> เพิ่มใหม่</button>
+                                    <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse"
+                                        data-target="#collapseExample" aria-expanded="false"
+                                        aria-controls="collapseExample">
+                                        <i class="fa-solid fa-plus"> </i> เพิ่มใหม่ </button>
+                                    <div class="collapse" id="collapseExample">
+                                        <div class="card card-body">
+                                            <form action="">
+                                                @csrf <div class="form-group row mt-2 d-flex flex-column flex-md-row ">
+                                                    <div class="col-12 col-md-6"> <label for="out-model"> รถ </label>
+                                                        <input type="text" id="out-model" class="form-control">
+                                                    </div>
+                                                    <div class="col-12 col-md-6">
+                                                        <label for="out-license"> ป้ ายทะเบียน </label> <input
+                                                            type="text" id="out-license" class="form-control">
+                                                    </div>
+                                                    <div class="col-12 col-md-6">
+                                                        <label for="out-own"> เจ้ าของรถ </label> <input type="text"
+                                                            id="out-own" class="form-control">
+                                                    </div>
+                                                    <div class="col-12 col-md-6"> <label for="out-tell"> เบอร์ โทรติดต่ อ
+                                                        </label> <input type="text" id="out-tell"
+                                                            class="form-control" />
+                                                    </div>
 
-                                        </div>
-                                        <div class="d-flex justify-content-end mt-2">
-                                            <div class="btn btn-sm btn-success w-25">บันทึก</div>
-                                            <button type="button" class="btn btn-sm btn-outline-danger w-25 "
-                                                data-bs-dismiss="modal" aria-label="Close">ปิด</button>
-                                        </div>
+                                                </div>
+                                                <div class="d-flex justify-content-end mt-2">
+                                                    <div class="btn btn-sm btn-success w-25"> บั นทึก </div> <button
+                                                        type="button" class="btn btn-sm btn-outline-danger w-25 " data -
+                                                        bs - dismiss="modal" aria - label="Close"> ปิด </button>
+                                                </div>
 
-                                    </form>
+                                            </form>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -173,44 +192,116 @@
             </div>
         </div>
     </div>
-    <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
-    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-    <script>
-        $('.nav-tabs a').on('click', function(e) {
-            e.preventDefault()
-            $(this).tab('show')
-        });
+    </div>
 
-        $(document).ready(function() {
-            $('#tableb').DataTable();
-        });
+    </div>
 
-        function modal(val) {
-            // document.getElementById('')
-            const data = @json($booking);
-            const bookdata = [];
-            moment.locale('th');
-            const start = [];
-            const end = [];
-            const detail = [];
-            data.forEach(d => {
-                if (d.id == val) {
-                    start.push(d.booking_start);
-                    end.push(d.booking_end);
-                    detail.push(d.booking_detail);
-                }
-            });
-            const bookstart = moment(JSON.stringify(start[0])).add(543, 'year').format('ddd ที่ D MMM YY เวลา HH:mm นาที');
-            const bookend = moment(JSON.stringify(end[0])).add(543, 'year').format('ddd ที่ D MMM YY เวลา HH:mm นาที');
-            // console.log(typeof(bookstart));
-            // alert(bookstart);
-            // const da = moment().format('D-MM-YYYY');
-            // console.log(da);
-            document.getElementById('start_date').innerHTML = bookstart;
-            document.getElementById('end_date').innerHTML = bookend;
-            document.getElementById('detail').innerHTML = detail[0];
-            document.getElementById('idform').value = val;
-            // {{ thaidate('l j F Y เวลา G:i', strtotime($bookings['booking_start'])) }}
+
+    <script type="text/javascript">
+        function open_modal() {
+            // $('#theModal').modal('show');
+            $('#collapseExample').collapse('toggle');
         }
+
+
     </script>
+
+    @push('js')
+        <script src="https://momentjs.com/downloads/moment-with-locales.js">
+            < /scrip> <
+            script src = "https://code.jquery.com/jquery-3.5.1.js" >
+        </script>
+        <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
+
+        <script>
+            function close() {
+                alert(1234)
+            }
+            $('.nav-tabs a').on('click', function(e) {
+                e.preventDefault()
+                $(this).tab('show')
+            });
+
+            $(document).ready(function() {
+                $('#tablerequest').DataTable({
+                    responsive: {
+                        details: {
+                            type: 'column',
+                            target: 0,
+                            renderer: function(api, rowIdx, columns) {
+                                var data = $.map(columns, function(col, i) {
+                                    return col.hidden ?
+                                        '<tr data-dt-row="' + col.rowIndex + '" data-dt-column="' +
+                                        col.columnIndex + '">' +
+                                        '<td>' + col.title + ':' + '</td> ' +
+                                        '<td>' + col.data + '</td>' +
+                                        '</tr>' :
+                                        '';
+                                }).join('');
+
+                                return data ?
+                                    $('<table/>').append(data) :
+                                    false;
+                            }
+                        }
+                    },
+                    columnDefs: [{
+                            responsivePriority: 1,
+                            targets: 0
+                        },
+                        {
+                            responsivePriority: 10001,
+                            targets: 4
+                        },
+                        {
+                            responsivePriority: 2,
+                            targets: -1
+                        }
+                    ],
+                    lengthMenu: [10, 20, 50, 100, ],
+                    language: {
+                        lengthMenu: "แสดง _MENU_ รายการ",
+                        search: "ค้นหาข้อมูลในตาราง",
+                        info: "แสดงข้อมูล _END_ จากทั้งหมด _TOTAL_ รายการ",
+
+                        paginate: {
+
+                            previous: "ก่อนหน้า",
+                            next: "ถัดไป",
+
+                        },
+                    },
+                });
+            });
+
+            function modal(val) {
+                // document.getElementById('')
+                const data = @json($booking);
+                const bookdata = [];
+                moment.locale('th');
+                const start = [];
+                const end = [];
+                const detail = [];
+                data.forEach(d => {
+                    if (d.id == val) {
+                        start.push(d.booking_start);
+                        end.push(d.booking_end);
+                        detail.push(d.booking_detail);
+                    }
+                });
+                const bookstart = moment(JSON.stringify(start[0])).add(543, 'year').format('ddd ที่ D MMM YY เวลา HH:mm นาที');
+                const bookend = moment(JSON.stringify(end[0])).add(543, 'year').format('ddd ที่ D MMM YY เวลา HH:mm นาที');
+                // console.log(typeof(bookstart));
+                // alert(bookstart);
+                // const da = moment().format('D-MM-YYYY');
+                // console.log(da);
+                document.getElementById('start_date').innerHTML = bookstart;
+                document.getElementById('end_date').innerHTML = bookend;
+                document.getElementById('detail').innerHTML = detail[0];
+                document.getElementById('idform').value = val;
+                // {{ thaidate('l j F Y เวลา G:i', strtotime($bookings['booking_start'])) }}
+            }
+        </script>
+    @endpush
 @endsection
