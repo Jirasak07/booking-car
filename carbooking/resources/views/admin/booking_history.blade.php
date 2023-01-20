@@ -20,7 +20,6 @@
                 <tbody>
                     @php
                         $i = 1;
-
                     @endphp
                     @foreach ($hiss as $history)
                         @if ($history['booking_status'] == 2 || $history['booking_status'] == 3)
