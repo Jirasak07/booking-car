@@ -90,12 +90,13 @@
         </script>
         <script>
             function showDetailHistory(id) {
+
                 $.ajax({
                     url: '/admin/history/'+id,
                     method: 'GET',
                     success: function(data) {
                         var detail = data.detail;
-                        console.log(detail[0].booking_detail);
+                        console.log(detail[0]);
                         Swal.fire({
                             title: '',
                             html: 'bb'+detail[0].booking_detail+'ครับ',
