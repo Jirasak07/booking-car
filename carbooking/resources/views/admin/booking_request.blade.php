@@ -43,7 +43,7 @@
                                             data-bs-toggle="modal" data-bs-target="#exampleModal">
                                             อนุมัติ</div>
                                         <a class="text-white btn btn-danger btn-sm "
-                                           onclick="alertCancel({{$bookings['id']}})">ยกเลิกคำขอ</a>
+                                            onclick="alertCancel({{ $bookings['id'] }})">ยกเลิกคำขอ</a>
                                     </td>
 
                                 </tr>
@@ -145,7 +145,7 @@
                                 </div>
                                 <div class="tab-pane" id="tab2">
 
-                                    <div>
+                                    <div class="collapse" id="collapseExample2">
                                         <select name="out_car" id="" style="width: 150px">
                                             <option value="1">1</option>
                                             <option value="1">1</option>
@@ -210,6 +210,8 @@
         function open_modal() {
             // $('#theModal').modal('show');
             $('#collapseExample').collapse('toggle');
+            $('#collapseExample2').collapse('toggle');
+
             // e.preventDefault()
             //     $(this).tab('show')
         }
@@ -230,6 +232,7 @@
             $('.nav-tabs a').on('click', function(e) {
                 e.preventDefault()
                 $(this).tab('show')
+                $('#collapseExample2').collapse('toggle');
             });
 
             $(document).ready(function() {

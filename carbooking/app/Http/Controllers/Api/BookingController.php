@@ -52,7 +52,7 @@ class BookingController extends Controller
     function showhistory(){
         $data = DB::table('tb_booking')
         ->join('users', 'tb_booking.username', '=', 'users.id')
-        ->orderBy('updated_at', 'desc')
+        ->orderBy('tb_booking.updated_at', 'DESC')
         ->select('tb_booking.id','type_car', 'users.name', 'booking_start', 'booking_end', 'booking_status')->get();
         return response()->json($data);
     }

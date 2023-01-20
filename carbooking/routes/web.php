@@ -66,7 +66,7 @@ Route::group(
 
         Route::post('approve', [\App\Http\Controllers\backend\Bookingcontroller::class, 'update'])->name('update');
 
-        Route::get('request/{id}', [\App\Http\Controllers\backend\Bookingcontroller::class, 'cancle'])->name('cancle');
+        Route::get('cancel/{id}', [\App\Http\Controllers\backend\Bookingcontroller::class, 'cancle']);
     }
 );
 
