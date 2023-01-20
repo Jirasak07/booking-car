@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\BookingModel;
 use App\Models\CarModel;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -101,6 +102,35 @@ class DashboardAdminController extends Controller
         return view('admin.dashboard')->with(['data2' => $data2, 'data1' => $data1, 'allcar1' => $allcar1, 'allcar2' => $allcar2, 'bookingcarAllin' => $bookingcarAllin, 'bookingcarAllout' => $bookingcarAllout, 'car' => $car, 'allbook' => $allbooking, 'pending' => $pending, 'approve' => $approve, 'cancel' => $cancel, 'bookingcarin' => $bookingcarin])
 
         ;
+    }
+
+    function detail_history($id){
+
+        $booking = BookingModel::find($id);
+
+        if($booking->typecar ==1){
+            $detail = DB::table('tb_booking')
+            ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
+            // ->join('tb_out_cars', 'tb_booking.license_plate', '=', 'tb_out_cars.id')
+            ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
+            ->where('tb_booking.id','=', $id)
+            ->select('driver_fullname', 'car_license','tb_booking.*')
+            ->get();
+        }else{
+            $detail = DB::table('tb_booking')
+            
+            ->join('tb_out_cars', 'tb_booking.license_plate', '=', 'tb_out_cars.id')
+            
+            ->where('tb_booking.id','=', $id)
+            ->select('car_out_license', 'car_out_model', 'car_out_driver', 'car_out_tel','tb_booking.*')
+            ->get();
+        }
+
+        
+        return response()->json([
+            'detail' =>$detail
+        ]);
+       
     }
 
 }
