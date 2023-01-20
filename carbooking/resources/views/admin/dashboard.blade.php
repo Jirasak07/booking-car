@@ -92,30 +92,15 @@
                 @endforeach
             </div>
         </div>
-        <div class="bg-white mb-5 rounded" style="height:150vh"  >
+        <div class="bg-white mb-5 rounded" style="height:150vh">
             @include('admin.calendar_show')
         </div>
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-
-            setInterval(() => {
-
-                $.ajax({
-                    url: '/admin/dashboard/refresh',
-                    method: 'GET',
-                    success: function(data) {
-                        $('#all').html(data.allbooking);
-                        $('#pending').html(data.pending);
-                        $('#cancel').html(data.cancel);
-
-                        $('#approve').html(data.approve);
-                    }
-                })
-            }, 5000);
             const bookingcar1 = @json($bookingcarin);
-            console.log('car1 :', bookingcar1[0].suppercarcare)
             var allbook = @json($allbook);
+            console.log("111",allbook);
             var car = @json($car);
             console.log(car);
             var allcar1 = @json($allcar1);
@@ -235,6 +220,20 @@
                 }
             }
         });
-        
+
+        setInterval(() => {
+
+            $.ajax({
+                url: '/admin/dashboard/refresh',
+                method: 'GET',
+                success: function(data) {
+                    $('#all').html(data.allbooking);
+                    $('#pending').html(data.pending);
+                    $('#cancel').html(data.cancel);
+
+                    $('#approve').html(data.approve);
+                }
+            })
+        }, 5000);
     </script>
 @endsection
