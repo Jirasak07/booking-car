@@ -113,7 +113,10 @@ class Bookingcontroller extends Controller
 
         //dd($booking->)
         //dd($events, $booking_join1,$booking_join2, $booking->id);
-        return view('user.dashboard')->with(['booking' => $events]);
+        return response()->json([
+            'booking' => $events
+        ]);
+        // return view('user.dashboard')->with(['booking' => $events]);
     }
     public function cancle($id)
     {
