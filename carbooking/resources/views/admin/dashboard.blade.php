@@ -222,7 +222,6 @@
         });
 
         setInterval(() => {
-
             $.ajax({
                 url: '/admin/dashboard/refresh',
                 method: 'GET',

@@ -4,208 +4,224 @@
 @extends('layouts.layout')
 @section('content')
     @include('layouts.header')
-    <div class="container-fulid mx-3 ">
-        <div class="container-md pt-3 pb-3 ">
-            <div class=" card shadow-table p-3  ">
-                <table id="tablerequest" class="display responsive nowrap " style="width:100%;font-size:0.8em">
-                    <thead class="table-dark">
-                        <tr>
-                            <th class="d-grid d-sm-none" style="max-width: 20px"></th>
-                            <th style="max-width: 30px">ลำดับ</th>
-                            <th>ผู้จอง</th>
-                            <th>วันเวลาเริ่มต้น</th>
-                            <th>วันเวลาสิ้นสุด</th>
-                            <th>รายละเอียด</th>
-                            <th>จัดการ</th>
+    <div class="" id="re">
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php
-                            $i = 1;
-                        @endphp
-                        @foreach ($booking as $bookings)
-                            @if ($bookings['booking_status'] == 1)
-                                <tr>
-                                    <td class="control d-grid d-sm-none"></td>
-                                    <td>{{ $i++ }}</td>
-                                    <td>{{ $bookings['name'] }}</td>
+        <div class="container-fulid mx-3 ">
+            <div class="container-md pt-3 pb-3 ">
+                <div class=" card shadow-table p-3  ">
+                    <table id="tablerequest" class="display responsive nowrap " style="width:100%;font-size:0.8em">
+                        <thead class="table-dark">
+                            <tr>
+                                <th class="d-grid d-sm-none" style="max-width: 20px"></th>
+                                <th style="max-width: 30px">ลำดับ</th>
+                                <th>ผู้จอง</th>
+                                <th>วันเวลาเริ่มต้น</th>
+                                <th>วันเวลาสิ้นสุด</th>
+                                <th>รายละเอียด</th>
+                                <th>จัดการ</th>
 
-                                    <td class="text-truncate" style="max-width: 250px">
-                                        {{ thaidate('l ที่ j F Y เวลา G:i นาที', strtotime($bookings['booking_start'])) }}
-                                    </td>
-                                    <td class="text-truncate" style="max-width: 300px">
-                                        {{ thaidate('l ที่ j F Y เวลา G:i นาที', strtotime($bookings['booking_end'])) }}
-                                    </td>
-                                    <td>{{ $bookings['booking_detail'] }}</td>
-                                    <td>
-                                        <div class="btn btn-success btn-sm" onclick="modal({{ $bookings['id'] }})"
-                                            data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                            อนุมัติ</div>
-                                        <a class="text-white btn btn-danger btn-sm "
-                                            onclick="alertCancel({{ $bookings['id'] }})">ยกเลิกคำขอ</a>
-                                    </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php
+                                $i = 1;
+                            @endphp
+                            @foreach ($booking as $bookings)
+                                @if ($bookings['booking_status'] == 1)
+                                    <tr>
+                                        <td class="control d-grid d-sm-none"></td>
+                                        <td>{{ $i++ }}</td>
+                                        <td>{{ $bookings['name'] }}</td>
 
-                                </tr>
-                            @endif
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
+                                        <td class="text-truncate" style="max-width: 250px">
+                                            {{ thaidate('l ที่ j F Y เวลา G:i นาที', strtotime($bookings['booking_start'])) }}
+                                        </td>
+                                        <td class="text-truncate" style="max-width: 300px">
+                                            {{ thaidate('l ที่ j F Y เวลา G:i นาที', strtotime($bookings['booking_end'])) }}
+                                        </td>
+                                        <td>{{ $bookings['booking_detail'] }}</td>
+                                        <td>
+                                            <div class="btn btn-success btn-sm" onclick="modal({{ $bookings['id'] }})"
+                                                data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                อนุมัติ</div>
+                                            <a class="text-white btn btn-danger btn-sm "
+                                                onclick="alertCancel({{ $bookings['id'] }})">ยกเลิกคำขอ</a>
+                                        </td>
 
-
-
-        {{-- @include('layouts.footers.auth') --}}
-    </div>
-    <!-- Button trigger modal -->
-
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog ">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">การอนุมัติคำขอ</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </tr>
+                                @endif
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
-                <div class="modal-body">
+            </div>
 
-                    <div class="mb-2  row">
-                        <div class="col-6">
-                            <label for="" class="form-label " style="line-height:50%">วันเวลาที่เริ่มต้น</label>
-                            </br>
-                            <label class=" ml-2" style="font-size: 80%;color:#630606;" for=""
-                                id="start_date"></label>
-                        </div>
-                        <div class="col-6">
-                            <label for="" class="form-label" style="line-height:50%">วันเวลาที่สิ้นสุด</label>
-                            </br>
-                            <label class=" ml-2" style="font-size: 80%;color:#630606;" for=""
-                                id="end_date"></label>
-                        </div>
-                        <div class="col-12 ">
-                            <label for="" class="form-label" style="line-height:50%">รายละเอียดการจอง</label>
-                            </br>
-                            <label class=" ml-2" style="font-size: 80%;color:#630606;" for=""
-                                id="detail">11012543</label>
-                        </div>
+
+
+            {{-- @include('layouts.footers.auth') --}}
+        </div>
+        <!-- Button trigger modal -->
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog ">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">การอนุมัติคำขอ</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="d-grid  justify-content-center row gap">
-                        <div class="container">
-                            <ul class="nav nav-tabs d-flex justify-content-center">
-                                <li class="nav-item">
-                                    <a class="nav-link active" data-toggle="tab" href="#tab1">ใช้รถภายใน</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" data-toggle="tab" href="#tab2">ใช้รถภายนอก</a>
-                                </li>
-                            </ul>
+                    <div class="modal-body">
 
-                            <div class="tab-content">
-                                <div class="tab-pane active" id="tab1">
-                                    <form method="POST" action="{{ route('update') }}"
-                                        class="d-flex flex-column align-items-center">
-                                        @csrf
-                                        <input type="hidden" id="idform" name="id_form">
-                                        <input type="hidden" name="type" value="1">
-                                        <div class=" mt-4">
-                                            <label for="selectcar">เลือกรถที่ต้องการใช้</label>
-                                            <select name="car_id" id="selectcar" class="rounded form-control" required
-                                                style="width: 250px; border:1px solid #6673af30 ">
-                                                @foreach ($car as $cars)
-                                                    <option value="{{ $cars['id'] }}">{{ $cars['car_model'] }}
-                                                        {{ $cars['car_license'] }} </option>
-                                                @endforeach
-
-
-                                            </select>
-                                        </div>
-                                        <div>
-                                            <label for="selectdriver">เลือกพนักงานขับรถ</label>
-                                            <select name="driver_id" id=" selectdriver" class="rounded form-control"
-                                                required style="width: 250px;  border:1px solid #6673af30 ">
-                                                @foreach ($driver as $dv)
-                                                    <option value="{{ $dv['id'] }}">{{ $dv['driver_fullname'] }}
-                                                    </option>
-                                                @endforeach
-
-                                            </select>
-                                        </div>
-
-
-
-                                        <div class="d-flex align-self-end justify-content-end w-100 mt-4 ">
-                                            <input type="submit" value="บันทึก" class="btn btn-sm btn-success w-25" />
-                                            <button type="button" class="btn btn-sm btn-outline-danger w-25 "
-                                                data-bs-dismiss="modal" aria-label="Close">ปิด</button>
-                                        </div>
-
-                                    </form>
-                                </div>
-                                <div class="tab-pane" id="tab2">
-
-                                    <div class="collapse" id="collapseExample2">
-                                        <select name="out_car" id="" style="width: 150px">
-                                            <option value="1">1</option>
-                                            <option value="1">1</option>
-                                            <option value="1">1</option>
-                                            <option value="1">1</option>
-                                        </select>
-                                        <button class="btn btn-success btn-sm" style="width: 60px">บันทึก</button>
-                                    </div>
-
-                                    <button onclick="open_modal();" class="btn btn-primary btn-sm"> <i
-                                            class="fa-solid fa-plus"> </i> เพิ่มใหม่</button>
-                                    <div class="collapse" id="collapseExample">
-                                        <div class="card card-body">
-                                            <form action="">
-                                                @csrf <div class="form-group row mt-2 d-flex flex-column flex-md-row ">
-                                                    <div class="col-12 col-md-6"> <label for="out-model"> รถ </label>
-                                                        <input type="text" id="out-model" class="form-control">
-                                                    </div>
-                                                    <div class="col-12 col-md-6">
-                                                        <label for="out-license"> ป้ ายทะเบียน </label> <input
-                                                            type="text" id="out-license" class="form-control">
-                                                    </div>
-                                                    <div class="col-12 col-md-6">
-                                                        <label for="out-own"> เจ้ าของรถ </label> <input type="text"
-                                                            id="out-own" class="form-control">
-                                                    </div>
-                                                    <div class="col-12 col-md-6"> <label for="out-tell"> เบอร์ โทรติดต่ อ
-                                                        </label> <input type="text" id="out-tell"
-                                                            class="form-control" />
-                                                    </div>
-
-                                                </div>
-                                                <div class="d-flex justify-content-end mt-2">
-                                                    <div class="btn btn-sm btn-success w-25"> บั นทึก </div> <button
-                                                        type="button" class="btn btn-sm btn-outline-danger w-25 " data -
-                                                        bs - dismiss="modal" aria - label="Close"
-                                                        onclick="open_modal()"> ปิด </button>
-                                                </div>
-
-                                            </form>
-                                        </div>
-                                    </div>
-
-                                </div>
+                        <div class="mb-2  row">
+                            <div class="col-6">
+                                <label for="" class="form-label " style="line-height:50%">วันเวลาที่เริ่มต้น</label>
+                                </br>
+                                <label class=" ml-2" style="font-size: 80%;color:#630606;" for=""
+                                    id="start_date"></label>
+                            </div>
+                            <div class="col-6">
+                                <label for="" class="form-label" style="line-height:50%">วันเวลาที่สิ้นสุด</label>
+                                </br>
+                                <label class=" ml-2" style="font-size: 80%;color:#630606;" for=""
+                                    id="end_date"></label>
+                            </div>
+                            <div class="col-12 ">
+                                <label for="" class="form-label" style="line-height:50%">รายละเอียดการจอง</label>
+                                </br>
+                                <label class=" ml-2" style="font-size: 80%;color:#630606;" for=""
+                                    id="detail">11012543</label>
                             </div>
                         </div>
+                        <div class="d-grid  justify-content-center row">
+                            <div class="container">
+                                <ul class="nav nav-tabs d-flex justify-content-center">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" data-toggle="tab" href="#tab1">ใช้รถภายใน</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#tab2">ใช้รถภายนอก</a>
+                                    </li>
+                                </ul>
+
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="tab1">
+                                        <form method="POST" action="{{ route('update') }}"
+                                            class="d-flex flex-column align-items-center">
+                                            @csrf
+                                            <input type="hidden" id="idform" name="id_form">
+                                            <input type="hidden" name="type" value="1">
+                                            <div class=" mt-4">
+                                                <label for="selectcar">เลือกรถที่ต้องการใช้</label>
+                                                <select name="car_id" id="selectcar" class="rounded form-control" required
+                                                    style="width: 250px; border:1px solid #6673af30 ">
+                                                    @foreach ($car as $cars)
+                                                        <option value="{{ $cars['id'] }}">{{ $cars['car_model'] }}
+                                                            {{ $cars['car_license'] }} </option>
+                                                    @endforeach
+
+
+                                                </select>
+                                            </div>
+                                            <div>
+                                                <label for="selectdriver">เลือกพนักงานขับรถ</label>
+                                                <select name="driver_id" id=" selectdriver" class="rounded form-control"
+                                                    required style="width: 250px;  border:1px solid #6673af30 ">
+                                                    @foreach ($driver as $dv)
+                                                        <option value="{{ $dv['id'] }}">{{ $dv['driver_fullname'] }}
+                                                        </option>
+                                                    @endforeach
+
+                                                </select>
+                                            </div>
+
+
+
+                                            <div class="d-flex align-self-end justify-content-end w-100 mt-4 ">
+                                                <input type="submit" value="บันทึก"
+                                                    class="btn btn-sm btn-success w-25" />
+                                                <button type="button" class="btn btn-sm btn-outline-danger w-25 "
+                                                    data-bs-dismiss="modal" aria-label="Close">ปิด</button>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                    <div class="tab-pane p-5" id="tab2">
+                                        <div class="collapse" id="collapseExample2">
+                                            <label for="selectOut">เลือกพนักงานขับรถ</label>
+                                            <div class=" d-flex justify-content-center align-items-center "
+                                                style="gap:5px">
+                                                <div style="width: 350px;">
+
+                                                    <select name="out_car" class="rounded form-control" id="selectOut">
+                                                        <option value="1">1</option>
+                                                        <option value="1">1</option>
+                                                        <option value="1">1</option>
+                                                        <option value="1">1</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="ml-3 btn btn-success btn-sm">บันทึก</div>
+                                                <div onclick="open_modal();" class="btn btn-primary btn-sm">
+                                                    <i class="fa-solid fa-plus"> </i> เพิ่มใหม่
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="collapse" id="collapseExample">
+                                            <div class="card card-body">
+                                                <form action="">
+                                                    @csrf <div class="form-group row mt-2 d-flex flex-column flex-md-row ">
+                                                        <div class="col-6 "> <label for="out-model">ยี่ห้อ</label>
+                                                            <input type="text" id="out-model" class="form-control">
+                                                        </div>
+
+                                                        <div class="col-6 ">
+                                                            <label for="out-license"> ป้ายทะเบียน </label> <input
+                                                                type="text" id="out-license" class="form-control">
+                                                        </div>
+                                                        <div class="col-12 "> <label
+                                                                for="out-model">รายละเอียด/รุ่น</label>
+                                                            <input type="text" id="out-model" class="form-control">
+                                                        </div>
+                                                        <div class="col-12 ">
+                                                            <label for="out-own"> เจ้าของรถ </label> <input
+                                                                type="text" id="out-own" class="form-control">
+                                                        </div>
+                                                        <div class="col-12 "> <label for="out-tell"> เบอร์โทรติดต่อ
+                                                            </label> <input type="text" id="out-tell"
+                                                                class="form-control" />
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="d-flex justify-content-end mt-2">
+                                                        <div class="btn btn-sm btn-success w-25"> บันทึก </div> <button
+                                                            type="button" class="btn btn-sm btn-outline-danger w-25 "
+                                                            data - bs - dismiss="modal" aria - label="Close"
+                                                            onclick="open_modal()"> ปิด </button>
+                                                    </div>
+
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
 
                     </div>
 
-
                 </div>
-
             </div>
         </div>
     </div>
-    </div>
 
     </div>
 
 
+    </div>
     <script type="text/javascript">
         function open_modal() {
             // $('#theModal').modal('show');

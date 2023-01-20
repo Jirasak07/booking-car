@@ -1,5 +1,4 @@
 @section('title', 'ข้อมูลการจอง')
-
 @extends('layouts.layout')
 @section('content')
     @include('layouts.header')
@@ -14,7 +13,6 @@
                         <th>วันเวลาสิ้นสุด</th>
                         <th>สถานะ</th>
                         <th>รายละเอียด</th>
-
                     </tr>
                 </thead>
                 <tbody>
@@ -36,27 +34,16 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <div class="btn btn-sm bg-primary text-white"> <i class="fa-solid fa-eye"></i></div>
-
+                                    <div class="btn btn-sm bg-primary text-white"
+                                        onclick="showDetailHistory({{ $history['id'] }})"> <i class="fa-solid fa-eye"></i>
+                                    </div>
                                 </td>
-
                             </tr>
                         @endif
                     @endforeach
-                    {{-- @foreach ($hiss as $his)
-                                <tr>
-                                    <td>{{$his['name']}}</td>
-                                </tr>
-                            @endforeach --}}
                 </tbody>
             </table>
-
-            {{-- @foreach ($his as $his)
-            <div>{{$his['id']}}</div>
-            @endforeach --}}
         </div>
-
-        {{-- @include('layouts.footers.auth') --}}
     </div>
     </div>
     @push('js')
@@ -70,8 +57,7 @@
                     responsive: {
                         details: false
                     },
-                    columnDefs: [
-                        {
+                    columnDefs: [{
                             responsivePriority: 1,
                             targets: 4
                         },
@@ -101,6 +87,23 @@
         <script>
             var his = @json($hiss);
             console.log(his)
+        </script>
+        <script>
+            function showDetailHistory(id) {
+                $.ajax({
+                    url: '/admin/history/'+id,
+                    method: 'GET',
+                    success: function(data) {
+                        var detail = data.detail;
+                        console.log(detail[0].booking_detail);
+                        Swal.fire({
+                            title: '',
+                            html: 'bb'+detail[0].booking_detail+'ครับ',
+                        })
+                    }
+                })
+
+            }
         </script>
     @endpush
 @endsection
