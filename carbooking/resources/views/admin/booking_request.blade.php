@@ -6,7 +6,7 @@
     @include('layouts.header')
     <div class="container-fulid mx-3 ">
         <div class="container-md pt-3 pb-3 ">
-            <div class=" card shadow-table  ">
+            <div class=" card shadow-table p-3  ">
                 <table id="tablerequest" class="display responsive nowrap " style="width:100%;font-size:0.8em">
                     <thead class="table-dark">
                         <tr>
