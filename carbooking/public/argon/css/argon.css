@@ -56,6 +56,8 @@
 *,
 *::before,
 *::after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
 
@@ -20457,9 +20459,7 @@ a.nav-link-sub:hover {
 .fc-view-container {
     aspect-ratio: 1/1;
 }
-::-webkit-scrollbar-x {
-    display: none;
-}
+
 .shadow-table {
     box-shadow: 2.8px 2.8px 2.2px rgba(0, 0, 0, 0.038),
         6.7px 6.7px 5.3px rgba(0, 0, 0, 0.046),

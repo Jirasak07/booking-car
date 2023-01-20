@@ -5,14 +5,14 @@
     @include('layouts.header')
     <div class="container-fulid mx-3 ">
         <div class="container-md p-md-2 p-1 mt-sm-2 mt-sm-1 mt-4">
-            <div class="card-dark shadow-table ">
-                <table class=" rounded table table-white table-striped fw-bold table-responsive-sm">
-                    <thead class="table-dark">
+            <div class="card p-2 shadow-table ">
+                <table id="tableuser"class="display responsive nowrap " style="width:100%;font-size:0.8em">
+                    <thead class="table-dark" style="width: max-content" >
                         <tr>
-                            <th class="fw-bold" align="center">ลำดับ</th>
-                            <th align="center">ชื่อ</th>
-                            <th align="center">Email</th>
-                            <th align="center">Role</th>
+                            <th class="fw-bold" >ลำดับ</th>
+                            <th >ชื่อ</th>
+                            <th >Email</th>
+                            <th >Role</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -22,28 +22,15 @@
                                 <td>{{ $Users->username }}</td>
                                 <td>{{ $Users->email }}</td>
                                 <td>
-                                    <div class="btn-group dropright" style="width: 30px">
-                                        <button type="button" class="btn btn-sm btn-default" style="width: 50px">
+                                    <div class="row" style="width: 100px">
+                                        <div  class="justify-content-center badge d-flex align-items-center rounded-0 text-white bg-default" style="width: 50px">
                                             {{ $Users->role_user == 1 ? 'Admin' : 'User' }}
 
-                                        </button>
-                                        <i class="fa-solid fa-pen-to-square btn btn-warning btn-sm" data-toggle="dropdown"
+                                        </div>
+                                        <i class="fa-solid fa-pen-to-square rounded-0 btn btn-warning btn-sm" data-toggle="dropdown"
                                             aria-haspopup="true" aria-expanded="false"
                                             onclick='changeRole({{ $Users->role_user }},{{ $Users->id }})'>
                                         </i>
-                                        {{-- <div class="dropdown-menu">
-
-                                            @if ($Users->role_user == 1)
-                                                <option value="1" class="option active"style="font-weight: 900" disabled >Admin
-                                                </option>
-                                                <option value="2" class="option" '>user</option>
-                                            @elseif ($Users->role_user == 2)
-                                                <option value="1" class="option" onclick="changeRole(1)">Admin</option>
-                                                <option value="2" class="option active" style="font-weight: 900" disabled>User
-                                                </option>
-                                            @endif
-
-                                        </div> --}}
                                     </div>
                                 </td>
                             </tr>
@@ -52,58 +39,92 @@
                 </table>
             </div>
         </div>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script>
-            function changeRole(e, val2) {
-                const name = e;
-                var role = 0;
-                if (e == 2) {
-                    var namerole = 'Admin';
-                    role = 1;
-                } else if (e == 1) {
-                    var namerole = 'User';
-                    role = 2;
-                }
-                Swal.fire({
-                    title: 'ต้องการเปลี่ยนเป็น' + namerole + 'หรือไม่ ?',
-                    icon: 'question',
-                    showCancelButton: true,
-                    confirmButtonColor: '#06d6a0',
-                    cancelButtonColor: '#ef476f',
-                    confirmButtonText: 'ตกลง',
-                    cancelButtonText: 'ยกเลิก'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $.ajax({
-                            url: '/admin/manage-role/' + val2,
-                            method: 'GET',
-                            success: function(data) {
-                                if (data.status == 'success') {
-                                    Swal.fire({
-                                        title: 'เสร็จสิ้น',
-                                        icon: 'success',
-                                        confirmButtonText: 'ok',
-                                    }).then((result) => {
-                                        /* Read more about isConfirmed, isDenied below */
-                                        if (result.isConfirmed) {
-                                            window.location.reload();
-                                        }
-                                    })
 
-                                } else if (data.status == 'error') {
-                                    Swal.fire({
-                                        title: 'ไม่สามารถเปลี่ยนได้',
-                                        icon: 'error',
-                                    })
-                                }
-                            }
-                        })
-                    }else {
+        @push('js')
+            <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script>
+                $(document).ready(function() {
+                    $('#tableuser').DataTable({
+                        responsive: {
+                        details: {
+                            type: 'column',
+                            target: 'tr'
+                        }
+                    },
+                    columnDefs: [{
 
-                    }
+                        orderable: false,
+                        targets: 0
+                    }],
+                    lengthMenu: [10, 20, 50, 100, ],
+                    language: {
+                        lengthMenu: "แสดง _MENU_ รายการ",
+                        search: "ค้นหาข้อมูลในตาราง",
+                        info: "แสดงข้อมูล _END_ จากทั้งหมด _TOTAL_ รายการ",
 
+                        paginate: {
+
+                            previous: "ก่อนหน้า",
+                            next: "ถัดไป",
+
+                        },
+                    },
+                    })
                 })
-            }
-        </script>
+            </script>
+            <script>
+                function changeRole(e, val2) {
+                    const name = e;
+                    var role = 0;
+                    if (e == 2) {
+                        var namerole = 'Admin';
+                        role = 1;
+                    } else if (e == 1) {
+                        var namerole = 'User';
+                        role = 2;
+                    }
+                    Swal.fire({
+                        title: 'ต้องการเปลี่ยนเป็น' + namerole + 'หรือไม่ ?',
+                        icon: 'question',
+                        showCancelButton: true,
+                        confirmButtonColor: '#06d6a0',
+                        cancelButtonColor: '#ef476f',
+                        confirmButtonText: 'ตกลง',
+                        cancelButtonText: 'ยกเลิก'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                url: '/admin/manage-role/' + val2,
+                                method: 'GET',
+                                success: function(data) {
+                                    if (data.status == 'success') {
+                                        Swal.fire({
+                                            title: 'เสร็จสิ้น',
+                                            icon: 'success',
+                                            confirmButtonText: 'ok',
+                                        }).then((result) => {
+                                            /* Read more about isConfirmed, isDenied below */
+                                            if (result.isConfirmed) {
+                                                window.location.reload();
+                                            }
+                                        })
+
+                                    } else if (data.status == 'error') {
+                                        Swal.fire({
+                                            title: 'ไม่สามารถเปลี่ยนได้',
+                                            icon: 'error',
+                                        })
+                                    }
+                                }
+                            })
+                        } else {
+
+                        }
+
+                    })
+                }
+            </script>
+        @endpush
     </div>
 @endsection
