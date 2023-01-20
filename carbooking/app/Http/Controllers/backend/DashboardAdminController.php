@@ -114,7 +114,7 @@ class DashboardAdminController extends Controller
             ->join('users', 'tb_booking.username', '=', 'users.id')
             ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
             ->where('tb_booking.id','=', $id)
-            ->select('tb_driver.driver_fullname as driver', 'car_license as car','booking_start as sdate','booking_end as edate','users.name as name_user')
+            ->select('tb_driver.driver_fullname as driver', 'car_license as car','car_model as car_detail','booking_start as sdate','booking_end as edate','type_car','users.name as name_user')
             ->get();
         }else if($booking->type_car == 2){
             $detail = DB::table('tb_booking')
@@ -123,13 +123,13 @@ class DashboardAdminController extends Controller
             ->join('users', 'tb_booking.username', '=', 'users.id')
             ->join('tb_out_cars', 'tb_booking.license_plate', '=', 'tb_out_cars.id')
             ->where('tb_booking.id','=', $id)
-            ->select('car_out_license', 'car_out_model', 'car_out_driver', 'car_out_tel','tb_booking.*','users.name')
+            ->select('car_out_license as car', 'car_out_model car_detail', 'car_out_driver as driver', 'car_out_tel as tel','owner','booking_start as sdate','booking_end as edate','type_car','users.name as name_user')
             ->get();
         }else{
             $detail = DB::table('tb_booking')
             ->join('users', 'tb_booking.username', '=', 'users.id')
             ->where('tb_booking.id','=', $id)
-            ->select('tb_booking.booking_start','tb_booking.booking_end','tb_booking.type_car','users.name')
+            ->select('booking_start as sdate','booking_end as edate','type_car','driver','license_plate as car','users.name as name_user')
             ->get();
         }
 dd($detail);
