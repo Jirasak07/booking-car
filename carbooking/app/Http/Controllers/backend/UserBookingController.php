@@ -19,7 +19,7 @@ class UserBookingController extends Controller
         $booking->booking_end = date('Y-m-d', strtotime($request->booking_end));
         $booking->booking_detail = $request->booking_detail;
         $booking->save();
-        return redirect()->back();
+        return redirect()->back()->with('success_edit','complete');
     }
 
     function unapprove($id)

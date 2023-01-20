@@ -18,6 +18,9 @@
     {{-- <script src='fullcalendar/dist/index.global.js'></script> --}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            setInterval(() => {
+                console.log('refresh');
+            }, 5000);
             var calendarEl = document.getElementById('calendar');
             var bookings = @json($booking);
             //console.log(bookings);
@@ -58,7 +61,14 @@
                     center: 'title',
                     right: 'timeGridDay,timeGridFourDay,dayGridMonth,listMonth'
                 },
-
+                eventClick: function(info) {
+                    var eventObj = info.event;
+                    //alert('Clicked ' + );
+                    Swal.fire({
+                        title: eventObj.title,
+                        text:'ช่วงเวลา ' +eventObj.start+' - '+eventObj.end,
+                    });
+                },
                 events: bookings,
 
                 views: {
@@ -82,7 +92,7 @@
                         text: 'clicked ' + info.dateStr
                     }); */
                 },
-                
+
                 select: function(info) {
                     var booking_start = moment(info.startStr).format('YYYY-MM-DD HH:mm:ss');
                     var booking_end = moment(info.endStr).format('YYYY-MM-DD HH:mm:ss');
@@ -101,7 +111,7 @@
                     document.getElementById('date_end').value = booking_e;
 
                     //tag input datetime-local เลือกวันย้อนหลังไม่ได้
-                    var now_utc = Date.now() 
+                    var now_utc = Date.now()
                     var today = new Date(now_utc).toISOString().substring(0, 16);
                     document.getElementById("date_start").setAttribute("min", today);
                     document.getElementById("date_end").setAttribute("min", today);
