@@ -50,7 +50,7 @@
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
-                                        <i class="fa-solid fa-hourglass-start"></i>
+                                        <i class="fa-regular fa-clock" style="font-size: 24px"></i>
                                     </div>
                                 </div>
                             </div>
