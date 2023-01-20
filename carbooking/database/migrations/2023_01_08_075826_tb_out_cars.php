@@ -18,6 +18,7 @@ class TbOutCars extends Migration
             $table->string('car_out_license');//ทะเบียนรถภายนอกPK
             $table->string('car_out_model');//รายระเอียดยี่ห้อ รุ่นรถภายนอก
             $table->string('car_out_driver');//ชื่อคนขับหรือชื่อบริษัทรถภายนอก
+            $table->string('owner');//เจ้าของ
             $table->string('car_out_tel');//เบอร์ติดต่อภายนอก
             $table->string('car_out_status');//สถานะรถภายนอก
             $table->timestamps();
