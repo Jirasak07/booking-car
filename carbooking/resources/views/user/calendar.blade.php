@@ -41,19 +41,58 @@
                 },
                 eventClick: function(e) {
                     moment.locale('th');
+
                     var newdate = new Date().getTimezoneOffset();
                     var newdate2 = new Date(e.event.start);
-                    alert(JSON.stringify(newdate2.getDay()))
+                    //alert(JSON.stringify(newdate2.getDay()))
                     var eventObj = e.event;
-                    var startb = JSON.stringify(eventObj.start)
-                    var endb = JSON.stringify(eventObj.end)
-                    var date = new Date(eventObj.start)
+                    // var startb = JSON.stringify(eventObj.start)
+                    // var endb = JSON.stringify(eventObj.end)
+                    var date_start = new Date(eventObj.start)
+                    var date_end = new Date(eventObj.end)
+                    var dt_sh = date_start.getUTCHours()
+                    var dt_eh = date_end.getUTCHours()
+                    var dt_st = date_start.getUTCMinutes()
+                    var dt_en = date_end.getUTCMinutes()
+                    //console.log("The current date is:", date_start)
+                    let getMonth = date_start.toLocaleString('th', {
+                        month: 'short',
+                    });
+                    let day = date_start.toLocaleString('th', {
+                        weekday: 'short'
+                    })
+                    if (dt_sh.toString().length == 1) {
+                        starth = '0' + dt_sh
+                    } else {
+                        starth = dt_sh
+                    }
+                    if (dt_eh.toString().length == 1) {
+                        endh = '0' + dt_eh
+                    } else {
+                        endh = dt_eh
+                    }
+                    if (dt_st.toString().length == 1) {
+                        starts = '0' + dt_st
+                    } else {
+                        starts = dt_st
+                    }
+                    if (dt_en.toString().length == 1) {
+                        ends = '0' + dt_en
+                    } else {
+                        ends = dt_en
+                    }
                     // alert(date.getUTCHours())
                     //alert('Clicked ' + );
                     Swal.fire({
-                        title: date.getUTCDate() + '-' + (date.getUTCMonth() + 1) + '-' + (date
-                                .getUTCFullYear() + 543) + 'เวลา' + date.getUTCHours() + ':' +
-                            date.getUTCMinutes(),
+                        html: '<div><h1>' + eventObj.title + '</h1><br/><h4>' + day + ' ' +
+                            date_start.getUTCDate() + ' ' + getMonth + ' ' + (date_start
+                                .getUTCFullYear() + 543) +
+                            ' เวลา ' + starth +
+                            ':' + starts + ' น. ถึง ' + day + ' ' + date_end.getUTCDate() + ' ' +
+                            getMonth + ' ' + (date_end.getUTCFullYear() +
+                                543) + ' เวลา ' + endh +
+                            ':' + ends +
+                            ' น.</h4></div>',
                     });
                 },
                 events: bookings,

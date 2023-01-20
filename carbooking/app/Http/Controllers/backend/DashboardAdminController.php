@@ -131,7 +131,6 @@ class DashboardAdminController extends Controller
             ->select('booking_start as sdate','booking_end as edate','booking_detail','type_car','driver','license_plate as car','users.name as name_user')
             ->get();
         }
-
         return response()->json([
             'detail' =>$detail
         ]);
