@@ -144,11 +144,19 @@
                                     </form>
                                 </div>
                                 <div class="tab-pane" id="tab2">
-                                    <button onclick="open_modal();" class="btn btn-primary btn-sm"> <i class="fa-solid fa-plus"> </i> เพิ่มใหม่</button>
-                                    <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse"
-                                        data-target="#collapseExample" aria-expanded="false"
-                                        aria-controls="collapseExample">
-                                        <i class="fa-solid fa-plus"> </i> เพิ่มใหม่ </button>
+
+                                    <div>
+                                        <select name="out_car" id="" style="width: 150px">
+                                            <option value="1">1</option>
+                                            <option value="1">1</option>
+                                            <option value="1">1</option>
+                                            <option value="1">1</option>
+                                        </select>
+                                        <button class="btn btn-success btn-sm" style="width: 60px">บันทึก</button>
+                                    </div>
+
+                                    <button onclick="open_modal();" class="btn btn-primary btn-sm"> <i
+                                            class="fa-solid fa-plus"> </i> เพิ่มใหม่</button>
                                     <div class="collapse" id="collapseExample">
                                         <div class="card card-body">
                                             <form action="">
@@ -173,7 +181,8 @@
                                                 <div class="d-flex justify-content-end mt-2">
                                                     <div class="btn btn-sm btn-success w-25"> บั นทึก </div> <button
                                                         type="button" class="btn btn-sm btn-outline-danger w-25 " data -
-                                                        bs - dismiss="modal" aria - label="Close"> ปิด </button>
+                                                        bs - dismiss="modal" aria - label="Close"
+                                                        onclick="open_modal()"> ปิด </button>
                                                 </div>
 
                                             </form>
@@ -201,9 +210,9 @@
         function open_modal() {
             // $('#theModal').modal('show');
             $('#collapseExample').collapse('toggle');
+            // e.preventDefault()
+            //     $(this).tab('show')
         }
-
-
     </script>
 
     @push('js')
@@ -278,16 +287,18 @@
             function modal(val) {
                 // document.getElementById('')
                 const data = @json($booking);
+
                 const bookdata = [];
                 moment.locale('th');
                 const start = [];
                 const end = [];
                 const detail = [];
-                data.forEach(d => {
-                    if (d.id == val) {
-                        start.push(d.booking_start);
-                        end.push(d.booking_end);
-                        detail.push(d.booking_detail);
+                data.forEach(showBooking => {
+                    if (showBooking.id == val) {
+
+                        start.push(showBooking.booking_start);
+                        end.push(showBooking.booking_end);
+                        detail.push(showBooking.booking_detail);
                     }
                 });
                 const bookstart = moment(JSON.stringify(start[0])).add(543, 'year').format('ddd ที่ D MMM YY เวลา HH:mm นาที');
@@ -300,7 +311,6 @@
                 document.getElementById('end_date').innerHTML = bookend;
                 document.getElementById('detail').innerHTML = detail[0];
                 document.getElementById('idform').value = val;
-                // {{ thaidate('l j F Y เวลา G:i', strtotime($bookings['booking_start'])) }}
             }
         </script>
     @endpush
