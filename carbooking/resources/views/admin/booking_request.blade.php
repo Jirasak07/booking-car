@@ -148,40 +148,39 @@
                                     </div>
                                     <div class="tab-pane pt-5" id="tab2">
 
-                                            <div class="card card-body">
-                                                <form action="">
-                                                    @csrf <div class="form-group row mt-2 d-flex flex-column flex-md-row ">
-                                                        <div class="col-6 "> <label for="out-model">ยี่ห้อ</label>
-                                                            <input type="text" id="out-model" class="form-control">
-                                                        </div>
-
-                                                        <div class="col-6 ">
-                                                            <label for="out-license"> ป้ายทะเบียน </label> <input
-                                                                type="text" id="out-license" class="form-control">
-                                                        </div>
-                                                        <div class="col-12 "> <label
-                                                                for="out-model">รายละเอียด/รุ่น</label>
-                                                            <input type="text" id="out-model" class="form-control">
-                                                        </div>
-                                                        <div class="col-12 ">
-                                                            <label for="out-own"> เจ้าของรถ </label> <input
-                                                                type="text" id="out-own" class="form-control">
-                                                        </div>
-                                                        <div class="col-12 "> <label for="out-tell"> เบอร์โทรติดต่อ
-                                                            </label> <input type="text" id="out-tell"
-                                                                class="form-control" />
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="d-flex justify-content-end mt-2">
-                                                        <div class="btn btn-sm btn-success w-25"> บันทึก </div> <button
-                                                            type="button" class="btn btn-sm btn-outline-danger w-25 "
-                                                            data - bs - dismiss="modal" aria - label="Close"
-                                                            onclick="open_modal()"> ปิด </button>
+                                        <div class="card card-body">
+                                            <form action="">
+                                                @csrf <div class="form-group row mt-2 d-flex flex-column flex-md-row ">
+                                                    <div class="col-6 "> <label for="out-model">ยี่ห้อ</label>
+                                                        <input type="text" id="out-model" class="form-control">
                                                     </div>
 
-                                                </form>
-                                            </div>
+                                                    <div class="col-6 ">
+                                                        <label for="out-license"> ป้ายทะเบียน </label> <input
+                                                            type="text" id="out-license" class="form-control">
+                                                    </div>
+                                                    <div class="col-12 "> <label for="out-model">รายละเอียด/รุ่น</label>
+                                                        <input type="text" id="out-model" class="form-control">
+                                                    </div>
+                                                    <div class="col-12 ">
+                                                        <label for="out-own"> เจ้าของรถ </label> <input type="text"
+                                                            id="out-own" class="form-control">
+                                                    </div>
+                                                    <div class="col-12 "> <label for="out-tell"> เบอร์โทรติดต่อ
+                                                        </label> <input type="text" id="out-tell"
+                                                            class="form-control" />
+                                                    </div>
+
+                                                </div>
+                                                <div class="d-flex justify-content-end mt-2">
+                                                    <div class="btn btn-sm btn-success w-25"> บันทึก </div> <button
+                                                        type="button" class="btn btn-sm btn-outline-danger w-25 " data -
+                                                        bs - dismiss="modal" aria - label="Close"
+                                                        onclick="open_modal()"> ปิด </button>
+                                                </div>
+
+                                            </form>
+                                        </div>
 
 
                                     </div>
@@ -217,6 +216,9 @@
             });
 
             $(document).ready(function() {
+                const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                console.log(timezone);
+                alert(timezone)
                 $('#tablerequest').DataTable({
                     responsive: {
                         details: {
