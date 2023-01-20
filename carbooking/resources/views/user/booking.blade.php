@@ -379,7 +379,7 @@
         @push('js')
             <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
             <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-            <script>
+            <script >
                 $(document).ready(function() {
                     setInterval(() => {
                         console.log('refresh');
@@ -393,6 +393,7 @@
                     document.getElementById("booking_start").setAttribute("min", today);
                     document.getElementById("booking_end").setAttribute("min", today);
                 });
+                
 
                 function alertCancel(id) {
                     //alert(id)
