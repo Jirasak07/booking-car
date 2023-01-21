@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
+
 class UserBookingController extends Controller
 {
     //
@@ -22,7 +23,7 @@ class UserBookingController extends Controller
         $booking->booking_detail = $request->booking_detail;
         //dd($booking);
         $booking->save();
-        return redirect()->back()->with('success_edit','complete');
+        return redirect()->back()->with('success_edit', 'complete');
     }
 
     function unapprove($id)
@@ -34,7 +35,7 @@ class UserBookingController extends Controller
     }
     function show_booking()
     {
-        $booking = DB::table('tb_booking')
+        /* $booking = DB::table('tb_booking')
 
             ->join('users', 'tb_booking.username', '=', 'users.id')
 
@@ -44,7 +45,7 @@ class UserBookingController extends Controller
             ->where('tb_booking.username','=', Auth::user()->id)
             ->orderBy('booking_status')
             ->select('car_out_license', 'car_out_model', 'car_out_driver', 'car_out_tel',  'driver_fullname', 'car_license', 'tb_booking.*', 'users.username')
-            ->get();
+            ->get(); */
 
         $booking_wait = DB::table('tb_booking')
             ->join('users', 'tb_booking.username', '=', 'users.id')
@@ -56,14 +57,66 @@ class UserBookingController extends Controller
         // return dd($booking);
         //dd($booking);
         $Alllist = DB::table('tb_booking')
-            ->where('tb_booking.username','=', Auth::user()->id)->count();
+            ->where('tb_booking.username', '=', Auth::user()->id)->count();
         $Alllistpending = DB::table('tb_booking')
             ->where('tb_booking.username', '=', Auth::user()->id)->where('booking_status', '=', '1')->count();
         $Alllistapprove = DB::table('tb_booking')
-            ->where('tb_booking.username','=', Auth::user()->id)->where('booking_status', '=', '2')->count();
+            ->where('tb_booking.username', '=', Auth::user()->id)->where('booking_status', '=', '2')->count();
         $Alllistcancle = DB::table('tb_booking')
             ->where('tb_booking.username', '=', Auth::user()->id)->where('booking_status', '=', '3')->count();
-            // dd($booking,$booking_wait,$Alllist,$Alllistpending,$Alllistapprove,$Alllistcancle,);
-        return view('user.booking')->with(['booking' => $booking, 'booking2' => $booking_wait, 'Alllist' => $Alllist, 'Alllistpending' => $Alllistpending, 'Alllistapprove' => $Alllistapprove, 'Alllistcancle' => $Alllistcancle]);
+        // dd($booking,$booking_wait,$Alllist,$Alllistpending,$Alllistapprove,$Alllistcancle,);
+        return view('user.booking')->with([/* 'booking' => $booking, */'booking2' => $booking_wait, 'Alllist' => $Alllist, 'Alllistpending' => $Alllistpending, 'Alllistapprove' => $Alllistapprove, 'Alllistcancle' => $Alllistcancle]);
+    }
+    function detail_booking($id)
+    {
+        $booking = DB::table('tb_booking')
+            ->join('users', 'tb_booking.username', '=', 'users.id')
+            ->where('tb_booking.id', '=', $id)
+            ->select('tb_booking.*', 'users.name')
+            ->get();
+        foreach ($booking as $value) {
+            if ($value->booking_status == '2') {
+                if ($value->type_car == '1') {
+                    $car = DB::table('tb_booking')
+                        ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
+                        ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
+                        ->select('driver_fullname as name_driver', 'car_license as car_license', 'car_model as car_model', 'tb_booking.*')
+                        ->where('tb_booking.id', '=', $id)
+                        ->get();
+                } elseif ($value->type_car == '2') {
+                    $car = DB::table('tb_booking')
+                        ->join('tb_out_cars', 'tb_booking.license_plate', '=', 'tb_out_cars.id')
+                        ->select('car_out_license as car_license', 'car_out_model as car_model', 'car_out_driver as name_driver', 'car_out_tel', 'tb_booking.*')
+                        ->where('tb_booking.id', '=', $id)
+                        ->get();
+                }
+                foreach ($car as $key) {
+                    $data = [
+                        'id' => $value->id,
+                        'name' => $value->name,
+                        'booking_start' => $value->booking_start,
+                        'booking_end' => $value->booking_end,
+                        'booking_detail' => $value->booking_detail,
+                        'booking_status' => $value->booking_status,
+                        'name_driver' => $key->name_driver,
+                        'car_license' => $key->car_license,
+                        'car_model' => $key->car_model
+                    ];
+                }
+            } else {
+                $data = [
+                    'id' => $value->id,
+                    'name' => $value->name,
+                    'booking_start' => $value->booking_start,
+                    'booking_end' => $value->booking_end,
+                    'booking_detail' => $value->booking_detail,
+                    'booking_status' => $value->booking_status,
+                    'name_driver' => '-',
+                    'car_license' => '-',
+                    'car_model' => '-'
+                ];
+            }
+        }
+        return response()->json($data);
     }
 }

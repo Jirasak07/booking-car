@@ -68,9 +68,10 @@
     
     <script src="{{ asset('argon') }}/vendor/jquery/dist/jquery.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-
+    <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
     @stack('js')
-
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    
     <!-- Argon JS -->
     <script src="{{ asset('argon') }}/js/argon.js?v=1.0.0"></script>
 </body>
