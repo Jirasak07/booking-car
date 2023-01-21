@@ -102,7 +102,8 @@
 
                         Swal.fire({
                             title: JSON.stringify(moment(end).format(
-                                'ddd ที่ D MMM '+ (new Date(detail[0].edate).getFullYear()+543) +' เวลา HH:mm นาที')),
+                                'ddd ที่ D MMM ' + (new Date(detail[0].edate).getFullYear() + 543) +
+                                ' เวลา HH:mm นาที')),
                         })
                     }
                 })

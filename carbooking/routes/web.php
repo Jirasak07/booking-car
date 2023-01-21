@@ -65,6 +65,7 @@ Route::group(
         })->name('GG');
 
         Route::post('approve', [\App\Http\Controllers\backend\Bookingcontroller::class, 'update'])->name('update');
+        Route::post('approve-out', [\App\Http\Controllers\backend\Bookingcontroller::class, 'updateout'])->name('updateout');
 
         Route::get('cancel/{id}', [\App\Http\Controllers\backend\Bookingcontroller::class, 'cancle']);
     }

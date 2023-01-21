@@ -149,31 +149,38 @@
                                     <div class="tab-pane pt-5" id="tab2">
 
                                         <div class="card card-body">
-                                            <form action="">
-                                                @csrf <div class="form-group row mt-2 d-flex flex-column flex-md-row ">
+                                            <form method="POST" action="{{ route('updateout') }}">
+                                                @csrf
+                                                <input type="hidden" id="idform2" name="id_form">
+                                                <input type="hidden" name="type" value="2">
+                                                <div class="form-group row mt-2 d-flex flex-column flex-md-row ">
                                                     <div class="col-6 "> <label for="out-model">ยี่ห้อ</label>
-                                                        <input type="text" id="out-model" class="form-control">
+                                                        <input type="text" id="out-model" name="brand" class="form-control">
                                                     </div>
 
                                                     <div class="col-6 ">
-                                                        <label for="out-license"> ป้ายทะเบียน </label> <input
+                                                        <label for="out-license"> ป้ายทะเบียน </label> <input name="car_out_license"
                                                             type="text" id="out-license" class="form-control">
                                                     </div>
                                                     <div class="col-12 "> <label for="out-model">รายละเอียด/รุ่น</label>
-                                                        <input type="text" id="out-model" class="form-control">
+                                                        <input type="text" id="out-model" name="car_out_model" class="form-control">
+                                                    </div>
+                                                    <div class="col-12 "> <label for="out-driver">คนขับ</label>
+                                                        <input type="text" id="out-driver" name="car_out_driver" class="form-control">
                                                     </div>
                                                     <div class="col-12 ">
                                                         <label for="out-own"> เจ้าของรถ </label> <input type="text"
-                                                            id="out-own" class="form-control">
+                                                            id="out-own" class="form-control" name="owner">
                                                     </div>
                                                     <div class="col-12 "> <label for="out-tell"> เบอร์โทรติดต่อ
                                                         </label> <input type="text" id="out-tell"
-                                                            class="form-control" />
+                                                            class="form-control" name="car_out_tel" />
                                                     </div>
 
                                                 </div>
                                                 <div class="d-flex justify-content-end mt-2">
-                                                    <div class="btn btn-sm btn-success w-25"> บันทึก </div> <button
+                                                    <button class="btn btn-sm btn-success w-25" type="submit"> บันทึก </button>
+                                                    <button
                                                         type="button" class="btn btn-sm btn-outline-danger w-25 " data -
                                                         bs - dismiss="modal" aria - label="Close"
                                                         onclick="open_modal()"> ปิด </button>
@@ -216,9 +223,6 @@
             });
 
             $(document).ready(function() {
-                const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-                console.log(timezone);
-                alert(timezone)
                 $('#tablerequest').DataTable({
                     responsive: {
                         details: {
@@ -282,12 +286,15 @@
                 data.forEach(showBooking => {
                     if (showBooking.id == val) {
                         start.push(showBooking.booking_start);
+
                         end.push(showBooking.booking_end);
                         detail.push(showBooking.booking_detail);
                     }
                 });
-                const bookstart = moment(JSON.stringify(start[0])).add(543, 'year').format('ddd ที่ D MMM YY เวลา HH:mm นาที');
-                const bookend = moment(JSON.stringify(end[0])).add(543, 'year').format('ddd ที่ D MMM YY เวลา HH:mm นาที');
+                const bookstart = moment(JSON.stringify(start[0])).format('ddd ที่ D MMM ' + (new Date(start[0]).getFullYear() +
+                    543) + ' เวลา HH:mm นาที');
+                const bookend = moment(JSON.stringify(end[0])).format('ddd ที่ D MMM ' + (new Date(end[0]).getFullYear() +
+                    543) + ' เวลา HH:mm นาที');
                 // console.log(typeof(bookstart));
                 // alert(bookstart);
                 // const da = moment().format('D-MM-YYYY');
@@ -296,6 +303,7 @@
                 document.getElementById('end_date').innerHTML = bookend;
                 document.getElementById('detail').innerHTML = detail[0];
                 document.getElementById('idform').value = val;
+                document.getElementById('idform2').value = val;
             }
         </script>
         <script>
