@@ -277,7 +277,6 @@
             function modal(val) {
                 // document.getElementById('')
                 const data = @json($booking);
-
                 const bookdata = [];
                 moment.locale('th');
                 const start = [];

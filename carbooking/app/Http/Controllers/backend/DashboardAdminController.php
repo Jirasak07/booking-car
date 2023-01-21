@@ -98,41 +98,102 @@ class DashboardAdminController extends Controller
 
         // $data = BookingModel::all()->Groupby("MONTH(booking_start)")->count('id');
         //  return dd($bookingcarin);
-        return view('admin.dashboard')->with(['data2' => $data2, 'data1' => $data1, 'allcar1' => $allcar1, 'allcar2' => $allcar2, 'bookingcarAllin' => $bookingcarAllin, 'bookingcarAllout' => $bookingcarAllout, 'car' => $car, 'allbook' => $allbooking, 'pending' => $pending, 'approve' => $approve, 'cancel' => $cancel, 'bookingcarin' => $bookingcarin])
+
+        $bookings = DB::table('tb_booking')
+            ->where('booking_status', '!=', '3')
+            ->select('tb_booking.*')
+            ->get();
+        $events = array();
+
+        foreach ($bookings as $booking) {
+            $color = null;
+            if ($booking->booking_status == '1') {
+                $color = '#ffd166';
+                $events[] = [
+                    'id' => $booking->id,
+                    'title' => $booking->booking_detail,
+                    'start' => $booking->booking_start,
+                    'end' => $booking->booking_end,
+                    'color' => $color,
+                ];
+            }
+        }
+        $booking_join1 = DB::table('tb_booking')
+            ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
+            ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
+            ->where('tb_booking.type_car', '=', '1')
+            ->where('tb_booking.booking_status', '!=', '3')
+            ->where('tb_booking.booking_status', '!=', '1')
+        //->orderBy('booking_status')
+            ->select('driver_fullname', 'car_license', 'car_model', 'tb_booking.*')
+            ->get();
+        foreach ($booking_join1 as $item) {
+            $color = '#06d6a0 ';
+            $carevents = "รถภายใน";
+            $events[] = [
+                'id' => $item->id,
+                'title' => $item->booking_detail . '(ทะเบียนรถ' . $carevents . ' ' . $item->car_license . ' คนขับรถ ' . $item->driver_fullname . ')',
+                'start' => $item->booking_start,
+                'end' => $item->booking_end,
+                'color' => $color,
+            ];
+        }
+        $booking_join2 = DB::table('tb_booking')
+            ->join('tb_out_cars', 'tb_booking.license_plate', '=', 'tb_out_cars.id')
+            ->where('tb_booking.type_car', '=', '2')
+            ->where('tb_booking.booking_status', '!=', '3')
+            ->where('tb_booking.booking_status', '!=', '1')
+            ->select('car_out_license', 'car_out_model', 'car_out_driver', 'car_out_tel', 'tb_booking.*')
+            ->get();
+        $carevents = "รถภายนอก";
+        foreach ($booking_join2 as $item2) {
+            $color = 'rgba(0,245,36,0.4)';
+            $carevents = "รถภายใน";
+            $events[] = [
+                'id' => $item2->id,
+                'title' => $item2->booking_detail . '(ทะเบียนรถ' . $carevents . ' ' . $item2->car_license . ' คนขับรถ ' . $item2->car_out_driver . ' เบอร์โทร ' . $item2->car_out_tel . ')',
+                'start' => $item2->booking_start,
+                'end' => $item2->booking_end,
+                'color' => $color,
+            ];
+        }
+
+        return view('admin.dashboard')->with(['calenbook' => $events, 'data2' => $data2, 'data1' => $data1, 'allcar1' => $allcar1, 'allcar2' => $allcar2, 'bookingcarAllin' => $bookingcarAllin, 'bookingcarAllout' => $bookingcarAllout, 'car' => $car, 'allbook' => $allbooking, 'pending' => $pending, 'approve' => $approve, 'cancel' => $cancel, 'bookingcarin' => $bookingcarin])
 
         ;
     }
 
-    function detail_history($id){
+    public function detail_history($id)
+    {
 
         $booking = BookingModel::find($id);
 
-        if($booking->type_car == '1'){
+        if ($booking->type_car == '1') {
             $detail = DB::table('tb_booking')
-            ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
+                ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
 
-            ->join('users', 'tb_booking.username', '=', 'users.id')
-            ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
-            ->where('tb_booking.id','=', $id)
-            ->select('tb_driver.driver_fullname as driver', 'tb_cars.car_license as car','tb_cars.car_model as car_detail','booking_start as sdate','booking_end as edate','booking_detail','users.name as name_user')
-            ->get();
-        }else if($booking->type_car == 2){
+                ->join('users', 'tb_booking.username', '=', 'users.id')
+                ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
+                ->where('tb_booking.id', '=', $id)
+                ->select('tb_driver.driver_fullname as driver', 'tb_cars.car_license as car', 'tb_cars.car_model as car_detail', 'booking_start as sdate', 'booking_end as edate', 'booking_detail', 'users.name as name_user')
+                ->get();
+        } else if ($booking->type_car == 2) {
             $detail = DB::table('tb_booking')
 
-            ->join('users', 'tb_booking.username', '=', 'users.id')
-            ->join('tb_out_cars', 'tb_booking.license_plate', '=', 'tb_out_cars.id')
-            ->where('tb_booking.id','=', $id)
-            ->select('car_out_license as car', 'car_out_model car_detail', 'car_out_driver as driver', 'car_out_tel as tel','owner','booking_start as sdate','booking_end as edate','booking_detail','type_car','users.name as name_user')
-            ->get();
-        }else{
+                ->join('users', 'tb_booking.username', '=', 'users.id')
+                ->join('tb_out_cars', 'tb_booking.license_plate', '=', 'tb_out_cars.id')
+                ->where('tb_booking.id', '=', $id)
+                ->select('car_out_license as car', 'car_out_model car_detail', 'car_out_driver as driver', 'car_out_tel as tel', 'owner', 'booking_start as sdate', 'booking_end as edate', 'booking_detail', 'type_car', 'users.name as name_user')
+                ->get();
+        } else {
             $detail = DB::table('tb_booking')
-            ->join('users', 'tb_booking.username', '=', 'users.id')
-            ->where('tb_booking.id','=', $id)
-            ->select('booking_start as sdate','booking_end as edate','booking_detail','type_car','driver','license_plate as car','users.name as name_user')
-            ->get();
+                ->join('users', 'tb_booking.username', '=', 'users.id')
+                ->where('tb_booking.id', '=', $id)
+                ->select('booking_start as sdate', 'booking_end as edate', 'booking_detail', 'type_car', 'driver', 'license_plate as car', 'users.name as name_user')
+                ->get();
         }
         return response()->json([
-            'detail' =>$detail
+            'detail' => $detail,
         ]);
 
     }
