@@ -114,11 +114,7 @@ class Bookingcontroller extends Controller
         return view('user.dashboard')->with(['booking' => $events]);
     }
 
-<<<<<<< HEAD
     public function refresh_calendar()
-=======
-    function refresh_calendar()
->>>>>>> e73d86e416e7563a712279bde62edc5e8c447fc7
     {
         $bookings = DB::table('tb_booking')
             ->where('booking_status', '!=', '3')
@@ -145,11 +141,7 @@ class Bookingcontroller extends Controller
             ->where('tb_booking.type_car', '=', '1')
             ->where('tb_booking.booking_status', '!=', '3')
             ->where('tb_booking.booking_status', '!=', '1')
-<<<<<<< HEAD
         //->orderBy('booking_status')
-=======
-            //->orderBy('booking_status')
->>>>>>> e73d86e416e7563a712279bde62edc5e8c447fc7
             ->select('driver_fullname', 'car_license', 'car_model', 'tb_booking.*')
             ->get();
         foreach ($booking_join1 as $item) {
@@ -183,21 +175,11 @@ class Bookingcontroller extends Controller
             ];
         }
 
-<<<<<<< HEAD
         //dd($booking->)
         //dd($events, $booking_join1,$booking_join2, $booking->id);
         return response()->json([
             'booking' => $events,
         ]);
-
-=======
-
-        //dd($booking->)
-        //dd($events, $booking_join1,$booking_join2, $booking->id);
-        return response()->json([
-            'booking' => $events
-        ]);
->>>>>>> e73d86e416e7563a712279bde62edc5e8c447fc7
     }
     public function cancle($id)
     {
@@ -245,10 +227,10 @@ class Bookingcontroller extends Controller
         $booking_update->save();
         return redirect()->back();
     }
-    public function updateout(Request $request)
+    public function updateout(Request $request, $id)
     {
-
         $id = $request->id_form;
+
         $booking_update = BookingModel::find($id);
         $car_out = new CaroutModel;
         $car_count = DB::table('tb_out_cars')->count();
@@ -256,21 +238,10 @@ class Bookingcontroller extends Controller
         if ($car_count < 1) {
             $car_out->id = 1;
             $car_out->car_out_license = $request->car_out_license;
-            $car_out->car_out_model = $request->brand;
+            $car_out->car_out_model = $request->brand + $request->car_out_model;
             $car_out->owner = $request->owner;
             $car_out->car_out_driver = $request->car_out_driver;
             $car_out->car_out_tel = $request->car_out_tel;
-<<<<<<< HEAD
-            $car_out->car_out_status = '1';
-            $car_out->save();
-
-        } else {
-            $car_out->id = $car_count + 1;
-            $car_out->car_out_license = $request->car_out_license;
-            $car_out->car_out_model = $request->brand ;
-            $car_out->owner = $request->owner;
-            $car_out->car_out_driver = $request->car_out_driver;
-=======
             $car_out->save();
             $booking_update->license_plate = $request->license_plate;
             $booking_update->driver = 1;
@@ -283,19 +254,8 @@ class Bookingcontroller extends Controller
             $car_out->car_out_model = $request->brand . " " . $request->car_out_model;
             $car_out->owner = $request->owner;
             $car_out->car_out_driver = $car_out->car_out_driver;
->>>>>>> e73d86e416e7563a712279bde62edc5e8c447fc7
             $car_out->car_out_tel = $request->car_out_tel;
-            $car_out->car_out_status = '1';
             $car_out->save();
-<<<<<<< HEAD
-
-        }
-        $booking_update->license_plate = $request->license_plate;
-        $booking_update->driver = $car_out->car_out_driver;
-        $booking_update->type_car ='2';
-        $booking_update->booking_status = "2";
-        $booking_update->save();
-=======
             $booking_update->license_plate = $request->license_plate;
             $booking_update->driver = $car_count + 1;
             $booking_update->type_car = "2";
@@ -303,7 +263,6 @@ class Bookingcontroller extends Controller
             $booking_update->save();
         }
 
->>>>>>> e73d86e416e7563a712279bde62edc5e8c447fc7
         return redirect()->back();
     }
 }
