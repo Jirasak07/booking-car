@@ -46,14 +46,13 @@
                                                 {!! Str::limit("$item->booking_detail", 50, ' ...') !!}
                                             </td>
                                             <td align="center">
-                                                <button class="btn btn-neutral btn-sm text-darker"data-toggle="modal"
+                                                <button class="btn btn-info btn-sm text-darker"data-toggle="modal"
                                                     data-target="#viewde{{ $item->id }}">
                                                     <i class="fa-solid fa-eye"></i>
                                                 </button>
                                             </td>
                                             <td align="center">
-                                                <button class="btn bg-yellow btn-sm"
-                                                    style="font-size: 14px;color:#393E46">กำลังดำเนินการ</button>
+                                                <i class="fa-regular fa-clock"style="font-size: 14px;color:#fff;background-color:#FF8B13;padding:4px 4px 4px 4px;border-radius:.375rem;"></i>
                                             </td>
                                             <td align="center">
                                                 <button class="btn btn-yellow btn-sm me-2" style="font-size: 13px"
@@ -72,7 +71,7 @@
                                             </td>
                                             <td class="text-wrap" style="font-size: 16px">{!! Str::limit("$item->booking_detail", 50, ' ...') !!}</td>
                                             <td align="center">
-                                                <button class="btn btn-neutral btn-sm text-darker"data-toggle="modal"
+                                                <button class="btn btn-info btn-sm text-darker"data-toggle="modal"
                                                     data-target="#viewde{{ $item->id }}">
                                                     <i class="fa-solid fa-eye"></i>
                                                 </button>
@@ -379,7 +378,7 @@
         @push('js')
             <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
             <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-            <script >
+            <script>
                 $(document).ready(function() {
                     setInterval(() => {
                         console.log('refresh');
@@ -393,7 +392,7 @@
                     document.getElementById("booking_start").setAttribute("min", today);
                     document.getElementById("booking_end").setAttribute("min", today);
                 });
-                
+
 
                 function alertCancel(id) {
                     //alert(id)

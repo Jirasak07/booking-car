@@ -20,7 +20,6 @@ class TbOutCars extends Migration
             $table->string('car_out_driver');//ชื่อคนขับหรือชื่อบริษัทรถภายนอก
             $table->string('owner');//เจ้าของ
             $table->string('car_out_tel');//เบอร์ติดต่อภายนอก
-            $table->string('car_out_status');//สถานะรถภายนอก
             $table->timestamps();
         });
         
