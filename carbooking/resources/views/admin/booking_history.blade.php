@@ -27,11 +27,7 @@
                                 <td>{{ thaidate('l ที่ j F Y เวลา G:i นาที', strtotime($history['booking_start'])) }}</td>
                                 <td>{{ thaidate('l ที่ j F Y เวลา G:i นาที', strtotime($history['booking_end'])) }}</td>
                                 <td>
-                                    @if ($history['booking_status'] == 2)
-                                        <div class="text-success">{{ __('อนุมัติ') }}</div>
-                                    @elseif ($history['booking_status'] == 3)
-                                        <div class="text-danger">{{ __('ยกเลิก') }}</div>
-                                    @endif
+                                    <i class='{{ $history['booking_status'] == 2? 'fa-solid fa-square-check text-success':'fa-solid fa-square-xmark text-danger ' }}' style="font-size: 2em"></i>
                                 </td>
                                 <td>
                                     <div class="btn btn-sm bg-primary text-white"
