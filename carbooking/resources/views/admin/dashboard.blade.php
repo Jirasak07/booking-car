@@ -15,7 +15,7 @@
                     <div class="col d-flex flex-column align-items-center text-white">
                         <div class="text-white ">ทั้งหมด</div>
                         <div style="font-size: 4rem;line-height: 80%;"id="all">0</div>
-                        <div>รายการ</div>
+                        <div>รายการ {{$pending}} </div>
                     </div>
                 </div>
             </div>
@@ -229,7 +229,6 @@
                     $('#all').html(data.allbooking);
                     $('#pending').html(data.pending);
                     $('#cancel').html(data.cancel);
-
                     $('#approve').html(data.approve);
                 }
             })

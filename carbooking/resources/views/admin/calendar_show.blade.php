@@ -6,110 +6,123 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar1');
-            var ev = @json($calenbook);
-            console.log('event', ev);
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                // themeSystem: 'bootstrap5',
-                selectable: true,
+            var eventt = @json($calenbook);
+            refreshCalen(eventt)
+            setInterval(() => {
+                $.ajax({
+                    url: '/admin/dashboard/eventcalen',
+                    method: 'GET',
+                    success: function(data) {
+                        refreshCalen(data.calenbook)
+                    }
+                })
 
-                contentHeight: 600,
-                handleWindowResize: true,
-                expandRows: true,
-                height: '100%',
-                nowIndicator: true,
-                allDaySlot: false,
-                events: ev,
-                titleFormat: {
-                    year: 'numeric',
-                    month: 'short',
-                    day: 'numeric'
-                },
-                aspectRatio: 2,
-                timeFormat: 'HH:mm',
-                initialView: 'timeGridFourDay',
-                nowIndicator: true,
-                allDaySlot: false,
-                timeZone: 'Asia/bangkok',
-                locale: 'th',
-                headerToolbar: {
-                    left: 'title',
-                    right: 'prev,next',
-                    center: 'timeGridFourDay,dayGridMonth,listWeek',
-                },
-                views: {
-                    timeGridFourDay: {
-                        type: 'timeGrid',
-                        duration: {
-                            days: 7
+            }, 10000);
+
+            function refreshCalen(val) {
+                var ev = val;
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+                    // themeSystem: 'bootstrap5',
+                    selectable: true,
+                    contentHeight: 600,
+                    handleWindowResize: true,
+                    expandRows: true,
+                    height: '100%',
+                    nowIndicator: true,
+                    allDaySlot: false,
+                    events: ev,
+                    titleFormat: {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric'
+                    },
+                    aspectRatio: 2,
+                    timeFormat: 'HH:mm',
+                    initialView: 'timeGridFourDay',
+                    nowIndicator: true,
+                    allDaySlot: false,
+                    timeZone: 'Asia/bangkok',
+                    locale: 'th',
+                    headerToolbar: {
+                        left: 'title',
+                        right: 'prev,next',
+                        center: 'timeGridFourDay,dayGridMonth,listWeek',
+                    },
+                    views: {
+                        timeGridFourDay: {
+                            type: 'timeGrid',
+                            duration: {
+                                days: 7
+                            },
+                            buttonText: '7 day'
                         },
-                        buttonText: '7 day'
-                    },
-                    listWeek: {
-                        buttonText: 'สัปดาห์'
-                    },
-                    dayGridMonth: {
-                        buttonText: 'เดือน'
-                    }
-
-                },
-                windowResize: function(arg) {
-    alert('The calendar has adjusted to a window resize. Current view: ' + arg.view.type);
-  },
-                eventClick: function(e) {
-                    var event = e.event;
-                    var idevent = e.event.id
-                    var datat = @json($calenbook);
-                    var start = [];
-                    var end = [];
-                    datat.forEach(b => {
-                        if (b.id == idevent) {
-                            start.push(b.start);
-                            end.push(b.end);
+                        listWeek: {
+                            buttonText: 'สัปดาห์'
+                        },
+                        dayGridMonth: {
+                            buttonText: 'เดือน'
                         }
-                    });
 
-                    console.log(idevent)
-                    // console.log(moment(timzone).format('HH:mm'))
-                    moment.locale('th');
-                    Swal.fire({
-                        icon: 'question',
-                        title: moment(JSON.stringify(start[0])).format(
-                            'ddd ที่ D MMM ' + (new Date(start[0]).getFullYear() +
-                                543) + ' เวลา HH:mm นาที'),
-                        text: event.title,
+                    },
+                    windowResize: function(arg) {
+                      
+                    },
+                    eventClick: function(e) {
+                        var event = e.event;
+                        var idevent = e.event.id
+                        var datat = @json($calenbook);
+                        var start = [];
+                        var end = [];
+                        datat.forEach(b => {
+                            if (b.id == idevent) {
+                                start.push(b.start);
+                                end.push(b.end);
+                            }
+                        });
 
-                    });
-                },
-                validRange: function(nowDate) {
-                    return {
-                        start: nowDate
-                    };
-                },
-                dateClick: function(info) {
+                        console.log(idevent)
+                        // console.log(moment(timzone).format('HH:mm'))
+                        moment.locale('th');
+                        Swal.fire({
+                            icon: 'question',
+                            title: moment(JSON.stringify(start[0])).format(
+                                'ddd ที่ D MMM ' + (new Date(start[0]).getFullYear() +
+                                    543) + ' เวลา HH:mm นาที'),
+                            text: event.title,
 
-                },
-                eventConstraint: function(info) {
-                    // check if there is already an event scheduled in the selected time slot
-                    console.log(info.startStr);
+                        });
+                    },
+                    validRange: function(nowDate) {
+                        return {
+                            start: nowDate
+                        };
+                    },
+                    dateClick: function(info) {
 
-                    /* if (checkEventExists(start, end)) {
-                        return false; // this time slot is not valid for selection
+                    },
+                    eventConstraint: function(info) {
+                        // check if there is already an event scheduled in the selected time slot
+                        console.log(info.startStr);
+
+                        /* if (checkEventExists(start, end)) {
+                            return false; // this time slot is not valid for selection
+                        }
+                        return true; */ // this time slot is valid for selection
+                    },
+                    select: function(info) {
+                        moment.locale('th');
+                        Swal.fire({
+                            title: JSON.stringify(moment(info.startStr).add(543, 'year').format(
+                                'ddd ที่ D MMM YY เวลา HH:mm นาที')),
+                            icon: 'info',
+                            text: info.startStr
+                        })
                     }
-                    return true; */ // this time slot is valid for selection
-                },
-                select: function(info) {
-                    moment.locale('th');
-                    Swal.fire({
-                        title: JSON.stringify(moment(info.startStr).add(543, 'year').format(
-                            'ddd ที่ D MMM YY เวลา HH:mm นาที')),
-                        icon: 'info',
-                        text: info.startStr
-                    })
-                }
-            });
-            calendar.setOption('aspectRatio', 2);
-            calendar.updateSize();
-            calendar.render();
+                });
+                calendar.setOption('aspectRatio', 2);
+                calendar.updateSize();
+                calendar.render();
+            }
         });
     </script>
 @endpush
