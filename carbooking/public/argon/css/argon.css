@@ -20453,9 +20453,6 @@ a.nav-link-sub:hover {
         max-width: fit-content !important;
     }
 }
-.calendar {
-    overflow: auto;
-}
 .fc-view-container {
     aspect-ratio: 1/1;
 }

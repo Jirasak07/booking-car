@@ -11,6 +11,11 @@
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 // themeSystem: 'bootstrap5',
                 selectable: true,
+
+                contentHeight: 600,
+                handleWindowResize: true,
+                expandRows: true,
+                height: '100%',
                 nowIndicator: true,
                 allDaySlot: false,
                 events: ev,
@@ -26,7 +31,6 @@
                 allDaySlot: false,
                 timeZone: 'Asia/bangkok',
                 locale: 'th',
-                height: '145vh',
                 headerToolbar: {
                     left: 'title',
                     right: 'prev,next',
@@ -48,14 +52,17 @@
                     }
 
                 },
+                windowResize: function(arg) {
+    alert('The calendar has adjusted to a window resize. Current view: ' + arg.view.type);
+  },
                 eventClick: function(e) {
                     var event = e.event;
                     var idevent = e.event.id
                     var datat = @json($calenbook);
-                    var start=[];
-                    var end=[];
+                    var start = [];
+                    var end = [];
                     datat.forEach(b => {
-                        if(b.id == idevent){
+                        if (b.id == idevent) {
                             start.push(b.start);
                             end.push(b.end);
                         }
@@ -67,9 +74,9 @@
                     Swal.fire({
                         icon: 'question',
                         title: moment(JSON.stringify(start[0])).format(
-                            'ddd ที่ D MMM '+(new Date(start[0]).getFullYear()+
-                    543) +' เวลา HH:mm นาที'),
-                    text:event.title,
+                            'ddd ที่ D MMM ' + (new Date(start[0]).getFullYear() +
+                                543) + ' เวลา HH:mm นาที'),
+                        text: event.title,
 
                     });
                 },
@@ -96,14 +103,15 @@
                         title: JSON.stringify(moment(info.startStr).add(543, 'year').format(
                             'ddd ที่ D MMM YY เวลา HH:mm นาที')),
                         icon: 'info',
-                        text:info.startStr
+                        text: info.startStr
                     })
                 }
             });
+            calendar.setOption('aspectRatio', 2);
+            calendar.updateSize();
             calendar.render();
         });
     </script>
 @endpush
-<div id='calendar-container'>
-    <div id='calendar1'></div>
-</div>
+
+<div id='calendar1'></div>
