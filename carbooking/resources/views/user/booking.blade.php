@@ -35,12 +35,12 @@
                                 @foreach ($booking2 as $item)
                                     <tr>
                                         <td align="center" style="font-size:18px;font-weight:500">{{ $i++ }}</td>
-                                        <td style="font-size:16px">
+                                        <td style="font-size:16px" id="date_range">
                                             @php
                                                 echo thaidate('วันที่ d M Y เวลา H:i', $item->booking_start) . '&nbsp;-&nbsp;' . thaidate('วันที่ d M Y เวลา H:i', $item->booking_end);
                                             @endphp
                                         </td>
-                                        <td style="font-size:16px">
+                                        <td style="font-size:16px" id="booking_detail">
                                             {!! Str::limit("$item->booking_detail", 50, ' ...') !!}
                                         </td>
                                         <td align="center">
@@ -49,7 +49,7 @@
                                                 <i class="fa-solid fa-eye"></i>
                                             </a>
                                         </td>
-                                        <td align="center">
+                                        <td align="center" id="booking_status">
                                             @if ($item->booking_status == '1')
                                                 <i
                                                     class="fa-regular fa-clock"style="font-size: 14px;color:#fff;background-color:#FF8B13;padding:4px 4px 4px 4px;border-radius:.375rem;"></i>
@@ -212,12 +212,13 @@
                             url: '/users/booking/refresh',
                             method: 'GET',
                             success: function(data) {
-                                console.log(data);
+                                //console.log(data);
                                 $('#alllist').html(data.Alllist);
                                 $('#alllistapprove').html(data.Alllistapprove);
                                 $('#alllistcancle').html(data.Alllistcancle);
                                 $('#alllistpending').html(data.Alllistpending);
-                                
+                                //$('#booking_status').html(data.booking2.booking_status);
+                                console.log(data.booking2.id);
                                 /* $('#all').html(data.allbooking);
                                 $('#pending').html(data.pending);
                                 $('#cancel').html(data.cancel);

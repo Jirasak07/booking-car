@@ -12,7 +12,7 @@
             var calendarEl = document.getElementById('calendar');
             //var bookings = @json($booking);
             //console.log(bookings);
-           
+
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 //themeSystem: 'bootstrap5',
                 selectable: true,
@@ -55,7 +55,7 @@
                 },
                 eventClick: function(e) {
                     moment.locale('th');
-console.log(e.event);
+                    //console.log(e.event);
                     var newdate = new Date().getTimezoneOffset();
                     var newdate2 = new Date(e.event.start);
                     //alert(JSON.stringify(newdate2.getDay()))
