@@ -58,10 +58,12 @@
                     var datat = @json($calenbook);
                     var start = [];
                     var end = [];
+                    var title2 = [];
                     datat.forEach(b => {
                         if (b.id == idevent) {
                             start.push(b.start);
                             end.push(b.end);
+                            title2.push(b.title2);
                         }
                     });
 
@@ -73,7 +75,7 @@
                         title: moment(JSON.stringify(start[0])).format(
                             'ddd ที่ D MMM ' + (new Date(start[0]).getFullYear() +
                                 543) + ' เวลา HH:mm นาที'),
-                        text: event.title,
+                        text: event.title +"+"+ title2[0] ,
 
                     });
                 },

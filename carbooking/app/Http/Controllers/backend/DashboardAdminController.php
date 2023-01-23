@@ -23,7 +23,8 @@ class DashboardAdminController extends Controller
             'cancel' => DB::table('tb_booking')->where('booking_status', '=', 3)->count('id'),
         ]);
     }
-    public function eventcalen(){
+    public function eventcalen()
+    {
         $datenow = new DateTime();
         $format_date = $datenow->format('Y-m-d H:i:s');
         $bookings = DB::table('tb_booking')
@@ -43,6 +44,7 @@ class DashboardAdminController extends Controller
                     'start' => $booking->booking_start,
                     'end' => $booking->booking_end,
                     'color' => $color,
+                    'title2' => 'this id title',
                 ];
             }
         }
@@ -63,10 +65,11 @@ class DashboardAdminController extends Controller
             $carevents = "รถภายใน";
             $events[] = [
                 'id' => $item->id,
-                'title' => $item->booking_detail . '(ทะเบียนรถ' . $carevents . ' ' . $item->car_license . ' คนขับรถ ' . $item->driver_fullname . ')',
+                'title' => $item->booking_detail,
                 'start' => $item->booking_start,
                 'end' => $item->booking_end,
                 'color' => $color,
+                'title2' => 'this id title',
             ];
         }
         $booking_join2 = DB::table('tb_booking')
@@ -87,6 +90,7 @@ class DashboardAdminController extends Controller
                 'start' => $item2->booking_start,
                 'end' => $item2->booking_end,
                 'color' => $color,
+                'title2' => 'this id title',
             ];
         }
         return response()->json($events);
@@ -186,6 +190,7 @@ class DashboardAdminController extends Controller
                     'start' => $booking->booking_start,
                     'end' => $booking->booking_end,
                     'color' => $color,
+                    'title2' => 'this id title',
                 ];
             }
         }
@@ -206,10 +211,11 @@ class DashboardAdminController extends Controller
             $carevents = "รถภายใน";
             $events[] = [
                 'id' => $item->id,
-                'title' => $item->booking_detail . '(ทะเบียนรถ' . $carevents . ' ' . $item->car_license . ' คนขับรถ ' . $item->driver_fullname . ')',
+                'title' => $item->booking_detail,
                 'start' => $item->booking_start,
                 'end' => $item->booking_end,
                 'color' => $color,
+                'title2' => 'this id title',
             ];
         }
         $booking_join2 = DB::table('tb_booking')
@@ -226,10 +232,11 @@ class DashboardAdminController extends Controller
             $carevents = "รถภายใน";
             $events[] = [
                 'id' => $item2->id,
-                'title' => $item2->booking_detail . '(ทะเบียนรถ' . $carevents . ' ' . $item2->car_license . ' คนขับรถ ' . $item2->car_out_driver . ' เบอร์โทร ' . $item2->car_out_tel . ')',
+                'title' => $item2->booking_detail,
                 'start' => $item2->booking_start,
                 'end' => $item2->booking_end,
                 'color' => $color,
+                'title2' => 'this id title',
             ];
         }
 
