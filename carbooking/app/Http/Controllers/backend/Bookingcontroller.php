@@ -243,7 +243,7 @@ class Bookingcontroller extends Controller
             $car_out->car_out_driver = $request->car_out_driver;
             $car_out->car_out_tel = $request->car_out_tel;
             $car_out->save();
-            $booking_update->license_plate = $car_out->id;
+            $booking_update->license_plate =1;
             $booking_update->driver =  $request->car_out_driver;
             $booking_update->type_car = "2";
             $booking_update->booking_status = "2";
@@ -256,7 +256,7 @@ class Bookingcontroller extends Controller
             $car_out->car_out_driver = $request->car_out_driver;
             $car_out->car_out_tel = $request->car_out_tel;
             $car_out->save();
-            $booking_update->license_plate = $car_out->id;
+            $booking_update->license_plate = $car_count + 1;
             $booking_update->driver =  $request->car_out_driver;
             $booking_update->type_car = "2";
             $booking_update->booking_status = "2";
