@@ -24,7 +24,7 @@ class Bookingsave extends FormRequest
     public function rules()
     {
         return [
-            'booking_start' => 'required',
+            'booking_start' => 'required|before:5 hours',
             'booking_end' => 'required',
             'booking_deatil' => 'required',
            
