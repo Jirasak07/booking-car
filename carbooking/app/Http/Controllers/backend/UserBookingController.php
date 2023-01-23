@@ -119,4 +119,9 @@ class UserBookingController extends Controller
         }
         return response()->json($data);
     }
+    function refresh_booking(){
+        return response()->json('
+        
+        ');
+    }
 }
