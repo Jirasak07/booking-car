@@ -1,5 +1,4 @@
 @section('title', 'ข้อมูลการจอง')
-
 @extends('layouts.layout')
 @section('content')
     @include('layouts.header')
@@ -12,7 +11,6 @@
                             <td style="max-width: 30px">ลำดับ</td>
                             <td>รายชื่อ</td>
                             <td>สถานะ</td>
-
                         </tr>
                     </thead>
                     <tbody>
@@ -20,15 +18,9 @@
                             <tr>
                                 <td>{{ $item['id'] }}</td>
                                 <td>{{ $item['driver_fullname'] }}</td>
-
                                 <td>
-                                    @if ($item['driver_status'] == 1)
-                                        <div class="btn btn-success btn-sm " style="width: 80px"
-                                            onclick="changeStatus({{ $item['id'] }})">{{ __('ว่าง') }}</div>
-                                    @elseif($item['driver_status'] == 2)
-                                        <a class="btn btn-danger btn-sm " style="width: 80px"
-                                            onclick="changeStatus({{ $item['id'] }})">{{ __('ไม่ว่าง') }}</a>
-                                    @endif
+                                        <div class='{{ $item['driver_status']==1? 'btn btn-success btn-sm ':'btn btn-danger btn-sm'}}' style="width: 80px"
+                                            onclick="changeStatus({{ $item['id'] }})">{{$item['driver_status']==1? 'ว่าง':'ไม่ว่าง'}}</div>
                                 </td>
                             </tr>
                         @endforeach

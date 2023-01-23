@@ -65,7 +65,7 @@
 
                     },
                     windowResize: function(arg) {
-                      
+
                     },
                     eventClick: function(e) {
                         var event = e.event;
@@ -112,17 +112,19 @@
                     select: function(info) {
                         moment.locale('th');
                         Swal.fire({
-                            title: JSON.stringify(moment(info.startStr).add(543, 'year').format(
-                                'ddd ที่ D MMM YY เวลา HH:mm นาที')),
+                            title: JSON.stringify(moment(info.startStr).format(
+                                'ddd ที่ D MMM ' + (new Date(info.startStr)
+                                .getFullYear() + 543) + ' เวลา HH:mm นาที')),
                             icon: 'info',
                             text: info.startStr
                         })
                     }
                 });
-                calendar.setOption('aspectRatio', 2);
-                calendar.updateSize();
-                calendar.render();
+
             }
+            calendar.setOption('aspectRatio', 2);
+            calendar.updateSize();
+            calendar.render();
         });
     </script>
 @endpush
