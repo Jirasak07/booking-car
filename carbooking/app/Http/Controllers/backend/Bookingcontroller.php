@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use DateTime;
 
 class Bookingcontroller extends Controller
 {
@@ -46,7 +47,8 @@ class Bookingcontroller extends Controller
         // $response = Http::get('http://'.$currentURL.'/index.php/api/calendar');
 
         // $jsonData = $response->json();
-
+        $datenow = new DateTime();
+        $format_date = $datenow->format('Y-m-d H:i:s');
         $bookings = DB::table('tb_booking')
             ->where('booking_status', '!=', '3')
             ->select('tb_booking.*')
@@ -72,6 +74,7 @@ class Bookingcontroller extends Controller
             ->where('tb_booking.type_car', '=', '1')
             ->where('tb_booking.booking_status', '!=', '3')
             ->where('tb_booking.booking_status', '!=', '1')
+            ->where('tb_booking.booking_end', '>', $format_date)
         //->orderBy('booking_status')
             ->select('driver_fullname', 'car_license', 'car_model', 'tb_booking.*')
             ->get();
@@ -91,6 +94,7 @@ class Bookingcontroller extends Controller
             ->where('tb_booking.type_car', '=', '2')
             ->where('tb_booking.booking_status', '!=', '3')
             ->where('tb_booking.booking_status', '!=', '1')
+            ->where('tb_booking.booking_end', '>', $format_date)
             ->select('car_out_license', 'car_out_model', 'car_out_driver', 'car_out_tel', 'tb_booking.*')
             ->get();
         $car = "รถภายนอก";
