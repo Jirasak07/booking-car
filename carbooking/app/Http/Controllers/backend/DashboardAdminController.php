@@ -43,12 +43,11 @@ class DashboardAdminController extends Controller
                     'title' => $booking->booking_detail,
                     'start' => $booking->booking_start,
                     'end' => $booking->booking_end,
-                    'color' => $color,
+                    'color' => '#ffd166',
                     'title2' => 'this id title',
                 ];
             }
         }
-
         // dd($format_date);
         $booking_join1 = DB::table('tb_booking')
             ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
@@ -68,7 +67,7 @@ class DashboardAdminController extends Controller
                 'title' => $item->booking_detail,
                 'start' => $item->booking_start,
                 'end' => $item->booking_end,
-                'color' => $color,
+                'color' => '#06d6a0 ',
                 'title2' => 'this id title',
             ];
         }
@@ -76,7 +75,7 @@ class DashboardAdminController extends Controller
             ->join('tb_out_cars', 'tb_booking.license_plate', '=', 'tb_out_cars.id')
             ->where('tb_booking.type_car', '=', '2')
             ->where('tb_booking.booking_status', '!=', '3')
-            ->where('tb_booking.booking_status', '!=', '1')
+            ->where('tb_booking.booking_status', '!=', '2')
             ->where('tb_booking.booking_end', '>', $format_date)
             ->select('car_out_license', 'car_out_model', 'car_out_driver', 'car_out_tel', 'tb_booking.*')
             ->get();
@@ -86,7 +85,7 @@ class DashboardAdminController extends Controller
             $carevents = "รถภายใน";
             $events[] = [
                 'id' => $item2->id,
-                'title' => $item2->booking_detail . '(ทะเบียนรถ' . $carevents . ' ' . $item2->car_license . ' คนขับรถ ' . $item2->car_out_driver . ' เบอร์โทร ' . $item2->car_out_tel . ')',
+                'title' => $item2->booking_detail,
                 'start' => $item2->booking_start,
                 'end' => $item2->booking_end,
                 'color' => $color,
