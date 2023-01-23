@@ -119,9 +119,24 @@ class UserBookingController extends Controller
         }
         return response()->json($data);
     }
+    
     function refresh_booking(){
-        return response()->json('
-        
-        ');
+        return response()->json(['booking_wait' =>DB::table('tb_booking')
+        ->join('users', 'tb_booking.username', '=', 'users.id')
+        ->where('tb_booking.username', '=', Auth::user()->id)
+        ->orderBy('booking_status')
+
+        ->select('tb_booking.*', 'users.username')
+        ->get(),
+
+    'Alllist' => DB::table('tb_booking')
+        ->where('tb_booking.username', '=', Auth::user()->id)->count(),
+    'Alllistpending' => DB::table('tb_booking')
+        ->where('tb_booking.username', '=', Auth::user()->id)->where('booking_status', '=', '1')->count(),
+    'Alllistapprove' => DB::table('tb_booking')
+        ->where('tb_booking.username', '=', Auth::user()->id)->where('booking_status', '=', '2')->count(),
+    'Alllistcancle' => DB::table('tb_booking')
+        ->where('tb_booking.username', '=', Auth::user()->id)->where('booking_status', '=', '3')->count()
+    ]);
     }
 }
