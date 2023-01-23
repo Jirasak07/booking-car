@@ -33,7 +33,7 @@
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
             @csrf
         </form>
-        @include('layouts.navbars.sidebar')
+        {{-- @include('layouts.navbars.sidebar') --}}
     @endauth
 
     <div class="d-flex justify-content-center align-items-center  h-100 " style="background-color: #16425b" >
