@@ -94,7 +94,9 @@ class DashboardAdminController extends Controller
     }
     public function index()
     {
-
+        $datenow = new DateTime();
+        $format_date = $datenow->format('Y-m-d H:i:s');
+    
         $date = Carbon::now()->format('d-m-Y H:i:s');
         // // dd($date);
         $bookingcar1ad = DB::table('tb_booking') //จำนวนรถภายในคันที่1 ที่อนุมัติแล้ว
@@ -168,11 +170,11 @@ class DashboardAdminController extends Controller
 
         // $data = BookingModel::all()->Groupby("MONTH(booking_start)")->count('id');
         //  return dd($bookingcarin);
-        $datenow = new DateTime();
-        $format_date = $datenow->format('Y-m-d H:i:s');
+
         $bookings = DB::table('tb_booking')
+        ->join('users', 'tb_booking.username', '=', 'users.id')
             ->where('tb_booking.booking_end', '>', $format_date)
-            ->select('tb_booking.*')
+            ->select('tb_booking.*','name')
             ->get();
         $events = array();
 
@@ -186,6 +188,9 @@ class DashboardAdminController extends Controller
                     'start' => $booking->booking_start,
                     'end' => $booking->booking_end,
                     'color' => '#ffd166',
+                    'data'=>$booking->name,
+                    'type'=>'1',
+                    'titlee'=>$booking->booking_detail
 
                 ];
             }
@@ -211,6 +216,8 @@ class DashboardAdminController extends Controller
                 'end' => $item->booking_end,
                 'color' => '#06d6a0 ',
                 'data'=>$item->name,
+                'type'=>'2',
+                'titlee'=>$booking->booking_detail
 
             ];
         }
@@ -234,6 +241,8 @@ class DashboardAdminController extends Controller
                 'end' => $item2->booking_end,
                 'color' => '#06d6a0 ',
                 'data'=>$item2->name,
+                'type'=>'2',
+                'titlee'=>$item2->booking_detail.' รถภายนอก : '.$item2->car_out_model.' ทะเบียน : '.$item2->car_out_license .' เบอร์โทรติดต่อ : '.$item2->car_out_tel ,
 
             ];
         }

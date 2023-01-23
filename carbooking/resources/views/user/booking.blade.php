@@ -36,11 +36,12 @@
                                     <tr>
                                         <td id="row-id" align="center" style="font-size:18px;font-weight:500">{{ $i++ }}</td>
                                         <td style="font-size:16px" id="date_range">
+                                        
                                             @php
                                                 echo thaidate('วันที่ d M Y เวลา H:i', $item->booking_start) . '&nbsp;-&nbsp;' . thaidate('วันที่ d M Y เวลา H:i', $item->booking_end);
                                             @endphp
                                         </td>
-                                        <td style="font-size:16px" id="booking_detail">
+                                        <td style="font-size:16px">
                                             {!! Str::limit("$item->booking_detail", 50, ' ...') !!}
                                         </td>
                                         <td align="center" id="view-de">
@@ -49,7 +50,7 @@
                                                 <i class="fa-solid fa-eye"></i>
                                             </a>
                                         </td>
-                                        <td align="center" id="booking_status">
+                                        <td align="center">
                                             @if ($item->booking_status == '1')
                                                 <i
                                                     class="fa-regular fa-clock"style="font-size: 14px;color:#fff;background-color:#FF8B13;padding:4px 4px 4px 4px;border-radius:.375rem;"></i>
@@ -215,65 +216,18 @@
                             url: '/users/booking/refresh',
                             method: 'GET',
                             success: function(data) {
-                                //console.log(data);
+                                console.log(data);
                                 $('#alllist').html(data.Alllist);
                                 $('#alllistapprove').html(data.Alllistapprove);
                                 $('#alllistcancle').html(data.Alllistcancle);
                                 $('#alllistpending').html(data.Alllistpending);
-                                //var i = 1;
-                                table.clear().draw();
-                                $("tbody").html("");
-                                var i = 1;
-                                $.each(data.res, function(key, item) {
-                                    // console.log(item);
-                                    var date_start = new Date(item.booking_start);
-                                    var date_end = new Date(item.booking_end);
-                                    let getMonths = date_start.toLocaleString('th', {
-                                        month: 'short',
-                                    });
-                                    let getMonthe = date_end.toLocaleString('th', {
-                                        month: 'short',
-                                    });
-                                    var booking_detail = item.booking_detail;
-                                    var short = booking_detail.substring(0, 50);
-                                    if (booking_detail.length > short.length) {
-                                        short += "...";
-                                    }
-                                    var detail =
-                                        "<a class='btn btn-info btn-sm text-darker'onclick='view_detail(" +
-                                        item.id + ")'><i class='fa-solid fa-eye'></i></a>";
-                                    var date_range = moment(item.booking_start).format(
-                                            'วันที่ D ' + getMonths + " " + (new Date(item
-                                                .booking_start).getFullYear() + 543) +
-                                            ' เวลา HH:mm') + " - " +
-                                        moment(item.booking_end).format('วันที่ D ' +
-                                            getMonthe + " " + (new Date(item.booking_end)
-                                                .getFullYear() + 543) + ' เวลา HH:mm');
-                                    if (item.booking_status == '1') {
-                                        status =
-                                            "<i class='fa-regular fa-clock'style='font-size: 14px;color:#fff;background-color:#FF8B13;padding:4px 4px 4px 4px;border-radius:.375rem;'></i>";
-                                        manage =
-                                            "<button class='btn btn-yellow btn-sm me-2' style='font-size: 13px'onclick='edit_booking(" +
-                                            item.id + ")'>" +
-                                            "<i class='fa-regular fa-pen-to-square'></i><span>แก้ไข</span>" +
-                                            "</button>" +
-                                            "<button class='btn btn-danger btn-sm' style='font-size: 13px'onclick='alertCancel(" +
-                                            item.id + ")'>" +
-                                            "<i class='fa-solid fa-rectangle-xmark'></i><span>ยกเลิก</span>" +
-                                            "</button>";
-                                    } else if (item.booking_status == '2') {
-                                        status =
-                                            "<i class = 'fa-solid fa-square-check'style = 'color: green;font-size:24px'> </i>";
-                                        manage = "";
-                                    } else {
-                                        status =
-                                            "<i class = 'fa-sharp fa-solid fa-rectangle-xmark'style = 'color: red;font-size:24px' > </i>";
-                                        manage = "";
-                                    }
-                                    table.row.add([
-                                        (i++), date_range, short, detail, status, manage
-                                    ]).draw();
-                                });
+                                //$('#booking_status').html(data.booking2.booking_status);
+                                var data2 = data.res[2];
+                                console.log(data2.id);
+                                /* $('#all').html(data.allbooking);
+                                $('#pending').html(data.pending);
+                                $('#cancel').html(data.cancel);
+                                $('#approve').html(data.approve); */
                             }
                         })
                     }, 10000);

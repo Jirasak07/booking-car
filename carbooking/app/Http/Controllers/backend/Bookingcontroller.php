@@ -192,9 +192,18 @@ class Bookingcontroller extends Controller
     }
     public function store(Request $request)
     {
+
+        $request->validate([
+            'booking_start' => 'required|before:5 hours',
+            'booking_end' => 'required',
+            'locate' => 'required|min:3',
+           
+        ]);
+
         $date_start = Carbon::parse($request->date_start)->format('Y-m-d\TH:i:s');
         $date_end = Carbon::parse($request->date_end)->format('Y-m-d\TH:i:s');
         //dd($request->all(),$date_start,$date_end);
+
         $bookingcar = new BookingModel();
         $cnt_booking = $bookingcar->count();
         if ($cnt_booking < 1) {
@@ -231,6 +240,17 @@ class Bookingcontroller extends Controller
     }
     public function updateout(Request $request)
     {
+
+
+        $request->validate([
+            'car_out_license' => 'required|min:3',
+            'brand' => 'required|min:3',
+            'car_out_model' => 'required|min:10',
+            'owner' => 'required|min:10',
+            'car_out_driver' => 'required|min:10',
+            'car_out_tel' => 'required|numeric|digits_between:8,15',
+        ]);
+
         $id = $request->id_form;
 
         $booking_update = BookingModel::find($id);

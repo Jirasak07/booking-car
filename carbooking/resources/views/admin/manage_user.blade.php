@@ -7,28 +7,32 @@
         <div class="container-md p-md-2 p-1 mt-sm-2 mt-sm-1 mt-4">
             <div class="card p-2 shadow-table ">
                 <table id="tableuser"class="display responsive nowrap " style="width:100%;font-size:0.8em">
-                    <thead class="table-dark" style="width: max-content" >
+                    <thead class="table-dark" style="width: max-content">
                         <tr>
-                            <th class="fw-bold" >ลำดับ</th>
-                            <th >ชื่อ</th>
-                            <th >Email</th>
-                            <th >Role</th>
+                            <th class="fw-bold">ลำดับ</th>
+                            <th>ชื่อ</th>
+                            <th>Email</th>
+                            <th>Role</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                        $i = 1;
+                        @endphp
                         @foreach ($user as $Users)
                             <tr>
-                                <td>1</td>
+                                <td>{{$i++}}</td>
                                 <td>{{ $Users->username }}</td>
                                 <td>{{ $Users->email }}</td>
                                 <td>
                                     <div class="row" style="width: 100px">
-                                        <div  class="justify-content-center badge d-flex align-items-center rounded-0 text-white bg-default" style="width: 50px">
+                                        <div class="justify-content-center badge d-flex align-items-center rounded-0 text-white bg-default"
+                                            style="width: 50px">
                                             {{ $Users->role_user == 1 ? 'Admin' : 'User' }}
 
                                         </div>
-                                        <i class="fa-solid fa-pen-to-square rounded-0 btn btn-warning btn-sm" data-toggle="dropdown"
-                                            aria-haspopup="true" aria-expanded="false"
+                                        <i class="fa-solid fa-pen-to-square rounded-0 btn btn-warning btn-sm"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                             onclick='changeRole({{ $Users->role_user }},{{ $Users->id }})'>
                                         </i>
                                     </div>
@@ -47,29 +51,29 @@
                 $(document).ready(function() {
                     $('#tableuser').DataTable({
                         responsive: {
-                        details: {
-                            type: 'column',
-                            target: 'tr'
-                        }
-                    },
-                    columnDefs: [{
-
-                        orderable: false,
-                        targets: 0
-                    }],
-                    lengthMenu: [10, 20, 50, 100, ],
-                    language: {
-                        lengthMenu: "แสดง _MENU_ รายการ",
-                        search: "ค้นหาข้อมูลในตาราง",
-                        info: "แสดงข้อมูล _END_ จากทั้งหมด _TOTAL_ รายการ",
-
-                        paginate: {
-
-                            previous: "ก่อนหน้า",
-                            next: "ถัดไป",
-
+                            details: {
+                                type: 'column',
+                                target: 'tr'
+                            }
                         },
-                    },
+                        columnDefs: [{
+
+                            orderable: false,
+                            targets: 0
+                        }],
+                        lengthMenu: [10, 20, 50, 100, ],
+                        language: {
+                            lengthMenu: "แสดง _MENU_ รายการ",
+                            search: "ค้นหาข้อมูลในตาราง",
+                            info: "แสดงข้อมูล _END_ จากทั้งหมด _TOTAL_ รายการ",
+
+                            paginate: {
+
+                                previous: "ก่อนหน้า",
+                                next: "ถัดไป",
+
+                            },
+                        },
                     })
                 })
             </script>
@@ -100,14 +104,13 @@
                                 success: function(data) {
                                     if (data.status == 'success') {
                                         Swal.fire({
-                                            title: 'เสร็จสิ้น',
+                                            position: 'center',
                                             icon: 'success',
-                                            confirmButtonText: 'ok',
-                                        }).then((result) => {
-                                            /* Read more about isConfirmed, isDenied below */
-                                            if (result.isConfirmed) {
-                                                window.location.reload();
-                                            }
+                                            title: 'เปลี่ยนสถานะสิทธิ์เสร็จสิ้น',
+                                            showConfirmButton: false,
+                                            timer: 1500
+                                        }).then((res) => {
+                                            window.location.reload();
                                         })
 
                                     } else if (data.status == 'error') {
