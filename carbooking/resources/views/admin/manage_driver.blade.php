@@ -19,8 +19,9 @@
                                 <td>{{ $item['id'] }}</td>
                                 <td>{{ $item['driver_fullname'] }}</td>
                                 <td>
-                                        <div class='{{ $item['driver_status']==1? 'btn btn-success btn-sm ':'btn btn-danger btn-sm'}}' style="width: 80px"
-                                            onclick="changeStatus({{ $item['id'] }})">{{$item['driver_status']==1? 'ว่าง':'ไม่ว่าง'}}</div>
+                                    <div class='{{ $item['driver_status'] == 1 ? 'btn btn-success btn-sm ' : 'btn btn-danger btn-sm' }}'
+                                        style="width: 80px" onclick="changeStatus({{ $item['id'] }})">
+                                        {{ $item['driver_status'] == 1 ? 'ว่าง' : 'ไม่ว่าง' }}</div>
                                 </td>
                             </tr>
                         @endforeach
@@ -29,26 +30,26 @@
             </div>
         </div>
         @push('js')
-        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-        <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
+            <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+            <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+            <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
             <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
             <script>
-                $(document).ready(function(){
+                $(document).ready(function() {
                     $('#tabledriver').DataTable({
-                    lengthMenu: [10, 20, 50, 100, ],
-                    language: {
-                        lengthMenu: "แสดง _MENU_ รายการ",
-                        search: "ค้นหาข้อมูลในตาราง",
-                        info: "แสดงข้อมูล _END_ จากทั้งหมด _TOTAL_ รายการ",
+                        lengthMenu: [10, 20, 50, 100, ],
+                        language: {
+                            lengthMenu: "แสดง _MENU_ รายการ",
+                            search: "ค้นหาข้อมูลในตาราง",
+                            info: "แสดงข้อมูล _END_ จากทั้งหมด _TOTAL_ รายการ",
 
-                        paginate: {
+                            paginate: {
 
-                            previous: "ก่อนหน้า",
-                            next: "ถัดไป",
+                                previous: "ก่อนหน้า",
+                                next: "ถัดไป",
 
+                            },
                         },
-                    },
                     });
                 })
             </script>
@@ -70,20 +71,19 @@
                                 success: function(data) {
                                     if (data.status == 'success') {
                                         Swal.fire({
-                                            title: 'เสร็จสิ้น',
+                                            position: 'center',
                                             icon: 'success',
-                                            confirmButtonText: 'ok',
-                                        }).then((result) => {
-                                            /* Read more about isConfirmed, isDenied below */
-                                            if (result.isConfirmed) {
-                                                window.location.reload();
-                                            }
+                                            title: 'เปลี่ยนสถานะเสร็จสิ้น',
+                                            showConfirmButton: false,
+                                            timer: 1500
+                                        }).then((res)=>{
+window.location.reload();
                                         })
-
                                     } else {
                                         Swal.fire({
                                             title: 'Error',
                                             icon: 'error',
+
                                         })
                                     }
                                 }

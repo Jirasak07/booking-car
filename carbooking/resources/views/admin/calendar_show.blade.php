@@ -49,22 +49,23 @@
                     }
 
                 },
-                windowResize: function(arg) {
-
-                },
                 eventClick: function(e) {
                     var event = e.event;
+
                     var idevent = e.event.id
                     var datat = @json($calenbook);
-
                     var start = [];
                     var end = [];
                     var name = [];
+                    var color = [];
+                    var detail = [];
                     datat.forEach(b => {
                         if (b.id == idevent) {
                             start.push(b.start);
                             end.push(b.end);
                             name.push(b.data);
+                            color.push(b.type);
+                            detail.push(b.titlee);
                         }
                     });
 
@@ -73,11 +74,23 @@
                     moment.locale('th');
 
                     Swal.fire({
-                        customClass: {
-                            title: ''
-                        },
-                        title: 'รายการจองของ :' + name[0],
-                        text: name[0],
+                        title: '<div style="font-size:50%" > รายการจองของคุณ : ' + name[0] +
+                            '</div>',
+                        html: '<div class="col-12" style="font-size:0.9rem"><i class="fa-solid fa-calendar-days" ></i>  :' +
+                            moment(
+                                JSON.stringify(start[0])).format(
+                                ' DD/MM/' + (new Date(start[0]).getFullYear() + 543) +
+                                ' เวลา H:mm') + 'น. -' + moment(
+                                JSON.stringify(end[0])).format(
+                                ' DD/MM/' + (new Date(end[0]).getFullYear() + 543) +
+                                ' เวลา H:mm') + 'น.' + '</div>' +
+                            '<div class="mt-3" style="font-size:0.9rem" >รายละเอียดการจอง : ' +
+                            detail[0] + '</div>',
+                        icon: (color[0] == 2 ? 'success' : 'warning'),
+                        iconHtml: (color[0] == 2 ?
+                            '<i class="fa-solid fa-calendar-check" ></i>' :
+                            '<i class="fa-solid fa-calendar-days"></i>'),
+
 
 
 
@@ -106,14 +119,7 @@
                     return true; */ // this time slot is valid for selection
                 },
                 select: function(info) {
-                    moment.locale('th');
-                    Swal.fire({
-                        title: JSON.stringify(moment(info.startStr).format(
-                            'ddd ที่ D MMM ' + (new Date(info.startStr).getFullYear() +
-                                543) + ' เวลา HH:mm นาที')),
-                        icon: 'info',
-                        text: info.startStr
-                    })
+
                 }
             });
             setInterval(() => {
@@ -127,29 +133,3 @@
 @endpush
 
 <div id='calendar1'></div>
-<template id="my-template">
-    <swal-title>
-        Save changes to "Untitled 1" before closing?
-    </swal-title>
-    <swal-icon type="warning" color="red"></swal-icon>
-    <swal-button type="confirm">
-        Save As
-    </swal-button>
-    <swal-button type="cancel">
-        Cancel
-    </swal-button>
-    <swal-button type="deny">
-        Close without Saving
-    </swal-button>
-    <swal-param name="allowEscapeKey" value="false" />
-    <swal-param name="customClass" value='{ "popup": "my-popup" }' />
-    <swal-function-param name="didOpen" value="popup => console.log(popup)" />
-</template>
-<script>
-    function Click() {
-        Swal.fire({
-            template: '#my-template'
-        })
-    }
-</script>
-<div class="btn btn-sm btn-danger" onclick="Click()">ปุ่ม</div>
