@@ -96,10 +96,7 @@ class DashboardAdminController extends Controller
     {
         $datenow = new DateTime();
         $format_date = $datenow->format('Y-m-d H:i:s');
-        $a = DB::table('tb_cars')
-        ->where('car_status','=','1')
-        ->get();
-dd($a);
+    
         $date = Carbon::now()->format('d-m-Y H:i:s');
         // // dd($date);
         $bookingcar1ad = DB::table('tb_booking') //จำนวนรถภายในคันที่1 ที่อนุมัติแล้ว
