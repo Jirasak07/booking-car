@@ -99,7 +99,7 @@ class Bookingcontroller extends Controller
             $car = "รถภายใน";
             $events[] = [
                 'id' => $item2->id,
-                'title' => $item2->booking_detail . '(ทะเบียนรถ' . $car . ' ' . $item2->car_license . ' คนขับรถ ' . $item2->car_out_driver . ' เบอร์โทร ' . $item2->car_out_tel . ')',
+                'title' => $item2->booking_detail . '(ทะเบียนรถ' . $car . ' ' . $item2->car_out_license . ' คนขับรถ ' . $item2->car_out_driver . ' เบอร์โทร ' . $item2->car_out_tel . ')',
                 'start' => $item2->booking_start,
                 'end' => $item2->booking_end,
                 'color' => $color,
@@ -168,7 +168,7 @@ class Bookingcontroller extends Controller
             $car = "รถภายใน";
             $events[] = [
                 'id' => $item2->id,
-                'title' => $item2->booking_detail . '(ทะเบียนรถ' . $car . ' ' . $item2->car_license . ' คนขับรถ ' . $item2->car_out_driver . ' เบอร์โทร ' . $item2->car_out_tel . ')',
+                'title' => $item2->booking_detail . '(ทะเบียนรถ' . $car . ' ' . $item2->car_out_license . ' คนขับรถ ' . $item2->car_out_driver . ' เบอร์โทร ' . $item2->car_out_tel . ')',
                 'start' => $item2->booking_start,
                 'end' => $item2->booking_end,
                 'color' => $color,
