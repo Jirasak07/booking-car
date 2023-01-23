@@ -122,14 +122,29 @@ class UserBookingController extends Controller
 
     function refresh_booking()
     {
+        
+        //return $booking2;
+        /* foreach ($booking2 as $value) {
+            $res = [
+                'id'=>$value->id,
+                'booking_detail'=>$value->booking_detail,
+                'booking_end'=>$value->booking_end,
+                'booking_start'=>$value->booking_start,
+                'booking_status'=>$value->booking_status,
+                'driver'=>$value->driver,
+                'license_plate'=>$value->license_plate,
+                'type_car'=>$value->type_car,
+                'username'=>$value->username
+            ];
+        } */
         return response()->json([
             'booking2' => DB::table('tb_booking')
-                ->join('users', 'tb_booking.username', '=', 'users.id')
-                ->where('tb_booking.username', '=', Auth::user()->id)
-                ->orderBy('booking_status')
+            ->join('users', 'tb_booking.username', '=', 'users.id')
+            ->where('tb_booking.username', '=', Auth::user()->id)
+            ->orderBy('booking_status')
 
-                ->select('tb_booking.*', 'users.username')
-                ->get(),
+            ->select('tb_booking.*', 'users.username')
+            ->get(),
 
             'Alllist' => DB::table('tb_booking')
                 ->where('tb_booking.username', '=', Auth::user()->id)->count(),
