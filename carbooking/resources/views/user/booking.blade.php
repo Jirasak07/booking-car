@@ -199,7 +199,6 @@
         </div>
 
         @push('js')
-        
             <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
             <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
             <script>
@@ -209,7 +208,22 @@
                     });
 
                     setInterval(() => {
-                        
+                        $.ajax({
+                            url: '/users/booking/refresh',
+                            method: 'GET',
+                            success: function(data) {
+                                console.log(data);
+                                $('#alllist').html(data.Alllist);
+                                $('#alllistapprove').html(data.Alllistapprove);
+                                $('#alllistcancle').html(data.Alllistcancle);
+                                $('#alllistpending').html(data.Alllistpending);
+                                
+                                /* $('#all').html(data.allbooking);
+                                $('#pending').html(data.pending);
+                                $('#cancel').html(data.cancel);
+                                $('#approve').html(data.approve); */
+                            }
+                        })
                     }, 10000);
                 });
 

@@ -10,7 +10,7 @@
                             <div class="row">
                                 <div class="col">
                                     <h3 class="card-title text-uppercase text-muted mb-0">การจองทั้งหมด</h3>
-                                    <span class="h2 font-weight-bold mb-0">{{ $Alllist }}</span>
+                                    <span class="h2 font-weight-bold mb-0" id="alllist">{{ $Alllist }}</span>
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
@@ -28,7 +28,7 @@
                             <div class="row">
                                 <div class="col">
                                     <h3 class="card-title text-uppercase text-muted mb-0">ยกเลิการจอง</h3>
-                                    <span class="h2 font-weight-bold mb-0">{{ $Alllistcancle }}</span>
+                                    <span class="h2 font-weight-bold mb-0" id="alllistcancle">{{ $Alllistcancle }}</span>
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
@@ -46,7 +46,7 @@
                             <div class="row">
                                 <div class="col">
                                     <h3 class="card-title text-uppercase text-muted mb-0">กำลังดำเนินการ</h3>
-                                    <span class="h2 font-weight-bold mb-0">{{ $Alllistpending }}</span>
+                                    <span class="h2 font-weight-bold mb-0" id="alllistpending">{{ $Alllistpending }}</span>
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
@@ -64,7 +64,7 @@
                             <div class="row">
                                 <div class="col">
                                     <h3 class="card-title text-uppercase text-muted mb-0">ดำเนินการเสร็จสิ้น</h3>
-                                    <span class="h2 font-weight-bold mb-0">{{ $Alllistapprove }}</span>
+                                    <span class="h2 font-weight-bold mb-0" id="alllistapprove">{{ $Alllistapprove }}</span>
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape bg-info text-white rounded-circle shadow">
