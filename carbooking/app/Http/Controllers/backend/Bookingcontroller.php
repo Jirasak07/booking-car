@@ -227,7 +227,7 @@ class Bookingcontroller extends Controller
         $booking_update->save();
         return redirect()->back();
     }
-    public function updateout(Request $request, $id)
+    public function updateout(Request $request)
     {
         $id = $request->id_form;
 

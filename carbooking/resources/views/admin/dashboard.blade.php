@@ -15,7 +15,7 @@
                     <div class="col d-flex flex-column align-items-center text-white">
                         <div class="text-white ">ทั้งหมด</div>
                         <div style="font-size: 4rem;line-height: 80%;"id="all">0</div>
-                        <div>รายการ {{$pending}} </div>
+                        <div>รายการ </div>
                     </div>
                 </div>
             </div>
@@ -100,7 +100,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             const bookingcar1 = @json($bookingcarin);
             var allbook = @json($allbook);
-            console.log("111",allbook);
+            console.log("111", allbook);
             var car = @json($car);
             console.log(car);
             var allcar1 = @json($allcar1);

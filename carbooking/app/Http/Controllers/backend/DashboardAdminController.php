@@ -89,9 +89,7 @@ class DashboardAdminController extends Controller
                 'color' => $color,
             ];
         }
-        return response()->json([
-            'calenbook'=> $events
-        ]);
+        return response()->json($events);
     }
     public function index()
     {
