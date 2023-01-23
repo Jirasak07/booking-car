@@ -1,6 +1,4 @@
 @section('title', 'ข้อมูลการจอง')
-<link href="https://cdn.datatables.net/responsive/2.4.0/css/responsive.dataTables.min.css" rel="stylesheet">
-
 @extends('layouts.layout')
 @section('content')
     @include('layouts.header')

@@ -29,7 +29,6 @@ class DashboardAdminController extends Controller
         $format_date = $datenow->format('Y-m-d H:i:s');
         $bookings = DB::table('tb_booking')
             ->where('tb_booking.booking_end', '>', $format_date)
-            ->where('booking_status', '!=', '3')
             ->select('tb_booking.*')
             ->get();
         $events = array();
@@ -44,7 +43,7 @@ class DashboardAdminController extends Controller
                     'start' => $booking->booking_start,
                     'end' => $booking->booking_end,
                     'color' => '#ffd166',
-                    'title2' => 'this id title',
+
                 ];
             }
         }
@@ -61,21 +60,20 @@ class DashboardAdminController extends Controller
             ->get();
         foreach ($booking_join1 as $item) {
             $color = '#06d6a0 ';
-            $carevents = "รถภายใน";
             $events[] = [
                 'id' => $item->id,
                 'title' => $item->booking_detail,
                 'start' => $item->booking_start,
                 'end' => $item->booking_end,
                 'color' => '#06d6a0 ',
-                'title2' => 'this id title',
+
             ];
         }
         $booking_join2 = DB::table('tb_booking')
             ->join('tb_out_cars', 'tb_booking.license_plate', '=', 'tb_out_cars.id')
             ->where('tb_booking.type_car', '=', '2')
             ->where('tb_booking.booking_status', '!=', '3')
-            ->where('tb_booking.booking_status', '!=', '2')
+            ->where('tb_booking.booking_status', '!=', '1')
             ->where('tb_booking.booking_end', '>', $format_date)
             ->select('car_out_license', 'car_out_model', 'car_out_driver', 'car_out_tel', 'tb_booking.*')
             ->get();
@@ -88,8 +86,8 @@ class DashboardAdminController extends Controller
                 'title' => $item2->booking_detail,
                 'start' => $item2->booking_start,
                 'end' => $item2->booking_end,
-                'color' => $color,
-                'title2' => 'this id title',
+                'color' => '#06d6a0 ',
+
             ];
         }
         return response()->json($events);
@@ -174,7 +172,6 @@ class DashboardAdminController extends Controller
         $format_date = $datenow->format('Y-m-d H:i:s');
         $bookings = DB::table('tb_booking')
             ->where('tb_booking.booking_end', '>', $format_date)
-            ->where('booking_status', '!=', '3')
             ->select('tb_booking.*')
             ->get();
         $events = array();
@@ -188,42 +185,43 @@ class DashboardAdminController extends Controller
                     'title' => $booking->booking_detail,
                     'start' => $booking->booking_start,
                     'end' => $booking->booking_end,
-                    'color' => $color,
-                    'title2' => 'this id title',
+                    'color' => '#ffd166',
+
                 ];
             }
         }
-
         // dd($format_date);
         $booking_join1 = DB::table('tb_booking')
             ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
             ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
+            ->join('users', 'tb_booking.username', '=', 'users.id')
             ->where('tb_booking.type_car', '=', '1')
             ->where('tb_booking.booking_status', '!=', '3')
             ->where('tb_booking.booking_status', '!=', '1')
             ->where('tb_booking.booking_end', '>', $format_date)
         //->orderBy('booking_status')
-            ->select('driver_fullname', 'car_license', 'car_model', 'tb_booking.*')
+            ->select('driver_fullname', 'car_license', 'car_model', 'tb_booking.*','name')
             ->get();
         foreach ($booking_join1 as $item) {
             $color = '#06d6a0 ';
-            $carevents = "รถภายใน";
             $events[] = [
                 'id' => $item->id,
                 'title' => $item->booking_detail,
                 'start' => $item->booking_start,
                 'end' => $item->booking_end,
-                'color' => $color,
-                'title2' => 'this id title',
+                'color' => '#06d6a0 ',
+                'data'=>$item->name,
+
             ];
         }
         $booking_join2 = DB::table('tb_booking')
             ->join('tb_out_cars', 'tb_booking.license_plate', '=', 'tb_out_cars.id')
+            ->join('users', 'tb_booking.username', '=', 'users.id')
             ->where('tb_booking.type_car', '=', '2')
             ->where('tb_booking.booking_status', '!=', '3')
             ->where('tb_booking.booking_status', '!=', '1')
             ->where('tb_booking.booking_end', '>', $format_date)
-            ->select('car_out_license', 'car_out_model', 'car_out_driver', 'car_out_tel', 'tb_booking.*')
+            ->select('car_out_license', 'car_out_model', 'car_out_driver', 'car_out_tel', 'tb_booking.*','name')
             ->get();
         $carevents = "รถภายนอก";
         foreach ($booking_join2 as $item2) {
@@ -234,10 +232,12 @@ class DashboardAdminController extends Controller
                 'title' => $item2->booking_detail,
                 'start' => $item2->booking_start,
                 'end' => $item2->booking_end,
-                'color' => $color,
-                'title2' => 'this id title',
+                'color' => '#06d6a0 ',
+                'data'=>$item2->name,
+
             ];
         }
+
 
         return view('admin.dashboard')->with(['calenbook' => $events, 'data2' => $data2, 'data1' => $data1, 'allcar1' => $allcar1, 'allcar2' => $allcar2, 'bookingcarAllin' => $bookingcarAllin, 'bookingcarAllout' => $bookingcarAllout, 'car' => $car, 'allbook' => $allbooking, 'pending' => $pending, 'approve' => $approve, 'cancel' => $cancel, 'bookingcarin' => $bookingcarin])
 
