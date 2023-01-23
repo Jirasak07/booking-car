@@ -177,9 +177,7 @@ class Bookingcontroller extends Controller
 
         //dd($booking->)
         //dd($events, $booking_join1,$booking_join2, $booking->id);
-        return response()->json([
-            'booking' => $events,
-        ]);
+        return response()->json($events);
     }
     public function cancle($id)
     {
