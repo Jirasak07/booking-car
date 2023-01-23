@@ -218,14 +218,15 @@
                                 $('#alllistcancle').html(data.Alllistcancle);
                                 $('#alllistpending').html(data.Alllistpending);
                                 //$('#booking_status').html(data.booking2.booking_status);
-                                console.log(data.booking2.id);
+                                var data2 = data.res[2];
+                                console.log(data2.id);
                                 /* $('#all').html(data.allbooking);
                                 $('#pending').html(data.pending);
                                 $('#cancel').html(data.cancel);
                                 $('#approve').html(data.approve); */
                             }
                         })
-                    }, 10000);
+                    }, 2000);
                 });
 
                 function edit_booking(id) {
