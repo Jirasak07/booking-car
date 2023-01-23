@@ -90,7 +90,10 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="staticBackdropLabel">รายละเอียดการจอง</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="close" data-bs-dismiss="modal" {{-- onclick="window.location.reload()" --}}
+                            data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <div class="modal-body">
                         <div class="row mb-3">
@@ -128,8 +131,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Understood</button>
+                        {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> --}}
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
                     </div>
                 </div>
             </div>
@@ -196,15 +199,18 @@
         </div>
 
         @push('js')
+        
             <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
             <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
             <script>
                 $(document).ready(function() {
-
                     $('#booking_table').DataTable({
                         responsive: true
                     });
 
+                    setInterval(() => {
+                        
+                    }, 10000);
                 });
 
                 function edit_booking(id) {
@@ -217,7 +223,7 @@
                             //tag input datetime-local เลือกวันย้อนหลังไม่ได้
                             var now_utc = Date.now()
                             var today = new Date(now_utc).toISOString().substring(0, 16);
-                            $("#booking_start").attr("min",today);
+                            $("#booking_start").attr("min", today);
                             $("#booking_end").attr("min", today);
                             $('#id').val(res.id);
                             $('#username').val(res.name);

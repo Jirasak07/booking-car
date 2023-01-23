@@ -35,10 +35,11 @@ Route::group(
         Route::get('dashboard', [\App\Http\Controllers\backend\Bookingcontroller::class, 'showcalendar'])->name('users.dashboard');
         Route::get('dashboard/refresh', [\App\Http\Controllers\backend\BookingController::class, 'refresh_calendar']);
         Route::get('booking', [\App\Http\Controllers\backend\UserBookingController::class, 'show_booking'])->name('users.view-booking');
+        Route::get('booking/refresh', [\App\Http\Controllers\backend\UserBookingController::class, 'refresh_booking']);
         Route::post('user/send', [\App\Http\Controllers\backend\Bookingcontroller::class, 'store'])->name('sendRe');
         Route::post('edit', [\App\Http\Controllers\backend\UserBookingcontroller::class, 'edit_booking'])->name('user.edit.booking');
         Route::get('cancel/{id}', [\App\Http\Controllers\backend\Bookingcontroller::class, 'cancle'])->name('users.booking_cancel');
-        Route::get('detail/{id}',[\App\Http\Controllers\backend\UserBookingController::class,'detail_booking']);
+        Route::get('detail/{id}', [\App\Http\Controllers\backend\UserBookingController::class, 'detail_booking']);
     }
 );
 

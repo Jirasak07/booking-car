@@ -1,8 +1,5 @@
 <style>
-    #calendar {
-        max-width: 100%;
-        margin: 20px auto;
-    }
+    
 </style>
 
 @push('js')
@@ -14,130 +11,155 @@
 
             var calendarEl = document.getElementById('calendar');
             var bookings = @json($booking);
-            console.log(bookings);
-
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                //themeSystem: 'bootstrap5',
-                selectable: true,
-                timeZone: 'Asia/bangkok',
-                locale: 'th',
-                initialView: 'timeGridFourDay',
-                allDaySlot: false,
-                nowIndicator: true,
-                timeFormat: 'HH:mm',
-                //hour12: false,
-                titleFormat: {
-                    month: 'long',
-                    year: 'numeric',
-                    day: 'numeric',
-                    //weekday: 'long',
-
-                    css: 'font-size:20px'
-                },
-                headerToolbar: {
-                    left: 'prev,next',
-                    center: 'title',
-                    right: 'timeGridDay,timeGridFourDay,dayGridMonth,listMonth'
-                },
-                eventClick: function(e) {
-                    moment.locale('th');
-
-                    var newdate = new Date().getTimezoneOffset();
-                    var newdate2 = new Date(e.event.start);
-                    //alert(JSON.stringify(newdate2.getDay()))
-                    var eventObj = e.event;
-                    // var startb = JSON.stringify(eventObj.start)
-                    // var endb = JSON.stringify(eventObj.end)
-                    var date_start = new Date(eventObj.start)
-                    var date_end = new Date(eventObj.end)
-                    var dt_sh = date_start.getUTCHours()
-                    var dt_eh = date_end.getUTCHours()
-                    var dt_st = date_start.getUTCMinutes()
-                    var dt_en = date_end.getUTCMinutes()
-                    //console.log("The current date is:", date_start)
-                    let getMonth = date_start.toLocaleString('th', {
-                        month: 'short',
-                    });
-                    let day = date_start.toLocaleString('th', {
-                        weekday: 'short'
-                    })
-                    if (dt_sh.toString().length == 1) {
-                        starth = '0' + dt_sh
-                    } else {
-                        starth = dt_sh
+            //console.log(bookings);
+            refreshCalen(bookings)
+            setInterval(() => {
+                $.ajax({
+                    url: '/users/dashboard/refresh',
+                    method: 'GET',
+                    success: function(data) {
+                        refreshCalen(data.booking);
+                        console.log(data.booking);
                     }
-                    if (dt_eh.toString().length == 1) {
-                        endh = '0' + dt_eh
-                    } else {
-                        endh = dt_eh
+                })
+
+            }, 10000);
+
+            function refreshCalen(val) {
+                var ev=val;
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+                    //themeSystem: 'bootstrap5',
+                    selectable: true,
+                    timeZone: 'Asia/bangkok',
+                    locale: 'th',
+                    initialView: 'timeGridFourDay',
+                    allDaySlot: false,
+                    nowIndicator: true,
+                    timeFormat: 'HH:mm',
+                    //hour12: false,
+                    titleFormat: {
+                        month: 'long',
+                        year: 'numeric',
+                        day: 'numeric',
+                        //weekday: 'long',
+
+                        css: 'font-size:20px'
+                    },
+                    headerToolbar: {
+                        left: 'prev,next',
+                        center: 'title',
+                        right: 'timeGridDay,timeGridFourDay,dayGridMonth,listMonth'
+                    },
+                    handleWindowResize: true,
+                    expandRows: true,
+                    height: '100%',
+                    aspectRatio: 2,
+                    events: ev,
+                    views: {
+                        timeGridFourDay: {
+                            type: 'timeGrid',
+                            duration: {
+                                days: 7
+                            },
+                            buttonText: '7 day'
+                        }
+                    },
+                    windowResize: function(arg) {
+                      
+                    },
+                    eventClick: function(e) {
+                        moment.locale('th');
+
+                        var newdate = new Date().getTimezoneOffset();
+                        var newdate2 = new Date(e.event.start);
+                        //alert(JSON.stringify(newdate2.getDay()))
+                        var eventObj = e.event;
+                        // var startb = JSON.stringify(eventObj.start)
+                        // var endb = JSON.stringify(eventObj.end)
+                        var date_start = new Date(eventObj.start)
+                        var date_end = new Date(eventObj.end)
+                        var dt_sh = date_start.getUTCHours()
+                        var dt_eh = date_end.getUTCHours()
+                        var dt_st = date_start.getUTCMinutes()
+                        var dt_en = date_end.getUTCMinutes()
+                        //console.log("The current date is:", date_start)
+                        let getMonth = date_start.toLocaleString('th', {
+                            month: 'short',
+                        });
+                        let day = date_start.toLocaleString('th', {
+                            weekday: 'short'
+                        })
+                        if (dt_sh.toString().length == 1) {
+                            starth = '0' + dt_sh
+                        } else {
+                            starth = dt_sh
+                        }
+                        if (dt_eh.toString().length == 1) {
+                            endh = '0' + dt_eh
+                        } else {
+                            endh = dt_eh
+                        }
+                        if (dt_st.toString().length == 1) {
+                            starts = '0' + dt_st
+                        } else {
+                            starts = dt_st
+                        }
+                        if (dt_en.toString().length == 1) {
+                            ends = '0' + dt_en
+                        } else {
+                            ends = dt_en
+                        }
+                        // alert(date.getUTCHours())
+                        //alert('Clicked ' + );
+                        Swal.fire({
+                            html: '<div><h1>' + eventObj.title + '</h1><br/><h4>' + day + ' ' +
+                                date_start.getUTCDate() + ' ' + getMonth + ' ' + (date_start
+                                    .getUTCFullYear() + 543) +
+                                ' เวลา ' + starth +
+                                ':' + starts + ' น. ถึง ' + day + ' ' + date_end.getUTCDate() +
+                                ' ' +
+                                getMonth + ' ' + (date_end.getUTCFullYear() +
+                                    543) + ' เวลา ' + endh +
+                                ':' + ends +
+                                ' น.</h4></div>',
+                        });
+                    },
+                    
+                    validRange: function(nowDate) {
+                        return {
+                            start: nowDate
+                        };
+                    },
+                    dateClick: function(info) {
+
+                    },
+
+                    select: function(info) {
+                        var booking_start = moment(info.startStr).format('YYYY-MM-DD HH:mm:ss');
+                        var booking_end = moment(info.endStr).format('YYYY-MM-DD HH:mm:ss');
+                        var booking_s = moment(info.startStr).format('YYYY-MM-DD HH:mm:ss');
+                        var booking_e = moment(info.endStr).format('YYYY-MM-DD HH:mm:ss');
+
+                        $('#bookingModal').modal('toggle');
+                        $('#booking_start').html(booking_start);
+                        $('#booking_end').html(booking_end);
+                        document.getElementById('start').value = booking_start;
+                        document.getElementById('end').value = booking_end;
+                        document.getElementById('date_start').value = booking_s;
+                        document.getElementById('date_end').value = booking_e;
+
+                        //tag input datetime-local เลือกวันย้อนหลังไม่ได้
+                        var now_utc = Date.now()
+                        var today = new Date(now_utc).toISOString().substring(0, 16);
+                        document.getElementById("date_start").setAttribute("min", today);
+                        document.getElementById("date_end").setAttribute("min", today);
                     }
-                    if (dt_st.toString().length == 1) {
-                        starts = '0' + dt_st
-                    } else {
-                        starts = dt_st
-                    }
-                    if (dt_en.toString().length == 1) {
-                        ends = '0' + dt_en
-                    } else {
-                        ends = dt_en
-                    }
-                    // alert(date.getUTCHours())
-                    //alert('Clicked ' + );
-                    Swal.fire({
-                        html: '<div><h1>' + eventObj.title + '</h1><br/><h4>' + day + ' ' +
-                            date_start.getUTCDate() + ' ' + getMonth + ' ' + (date_start
-                                .getUTCFullYear() + 543) +
-                            ' เวลา ' + starth +
-                            ':' + starts + ' น. ถึง ' + day + ' ' + date_end.getUTCDate() + ' ' +
-                            getMonth + ' ' + (date_end.getUTCFullYear() +
-                                543) + ' เวลา ' + endh +
-                            ':' + ends +
-                            ' น.</h4></div>',
-                    });
-                },
-                events: bookings,
-                views: {
-                    timeGridFourDay: {
-                        type: 'timeGrid',
-                        duration: {
-                            days: 7
-                        },
-                        buttonText: '7 day'
-                    }
-                },
-                validRange: function(nowDate) {
-                    return {
-                        start: nowDate
-                    };
-                },
-                dateClick: function(info) {
 
-                },
-
-                select: function(info) {
-                    var booking_start = moment(info.startStr).format('YYYY-MM-DD HH:mm:ss');
-                    var booking_end = moment(info.endStr).format('YYYY-MM-DD HH:mm:ss');
-                    var booking_s = moment(info.startStr).format('YYYY-MM-DD HH:mm:ss');
-                    var booking_e = moment(info.endStr).format('YYYY-MM-DD HH:mm:ss');
-
-                    $('#bookingModal').modal('toggle');
-                    $('#booking_start').html(booking_start);
-                    $('#booking_end').html(booking_end);
-                    document.getElementById('start').value = booking_start;
-                    document.getElementById('end').value = booking_end;
-                    document.getElementById('date_start').value = booking_s;
-                    document.getElementById('date_end').value = booking_e;
-
-                    //tag input datetime-local เลือกวันย้อนหลังไม่ได้
-                    var now_utc = Date.now()
-                    var today = new Date(now_utc).toISOString().substring(0, 16);
-                    document.getElementById("date_start").setAttribute("min", today);
-                    document.getElementById("date_end").setAttribute("min", today);
-                }
-
-            });
-
-            calendar.render();
+                });
+                calendar.setOption('aspectRatio', 2);
+                calendar.updateSize();
+                calendar.render();
+            }
         });
     </script>
 @endpush
@@ -201,8 +223,6 @@
 
     </div>
 </div>
-
-<div class="container-fluid">
-
-    <div id='calendar'></div>
-</div>
+<div id='calendar' class="container-fluid py-3"></div>
+{{-- <div class="">
+</div> --}}
