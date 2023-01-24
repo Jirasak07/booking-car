@@ -120,32 +120,31 @@ class UserBookingController extends Controller
         return response()->json($data);
     }
 
-    function refresh_booking()
+    public function refresh_booking()
     {
-
-        //return $booking2;
-        /* foreach ($booking2 as $value) {
-            $res = [
-                'id'=>$value->id,
-                'booking_detail'=>$value->booking_detail,
-                'booking_end'=>$value->booking_end,
-                'booking_start'=>$value->booking_start,
-                'booking_status'=>$value->booking_status,
-                'driver'=>$value->driver,
-                'license_plate'=>$value->license_plate,
-                'type_car'=>$value->type_car,
-                'username'=>$value->username
-            ];
-        } */
-        return response()->json([
-            'booking2' => DB::table('tb_booking')
+        $booking2 = DB::table('tb_booking')
             ->join('users', 'tb_booking.username', '=', 'users.id')
             ->where('tb_booking.username', '=', Auth::user()->id)
             ->orderBy('booking_status')
-
             ->select('tb_booking.*', 'users.username')
-            ->get(),
+            ->get();
 
+        foreach ($booking2 as $value2) {
+            $res[] = [
+                'id' => $value2->id,
+                'booking_detail' => $value2->booking_detail,
+                'booking_end' => $value2->booking_end,
+                'booking_start' => $value2->booking_start,
+                'booking_status' => $value2->booking_status,
+                'driver' => $value2->driver,
+                'license_plate' => $value2->license_plate,
+                'type_car' => $value2->type_car,
+                'username' => $value2->username,
+            ];
+        }
+
+        return response()->json([
+            'res'=>$res,
             'Alllist' => DB::table('tb_booking')
                 ->where('tb_booking.username', '=', Auth::user()->id)->count(),
             'Alllistpending' => DB::table('tb_booking')
@@ -153,7 +152,7 @@ class UserBookingController extends Controller
             'Alllistapprove' => DB::table('tb_booking')
                 ->where('tb_booking.username', '=', Auth::user()->id)->where('booking_status', '=', '2')->count(),
             'Alllistcancle' => DB::table('tb_booking')
-                ->where('tb_booking.username', '=', Auth::user()->id)->where('booking_status', '=', '3')->count()
+                ->where('tb_booking.username', '=', Auth::user()->id)->where('booking_status', '=', '3')->count(),
         ]);
     }
 }
