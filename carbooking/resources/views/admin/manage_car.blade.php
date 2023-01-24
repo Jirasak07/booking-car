@@ -23,13 +23,9 @@
                                 <td>{{ $cars['car_model'] }}</td>
 
                                 <td>
-                                    @if ($cars['car_status'] == 1)
-                                        <a class="btn btn-success btn-sm " style="width: 90px"
-                                            href="{{ route('changestatus', $cars['id']) }}">{{ __('พร้อมใช้งาน') }}</a>
-                                    @elseif($cars['car_status'] == 2)
-                                        <a class="btn btn-danger btn-sm " style="width: 90px"
-                                            href="{{ route('changestatus', $cars['id']) }}">{{ __('ไม่พร้อมใช้งาน') }}</a>
-                                    @endif
+                                    <div class='{{ $cars['car_status'] == 1 ? 'btn btn-success btn-sm ' : 'btn btn-danger btn-sm' }}'
+                                        style="width: 90px" onclick="changeStatus({{ $cars['id'] }})">
+                                        {{ $cars['car_status'] == 1 ? 'พร้อมใช้งาน' : 'ไม่พร้อมใช้งาน' }}</div>
                                 </td>
                             </tr>
                         @endforeach
@@ -73,6 +69,46 @@
                     },
                 });
             })
+        </script>
+        <script>
+            function changeStatus(e) {
+                Swal.fire({
+                    title: 'ต้องการเปลี่ยนสถานะหรือไม่ ?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#06d6a0',
+                    cancelButtonColor: '#ef476f',
+                    confirmButtonText: 'ตกลง',
+                    cancelButtonText: 'ยกเลิก'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: '/admin/manage-car/' + e,
+                            method: 'GET',
+                            success: function(data) {
+                                if (data.status == 'success') {
+                                    Swal.fire({
+                                        position: 'center',
+                                        icon: 'success',
+                                        title: 'เปลี่ยนสถานะเสร็จสิ้น',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    }).then((res) => {
+                                        window.location.reload();
+                                    })
+                                } else {
+                                    Swal.fire({
+                                        title: 'Error',
+                                        icon: 'error',
+
+                                    })
+                                }
+                            }
+                        })
+
+                    }
+                })
+            }
         </script>
     @endpush
 @endsection
