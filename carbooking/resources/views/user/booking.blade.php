@@ -211,22 +211,14 @@
             <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
             <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
             <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://cdn.datatables.net/rowreorder/1.3.1/js/dataTables.rowReorder.min.js"></script>
             <script>
                 $(document).ready(function() {
                     $('#booking_table').DataTable({
-                        responsive: {
-                            details: {
-                                type: 'column',
-                                target: 'tr'
-                            }
+                        rowReorder: {
+                            selector: 'td:nth-child(2)'
                         },
-                        columnDefs: [{
-                            className: 'control',
-                            orderable: false,
-                            targets: 0
-                        }],
-                        lengthMenu: [10, 20, 50, 100, ],
-
+                        responsive: true,
                         language: {
                             lengthMenu: "แสดง _MENU_ รายการ",
                             search: "ค้นหาข้อมูลในตาราง",
@@ -258,7 +250,7 @@
                             url: '/users/booking/refresh',
                             method: 'GET',
                             success: function(data) {
-                                //console.log(data);
+                                console.log(data);
                                 $('#alllist').html(data.Alllist);
                                 $('#alllistapprove').html(data.Alllistapprove);
                                 $('#alllistcancle').html(data.Alllistcancle);
@@ -320,7 +312,7 @@
                                 });
                             }
                         })
-                    }, 30000);
+                    }, 15000);
                 });
 
                 function edit_booking(id) {
