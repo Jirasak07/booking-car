@@ -6,6 +6,8 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            var pathArray = window.location.host;
+
             var calendarEl = document.getElementById('calendar1');
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 // themeSystem: 'bootstrap5',
@@ -13,7 +15,7 @@
                 expandRows: true,
                 nowIndicator: true,
                 allDaySlot: false,
-                events: 'http://localhost:2222/index.php/admin/dashboard/eventcalen',
+                events: 'http://'+pathArray+'/index.php/admin/dashboard/eventcalen',
                 titleFormat: {
                     year: 'numeric',
                     month: 'short',
