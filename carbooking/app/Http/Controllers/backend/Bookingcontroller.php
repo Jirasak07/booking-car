@@ -193,10 +193,10 @@ class Bookingcontroller extends Controller
     public function store(Request $request)
     {
 
-        $request->validate([
-            'booking_start' => 'required|before:5 hours',
-            'booking_end' => 'required',
-            'locate' => 'required|min:3',
+        $varlidate=$request->validate([
+            /* 'date_start' => 'required|before:5 hours',
+            'date_end' => 'required', */
+            'location' => 'required|min:3',
            
         ]);
 
@@ -219,6 +219,7 @@ class Bookingcontroller extends Controller
         $bookingcar->type_car = '-';
         $bookingcar->booking_detail = $request->location;
         $bookingcar->booking_status = '1';
+        //return $bookingcar;
         $bookingcar->save();
 
         return redirect()->back()->with('success', 'การจองสำเร็จ');
