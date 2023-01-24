@@ -27,7 +27,8 @@
                                 <td>{{ thaidate('l ที่ j F Y เวลา G:i นาที', strtotime($history['booking_start'])) }}</td>
                                 <td>{{ thaidate('l ที่ j F Y เวลา G:i นาที', strtotime($history['booking_end'])) }}</td>
                                 <td>
-                                    <i class='{{ $history['booking_status'] == 2? 'fa-solid fa-square-check text-success':'fa-solid fa-square-xmark text-danger ' }}' style="font-size: 2em"></i>
+                                    <i class='{{ $history['booking_status'] == 2 ? 'fa-solid fa-square-check text-success' : 'fa-solid fa-square-xmark text-danger ' }}'
+                                        style="font-size: 2em"></i>
                                 </td>
                                 <td>
                                     <div class="btn btn-sm bg-primary text-white"
@@ -95,11 +96,24 @@
                     success: function(data) {
                         var detail = data.detail;
                         var end = new Date(detail[0].edate)
-
+console.log(detail)
                         Swal.fire({
-                            title: JSON.stringify(moment(end).format(
-                                'ddd ที่ D MMM ' + (new Date(detail[0].edate).getFullYear() + 543) +
-                                ' เวลา HH:mm นาที')),
+                            title: '<div style="font-size:50%" > รายการจองของคุณ : </div>',
+                            html: '<div class="col-12" style="font-size:0.9rem"><i class="fa-solid fa-calendar-days" ></i>  :' +
+                                moment(
+                                    JSON.stringify(end[0])).format(
+                                    ' DD/MM/' + (new Date(end[0]).getFullYear() + 543) +
+                                    ' เวลา H:mm') + 'น. -' + moment(
+                                    JSON.stringify(end[0])).format(
+                                    ' DD/MM/' + (new Date(end[0]).getFullYear() + 543) +
+                                    ' เวลา H:mm') + 'น.' + '</div>' +
+                                '<div class="mt-3" style="font-size:0.9rem" >รายละเอียดการจอง : </div>',
+                            // icon: (color[0] == 2 ? 'success' : 'warning'),
+                            // iconHtml: (color[0] == 2 ?
+                            //     '<i class="fa-solid fa-calendar-check" ></i>' :
+                            //     '<i class="fa-solid fa-calendar-days"></i>'),
+
+
                         })
                     }
                 })

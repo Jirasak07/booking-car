@@ -96,7 +96,7 @@ class DashboardAdminController extends Controller
     {
         $datenow = new DateTime();
         $format_date = $datenow->format('Y-m-d H:i:s');
-    
+
         $date = Carbon::now()->format('d-m-Y H:i:s');
         // // dd($date);
         $bookingcar1ad = DB::table('tb_booking') //จำนวนรถภายในคันที่1 ที่อนุมัติแล้ว
@@ -265,7 +265,7 @@ class DashboardAdminController extends Controller
                 ->join('users', 'tb_booking.username', '=', 'users.id')
                 ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
                 ->where('tb_booking.id', '=', $id)
-                ->select('tb_driver.driver_fullname as driver', 'tb_cars.car_license as car', 'tb_cars.car_model as car_detail', 'booking_start as sdate', 'booking_end as edate', 'booking_detail', 'users.name as name_user')
+                ->select('tb_driver.driver_fullname as driver', 'tb_cars.car_license as car', 'tb_cars.car_model as car_detail', 'booking_start as sdate', 'booking_end as edate', 'booking_detail', 'users.name as name_user','booking_status')
                 ->get();
         } else if ($booking->type_car == 2) {
             $detail = DB::table('tb_booking')
