@@ -178,15 +178,34 @@
         var countcar2 = @json($data2);
         var car1 = [];
         var car2 = [];
-        countcar1.forEach(c1 => {
-            // console.log(d)
-            car1.push(c1.data)
-        })
-        countcar2.forEach(c2 => {
-            // console.log(d)
-            car2.push(c2.data)
-        })
-        console.log(car1, car2)
+        var teststore = [];
+        for (let i = 0; i < 12; i++) {
+            countcar1.forEach(a => {
+                if (a.month == i) {
+
+                    car1[i - 1] = a.data
+
+                } else if (a.month != i) {
+                    car1[i] = '0'
+                }
+            })
+        }
+        for (let i = 0; i < 12; i++) {
+            countcar2.forEach(a => {
+                if (a.month == i) {
+
+                    car2[i - 1] = a.data
+
+                } else if (a.month != i) {
+                    car2[i] = '0'
+                }
+            })
+        }
+
+
+
+        console.log(teststore)
+        // console.log('ชาร์ต',countcar1)
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: {

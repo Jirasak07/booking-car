@@ -20,8 +20,6 @@ class CarsController extends Controller
 
     public function changeStatus($id)
     {
-
-
       $car = CarModel::find($id);
 
       if($car->car_status == 1){
@@ -32,6 +30,6 @@ class CarsController extends Controller
         $car->car_status = ('1');
         $car->save();
       }
-     return redirect()->back();
+     return response()->json(['status'=>'success']);
     }
 }
