@@ -1,6 +1,13 @@
 @section('title', 'ข้อมูลการจอง')
 <link href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet">
 @extends('layouts.layout')
+<style>
+    .custom-class {
+        text-align: center;
+        font-weight: bold;
+
+    }
+</style>
 @section('content')
     @include('layouts.header')
     @include('user.box_list_booking')
@@ -34,7 +41,8 @@
                                 @endphp
                                 @foreach ($booking2 as $item)
                                     <tr>
-                                        <td id="row-id" align="center" style="font-size:18px;font-weight:500">{{ $i++ }}</td>
+                                        <td id="row-id" align="center" style="font-size:18px;font-weight:500">
+                                            {{ $i++ }}</td>
                                         <td style="font-size:16px" id="date_range">
                                             @php
                                                 echo thaidate('วันที่ d M Y เวลา H:i', $item->booking_start) . '&nbsp;-&nbsp;' . thaidate('วันที่ d M Y เวลา H:i', $item->booking_end);
@@ -199,18 +207,53 @@
         </div>
 
         @push('js')
+            <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
             <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+            <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
             <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
             <script>
                 $(document).ready(function() {
                     $('#booking_table').DataTable({
-                        responsive: true
+                        responsive: {
+                            details: {
+                                type: 'column',
+                                target: 'tr'
+                            }
+                        },
+                        columnDefs: [{
+                            className: 'control',
+                            orderable: false,
+                            targets: 0
+                        }],
+                        lengthMenu: [10, 20, 50, 100, ],
+
+                        language: {
+                            lengthMenu: "แสดง _MENU_ รายการ",
+                            search: "ค้นหาข้อมูลในตาราง",
+                            info: "แสดงข้อมูล _END_ จากทั้งหมด _TOTAL_ รายการ",
+
+                            paginate: {
+
+                                previous: "ก่อนหน้า",
+                                next: "ถัดไป",
+
+                            },
+                        },
+                        "createdRow": function(row, data, index) {
+                            // Add your custom class to the column you want here
+                            $('td', row).eq(0).addClass('custom-class');
+                            $('td', row).eq(0).css('font-size', '1rem');
+                            $('td', row).eq(1).css('font-size', '1rem');
+                            $('td', row).eq(2).css('font-size', '1rem');
+                            $('td', row).eq(3).css('text-align', 'center');
+                            $('td', row).eq(4).css('text-align', 'center');
+                            $('td', row).eq(5).css('text-align', 'center');
+                        }
                     });
 
                     setInterval(() => {
                         var table = $('#booking_table').DataTable();
                         //$('#view-de').css();
-
                         $.ajax({
                             url: '/users/booking/refresh',
                             method: 'GET',
@@ -273,10 +316,11 @@
                                     table.row.add([
                                         (i++), date_range, short, detail, status, manage
                                     ]).draw();
+
                                 });
                             }
                         })
-                    }, 10000);
+                    }, 30000);
                 });
 
                 function edit_booking(id) {
