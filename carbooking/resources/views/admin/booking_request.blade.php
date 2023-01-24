@@ -32,10 +32,10 @@
                                         <td>{{ $bookings['name'] }}</td>
 
                                         <td class="text-truncate" style="max-width: 250px">
-                                            {{ thaidate('l ที่ j F Y เวลา G:i นาที', strtotime($bookings['booking_start'])) }}
+                                            {{ thaidate('l ที่ j F Y เวลา G:i ', strtotime($bookings['booking_start'])) }}
                                         </td>
                                         <td class="text-truncate" style="max-width: 300px">
-                                            {{ thaidate('l ที่ j F Y เวลา G:i นาที', strtotime($bookings['booking_end'])) }}
+                                            {{ thaidate('l ที่ j F Y เวลา G:i ', strtotime($bookings['booking_end'])) }}
                                         </td>
                                         <td>{{ $bookings['booking_detail'] }}</td>
                                         <td>
@@ -73,7 +73,7 @@
 
                         <div class="mb-2  row text-xl-center">
                             <div class="col-12 text-center mb-3" style="font-weight: 700">
-                                <label for="">รายการจองของ :</label>
+                                <label for="">รายการของคุณ :</label>
                                 <label for="" id="name"></label>
                             </div>
                             <div class="col-12 col-sm-6">
@@ -293,9 +293,9 @@
                     }
                 });
                 const bookstart = moment(JSON.stringify(start[0])).format('ddd ที่ D MMM ' + (new Date(start[0]).getFullYear() +
-                    543) + ' เวลา HH:mm นาที');
+                    543) + ' เวลา HH:mm');
                 const bookend = moment(JSON.stringify(end[0])).format('ddd ที่ D MMM ' + (new Date(end[0]).getFullYear() +
-                    543) + ' เวลา HH:mm นาที');
+                    543) + ' เวลา HH:mm');
                 // console.log(typeof(bookstart));
                 // alert(bookstart);
                 // const da = moment().format('D-MM-YYYY');
