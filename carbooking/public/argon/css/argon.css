@@ -20331,7 +20331,6 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 }
 .m-dash {
     margin: 0px !important;
-    color: #00f7b5;
     margin-left: 0px !important;
     margin-right: 0px !important;
     box-shadow: 2px 2px 8px 4px rgba(0, 0, 0, 0.1);
@@ -20442,19 +20441,8 @@ a.nav-link-sub:hover {
     margin: 0 15px;
     color: white !important;
 }
-@media screen and (max-width: 380px) {
-    .fc-header-toolbar.fc-toolbar.fc-toolbar-ltr {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .fc-button-group {
-        max-width: fit-content !important;
-    }
-}
-.fc-view-container {
-    aspect-ratio: 1/1;
+@media screen and (max-width: 450px) {
+
 }
 
 .shadow-table {
@@ -20479,16 +20467,6 @@ a.nav-link-sub:hover {
     justify-content: center;
     gap: 10px;
 }
-
-.fc-header-toolbar {
-    /*
-    the calendar will be butting up against the edges,
-    but let's scoot in the header's buttons
-    */
-    padding-top: 1em;
-    padding-left: 1em;
-    padding-right: 1em;
-}
 .shadowx {
     box-shadow: 2px 2px 20px 5px rgba(53, 53, 53, 0.87);
 }
@@ -20501,4 +20479,40 @@ a.nav-link-sub:hover {
     cursor: pointer;
     border-radius: 5px;
 }
+#calendar1{
+    height: 100% !important;
+    min-height: 500px;
+}
+@media screen and (max-width: 777px) {
+    .fc-event-title {
+        font-size: 0.8em;
 
+    }
+    .fc-event-time{
+        font-size: 0.8em;
+    }
+    .fc-toolbar{
+        font-size: 0.9em;
+    }
+    .fc-toolbar-title{
+        font-size: 1em !important;
+    }
+    .fc-button.fc-button-primary{
+        font-size: 0.8em !important;
+    }
+    .fc-col-header-cell-cushion{
+        font-size: 0.8em !important;
+    }
+    .fc-daygrid-day-number{
+        font-size: 0.8em !important;
+    }
+    .fc-timegrid-slot-label-cushion.fc-scrollgrid-shrink-cushion{
+        font-size: 0.8em !important;
+    }
+    .fc-listWeek-view.fc-view.fc-list.fc-list-sticky{
+        font-size: 0.8em !important;
+    }
+}
+.fc-timegrid-slot-label-cushion.fc-scrollgrid-shrink-cushion{
+    font-size: 0.8em !important;
+}

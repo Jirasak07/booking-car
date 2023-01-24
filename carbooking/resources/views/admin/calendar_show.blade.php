@@ -1,4 +1,5 @@
 @push('js')
+    <link type="text/css" href="{{ asset('argon') }}/css/argon.css?v=1.0.0" rel="stylesheet">
     <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
     <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.0.2/index.global.min.js'></script>
@@ -9,10 +10,7 @@
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 // themeSystem: 'bootstrap5',
                 selectable: true,
-                contentHeight: 600,
-                handleWindowResize: true,
                 expandRows: true,
-                height: '100%',
                 nowIndicator: true,
                 allDaySlot: false,
                 events: 'http://localhost:2222/index.php/admin/dashboard/eventcalen',
@@ -21,11 +19,8 @@
                     month: 'short',
                     day: 'numeric'
                 },
-                aspectRatio: 2,
+                aspectRatio: 1.5,
                 timeFormat: 'HH:mm',
-                initialView: 'timeGridFourDay',
-                nowIndicator: true,
-                allDaySlot: false,
                 timeZone: 'Asia/bangkok',
                 locale: 'th',
                 headerToolbar: {
@@ -125,7 +120,6 @@
             setInterval(() => {
                 calendar.refetchEvents()
             }, 2000);
-            calendar.setOption('aspectRatio', 2);
             calendar.updateSize();
             calendar.render();
         });

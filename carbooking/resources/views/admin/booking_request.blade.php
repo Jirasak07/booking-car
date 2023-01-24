@@ -139,7 +139,7 @@
                                                 <input type="submit" value="บันทึก"
                                                     class="btn btn-sm btn-success w-25" />
                                                 <button type="button" class="btn btn-sm btn-outline-danger w-25 "
-                                                    data-bs-dismiss="modal" aria-label="Close">ปิด</button>
+                                                    data-bs-dismiss="modal" aria-label="Close" >ปิด</button>
                                             </div>
 
                                         </form>
@@ -178,10 +178,8 @@
                                                 </div>
                                                 <div class="d-flex justify-content-end mt-2">
                                                     <button class="btn btn-sm btn-success w-25" type="submit"> บันทึก </button>
-                                                    <button
-                                                        type="button" class="btn btn-sm btn-outline-danger w-25 " data -
-                                                        bs - dismiss="modal" aria - label="Close"
-                                                        onclick="open_modal()"> ปิด </button>
+                                                    <button type="button" class="btn btn-sm btn-outline-danger w-25 "
+                                                    data-bs-dismiss="modal" aria-label="Close" >ปิด</button>
                                                 </div>
 
                                             </form>

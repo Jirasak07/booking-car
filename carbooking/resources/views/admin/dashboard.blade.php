@@ -92,9 +92,11 @@
                 @endforeach
             </div>
         </div>
-        <div class="bg-white mb-5 rounded" style="height:150vh">
+        <div class="bg-white rounded m-dash p-2"  >
             @include('admin.calendar_show')
+
         </div>
+<div class="mb-5"></div>
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
