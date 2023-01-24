@@ -40,7 +40,7 @@
                 expandRows: true,
                 height: '100%',
                 aspectRatio: 2,
-                events: 'http://localhost:225/index.php/users/dashboard/refresh',
+                events: 'http://localhost:2222/index.php/users/dashboard/refresh',
                 views: {
                     timeGridFourDay: {
                         type: 'timeGrid',

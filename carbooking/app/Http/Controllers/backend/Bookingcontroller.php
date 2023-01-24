@@ -25,6 +25,16 @@ class Bookingcontroller extends Controller
         $jsonDatadriver = $responsedriver->json();
         return view('admin.booking_request')->with(['booking' => $jsonData, 'car' => $jsonDatacar, 'driver' => $jsonDatadriver]);
     }
+    public function requestDataTable(){
+        $currentURL = request()->getHttpHost();
+        $response = Http::get('http://' . $currentURL . '/index.php/api/pageupdate');
+        $jsonData = $response->json();
+        $responsecar = Http::get('http://' . $currentURL . '/index.php/api/car');
+        $jsonDatacar = $responsecar->json();
+        $responsedriver = Http::get('http://' . $currentURL . '/index.php/api/driver');
+        $jsonDatadriver = $responsedriver->json();
+        return response()->json(['data' => $jsonData]);
+    }
 
     public function history()
     {
@@ -197,7 +207,7 @@ class Bookingcontroller extends Controller
             'booking_start' => 'required|before:5 hours',
             'booking_end' => 'required',
             'locate' => 'required|min:3',
-           
+
         ]);
 
         $date_start = Carbon::parse($request->date_start)->format('Y-m-d\TH:i:s');

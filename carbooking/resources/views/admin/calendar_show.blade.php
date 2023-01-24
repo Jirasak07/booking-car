@@ -65,8 +65,6 @@
                             detail.push(b.titlee);
                         }
                     });
-
-                    console.log(idevent)
                     // console.log(moment(timzone).format('HH:mm'))
                     moment.locale('th');
 
@@ -82,7 +80,7 @@
                                 ' DD/MM/' + (new Date(end[0]).getFullYear() + 543) +
                                 ' เวลา H:mm') + 'น.' + '</div>' +
                             '<div class="mt-3" style="font-size:0.9rem" >รายละเอียดการจอง : ' +
-                            detail[0] + '</div>',
+                            detail[0] +'</div>',
                         icon: (color[0] == 2 ? 'success' : 'warning'),
                         iconHtml: (color[0] == 2 ?
                             '<i class="fa-solid fa-calendar-check" ></i>' :

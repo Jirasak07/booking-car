@@ -7,6 +7,7 @@
         <div class="container-fulid mx-3 ">
             <div class="container-md pt-3 pb-3 ">
                 <div class=" card shadow-table p-3  ">
+                    <div class="btn btn-success" onclick="fethData()" >click</div>
                     <table id="tablerequest" class="display responsive nowrap " style="width:100%;font-size:0.8em">
                         <thead class="table-dark">
                             <tr>
@@ -20,13 +21,14 @@
 
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="tbody">
                             @php
                                 $i = 1;
+
                             @endphp
                             @foreach ($booking as $bookings)
                                 @if ($bookings['booking_status'] == 1)
-                                    <tr>
+                                    <tr >
                                         <td class="control d-grid d-sm-none"></td>
                                         <td>{{ $i++ }}</td>
                                         <td>{{ $bookings['name'] }}</td>
@@ -217,13 +219,24 @@
         <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
 
         <script>
+
             $('.nav-tabs a').on('click', function(e) {
                 e.preventDefault()
                 $(this).tab('show')
             });
 
+            function fethData(){
+                var html ="";
+                var data = '<tr><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td></tr>';
+                for(var i =0; i< 10; i++){
+                    html += data;
+                }
+                $('#tbody').html(html);
+            }
             $(document).ready(function() {
+
                 $('#tablerequest').DataTable({
+                    // ajax:'http://localhost:2222/index.php/admin/request/data',
                     responsive: {
                         details: {
                             type: 'column',

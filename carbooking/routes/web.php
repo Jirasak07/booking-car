@@ -55,6 +55,7 @@ Route::group(
         Route::get('dashboard/eventcalen', [\App\Http\Controllers\backend\DashboardAdminController::class, 'eventcalen']);
         Route::get('history/{id}', [\App\Http\Controllers\backend\DashboardAdminController::class, 'detail_history']);
         Route::get('request', [\App\Http\Controllers\backend\Bookingcontroller::class, 'index'])->name('admin.booking_request');
+        Route::get('request/data', [\App\Http\Controllers\backend\Bookingcontroller::class, 'requestDataTable']);
         Route::get('manage-driver', [DriverController::class, 'index'])->name('admin.manage-driver');
         Route::get('manage-driver/{id}', [DriverController::class, 'changestatus'])->name('driverstatus');
 
