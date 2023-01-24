@@ -96,24 +96,15 @@
                     success: function(data) {
                         var detail = data.detail;
                         var end = new Date(detail[0].edate)
-console.log(detail)
+                        console.log(end)
+                        var status = detail[0].booking_status;
+
                         Swal.fire({
                             title: '<div style="font-size:50%" > รายการจองของคุณ : </div>',
                             html: '<div class="col-12" style="font-size:0.9rem"><i class="fa-solid fa-calendar-days" ></i>  :' +
-                                moment(
-                                    JSON.stringify(end[0])).format(
-                                    ' DD/MM/' + (new Date(end[0]).getFullYear() + 543) +
-                                    ' เวลา H:mm') + 'น. -' + moment(
-                                    JSON.stringify(end[0])).format(
-                                    ' DD/MM/' + (new Date(end[0]).getFullYear() + 543) +
-                                    ' เวลา H:mm') + 'น.' + '</div>' +
+                                moment(JSON.stringify(end[0])).format(' DD/MM/ เวลา H:mm')+'น. -'+ moment(JSON.stringify(end[0])).format(' DD/MM/')+'น.' + '</div>' +
                                 '<div class="mt-3" style="font-size:0.9rem" >รายละเอียดการจอง : </div>',
-                            // icon: (color[0] == 2 ? 'success' : 'warning'),
-                            // iconHtml: (color[0] == 2 ?
-                            //     '<i class="fa-solid fa-calendar-check" ></i>' :
-                            //     '<i class="fa-solid fa-calendar-days"></i>'),
-
-
+                            icon: (status == 2 ? 'success' : 'error'),
                         })
                     }
                 })

@@ -273,13 +273,13 @@ class DashboardAdminController extends Controller
                 ->join('users', 'tb_booking.username', '=', 'users.id')
                 ->join('tb_out_cars', 'tb_booking.license_plate', '=', 'tb_out_cars.id')
                 ->where('tb_booking.id', '=', $id)
-                ->select('car_out_license as car', 'car_out_model car_detail', 'car_out_driver as driver', 'car_out_tel as tel', 'owner', 'booking_start as sdate', 'booking_end as edate', 'booking_detail', 'type_car', 'users.name as name_user')
+                ->select('car_out_license as car', 'car_out_model car_detail', 'car_out_driver as driver', 'car_out_tel as tel', 'owner', 'booking_start as sdate', 'booking_end as edate', 'booking_detail', 'type_car', 'users.name as name_user','booking_status')
                 ->get();
         } else {
             $detail = DB::table('tb_booking')
                 ->join('users', 'tb_booking.username', '=', 'users.id')
                 ->where('tb_booking.id', '=', $id)
-                ->select('booking_start as sdate', 'booking_end as edate', 'booking_detail', 'type_car', 'driver', 'license_plate as car', 'users.name as name_user')
+                ->select('booking_start as sdate', 'booking_end as edate', 'booking_detail', 'type_car', 'driver', 'license_plate as car', 'users.name as name_user','booking_status')
                 ->get();
         }
         return response()->json([

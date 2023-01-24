@@ -71,23 +71,27 @@
                     </div>
                     <div class="modal-body">
 
-                        <div class="mb-2  row">
-                            <div class="col-6">
-                                <label for="" class="form-label " style="line-height:50%">วันเวลาที่เริ่มต้น</label>
+                        <div class="mb-2  row text-xl-center">
+                            <div class="col-12 text-center mb-3" style="font-weight: 700">
+                                <label for="">รายการจองของ :</label>
+                                <label for="" id="name"></label>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <label for="" class="form-label " style="line-height:50%;font-weight: 700">วันเวลาที่เริ่มต้น</label>
                                 </br>
-                                <label class=" ml-2" style="font-size: 80%;color:#630606;" for=""
+                                <label class=" ml-2" style="font-size: 80%;" for=""
                                     id="start_date"></label>
                             </div>
-                            <div class="col-6">
-                                <label for="" class="form-label" style="line-height:50%">วันเวลาที่สิ้นสุด</label>
+                            <div class="col-12 col-sm-6">
+                                <label for="" class="form-label" style="line-height:50%;font-weight: 700">วันเวลาที่สิ้นสุด</label>
                                 </br>
-                                <label class=" ml-2" style="font-size: 80%;color:#630606;" for=""
+                                <label class=" ml-2" style="font-size: 80%;" for=""
                                     id="end_date"></label>
                             </div>
-                            <div class="col-12 ">
-                                <label for="" class="form-label" style="line-height:50%">รายละเอียดการจอง</label>
+                            <div class="col-12 col-sm-6">
+                                <label for="" class="form-label" style="line-height:50%;font-weight: 700">รายละเอียดการจอง</label>
                                 </br>
-                                <label class=" ml-2" style="font-size: 80%;color:#630606;" for=""
+                                <label class=" ml-2" style="font-size: 80%;" for=""
                                     id="detail">11012543</label>
                             </div>
                         </div>
@@ -273,15 +277,17 @@
             function modal(val) {
                 // document.getElementById('')
                 const data = @json($booking);
+                console.log(data)
                 const bookdata = [];
                 moment.locale('th');
                 const start = [];
                 const end = [];
                 const detail = [];
+                const name = [];
                 data.forEach(showBooking => {
                     if (showBooking.id == val) {
                         start.push(showBooking.booking_start);
-
+                        name.push(showBooking.name);
                         end.push(showBooking.booking_end);
                         detail.push(showBooking.booking_detail);
                     }
@@ -296,6 +302,7 @@
                 // console.log(da);
                 document.getElementById('start_date').innerHTML = bookstart;
                 document.getElementById('end_date').innerHTML = bookend;
+                document.getElementById('name').innerHTML = name;
                 document.getElementById('detail').innerHTML = detail[0];
                 document.getElementById('idform').value = val;
                 document.getElementById('idform2').value = val;
