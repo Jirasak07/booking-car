@@ -23,6 +23,7 @@
                 nowIndicator: true,
                 timeFormat: 'HH:mm',
                 //hour12: false,
+                //minTime: moment().format('HH:mm:ss'),
                 titleFormat: {
                     month: 'long',
                     year: 'numeric',
@@ -53,6 +54,7 @@
                 windowResize: function(arg) {
 
                 },
+
                 eventClick: function(e) {
                     moment.locale('th');
                     //console.log(e.event);
@@ -111,34 +113,50 @@
                     });
                 },
 
-                validRange: function(nowDate) {
-                    return {
-                        start: nowDate
-                    };
+                validRange: {
+                    start: moment.now()
                 },
                 dateClick: function(info) {
-
+                    if (info.start < moment()) {
+                        return false;
+                    }
                 },
 
                 select: function(info) {
+                    var nowDate = new moment();
+
                     var booking_start = moment(info.startStr).format('YYYY-MM-DD HH:mm:ss');
                     var booking_end = moment(info.endStr).format('YYYY-MM-DD HH:mm:ss');
                     var booking_s = moment(info.startStr).format('YYYY-MM-DD HH:mm:ss');
                     var booking_e = moment(info.endStr).format('YYYY-MM-DD HH:mm:ss');
 
-                    $('#bookingModal').modal('toggle');
-                    $('#booking_start').html(booking_start);
-                    $('#booking_end').html(booking_end);
-                    document.getElementById('start').value = booking_start;
-                    document.getElementById('end').value = booking_end;
-                    document.getElementById('date_start').value = booking_s;
-                    document.getElementById('date_end').value = booking_e;
+                    var canbook = moment(nowDate, 'HH:mm:ss a').add('5', 'hours').format(
+                        'YYYY-MM-DD HH:mm:ss a');
+                    //var currect = moment(canbook).format('YYYY-MM-DD HH:mm:ss')
+                    // console.log(canbook);
+                    // console.log(booking_start);
+                    //console.log(currect);
+                    if (booking_start < canbook) {
+                        event.preventDefault();
+                        Swal.fire({
+                            icon: 'error',
+                            //title: 'Oops...',
+                            text: 'โปรดจองก่อนเวลาเดินทาง 5 ชั่วโมง',
+                        })
+                    } else {
+                        $('#bookingModal').modal('toggle');
+                        $('#booking_start').html(booking_start);
+                        $('#booking_end').html(booking_end);
 
-                    //tag input datetime-local เลือกวันย้อนหลังไม่ได้
-                    var now_utc = Date.now()
-                    var today = new Date(now_utc).toISOString().substring(0, 16);
-                    document.getElementById("date_start").setAttribute("min", today);
-                    document.getElementById("date_end").setAttribute("min", today);
+                        document.getElementById('date_start').value = booking_s;
+                        document.getElementById('date_end').value = booking_e;
+
+                        //tag input datetime-local เลือกวันย้อนหลังไม่ได้
+                        var now_utc = Date.now()
+                        var today = new Date(now_utc).toISOString().substring(0, 16);
+                        document.getElementById("date_start").setAttribute("min", today);
+                        document.getElementById("date_end").setAttribute("min", today);
+                    }
                 }
 
             });
@@ -149,7 +167,24 @@
             calendar.updateSize();
             calendar.render();
 
+
+
         });
+
+        function updateEndTime() {
+            var changeStart = $("#date_start").val();
+            var changeEnd = $("#date_end").val();
+            var start = moment(changeStart);
+            var end = moment(changeEnd);
+            var diffInMinutes = end.diff(start, 'minutes');
+            console.log(diffInMinutes);
+            if (diffInMinutes < 30) {
+                $('#error_text').html('โปรดระบุช่วงเวลาอย่างน้อย 30 นาที');
+            } else {
+                $('#error_text').html(' ');
+            }
+
+        }
     </script>
 @endpush
 <div class="modal fade" id="bookingModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -175,10 +210,11 @@
                             <label class="plaintext" id="booking_start" name="booking_start"></label>
                         </div>
                         <div class="col-md-3">
-                            <input type="hidden" name="start" id="start" value="">
                             <input type="datetime-local" data-date="" class="form-control"
-                                data-date-format="DD MM YYYY HH:mm:ss a" name="date_start" id="date_start">
-
+                                data-date-format="DD MM YYYY HH:mm:ss a" name="date_start" id="date_start"
+                                onchange="updateEndTime()">
+                            <label class="plaintext text-danger" style="font-size: 14px" id="error_text"
+                                name="error_text"></label>
                         </div>
                         <br />
                         <br />
@@ -189,9 +225,12 @@
                             <label class="plaintext" id="booking_end" name="booking_end"></label>
                         </div>
                         <div class="col-md-3">
-                            <input type="hidden" name="end" id="end">
+
                             <input type="datetime-local" data-date="" class="form-control"
-                                data-date-format="DD MM YYYY HH:mm:ss a" id="date_end" name="date_end">
+                                data-date-format="DD MM YYYY HH:mm:ss a" id="date_end" name="date_end"
+                                onchange="updateEndTime()">
+                            <label class="plaintext text-danger" style="font-size: 14px" id="error_text"
+                                name="error_text"></label>
                         </div>
                         <br />
                         <br />
@@ -213,5 +252,3 @@
     </div>
 </div>
 <div id='calendar' class="container-fluid py-3"></div>
-{{-- <div class="">
-</div> --}}
