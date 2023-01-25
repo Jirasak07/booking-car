@@ -294,6 +294,6 @@ class DashboardAdminController extends Controller
           $query = $request->get('query');
           $filterResult = CaroutModel::where('license_plate', 'LIKE', '%'. $query. '%')->get();
           return response()->json($filterResult);
-    } 
+    }
 
 }
