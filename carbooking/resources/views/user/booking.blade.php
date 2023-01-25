@@ -224,13 +224,13 @@
                                 targets: 0
                             },
                             {
-                                responsivePriority: 10001,
-                                targets: 4
+                                responsivePriority: 2,
+                                targets: 3
                             },
                             {
-                                responsivePriority: 2,
-                                targets: -1
-                            }
+                                responsivePriority: 3,
+                                targets: 5
+                            },
                         ],
                         lengthMenu: [10, 20, 50, 100, ],
                         language: {

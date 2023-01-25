@@ -140,7 +140,7 @@ class Bookingcontroller extends Controller
         foreach ($bookings as $booking) {
             $color = null;
             if ($booking->booking_status == '1') {
-                $color = 'rgba(245,147,0,0.4)';
+                $color = '#ffd166';
                 $events[] = [
                     'id' => $booking->id,
                     'title' => $booking->booking_detail,
@@ -160,7 +160,7 @@ class Bookingcontroller extends Controller
             ->select('driver_fullname', 'car_license', 'car_model', 'tb_booking.*')
             ->get();
         foreach ($booking_join1 as $item) {
-            $color = 'rgba(0,245,36,0.4)';
+            $color = '#06d6a0';
             $car = "รถภายใน";
             $events[] = [
                 'id' => $item->id,
@@ -179,7 +179,7 @@ class Bookingcontroller extends Controller
             ->get();
         $car = "รถภายนอก";
         foreach ($booking_join2 as $item2) {
-            $color = 'rgba(0,245,36,0.4)';
+            $color = '#06d6a0';
             $car = "รถภายใน";
             $events[] = [
                 'id' => $item2->id,
