@@ -8,7 +8,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-
+            var pathArray = window.location.host;
             var calendarEl = document.getElementById('calendar');
             //var bookings = @json($booking);
             //console.log(bookings);
@@ -41,7 +41,7 @@
                 expandRows: true,
                 height: '100%',
                 aspectRatio: 2,
-                events: 'http://localhost:2222/index.php/users/dashboard/refresh',
+                events: 'http://'+pathArray+'/index.php//users/dashboard/refresh',
                 views: {
                     timeGridFourDay: {
                         type: 'timeGrid',

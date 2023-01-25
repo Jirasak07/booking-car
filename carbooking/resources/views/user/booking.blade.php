@@ -243,7 +243,7 @@
                         }
                     });
 
-                    setInterval(() => {
+                    /* setInterval(() => {
                         var table = $('#booking_table').DataTable();
                         //$('#view-de').css();
                         $.ajax({
@@ -312,7 +312,7 @@
                                 });
                             }
                         })
-                    }, 15000);
+                    }, 15000); */
                 });
 
                 function edit_booking(id) {
