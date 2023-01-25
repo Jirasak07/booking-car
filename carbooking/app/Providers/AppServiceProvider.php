@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -16,6 +18,13 @@ class AppServiceProvider extends ServiceProvider
         //
     }
 
+    public function autocancle(){
+        $current_date_time = Carbon::now();
+        DB::table('tb_booking')
+            ->where('booking_status', '=', '1')
+            ->where('booking_start', '<', $current_date_time->subMinutes(15))
+            ->update(['booking_status', '=', '3']);
+    }
     /**
      * Bootstrap any application services.
      *
@@ -24,5 +33,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        $this->autocancle();
     }
 }
