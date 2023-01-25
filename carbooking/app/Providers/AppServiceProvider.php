@@ -33,6 +33,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
-        $this->autocancle();
+        // $this->autocancle();
     }
 }
