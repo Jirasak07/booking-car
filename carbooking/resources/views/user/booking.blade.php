@@ -219,6 +219,20 @@
                             selector: 'td:nth-child(2)'
                         },
                         responsive: true,
+                        columnDefs: [{
+                                responsivePriority: 1,
+                                targets: 0
+                            },
+                            {
+                                responsivePriority: 10001,
+                                targets: 4
+                            },
+                            {
+                                responsivePriority: 2,
+                                targets: -1
+                            }
+                        ],
+                        lengthMenu: [10, 20, 50, 100, ],
                         language: {
                             lengthMenu: "แสดง _MENU_ รายการ",
                             search: "ค้นหาข้อมูลในตาราง",

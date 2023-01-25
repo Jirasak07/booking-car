@@ -41,7 +41,7 @@
                 expandRows: true,
                 height: '100%',
                 aspectRatio: 2,
-                events: 'http://'+pathArray+'/index.php//users/dashboard/refresh',
+                events: 'http://' + pathArray + '/index.php//users/dashboard/refresh',
                 views: {
                     timeGridFourDay: {
                         type: 'timeGrid',
@@ -172,12 +172,21 @@
         });
 
         function updateEndTime() {
+            var now = new moment();
+            console.log(now);
             var changeStart = $("#date_start").val();
             var changeEnd = $("#date_end").val();
             var start = moment(changeStart);
             var end = moment(changeEnd);
+            var diffHours = start.diff(now, 'hours');
             var diffInMinutes = end.diff(start, 'minutes');
+            console.log(diffHours);
             console.log(diffInMinutes);
+            if (diffHours < 5) {
+                $('#error').html('โปรดระบุเวลาออกเดินทางก่อน 5 ชั่วโมง');
+            } else {
+                $('#error').html(' ');
+            }
             if (diffInMinutes < 30) {
                 $('#error_text').html('โปรดระบุช่วงเวลาอย่างน้อย 30 นาที');
             } else {
@@ -206,32 +215,45 @@
                         <div class="col-md-3">
                             <strong for="validationCustom03">วันเดินทางไป</strong>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <label class="plaintext" id="booking_start" name="booking_start"></label>
                         </div>
-                        <div class="col-md-3">
-                            <input type="datetime-local" data-date="" class="form-control"
-                                data-date-format="DD MM YYYY HH:mm:ss a" name="date_start" id="date_start"
-                                onchange="updateEndTime()">
-                            <label class="plaintext text-danger" style="font-size: 14px" id="error_text"
-                                name="error_text"></label>
+                        <div class="col-md-4">
+                            <div class="col-auto">
+                                <input type="datetime-local" data-date="" class="form-control"
+                                    data-date-format="DD MM YYYY HH:mm:ss a" name="date_start" id="date_start"
+                                    onchange="updateEndTime()">
+                            </div>
+                            <div class=" form-text">
+                                <label class="plaintext text-danger" style="font-size: 14px" id="error"
+                                    name="error_text"></label>
+                                <label class="plaintext text-danger" style="font-size: 14px" id="error_text"
+                                    name="error_text"></label>
+                            </div>
                         </div>
+
                         <br />
                         <br />
                         <div class="col-md-3">
                             <strong for="validationCustom03">วันเดินทางกลับ</strong>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <label class="plaintext" id="booking_end" name="booking_end"></label>
                         </div>
-                        <div class="col-md-3">
-
-                            <input type="datetime-local" data-date="" class="form-control"
-                                data-date-format="DD MM YYYY HH:mm:ss a" id="date_end" name="date_end"
-                                onchange="updateEndTime()">
-                            <label class="plaintext text-danger" style="font-size: 14px" id="error_text"
-                                name="error_text"></label>
+                        <div class="col-md-4">
+                            <div class="col-auto">
+                                <input type="datetime-local" data-date="" class="form-control"
+                                    data-date-format="DD MM YYYY HH:mm:ss a" id="date_end" name="date_end"
+                                    onchange="updateEndTime()">
+                            </div>
+                            <div class=" form-text">
+                                <label class="plaintext text-danger" style="font-size: 14px" id="error"
+                                    name="error_text"></label>
+                                <label class="plaintext text-danger" style="font-size: 14px" id="error_text"
+                                    name="error_text"></label>
+                            </div>
                         </div>
+
                         <br />
                         <br />
                         <div class="col-md-12">
