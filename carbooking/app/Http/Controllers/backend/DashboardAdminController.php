@@ -5,8 +5,10 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use App\Models\BookingModel;
 use App\Models\CarModel;
+use App\Models\CaroutModel;
 use Carbon\Carbon;
 use DateTime;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
@@ -287,5 +289,11 @@ class DashboardAdminController extends Controller
         ]);
 
     }
+    public function autocomplete(Request $request)
+    {
+          $query = $request->get('query');
+          $filterResult = CaroutModel::where('lice', 'LIKE', '%'. $query. '%')->get();
+          return response()->json($filterResult);
+    } 
 
 }
