@@ -4,6 +4,7 @@ namespace App\Http;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use App\Http\Controllers\backend\BookingController;
 
 class Kernel extends HttpKernel
 {
@@ -71,7 +72,7 @@ class Kernel extends HttpKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->call(function () {
-            $this->cancelBookings();
+            $this->autocancle();
         })->everyFifteenMinutes();
     }
 }
