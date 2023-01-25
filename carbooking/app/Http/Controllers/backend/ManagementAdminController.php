@@ -45,7 +45,7 @@ class ManagementAdminController extends Controller
             ->leftJoin('tb_booking', 'tb_cars.id', '=', 'tb_bookings.license_plate')
             ->where(function ($query) use ($sdate, $edate) {
                 $query->where(function ($query) use ($sdate, $edate) {
-                    $query->where('tb_booking.status', '<>', 'reserved')
+                    $query->where('tb_booking.status', '<>', '2')
                         ->orWhere(function ($query) use ($sdate, $edate) {
                             $query->where('tb_booking.booking_start', '>', $edate)
                                 ->orWhere('tb_booking.booking_end', '<', $sdate);
@@ -58,7 +58,7 @@ class ManagementAdminController extends Controller
             ->leftJoin('tb_booking', 'tb_driver.id', '=', 'tb_bookings.driver')
             ->where(function ($query) use ($sdate, $edate) {
                 $query->where(function ($query) use ($sdate, $edate) {
-                    $query->where('tb_booking.status', '<>', 'reserved')
+                    $query->where('tb_booking.status', '<>', '2')
                         ->orWhere(function ($query) use ($sdate, $edate) {
                             $query->where('tb_booking.booking_start', '>', $edate)
                                 ->orWhere('tb_booking.booking_end', '<', $sdate);
