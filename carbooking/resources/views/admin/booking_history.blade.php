@@ -95,15 +95,15 @@
                     method: 'GET',
                     success: function(data) {
                         var detail = data.detail;
-                        var end = new Date(detail[0].edate)
-                        console.log(end)
+                        console.log(detail[0])
+                        var start =  moment(detail[0].sdate).format('D MMM '+(new Date(detail[0].sdate).getFullYear()+543)+' เวลา  H:mm น. - ')
+                        var end =  moment(detail[0].edate).format('D MMM '+(new Date(detail[0].edate).getFullYear()+543)+' เวลา  H:mm น. ')
                         var status = detail[0].booking_status;
 
                         Swal.fire({
-                            title: '<div style="font-size:50%" > รายการจองของคุณ : </div>',
-                            html: '<div class="col-12" style="font-size:0.9rem"><i class="fa-solid fa-calendar-days" ></i>  :' +
-                                moment(JSON.stringify(end[0])).format(' DD/MM/ เวลา H:mm')+'น. -'+ moment(JSON.stringify(end[0])).format(' DD/MM/')+'น.' + '</div>' +
-                                '<div class="mt-3" style="font-size:0.9rem" >รายละเอียดการจอง : </div>',
+                            title: '<div style="font-size:50%" > รายการจองของคุณ : '+detail[0].name_user+' </div>',
+                            html: '<div class="col-12" style="font-size:0.9rem"><i class="fa-solid fa-calendar-days" ></i>  :'+start+end +'</div>' +
+                                '<div class="col-12 mt-3 row " style="font-size:0.9rem" ><div class="col-12">รายละเอียดการจอง : '+ detail[0].booking_detail +'</div><div class="col-12"> สถานะ : '+(status == 2? 'อนุมัติแล้ว':'ถูกยกเลิก')+' </div></div>',
                             icon: (status == 2 ? 'success' : 'error'),
                         })
                     }
