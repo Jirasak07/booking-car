@@ -190,7 +190,9 @@
                             <div class="row mb-3">
                                 <label class="col-sm-3 col-form-label">รายละเอียดการจอง</label>
                                 <div class="col-sm-9">
-                                    <textarea name="booking_detail" id="booking_detail" cols="30" rows="3" class="form-control"></textarea>
+                                    <textarea name="booking_detail" id="bdetail" cols="30" rows="3" class=" form-control"></textarea>
+                                   {{--  <textarea name="booking_detail" id="booking_detail" cols="30" rows="3" class="form-control"
+                                        value=""></textarea> --}}
                                 </div>
                             </div>
                         </div>
@@ -245,16 +247,7 @@
 
                             },
                         },
-                        "createdRow": function(row, data, index) {
-                            // Add your custom class to the column you want here
-                            $('td', row).eq(0).addClass('custom-class');
-                            $('td', row).eq(0).css('font-size', '1rem');
-                            $('td', row).eq(1).css('font-size', '1rem');
-                            $('td', row).eq(2).css('font-size', '1rem');
-                            $('td', row).eq(3).css('text-align', 'center');
-                            $('td', row).eq(4).css('text-align', 'center');
-                            $('td', row).eq(5).css('text-align', 'center');
-                        }
+
                     });
 
                     /* setInterval(() => {
@@ -342,10 +335,12 @@
                             $("#booking_start").attr("min", today);
                             $("#booking_end").attr("min", today);
                             $('#id').val(res.id);
+                            console.log(res.booking_detail);
                             $('#username').val(res.name);
                             $('#booking_start').val(res.booking_start);
                             $('#booking_end').val(res.booking_end);
-                            $('#booking_detail').val(res.booking_detail);
+                            //document.getElementById("booking_detail").value = res.booking_detail;
+                            $('#bdetail').val(res.booking_detail);
                         }
                     })
                 }
