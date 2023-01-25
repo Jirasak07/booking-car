@@ -259,7 +259,7 @@
                         <div class="col-md-12">
                             <strong class="form-label">รายละเอียดการจอง</strong>
                             <span class=" text-danger">*</span>
-                            <textarea name="location" id="location" class="form-control" rows="5" required></textarea>
+                            <textarea name="location" id="location" class="form-control" rows="5" ></textarea>
                         </div>
                     </div>
                 </div>
