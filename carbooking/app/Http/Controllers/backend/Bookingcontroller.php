@@ -311,4 +311,12 @@ class Bookingcontroller extends Controller
 
         return redirect()->back();
     }
+
+    function autocancle(){
+        $current_date_time = Carbon::now();
+        $booking_cancle = DB::table('tb_booking')
+        ->where('booking_status', '=', '1')
+        ->where('booking_start' ,'<', $current_date_time->subMinutes(15))
+        ->update(['booking_status', '=', '3']);
+    }
 }
