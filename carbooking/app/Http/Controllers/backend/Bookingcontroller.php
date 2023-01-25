@@ -62,77 +62,7 @@ class Bookingcontroller extends Controller
         $format_date = $datenow->format('Y-m-d H:i:s');
         $bookings = DB::table('tb_booking')
             ->where('booking_status', '!=', '3')
-            ->select('tb_booking.*')
-            ->get();
-        $events = array();
-
-        foreach ($bookings as $booking) {
-            $color = null;
-            if ($booking->booking_status == '1') {
-                $color = 'rgba(245,147,0,0.4)';
-                $events[] = [
-                    'id' => $booking->id,
-                    'title' => $booking->booking_detail,
-                    'start' => $booking->booking_start,
-                    'end' => $booking->booking_end,
-                    'color' => $color,
-                ];
-            }
-        }
-        $booking_join1 = DB::table('tb_booking')
-            ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
-            ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
-            ->where('tb_booking.type_car', '=', '1')
-            ->where('tb_booking.booking_status', '!=', '3')
-            ->where('tb_booking.booking_status', '!=', '1')
             ->where('tb_booking.booking_end', '>', $format_date)
-            //->orderBy('booking_status')
-            ->select('driver_fullname', 'car_license', 'car_model', 'tb_booking.*')
-            ->get();
-        foreach ($booking_join1 as $item) {
-            $color = 'rgba(0,245,36,0.4)';
-            $car = "รถภายใน";
-            $events[] = [
-                'id' => $item->id,
-                'title' => $item->booking_detail . '(ทะเบียนรถ' . $car . ' ' . $item->car_license . ' คนขับรถ ' . $item->driver_fullname . ')',
-                'start' => $item->booking_start,
-                'end' => $item->booking_end,
-                'color' => $color,
-            ];
-        }
-        $booking_join2 = DB::table('tb_booking')
-            ->join('tb_out_cars', 'tb_booking.license_plate', '=', 'tb_out_cars.id')
-            ->where('tb_booking.type_car', '=', '2')
-            ->where('tb_booking.booking_status', '!=', '3')
-            ->where('tb_booking.booking_status', '!=', '1')
-            ->where('tb_booking.booking_end', '>', $format_date)
-            ->select('car_out_license', 'car_out_model', 'car_out_driver', 'car_out_tel', 'tb_booking.*')
-            ->get();
-        $car = "รถภายนอก";
-        foreach ($booking_join2 as $item2) {
-            $color = 'rgba(0,245,36,0.4)';
-            $car = "รถภายใน";
-            $events[] = [
-                'id' => $item2->id,
-                'title' => $item2->booking_detail . '(ทะเบียนรถ' . $car . ' ' . $item2->car_out_license . ' คนขับรถ ' . $item2->car_out_driver . ' เบอร์โทร ' . $item2->car_out_tel . ')',
-                'start' => $item2->booking_start,
-                'end' => $item2->booking_end,
-                'color' => $color,
-            ];
-        }
-
-        //dd($booking->)
-        //dd($events, $booking_join1,$booking_join2, $booking->id);
-        // return response()->json([
-        //     'booking' => $events
-        // ]);
-        return view('user.dashboard')->with(['booking' => $events]);
-    }
-
-    public function refresh_calendar()
-    {
-        $bookings = DB::table('tb_booking')
-            ->where('booking_status', '!=', '3')
             ->select('tb_booking.*')
             ->get();
         $events = array();
@@ -156,6 +86,7 @@ class Bookingcontroller extends Controller
             ->where('tb_booking.type_car', '=', '1')
             ->where('tb_booking.booking_status', '!=', '3')
             ->where('tb_booking.booking_status', '!=', '1')
+            ->where('tb_booking.booking_end', '>', $format_date)
             //->orderBy('booking_status')
             ->select('driver_fullname', 'car_license', 'car_model', 'tb_booking.*')
             ->get();
@@ -175,6 +106,81 @@ class Bookingcontroller extends Controller
             ->where('tb_booking.type_car', '=', '2')
             ->where('tb_booking.booking_status', '!=', '3')
             ->where('tb_booking.booking_status', '!=', '1')
+            ->where('tb_booking.booking_end', '>', $format_date)
+            ->select('car_out_license', 'car_out_model', 'car_out_driver', 'car_out_tel', 'tb_booking.*')
+            ->get();
+        $car = "รถภายนอก";
+        foreach ($booking_join2 as $item2) {
+            $color = '#06d6a0';
+            $car = "รถภายใน";
+            $events[] = [
+                'id' => $item2->id,
+                'title' => $item2->booking_detail . '(ทะเบียนรถ' . $car . ' ' . $item2->car_out_license . ' คนขับรถ ' . $item2->car_out_driver . ' เบอร์โทร ' . $item2->car_out_tel . ')',
+                'start' => $item2->booking_start,
+                'end' => $item2->booking_end,
+                'color' => $color,
+            ];
+        }
+
+        //dd($booking->)
+        //dd($events, $booking_join1,$booking_join2, $booking->id);
+        // return response()->json([
+        //     'booking' => $events
+        // ]);
+        return view('user.dashboard')->with(['booking' => $events]);
+    }
+
+    public function refresh_calendar()
+    {
+        $datenow = new DateTime();
+        $format_date = $datenow->format('Y-m-d H:i:s');
+        $bookings = DB::table('tb_booking')
+            ->where('booking_status', '!=', '3')
+            ->where('tb_booking.booking_end', '>', $format_date)
+            ->select('tb_booking.*')
+            ->get();
+        $events = array();
+
+        foreach ($bookings as $booking) {
+            $color = null;
+            if ($booking->booking_status == '1') {
+                $color = '#ffd166';
+                $events[] = [
+                    'id' => $booking->id,
+                    'title' => $booking->booking_detail,
+                    'start' => $booking->booking_start,
+                    'end' => $booking->booking_end,
+                    'color' => $color,
+                ];
+            }
+        }
+        $booking_join1 = DB::table('tb_booking')
+            ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
+            ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
+            ->where('tb_booking.type_car', '=', '1')
+            ->where('tb_booking.booking_status', '!=', '3')
+            ->where('tb_booking.booking_status', '!=', '1')
+            ->where('tb_booking.booking_end', '>', $format_date)
+            //->orderBy('booking_status')
+            ->select('driver_fullname', 'car_license', 'car_model', 'tb_booking.*')
+            ->get();
+        foreach ($booking_join1 as $item) {
+            $color = '#06d6a0';
+            $car = "รถภายใน";
+            $events[] = [
+                'id' => $item->id,
+                'title' => $item->booking_detail . '(ทะเบียนรถ' . $car . ' ' . $item->car_license . ' คนขับรถ ' . $item->driver_fullname . ')',
+                'start' => $item->booking_start,
+                'end' => $item->booking_end,
+                'color' => $color,
+            ];
+        }
+        $booking_join2 = DB::table('tb_booking')
+            ->join('tb_out_cars', 'tb_booking.license_plate', '=', 'tb_out_cars.id')
+            ->where('tb_booking.type_car', '=', '2')
+            ->where('tb_booking.booking_status', '!=', '3')
+            ->where('tb_booking.booking_status', '!=', '1')
+            ->where('tb_booking.booking_end', '>', $format_date)
             ->select('car_out_license', 'car_out_model', 'car_out_driver', 'car_out_tel', 'tb_booking.*')
             ->get();
         $car = "รถภายนอก";
