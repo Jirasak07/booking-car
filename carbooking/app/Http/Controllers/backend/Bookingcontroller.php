@@ -25,7 +25,8 @@ class Bookingcontroller extends Controller
         $jsonDatadriver = $responsedriver->json();
         return view('admin.booking_request')->with(['booking' => $jsonData, 'car' => $jsonDatacar, 'driver' => $jsonDatadriver]);
     }
-    public function requestDataTable(){
+    public function requestDataTable()
+    {
         $currentURL = request()->getHttpHost();
         $response = Http::get('http://' . $currentURL . '/index.php/api/pageupdate');
         $jsonData = $response->json();
@@ -85,7 +86,7 @@ class Bookingcontroller extends Controller
             ->where('tb_booking.booking_status', '!=', '3')
             ->where('tb_booking.booking_status', '!=', '1')
             ->where('tb_booking.booking_end', '>', $format_date)
-        //->orderBy('booking_status')
+            //->orderBy('booking_status')
             ->select('driver_fullname', 'car_license', 'car_model', 'tb_booking.*')
             ->get();
         foreach ($booking_join1 as $item) {
@@ -155,7 +156,7 @@ class Bookingcontroller extends Controller
             ->where('tb_booking.type_car', '=', '1')
             ->where('tb_booking.booking_status', '!=', '3')
             ->where('tb_booking.booking_status', '!=', '1')
-        //->orderBy('booking_status')
+            //->orderBy('booking_status')
             ->select('driver_fullname', 'car_license', 'car_model', 'tb_booking.*')
             ->get();
         foreach ($booking_join1 as $item) {
@@ -203,11 +204,10 @@ class Bookingcontroller extends Controller
     public function store(Request $request)
     {
 
-        $varlidate=$request->validate([
-            /* 'date_start' => 'required|before:5 hours',
-            'date_end' => 'required', */
+        $varlidate = $request->validate([
             'location' => 'required|min:3',
-
+        ], [
+            'location.required' => 'โปรดระบุรายละเอียดและสถานที่ที่จะไป',
         ]);
 
         $date_start = Carbon::parse($request->date_start)->format('Y-m-d\TH:i:s');
@@ -255,12 +255,12 @@ class Bookingcontroller extends Controller
 
         $request->validate(
             [
-            'car_out_license' => 'required|min:3',
-            'brand' => 'required|min:3',
-            'car_out_model' => 'required|min:10',
-            'owner' => 'required|min:10',
-            'car_out_driver' => 'required|min:10',
-            'car_out_tel' => 'required|numeric|digits_between:8,15',
+                'car_out_license' => 'required|min:3',
+                'brand' => 'required|min:3',
+                'car_out_model' => 'required|min:10',
+                'owner' => 'required|min:10',
+                'car_out_driver' => 'required|min:10',
+                'car_out_tel' => 'required|numeric|digits_between:8,15',
             ],
             [
                 'car_out_license.required' => 'โปรดระบุทะเบียน',
@@ -273,7 +273,7 @@ class Bookingcontroller extends Controller
                 'car_out_tel.numeric' => 'ระบุเฉพาะตัวเลขเท่านั้น',
                 'car_out_tel.digits_between' => 'เบอร์โทรต้องมี 8 - 15 ตัว',
             ]
-    );
+        );
 
         $id = $request->id_form;
 
@@ -289,7 +289,7 @@ class Bookingcontroller extends Controller
             $car_out->car_out_driver = $request->car_out_driver;
             $car_out->car_out_tel = $request->car_out_tel;
             $car_out->save();
-            $booking_update->license_plate =1;
+            $booking_update->license_plate = 1;
             $booking_update->driver =  $request->car_out_driver;
             $booking_update->type_car = "2";
             $booking_update->booking_status = "2";
@@ -312,11 +312,12 @@ class Bookingcontroller extends Controller
         return redirect()->back();
     }
 
-    function autocancle(){
+    function autocancle()
+    {
         $current_date_time = Carbon::now();
         $booking_cancle = DB::table('tb_booking')
-        ->where('booking_status', '=', '1')
-        ->where('booking_start' ,'<', $current_date_time->subMinutes(15))
-        ->update(['booking_status', '=', '3']);
+            ->where('booking_status', '=', '1')
+            ->where('booking_start', '<', $current_date_time->subMinutes(15))
+            ->update(['booking_status', '=', '3']);
     }
 }
