@@ -127,8 +127,7 @@
 
                     var booking_start = moment(info.startStr).format('YYYY-MM-DD HH:mm:ss');
                     var booking_end = moment(info.endStr).format('YYYY-MM-DD HH:mm:ss');
-                    var booking_s = moment(info.startStr).format('YYYY-MM-DD HH:mm:ss');
-                    var booking_e = moment(info.endStr).format('YYYY-MM-DD HH:mm:ss');
+
 
                     var canbook = moment(nowDate, 'HH:mm:ss a').add('5', 'hours').format(
                         'YYYY-MM-DD HH:mm:ss a');
@@ -148,8 +147,8 @@
                         $('#booking_start').html(booking_start);
                         $('#booking_end').html(booking_end);
 
-                        document.getElementById('date_start').value = booking_s;
-                        document.getElementById('date_end').value = booking_e;
+                        document.getElementById('date_start').value = booking_start;
+                        document.getElementById('date_end').value = booking_end;
 
                         //tag input datetime-local เลือกวันย้อนหลังไม่ได้
                         var now_utc = Date.now()
@@ -215,51 +214,47 @@
                         <div class="col-md-3">
                             <strong for="validationCustom03">วันเดินทางไป</strong>
                         </div>
-                        <div class="col-md-3">
-                            <label class="plaintext" id="booking_start" name="booking_start"></label>
-                        </div>
+
                         <div class="col-md-4">
                             <div class="col-auto">
                                 <input type="datetime-local" data-date="" class="form-control"
                                     data-date-format="DD MM YYYY HH:mm:ss a" name="date_start" id="date_start"
                                     onchange="updateEndTime()">
                             </div>
-                            <div class=" form-text">
-                                <label class="plaintext text-danger" style="font-size: 14px" id="error"
-                                    name="error_text"></label>
-                                <label class="plaintext text-danger" style="font-size: 14px" id="error_text"
-                                    name="error_text"></label>
-                            </div>
-                        </div>
 
+                        </div>
+                        <div class="col-md-4 form-text">
+                            <label class="plaintext text-danger" style="font-size: 14px" id="error"
+                                name="error_text"></label>
+                            <label class="plaintext text-danger" style="font-size: 14px" id="error_text"
+                                name="error_text"></label>
+                        </div>
                         <br />
                         <br />
                         <div class="col-md-3">
                             <strong for="validationCustom03">วันเดินทางกลับ</strong>
                         </div>
-                        <div class="col-md-3">
-                            <label class="plaintext" id="booking_end" name="booking_end"></label>
-                        </div>
+
                         <div class="col-md-4">
                             <div class="col-auto">
                                 <input type="datetime-local" data-date="" class="form-control"
                                     data-date-format="DD MM YYYY HH:mm:ss a" id="date_end" name="date_end"
                                     onchange="updateEndTime()">
                             </div>
-                            <div class=" form-text">
-                                <label class="plaintext text-danger" style="font-size: 14px" id="error"
-                                    name="error_text"></label>
-                                <label class="plaintext text-danger" style="font-size: 14px" id="error_text"
-                                    name="error_text"></label>
-                            </div>
-                        </div>
 
+                        </div>
+                        <div class="col-md-4 form-text">
+                            <label class="plaintext text-danger" style="font-size: 14px" id="error"
+                                name="error_text"></label>
+                            <label class="plaintext text-danger" style="font-size: 14px" id="error_text"
+                                name="error_text"></label>
+                        </div>
                         <br />
                         <br />
                         <div class="col-md-12">
                             <strong class="form-label">รายละเอียดการจอง</strong>
                             <span class=" text-danger">*</span>
-                            <textarea name="location" id="location" class="form-control" rows="5" ></textarea>
+                            <textarea name="location" id="location" class="form-control" rows="5"></textarea>
                         </div>
                     </div>
                 </div>
