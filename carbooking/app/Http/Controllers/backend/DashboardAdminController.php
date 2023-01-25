@@ -12,6 +12,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
+use function PHPSTORM_META\type;
+
 class DashboardAdminController extends Controller
 {
     //
@@ -267,7 +269,7 @@ class DashboardAdminController extends Controller
                 ->join('users', 'tb_booking.username', '=', 'users.id')
                 ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
                 ->where('tb_booking.id', '=', $id)
-                ->select('tb_driver.driver_fullname as driver', 'tb_cars.car_license as car', 'tb_cars.car_model as car_detail', 'booking_start as sdate', 'booking_end as edate', 'booking_detail', 'users.name as name_user','booking_status')
+                ->select('tb_driver.driver_fullname as driver', 'tb_cars.car_license as car', 'tb_cars.car_model as car_detail', 'booking_start as sdate', 'booking_end as edate', 'booking_detail', 'users.name as name_user','booking_status','type_car')
                 ->get();
         } else if ($booking->type_car == 2) {
             $detail = DB::table('tb_booking')
@@ -281,7 +283,7 @@ class DashboardAdminController extends Controller
             $detail = DB::table('tb_booking')
                 ->join('users', 'tb_booking.username', '=', 'users.id')
                 ->where('tb_booking.id', '=', $id)
-                ->select('booking_start as sdate', 'booking_end as edate', 'booking_detail', 'type_car', 'driver', 'license_plate as car', 'users.name as name_user','booking_status')
+                ->select('booking_start as sdate', 'booking_end as edate', 'booking_detail', 'type_car', 'driver', 'license_plate as car', 'users.name as name_user','booking_status','type_car')
                 ->get();
         }
         return response()->json([
