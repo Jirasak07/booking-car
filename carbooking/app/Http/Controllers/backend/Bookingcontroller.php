@@ -77,6 +77,8 @@ class Bookingcontroller extends Controller
                     'start' => $booking->booking_start,
                     'end' => $booking->booking_end,
                     'color' => $color,
+                    'type' => '1',
+                    'description' => '-'
                 ];
             }
         }
@@ -95,10 +97,12 @@ class Bookingcontroller extends Controller
             $car = "รถภายใน";
             $events[] = [
                 'id' => $item->id,
-                'title' => $item->booking_detail . '(ทะเบียนรถ' . $car . ' ' . $item->car_license . ' คนขับรถ ' . $item->driver_fullname . ')',
+                'title' => $item->booking_detail,
                 'start' => $item->booking_start,
                 'end' => $item->booking_end,
                 'color' => $color,
+                'type' => '2',
+                'description' => $car . ' ทะเบียนรถ ' .  ' ' . $item->car_license . ' คนขับรถ ' . $item->driver_fullname,
             ];
         }
         $booking_join2 = DB::table('tb_booking')
@@ -115,10 +119,12 @@ class Bookingcontroller extends Controller
             $car = "รถภายใน";
             $events[] = [
                 'id' => $item2->id,
-                'title' => $item2->booking_detail . '(ทะเบียนรถ' . $car . ' ' . $item2->car_out_license . ' คนขับรถ ' . $item2->car_out_driver . ' เบอร์โทร ' . $item2->car_out_tel . ')',
+                'title' => $item2->booking_detail,
                 'start' => $item2->booking_start,
                 'end' => $item2->booking_end,
                 'color' => $color,
+                'type' => '2',
+                'description' => $car . ' ทะเบียนรถ ' .  ' ' . $item2->car_out_license . ' คนขับรถ ' . $item2->car_out_driver . ' เบอร์โทร ' . $item2->car_out_tel,
             ];
         }
 
@@ -151,6 +157,8 @@ class Bookingcontroller extends Controller
                     'start' => $booking->booking_start,
                     'end' => $booking->booking_end,
                     'color' => $color,
+                    'type' => '1',
+                    'description' => '-'
                 ];
             }
         }
@@ -169,10 +177,12 @@ class Bookingcontroller extends Controller
             $car = "รถภายใน";
             $events[] = [
                 'id' => $item->id,
-                'title' => $item->booking_detail . '(ทะเบียนรถ' . $car . ' ' . $item->car_license . ' คนขับรถ ' . $item->driver_fullname . ')',
+                'title' => $item->booking_detail,
                 'start' => $item->booking_start,
                 'end' => $item->booking_end,
                 'color' => $color,
+                'type' => '2',
+                'description' => $car . ' ทะเบียนรถ ' .  ' ' . $item->car_license . ' คนขับรถ ' . $item->driver_fullname,
             ];
         }
         $booking_join2 = DB::table('tb_booking')
@@ -189,10 +199,12 @@ class Bookingcontroller extends Controller
             $car = "รถภายใน";
             $events[] = [
                 'id' => $item2->id,
-                'title' => $item2->booking_detail . '(ทะเบียนรถ' . $car . ' ' . $item2->car_out_license . ' คนขับรถ ' . $item2->car_out_driver . ' เบอร์โทร ' . $item2->car_out_tel . ')',
+                'title' => $item2->booking_detail,
                 'start' => $item2->booking_start,
                 'end' => $item2->booking_end,
                 'color' => $color,
+                'type' => '2',
+                'description' => $car . ' ทะเบียนรถ ' .  ' ' . $item2->car_out_license . ' คนขับรถ ' . $item2->car_out_driver . ' เบอร์โทร ' . $item2->car_out_tel,
             ];
         }
 
@@ -214,6 +226,7 @@ class Bookingcontroller extends Controller
             'location' => 'required|min:3',
         ], [
             'location.required' => 'โปรดระบุรายละเอียดและสถานที่ที่จะไป',
+            'location.min'=>'โปรดระบุรายละเอียดอย่างน้อย 3 ตัวอักษร',
         ]);
 
         $date_start = Carbon::parse($request->date_start)->format('Y-m-d\TH:i:s');
@@ -317,6 +330,4 @@ class Bookingcontroller extends Controller
 
         return redirect()->back();
     }
-
- 
 }
