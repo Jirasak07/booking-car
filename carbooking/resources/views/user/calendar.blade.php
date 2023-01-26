@@ -1,5 +1,7 @@
 <style>
-
+    .fc-time {
+        margin-bottom: 5px;
+    }
 </style>
 
 @push('js')
@@ -8,6 +10,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+
             var pathArray = window.location.host;
             var calendarEl = document.getElementById('calendar');
             //var bookings = @json($booking);
@@ -15,6 +18,7 @@
 
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 //themeSystem: 'bootstrap5',
+
                 selectable: true,
                 timeZone: 'Asia/bangkok',
                 locale: 'th',
@@ -41,7 +45,27 @@
                 expandRows: true,
                 height: '100%',
                 aspectRatio: 2,
+                eventTimeFormat: { // like '14:30:00'
+                    hour: '2-digit',
+                    minute: '2-digit',
+
+                    meridiem: false
+                },
                 events: 'http://' + pathArray + '/index.php//users/dashboard/refresh',
+                eventDisplay: 'block',
+
+
+                eventDidMount: function(info) {
+
+                    // console.log(info.event.title);
+                    // console.log(info.timeText); //time events
+                    /* info.el.title = "---- YOUR TEXT----" */
+                },
+                /*  eventRender: function(event, element) {
+                     element.find('.fc-title').before("<br>");
+                     element.find('.fc-title').before(element.find('.fc-time'));
+                 }, */
+
                 views: {
                     timeGridFourDay: {
                         type: 'timeGrid',
@@ -57,7 +81,7 @@
 
                 eventClick: function(e) {
                     moment.locale('th');
-                    //console.log(e.event);
+                    console.log(e.event);
                     var newdate = new Date().getTimezoneOffset();
                     var newdate2 = new Date(e.event.start);
                     //alert(JSON.stringify(newdate2.getDay()))
@@ -164,7 +188,12 @@
             }, 5000);
             calendar.setOption('aspectRatio', 2);
             calendar.updateSize();
-            calendar.render();
+            calendar.render(function(event, element) {
+                element.find('.fc-time').after('<br>');
+                var start = moment(event.start).format("h:mm a");
+                var end = moment(event.end).format("h:mm a");
+                element.find('.fc-time').html(start + ' - ' + end);
+            });
 
 
 
@@ -268,4 +297,4 @@
 
     </div>
 </div>
-<div id='calendar' class="container-fluid py-3"></div>
+<div id='calendar' class="py-2 px-2 m-dash p-2"></div>

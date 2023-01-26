@@ -10,11 +10,14 @@
 </style>
 @section('content')
     @include('layouts.header')
-    @include('user.box_list_booking')
-    <div class="container-fluid mt-4">
+    <div class=" mt-3">
+        @include('user.box_list_booking')
+    </div>
+    
+    <div class="container-fluid mt-3">
         <div class="row mb-3">
             <div class="col-xl-12">
-                <div class="card shadow-sm p-3 overflow-auto">
+                <div class="bg-white rounded shadow-sm m-dash p-2">
                     @if ($message = Session::get('success_edit'))
                         <script>
                             Swal.fire({
@@ -24,8 +27,8 @@
                         </script>
                     @endif
                     <div class="table-responsive">
-                        <table class="table table-hover fw-bold w-100  " id="booking_table">
-                            <thead class="table-light">
+                        <table class="table  fw-bold w-100  " id="booking_table">
+                            <thead class="table-dark table-hover">
                                 <tr align="center">
                                     <th class="fw-bolder" style="font-size: 18px">ลำดับ</th>
                                     <th class="fw-bolder" style="font-size: 18px">ช่วงวันที่</th>
@@ -191,7 +194,7 @@
                                 <label class="col-sm-3 col-form-label">รายละเอียดการจอง</label>
                                 <div class="col-sm-9">
                                     <textarea name="booking_detail" id="bdetail" cols="30" rows="3" class=" form-control"></textarea>
-                                   {{--  <textarea name="booking_detail" id="booking_detail" cols="30" rows="3" class="form-control"
+                                    {{--  <textarea name="booking_detail" id="booking_detail" cols="30" rows="3" class="form-control"
                                         value=""></textarea> --}}
                                 </div>
                             </div>
@@ -354,6 +357,7 @@
                         url: '/users/detail/' + id,
                         dataType: 'JSON',
                         success: function(res) {
+                            moment.locale('th');
                             if (res.booking_status == '1') {
                                 status = 'กำลังดำเนินการ';
                                 $('#status_booking').css("color", "#FFB100");
@@ -373,8 +377,8 @@
                                     .car_model;
                             }
                             //console.log(res.booking_start);
-                            var start = moment(res.booking_start).format('ddd ที่ D MMM YY เวลา HH:mm')
-                            var end = moment(res.booking_end).format('ddd ที่ D MMM YY เวลา HH:mm')
+                            var start = moment(res.booking_start).add(543, 'year').format('ddd ที่ D MMM YYYY เวลา HH:mm')
+                            var end = moment(res.booking_end).add(543, 'year').format('ddd ที่ D MMM YYYY เวลา HH:mm')
                             //console.log(car_detail);
                             $('#viewdetail').modal('toggle');
                             //$('#id_booking').html(res.id);
