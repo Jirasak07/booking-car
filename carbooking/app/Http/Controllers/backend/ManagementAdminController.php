@@ -4,9 +4,10 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\BookingModel;
+use App\Models\CaroutModel;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Http\Request;
 class ManagementAdminController extends Controller
 {
     //
@@ -72,5 +73,82 @@ class ManagementAdminController extends Controller
             return response()->json(['unreserved_cars' => $unreserved_cars, 'unreserved_driver' => $unreserved_driver]);
 
         // return (['unreserved_cars' => $unreserved_cars, 'unreserved_driver' => $unreserved_driver]);
+    }
+    public function aprove_in(Request $request)
+    {
+        // dd($request->all());
+        $id = $request->id_form;
+
+        $booking_update = BookingModel::find($id);
+
+        $booking_update->license_plate = $request->car_id;
+        $booking_update->driver = $request->driver_id;
+        $booking_update->type_car = $request->type;
+        $booking_update->booking_status = "2";
+
+        $booking_update->save();
+        return redirect()->back();
+    }
+    public function aprove_out(Request $request)
+    {
+
+
+        $request->validate(
+            [
+                'car_out_license' => 'required|min:3',
+                'brand' => 'required|min:3',
+                'car_out_model' => 'required|min:10',
+                'owner' => 'required|min:10',
+                'car_out_driver' => 'required|min:10',
+                'car_out_tel' => 'required|numeric|digits_between:8,15',
+            ],
+            [
+                'car_out_license.required' => 'โปรดระบุทะเบียน',
+                'brand.required' => 'โปรดระบุยี่ห้อรถ',
+                'car_out_model.required' => 'โปรดระบุรายละเอียดรุ่นรถ',
+                'owner.required' => 'โปรดระบุชื่อเจ้าของรถ',
+                'car_out_driver.required' => 'โปรดระบุชื่อคนขับ',
+                'car_out_tel.required' => 'โปรดระบุเบอร์โทรเจ้าของรถ',
+                // 'email.email' => 'รูปแบบอีเมล์ไม่ถูกต้อง',
+                'car_out_tel.numeric' => 'ระบุเฉพาะตัวเลขเท่านั้น',
+                'car_out_tel.digits_between' => 'เบอร์โทรต้องมี 8 - 15 ตัว',
+            ]
+        );
+
+        $id = $request->id_form;
+
+        $booking_update = BookingModel::find($id);
+        $car_out = new CaroutModel();
+        $car_count = DB::table('tb_out_cars')->count();
+
+        if ($car_count < 1) {
+            $car_out->id = 1;
+            $car_out->car_out_license = $request->car_out_license;
+            $car_out->car_out_model = $request->brand . " " . $request->car_out_model;
+            $car_out->owner = $request->owner;
+            $car_out->car_out_driver = $request->car_out_driver;
+            $car_out->car_out_tel = $request->car_out_tel;
+            $car_out->save();
+            $booking_update->license_plate = 1;
+            $booking_update->driver =  $request->car_out_driver;
+            $booking_update->type_car = "2";
+            $booking_update->booking_status = "2";
+            $booking_update->save();
+        } else {
+            $car_out->id = $car_count + 1;
+            $car_out->car_out_license = $request->car_out_license;
+            $car_out->car_out_model = $request->brand . " " . $request->car_out_model;
+            $car_out->owner = $request->owner;
+            $car_out->car_out_driver = $request->car_out_driver;
+            $car_out->car_out_tel = $request->car_out_tel;
+            $car_out->save();
+            $booking_update->license_plate = $car_count + 1;
+            $booking_update->driver =  $request->car_out_driver;
+            $booking_update->type_car = "2";
+            $booking_update->booking_status = "2";
+            $booking_update->save();
+        }
+
+        return redirect()->back();
     }
 }
