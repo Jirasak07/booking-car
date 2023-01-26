@@ -25,7 +25,7 @@
                 initialView: 'timeGridFourDay',
                 allDaySlot: false,
                 nowIndicator: true,
-                timeFormat: 'HH:mm',
+                timeFormat: 'H(:mm)',
                 //hour12: false,
                 //minTime: moment().format('HH:mm:ss'),
                 titleFormat: {
@@ -49,7 +49,7 @@
                     hour: '2-digit',
                     minute: '2-digit',
 
-                    meridiem: false
+                    hour12: false
                 },
                 events: 'http://' + pathArray + '/index.php//users/dashboard/refresh',
                 eventDisplay: 'block',
@@ -78,9 +78,51 @@
                 windowResize: function(arg) {
 
                 },
-
+                /*    eventRender: function(event, element) {
+                       element.find('.fc-event-time').append('<br>');
+                   }, */
                 eventClick: function(e) {
+                    var event = e.event;
+                    var idevent = e.event.id
+                    var datat = @json($booking);
+                    var start = [];
+                    var end = [];
+                    var color = [];
+                    var title = [];
+                    var detail = [];
+                    datat.forEach(b => {
+                        if (b.id == idevent) {
+                            title.push(b.title)
+                            start.push(b.start);
+                            end.push(b.end);
+                            color.push(b.type);
+                            detail.push(b.description);
+                        }
+                    });
+                    // console.log(moment(timzone).format('HH:mm'))
                     moment.locale('th');
+
+                    Swal.fire({
+                        title: '<div style="font-size:70%" ><strong>รายการจอง</strong></div>',
+                        html: '<div class="col-12" style="font-size:0.9rem"><div class=" text-left"><i class="fa-solid fa-calendar-days" ></i>  : ' +
+                            moment(
+                                JSON.stringify(start[0])).format(
+                                'dd ที่ DD/MM/' + (new Date(start[0]).getFullYear() + 543) +
+                                ' เวลา H:mm') + ' น. - ' + moment(
+                                JSON.stringify(end[0])).format(
+                                'dd ที่ DD/MM/' + (new Date(end[0]).getFullYear() + 543) +
+                                ' เวลา H:mm') + ' น.' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="mt-3 text-left px-3" style="font-size:0.9rem" ><strong>รายละเอียดการจอง</strong> : ' +
+                            title[0] + '</div><div class="mt-3 text-left px-3" style="font-size:0.9rem"><strong>รถในการเดินทาง</strong> : ' +
+                            detail[0] + '</div>',
+                        icon: (color[0] == 2 ? 'success' : 'warning'),
+                        iconHtml: (color[0] == 2 ?
+                            '<i class="fa-solid fa-calendar-check" ></i>' :
+                            '<i class="fa-solid fa-calendar-days"></i>'),
+                    })
+                    /*moment.locale('th');
                     console.log(e.event);
                     var newdate = new Date().getTimezoneOffset();
                     var newdate2 = new Date(e.event.start);
@@ -134,9 +176,8 @@
                                 543) + ' เวลา ' + endh +
                             ':' + ends +
                             ' น.</h4></div>',
-                    });
+                    });*/
                 },
-
                 validRange: {
                     start: moment.now()
                 },
@@ -183,17 +224,16 @@
                 }
 
             });
-            setInterval(() => {
+            /* setInterval(() => {
                 calendar.refetchEvents()
-            }, 5000);
+            }, 5000); */
             calendar.setOption('aspectRatio', 2);
             calendar.updateSize();
-            calendar.render(function(event, element) {
-                element.find('.fc-time').after('<br>');
-                var start = moment(event.start).format("h:mm a");
-                var end = moment(event.end).format("h:mm a");
-                element.find('.fc-time').html(start + ' - ' + end);
-            });
+            calendar.render(
+                /* function(event, element) {
+                                element.find('.fc-event-time').append('<br>');
+                            } */
+            );
 
 
 
