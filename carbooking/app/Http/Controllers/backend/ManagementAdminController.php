@@ -43,23 +43,25 @@ class ManagementAdminController extends Controller
         $sdate = $date->booking_start;
         $edate = $date->booking_end;
         $unreserved_cars = DB::table('tb_cars')
-            ->leftJoin('tb_booking', 'tb_cars.id', '=', 'tb_bookings.license_plate')
+            ->leftJoin('tb_booking', 'tb_cars.id', '=', 'tb_booking.license_plate')
+            
             ->where(function ($query) use ($sdate, $edate) {
                 $query->where(function ($query) use ($sdate, $edate) {
                     $query->where('tb_booking.booking_status', '<>', '2')
                         ->orWhere(function ($query) use ($sdate, $edate) {
-                            $query->where('tb_booking.booking_start', '>', $edate)
-                                ->orWhere('tb_booking.booking_end', '<', $sdate);
+                            $query->where('tb_booking.booking_end', '<', $edate)
+                                ->Where('tb_booking.booking_start', '>', $sdate);
                         });
                 })
                     ->orWhereNull('tb_booking.license_plate');
-            })
+            })->orderBy('tb_booking.booking_start')
             ->get();
         $unreserved_driver = DB::table('tb_driver')
-            ->leftJoin('tb_booking', 'tb_driver.id', '=', 'tb_bookings.driver')
+            ->leftJoin('tb_booking', 'tb_driver.id', '=', 'tb_booking.driver')
+   
             ->where(function ($query) use ($sdate, $edate) {
                 $query->where(function ($query) use ($sdate, $edate) {
-                    $query->where('tb_booking.booking_status', '<>', '2')
+                    $query->where('tb_booking.booking_status', '=', '2')
                         ->orWhere(function ($query) use ($sdate, $edate) {
                             $query->where('tb_booking.booking_start', '>', $edate)
                                 ->orWhere('tb_booking.booking_end', '<', $sdate);
@@ -68,7 +70,7 @@ class ManagementAdminController extends Controller
                     ->orWhereNull('tb_booking.driver');
             })
             ->get();
-           
+           dd($sdate,$unreserved_cars);
         
             return response()->json(['unreserved_cars' => $unreserved_cars, 'unreserved_driver' => $unreserved_driver]);
 
