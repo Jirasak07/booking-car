@@ -27,6 +27,9 @@ class DashboardAdminController extends Controller
             'cancel' => DB::table('tb_booking')->where('booking_status', '=', 3)->count('id'),
         ]);
     }
+
+
+
     public function eventcalen()
     {
         $datenow = new DateTime();
@@ -96,41 +99,15 @@ class DashboardAdminController extends Controller
         }
         return response()->json($events);
     }
+
+
+
     public function index()
     {
         $datenow = new DateTime();
         $format_date = $datenow->format('Y-m-d H:i:s');
 
-        $date = Carbon::now()->format('d-m-Y H:i:s');
-        // // dd($date);
-        $bookingcar1ad = DB::table('tb_booking') //จำนวนรถภายในคันที่1 ที่อนุมัติแล้ว
-            ->where('license_plate', '=', 1)
-            ->where('type_car', '=', 1)
-            ->where('booking_status', '=', 2)->count();
-
-        $bookingcar2ad = DB::table('tb_booking') //จำนวนรถภายในคันที่2 ที่อนุมัติแล้ว
-            ->where('license_plate', '=', 2)
-            ->where('type_car', '=', 1)
-            ->where('booking_status', '=', 2)->count();
-
-        $bookingcar1wil = DB::table('tb_booking') //จำนวนรถภายในคันที่1 ที่รอดำเนินการ
-            ->where('license_plate', '=', 1)
-            ->where('type_car', '=', 1)
-            ->where('booking_status', '=', 1)->count();
-
-        $bookingcar2wil = DB::table('tb_booking') //จำนวนรถภายในคันที่2 ที่รอดำเนินการ
-            ->where('license_plate', '=', 2)
-            ->where('type_car', '=', 1)->count();
-
-        $bookingcar1can = DB::table('tb_booking') //จำนวนรถภายในคันที่1 ที่ไม่อนุมัติ
-            ->where('license_plate', '=', 1)
-            ->where('type_car', '=', 1)
-            ->where('booking_status', '=', 3)->count();
-
-        $bookingcar2can = DB::table('tb_booking') //จำนวนรถภายในคันที่2 ที่ไม่อนุมัติ
-            ->where('license_plate', '=', 2)
-            ->where('type_car', '=', 1)
-            ->where('booking_status', '=', 3)->count();
+      
 
         $bookingcarin = DB::table('tb_booking') //จำนวนรถภายในคันที่1 ทั้งหมด
             ->select(DB::raw('COUNT(id) suppercarcare'), DB::raw('license_plate'))
@@ -139,9 +116,7 @@ class DashboardAdminController extends Controller
 
             ->groupBy('license_plate')->get();
         // dd($bookingcarin);
-        $bookingcar2 = DB::table('tb_booking') //จำนวนรถภายในคันที่2 ทั้งหมด
-            ->where('license_plate', '=', 2)
-            ->where('type_car', '=', 1)->count();
+       
 
         $bookingcarAllin = DB::table('tb_booking') //จำนวนรถภายใน ทั้งหมด
             ->where('type_car', '=', 1)->count();
@@ -257,6 +232,8 @@ class DashboardAdminController extends Controller
         ;
     }
 
+
+
     public function detail_history($id)
     {
 
@@ -291,6 +268,10 @@ class DashboardAdminController extends Controller
         ]);
 
     }
+
+
+
+    
     public function autocomplete(Request $request)
     {
           $query = $request->get('query');
