@@ -63,6 +63,7 @@ Route::group(
         Route::get('manage-car/{id}', [CarsController::class, 'changestatus'])->name('changestatus');
         Route::get('manage-user', [\App\Http\Controllers\backend\ManagementAdminController::class, 'index'])->name('admin.manage-user');
         Route::get('manage-role/{id}', [\App\Http\Controllers\backend\ManagementAdminController::class, 'edit_role']);
+        Route::get('manage/{id}', [\App\Http\Controllers\backend\ManagementAdminController::class, 'caranddriver_aprove']);
         Route::get('history', [\App\Http\Controllers\backend\Bookingcontroller::class, 'history'])->name('admin.booking_history');
         Route::post('GG', function (Request $request) {
             dd($request->all());
