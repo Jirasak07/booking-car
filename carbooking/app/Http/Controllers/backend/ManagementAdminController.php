@@ -63,14 +63,14 @@ class ManagementAdminController extends Controller
                 $query->where(function ($query) use ($sdate, $edate) {
                     $query->where('tb_booking.booking_status', '=', '2')
                         ->orWhere(function ($query) use ($sdate, $edate) {
-                            $query->where('tb_booking.booking_start', '>', $edate)
-                                ->orWhere('tb_booking.booking_end', '<', $sdate);
+                            $query->where('tb_booking.booking_end', '<', $edate)
+                                ->Where('tb_booking.booking_start', '>', $sdate);
                         });
                 })
                     ->orWhereNull('tb_booking.driver');
             })
             ->get();
-           dd($sdate,$unreserved_cars);
+           dd($sdate,$edate,$unreserved_cars);
         
             return response()->json(['unreserved_cars' => $unreserved_cars, 'unreserved_driver' => $unreserved_driver]);
 
