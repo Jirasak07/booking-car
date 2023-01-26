@@ -1,7 +1,6 @@
 <!-- box header booking pages -->
-<div class="container mt-4 ">
-    <div class="d-flex flex-xl-row flex-column mx-4   " style="gap: 10px;min-height:120px">
-
+<div class="container-fluid mt-4 ">
+    <div class="d-flex flex-xl-row flex-column" style="gap: 10px;min-height:120px">
         <div class=" w-100 m-dash rounded">
             <div class=" rounded h-100 booking-all d-flex flex-row align-items-center" style="min-height:120px">
                 <div class="h-100 col  text-white icon-d-2  icon-circle">
