@@ -68,8 +68,8 @@ Route::group(
             dd($request->all());
         })->name('GG');
 
-        Route::post('approve', [\App\Http\Controllers\backend\Bookingcontroller::class, 'update'])->name('update');
-        Route::post('approve-out', [\App\Http\Controllers\backend\Bookingcontroller::class, 'updateout'])->name('updateout');
+        Route::post('approve', [\App\Http\Controllers\backend\ManagementAdminController::class, 'aprove_in'])->name('update');
+        Route::post('approve-out', [\App\Http\Controllers\backend\ManagementAdminController::class, 'aprove_out'])->name('updateout');
 
         Route::get('cancel/{id}', [\App\Http\Controllers\backend\Bookingcontroller::class, 'cancle']);
     }
