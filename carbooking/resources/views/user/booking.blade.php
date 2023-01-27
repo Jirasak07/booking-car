@@ -17,7 +17,7 @@
         <div class="container-fluid mt-3">
             <div class="row mb-3">
                 <div class="col-xl-12">
-                    <div class="bg-white rounded shadow-sm m-dash p-2">
+                    <div class="bg-white rounded shadow-xl m-dash p-2">
                         @if ($message = Session::get('success_edit'))
                             <script>
                                 Swal.fire({
@@ -27,7 +27,7 @@
                             </script>
                         @endif
                         <div class="table-responsive">
-                            <table class="table  fw-bold w-100  " id="booking_table">
+                            <table class="table  fw-bold w-100" id="booking_table">
                                 <thead class="table-dark table-hover">
                                     <tr align="center">
                                         <th class="fw-bolder" style="font-size: 18px">ลำดับ</th>
