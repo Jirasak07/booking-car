@@ -117,7 +117,7 @@ class Bookingcontroller extends Controller
         $car = "รถภายนอก";
         foreach ($booking_join2 as $item2) {
             $color = '#06d6a0';
-            $car = "รถภายใน";
+            $car = "รถภายนอก";
             $events[] = [
                 'id' => $item2->id,
                 'title' => $item2->booking_detail,
@@ -197,7 +197,7 @@ class Bookingcontroller extends Controller
         $car = "รถภายนอก";
         foreach ($booking_join2 as $item2) {
             $color = '#06d6a0';
-            $car = "รถภายใน";
+            $car = "รถภายนอก";
             $events[] = [
                 'id' => $item2->id,
                 'title' => $item2->booking_detail,

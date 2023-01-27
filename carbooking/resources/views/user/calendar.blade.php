@@ -101,7 +101,7 @@
                     });
                     // console.log(moment(timzone).format('HH:mm'))
                     moment.locale('th');
-
+                    console.log(idevent);
                     Swal.fire({
                         title: '<div style="font-size:70%" ><strong>รายการจอง</strong></div>',
                         html: '<div class="col-12" style="font-size:0.9rem"><div class=" text-left"><i class="fa-solid fa-calendar-days" ></i>  : ' +
@@ -115,14 +115,15 @@
                             '</div>' +
                             '</div>' +
                             '<div class="mt-3 text-left px-3" style="font-size:0.9rem" ><strong>รายละเอียดการจอง</strong> : ' +
-                            title[0] + '</div><div class="mt-3 text-left px-3" style="font-size:0.9rem"><strong>รถในการเดินทาง</strong> : ' +
+                            title[0] +
+                            '</div><div class="mt-3 text-left px-3" style="font-size:0.9rem"><strong>รถในการเดินทาง</strong> : ' +
                             detail[0] + '</div>',
                         icon: (color[0] == 2 ? 'success' : 'warning'),
                         iconHtml: (color[0] == 2 ?
                             '<i class="fa-solid fa-calendar-check" ></i>' :
                             '<i class="fa-solid fa-calendar-days"></i>'),
                     })
-                    
+
                 },
                 validRange: {
                     start: moment.now()
