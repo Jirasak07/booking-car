@@ -8,20 +8,21 @@
                 <table id="tabledcar1"class="display responsive nowrap " style="width:100%;font-size:0.8em">
                     <thead class="table-dark">
                         <tr>
-                            <td class="fw-bold">ลำดับ</td>
-                            <td>หมายเลขทะเบียน</td>
-                            <td>รายละเอียดรถ</td>
-                            <td>สถานะ</td>
-
+                            <th>ลำดับ</th>
+                            <th>หมายเลขทะเบียน</th>
+                            <th>รายละเอียดรถ</th>
+                            <th>สถานะ</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                        $i = 1
+                        @endphp
                         @foreach ($car as $cars)
                             <tr>
-                                <td>{{ $cars['id'] }}</td>
+                                <td>{{ $i++ }}</td>
                                 <td>{{ $cars['car_license'] }}</td>
                                 <td>{{ $cars['car_model'] }}</td>
-
                                 <td>
                                     <div class='{{ $cars['car_status'] == 1 ? 'btn btn-success btn-sm ' : 'btn btn-danger btn-sm' }}'
                                         style="width: 90px" onclick="changeStatus({{ $cars['id'] }})">
@@ -49,11 +50,7 @@
                             target: 'tr'
                         }
                     },
-                    columnDefs: [{
-                        className: 'control',
-                        orderable: false,
-                        targets: 0
-                    }],
+                   
                     lengthMenu: [10, 20, 50, 100, ],
                     language: {
                         lengthMenu: "แสดง _MENU_ รายการ",

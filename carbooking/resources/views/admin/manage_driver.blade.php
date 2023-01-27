@@ -8,7 +8,7 @@
                 <table id="tabledriver" class="display responsive nowrap " style="width:100%;font-size:0.8em">
                     <thead class="table-dark table-hover">
                         <tr>
-                            <td style="max-width: 30px">ลำดับ</td>
+                            <td >ลำดับ</td>
                             <td>รายชื่อ</td>
                             <td>สถานะ</td>
                         </tr>

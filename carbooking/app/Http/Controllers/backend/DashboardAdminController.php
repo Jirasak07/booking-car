@@ -196,7 +196,7 @@ class DashboardAdminController extends Controller
                 'color' => '#06d6a0 ',
                 'data'=>$item->name,
                 'type'=>'2',
-                'titlee'=> ' รถภายใน : '. $item->car_model.' <strong> ทะเบียน</strong> : '.$item->car_license.' <strong > พนักงานขับ : </strong>'.$item->driver_fullname
+                'titlee'=> ' รถภายใน : '. $item->car_model.'  ทะเบียน : '.$item->car_license.' พนักงานขับ : '.$item->driver_fullname
 
             ];
         }

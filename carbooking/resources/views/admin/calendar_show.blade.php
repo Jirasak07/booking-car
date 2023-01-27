@@ -83,8 +83,8 @@
                                 ' เวลา H:mm') + ' น.' +
                             '</div>' +
                             '</div>' +
-                            '<div class="mt-3 text-left px-3" style="font-size:0.9rem" ><strong>รายละเอียดการจอง</strong> : '+ event.title +' </div>< class="mt-3 text-left px-3" style="font-size:0.9rem"><strong>รถในการเดินทาง</strong> : ' +
-                            detail[0] + '<br/><strong> สถานะ : </strong>'+ (color[0]==2? '<div>อนุมัติเรียบร้อย</div>':'<div>รอดำเนินการ</div>') +' </div>',
+                            '<div class="mt-3 text-left px-3" style="font-size:0.9rem" ><strong>รายละเอียดการจอง</strong> : '+ event.title +' </div><div class="mt-3 text-left px-3" style="font-size:0.9rem"><strong>รถในการเดินทาง</strong> : ' +
+                            detail[0] + '<br/><strong> สถานะ : </strong>'+ (color[0]==2? 'อนุมัติเรียบร้อย':'รอดำเนินการ') +'</div>',
                         icon: (color[0] == 2 ? 'success' : 'warning'),
                         iconHtml: (color[0] == 2 ?
                             '<i class="fa-solid fa-calendar-check" ></i>' :
