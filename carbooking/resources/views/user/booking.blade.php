@@ -74,7 +74,7 @@
                                             </td>
                                             <td align="center" id="manage">
                                                 @if ($item->booking_status == '1')
-                                                    <button class="btn btn-warning bg-yellow btn-sm me-2" style="font-size: 13px"
+                                                    <button class="btn bg-yellow btn-sm me-2 text-white" style="font-size: 13px"
                                                         onclick="edit_booking({{ $item->id }})">
                                                         <i class="fa-regular fa-pen-to-square"></i><span>แก้ไข</span>
                                                     </button>
