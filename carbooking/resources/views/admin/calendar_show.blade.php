@@ -56,6 +56,7 @@
                     var end = [];
                     var name = [];
                     var color = [];
+                    console.log(event.title)
                     var detail = [];
                     datat.forEach(b => {
                         if (b.id == idevent) {
@@ -72,16 +73,18 @@
                     Swal.fire({
                         title: '<div style="font-size:50%" > รายการจองของคุณ : ' + name[0] +
                             '</div>',
-                        html: '<div class="col-12" style="font-size:0.9rem"><i class="fa-solid fa-calendar-days" ></i>  :' +
+                        html: '<div class="col-12" style="font-size:0.9rem"><div class=" text-left"><i class="fa-solid fa-calendar-days" ></i>  : ' +
                             moment(
                                 JSON.stringify(start[0])).format(
-                                ' DD/MM/' + (new Date(start[0]).getFullYear() + 543) +
-                                ' เวลา H:mm') + 'น. -' + moment(
+                                'dd ที่ DD/MM/' + (new Date(start[0]).getFullYear() + 543) +
+                                ' เวลา H:mm') + ' น. - ' + moment(
                                 JSON.stringify(end[0])).format(
-                                ' DD/MM/' + (new Date(end[0]).getFullYear() + 543) +
-                                ' เวลา H:mm') + 'น.' + '</div>' +
-                            '<div class="mt-3" style="font-size:0.9rem" >รายละเอียดการจอง : ' +
-                            detail[0] + '</div>',
+                                'dd ที่ DD/MM/' + (new Date(end[0]).getFullYear() + 543) +
+                                ' เวลา H:mm') + ' น.' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="mt-3 text-left px-3" style="font-size:0.9rem" ><strong>รายละเอียดการจอง</strong> : '+ event.title +' </div>< class="mt-3 text-left px-3" style="font-size:0.9rem"><strong>รถในการเดินทาง</strong> : ' +
+                            detail[0] + '<br/><strong> สถานะ : </strong>'+ (color[0]==2? '<div>อนุมัติเรียบร้อย</div>':'<div>รอดำเนินการ</div>') +' </div>',
                         icon: (color[0] == 2 ? 'success' : 'warning'),
                         iconHtml: (color[0] == 2 ?
                             '<i class="fa-solid fa-calendar-check" ></i>' :

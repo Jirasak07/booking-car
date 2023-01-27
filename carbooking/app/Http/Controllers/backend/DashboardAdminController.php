@@ -107,7 +107,7 @@ class DashboardAdminController extends Controller
         $datenow = new DateTime();
         $format_date = $datenow->format('Y-m-d H:i:s');
 
-      
+
 
         $bookingcarin = DB::table('tb_booking') //จำนวนรถภายในคันที่1 ทั้งหมด
             ->select(DB::raw('COUNT(id) suppercarcare'), DB::raw('license_plate'))
@@ -116,7 +116,7 @@ class DashboardAdminController extends Controller
 
             ->groupBy('license_plate')->get();
         // dd($bookingcarin);
-       
+
 
         $bookingcarAllin = DB::table('tb_booking') //จำนวนรถภายใน ทั้งหมด
             ->where('type_car', '=', 1)->count();
@@ -169,7 +169,7 @@ class DashboardAdminController extends Controller
                     'color' => '#ffd166',
                     'data'=>$booking->name,
                     'type'=>'1',
-                    'titlee'=>$booking->booking_detail
+                    'titlee'=>'-'
 
                 ];
             }
@@ -196,7 +196,7 @@ class DashboardAdminController extends Controller
                 'color' => '#06d6a0 ',
                 'data'=>$item->name,
                 'type'=>'2',
-                'titlee'=>$booking->booking_detail
+                'titlee'=> ' รถภายใน : '. $item->car_model.' <strong> ทะเบียน</strong> : '.$item->car_license.' <strong > พนักงานขับ : </strong>'.$item->driver_fullname
 
             ];
         }
@@ -221,7 +221,7 @@ class DashboardAdminController extends Controller
                 'color' => '#06d6a0 ',
                 'data'=>$item2->name,
                 'type'=>'2',
-                'titlee'=>$item2->booking_detail.' รถภายนอก : '.$item2->car_out_model.' ทะเบียน : '.$item2->car_out_license .' เบอร์โทรติดต่อ : '.$item2->car_out_tel ,
+                'titlee'=>' รถภายนอก : '.$item2->car_out_model.' ทะเบียน : '.$item2->car_out_license .' เบอร์โทรติดต่อ : '.$item2->car_out_tel ,
 
             ];
         }
@@ -271,7 +271,7 @@ class DashboardAdminController extends Controller
 
 
 
-    
+
     public function autocomplete(Request $request)
     {
           $query = $request->get('query');

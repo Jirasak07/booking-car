@@ -60,29 +60,42 @@ class ManagementAdminController extends Controller
                     ->orWhereNull('tb_booking.license_plate');
             })->orderBy('tb_booking.booking_start')
             ->get();
-        $unreserved_driver = DB::table('tb_driver')
-            ->leftJoin('tb_booking', 'tb_driver.id', '=', 'tb_booking.driver')
 
-            ->where(function ($query) use ($sdate, $edate) {
-                $query->where(function ($query) use ($sdate, $edate) {
-                    $query->where('tb_booking.booking_status', '=', '2')
-                    ->orWhere(function ($query) use ($sdate, $edate) {
-                        $query->Where('tb_booking.booking_end', '>' ,$sdate )
-                        ->Where('tb_booking.booking_start', '<', $sdate );
 
-                    }) ->orWhere(function ($query) use ($sdate, $edate) {
-                        $query->where('tb_booking.booking_start', '<', $edate )
-                        ->Where('tb_booking.booking_end', '>', $edate);
-                    });
-                })
-                    ->orWhereNull('tb_booking.driver');
-            })
-            ->get();
+
+             // $car = $reserved_cars['license_plate'];
+            // $unreserved_cars = DB::table('tb_cars')
+            // ->where(function ($query) use ($car) {
+            //     $query->where(function ($query) use ($car) {
+                    
+            //                 $query->Where('tb_cars.id', '!=' ,$car);
+                     
+            //     })
+            //         ;
+            // })
+            // ->get();
+
+        // $unreserved_driver = DB::table('tb_driver')
+        //     ->leftJoin('tb_booking', 'tb_driver.id', '=', 'tb_booking.driver')
+
+        //     ->where(function ($query) use ($sdate, $edate) {
+        //         $query->where(function ($query) use ($sdate, $edate) {
+        //             $query->where('tb_booking.booking_status', '=', '2')
+        //             ->orWhere(function ($query) use ($sdate, $edate) {
+        //                 $query->Where('tb_booking.booking_end', '>' ,$sdate )
+        //                 ->Where('tb_booking.booking_start', '<', $sdate );
+
+        //             }) ->orWhere(function ($query) use ($sdate, $edate) {
+        //                 $query->where('tb_booking.booking_start', '<', $edate )
+        //                 ->Where('tb_booking.booking_end', '>', $edate);
+        //             });
+        //         })
+        //             ->orWhereNull('tb_booking.driver');
+        //     })
+        //     ->get();
            return response()->json(['sdate'=>$sdate,'edate'=>$edate,'not_car'=>$unreserved_cars]);
 
-            // return response()->json(['unreserved_cars' => $unreserved_cars, 'unreserved_driver' => $unreserved_driver]);
-
-        // return (['unreserved_cars' => $unreserved_cars, 'unreserved_driver' => $unreserved_driver]);
+           
     }
     public function aprove_in(Request $request)
     {
