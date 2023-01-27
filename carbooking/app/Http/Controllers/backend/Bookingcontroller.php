@@ -217,7 +217,7 @@ class Bookingcontroller extends Controller
     {
         $canclebooking = BookingModel::find($id);
         $canclebooking->booking_status = ('3');
-        $canclebooking->booking_detail =  $canclebooking->booking_detail." ".'.'. " ".$request->detail;
+        $canclebooking->booking_detail =  $canclebooking->booking_detail.".".$request->detail;
         $canclebooking->save();
         return response()->json(['status' => 'success']);
     }
