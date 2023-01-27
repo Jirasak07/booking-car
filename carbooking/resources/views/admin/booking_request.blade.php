@@ -23,7 +23,7 @@
                         <tbody>
                             @php
                                 $i = 1;
-                                
+
                             @endphp
                             @foreach ($booking as $bookings)
                                 @if ($bookings['booking_status'] == 1)
@@ -298,12 +298,8 @@
                     },
                 });
             });
-
-            function closeModal() {
-                document.querySelectorAll('#select-car option').forEach(option => option.remove())
-            }
-
             function modal(val) {
+                document.querySelectorAll('#select-car option').forEach(option => option.remove())
                 const data = @json($booking);
                 var carselect = @json($car);
                 $.ajax({
@@ -311,6 +307,7 @@
                     url: '/admin/manage/' + val,
                     dataType: 'JSON',
                     success: function(data) {
+                        console.log(data)
                         // เช็ครถว่างหรือไม่ว่างใน Select option ตอนกดอนุมัติ
                         var dataCar = data.not_car;
                         if (dataCar.length == 0) {
