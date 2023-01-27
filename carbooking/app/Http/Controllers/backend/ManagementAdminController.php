@@ -8,6 +8,8 @@ use App\Models\CaroutModel;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+
 class ManagementAdminController extends Controller
 {
     //
@@ -42,7 +44,7 @@ class ManagementAdminController extends Controller
         $date = BookingModel::find($id);
         $sdate = $date->booking_start;
         $edate = $date->booking_end;
-        $unreserved_cars = DB::table('tb_cars')
+        $reserved_cars = DB::table('tb_cars')
             ->leftJoin('tb_booking', 'tb_cars.id', '=', 'tb_booking.license_plate')
 
             ->where(function ($query) use ($sdate, $edate) {
@@ -58,23 +60,46 @@ class ManagementAdminController extends Controller
                         });
                 })
                     ->orWhereNull('tb_booking.license_plate');
-            })->orderBy('tb_booking.booking_start')
+            })
+            ->select('tb_booking.license_plate','tb_booking.driver')
+            ->orderBy('tb_booking.booking_start')
+            ->get();
+        $car = array();
+foreach($reserved_cars as $item){
+    $car[] = [
+        'id' => $item->license_plate
+    ];
+
+
+}
+$driver = array();
+foreach($reserved_cars as $item){
+    $driver[] = [
+        'id' => $item->driver
+    ];
+
+
+}
+             
+            $unreserved_cars = DB::table('tb_cars')
+            ->where(function ($query) use ($car) {
+                $query->where(function ($query) use ($car) {
+                            $query->Where('tb_cars.id', '!=' ,$car);
+                     
+                })
+                    ;
+            })
             ->get();
 
-
-
-             // $car = $reserved_cars['license_plate'];
-            // $unreserved_cars = DB::table('tb_cars')
-            // ->where(function ($query) use ($car) {
-            //     $query->where(function ($query) use ($car) {
-                    
-            //                 $query->Where('tb_cars.id', '!=' ,$car);
+ $unreserved_driver = DB::table('tb_driver')
+            ->where(function ($query) use ($driver) {
+                $query->where(function ($query) use ($driver) {
+                            $query->Where('tb_driver.id', '!=' ,$driver);
                      
-            //     })
-            //         ;
-            // })
-            // ->get();
-
+                })
+                    ;
+            })
+            ->get();
         // $unreserved_driver = DB::table('tb_driver')
         //     ->leftJoin('tb_booking', 'tb_driver.id', '=', 'tb_booking.driver')
 
@@ -93,7 +118,8 @@ class ManagementAdminController extends Controller
         //             ->orWhereNull('tb_booking.driver');
         //     })
         //     ->get();
-           return response()->json(['sdate'=>$sdate,'edate'=>$edate,'not_car'=>$unreserved_cars]);
+        // dd($unreserved_cars,$unreserved_driver);
+           return response()->json(['car'=>$unreserved_cars,'driver'=>$unreserved_driver]);
 
            
     }
