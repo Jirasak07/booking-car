@@ -308,8 +308,9 @@
                     dataType: 'JSON',
                     success: function(data) {
                         console.log(data)
+                        var car= data.car
                         // เช็ครถว่างหรือไม่ว่างใน Select option ตอนกดอนุมัติ
-                        var dataCar = data.not_car;
+                        var dataCar = car;
                         if (dataCar.length == 0) {
                             carselect.forEach(function(item) {
                                 $('#select-car').append($('<option>', {
