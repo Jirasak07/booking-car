@@ -10,6 +10,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use DateTime;
+use Illuminate\Support\Facades\Validator;
 
 class Bookingcontroller extends Controller
 {
@@ -224,13 +225,13 @@ class Bookingcontroller extends Controller
 
         $varlidate = $request->validate([
             'date_start' => 'required|date|after:now + 5 hours',
-            'date_end' => 'required|date|after:'.$request->date_start.'+ 30 minutes',
+            'date_end' => 'required|date|after:date_start + 30 minutes',
             'location' => 'required|min:3',
         ], [
-            'date_start.after:now + 5 hours'=>'โปรดจองก่อนเดินทาง 5 ชั่วโมง',
-            'date_start.after:'.$request->date_start.'+ 30 minutes'=>'โปรดระบุเวลาการเดินทางอย่างน้อย 30 นาที',
+            'date_start.after:now + 5 hours' => 'โปรดจองก่อนเดินทาง 5 ชั่วโมง',
+            'date_start.after:date_start + 30 minutes' => 'โปรดระบุเวลาการเดินทางอย่างน้อย 30 นาที',
             'location.required' => 'โปรดระบุรายละเอียดและสถานที่ที่จะไป',
-            'location.min'=>'โปรดระบุรายละเอียดอย่างน้อย 3 ตัวอักษร',
+            'location.min' => 'โปรดระบุรายละเอียดอย่างน้อย 3 ตัวอักษร',
         ]);
 
         $date_start = Carbon::parse($request->date_start)->format('Y-m-d\TH:i:s');
@@ -252,12 +253,9 @@ class Bookingcontroller extends Controller
         $bookingcar->type_car = '-';
         $bookingcar->booking_detail = $request->location;
         $bookingcar->booking_status = '1';
-        //return $bookingcar;
+        //dd($bookingcar);
         $bookingcar->save();
 
         return redirect()->back()->with('success', 'การจองสำเร็จ');
     }
-    
-
- 
 }

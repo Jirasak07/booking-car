@@ -161,4 +161,12 @@ class ManagementAdminController extends Controller
 
         return redirect()->back();
     }
+
+    public function edit_booking(Request $request){
+        $id = $request->id_form;
+        $booking_edit  = BookingModel::find($id);
+        $booking_edit->license_plate = $request->license;
+        $booking_edit->driver = $request->driver;
+        $booking_edit->save();
+    }
 }
