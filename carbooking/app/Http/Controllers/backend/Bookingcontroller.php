@@ -223,8 +223,12 @@ class Bookingcontroller extends Controller
     {
 
         $varlidate = $request->validate([
+            'date_start' => 'required|date|after:now + 5 hours',
+            'date_end' => 'required|date|after:'.$request->date_start.'+ 30 minutes',
             'location' => 'required|min:3',
         ], [
+            'date_start.after:now + 5 hours'=>'โปรดจองก่อนเดินทาง 5 ชั่วโมง',
+            'date_start.after:'.$request->date_start.'+ 30 minutes'=>'โปรดระบุเวลาการเดินทางอย่างน้อย 30 นาที',
             'location.required' => 'โปรดระบุรายละเอียดและสถานที่ที่จะไป',
             'location.min'=>'โปรดระบุรายละเอียดอย่างน้อย 3 ตัวอักษร',
         ]);

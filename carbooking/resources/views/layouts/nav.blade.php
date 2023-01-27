@@ -4,8 +4,8 @@
         <!-- Brand -->
 
         <!-- Form -->
-        <div class="text-capitalize fw-normal h1 text-test mx-4 d-md-flex d-none"
-            style="color:#8392bd;font-weight:normal;">
+        <div class="text-capitalize h1 text-test mx-4 d-md-flex d-none pt-3 fw-200"
+            style="color:#EAEAEA;">
             <label id="name-head">@yield('title')</label>
         </div>
         {{-- <script>

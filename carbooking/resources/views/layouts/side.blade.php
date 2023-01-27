@@ -1,3 +1,10 @@
+<style>
+    .active-nav {
+        border-left: 0.75vh solid #540375;
+        background-color: #EAEAEA;
+        color: rgb(0, 0, 0)
+    }
+</style>
 <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white shadow-box-login " id="sidenav-main">
     <div class="container-fluid">
         <!-- Toggler -->
@@ -71,15 +78,16 @@
             <!-- Navigation -->
             @if (Auth::user()->role_user == '2')
                 <ul class="navbar-nav  ">
-                    <li class="nav-item ">
-                        <a class="{{ 'users/dashboard' == request()->path() ? 'nav-link text-success  ' : 'nav-link ' }}"
-                            style="font-weight: 600;" href="{{ route('users.dashboard') }}">
-                            <i class="fa-solid fa-gauge-high "></i> {{ __('Dashboard') }}
+                    <li class="{{ 'users/dashboard' == request()->path() ? 'nav-item active-nav ' : 'nav-item ' }}">
+                        <a class="{{ 'users/dashboard' == request()->path() ? 'nav-link text-darker' : 'nav-link ' }}"
+                            style="font-weight: 600;font-size:1rem" href="{{ route('users.dashboard') }}">
+                            <i class="fa-solid fa-gauge-high"></i> {{ __('Dashboard') }}
                         </a>
                     </li>
-                    <li class="nav-item ">
-                        <a class="{{ 'users/booking' == request()->path() ? 'nav-link text-success  ' : 'nav-link ' }}"
-                            style="font-weight: 600;" href="{{ route('users.view-booking', Auth::user()->id) }}">
+                    <li class="{{ 'users/booking' == request()->path() ? 'nav-item active-nav ' : 'nav-item ' }}">
+                        <a class="{{ 'users/booking' == request()->path() ? 'nav-link text-darker' : 'nav-link ' }}"
+                            style="font-weight: 600;font-size:1rem"
+                            href="{{ route('users.view-booking', Auth::user()->id) }}">
                             <i class="fa-solid fa-calendar-days"></i> {{ __('ข้อมูลการจอง') }}
                         </a>
                     </li>
