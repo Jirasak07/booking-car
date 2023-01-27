@@ -23,7 +23,7 @@
                         <tbody>
                             @php
                                 $i = 1;
-
+                                
                             @endphp
                             @foreach ($booking as $bookings)
                                 @if ($bookings['booking_status'] == 1)
@@ -156,28 +156,52 @@
                                                     <div class="col-6 "> <label for="out-model">ยี่ห้อ</label>
                                                         <input type="text" id="out-model" name="brand"
                                                             class="form-control">
+                                                        @if ($errors->has('brand'))
+                                                            <span class="text-danger">{{ $errors->first('brand') }}</span>
+                                                        @endif
                                                     </div>
 
                                                     <div class="col-6 ">
                                                         <label for="out-license"> ป้ายทะเบียน </label> <input
                                                             name="car_out_license" type="text" id="out-license"
                                                             class="form-control">
+                                                        @if ($errors->has('car_out_license'))
+                                                            <span
+                                                                class="text-danger">{{ $errors->first('car_out_license') }}</span>
+                                                        @endif
+
                                                     </div>
                                                     <div class="col-12 "> <label for="out-model">รายละเอียด/รุ่น</label>
                                                         <input type="text" id="out-model" name="car_out_model"
                                                             class="form-control">
+                                                        @if ($errors->has('car_out_model'))
+                                                            <span
+                                                                class="text-danger">{{ $errors->first('car_out_model') }}</span>
+                                                        @endif
                                                     </div>
+
                                                     <div class="col-12 "> <label for="out-driver">คนขับ</label>
                                                         <input type="text" id="out-driver" name="car_out_driver"
                                                             class="form-control">
+                                                        @if ($errors->has('car_out_driver'))
+                                                            <span
+                                                                class="text-danger">{{ $errors->first('car_out_driver') }}</span>
+                                                        @endif
                                                     </div>
                                                     <div class="col-12 ">
                                                         <label for="out-own"> เจ้าของรถ </label> <input type="text"
                                                             id="out-own" class="form-control" name="owner">
+                                                        @if ($errors->has('owner'))
+                                                            <span class="text-danger">{{ $errors->first('owner') }}</span>
+                                                        @endif
                                                     </div>
                                                     <div class="col-12 "> <label for="out-tell"> เบอร์โทรติดต่อ
                                                         </label> <input type="text" id="out-tell"
                                                             class="form-control" name="car_out_tel" />
+                                                        @if ($errors->has('car_out_tel'))
+                                                            <span
+                                                                class="text-danger">{{ $errors->first('car_out_tel') }}</span>
+                                                        @endif
                                                     </div>
 
                                                 </div>
@@ -310,7 +334,7 @@
                             });
                         }
                     },
-                  //<================================================================>//
+                    //<================================================================>//
                 })
                 // ใช้แสดงข้อมูลรายละเอียดการจอง บน Modal
                 const bookdata = [];
@@ -335,7 +359,7 @@
                 document.getElementById('end_date').innerHTML = bookend;
                 document.getElementById('name').innerHTML = name;
                 document.getElementById('detail').innerHTML = detail[0];
-                  //<================================================================>//
+                //<================================================================>//
                 // กำหนด id ของการจองให้กับ form รถภายในและภายนอก
                 document.getElementById('idform').value = val;
                 document.getElementById('idform2').value = val;
