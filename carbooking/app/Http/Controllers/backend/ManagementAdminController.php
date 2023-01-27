@@ -78,7 +78,7 @@ class ManagementAdminController extends Controller
                     ->orWhereNull('tb_booking.driver');
             })
             ->get();
-           dd($sdate,$edate,$unreserved_cars);
+           return response()->json(['sdate'=>$sdate,'edate'=>$edate,'not_car'=>$unreserved_cars]);
 
             // return response()->json(['unreserved_cars' => $unreserved_cars, 'unreserved_driver' => $unreserved_driver]);
 

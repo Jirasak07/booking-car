@@ -27,7 +27,7 @@
                             @endphp
                             @foreach ($booking as $bookings)
                                 @if ($bookings['booking_status'] == 1)
-                                    <tr >
+                                    <tr>
                                         <td class="control d-grid d-sm-none"></td>
                                         <td>{{ $i++ }}</td>
                                         <td>{{ $bookings['name'] }}</td>
@@ -78,22 +78,22 @@
                                 <label for="" id="name"></label>
                             </div>
                             <div class="col-12 col-sm-6">
-                                <label for="" class="form-label " style="line-height:50%;font-weight: 700">วันเวลาที่เริ่มต้น</label>
+                                <label for="" class="form-label "
+                                    style="line-height:50%;font-weight: 700">วันเวลาที่เริ่มต้น</label>
                                 </br>
-                                <label class=" ml-2" style="font-size: 80%;" for=""
-                                    id="start_date"></label>
+                                <label class=" ml-2" style="font-size: 80%;" for="" id="start_date"></label>
                             </div>
                             <div class="col-12 col-sm-6">
-                                <label for="" class="form-label" style="line-height:50%;font-weight: 700">วันเวลาที่สิ้นสุด</label>
+                                <label for="" class="form-label"
+                                    style="line-height:50%;font-weight: 700">วันเวลาที่สิ้นสุด</label>
                                 </br>
-                                <label class=" ml-2" style="font-size: 80%;" for=""
-                                    id="end_date"></label>
+                                <label class=" ml-2" style="font-size: 80%;" for="" id="end_date"></label>
                             </div>
                             <div class="col-12 col-sm-6">
-                                <label for="" class="form-label" style="line-height:50%;font-weight: 700">รายละเอียดการจอง</label>
+                                <label for="" class="form-label"
+                                    style="line-height:50%;font-weight: 700">รายละเอียดการจอง</label>
                                 </br>
-                                <label class=" ml-2" style="font-size: 80%;" for=""
-                                    id="detail">11012543</label>
+                                <label class=" ml-2" style="font-size: 80%;" for="" id="detail">11012543</label>
                             </div>
                         </div>
                         <div class="d-grid  justify-content-center row">
@@ -115,15 +115,10 @@
                                             <input type="hidden" id="idform" name="id_form">
                                             <input type="hidden" name="type" value="1">
                                             <div class=" mt-4">
-                                                <label for="selectcar">เลือกรถที่ต้องการใช้</label>
-                                                <select name="car_id" id="selectcar" class="rounded form-control" required
+                                                <label for="select-car">เลือกรถที่ต้องการใช้</label>
+
+                                                <select name="car_id" id="select-car" class="rounded form-control" required
                                                     style="width: 250px; border:1px solid #6673af30 ">
-                                                    @foreach ($car as $cars)
-                                                        <option value="{{ $cars['id'] }}">{{ $cars['car_model'] }}
-                                                            {{ $cars['car_license'] }} </option>
-                                                    @endforeach
-
-
                                                 </select>
                                             </div>
                                             <div>
@@ -144,7 +139,8 @@
                                                 <input type="submit" value="บันทึก"
                                                     class="btn btn-sm btn-success w-25" />
                                                 <button type="button" class="btn btn-sm btn-outline-danger w-25 "
-                                                    data-bs-dismiss="modal" aria-label="Close" >ปิด</button>
+                                                    data-bs-dismiss="modal" aria-label="Close"
+                                                    onclick="closeModal()">ปิด</button>
                                             </div>
 
                                         </form>
@@ -158,18 +154,22 @@
                                                 <input type="hidden" name="type" value="2">
                                                 <div class="form-group row mt-2 d-flex flex-column flex-md-row ">
                                                     <div class="col-6 "> <label for="out-model">ยี่ห้อ</label>
-                                                        <input type="text" id="out-model" name="brand" class="form-control">
+                                                        <input type="text" id="out-model" name="brand"
+                                                            class="form-control">
                                                     </div>
 
                                                     <div class="col-6 ">
-                                                        <label for="out-license"> ป้ายทะเบียน </label> <input name="car_out_license"
-                                                            type="text" id="out-license" class="form-control">
+                                                        <label for="out-license"> ป้ายทะเบียน </label> <input
+                                                            name="car_out_license" type="text" id="out-license"
+                                                            class="form-control">
                                                     </div>
                                                     <div class="col-12 "> <label for="out-model">รายละเอียด/รุ่น</label>
-                                                        <input type="text" id="out-model" name="car_out_model" class="form-control">
+                                                        <input type="text" id="out-model" name="car_out_model"
+                                                            class="form-control">
                                                     </div>
                                                     <div class="col-12 "> <label for="out-driver">คนขับ</label>
-                                                        <input type="text" id="out-driver" name="car_out_driver" class="form-control">
+                                                        <input type="text" id="out-driver" name="car_out_driver"
+                                                            class="form-control">
                                                     </div>
                                                     <div class="col-12 ">
                                                         <label for="out-own"> เจ้าของรถ </label> <input type="text"
@@ -182,9 +182,10 @@
 
                                                 </div>
                                                 <div class="d-flex justify-content-end mt-2">
-                                                    <button class="btn btn-sm btn-success w-25" type="submit"> บันทึก </button>
+                                                    <button class="btn btn-sm btn-success w-25" type="submit"> บันทึก
+                                                    </button>
                                                     <button type="button" class="btn btn-sm btn-outline-danger w-25 "
-                                                    data-bs-dismiss="modal" aria-label="Close" >ปิด</button>
+                                                        data-bs-dismiss="modal" aria-label="Close">ปิด</button>
                                                 </div>
 
                                             </form>
@@ -218,15 +219,12 @@
         <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
 
         <script>
-
             $('.nav-tabs a').on('click', function(e) {
                 e.preventDefault()
                 $(this).tab('show')
             });
             $(document).ready(function() {
-
                 $('#tablerequest').DataTable({
-                    // ajax:'http://localhost:2222/index.php/admin/request/data',
                     responsive: {
                         details: {
                             type: 'column',
@@ -277,10 +275,44 @@
                 });
             });
 
+            function closeModal() {
+                document.querySelectorAll('#select-car option').forEach(option => option.remove())
+            }
+
             function modal(val) {
-                // document.getElementById('')
                 const data = @json($booking);
-                console.log(data)
+                var carselect = @json($car);
+                $.ajax({
+                    type: 'GET',
+                    url: '/admin/manage/' + val,
+                    dataType: 'JSON',
+                    success: function(data) {
+                        // เช็ครถว่างหรือไม่ว่างใน Select option ตอนกดอนุมัติ
+                        var dataCar = data.not_car;
+                        if (dataCar.length == 0) {
+                            carselect.forEach(function(item) {
+                                $('#select-car').append($('<option>', {
+                                    value: item.id,
+                                    text: item.car_license
+                                }))
+                            });
+                        } else if (dataCar.length > 0) {
+                            carselect.forEach(function(item) {
+                                dataCar.forEach(function(d) {
+                                    if (d.license_plate != item.id) {
+                                        $('#select-car').append($('<option>', {
+                                            value: item.id,
+                                            text: item.car_license
+                                        }))
+                                        console.log(item.id)
+                                    }
+                                })
+                            });
+                        }
+                    },
+                  //<================================================================>//
+                })
+                // ใช้แสดงข้อมูลรายละเอียดการจอง บน Modal
                 const bookdata = [];
                 moment.locale('th');
                 const start = [];
@@ -299,23 +331,20 @@
                     543) + ' เวลา HH:mm');
                 const bookend = moment(JSON.stringify(end[0])).format('ddd ที่ D MMM ' + (new Date(end[0]).getFullYear() +
                     543) + ' เวลา HH:mm');
-                // console.log(typeof(bookstart));
-                // alert(bookstart);
-                // const da = moment().format('D-MM-YYYY');
-                // console.log(da);
                 document.getElementById('start_date').innerHTML = bookstart;
                 document.getElementById('end_date').innerHTML = bookend;
                 document.getElementById('name').innerHTML = name;
                 document.getElementById('detail').innerHTML = detail[0];
+                  //<================================================================>//
+                // กำหนด id ของการจองให้กับ form รถภายในและภายนอก
                 document.getElementById('idform').value = val;
                 document.getElementById('idform2').value = val;
+                //<================================================================>//
             }
         </script>
         <script>
             function alertCancel(id) {
-                //alert(id)
                 Swal.fire({
-                    //title: 'Are you sure?',
                     text: "คุณต้องการยกเลิกการจองใช่หรือไม่!",
                     icon: 'warning',
                     showCancelButton: true,
@@ -336,7 +365,6 @@
                                         icon: 'success',
                                         confirmButtonText: 'ok',
                                     }).then((data) => {
-                                        /* Read more about isConfirmed, isDenied below */
                                         if (result.isConfirmed) {
                                             window.location.reload();
                                         }
