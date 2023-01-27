@@ -82,6 +82,7 @@ foreach($reserved_cars as $item){
 }
              
             $unreserved_cars = DB::table('tb_cars')
+            ->where('car_status','1')
             ->where(function ($query) use ($car) {
                 $query->where(function ($query) use ($car) {
                             $query->Where('tb_cars.id', '!=' ,$car);
@@ -92,6 +93,7 @@ foreach($reserved_cars as $item){
             ->get();
 
  $unreserved_driver = DB::table('tb_driver')
+            ->where('driver_status','1')
             ->where(function ($query) use ($driver) {
                 $query->where(function ($query) use ($driver) {
                             $query->Where('tb_driver.id', '!=' ,$driver);
