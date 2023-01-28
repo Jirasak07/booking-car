@@ -74,8 +74,8 @@
                                             </td>
                                             <td align="center" id="manage">
                                                 @if ($item->booking_status == '1')
-                                                    <button class="btn bg-yellow btn-sm me-2 text-white" style="font-size: 13px"
-                                                        onclick="edit_booking({{ $item->id }})">
+                                                    <button class="btn bg-yellow btn-sm me-2 text-white"
+                                                        style="font-size: 13px" onclick="edit_booking({{ $item->id }})">
                                                         <i class="fa-regular fa-pen-to-square"></i><span>แก้ไข</span>
                                                     </button>
                                                     <button class="btn btn-danger btn-sm" style="font-size: 13px"
@@ -212,6 +212,38 @@
                 </div>
             </div>
 
+            <!-- cancel text Modal -->
+            <div class="modal fade" id="cencel_detail" data-bs-backdrop="static" data-bs-keyboard="false"
+                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">ยกเลิกการจอง</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <form {{-- action="{{ route('users.booking_cancel') }}" --}} method="post" id="detail_cancel">
+                            @csrf
+                            <div class="modal-body">
+                                <div class=" row g-3 mb-3">
+                                    <input type="hidden" name="id_cancel" id="id_cancel" value="">
+                                    <h3 for=""><strong>โปรดระบุสาเหตุการยกเลิกการจอง</strong></h3>
+                                    <input type="text" name="detail" id="detail" class=" form-control"
+                                        value="">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" name="cancelBooking" value="ยืนยัน" id="cancelBooking"
+                                    class="btn btn-primary">ยืนยัน</button>
+                                <button type="button" class="btn grey btn-danger"data-bs-dismiss="modal"
+                                    {{-- onclick="window.location.reload()" --}} data-dismiss="modal">{{ __('ย้อนกลับ') }}</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
             @push('js')
                 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
                 <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
@@ -220,6 +252,50 @@
                 <script src="https://cdn.datatables.net/rowreorder/1.3.1/js/dataTables.rowReorder.min.js"></script>
                 <script>
                     $(document).ready(function() {
+                        $('#cancelBooking').on('click', function() {
+                            var id_cancel = $('#id_cancel').val();
+                            var detail = $('#detail').val();
+                            if (detail != "" ) {
+                                $("#cancelBooking").attr("disabled", "disabled");
+                                $.ajax({
+                                    url: "{{ url('/users/cancel') }}",
+                                    type: "POST",
+                                    data: {
+                                        id_cancel: id_cancel,
+                                        detail: detail,
+                                        "_token": "{{ csrf_token() }}",
+                                    },
+                                    cache: false,
+                                    success: function(response) {
+                                        if (response.status == 'success') {
+                                            Swal.fire({
+                                                title: 'Success',
+                                                text: "ยกเลิกการจองสำเร็จ",
+                                                icon: 'success',
+                                                //width: '550px',
+                                                showConfirmButton: true,
+                                            })
+                                            setInterval(function() {
+                                                swal.close();
+                                                window.location.reload();
+                                            }, 1500)
+                                        } else {
+                                            Swal.fire({
+                                                title: 'Error',
+                                                text: "ยกเลิกการจองไม่สำเร็จ",
+                                                icon: 'error',
+                                                //width: '550px',
+                                                showConfirmButton: true,
+                                                timer: 3000
+                                            })
+                                        }
+
+                                    }
+                                });
+                            } 
+                            console.log(id_cancel);
+                            console.log(detail);
+                        });
                         $('#booking_table').DataTable({
                             rowReorder: {
                                 selector: 'td:nth-child(2)'
@@ -408,30 +484,12 @@
                             cancelButtonText: 'Cancel'
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                $.ajax({
-                                    type: 'GET',
-                                    url: '/users/cancel/' + id,
-                                    dataType: 'JSON',
-                                    success: function(data) {
-                                        if (data.status == 'success') {
-                                            Swal.fire({
-                                                title: 'เสร็จสิ้น',
-                                                icon: 'success',
-                                                confirmButtonText: 'OK',
-                                            }).then((data) => {
-                                                /* Read more about isConfirmed, isDenied below */
-                                                if (result.isConfirmed) {
-                                                    window.location.reload();
-                                                }
-                                            })
-                                        } else {
-                                            Swal.fire({
-                                                title: 'Error',
-                                                icon: 'error',
-                                            })
-                                        }
-                                    },
-                                });
+                                console.log(id);
+                                document.getElementById('id_cancel').value = id
+                                //$('#id_cancel').val(id);
+                                $('#cencel_detail').modal('toggle');
+
+                                //console.log(data);
                             }
                         })
                     }

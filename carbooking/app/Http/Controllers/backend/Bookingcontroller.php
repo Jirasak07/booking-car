@@ -213,11 +213,14 @@ class Bookingcontroller extends Controller
         //dd($events, $booking_join1,$booking_join2, $booking->id);
         return response()->json($events);
     }
-    public function cancle(Request $request, $id)
-    {
+    public function cancle(Request $request)
+    { 
+        //dd($request->all());
+        $id = $request->id_cancel;
         $canclebooking = BookingModel::find($id);
         $canclebooking->booking_status = ('3');
         $canclebooking->booking_detail =  $canclebooking->booking_detail.".".$request->detail;
+       // dd($canclebooking);
         $canclebooking->save();
         return response()->json(['status' => 'success']);
     }
