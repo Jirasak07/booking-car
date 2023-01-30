@@ -81,45 +81,34 @@ foreach($reserved_cars as $item){
 
 }
              
-            $unreserved_cars = DB::table('tb_cars')
-            ->where('car_status','1')
-            ->where(function ($query) use ($car) {
-                $query->where(function ($query) use ($car) {
-                            $query->Where('tb_cars.id', '!=' ,$car);
-                     
-                })
-                    ;
-            })
-            ->get();
 
- $unreserved_driver = DB::table('tb_driver')
-            ->where('driver_status','1')
-            ->where(function ($query) use ($driver) {
-                $query->where(function ($query) use ($driver) {
-                            $query->Where('tb_driver.id', '!=' ,$driver);
-                     
-                })
-                    ;
-            })
-            ->get();
-        // $unreserved_driver = DB::table('tb_driver')
-        //     ->leftJoin('tb_booking', 'tb_driver.id', '=', 'tb_booking.driver')
+   $count = BookingModel::where('booking_status','2')->count();
+            if($count < 0 ){
+                $unreserved_cars = DB::table('tb_cars')->get();
+                $unreserved_driver = DB::table('tb_driver')->get();
+   }else{
+    $unreserved_cars = DB::table('tb_cars')
+    ->where('car_status','1')
+    ->where(function ($query) use ($car) {
+        $query->where(function ($query) use ($car) {
+                    $query->Where('tb_cars.id', '!=' ,$car);
+             
+        })
+            ;
+    })
+    ->get();
 
-        //     ->where(function ($query) use ($sdate, $edate) {
-        //         $query->where(function ($query) use ($sdate, $edate) {
-        //             $query->where('tb_booking.booking_status', '=', '2')
-        //             ->orWhere(function ($query) use ($sdate, $edate) {
-        //                 $query->Where('tb_booking.booking_end', '>' ,$sdate )
-        //                 ->Where('tb_booking.booking_start', '<', $sdate );
-
-        //             }) ->orWhere(function ($query) use ($sdate, $edate) {
-        //                 $query->where('tb_booking.booking_start', '<', $edate )
-        //                 ->Where('tb_booking.booking_end', '>', $edate);
-        //             });
-        //         })
-        //             ->orWhereNull('tb_booking.driver');
-        //     })
-        //     ->get();
+$unreserved_driver = DB::table('tb_driver')
+    ->where('driver_status','1')
+    ->where(function ($query) use ($driver) {
+        $query->where(function ($query) use ($driver) {
+                    $query->Where('tb_driver.id', '!=' ,$driver);
+             
+        })
+            ;
+    })
+    ->get();
+   }
         // dd($unreserved_cars,$unreserved_driver);
            return response()->json(['car'=>$unreserved_cars,'driver'=>$unreserved_driver]);
 
@@ -144,27 +133,7 @@ foreach($reserved_cars as $item){
     {
 
 
-        $request->validate(
-            [
-                'car_out_license' => 'required|min:3',
-                'brand' => 'required|min:3',
-                'car_out_model' => 'required|min:10',
-                'owner' => 'required|min:10',
-                'car_out_driver' => 'required|min:10',
-                'car_out_tel' => 'required|numeric|digits_between:8,15',
-            ],
-            [
-                'car_out_license.required' => 'โปรดระบุทะเบียน',
-                'brand.required' => 'โปรดระบุยี่ห้อรถ',
-                'car_out_model.required' => 'โปรดระบุรายละเอียดรุ่นรถ',
-                'owner.required' => 'โปรดระบุชื่อเจ้าของรถ',
-                'car_out_driver.required' => 'โปรดระบุชื่อคนขับ',
-                'car_out_tel.required' => 'โปรดระบุเบอร์โทรเจ้าของรถ',
-                // 'email.email' => 'รูปแบบอีเมล์ไม่ถูกต้อง',
-                'car_out_tel.numeric' => 'ระบุเฉพาะตัวเลขเท่านั้น',
-                'car_out_tel.digits_between' => 'เบอร์โทรต้องมี 8 - 15 ตัว',
-            ]
-        );
+  
 
         $id = $request->id_form;
 
