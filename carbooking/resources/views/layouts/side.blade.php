@@ -64,7 +64,7 @@
                 </div>
             </div>
             <!-- Navigation -->
-            <div class="text-center pb-3" style="font-weight: 700"> {{ Auth::user()->name }}</div>
+            <div class="text-center pb-3 d-block d-sm-none" style="font-weight: 700"> {{ Auth::user()->name }}</div>
             @if (Auth::user()->role_user == '2')
                 <ul class="navbar-nav  ">
                     <li class="{{ 'users/booking' == request()->path() ? 'nav-item active-nav ' : 'nav-item ' }}">

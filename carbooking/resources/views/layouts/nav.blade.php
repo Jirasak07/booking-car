@@ -27,11 +27,12 @@
                 <a class=" pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
                     <div class="media align-items-center ">
-                        <span class="avatar avatar-sm rounded-circle  bg-dark">
+                        <span class="avatar avatar-sm rounded-circle  bg-success">
                             {{-- <img alt="Image placeholder" src="{{ asset('assets/img/lanna-removebg-preview.png') }}"> --}}
                             <i class="fa-solid fa-user-tie" style="font-size: 1.5rem"></i>
 
                         </span>
+                        <h4 class="text-overflow m-0 text-dark px-2">{{ Auth::user()->name }}</h4>
                         <div class="media-body ml-2 d-none d-lg-block">
                             <span class="mb-0 text-sm  font-weight-bold">{{-- {{ auth()->user()->name }} --}}</span>
                         </div>
@@ -39,9 +40,9 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
                     <div class=" dropdown-header noti-title">
-                        <h6 class="text-overflow m-0">{{ Auth::user()->name }}</h6>
+
                     </div>
-                   
+
                     <div class="dropdown-divider"></div>
                     <a href="{{ route('logout') }}" class="dropdown-item">
                         <i class="fa-solid fa-right-from-bracket"></i>
