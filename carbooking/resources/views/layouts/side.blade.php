@@ -64,7 +64,7 @@
                 </div>
             </div>
             <!-- Navigation -->
-            <div class="text-center" style="font-weight: 700"> {{ Auth::user()->name }}</div>
+            <div class="text-center pb-3" style="font-weight: 700"> {{ Auth::user()->name }}</div>
             @if (Auth::user()->role_user == '2')
                 <ul class="navbar-nav  ">
                     <li class="{{ 'users/booking' == request()->path() ? 'nav-item active-nav ' : 'nav-item ' }}">
@@ -148,8 +148,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="{{ 'admin/manage-user' == request()->path() ? 'nav-link-sub text-primary ' : 'nav-link-sub text-default ' }}"
-                                    style="font-weight: 600;font-size:0.85rem"
-                                    href="{{ route('admin.manage-user') }}">
+                                    style="font-weight: 600;font-size:0.85rem" href="{{ route('admin.manage-user') }}">
                                     <i class="fa-sharp fa-solid fa-circle-dot" style="font-size: 50%"></i>
                                     {{ __('จัดการข้อมูลผู้ใช้') }}
                                 </a>
@@ -159,6 +158,6 @@
             @endif
             </ul>
         </div>
-        <div class="btn-sm btn-danger btn">ออกจากระบบ</div>
+        <div class=" btn-danger btn"><i class="fa-solid fa-person-walking-arrow-right"></i> ออกจากระบบ</div>
     </div>
 </nav>
