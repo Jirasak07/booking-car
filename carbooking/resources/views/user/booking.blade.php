@@ -53,7 +53,7 @@
                                             </td>
                                             <td style="font-size:16px" id="booking_detail">
                                                 @php
-                                                    $detail = explode('.', $item->booking_detail);
+                                                    $detail = explode('~', $item->booking_detail);
                                                 @endphp
                                                 {!! Str::limit("$detail[0]", 50, ' ...') !!}
                                             </td>
@@ -112,36 +112,44 @@
                         </div>
                         <div class="modal-body">
                             <div class="row mb-3">
-                                <label for="" class="col-sm-2 col-form-label">ชื่อผู้จอง</label>
+                                <strong for="" class="col-sm-2 col-form-label">ชื่อผู้จอง</strong>
                                 <div class="col-sm-10">
                                     <label type="text" disabled value="" readonly class="form-control-plaintext"
                                         id="user_book" name="user_book">
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">สถานะการจอง</label>
+                                <strong class="col-sm-2 col-form-label">สถานะการจอง</strong>
                                 <div class="col-sm-10">
                                     <label class="form-control-plaintext" id="status_booking"></label>
                                 </div>
                             </div>
                             <div class="row mb-1">
-                                <label for="" class="col-sm-2 col-form-label">ช่วงวันที่</label>
+                                <strong for="" class="col-sm-2 col-form-label">ช่วงวันที่</strong>
                                 <div class="col-sm-10">
                                     <label class="form-control-plaintext" id="date_booking"></label>
                                 </div>
                             </div>
                             <div class="row mb-1">
-                                <label for="" class="col-sm-3 col-form-label">รายละเอียดรถและคนขับ</label>
+                                <strong for="" class="col-sm-3 col-form-label">รายละเอียดรถและคนขับ</strong>
                                 <div class="col-sm-8">
                                     <label name="" id="detail_car" cols="30" rows="3" readonly
                                         class="form-control-plaintext"></label>
                                 </div>
                             </div>
                             <div class="row mb-1">
-                                <label for="" class="col-sm-3 col-form-label">รายละเอียดการจอง</label>
+                                <strong for="" class="col-sm-3 col-form-label">รายละเอียดการจอง</strong>
                                 <div class="col-sm-8">
                                     <label name="" id="detail_booking" cols="30" disabled
                                         rows="5"value="" readonly class="form-control-plaintext"></label>
+                                </div>
+                            </div>
+                            <div class="row mb-1">
+                                <strong for="" class="col-sm-3 col-form-label ">สาเหตุการยกเลิก</strong>
+                                <div class="col-sm-8">
+                                    <label name="" id="detail_booking_cancel" cols="30" disabled
+                                        rows="5"value="" readonly
+                                        class="form-control-plaintext text-red"></label>
                                 </div>
                             </div>
                         </div>
@@ -213,283 +221,309 @@
                     </div>
                 </div>
             </div>
-
-            @push('js')
-                <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-                <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-                <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
-                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-                <script src="https://cdn.datatables.net/rowreorder/1.3.1/js/dataTables.rowReorder.min.js"></script>
-                <script>
-                    $(document).ready(function() {
-                        $('#booking_table').DataTable({
-                            rowReorder: {
-                                selector: 'td:nth-child(2)'
-                            },
-                            responsive: true,
-                            columnDefs: [{
-                                    responsivePriority: 1,
-                                    targets: 0
-                                },
-                                {
-                                    responsivePriority: 2,
-                                    targets: 3
-                                },
-                                {
-                                    responsivePriority: 3,
-                                    targets: 5
-                                },
-                            ],
-                            lengthMenu: [10, 20, 50, 100, ],
-                            language: {
-                                lengthMenu: "แสดง _MENU_ รายการ",
-                                search: "ค้นหาข้อมูลในตาราง",
-                                info: "แสดงข้อมูล _END_ จากทั้งหมด _TOTAL_ รายการ",
-
-                                paginate: {
-
-                                    previous: "ก่อนหน้า",
-                                    next: "ถัดไป",
-
-                                },
-                            },
-
-                        });
-
-                        /* setInterval(() => {
-                            var table = $('#booking_table').DataTable();
-                            //$('#view-de').css();
-                            $.ajax({
-                                url: '/users/booking/refresh',
-                                method: 'GET',
-                                success: function(data) {
-                                    console.log(data);
-                                    $('#alllist').html(data.Alllist);
-                                    $('#alllistapprove').html(data.Alllistapprove);
-                                    $('#alllistcancle').html(data.Alllistcancle);
-                                    $('#alllistpending').html(data.Alllistpending);
-                                    //var i = 1;
-                                    table.clear().draw();
-                                    $("tbody").html("");
-                                    var i = 1;
-                                    $.each(data.res, function(key, item) {
-                                        // console.log(item);
-                                        var date_start = new Date(item.booking_start);
-                                        var date_end = new Date(item.booking_end);
-                                        let getMonths = date_start.toLocaleString('th', {
-                                            month: 'short',
-                                        });
-                                        let getMonthe = date_end.toLocaleString('th', {
-                                            month: 'short',
-                                        });
-                                        var booking_detail = item.booking_detail;
-                                        var short = booking_detail.substring(0, 50);
-                                        if (booking_detail.length > short.length) {
-                                            short += "...";
-                                        }
-                                        var detail =
-                                            "<a class='btn btn-info btn-sm text-darker'onclick='view_detail(" +
-                                            item.id + ")'><i class='fa-solid fa-eye'></i></a>";
-                                        var date_range = moment(item.booking_start).format(
-                                                'วันที่ D ' + getMonths + " " + (new Date(item
-                                                    .booking_start).getFullYear() + 543) +
-                                                ' เวลา HH:mm') + " - " +
-                                            moment(item.booking_end).format('วันที่ D ' +
-                                                getMonthe + " " + (new Date(item.booking_end)
-                                                    .getFullYear() + 543) + ' เวลา HH:mm');
-                                        if (item.booking_status == '1') {
-                                            status =
-                                                "<i class='fa-regular fa-clock'style='font-size: 14px;color:#fff;background-color:#FF8B13;padding:4px 4px 4px 4px;border-radius:.375rem;'></i>";
-                                            manage =
-                                                "<button class='btn btn-yellow btn-sm me-2' style='font-size: 13px'onclick='edit_booking(" +
-                                                item.id + ")'>" +
-                                                "<i class='fa-regular fa-pen-to-square'></i><span>แก้ไข</span>" +
-                                                "</button>" +
-                                                "<button class='btn btn-danger btn-sm' style='font-size: 13px'onclick='alertCancel(" +
-                                                item.id + ")'>" +
-                                                "<i class='fa-solid fa-rectangle-xmark'></i><span>ยกเลิก</span>" +
-                                                "</button>";
-                                        } else if (item.booking_status == '2') {
-                                            status =
-                                                "<i class = 'fa-solid fa-square-check'style = 'color: green;font-size:24px'> </i>";
-                                            manage = "";
-                                        } else {
-                                            status =
-                                                "<i class = 'fa-sharp fa-solid fa-rectangle-xmark'style = 'color: red;font-size:24px' > </i>";
-                                            manage = "";
-                                        }
-                                        table.row.add([
-                                            (i++), date_range, short, detail, status, manage
-                                        ]).draw();
-
-                                    });
-                                }
-                            })
-                        }, 15000); */
-                    });
-
-                    function edit_booking(id) {
-                        $.ajax({
-                            type: 'GET',
-                            url: '/users/detail/' + id,
-                            dataType: 'JSON',
-                            success: function(res) {
-                                $('#editdetail').modal('toggle');
-                                //tag input datetime-local เลือกวันย้อนหลังไม่ได้
-                                var now_utc = Date.now()
-                                var today = new Date(now_utc).toISOString().substring(0, 16);
-                                $("#booking_start").attr("min", today);
-                                $("#booking_end").attr("min", today);
-                                $('#id').val(res.id);
-                                console.log(res.booking_detail);
-                                $('#username').val(res.name);
-                                $('#booking_start').val(res.booking_start);
-                                $('#booking_end').val(res.booking_end);
-                                //document.getElementById("booking_detail").value = res.booking_detail;
-                                $('#bdetail').val(res.booking_detail);
-                            }
-                        })
-                    }
-
-                    function view_detail(id) {
-                        var status = '';
-                        var car_detail;
-                        console.log(id);
-                        $.ajax({
-                            type: 'GET',
-                            url: '/users/detail/' + id,
-                            dataType: 'JSON',
-                            success: function(res) {
-                                moment.locale('th');
-                                if (res.booking_status == '1') {
-                                    status = 'กำลังดำเนินการ';
-                                    $('#status_booking').css("color", "#FFB100");
-                                    //status.css("color":"red");
-                                } else if (res.booking_status == '2') {
-                                    status = 'ดำเนินการเสร็จสิ้น';
-                                    $('#status_booking').css("color", "green");
-                                } else {
-                                    status = 'ยกเลิกการจอง';
-                                    $('#status_booking').css("color", "red");
-                                }
-                                if (res.car_license == '-') {
-                                    car_detail = '-';
-                                } else {
-                                    car_detail = 'คนขับ ' + res.name_driver + ' ทะเบียนรถ ' + res.car_license +
-                                        ' ' + res
-                                        .car_model;
-                                }
-                                //console.log(res.booking_start);
-                                var start = moment(res.booking_start).add(543, 'year').format(
-                                    'ddd ที่ D MMM YYYY เวลา HH:mm')
-                                var end = moment(res.booking_end).add(543, 'year').format('ddd ที่ D MMM YYYY เวลา HH:mm')
-                                //console.log(car_detail);
-
-                                //$('#id_booking').html(res.id);
-                                $('#user_book').html(res.name);
-                                $('#status_booking').html(status);
-                                $('#date_booking').html(start + ' - ' + end);
-                                $('#detail_car').html(car_detail);
-                                $('#detail_booking').html(res.booking_detail);
-                                $('#viewdetail').modal('toggle');
-                            }
-                        });
-
-
-                    }
-
-                    function alertCancel(id) {
-                        //alert(id)
-                        var id = id;
-                        console.log(id);
-                        $.ajax({
-                            type: 'GET',
-                            url: '/users/detail/' + id,
-                            dataType: 'JSON',
-                            success: function(res) {
-                                console.log(res.booking_detail);
-                                moment.locale('th');
-                                var start = moment(res.booking_start).add(543, 'year').format(
-                                    'ddd ที่ D MMM YYYY เวลา HH:mm')
-                                var end = moment(res.booking_end).add(543, 'year').format('ddd ที่ D MMM YYYY เวลา HH:mm')
-                                Swal.fire({
-                                    //title: 'Are you sure?',
-                                    title: "<h3>คุณต้องการยกเลิกการจองใช่หรือไม่!</h3>",
-                                    html: '<div class="col-12" style="font-size:0.9rem">' +
-                                        '<div class=" text-left"><i class="fa-solid fa-calendar-days" ></i>  : ' +
-                                        start + ' - ' + end +
-                                        '</div>' +
-                                        '<div class="mt-3 text-left" style="font-size:0.9rem" ><strong>รายละเอียดการจอง</strong> : ' +
-                                        res.booking_detail +
-                                        '</div>' +
-                                        '<form method="POST">' +
-                                        '<div class="mt-3 text-left text-danger" style="font-size:0.9rem" ><strong>สาเหตุการยกเลิก<span>*</span></strong>' +
-                                        '<input type="hidden" name="id_cancel" id="id_cancel" value="' + id + '">' +
-                                        '<input type="text" name="detail" id="detail" class=" form-control mt-3"value=""  placeholder="โปรดระบุสาเหตุการยกเลิกการจอง">' +
-                                        '</div>' +
-                                        '</form>' +
-                                        '</div>',
-                                    icon: 'warning',
-                                    showCancelButton: true,
-                                    confirmButtonColor: '#3085d6',
-                                    cancelButtonColor: '#d33',
-                                    confirmButtonText: 'OK',
-                                    cancelButtonText: 'Cancel'
-                                }).then((result) => {
-                                    if (result.isConfirmed) {
-                                        var id_cancel = $('#id_cancel').val();
-                                        var detail = $('#detail').val();
-                                        console.log(id_cancel);
-                                        console.log(detail);
-                                        if (detail != "") {
-                                            $("#cancelBooking").attr("disabled", "disabled");
-                                            $.ajax({
-                                                url: "{{ url('/users/cancel') }}",
-                                                type: "POST",
-                                                data: {
-                                                    id_cancel: id_cancel,
-                                                    detail: detail,
-                                                    "_token": "{{ csrf_token() }}",
-                                                },
-                                                cache: false,
-                                                success: function(response) {
-                                                    if (response.status == 'success') {
-                                                        Swal.fire({
-                                                            title: 'Success',
-                                                            text: "ยกเลิกการจองสำเร็จ",
-                                                            icon: 'success',
-                                                            //width: '550px',
-                                                            showConfirmButton: true,
-                                                        })
-                                                        setInterval(function() {
-                                                            swal.close();
-                                                            window.location.reload();
-                                                        }, 1500)
-                                                    } else {
-                                                        Swal.fire({
-                                                            title: 'Error',
-                                                            text: "ยกเลิกการจองไม่สำเร็จ",
-                                                            icon: 'error',
-                                                            //width: '550px',
-                                                            showConfirmButton: true,
-                                                            timer: 3000
-                                                        })
-                                                    }
-
-                                                }
-                                            });
-                                        }
-                                    }
-                                })
-                            }
-                        });
-
-                    }
-                </script>
-            @endpush
-
         </div>
     @else
     @endif
+    @push('js')
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://cdn.datatables.net/rowreorder/1.3.1/js/dataTables.rowReorder.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('#booking_table').DataTable({
+                    rowReorder: {
+                        selector: 'td:nth-child(2)'
+                    },
+                    responsive: true,
+                    columnDefs: [{
+                            responsivePriority: 1,
+                            targets: 0
+                        },
+                        {
+                            responsivePriority: 2,
+                            targets: 3
+                        },
+                        {
+                            responsivePriority: 3,
+                            targets: 5
+                        },
+                    ],
+                    lengthMenu: [10, 20, 50, 100, ],
+                    language: {
+                        lengthMenu: "แสดง _MENU_ รายการ",
+                        search: "ค้นหาข้อมูลในตาราง",
+                        info: "แสดงข้อมูล _END_ จากทั้งหมด _TOTAL_ รายการ",
+
+                        paginate: {
+
+                            previous: "ก่อนหน้า",
+                            next: "ถัดไป",
+
+                        },
+                    },
+
+                });
+
+                /* setInterval(() => {
+                    var table = $('#booking_table').DataTable();
+                    //$('#view-de').css();
+                    $.ajax({
+                        url: '/users/booking/refresh',
+                        method: 'GET',
+                        success: function(data) {
+                            console.log(data);
+                            $('#alllist').html(data.Alllist);
+                            $('#alllistapprove').html(data.Alllistapprove);
+                            $('#alllistcancle').html(data.Alllistcancle);
+                            $('#alllistpending').html(data.Alllistpending);
+                            //var i = 1;
+                            table.clear().draw();
+                            $("tbody").html("");
+                            var i = 1;
+                            $.each(data.res, function(key, item) {
+                                // console.log(item);
+                                var date_start = new Date(item.booking_start);
+                                var date_end = new Date(item.booking_end);
+                                let getMonths = date_start.toLocaleString('th', {
+                                    month: 'short',
+                                });
+                                let getMonthe = date_end.toLocaleString('th', {
+                                    month: 'short',
+                                });
+                                var booking_detail = item.booking_detail;
+                                var short = booking_detail.substring(0, 50);
+                                if (booking_detail.length > short.length) {
+                                    short += "...";
+                                }
+                                var detail =
+                                    "<a class='btn btn-info btn-sm text-darker'onclick='view_detail(" +
+                                    item.id + ")'><i class='fa-solid fa-eye'></i></a>";
+                                var date_range = moment(item.booking_start).format(
+                                        'วันที่ D ' + getMonths + " " + (new Date(item
+                                            .booking_start).getFullYear() + 543) +
+                                        ' เวลา HH:mm') + " - " +
+                                    moment(item.booking_end).format('วันที่ D ' +
+                                        getMonthe + " " + (new Date(item.booking_end)
+                                            .getFullYear() + 543) + ' เวลา HH:mm');
+                                if (item.booking_status == '1') {
+                                    status =
+                                        "<i class='fa-regular fa-clock'style='font-size: 14px;color:#fff;background-color:#FF8B13;padding:4px 4px 4px 4px;border-radius:.375rem;'></i>";
+                                    manage =
+                                        "<button class='btn btn-yellow btn-sm me-2' style='font-size: 13px'onclick='edit_booking(" +
+                                        item.id + ")'>" +
+                                        "<i class='fa-regular fa-pen-to-square'></i><span>แก้ไข</span>" +
+                                        "</button>" +
+                                        "<button class='btn btn-danger btn-sm' style='font-size: 13px'onclick='alertCancel(" +
+                                        item.id + ")'>" +
+                                        "<i class='fa-solid fa-rectangle-xmark'></i><span>ยกเลิก</span>" +
+                                        "</button>";
+                                } else if (item.booking_status == '2') {
+                                    status =
+                                        "<i class = 'fa-solid fa-square-check'style = 'color: green;font-size:24px'> </i>";
+                                    manage = "";
+                                } else {
+                                    status =
+                                        "<i class = 'fa-sharp fa-solid fa-rectangle-xmark'style = 'color: red;font-size:24px' > </i>";
+                                    manage = "";
+                                }
+                                table.row.add([
+                                    (i++), date_range, short, detail, status, manage
+                                ]).draw();
+
+                            });
+                        }
+                    })
+                }, 15000); */
+            });
+
+            function edit_booking(id) {
+                $.ajax({
+                    type: 'GET',
+                    url: '/users/detail/' + id,
+                    dataType: 'JSON',
+                    success: function(res) {
+                        $('#editdetail').modal('toggle');
+                        //tag input datetime-local เลือกวันย้อนหลังไม่ได้
+                        var now_utc = Date.now()
+                        var today = new Date(now_utc).toISOString().substring(0, 16);
+                        $("#booking_start").attr("min", today);
+                        $("#booking_end").attr("min", today);
+                        $('#id').val(res.id);
+                        console.log(res.booking_detail);
+                        $('#username').val(res.name);
+                        $('#booking_start').val(res.booking_start);
+                        $('#booking_end').val(res.booking_end);
+                        //document.getElementById("booking_detail").value = res.booking_detail;
+                        $('#bdetail').val(res.booking_detail);
+                    }
+                })
+            }
+
+            function view_detail(id) {
+                var status = '';
+                var car_detail;
+                console.log(id);
+                $.ajax({
+                    type: 'GET',
+                    url: '/users/detail/' + id,
+                    dataType: 'JSON',
+                    success: function(res) {
+                        moment.locale('th');
+                        if (res.booking_status == '1') {
+                            status = 'กำลังดำเนินการ';
+                            $('#status_booking').css("color", "#FFB100");
+                            //status.css("color":"red");
+                        } else if (res.booking_status == '2') {
+                            status = 'ดำเนินการเสร็จสิ้น';
+                            $('#status_booking').css("color", "green");
+                        } else {
+                            status = 'ยกเลิกการจอง';
+                            $('#status_booking').css("color", "red");
+                        }
+                        if (res.car_license == '-') {
+                            car_detail = '-';
+                        } else {
+                            car_detail = 'คนขับ ' + res.name_driver + ' ทะเบียนรถ ' + res.car_license +
+                                ' ' + res
+                                .car_model;
+                        }
+                        var detail_booking = res.booking_detail;
+                        var s_detail = detail_booking.split('~');
+                        if (s_detail.length == 2) {
+                            s_detail[1] = s_detail[1];
+                        } else {
+                            s_detail[1] = '-'
+                        }
+                        console.log(s_detail[1]);
+                        //console.log(res.booking_start);
+                        var start = moment(res.booking_start).add(543, 'year').format(
+                            'ddd ที่ D MMM YYYY เวลา HH:mm')
+                        var end = moment(res.booking_end).add(543, 'year').format('ddd ที่ D MMM YYYY เวลา HH:mm')
+                        //console.log(car_detail);
+
+                        //$('#id_booking').html(res.id);
+                        $('#user_book').html(res.name);
+                        $('#status_booking').html(status);
+                        $('#date_booking').html(start + ' - ' + end);
+                        $('#detail_car').html(car_detail);
+                        $('#detail_booking').html(s_detail[0]);
+                        $('#detail_booking_cancel').html(s_detail[1]);
+                        $('#viewdetail').modal('toggle');
+                    }
+                });
+
+
+            }
+
+            function alertCancel(id) {
+                //alert(id)
+                var id = id;
+                console.log(id);
+                $.ajax({
+                    type: 'GET',
+                    url: '/users/detail/' + id,
+                    dataType: 'JSON',
+                    success: function(res) {
+                        console.log(res.booking_detail);
+                        moment.locale('th');
+                        var start = moment(res.booking_start).add(543, 'year').format(
+                            'ddd ที่ D MMM YYYY เวลา HH:mm')
+                        var end = moment(res.booking_end).add(543, 'year').format('ddd ที่ D MMM YYYY เวลา HH:mm')
+                        Swal.fire({
+                            //title: 'Are you sure?',
+                            title: "<h3>คุณต้องการยกเลิกการจองใช่หรือไม่!</h3>",
+                            html: '<div class="col-12" style="font-size:0.9rem">' +
+                                '<div class=" text-left"><i class="fa-solid fa-calendar-days" ></i>  : ' +
+                                start + ' - ' + end +
+                                '</div>' +
+                                '<div class="mt-3 text-left" style="font-size:0.9rem" ><strong>รายละเอียดการจอง</strong> : ' +
+                                res.booking_detail +
+                                '</div>' +
+                                '<form method="POST">' +
+                                '<div class="mt-3 text-left text-danger" style="font-size:0.9rem" ><strong>สาเหตุการยกเลิก<span>*</span></strong>' +
+                                '<input type="hidden" name="id_cancel" id="id_cancel" value="' + id + '">' +
+                                '<input type="text" name="detail" id="detail" class=" form-control mt-3"value=""  placeholder="โปรดระบุสาเหตุการยกเลิกการจอง">' +
+                                '</div>' +
+                                '</form>' +
+                                '</div>',
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'OK',
+                            cancelButtonText: 'Cancel'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                var id_cancel = $('#id_cancel').val();
+                                var detail = $('#detail').val();
+                                console.log(id_cancel);
+                                console.log(detail);
+                                if (detail != "") {
+                                    $("#cancelBooking").attr("disabled", "disabled");
+                                    $.ajax({
+                                        url: "{{ url('/users/cancel') }}",
+                                        type: "POST",
+                                        data: {
+                                            id_cancel: id_cancel,
+                                            detail: detail,
+                                            "_token": "{{ csrf_token() }}",
+                                        },
+                                        cache: false,
+                                        success: function(response) {
+                                            if (response.status == 'success') {
+                                                Swal.fire({
+                                                    title: 'Success',
+                                                    text: "ยกเลิกการจองสำเร็จ",
+                                                    icon: 'success',
+                                                    //width: '550px',
+                                                    showConfirmButton: true,
+                                                })
+                                                setInterval(function() {
+                                                    swal.close();
+                                                    window.location.reload();
+                                                }, 1500)
+                                            } else {
+                                                Swal.fire({
+                                                    title: 'Error',
+                                                    text: "ยกเลิกการจองไม่สำเร็จ",
+                                                    icon: 'error',
+                                                    //width: '550px',
+                                                    showConfirmButton: true,
+                                                    timer: 3000
+                                                })
+                                            }
+
+                                        }
+                                    });
+                                }
+                            }
+                        })
+                    }
+                });
+
+            }
+
+            /*  booking header click show to datatables */
+            function dt_all() {
+                window.location.reload();
+            }
+
+            function dt_cancel() {
+                console.log('cancel');
+            }
+
+            function dt_padding() {
+                console.log('padding');
+            }
+
+            function dt_appprove() {
+                console.log('appprove');
+            }
+        </script>
+    @endpush
+
+
 
 @endsection
