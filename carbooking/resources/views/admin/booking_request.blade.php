@@ -145,65 +145,50 @@
                                     <div class="tab-pane pt-5" id="tab2">
 
                                         <div class="card card-body">
-                                            <form  method="POST" action="{{ route('updateout') }}">
-                                                @csrf
+                                            <div class="alert alert-danger print-error-msg" style="display:none">
+                                                <ul></ul>
+                                            </div>
+                                            <form>
+                                                {{ csrf_field() }}
                                                 <input type="hidden" id="idform2" name="id_form">
                                                 <input type="hidden" name="type" value="2">
                                                 <div class="form-group row mt-2 d-flex flex-column flex-md-row ">
                                                     <div class="col-6 "> <label for="out-model">ยี่ห้อ</label>
                                                         <input type="text" id="out-model" name="brand"
                                                             class="form-control">
-                                                        @if ($errors->has('brand'))
-                                                            <span class="text-danger">{{ $errors->first('brand') }}</span>
-                                                        @endif
                                                     </div>
 
                                                     <div class="col-6 ">
                                                         <label for="out-license"> ป้ายทะเบียน </label> <input
                                                             name="car_out_license" type="text" id="out-license"
                                                             class="form-control">
-                                                        @if ($errors->has('car_out_license'))
-                                                            <span
-                                                                class="text-danger">{{ $errors->first('car_out_license') }}</span>
-                                                        @endif
 
                                                     </div>
                                                     <div class="col-12 "> <label for="out-model">รายละเอียด/รุ่น</label>
                                                         <input type="text" id="out-model" name="car_out_model"
                                                             class="form-control">
-                                                        @if ($errors->has('car_out_model'))
-                                                            <span
-                                                                class="text-danger">{{ $errors->first('car_out_model') }}</span>
-                                                        @endif
+
                                                     </div>
 
                                                     <div class="col-12 "> <label for="out-driver">คนขับ</label>
                                                         <input type="text" id="out-driver" name="car_out_driver"
                                                             class="form-control">
-                                                        @if ($errors->has('car_out_driver'))
-                                                            <span
-                                                                class="text-danger">{{ $errors->first('car_out_driver') }}</span>
-                                                        @endif
+
                                                     </div>
                                                     <div class="col-12 ">
                                                         <label for="out-own"> เจ้าของรถ </label> <input type="text"
                                                             id="out-own" class="form-control" name="owner">
-                                                        @if ($errors->has('owner'))
-                                                            <span class="text-danger">{{ $errors->first('owner') }}</span>
-                                                        @endif
+
                                                     </div>
                                                     <div class="col-12 "> <label for="out-tell"> เบอร์โทรติดต่อ
                                                         </label> <input type="text" id="out-tell"
                                                             class="form-control" name="car_out_tel" />
-                                                        @if ($errors->has('car_out_tel'))
-                                                            <span
-                                                                class="text-danger">{{ $errors->first('car_out_tel') }}</span>
-                                                        @endif
+
                                                     </div>
 
                                                 </div>
                                                 <div class="d-flex justify-content-end mt-2">
-                                                    <button type="submit" class="btn btn-sm btn-success "><i
+                                                    <button id="frm1-approve" class=" btn btn-sm btn-success "><i
                                                             class="fa-sharp fa-solid fa-floppy-disk"></i> บันทึก</button>
                                                     <button type="button" class="btn btn-sm btn-outline-danger "
                                                         data-bs-dismiss="modal" aria-label="Close"><i
@@ -240,6 +225,51 @@
         <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
 
+        <script>
+            $("#frm1-approve").click(function(e) {
+                e.preventDefault();
+                var _token = $("input[name='_token']").val();
+                var type = $("input[name='type']").val();
+                var idform = $("input[id='idform']").val();
+                var brand = $("input[name='brand']").val();
+                var car_out_license = $("input[name='car_out_license']").val();
+                var car_out_model = $("input[name='car_out_model']").val();
+                var car_out_driver = $("input[name='car_out_driver']").val();
+                var owner = $("input[name='owner']").val();
+                var car_out_tel = $("input[name='car_out_tel']").val();
+
+                $.ajax({
+                    url: "{{ route('updateout') }}",
+                    type: 'POST',
+                    data: {
+                        _token: _token,
+                        type: type,
+                        idform: idform,
+                        brand: brand,
+                        car_out_license: car_out_license,
+                        car_out_model: car_out_model,
+                        car_out_driver: car_out_driver,
+                        owner: owner,
+                        car_out_tel: car_out_tel
+                    },
+                    success: function(data) {
+                        if ($.isEmptyObject(data.error)) {
+                            alert(data.success);
+                        } else {
+                            printErrorMsg(data.error);
+                        }
+                    }
+                })
+            })
+
+            function printErrorMsg(msg) {
+                $(".print-error-msg").find("ul").html('');
+                $(".print-error-msg").css('display', 'block');
+                $.each(msg, function(key, value) {
+                    $(".print-error-msg").find("ul").append('<li>' + value + '</li>');
+                });
+            }
+        </script>
         <script>
             $('.nav-tabs a').on('click', function(e) {
                 e.preventDefault()

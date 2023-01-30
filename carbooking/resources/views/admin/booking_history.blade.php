@@ -134,22 +134,43 @@
                             if (res.dismiss == 'cancel') {
                                 Swal.fire({
                                     input: 'text',
-                                    icon:'warning',
+                                    icon: 'warning',
                                     title: 'กรุณากรอกหมายเหตุการยกเลิก',
                                     inputPlaceholder: 'หมายเหตุการยกเลิก',
                                     confirmButtonText: 'บันทึก',
                                     showCancelButton: true,
-                                    cancelButtonColor:'#ef476f',
-                                    confirmButtonColor:'#06d6a0',
-                                    cancelButtonText:'ยกเลิก'
+                                    cancelButtonColor: '#ef476f',
+                                    confirmButtonColor: '#06d6a0',
+                                    cancelButtonText: 'ยกเลิก'
                                 }).then((resp) => {
                                     if (resp.isConfirmed) {
-                                        if(resp.value){
-                                            alert(resp.value)
-                                        }else{
+                                        if (resp.value) {
+                                            $.ajax({
+                                                type: 'GET',
+                                                url: '/admin/cancel/' + id + '/' + resp.value,
+                                                dataType: 'JSON',
+                                                success: function(data) {
+                                                    if (data.status == 'success') {
+                                                        Swal.fire({
+                                                            title: 'เสร็จสิ้น',
+                                                            icon: 'success',
+                                                            confirmButtonText: 'ok',
+                                                        }).then((data) => {
+                                                            window.location
+                                                                .reload();
+                                                        })
+                                                    } else {
+                                                        Swal.fire({
+                                                            title: 'เกิดข้อผิดพลาด',
+                                                            icon: 'error',
+                                                        })
+                                                    }
+                                                },
+                                            });
+                                        } else {
                                             Swal.fire({
-                                                text:'กรุณากรอกข้อมูล',
-                                                icon:'error'
+                                                text: 'กรุณากรอกข้อมูล',
+                                                icon: 'error'
                                             })
                                         }
                                     }
