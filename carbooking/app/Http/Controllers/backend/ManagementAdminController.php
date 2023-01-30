@@ -59,7 +59,17 @@ class ManagementAdminController extends Controller
                         }) ->orWhere(function ($query) use ($sdate, $edate) {
                             $query->where('tb_booking.booking_start', '>', $edate )
                             ->Where('tb_booking.booking_end', '<', $edate);
-                        });
+                        })->orWhere(function ($query) use ($sdate, $edate) {
+                            $query->where('tb_booking.booking_start', '>', $sdate )
+                            ->Where('tb_booking.booking_end', '<', $edate);
+                        })->orWhere(function ($query) use ($sdate, $edate) {
+                            $query->where('tb_booking.booking_start', '<', $sdate )
+                            ->Where('tb_booking.booking_end', '>', $edate);
+                        })->orWhere(function ($query) use ($sdate, $edate) {
+                            $query->where('tb_booking.booking_start', '=', $edate )
+                            ->Where('tb_booking.booking_end', '=', $edate);
+                        })
+                        ;
                 })
                     ;
             })
