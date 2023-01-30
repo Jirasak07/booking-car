@@ -17,13 +17,13 @@
             <img src="{{ asset('assets/img/lanna-removebg-preview.png') }}" class="navbar-brand-img" alt="...">
         </a>
         <!-- User -->
-        <ul class="nav align-items-center d-md-none">
+        {{-- <ul class="nav align-items-center d-none d-sm-block">
             <li class="nav-item dropdown">
                 <a class="  nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
                     <div class="media align-items-center">
                         <span class="avatar avatar-sm rounded-circle  bg-dark">
-                            {{-- <img alt="Image placeholder" src="{{ asset('assets/img/lanna-removebg-preview.png') }}"> --}}
+
                             <i class="fa-solid fa-user-tie" style="font-size: 1.5rem"></i>
 
                         </span>
@@ -41,7 +41,7 @@
                     </a>
                 </div>
             </li>
-        </ul>
+        </ul> --}}
         <!-- Collapse -->
         <div class="collapse  navbar-collapse" id="sidenav-collapse-main">
             <!-- Collapse header -->
@@ -63,19 +63,8 @@
                     </div>
                 </div>
             </div>
-            <!-- Form -->
-            <form class="mt-4 mb-3 d-md-none">
-                <div class="input-group input-group-rounded input-group-merge">
-                    <input type="search" class="form-control form-control-rounded form-control-prepended"
-                        placeholder="{{ __('Search') }}" aria-label="Search">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">
-                            <span class="fa fa-search"></span>
-                        </div>
-                    </div>
-                </div>
-            </form>
             <!-- Navigation -->
+            <div class="text-center" style="font-weight: 700"> {{ Auth::user()->name }}</div>
             @if (Auth::user()->role_user == '2')
                 <ul class="navbar-nav  ">
                     <li class="{{ 'users/booking' == request()->path() ? 'nav-item active-nav ' : 'nav-item ' }}">
@@ -130,15 +119,21 @@
 
 
                     <li
-                        class="{{ 'admin/manage-car' == request()->path() || 'admin/manage-driver' == request()->path() || 'admin/manage-user' == request()->path() ? 'nav-item active-nav ' : 'nav-item ' }}">
+                        class="{{ 'admin/setting' == request()->path() || 'admin/manage-car' == request()->path() || 'admin/manage-driver' == request()->path() || 'admin/manage-user' == request()->path() ? 'nav-item active-nav ' : 'nav-item ' }}">
                         <a class="{{ 'admin/manage-car' == request()->path() || 'admin/manage-driver' == request()->path() || 'admin/manage-user' == request()->path() ? 'nav-link text-darker' : 'nav-link ' }}"
                             style="font-weight: 600;font-size:0.9rem" href="{{ route('admin.manage-car') }}">
                             <i class="fa-regular fa-calendar"></i> {{ __('จัดการข้อมูลพื้นฐาน') }} </a>
                         <ul class="sub-menu py-2 ">
                             <li class="nav-item">
+                                <a class="{{ 'admin/setting' == request()->path() ? 'nav-link-sub text-primary ' : 'nav-link-sub text-default  ' }}"
+                                    style="font-weight: 600;font-size:0.85rem" href="{{ route('admin.setting') }}">
+                                    <i class="fa-sharp fa-solid fa-circle-dot" style="font-size: 50%"></i>
+                                    {{ __('ตั้งค่าข้อมูล') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="{{ 'admin/manage-car' == request()->path() ? 'nav-link-sub text-primary ' : 'nav-link-sub text-default  ' }}"
-                                    style="font-weight: 600;font-size:0.85rem"
-                                    href="{{ route('admin.manage-car') }}">
+                                    style="font-weight: 600;font-size:0.85rem" href="{{ route('admin.manage-car') }}">
                                     <i class="fa-sharp fa-solid fa-circle-dot" style="font-size: 50%"></i>
                                     {{ __('จัดการข้อมูลรถภายใน') }}
                                 </a>
@@ -160,35 +155,10 @@
                                 </a>
                             </li>
                         </ul>
-
-                        {{-- {{ Request::routeIs('admin/manage-driver')? 'nav-link-sub text-white' : 'nav-link-sub active' }} --}}
                     </li>
             @endif
-
-            {{-- <li class="nav-item">
-                    <a class="nav-link " href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples">
-                        <i class="fab fa-laravel" style="color: #f4645f;"></i>
-                        <span class="nav-link-text" style="color: #f4645f;">{{ __('Laravel Examples') }}</span>
-                    </a>
-
-                    <div class="collapse show" id="navbar-examples">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a class="nav-link" href="">
-                                    {{ __('User profile') }}
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="">
-                                    {{ __('User Management') }}
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li> --}}
-
             </ul>
         </div>
+        <div class="btn-sm btn-danger btn">ออกจากระบบ</div>
     </div>
-
 </nav>

@@ -4,7 +4,6 @@ use App\Http\Controllers\backend\DashboardAdminController;
 use App\Http\Controllers\backend\UserBookingController;
 use App\Http\Controllers\CarsController;
 use App\Http\Controllers\DriverController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -58,17 +57,17 @@ Route::group(
         Route::get('request/data', [\App\Http\Controllers\backend\Bookingcontroller::class, 'requestDataTable']);
         Route::get('manage-driver', [DriverController::class, 'index'])->name('admin.manage-driver');
         Route::get('manage-driver/{id}', [DriverController::class, 'changestatus'])->name('driverstatus');
-
         Route::get('manage-car', [CarsController::class, 'index'])->name('admin.manage-car');
         Route::get('manage-car/{id}', [CarsController::class, 'changestatus'])->name('changestatus');
         Route::get('manage-user', [\App\Http\Controllers\backend\ManagementAdminController::class, 'index'])->name('admin.manage-user');
         Route::get('manage-role/{id}', [\App\Http\Controllers\backend\ManagementAdminController::class, 'edit_role']);
         Route::get('manage/{id}', [\App\Http\Controllers\backend\ManagementAdminController::class, 'caranddriver_aprove']);
         Route::get('history', [\App\Http\Controllers\backend\Bookingcontroller::class, 'history'])->name('admin.booking_history');
+        Route::get('setting', function () {return view('admin.setting');})->name('admin.setting');
         Route::post('approve', [\App\Http\Controllers\backend\ManagementAdminController::class, 'aprove_in'])->name('update');
         Route::post('approve-out', [\App\Http\Controllers\backend\ManagementAdminController::class, 'aprove_out'])->name('updateout');
         Route::get('cancel/{id}/{note}', [\App\Http\Controllers\backend\Bookingcontroller::class, 'cancle']);
-        Route::post('admin/booking',[\App\Http\Controllers\backend\Bookingcontroller::class,'store'])->name('send-booking');
+        Route::post('admin/booking', [\App\Http\Controllers\backend\Bookingcontroller::class, 'store'])->name('send-booking');
     }
 );
 
