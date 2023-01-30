@@ -498,22 +498,6 @@
 
             }
 
-            /*  booking header click show to datatables */
-            function dt_all() {
-                console.log('all');
-            }
-
-            function dt_cancel() {
-                console.log('cancel');
-            }
-
-            function dt_padding() {
-                console.log('padding');
-            }
-
-            function dt_appprove() {
-                console.log('appprove');
-            }
         </script>
     @endpush
 
