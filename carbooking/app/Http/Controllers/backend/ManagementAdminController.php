@@ -132,14 +132,21 @@ $unreserved_driver = DB::table('tb_driver')
         $id = $request->id_form;
 
         $booking_update = BookingModel::find($id);
-
-        $booking_update->license_plate = $request->car_id;
-        $booking_update->driver = $request->driver_id;
-        $booking_update->type_car = $request->type;
-        $booking_update->booking_status = "2";
-
-        $booking_update->save();
-        return redirect()->back();
+        if($booking_update->booking_status == 1){
+            $booking_update->license_plate = $request->car_id;
+            $booking_update->driver = $request->driver_id;
+            $booking_update->type_car = $request->type;
+            $booking_update->booking_status = "2";
+    
+            $booking_update->save();
+            return redirect()->back();
+        }else{
+            $booking_update->booking_status =  $booking_update->booking_status;
+            $booking_update->save();
+            return redirect()->back()->with('success',"รายการนี้ถูกยกเลิกไปแล้ว");
+        }
+       
+        
     }
     public function aprove_out(Request $request)
     {
@@ -152,7 +159,7 @@ $unreserved_driver = DB::table('tb_driver')
         $booking_update = BookingModel::find($id);
         $car_out = new CaroutModel();
         $car_count = DB::table('tb_out_cars')->count();
-
+        if($booking_update->booking_status == 1){
         if ($car_count < 1) {
             $car_out->id = 1;
             $car_out->car_out_license = $request->car_out_license;
@@ -179,9 +186,16 @@ $unreserved_driver = DB::table('tb_driver')
             $booking_update->type_car = "2";
             $booking_update->booking_status = "2";
             $booking_update->save();
+            
         }
-
         return redirect()->back();
+    }else{
+        $booking_update->booking_status =  $booking_update->booking_status;
+        $booking_update->save();
+        return redirect()->back()->with('success',"รายการนี้ถูกยกเลิกไปแล้ว");
+    }
+
+     
     }
 
     public function edit_booking(Request $request){
