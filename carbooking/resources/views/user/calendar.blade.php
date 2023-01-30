@@ -276,7 +276,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <input type="submit" name="saveBooking" value="ยืนยัน" id="saveBooking" class="btn btn-primary">
+                    <button type="submit" name="saveBooking" value="" id="saveBooking"
+                        class="btn btn-primary">ยืนยัน</button>
                     <button type="button" class="btn grey btn-danger"data-bs-dismiss="modal" {{-- onclick="window.location.reload()" --}}
                         data-dismiss="modal">{{ __('ย้อนกลับ') }}</button>
                 </div>
