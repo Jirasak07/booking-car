@@ -42,9 +42,11 @@
                                         <td>
                                             <div class="btn btn-success btn-sm" onclick="modal({{ $bookings['id'] }})"
                                                 data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                อนุมัติ</div>
+                                                <i class="fa-solid fa-check"></i> อนุมัติ
+                                            </div>
                                             <a class="text-white btn btn-danger btn-sm "
-                                                onclick="alertCancel({{ $bookings['id'] }})">ยกเลิกคำขอ</a>
+                                                onclick="alertCancel({{ $bookings['id'] }})"> <i
+                                                    class="fa-solid fa-ban"></i> ยกเลิก</a>
                                         </td>
 
                                     </tr>
@@ -122,25 +124,20 @@
                                                 </select>
                                             </div>
                                             <div>
-                                                <label for="selectdriver">เลือกพนักงานขับรถ</label>
-                                                <select name="driver_id" id=" selectdriver" class="rounded form-control"
+                                                <label for="select-driver">เลือกพนักงานขับรถ</label>
+                                                <select name="driver_id" id="select-driver" class="rounded form-control"
                                                     required style="width: 250px;  border:1px solid #6673af30 ">
-                                                    @foreach ($driver as $dv)
-                                                        <option value="{{ $dv['id'] }}">{{ $dv['driver_fullname'] }}
-                                                        </option>
-                                                    @endforeach
-
                                                 </select>
                                             </div>
 
 
 
                                             <div class="d-flex align-self-end justify-content-end w-100 mt-4 ">
-                                                <input type="submit" value="บันทึก"
-                                                    class="btn btn-sm btn-success w-25" />
-                                                <button type="button" class="btn btn-sm btn-outline-danger w-25 "
-                                                    data-bs-dismiss="modal" aria-label="Close"
-                                                    onclick="closeModal()">ปิด</button>
+                                                <button type="submit" class="btn btn-sm btn-success "><i
+                                                        class="fa-sharp fa-solid fa-floppy-disk"></i> บันทึก</button>
+                                                <button type="button" class="btn btn-sm btn-outline-danger "
+                                                    data-bs-dismiss="modal" aria-label="Close" onclick="closeModal()"><i
+                                                        class="fa-solid fa-circle-xmark"></i> ยกเลิก</button>
                                             </div>
 
                                         </form>
@@ -206,10 +203,11 @@
 
                                                 </div>
                                                 <div class="d-flex justify-content-end mt-2">
-                                                    <button class="btn btn-sm btn-success w-25" type="submit"> บันทึก
-                                                    </button>
-                                                    <button type="button" class="btn btn-sm btn-outline-danger w-25 "
-                                                        data-bs-dismiss="modal" aria-label="Close">ปิด</button>
+                                                    <button type="submit" class="btn btn-sm btn-success "><i
+                                                            class="fa-sharp fa-solid fa-floppy-disk"></i> บันทึก</button>
+                                                    <button type="button" class="btn btn-sm btn-outline-danger "
+                                                        data-bs-dismiss="modal" aria-label="Close"><i
+                                                            class="fa-solid fa-circle-xmark"></i> ยกเลิก</button>
                                                 </div>
 
                                             </form>
@@ -298,8 +296,10 @@
                     },
                 });
             });
+
             function modal(val) {
                 document.querySelectorAll('#select-car option').forEach(option => option.remove())
+                document.querySelectorAll('#select-driver option').forEach(option => option.remove())
                 const data = @json($booking);
                 var carselect = @json($car);
                 $.ajax({
@@ -307,30 +307,23 @@
                     url: '/admin/manage/' + val,
                     dataType: 'JSON',
                     success: function(data) {
-                        console.log(data)
-                        var car= data.car
+                        console.log(data.driver)
+                        var car = data.car
+                        var driver = data.driver
                         // เช็ครถว่างหรือไม่ว่างใน Select option ตอนกดอนุมัติ
-                        var dataCar = car;
-                        if (dataCar.length == 0) {
-                            carselect.forEach(function(item) {
-                                $('#select-car').append($('<option>', {
-                                    value: item.id,
-                                    text: item.car_license
-                                }))
-                            });
-                        } else if (dataCar.length > 0) {
-                            carselect.forEach(function(item) {
-                                dataCar.forEach(function(d) {
-                                    if (d.license_plate != item.id) {
-                                        $('#select-car').append($('<option>', {
-                                            value: item.id,
-                                            text: item.car_license
-                                        }))
-                                        console.log(item.id)
-                                    }
-                                })
-                            });
-                        }
+                        car.forEach(carsel => {
+                            $('#select-car').append($('<option>', {
+                                value: carsel.id,
+                                text: carsel.car_model + ' ทะเบียน ' + carsel.car_license
+                            }))
+                        })
+                        driver.forEach(driver => {
+                            $('#select-driver').append($('<option>', {
+                                value: driver.id,
+                                text: driver.driver_fullname
+                            }))
+                        })
+
                     },
                     //<================================================================>//
                 })
@@ -366,41 +359,82 @@
         </script>
         <script>
             function alertCancel(id) {
-                Swal.fire({
-                    text: "คุณต้องการยกเลิกการจองใช่หรือไม่!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'OK',
-                    cancelButtonText: 'Cancel'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $.ajax({
-                            type: 'GET',
-                            url: '/admin/cancel/' + id,
-                            dataType: 'JSON',
-                            success: function(data) {
-                                if (data.status == 'success') {
+                const data = @json($booking);
+                const namecancel = [];
+
+                data.forEach(show => {
+                        if (show.id == id) {
+                            namecancel.push(show);
+                        }
+                    }),
+                    (async () => {
+                        moment.locale('th')
+                        const bstart = moment(JSON.stringify(namecancel[0].booking_start)).format(' D MMM ' + (new Date(
+                                namecancel[0].booking_start)
+                            .getFullYear() +
+                            543) + ' เวลา HH:mm');
+                        const bend = moment(JSON.stringify(namecancel[0].booking_end)).format(' D MMM ' + (new Date(
+                                namecancel[0].booking_end)
+                            .getFullYear() +
+                            543) + ' เวลา HH:mm');
+                        console.log(namecancel)
+                        const {
+                            value: text
+                        } = await Swal.fire({
+                            title: 'ยกเลิกรายการ',
+                            input: 'text',
+                            // inputLabel: '<div>jjj</div>รายการจองของ ' + namecancel[0].name,
+                            html: '<div class="d-flex justify-content-center" ><div style="width: max-content;"> <div class="text-left" style="font-size:0.9rem;">เจ้าของรายการ : ' +
+                                namecancel[0].name + '</div> <div style="font-size:0.9rem;" >ระหว่างวันที่ : ' +
+                                bstart + '-' + bend +
+                                '</div><div class="text-left" style="font-size:0.9rem">รายละเอียด : ' +
+                                namecancel[0].booking_detail + ' </div> </div></div>',
+                            inputPlaceholder: 'กรอกหมายเหตุ',
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#06d6a0',
+                            cancelButtonColor: '#ef476f',
+                            confirmButtonText: '<i class="fa-sharp fa-solid fa-floppy-disk"> บันทึก',
+                            cancelButtonText: '<i class="fa-solid fa-ban"> ยกเลิก',
+
+                        }).then((result) => {
+                            console.log(result)
+                            if (result.isConfirmed) {
+                                if (result.value) {
+                                    $.ajax({
+                                        type: 'GET',
+                                        url: '/admin/cancel/' + id + '/' + result.value,
+                                        dataType: 'JSON',
+                                        success: function(data) {
+                                            if (data.status == 'success') {
+                                                Swal.fire({
+                                                    title: 'เสร็จสิ้น',
+                                                    icon: 'success',
+                                                    confirmButtonText: 'ok',
+                                                }).then((data) => {
+                                                    window.location.reload();
+                                                })
+                                            } else {
+                                                Swal.fire({
+                                                    title: 'Error',
+                                                    icon: 'error',
+                                                })
+                                            }
+                                        },
+                                    });
+                                } else if (!result.value) {
                                     Swal.fire({
-                                        title: 'เสร็จสิ้น',
-                                        icon: 'success',
-                                        confirmButtonText: 'ok',
-                                    }).then((data) => {
-                                        if (result.isConfirmed) {
-                                            window.location.reload();
-                                        }
-                                    })
-                                } else {
-                                    Swal.fire({
-                                        title: 'Error',
                                         icon: 'error',
+                                        text: 'ไม่สำเร็จ กรุณากรอกหมายเหตุการยกเลิกรายการ',
+                                        confirmButtonColor: '#118ab2',
+                                        confirmButtonText: 'ตกลง',
                                     })
                                 }
-                            },
-                        });
-                    }
-                })
+                            }
+                        })
+
+
+                    })()
             }
         </script>
     @endpush

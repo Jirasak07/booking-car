@@ -42,6 +42,9 @@
             </table>
         </div>
     </div>
+
+
+
     </div>
     @push('js')
         <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -103,20 +106,55 @@
                         var status = detail[0].booking_status;
                         var driver = detail[0].driver;
                         var car = detail[0].car_detail + ' ทะเบียน ' + detail[0].car
-
+                        var det = String(detail[0].booking_detail).split("~")
                         Swal.fire({
                             title: '<div style="font-size:50%" > รายการจองของคุณ : ' + detail[0].name_user +
                                 ' </div>',
-                            html: '<div class="col-12" style="font-size:0.9rem"><i class="fa-solid fa-calendar-days" ></i>  :' +
-                                start + end + '</div>' +
-                                '<div class="col-12 mt-3 row " style="font-size:0.9rem" ><div class="text-left col-12">รายละเอียดการจอง : ' +
-                                detail[0].booking_detail +
-                                '</div><div class="text-left col-12"> รถที่ใช้ : ' + (status == 2? car:'-') +
-                                ' </div><div class="col-12 text-left"> พนักงานขับ : ' + driver +
-                                '</div><div class="text-left col-12"> สถานะ : ' +
-                                (status == 2 ? 'อนุมัติแล้ว' : 'ถูกยกเลิก') +
-                                ' </div></div>',
+                            html: '<div class=" d-flex justify-content-center "> <div style="width: max-content;"><div class="text-left" style="font-size:0.9rem;">ระยะเวลา : ' +
+                                start + end +
+                                ' </div><div  class="text-left" style="font-size:0.9rem;" >รายละเอียด : ' +
+                                det[0] +
+                                '</div><div class="text-left" style="font-size:0.9rem" >พนักงานขับ : ' +
+                                driver +
+                                '</div><div class="text-left" style="font-size:0.9rem"> รถที่ใช้ : ' + (
+                                    status == 2 ? car : '-') +
+                                ' </div> <div  class="text-left" style="font-size:0.9rem">สถานะ : ' + (
+                                    status == 2 ? 'อนุมัติ' : 'ยกเลิก') +
+                                '</div> <div  class="text-left" style="font-size:0.9rem">หมายเหตุ : ' + (
+                                    status == 2 ? '-' : det[1]) + '</div> </div> </div>',
                             icon: (status == 2 ? 'success' : 'error'),
+                            showCancelButton: (status == 2 ? true : false),
+                            confirmButtonText: '<i class="fa-solid fa-check"> ตกลง',
+                            cancelButtonText: '<i class="fa-solid fa-ban"> ยกเลิกรายการ',
+                            showDeniedButton: true,
+                            confirmButtonColor: '#06d6a0',
+                            cancelButtonColor: '#ef476f',
+                        }).then((res) => {
+                            console.log(res)
+                            if (res.dismiss == 'cancel') {
+                                Swal.fire({
+                                    input: 'text',
+                                    icon:'warning',
+                                    title: 'กรุณากรอกหมายเหตุการยกเลิก',
+                                    inputPlaceholder: 'หมายเหตุการยกเลิก',
+                                    confirmButtonText: 'บันทึก',
+                                    showCancelButton: true,
+                                    cancelButtonColor:'#ef476f',
+                                    confirmButtonColor:'#06d6a0',
+                                    cancelButtonText:'ยกเลิก'
+                                }).then((resp) => {
+                                    if (resp.isConfirmed) {
+                                        if(resp.value){
+                                            alert(resp.value)
+                                        }else{
+                                            Swal.fire({
+                                                text:'กรุณากรอกข้อมูล',
+                                                icon:'error'
+                                            })
+                                        }
+                                    }
+                                })
+                            }
                         })
                     }
                 })
