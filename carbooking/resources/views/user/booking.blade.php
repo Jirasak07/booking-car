@@ -215,12 +215,14 @@
             <!-- cancel text Modal -->
             <div class="modal fade" id="cencel_detail" data-bs-backdrop="static" data-bs-keyboard="false"
                 tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h1 class="modal-title fs-5" id="staticBackdropLabel">ยกเลิกการจอง</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
+                            <button type="button" class="close" data-bs-dismiss="modal" {{-- onclick="window.location.reload()" --}}
+                            data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                         </div>
                         <form {{-- action="{{ route('users.booking_cancel') }}" --}} method="post" id="detail_cancel">
                             @csrf

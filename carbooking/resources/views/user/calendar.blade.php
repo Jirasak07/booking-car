@@ -135,16 +135,17 @@
                 },
 
                 select: function(info) {
+                    moment.locale('th');
                     var nowDate = new moment();
 
-                    var booking_start = moment(info.startStr).format('YYYY-MM-DD HH:mm:ss');
-                    var booking_end = moment(info.endStr).format('YYYY-MM-DD HH:mm:ss');
+                    var booking_start = moment(info.startStr).format('YYYY-MM-DD HH:mm');
+                    var booking_end = moment(info.endStr).format('YYYY-MM-DD HH:mm');
 
 
                     var canbook = moment(nowDate, 'HH:mm:ss a').add('5', 'hours').format(
-                        'YYYY-MM-DD HH:mm:ss a');
+                        'YYYY-MM-DD HH:mm');
                     //var currect = moment(canbook).format('YYYY-MM-DD HH:mm:ss')
-                    // console.log(canbook);
+                    console.log(canbook);
                     // console.log(booking_start);
                     //console.log(currect);
                     if (booking_start < canbook) {
@@ -234,7 +235,7 @@
                         <div class="col-md-4">
                             <div class="col-auto">
                                 <input type="datetime-local" data-date="" class="form-control"
-                                    data-date-format="DD MM YYYY HH:mm:ss a" name="date_start" id="date_start"
+                                    data-date-format="DD MM YYYY HH:mm" name="date_start" id="date_start"
                                     onchange="updateEndTime()">
                             </div>
 
@@ -254,7 +255,7 @@
                         <div class="col-md-4">
                             <div class="col-auto">
                                 <input type="datetime-local" data-date="" class="form-control"
-                                    data-date-format="DD MM YYYY HH:mm:ss a" id="date_end" name="date_end"
+                                    data-date-format="DD MM YYYY HH:mm" id="date_end" name="date_end"
                                     onchange="updateEndTime()">
                             </div>
 
