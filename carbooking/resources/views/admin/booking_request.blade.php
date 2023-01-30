@@ -145,7 +145,7 @@
                                     <div class="tab-pane pt-5" id="tab2">
 
                                         <div class="card card-body">
-                                            <form method="POST" action="{{ route('updateout') }}">
+                                            <form  method="POST" action="{{ route('updateout') }}">
                                                 @csrf
                                                 <input type="hidden" id="idform2" name="id_form">
                                                 <input type="hidden" name="type" value="2">
