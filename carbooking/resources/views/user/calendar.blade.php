@@ -277,9 +277,9 @@
                 </div>
                 <div class="modal-footer">
                     <button type="submit" name="saveBooking" value="" id="saveBooking"
-                        class="btn btn-primary">ยืนยัน</button>
+                        class="btn text-lighter" style="background-color: #06d6a0">บันทึก</button>
                     <button type="button" class="btn grey btn-danger"data-bs-dismiss="modal" {{-- onclick="window.location.reload()" --}}
-                        data-dismiss="modal">{{ __('ย้อนกลับ') }}</button>
+                        data-dismiss="modal">{{ __('ยกเลิก') }}</button>
                 </div>
             </div>
         </form>

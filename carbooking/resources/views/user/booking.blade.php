@@ -155,7 +155,7 @@
                         </div>
                         <div class="modal-footer">
                             {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> --}}
-                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                            <button type="button" class="btn btn-default" data-bs-dismiss="modal">ปิด</button>
                         </div>
                     </div>
                 </div>
@@ -178,7 +178,7 @@
                             <div class="modal-body">
                                 <input type="hidden" name="id" id="id" value="" />
                                 <div class="row mb-3">
-                                    <label for="" class="col-sm-2 col-form-label">ชื่อผู้จอง</label>
+                                    <strong for="" class="col-sm-2 col-form-label">ชื่อผู้จอง</strong>
                                     <div class="col-sm-10">
                                         <input type="text" disabled value="" readonly
                                             class="form-control-plaintext" id="username" name="username">
@@ -186,7 +186,7 @@
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label for="" class="col-sm-2 col-form-label">ช่วงวันที่</label>
+                                    <strong for="" class="col-sm-2 col-form-label">ช่วงวันที่</strong>
                                     <div class="col-sm-10">
                                         <div class="row g-3">
                                             <div class="col-md-5">
@@ -203,7 +203,7 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label class="col-sm-3 col-form-label">รายละเอียดการจอง</label>
+                                    <strong class="col-sm-3 col-form-label">รายละเอียดการจอง</strong>
                                     <div class="col-sm-9">
                                         <textarea name="booking_detail" id="bdetail" cols="30" rows="3" class=" form-control"></textarea>
 
@@ -211,10 +211,10 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <input type="submit" name="saveBooking" value="ยืนยัน" id="EditBooking"
-                                    class="btn btn-primary">
-                                <button type="button" class="btn grey btn-danger"data-bs-dismiss="modal"
-                                    {{-- onclick="window.location.reload()" --}} data-dismiss="modal">{{ __('ย้อนกลับ') }}</button>
+                                <button type="submit" name="saveBooking" value="" id="EditBooking"
+                                    class="btn text-lighter" style="background-color: #06d6a0">บันทึก</button>
+                                <button type="button" class="btn grey btn-danger" style="background-color: #ef476f" data-bs-dismiss="modal"
+                                    {{-- onclick="window.location.reload()" --}} data-dismiss="modal">{{ __('ยกเลิก') }}</button>
                             </div>
                         </form>
 
@@ -421,93 +421,86 @@
                 //alert(id)
                 var id = id;
                 console.log(id);
-                $.ajax({
-                    type: 'GET',
-                    url: '/users/detail/' + id,
-                    dataType: 'JSON',
-                    success: function(res) {
-                        console.log(res.booking_detail);
-                        moment.locale('th');
-                        var start = moment(res.booking_start).add(543, 'year').format(
-                            'ddd ที่ D MMM YYYY เวลา HH:mm')
-                        var end = moment(res.booking_end).add(543, 'year').format('ddd ที่ D MMM YYYY เวลา HH:mm')
-                        Swal.fire({
-                            //title: 'Are you sure?',
-                            title: "<h3>คุณต้องการยกเลิกการจองใช่หรือไม่!</h3>",
-                            html: '<div class="col-12" style="font-size:0.9rem">' +
-                                '<div class=" text-left"><i class="fa-solid fa-calendar-days" ></i>  : ' +
-                                start + ' - ' + end +
-                                '</div>' +
-                                '<div class="mt-3 text-left" style="font-size:0.9rem" ><strong>รายละเอียดการจอง</strong> : ' +
-                                res.booking_detail +
-                                '</div>' +
-                                '<form method="POST">' +
-                                '<div class="mt-3 text-left text-danger" style="font-size:0.9rem" ><strong>สาเหตุการยกเลิก<span>*</span></strong>' +
-                                '<input type="hidden" name="id_cancel" id="id_cancel" value="' + id + '">' +
-                                '<input type="text" name="detail" id="detail" class=" form-control mt-3"value=""  placeholder="โปรดระบุสาเหตุการยกเลิกการจอง">' +
-                                '</div>' +
-                                '</form>' +
-                                '</div>',
+                const data = @json($booking2);
+                const namecancel = [];
+
+                data.forEach(show => {
+                        if (show.id == id) {
+                            namecancel.push(show);
+                        }
+                    }),
+                    (async () => {
+                        moment.locale('th')
+                        const bstart = moment(JSON.stringify(namecancel[0].booking_start)).format(' D MMM ' + (new Date(
+                                namecancel[0].booking_start)
+                            .getFullYear() +
+                            543) + ' เวลา HH:mm');
+                        const bend = moment(JSON.stringify(namecancel[0].booking_end)).format(' D MMM ' + (new Date(
+                                namecancel[0].booking_end)
+                            .getFullYear() +
+                            543) + ' เวลา HH:mm');
+                        console.log(namecancel)
+                        const {
+                            value: text
+                        } = await Swal.fire({
+                            title: 'ยกเลิกรายการ',
+                            input: 'text',
+                            // inputLabel: '<div>jjj</div>รายการจองของ ' + namecancel[0].name,
+                            html: '<div class="d-flex justify-content-center" ><div style="width: max-content;">' +
+                                '<div style="font-size:0.9rem;" ><span style="font-weight:800">ระหว่างวันที่ :</span> ' +
+                                bstart + ' - ' + bend +
+                                '</div><div class="text-left" style="font-size:0.9rem"><span style="font-weight:800">รายละเอียด : </span>' +
+                                namecancel[0].booking_detail + ' </div> </div></div>',
+                            inputPlaceholder: 'กรอกหมายเหตุ',
                             icon: 'warning',
                             showCancelButton: true,
-                            confirmButtonColor: '#3085d6',
-                            cancelButtonColor: '#d33',
-                            confirmButtonText: 'OK',
-                            cancelButtonText: 'Cancel'
+                            confirmButtonColor: '#06d6a0',
+                            cancelButtonColor: '#ef476f',
+                            confirmButtonText: 'บันทึก',
+                            cancelButtonText: 'ยกเลิก',
+
                         }).then((result) => {
+                            console.log(result)
                             if (result.isConfirmed) {
-                                var id_cancel = $('#id_cancel').val();
-                                var detail = $('#detail').val();
-                                console.log(id_cancel);
-                                console.log(detail);
-                                if (detail != "") {
-                                    $("#cancelBooking").attr("disabled", "disabled");
+                                if (result.value) {
                                     $.ajax({
-                                        url: "{{ url('/users/cancel') }}",
-                                        type: "POST",
-                                        data: {
-                                            id_cancel: id_cancel,
-                                            detail: detail,
-                                            "_token": "{{ csrf_token() }}",
-                                        },
-                                        cache: false,
-                                        success: function(response) {
-                                            if (response.status == 'success') {
+                                        type: 'GET',
+                                        url: '/users/cancel/' + id + '/' + result.value,
+                                        dataType: 'JSON',
+                                        success: function(data) {
+                                            if (data.status == 'success') {
                                                 Swal.fire({
-                                                    title: 'Success',
-                                                    text: "ยกเลิกการจองสำเร็จ",
+                                                    title: 'เสร็จสิ้น',
                                                     icon: 'success',
-                                                    //width: '550px',
-                                                    showConfirmButton: true,
-                                                })
-                                                setInterval(function() {
-                                                    swal.close();
+                                                    confirmButtonText: 'ok',
+                                                }).then((data) => {
                                                     window.location.reload();
-                                                }, 1500)
+                                                })
                                             } else {
                                                 Swal.fire({
                                                     title: 'Error',
-                                                    text: "ยกเลิกการจองไม่สำเร็จ",
                                                     icon: 'error',
-                                                    //width: '550px',
-                                                    showConfirmButton: true,
-                                                    timer: 3000
                                                 })
                                             }
-
-                                        }
+                                        },
                                     });
+                                } else if (!result.value) {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        text: 'ไม่สำเร็จ กรุณากรอกหมายเหตุการยกเลิกรายการ',
+                                        confirmButtonColor: '#118ab2',
+                                        confirmButtonText: 'ตกลง',
+                                    })
                                 }
                             }
                         })
-                    }
-                });
+                    })()
 
             }
 
             /*  booking header click show to datatables */
             function dt_all() {
-                window.location.reload();
+                console.log('all');
             }
 
             function dt_cancel() {

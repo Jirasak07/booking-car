@@ -66,7 +66,7 @@ class ManagementAdminController extends Controller
                             $query->where('tb_booking.booking_start', '<', $sdate )
                             ->Where('tb_booking.booking_end', '>', $edate);
                         })->orWhere(function ($query) use ($sdate, $edate) {
-                            $query->where('tb_booking.booking_start', '=', $edate )
+                            $query->where('tb_booking.booking_start', '=', $sdate )
                             ->Where('tb_booking.booking_end', '=', $edate);
                         })
                         ;
@@ -92,7 +92,7 @@ foreach($reserved_cars as $item){
 
 
 }
-             
+
 
    $count = BookingModel::where('booking_status','2')->where('type_car', '1')->count();
             if($count < 1 ){
@@ -104,7 +104,7 @@ foreach($reserved_cars as $item){
     ->where(function ($query) use ($car) {
         $query->where(function ($query) use ($car) {
                     $query->Where('tb_cars.id', '!=' ,$car);
-             
+
         })
             ;
     })
@@ -115,7 +115,7 @@ $unreserved_driver = DB::table('tb_driver')
     ->where(function ($query) use ($driver) {
         $query->where(function ($query) use ($driver) {
                     $query->Where('tb_driver.id', '!=' ,$driver);
-             
+
         })
             ;
     })
@@ -124,7 +124,7 @@ $unreserved_driver = DB::table('tb_driver')
         // dd($unreserved_cars);
            return response()->json(['car'=>$unreserved_cars,'driver'=>$unreserved_driver]);
 
-           
+
     }
     public function aprove_in(Request $request)
     {
@@ -152,7 +152,7 @@ $unreserved_driver = DB::table('tb_driver')
     {
 
 
-  
+
 
         $id = $request->id_form;
 
