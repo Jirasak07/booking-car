@@ -219,7 +219,7 @@ class Bookingcontroller extends Controller
         $id = $request->id_cancel;
         $canclebooking = BookingModel::find($id);
         $canclebooking->booking_status = ('3');
-        $canclebooking->booking_detail =  $canclebooking->booking_detail.".".$request->detail;
+        $canclebooking->booking_detail =  $canclebooking->booking_detail."~".$request->detail;
        // dd($canclebooking);
         $canclebooking->save();
         return response()->json(['status' => 'success']);
@@ -230,7 +230,7 @@ class Bookingcontroller extends Controller
         $varlidate = $request->validate([
             'date_start' => 'required|date|after:now + 5 hours',
             'date_end' => 'required|date|after:date_start + 30 minutes',
-            'location' => 'required|min:3',
+            'location' => 'required|min:10',
         ], [
             'date_start.after:now + 5 hours' => 'โปรดจองก่อนเดินทาง 5 ชั่วโมง',
             'date_start.after:date_start + 30 minutes' => 'โปรดระบุเวลาการเดินทางอย่างน้อย 30 นาที',
