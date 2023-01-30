@@ -22,10 +22,10 @@
             </div>
 
             <div class="w-100  m-dash rounded">
-                <div class=" rounded h-100 pending  d-flex flex-row align-items-center " style="min-height:120px">
-                    <div class="h-100 col icon-d-2 icon-circle  "> <i class="fa-solid fa-hourglass-end icon-dashboard "></i>
+                <div class=" rounded h-100 bg-defualt  d-flex flex-row align-items-center " style="min-height:120px;border:5px solid #FFC857">
+                    <div class="h-100 col icon-d-2 icon-circle  " style="color:#FFC857"> <i class="fa-solid fa-hourglass-end icon-dashboard "></i>
                     </div>
-                    <div class="col text-white d-flex flex-column align-items-center">
+                    <div class="col  d-flex flex-column align-items-center" style="color:#FFC857" >
                         <div>รอดำเนินการ</div>
                         <div style="font-size: 4rem;line-height: 80%;" id="pending">0</div>
                         <div>รายการ</div>

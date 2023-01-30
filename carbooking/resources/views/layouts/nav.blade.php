@@ -27,7 +27,7 @@
                 <a class=" pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
                     <div class="media align-items-center ">
-                        <span class="avatar avatar-sm rounded-circle  bg-success">
+                        <span class="avatar avatar-sm rounded-circle " style="background-color:#F5A65B;">
                             {{-- <img alt="Image placeholder" src="{{ asset('assets/img/lanna-removebg-preview.png') }}"> --}}
                             <i class="fa-solid fa-user-tie" style="font-size: 1.5rem"></i>
 

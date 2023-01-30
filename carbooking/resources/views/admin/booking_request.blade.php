@@ -133,9 +133,9 @@
 
 
                                             <div class="d-flex align-self-end justify-content-end w-100 mt-4 ">
-                                                <button type="submit" class="btn btn-sm btn-success "><i
+                                                <button type="submit" class="btn btn-md btn-success "><i
                                                         class="fa-sharp fa-solid fa-floppy-disk"></i> บันทึก</button>
-                                                <button type="button" class="btn btn-sm btn-outline-danger "
+                                                <button type="button" class="btn btn-md btn-outline-danger "
                                                     data-bs-dismiss="modal" aria-label="Close" onclick="closeModal()"><i
                                                         class="fa-solid fa-circle-xmark"></i> ยกเลิก</button>
                                             </div>
@@ -188,9 +188,9 @@
 
                                                 </div>
                                                 <div class="d-flex justify-content-end mt-2">
-                                                    <button id="frm1-approve" class=" btn btn-sm btn-success "><i
+                                                    <button id="frm1-approve" class=" btn  btn-success "><i
                                                             class="fa-sharp fa-solid fa-floppy-disk"></i> บันทึก</button>
-                                                    <button type="button" class="btn btn-sm btn-outline-danger "
+                                                    <button type="button" class="btn  btn-outline-danger "
                                                         data-bs-dismiss="modal" aria-label="Close"><i
                                                             class="fa-solid fa-circle-xmark"></i> ยกเลิก</button>
                                                 </div>
