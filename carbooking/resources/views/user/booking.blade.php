@@ -52,7 +52,10 @@
                                                 @endphp
                                             </td>
                                             <td style="font-size:16px" id="booking_detail">
-                                                {!! Str::limit("$item->booking_detail", 50, ' ...') !!}
+                                                @php
+                                                    $detail = explode('.', $item->booking_detail);
+                                                @endphp
+                                                {!! Str::limit("$detail[0]", 50, ' ...') !!}
                                             </td>
                                             <td align="center" id="view-de">
                                                 <a class="btn btn-primary btn-sm text-white"
@@ -195,46 +198,13 @@
                                     <label class="col-sm-3 col-form-label">รายละเอียดการจอง</label>
                                     <div class="col-sm-9">
                                         <textarea name="booking_detail" id="bdetail" cols="30" rows="3" class=" form-control"></textarea>
-                                        {{--  <textarea name="booking_detail" id="booking_detail" cols="30" rows="3" class="form-control"
-                                        value=""></textarea> --}}
+
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <input type="submit" name="saveBooking" value="ยืนยัน" id="EditBooking"
                                     class="btn btn-primary">
-                                <button type="button" class="btn grey btn-danger"data-bs-dismiss="modal"
-                                    {{-- onclick="window.location.reload()" --}} data-dismiss="modal">{{ __('ย้อนกลับ') }}</button>
-                            </div>
-                        </form>
-
-                    </div>
-                </div>
-            </div>
-
-            <!-- cancel text Modal -->
-            <div class="modal fade" id="cencel_detail" data-bs-backdrop="static" data-bs-keyboard="false"
-                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="staticBackdropLabel">ยกเลิกการจอง</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
-                        <form {{-- action="{{ route('users.booking_cancel') }}" --}} method="post" id="detail_cancel">
-                            @csrf
-                            <div class="modal-body">
-                                <div class=" row g-3 mb-3">
-                                    <input type="hidden" name="id_cancel" id="id_cancel" value="">
-                                    <h3 for=""><strong>โปรดระบุสาเหตุการยกเลิกการจอง</strong></h3>
-                                    <input type="text" name="detail" id="detail" class=" form-control"
-                                        value="">
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" name="cancelBooking" value="ยืนยัน" id="cancelBooking"
-                                    class="btn btn-primary">ยืนยัน</button>
                                 <button type="button" class="btn grey btn-danger"data-bs-dismiss="modal"
                                     {{-- onclick="window.location.reload()" --}} data-dismiss="modal">{{ __('ย้อนกลับ') }}</button>
                             </div>
@@ -252,50 +222,6 @@
                 <script src="https://cdn.datatables.net/rowreorder/1.3.1/js/dataTables.rowReorder.min.js"></script>
                 <script>
                     $(document).ready(function() {
-                        $('#cancelBooking').on('click', function() {
-                            var id_cancel = $('#id_cancel').val();
-                            var detail = $('#detail').val();
-                            if (detail != "" ) {
-                                $("#cancelBooking").attr("disabled", "disabled");
-                                $.ajax({
-                                    url: "{{ url('/users/cancel') }}",
-                                    type: "POST",
-                                    data: {
-                                        id_cancel: id_cancel,
-                                        detail: detail,
-                                        "_token": "{{ csrf_token() }}",
-                                    },
-                                    cache: false,
-                                    success: function(response) {
-                                        if (response.status == 'success') {
-                                            Swal.fire({
-                                                title: 'Success',
-                                                text: "ยกเลิกการจองสำเร็จ",
-                                                icon: 'success',
-                                                //width: '550px',
-                                                showConfirmButton: true,
-                                            })
-                                            setInterval(function() {
-                                                swal.close();
-                                                window.location.reload();
-                                            }, 1500)
-                                        } else {
-                                            Swal.fire({
-                                                title: 'Error',
-                                                text: "ยกเลิกการจองไม่สำเร็จ",
-                                                icon: 'error',
-                                                //width: '550px',
-                                                showConfirmButton: true,
-                                                timer: 3000
-                                            })
-                                        }
-
-                                    }
-                                });
-                            } 
-                            console.log(id_cancel);
-                            console.log(detail);
-                        });
                         $('#booking_table').DataTable({
                             rowReorder: {
                                 selector: 'td:nth-child(2)'
@@ -458,13 +384,14 @@
                                     'ddd ที่ D MMM YYYY เวลา HH:mm')
                                 var end = moment(res.booking_end).add(543, 'year').format('ddd ที่ D MMM YYYY เวลา HH:mm')
                                 //console.log(car_detail);
-                                $('#viewdetail').modal('toggle');
+
                                 //$('#id_booking').html(res.id);
                                 $('#user_book').html(res.name);
                                 $('#status_booking').html(status);
                                 $('#date_booking').html(start + ' - ' + end);
                                 $('#detail_car').html(car_detail);
                                 $('#detail_booking').html(res.booking_detail);
+                                $('#viewdetail').modal('toggle');
                             }
                         });
 
@@ -473,25 +400,90 @@
 
                     function alertCancel(id) {
                         //alert(id)
-                        Swal.fire({
-                            //title: 'Are you sure?',
-                            text: "คุณต้องการยกเลิกการจองใช่หรือไม่!",
-                            icon: 'warning',
-                            showCancelButton: true,
-                            confirmButtonColor: '#3085d6',
-                            cancelButtonColor: '#d33',
-                            confirmButtonText: 'OK',
-                            cancelButtonText: 'Cancel'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                console.log(id);
-                                document.getElementById('id_cancel').value = id
-                                //$('#id_cancel').val(id);
-                                $('#cencel_detail').modal('toggle');
+                        var id = id;
+                        console.log(id);
+                        $.ajax({
+                            type: 'GET',
+                            url: '/users/detail/' + id,
+                            dataType: 'JSON',
+                            success: function(res) {
+                                console.log(res.booking_detail);
+                                moment.locale('th');
+                                var start = moment(res.booking_start).add(543, 'year').format(
+                                    'ddd ที่ D MMM YYYY เวลา HH:mm')
+                                var end = moment(res.booking_end).add(543, 'year').format('ddd ที่ D MMM YYYY เวลา HH:mm')
+                                Swal.fire({
+                                    //title: 'Are you sure?',
+                                    title: "<h3>คุณต้องการยกเลิกการจองใช่หรือไม่!</h3>",
+                                    html: '<div class="col-12" style="font-size:0.9rem">' +
+                                        '<div class=" text-left"><i class="fa-solid fa-calendar-days" ></i>  : ' +
+                                        start + ' - ' + end +
+                                        '</div>' +
+                                        '<div class="mt-3 text-left" style="font-size:0.9rem" ><strong>รายละเอียดการจอง</strong> : ' +
+                                        res.booking_detail +
+                                        '</div>' +
+                                        '<form method="POST">' +
+                                        '<div class="mt-3 text-left text-danger" style="font-size:0.9rem" ><strong>สาเหตุการยกเลิก<span>*</span></strong>' +
+                                        '<input type="hidden" name="id_cancel" id="id_cancel" value="' + id + '">' +
+                                        '<input type="text" name="detail" id="detail" class=" form-control mt-3"value=""  placeholder="โปรดระบุสาเหตุการยกเลิกการจอง">' +
+                                        '</div>' +
+                                        '</form>' +
+                                        '</div>',
+                                    icon: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#3085d6',
+                                    cancelButtonColor: '#d33',
+                                    confirmButtonText: 'OK',
+                                    cancelButtonText: 'Cancel'
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        var id_cancel = $('#id_cancel').val();
+                                        var detail = $('#detail').val();
+                                        console.log(id_cancel);
+                                        console.log(detail);
+                                        if (detail != "") {
+                                            $("#cancelBooking").attr("disabled", "disabled");
+                                            $.ajax({
+                                                url: "{{ url('/users/cancel') }}",
+                                                type: "POST",
+                                                data: {
+                                                    id_cancel: id_cancel,
+                                                    detail: detail,
+                                                    "_token": "{{ csrf_token() }}",
+                                                },
+                                                cache: false,
+                                                success: function(response) {
+                                                    if (response.status == 'success') {
+                                                        Swal.fire({
+                                                            title: 'Success',
+                                                            text: "ยกเลิกการจองสำเร็จ",
+                                                            icon: 'success',
+                                                            //width: '550px',
+                                                            showConfirmButton: true,
+                                                        })
+                                                        setInterval(function() {
+                                                            swal.close();
+                                                            window.location.reload();
+                                                        }, 1500)
+                                                    } else {
+                                                        Swal.fire({
+                                                            title: 'Error',
+                                                            text: "ยกเลิกการจองไม่สำเร็จ",
+                                                            icon: 'error',
+                                                            //width: '550px',
+                                                            showConfirmButton: true,
+                                                            timer: 3000
+                                                        })
+                                                    }
 
-                                //console.log(data);
+                                                }
+                                            });
+                                        }
+                                    }
+                                })
                             }
-                        })
+                        });
+
                     }
                 </script>
             @endpush

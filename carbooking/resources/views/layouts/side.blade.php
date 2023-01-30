@@ -4,7 +4,6 @@
         background-color: #EAEAEA;
         color: rgb(0, 0, 0)
     }
-   
 </style>
 <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white shadow-box-login " id="sidenav-main">
     <div class="container-fluid">
@@ -79,12 +78,6 @@
             <!-- Navigation -->
             @if (Auth::user()->role_user == '2')
                 <ul class="navbar-nav  ">
-                    <li class="{{ 'users/dashboard' == request()->path() ? 'nav-item active-nav ' : 'nav-item ' }}">
-                        <a class="{{ 'users/dashboard' == request()->path() ? 'nav-link text-darker' : 'nav-link ' }}"
-                            style="font-weight: 600;font-size:1rem" href="{{ route('users.dashboard') }}">
-                            <i class="fa-solid fa-gauge-high"></i> {{ __('Dashboard') }}
-                        </a>
-                    </li>
                     <li class="{{ 'users/booking' == request()->path() ? 'nav-item active-nav ' : 'nav-item ' }}">
                         <a class="{{ 'users/booking' == request()->path() ? 'nav-link text-darker' : 'nav-link ' }}"
                             style="font-weight: 600;font-size:1rem"
@@ -92,6 +85,13 @@
                             <i class="fa-solid fa-calendar-days"></i> {{ __('ข้อมูลการจอง') }}
                         </a>
                     </li>
+                    <li class="{{ 'users/dashboard' == request()->path() ? 'nav-item active-nav ' : 'nav-item ' }}">
+                        <a class="{{ 'users/dashboard' == request()->path() ? 'nav-link text-darker' : 'nav-link ' }}"
+                            style="font-weight: 600;font-size:1rem" href="{{ route('users.dashboard') }}">
+                            <i class="fa-regular fa-calendar-plus"></i>{{ __('จองคิวรถ') }}
+                        </a>
+                    </li>
+
                 </ul>
             @endif
             @if (Auth::user()->role_user == '1')
@@ -102,14 +102,16 @@
                             <i class="fa-solid fa-gauge-high "></i> {{ __('Dashboard') }}
                         </a>
                     </li>
-                    <li class="{{ 'admin/request' == request()->path()||'admin/history' == request()->path() ? 'nav-item active-nav ' : 'nav-item ' }}">
-                        <a class="{{ 'admin/request' == request()->path()||'admin/history' == request()->path() ? 'nav-link text-darker' : 'nav-link ' }}" style="font-weight: 600;font-size:1rem"
-                            href="{{ route('admin.booking_request') }}">
+                    <li
+                        class="{{ 'admin/request' == request()->path() || 'admin/history' == request()->path() ? 'nav-item active-nav ' : 'nav-item ' }}">
+                        <a class="{{ 'admin/request' == request()->path() || 'admin/history' == request()->path() ? 'nav-link text-darker' : 'nav-link ' }}"
+                            style="font-weight: 600;font-size:1rem" href="{{ route('admin.booking_request') }}">
                             <i class="fa-solid fa-calendar-days"></i> {{ __('ข้อมูลการจอง') }} </a>
                         <ul class="sub-menu py-2 ">
                             <li class="nav-item">
                                 <a class="{{ 'admin/request' == request()->path() ? 'nav-link-sub text-primary' : 'nav-link-sub  ' }}"
-                                    style="font-weight: 600;font-size:0.9rem" href="{{ route('admin.booking_request') }}">
+                                    style="font-weight: 600;font-size:0.9rem"
+                                    href="{{ route('admin.booking_request') }}">
                                     <i class="fa-sharp fa-solid fa-circle-dot" style="font-size: 50%"></i>
                                     {{ __('รายการจองรถ') }}
                                 </a>
@@ -117,7 +119,8 @@
 
                             <li class="nav-item">
                                 <a class="{{ 'admin/history' == request()->path() ? 'nav-link-sub text-primary ' : 'nav-link-sub ' }}"
-                                    style="font-weight: 600;font-size:0.9rem" href="{{ route('admin.booking_history') }}">
+                                    style="font-weight: 600;font-size:0.9rem"
+                                    href="{{ route('admin.booking_history') }}">
                                     <i class="fa-sharp fa-solid fa-circle-dot" style="font-size: 50%"></i>
                                     {{ __('ประวัติรายการ') }}
                                 </a>
@@ -126,28 +129,32 @@
                     </li>
 
 
-                    <li class="{{ 'admin/manage-car' == request()->path()||'admin/manage-driver' == request()->path()||'admin/manage-user' == request()->path() ? 'nav-item active-nav ' : 'nav-item ' }}">
-                        <a class="{{ 'admin/manage-car' == request()->path()||'admin/manage-driver' == request()->path()||'admin/manage-user' == request()->path() ? 'nav-link text-darker' : 'nav-link ' }}" style="font-weight: 600;font-size:0.9rem"
-                            href="{{ route('admin.manage-car') }}">
+                    <li
+                        class="{{ 'admin/manage-car' == request()->path() || 'admin/manage-driver' == request()->path() || 'admin/manage-user' == request()->path() ? 'nav-item active-nav ' : 'nav-item ' }}">
+                        <a class="{{ 'admin/manage-car' == request()->path() || 'admin/manage-driver' == request()->path() || 'admin/manage-user' == request()->path() ? 'nav-link text-darker' : 'nav-link ' }}"
+                            style="font-weight: 600;font-size:0.9rem" href="{{ route('admin.manage-car') }}">
                             <i class="fa-regular fa-calendar"></i> {{ __('จัดการข้อมูลพื้นฐาน') }} </a>
                         <ul class="sub-menu py-2 ">
                             <li class="nav-item">
                                 <a class="{{ 'admin/manage-car' == request()->path() ? 'nav-link-sub text-primary ' : 'nav-link-sub text-default  ' }}"
-                                    style="font-weight: 600;font-size:0.85rem" href="{{ route('admin.manage-car') }}">
+                                    style="font-weight: 600;font-size:0.85rem"
+                                    href="{{ route('admin.manage-car') }}">
                                     <i class="fa-sharp fa-solid fa-circle-dot" style="font-size: 50%"></i>
                                     {{ __('จัดการข้อมูลรถภายใน') }}
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="{{ 'admin/manage-driver' == request()->path() ? 'nav-link-sub text-primary ' : 'nav-link-sub text-default ' }}"
-                                    style="font-weight: 600;font-size:0.85rem" href="{{ route('admin.manage-driver') }}">
+                                    style="font-weight: 600;font-size:0.85rem"
+                                    href="{{ route('admin.manage-driver') }}">
                                     <i class="fa-sharp fa-solid fa-circle-dot" style="font-size: 50%"></i>
                                     {{ __('จัดการข้อมูลพนักงานขับ') }}
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="{{ 'admin/manage-user' == request()->path() ? 'nav-link-sub text-primary ' : 'nav-link-sub text-default ' }}"
-                                    style="font-weight: 600;font-size:0.85rem" href="{{ route('admin.manage-user') }}">
+                                    style="font-weight: 600;font-size:0.85rem"
+                                    href="{{ route('admin.manage-user') }}">
                                     <i class="fa-sharp fa-solid fa-circle-dot" style="font-size: 50%"></i>
                                     {{ __('จัดการข้อมูลผู้ใช้') }}
                                 </a>

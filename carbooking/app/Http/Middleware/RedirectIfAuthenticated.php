@@ -25,7 +25,7 @@ class RedirectIfAuthenticated
             if (Auth::guard($guard)->check() && Auth::user()->role_user == 1) {
                 return redirect()->route('admin.dashboard');
             } elseif (Auth::guard($guard)->check() && Auth::user()->role_user == 2) {
-                return redirect()->route('users.dashboard');
+                return redirect()->route('users.view-booking');
             }
         }
 
