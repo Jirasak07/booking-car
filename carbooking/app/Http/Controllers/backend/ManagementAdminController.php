@@ -4,7 +4,9 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\BookingModel;
+use App\Models\CarModel;
 use App\Models\CaroutModel;
+use App\Models\DriverModel;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -82,10 +84,10 @@ foreach($reserved_cars as $item){
 }
              
 
-   $count = BookingModel::where('booking_status','2')->count();
-            if($count < 0 ){
-                $unreserved_cars = DB::table('tb_cars')->get();
-                $unreserved_driver = DB::table('tb_driver')->get();
+   $count = BookingModel::where('booking_status','2')->where('type_car', '1')->count();
+            if($count < 1 ){
+                $unreserved_cars = CarModel::all();
+                $unreserved_driver = DriverModel::all();
    }else{
     $unreserved_cars = DB::table('tb_cars')
     ->where('car_status','1')

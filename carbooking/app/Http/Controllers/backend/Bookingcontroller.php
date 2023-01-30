@@ -229,12 +229,12 @@ class Bookingcontroller extends Controller
         $varlidate = $request->validate([
             'date_start' => 'required|date|after:now + 5 hours',
             'date_end' => 'required|date|after:date_start + 30 minutes',
-            'location' => 'required|min:10',
+            'location' => 'required',
         ], [
             'date_start.after:now + 5 hours' => 'โปรดจองก่อนเดินทาง 5 ชั่วโมง',
             'date_start.after:date_start + 30 minutes' => 'โปรดระบุเวลาการเดินทางอย่างน้อย 30 นาที',
             'location.required' => 'โปรดระบุรายละเอียดและสถานที่ที่จะไป',
-            'location.min' => 'โปรดระบุรายละเอียดอย่างน้อย 3 ตัวอักษร',
+        
         ]);
 
         $date_start = Carbon::parse($request->date_start)->format('Y-m-d\TH:i:s');
@@ -260,5 +260,18 @@ class Bookingcontroller extends Controller
         $bookingcar->save();
 
         return redirect()->back()->with('success', 'การจองสำเร็จ');
+    }
+    function edit_booking(Request $request)
+    {
+        $id = $request->id;
+        $date_start = Carbon::parse($request->booking_start)->format('Y-m-d\TH:i:s');
+        $date_end = Carbon::parse($request->booking_end)->format('Y-m-d\TH:i:s');
+        $booking = BookingModel::find($id);
+        $booking->booking_start = $date_start;
+        $booking->booking_end = $date_end;
+        $booking->booking_detail = $request->booking_detail;
+        //dd($booking);
+        $booking->save();
+        return redirect()->back()->with('success_edit', 'complete');
     }
 }
