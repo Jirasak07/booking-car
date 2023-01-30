@@ -218,7 +218,7 @@ class Bookingcontroller extends Controller
         //dd($request->all());
         $canclebooking = BookingModel::find($id);
         $canclebooking->booking_status = ('3');
-        $canclebooking->booking_detail =  $canclebooking->booking_detail.".".$note;
+        $canclebooking->booking_detail =  $canclebooking->booking_detail."~".$note;
        // dd($canclebooking);
         $canclebooking->save();
         return response()->json(['status' => 'success']);
@@ -234,7 +234,7 @@ class Bookingcontroller extends Controller
             'date_start.after:now + 5 hours' => 'โปรดจองก่อนเดินทาง 5 ชั่วโมง',
             'date_start.after:date_start + 30 minutes' => 'โปรดระบุเวลาการเดินทางอย่างน้อย 30 นาที',
             'location.required' => 'โปรดระบุรายละเอียดและสถานที่ที่จะไป',
-        
+
         ]);
 
         $date_start = Carbon::parse($request->date_start)->format('Y-m-d\TH:i:s');
