@@ -52,11 +52,11 @@ class ManagementAdminController extends Controller
             ->where(function ($query) use ($sdate, $edate) {
                 $query->where(function ($query) use ($sdate, $edate) {
                     $query->where('tb_booking.booking_status', '==', '2')
-                        ->orWhere(function ($query) use ($sdate, $edate) {
+                        ->orWhere(function ($query) use ($sdate) {
                             $query->Where('tb_booking.booking_end', '>' ,$sdate )
                             ->Where('tb_booking.booking_start', '<', $sdate );
 
-                        }) ->orWhere(function ($query) use ($sdate, $edate) {
+                        }) ->orWhere(function ($query) use ( $edate) {
                             $query->where('tb_booking.booking_start', '>', $edate )
                             ->Where('tb_booking.booking_end', '<', $edate);
                         })->orWhere(function ($query) use ($sdate, $edate) {
