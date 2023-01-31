@@ -1,13 +1,13 @@
 <!-- box header booking pages -->
 <div class="container-fluid mt-4 ">
     <div class="d-flex flex-xl-row flex-column" style="gap: 10px;min-height:120px">
-        <div class="card w-100 rounded text-darker" style="background-color: #698996;border:1px solid #2F2F2F">
+        <div class="card w-100 rounded text-darker" style="background-color: #427AA1;border:1px solid #2F2F2F">
             <div class=" rounded h-100 d-flex flex-row align-items-center"
                 style="min-height:120px;">
-                <div class="h-100 col icon-d-2 icon-circle" style="color: #ffffff">
+                <div class="h-100 col icon-d-2 icon-circle text-white">
                     <i class="fa-solid fa-clipboard-list  icon-dashboard "></i>
                 </div>
-                <div class="col d-flex flex-column align-items-center" style="color: #ffffff">
+                <div class="col d-flex flex-column align-items-center text-white">
                     <div class="">ทั้งหมด</div>
                     <div style="font-size: 4rem;line-height: 80%;"id="alllist">{{ $Alllist }}</div>
                     <div>รายการ </div>
@@ -15,7 +15,7 @@
             </div>
         </div>
 
-        <div class=" card w-100 rounded" style="background-color: #feef47;border:1px solid #d1bf00">
+        <div class=" card w-100 rounded" style="background-color: #FFB400;border:1px solid #ae9f00">
             <div class=" rounded h-100 d-flex flex-row align-items-center"
                 style="min-height:120px;">
                 <div class="h-100 col icon-d-2 icon-circle">

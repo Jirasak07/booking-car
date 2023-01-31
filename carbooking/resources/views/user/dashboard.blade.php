@@ -31,7 +31,7 @@
                 </div>
             </div> --}}
         </div>
-        <div class="bg-white mb-5 mt-6 rounded " style="height:150vh">
+        <div class="bg-white mb-3 mt-3 rounded " style="height:150vh">
             @include('user.calendar')
         </div>
     </div>
