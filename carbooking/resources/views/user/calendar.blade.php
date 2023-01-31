@@ -1,7 +1,4 @@
 <style>
-    .fc-time {
-        margin-bottom: 5px;
-    }
 </style>
 
 @push('js')
@@ -10,15 +7,10 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-
             var pathArray = window.location.host;
             var calendarEl = document.getElementById('calendar');
-            //var bookings = @json($booking);
-            //console.log(bookings);
-
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 //themeSystem: 'bootstrap5',
-
                 selectable: true,
                 timeZone: 'Asia/bangkok',
                 locale: 'th',
@@ -33,7 +25,6 @@
                     year: 'numeric',
                     day: 'numeric',
                     //weekday: 'long',
-
                     css: 'font-size:20px'
                 },
                 headerToolbar: {
@@ -43,29 +34,15 @@
                 },
                 handleWindowResize: true,
                 expandRows: true,
-                height: '100%',
+                 height: '100%',
                 aspectRatio: 2,
                 eventTimeFormat: { // like '14:30:00'
                     hour: '2-digit',
                     minute: '2-digit',
-
                     hour12: false
                 },
                 events: 'http://' + pathArray + '/index.php//users/dashboard/refresh',
                 eventDisplay: 'block',
-
-
-                eventDidMount: function(info) {
-
-                    // console.log(info.event.title);
-                    // console.log(info.timeText); //time events
-                    /* info.el.title = "---- YOUR TEXT----" */
-                },
-                /*  eventRender: function(event, element) {
-                     element.find('.fc-title').before("<br>");
-                     element.find('.fc-title').before(element.find('.fc-time'));
-                 }, */
-
                 views: {
                     timeGridFourDay: {
                         type: 'timeGrid',
@@ -78,9 +55,6 @@
                 windowResize: function(arg) {
 
                 },
-                /*    eventRender: function(event, element) {
-                       element.find('.fc-event-time').append('<br>');
-                   }, */
                 eventClick: function(e) {
                     var event = e.event;
                     var idevent = e.event.id
@@ -144,10 +118,7 @@
 
                     var canbook = moment(nowDate, 'HH:mm:ss a').add('5', 'hours').format(
                         'YYYY-MM-DD HH:mm');
-                    //var currect = moment(canbook).format('YYYY-MM-DD HH:mm:ss')
                     console.log(canbook);
-                    // console.log(booking_start);
-                    //console.log(currect);
                     if (booking_start < canbook) {
                         event.preventDefault();
                         Swal.fire({
@@ -159,10 +130,8 @@
                         $('#bookingModal').modal('toggle');
                         $('#booking_start').html(booking_start);
                         $('#booking_end').html(booking_end);
-
                         document.getElementById('date_start').value = booking_start;
                         document.getElementById('date_end').value = booking_end;
-
                         //tag input datetime-local เลือกวันย้อนหลังไม่ได้
                         var now_utc = Date.now()
                         var today = new Date(now_utc).toISOString().substring(0, 16);
@@ -170,21 +139,13 @@
                         document.getElementById("date_end").setAttribute("min", today);
                     }
                 }
-
             });
             setInterval(() => {
                 calendar.refetchEvents()
             }, 5000);
             calendar.setOption('aspectRatio', 2);
             calendar.updateSize();
-            calendar.render(
-                /* function(event, element) {
-                                element.find('.fc-event-time').append('<br>');
-                            } */
-            );
-
-
-
+            calendar.render();
         });
 
         function updateEndTime() {
@@ -208,7 +169,6 @@
             } else {
                 $('#error_text').html(' ');
             }
-
         }
     </script>
 @endpush
@@ -276,8 +236,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" name="saveBooking" value="" id="saveBooking"
-                        class="btn text-lighter" style="background-color: #2B59C3">ยืนยัน</button>
+                    <button type="submit" name="saveBooking" value="" id="saveBooking" class="btn text-lighter"
+                        style="background-color: #2B59C3">ยืนยัน</button>
                     <button type="button" class="btn grey btn-danger"data-bs-dismiss="modal" {{-- onclick="window.location.reload()" --}}
                         data-dismiss="modal">{{ __('ยกเลิก') }}</button>
                 </div>
@@ -286,4 +246,4 @@
 
     </div>
 </div>
-<div id='calendar' class="py-2 px-2 m-dash p-2"></div>
+<div id='calendar'></div>
