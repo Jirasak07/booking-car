@@ -15,7 +15,7 @@
             </div>
         </div>
 
-        <div class=" card w-100 rounded" style="background-color: #feef47;border:1px solid #d1bf00">
+        <div class=" card w-100 rounded" style="background-color: #feef47;border:1px solid #ae9f00">
             <div class=" rounded h-100 d-flex flex-row align-items-center"
                 style="min-height:120px;">
                 <div class="h-100 col icon-d-2 icon-circle">
