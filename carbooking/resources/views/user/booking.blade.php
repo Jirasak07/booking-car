@@ -144,7 +144,7 @@
                                         rows="5"value="" readonly class="form-control-plaintext"></label>
                                 </div>
                             </div>
-                            <div class="row mb-1">
+                            <div class="row mb-1" id="div-de-can">
                                 <strong for="" class="col-sm-3 col-form-label ">สาเหตุการยกเลิก</strong>
                                 <div class="col-sm-8">
                                     <label name="" id="detail_booking_cancel" cols="30" disabled
@@ -205,7 +205,7 @@
                                 <div class="row mb-3">
                                     <strong class="col-sm-3 col-form-label">รายละเอียดการจอง</strong>
                                     <div class="col-sm-9">
-                                        <textarea name="booking_detail" id="bdetail" cols="30" rows="3" class=" form-control"></textarea>
+                                        <textarea name="booking_detail" id="bdetail" cols="30" rows="3" class=" form-control" required></textarea>
 
                                     </div>
                                 </div>
@@ -392,9 +392,9 @@
                         var detail_booking = res.booking_detail;
                         var s_detail = detail_booking.split('~');
                         if (s_detail.length == 2) {
-                            s_detail[1] = s_detail[1];
+                            $('#detail_booking_cancel').html(s_detail[1]);
                         } else {
-                            s_detail[1] = '-'
+                            $('#div-de-can').html('');
                         }
                         console.log(s_detail[1]);
                         //console.log(res.booking_start);
@@ -409,7 +409,7 @@
                         $('#date_booking').html(start + ' - ' + end);
                         $('#detail_car').html(car_detail);
                         $('#detail_booking').html(s_detail[0]);
-                        $('#detail_booking_cancel').html(s_detail[1]);
+                        
                         $('#viewdetail').modal('toggle');
                     }
                 });
