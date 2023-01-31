@@ -1,5 +1,3 @@
-@section('title', 'Dashboard')
-
 @extends('layouts.layout')
 @section('content')
     @include('layouts.header')
@@ -113,7 +111,7 @@
             </div>
         @endif
         <div class="bg-white p-3 rounded ml-3 mr-3 ">
-            <div class="d-flex mb-3"> หมายเหตุ <div class="ml-3 d-flex align-items-center" style="font-size: 14px;gap:5px"><i class="fa-solid fa-square"
+            <div class="d-flex mb-3 head-beforcalendar"> หมายเหตุ <div class="ml-3 d-flex align-items-center" style="font-size: 14px;gap:5px"><i class="fa-solid fa-square"
                         style="color: #06d6a0"></i>
                       อนุมัติเรียบร้อย
                 </div>

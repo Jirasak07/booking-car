@@ -13,6 +13,7 @@
                 // themeSystem: 'bootstrap5',
                 selectable: true,
                 expandRows: true,
+
                 nowIndicator: true,
                 initialView: 'timeGridFourDay',
                 allDaySlot: false,
@@ -22,7 +23,6 @@
                     month: 'short',
                     day: 'numeric'
                 },
-                aspectRatio: 1.5,
                 timeFormat: 'HH:mm',
                 timeZone: 'Asia/bangkok',
                 locale: 'th',
@@ -83,8 +83,11 @@
                                 ' เวลา H:mm') + ' น.' +
                             '</div>' +
                             '</div>' +
-                            '<div class="mt-3 text-left px-3" style="font-size:0.9rem" ><strong>รายละเอียดการจอง</strong> : '+ event.title +' </div><div class="mt-3 text-left px-3" style="font-size:0.9rem"><strong>รถในการเดินทาง</strong> : ' +
-                            detail[0] + '<br/><strong> สถานะ : </strong>'+ (color[0]==2? 'อนุมัติเรียบร้อย':'รอดำเนินการ') +'</div>',
+                            '<div class="mt-3 text-left px-3" style="font-size:0.9rem" ><strong>รายละเอียดการจอง</strong> : ' +
+                            event.title +
+                            ' </div><div class="mt-3 text-left px-3" style="font-size:0.9rem"><strong>รถในการเดินทาง</strong> : ' +
+                            detail[0] + '<br/><strong> สถานะ : </strong>' + (color[0] == 2 ?
+                                'อนุมัติเรียบร้อย' : 'รอดำเนินการ') + '</div>',
                         icon: (color[0] == 2 ? 'success' : 'warning'),
                         iconHtml: (color[0] == 2 ?
                             '<i class="fa-solid fa-calendar-check" ></i>' :
@@ -156,9 +159,10 @@
             setInterval(() => {
                 calendar.refetchEvents()
             }, 2000);
-            calendar.updateSize();
+
             calendar.render();
         });
+
         function updateEndTime() {
             var now = new moment();
             console.log(now);

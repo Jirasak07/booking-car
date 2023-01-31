@@ -1,4 +1,3 @@
-@section('title', 'ข้อมูลการจอง')
 @extends('layouts.layout')
 @section('content')
     @include('layouts.header')
@@ -50,7 +49,7 @@
                             target: 'tr'
                         }
                     },
-                   
+
                     lengthMenu: [10, 20, 50, 100, ],
                     language: {
                         lengthMenu: "แสดง _MENU_ รายการ",

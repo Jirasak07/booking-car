@@ -5,7 +5,7 @@
         color: rgb(0, 0, 0)
     }
 </style>
-<nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white shadow-box-login min-nav pb-5" id="sidenav-main" >
+<nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white shadow-box-login min-nav pb-md-5" id="sidenav-main" >
     <div class="container-fluid">
         <!-- Toggler -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main"
@@ -158,6 +158,6 @@
             @endif
             </ul>
         </div>
-        <a href="{{ route('logout') }}" class="  btn-logout "><i class="fa-solid fa-person-walking-arrow-right"></i> ออกจากระบบ</a>
+        <a href="{{ route('logout') }}" class="btn btn-sm btn-danger   "><i class="fa-solid fa-person-walking-arrow-right"></i> ออกจากระบบ</a>
     </div>
 </nav>

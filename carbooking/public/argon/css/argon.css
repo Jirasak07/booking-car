@@ -20499,9 +20499,16 @@ a.nav-link-sub:hover {
     cursor: pointer;
     border-radius: 5px;
 }
-#calendar1 {
-    height: 100% !important;
-    min-height: 500px;
+.fc-button-primary.fc-button-active{
+    background-color: #94d2bd !important;
+    border: none !important;
+}
+.fc-button-primary{
+    background-color: #0a9396 !important;
+    border: none !important;
+}
+#calendar1{
+    height: 200vh;
 }
 @media screen and (max-width: 766px) {
     .fc-event-title {
@@ -20512,13 +20519,17 @@ a.nav-link-sub:hover {
     }
     .fc-toolbar {
         font-size: 0.9em;
+
     }
     .fc-toolbar-title {
         font-size: 1em !important;
+
     }
     .fc-button.fc-button-primary {
         font-size: 0.8em !important;
+
     }
+
     .fc-col-header-cell-cushion {
         font-size: 0.8em !important;
     }
@@ -20534,6 +20545,14 @@ a.nav-link-sub:hover {
     .min-nav {
         min-width: 375px;
     }
+    .fc-header-toolbar.fc-toolbar.fc-toolbar-ltr{
+        display: flex;
+        flex-flow: column;
+        gap: 10px;
+    }
+    .d-flex.mb-3.head-beforcalendar{
+        font-size: 0.8em;
+    }
 }
 .fc-timegrid-slot-label-cushion.fc-scrollgrid-shrink-cushion {
     font-size: 0.8em !important;
@@ -20547,34 +20566,15 @@ a.nav-link-sub:hover {
     -webkit-backdrop-filter: blur(9.8px);
 }
 
-.btn-logout {
-    font-size: 18px;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    outline: 0;
-    border: 0;
-    cursor: pointer;
-    will-change: box-shadow, transform;
-    background-color: var(--danger);
 
-
-    padding: 0 2em;
-    border-radius: 0.3em;
-    color: #fff;
-    height: 2.6em;
-    text-shadow: 0 1px 0 rgb(0 0 0 / 40%);
-    transition: box-shadow 0.15s ease, transform 0.15s ease;
-}
-
-.btn-logout:hover {
+.btn-danger:hover {
     box-shadow: 0px 0.1em 0.2em rgb(45 35 66 / 40%),
         0px 0.4em 0.7em -0.1em rgb(45 35 66 / 30%), inset 0px -0.1em 0px var(--dark);
     transform: translateY(-0.1em);
     color: white;
 }
 
-.btn-logout:active {
+.btn-danger:active {
     box-shadow: inset 0px 0.1em 0.6em var(--red);
     transform: translateY(0em);
 }
