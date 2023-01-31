@@ -144,27 +144,7 @@ class ManagementAdminController extends Controller
     }
     public function aprove_out(Request $request)
     {
-        // $request->validate(
-        //     [
-        //         'car_out_license' => 'required|min:3',
-        //         'brand' => 'required|min:3',
-        //         'car_out_model' => 'required|min:10',
-        //         'owner' => 'required|min:10',
-        //         'car_out_driver' => 'required|min:10',
-        //         'car_out_tel' => 'required|numeric|digits_between:8,15',
-        //     ],
-        //     [
-        //         'car_out_license.required' => 'โปรดระบุทะเบียน',
-        //         'brand.required' => 'โปรดระบุยี่ห้อรถ',
-        //         'car_out_model.required' => 'โปรดระบุรายละเอียดรุ่นรถ',
-        //         'owner.required' => 'โปรดระบุชื่อเจ้าของรถ',
-        //         'car_out_driver.required' => 'โปรดระบุชื่อคนขับ',
-        //         'car_out_tel.required' => 'โปรดระบุเบอร์โทรเจ้าของรถ',
-        //         // 'email.email' => 'รูปแบบอีเมล์ไม่ถูกต้อง',
-        //         'car_out_tel.numeric' => 'ระบุเฉพาะตัวเลขเท่านั้น',
-        //         'car_out_tel.digits_between' => 'เบอร์โทรต้องมี 8 - 15 ตัว',
-        //     ]
-        // );
+
         $id = $request->id_form;
         $booking_update = BookingModel::find($id);
         $car_out = new CaroutModel();
