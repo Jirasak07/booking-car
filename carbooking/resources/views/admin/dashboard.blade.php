@@ -3,7 +3,7 @@
 @extends('layouts.layout')
 @section('content')
     @include('layouts.header')
-    <div class="container mt-3  " style="max-width: 1080px;min-width:375px" >
+    <div class="container mt-3  " style="max-width: 1080px;min-width:375px">
 
         <div class="mx-5 my-3 text-default" style="font-weight: 700;font-size:1.2rem"> รายการจอง</div>
         <div class="d-flex flex-xl-row flex-column mx-3   " style="gap: 10px;min-height:120px">
@@ -113,6 +113,14 @@
             </div>
         @endif
         <div class="bg-white p-3 rounded ml-3 mr-3 ">
+            <div class="d-flex mb-3"> หมายเหตุ <div class="ml-3 d-flex align-items-center" style="font-size: 14px;gap:5px"><i class="fa-solid fa-square"
+                        style="color: #06d6a0"></i>
+                      อนุมัติเรียบร้อย
+                </div>
+                <div class="ml-3 d-flex align-items-center" style="font-size: 14px;gap:5px"><i class="fa-solid fa-square"
+                    style="color: #ffd166"></i>
+                  รอดำเนินการ</div>
+            </div>
             @include('admin.calendar_show')
 
         </div>
@@ -170,13 +178,13 @@
                         label: 'มีการใช้งาน ครั้ง',
                         data: [allcar1[0].allcar1, allcar2[0].allcar2],
                         backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
+                            'rgba( 18, 188, 0, 0.6 )',
+                            'rgba( 248, 108, 0, 0.6 )',
 
                         ],
                         borderColor: [
-                            'rgb(255, 99, 132)',
-                            'rgb(54, 162, 235)',
+                            '#12BC00',
+                            '#F86C00',
                         ],
                         hoverOffset: 4
                     }],
@@ -249,14 +257,14 @@
                 datasets: [{
                     label: 'รถภายใน',
                     data: car1,
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    borderColor: 'rgb(255, 99, 132)',
+                    backgroundColor: 'rgba( 18, 188, 0, 0.6 )',
+                    borderColor: '#12BC00',
                     borderWidth: 2
                 }, {
                     label: 'รถภายนอก',
                     data: car2,
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderColor: 'rgb(54, 162, 235)',
+                    backgroundColor: 'rgba( 248, 108, 0, 0.6 )',
+                    borderColor: '#F86C00',
                     borderWidth: 2
                 }]
             },
