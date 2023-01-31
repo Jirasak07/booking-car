@@ -1,6 +1,4 @@
-<div class="header   shadow-bottom d-none d-md-flex "style="padding-bottom:60px;background-color: #FF3CAC;
-background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
-" >
+<div class="header    shadow-bottom d-none d-md-flex  "style="padding-bottom:60px;background-color:#073b4c;box-shadow: 3px 10px 11px 0px rgba(0, 0, 0, 0.18);" >
     <div class="container-fluid">
         <div class="header-body">
             <!-- Card stats -->

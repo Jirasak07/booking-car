@@ -20378,28 +20378,46 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 }
 
 .booking-all {
-    background-color: #073b4c;
+    background: rgba(106, 76, 147, 0.4);
+    backdrop-filter: blur(9px);
+    -webkit-backdrop-filter: blur(9px);
+    color: #6a4c93;
 }
 .bg-bookall {
-    background-color: #181d31;
+    background-color: white;
 }
 .confirm {
-    background-color: #06d6a0 !important;
+    /* background-image: linear-gradient( 135deg, #81FBB8 10%, #28C76F 100%); */
+
+    background: rgba(138, 201, 38, 0.4);
+    backdrop-filter: blur(7.5px);
+    -webkit-backdrop-filter: blur(7.5px);
+
+    color: #64a400;
+    /* color: var(--white) !important; */
 }
 .ic-success {
     background-color: #3cbe32;
 }
 .pending {
-    background-color: #ffd166 !important;
+    background: rgba(255, 202, 58, 0.4);
+    backdrop-filter: blur(7.5px);
+    -webkit-backdrop-filter: blur(7.5px);
+
+    color: #da9f00;
 }
 .bg-pending {
     background-color: #ffc93c;
 }
 .bg-cancel {
-    background-color: #ef476f;
+    background: rgba(255, 89, 94, 0.4);
+    backdrop-filter: blur(7.5px);
+    -webkit-backdrop-filter: blur(7.5px);
+    border-radius: 10px;
+    color: #be1b1f;
 }
 .icon-dashboard {
-    font-size: 5rem !important;
+    font-size: 4rem !important;
 }
 .icon-d-2 {
     display: flex;
@@ -20442,7 +20460,6 @@ a.nav-link-sub:hover {
     color: white !important;
 }
 @media screen and (max-width: 450px) {
-
 }
 
 .shadow-table {
@@ -20457,8 +20474,11 @@ a.nav-link-sub:hover {
     font-size: 5rem !important;
 }
 .info-car {
-    background-color: #073b4c;
-    border-left: 5px solid #118ab2;
+    background: rgba(99, 173, 242, 0.35);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-radius: 10px;
+    color: #2c70b3 !important;
 }
 .title-cars {
     display: flex;
@@ -20479,41 +20499,82 @@ a.nav-link-sub:hover {
     cursor: pointer;
     border-radius: 5px;
 }
-#calendar1{
+#calendar1 {
     height: 100% !important;
     min-height: 500px;
 }
-@media screen and (max-width: 777px) {
+@media screen and (max-width: 766px) {
     .fc-event-title {
         font-size: 0.8em;
-
     }
-    .fc-event-time{
+    .fc-event-time {
         font-size: 0.8em;
     }
-    .fc-toolbar{
+    .fc-toolbar {
         font-size: 0.9em;
     }
-    .fc-toolbar-title{
+    .fc-toolbar-title {
         font-size: 1em !important;
     }
-    .fc-button.fc-button-primary{
+    .fc-button.fc-button-primary {
         font-size: 0.8em !important;
     }
-    .fc-col-header-cell-cushion{
+    .fc-col-header-cell-cushion {
         font-size: 0.8em !important;
     }
-    .fc-daygrid-day-number{
+    .fc-daygrid-day-number {
         font-size: 0.8em !important;
     }
-    .fc-timegrid-slot-label-cushion.fc-scrollgrid-shrink-cushion{
+    .fc-timegrid-slot-label-cushion.fc-scrollgrid-shrink-cushion {
         font-size: 0.8em !important;
     }
-    .fc-listWeek-view.fc-view.fc-list.fc-list-sticky{
+    .fc-listWeek-view.fc-view.fc-list.fc-list-sticky {
         font-size: 0.8em !important;
+    }
+    .min-nav {
+        min-width: 375px;
     }
 }
-.fc-timegrid-slot-label-cushion.fc-scrollgrid-shrink-cushion{
+.fc-timegrid-slot-label-cushion.fc-scrollgrid-shrink-cushion {
     font-size: 0.8em !important;
-    
+}
+.pend {
+    /* From https://css.glass */
+    background: rgba(255, 200, 87, 0.51);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(9.8px);
+    -webkit-backdrop-filter: blur(9.8px);
+}
+
+.btn-logout {
+    font-size: 18px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    outline: 0;
+    border: 0;
+    cursor: pointer;
+    will-change: box-shadow, transform;
+    background-color: var(--danger);
+
+
+    padding: 0 2em;
+    border-radius: 0.3em;
+    color: #fff;
+    height: 2.6em;
+    text-shadow: 0 1px 0 rgb(0 0 0 / 40%);
+    transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.btn-logout:hover {
+    box-shadow: 0px 0.1em 0.2em rgb(45 35 66 / 40%),
+        0px 0.4em 0.7em -0.1em rgb(45 35 66 / 30%), inset 0px -0.1em 0px var(--dark);
+    transform: translateY(-0.1em);
+    color: white;
+}
+
+.btn-logout:active {
+    box-shadow: inset 0px 0.1em 0.6em var(--red);
+    transform: translateY(0em);
 }
