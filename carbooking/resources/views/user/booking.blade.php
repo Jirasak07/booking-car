@@ -90,7 +90,6 @@
                                             </td>
                                         </tr>
                                     @endforeach
-
                                 </tbody>
                             </table>
                         </div>
@@ -104,9 +103,9 @@
                 <div class="modal-dialog modal-lg modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="staticBackdropLabel">รายละเอียดการจอง</h1>
-                            <button type="button" class="close" data-bs-dismiss="modal" {{-- onclick="window.location.reload()" --}}
-                                data-dismiss="modal" aria-label="Close">
+                            <h3 class="modal-title fs-5" id="staticBackdropLabel">รายละเอียดการจอง</h3>
+                            <button type="button" class="close" data-bs-dismiss="modal" data-dismiss="modal"
+                                aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -154,7 +153,6 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> --}}
                             <button type="button" class="btn btn-default" data-bs-dismiss="modal">ปิด</button>
                         </div>
                     </div>
@@ -167,9 +165,9 @@
                 <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content ">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="viewdeLabel">แก้ไขรายละเอียดการจอง</h1>
-                            <button type="button" class="close" data-bs-dismiss="modal" {{-- onclick="window.location.reload()" --}}
-                                data-dismiss="modal" aria-label="Close">
+                            <h3 class="modal-title fs-5" id="viewdeLabel">แก้ไขรายละเอียดการจอง</h3>
+                            <button type="button" class="close" data-bs-dismiss="modal" data-dismiss="modal"
+                                aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -184,7 +182,6 @@
                                             class="form-control-plaintext" id="username" name="username">
                                     </div>
                                 </div>
-
                                 <div class="row mb-3">
                                     <strong for="" class="col-sm-2 col-form-label">ช่วงวันที่</strong>
                                     <div class="col-sm-10">
@@ -206,15 +203,14 @@
                                     <strong class="col-sm-3 col-form-label">รายละเอียดการจอง</strong>
                                     <div class="col-sm-9">
                                         <textarea name="booking_detail" id="bdetail" cols="30" rows="3" class=" form-control" required></textarea>
-
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="submit" name="saveBooking" value="" id="EditBooking"
-                                    class="btn text-lighter" style="background-color: #06d6a0">บันทึก</button>
-                                <button type="button" class="btn grey btn-danger" style="background-color: #ef476f" data-bs-dismiss="modal"
-                                    {{-- onclick="window.location.reload()" --}} data-dismiss="modal">{{ __('ยกเลิก') }}</button>
+                                    class="btn text-white" style="background-color: #06d6a0">บันทึก</button>
+                                <button type="button" class="btn grey btn-danger" style="background-color: #ef476f"
+                                    data-bs-dismiss="modal"data-dismiss="modal">{{ __('ยกเลิก') }}</button>
                             </div>
                         </form>
 
@@ -255,9 +251,7 @@
                         lengthMenu: "แสดง _MENU_ รายการ",
                         search: "ค้นหาข้อมูลในตาราง",
                         info: "แสดงข้อมูล _END_ จากทั้งหมด _TOTAL_ รายการ",
-
                         paginate: {
-
                             previous: "ก่อนหน้า",
                             next: "ถัดไป",
 
@@ -350,12 +344,11 @@
                         var today = new Date(now_utc).toISOString().substring(0, 16);
                         $("#booking_start").attr("min", today);
                         $("#booking_end").attr("min", today);
+
                         $('#id').val(res.id);
-                        console.log(res.booking_detail);
                         $('#username').val(res.name);
                         $('#booking_start').val(res.booking_start);
                         $('#booking_end').val(res.booking_end);
-                        //document.getElementById("booking_detail").value = res.booking_detail;
                         $('#bdetail').val(res.booking_detail);
                     }
                 })
@@ -396,25 +389,18 @@
                         } else {
                             $('#div-de-can').html('');
                         }
-                        console.log(s_detail[1]);
-                        //console.log(res.booking_start);
                         var start = moment(res.booking_start).add(543, 'year').format(
                             'ddd ที่ D MMM YYYY เวลา HH:mm')
                         var end = moment(res.booking_end).add(543, 'year').format('ddd ที่ D MMM YYYY เวลา HH:mm')
-                        //console.log(car_detail);
 
-                        //$('#id_booking').html(res.id);
                         $('#user_book').html(res.name);
                         $('#status_booking').html(status);
                         $('#date_booking').html(start + ' - ' + end);
                         $('#detail_car').html(car_detail);
                         $('#detail_booking').html(s_detail[0]);
-                        
                         $('#viewdetail').modal('toggle');
                     }
                 });
-
-
             }
 
             function alertCancel(id) {
@@ -443,15 +429,15 @@
                         const {
                             value: text
                         } = await Swal.fire({
-                            title: 'ยกเลิกรายการ',
+                            title: '<h2 class="text-darker">ยกเลิกรายการ</h2>',
                             input: 'text',
                             // inputLabel: '<div>jjj</div>รายการจองของ ' + namecancel[0].name,
-                            html: '<div class="d-flex justify-content-center" ><div style="width: max-content;">' +
-                                '<div style="font-size:0.9rem;" ><span style="font-weight:800">ระหว่างวันที่ :</span> ' +
+                            html: '<div class="col-12" ><div style="width: max-content;">' +
+                                '<div style="font-size:1rem;" ><span style="font-weight:800">ระหว่างวันที่ :</span> ' +
                                 bstart + ' - ' + bend +
-                                '</div><div class="text-left" style="font-size:0.9rem"><span style="font-weight:800">รายละเอียด : </span>' +
+                                '</div><div class="text-left" style="font-size:1rem"><span style="font-weight:800">รายละเอียด : </span>' +
                                 namecancel[0].booking_detail + ' </div> </div></div>',
-                            inputPlaceholder: 'กรอกหมายเหตุ',
+                            inputPlaceholder: 'กรอกหมายเหตุการยกเลิก',
                             icon: 'warning',
                             showCancelButton: true,
                             confirmButtonColor: '#06d6a0',
@@ -495,12 +481,7 @@
                             }
                         })
                     })()
-
             }
-
         </script>
     @endpush
-
-
-
 @endsection
