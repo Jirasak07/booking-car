@@ -7,7 +7,7 @@
                 <table id="tabledcar1"class="display responsive nowrap " style="width:100%;font-size:0.8em">
                     <thead class="table-dark">
                         <tr>
-                            <th>ลำดับ</th>
+                            <th style="max-width: 30px">ลำดับ</th>
                             <th>หมายเลขทะเบียน</th>
                             <th>รายละเอียดรถ</th>
                             <th>สถานะ</th>

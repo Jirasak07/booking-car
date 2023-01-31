@@ -20508,9 +20508,12 @@ a.nav-link-sub:hover {
     border: none !important;
 }
 #calendar1{
-    height: 200vh;
+    height: 150vh;
 }
 @media screen and (max-width: 766px) {
+    #calendar1{
+        height: 200vh;
+    }
     .fc-event-title {
         font-size: 0.8em;
     }

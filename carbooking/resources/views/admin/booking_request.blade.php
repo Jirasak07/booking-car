@@ -147,47 +147,52 @@
                                             <div class="alert alert-danger print-error-msg" style="display:none">
                                                 <ul></ul>
                                             </div>
-                                            <form>
-                                                {{ csrf_field() }}
+                                            <form method="POST" action="{{ route('updateout') }}">
+                                                @csrf
                                                 <input type="hidden" id="idform2" name="id_form">
                                                 <input type="hidden" name="type" value="2">
                                                 <div class="form-group row mt-2 d-flex flex-column flex-md-row ">
                                                     <div class="col-6 "> <label for="out-model">ยี่ห้อ</label>
-                                                        <input type="text" id="out-model" name="brand"
-                                                            class="form-control">
+                                                        <input required type="text" id="out-model" name="brand"
+                                                            title="กรุณากรอเบอร์โทรให้ถูกต้อง" class="form-control">
                                                     </div>
 
                                                     <div class="col-6 ">
-                                                        <label for="out-license"> ป้ายทะเบียน </label> <input
+                                                        <label for="out-license"> ป้ายทะเบียน </label> <input require
                                                             name="car_out_license" type="text" id="out-license"
                                                             class="form-control">
 
                                                     </div>
                                                     <div class="col-12 "> <label for="out-model">รายละเอียด/รุ่น</label>
-                                                        <input type="text" id="out-model" name="car_out_model"
+                                                        <input require type="text" id="out-model" name="car_out_model"
                                                             class="form-control">
 
                                                     </div>
 
                                                     <div class="col-12 "> <label for="out-driver">คนขับ</label>
-                                                        <input type="text" id="out-driver" name="car_out_driver"
-                                                            class="form-control">
+                                                        <input require type="text" id="out-driver"
+                                                            name="car_out_driver" class="form-control">
 
                                                     </div>
                                                     <div class="col-12 ">
-                                                        <label for="out-own"> เจ้าของรถ </label> <input type="text"
-                                                            id="out-own" class="form-control" name="owner">
+                                                        <label for="out-own"> เจ้าของรถ </label> <input require
+                                                            type="text" id="out-own" class="form-control"
+                                                            name="owner">
 
                                                     </div>
                                                     <div class="col-12 "> <label for="out-tell"> เบอร์โทรติดต่อ
-                                                        </label> <input type="text" id="out-tell"
-                                                            class="form-control" name="car_out_tel" />
+                                                        </label>
+                                                        <input require type="number" id="out-tell"
+                                                            pattern="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$"
+                                                            title="กรุณากรอเบอร์โทรให้ถูกต้อง" class="form-control"
+                                                            name="car_out_tel" />
 
                                                     </div>
 
                                                 </div>
                                                 <div class="d-flex justify-content-end mt-2">
-                                                    <button id="frm1-approve" class=" btn  btn-success "><i
+                                                    <button id="frm1-approve" type="submit"
+                                                        class=" btn  btn-success "><i
                                                             class="fa-sharp fa-solid fa-floppy-disk"></i> บันทึก</button>
                                                     <button type="button" class="btn  btn-outline-danger "
                                                         data-bs-dismiss="modal" aria-label="Close"><i
@@ -225,41 +230,41 @@
         <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
 
         <script>
-            $("#frm1-approve").click(function(e) {
-                e.preventDefault();
-                var _token = $("input[name='_token']").val();
-                var type = $("input[name='type']").val();
-                var idform = $("input[id='idform']").val();
-                var brand = $("input[name='brand']").val();
-                var car_out_license = $("input[name='car_out_license']").val();
-                var car_out_model = $("input[name='car_out_model']").val();
-                var car_out_driver = $("input[name='car_out_driver']").val();
-                var owner = $("input[name='owner']").val();
-                var car_out_tel = $("input[name='car_out_tel']").val();
+            // $("#frm1-approve").click(function(e) {
+            //     e.preventDefault();
+            //     var _token = $("input[name='_token']").val();
+            //     var type = $("input[name='type']").val();
+            //     var idform = $("input[id='idform']").val();
+            //     var brand = $("input[name='brand']").val();
+            //     var car_out_license = $("input[name='car_out_license']").val();
+            //     var car_out_model = $("input[name='car_out_model']").val();
+            //     var car_out_driver = $("input[name='car_out_driver']").val();
+            //     var owner = $("input[name='owner']").val();
+            //     var car_out_tel = $("input[name='car_out_tel']").val();
 
-                $.ajax({
-                    url: "{{ route('updateout') }}",
-                    type: 'POST',
-                    data: {
-                        _token: _token,
-                        type: type,
-                        idform: idform,
-                        brand: brand,
-                        car_out_license: car_out_license,
-                        car_out_model: car_out_model,
-                        car_out_driver: car_out_driver,
-                        owner: owner,
-                        car_out_tel: car_out_tel
-                    },
-                    success: function(data) {
-                        if ($.isEmptyObject(data.error)) {
-                            alert(data.success);
-                        } else {
-                            printErrorMsg(data.error);
-                        }
-                    }
-                })
-            })
+            //     $.ajax({
+            //         url: "{{ route('updateout') }}",
+            //         type: 'POST',
+            //         data: {
+            //             _token: _token,
+            //             type: type,
+            //             idform: idform,
+            //             brand: brand,
+            //             car_out_license: car_out_license,
+            //             car_out_model: car_out_model,
+            //             car_out_driver: car_out_driver,
+            //             owner: owner,
+            //             car_out_tel: car_out_tel
+            //         },
+            //         success: function(data) {
+            //             if ($.isEmptyObject(data.error)) {
+            //                 alert(data.success);
+            //             } else {
+            //                 printErrorMsg(data.error);
+            //             }
+            //         }
+            //     })
+            // })
 
             function printErrorMsg(msg) {
                 $(".print-error-msg").find("ul").html('');
