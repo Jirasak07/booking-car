@@ -144,7 +144,7 @@ class ManagementAdminController extends Controller
     }
     public function aprove_out(Request $request)
     {
-        
+
         $id = $request->id_form;
         $booking_update = BookingModel::find($id);
         $car_out = new CaroutModel();

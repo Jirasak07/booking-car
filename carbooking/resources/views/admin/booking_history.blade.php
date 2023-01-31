@@ -123,10 +123,13 @@
                                     status == 2 ? '-' : det[1]) + '</div> </div> </div>',
                             icon: (status == 2 ? 'success' : 'error'),
                             showCancelButton: (status == 2 ? true : false),
+                            showDenyButton: (status == 2 ? true : false),
                             confirmButtonText: '<i class="fa-solid fa-check"> ตกลง',
+                            denyButtonText: '<i class="fa-solid fa-pen-to-square"> แก้ไข',
                             cancelButtonText: '<i class="fa-solid fa-ban"> ยกเลิกรายการ',
                             showDeniedButton: true,
                             confirmButtonColor: '#06d6a0',
+                            denyButtonColor: '#ffb703',
                             cancelButtonColor: '#ef476f',
                         }).then((res) => {
                             console.log(res)
@@ -146,7 +149,8 @@
                                         if (resp.value) {
                                             $.ajax({
                                                 type: 'GET',
-                                                url: '/admin/cancel/' + id + '/' + resp.value,
+                                                url: '/admin/cancel/' + id + '/' + resp
+                                                    .value,
                                                 dataType: 'JSON',
                                                 success: function(data) {
                                                     if (data.status == 'success') {
@@ -174,6 +178,8 @@
                                         }
                                     }
                                 })
+                            } else if (res.isDenied) {
+                                Swal.fire('deny')
                             }
                         })
                     }
