@@ -76,7 +76,7 @@
                         <div class="mb-2  row text-xl-center">
                             <div class="col-12 text-center mb-3" style="font-weight: 700">
                                 <label for="">รายการของคุณ :</label>
-                                <label for="" id="name"></label>
+                               
                             </div>
                             <div class="col-12 col-sm-6">
                                 <label for="" class="form-label "
