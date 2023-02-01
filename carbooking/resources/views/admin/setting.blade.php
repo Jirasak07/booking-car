@@ -17,26 +17,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                            @foreach($time as $item)
-                        <tr>
-                            <td>{{$item->name}}</td>
-                            <td>{{$item->time}}</td>
+                        @foreach ($time as $item)
+                            <tr>
+                                <td>{{ $item->name }}</td>
+                                <td>{{ $item->time }}</td>
 
-                            <td>
-                                @if($item->unit == 1)
-                                ชม.
-                                @elseif($item->unit == 2)
-                                วัน
-                                @else
-                                เดือน
-                            @endif
-                            </td>
-                            <td>
-                                <div class="btn btn-info btn-sm" onclick="showModal({{$item->id}})">
-                                    Edit
-                                </div>
-                            </td>
-                        </tr>
+                                <td>
+                                    @if ($item->unit == 1)
+                                        ชม.
+                                    @elseif($item->unit == 2)
+                                        วัน
+                                    @else
+                                        เดือน
+                                    @endif
+                                </td>
+                                <td>
+                                    <div class="btn btn-info btn-sm" onclick="showModal({{ $item->id }})">
+                                        Edit
+                                    </div>
+                                </td>
+                            </tr>
                         @endforeach
                 </table>
             </div>
@@ -45,8 +45,8 @@
     </div>
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <form class="modal-content">
-                @csrf
+            <form id="formsetting" class="modal-content">
+                {{-- method="POST" action="{{ url('admin/edit-setting') }}" --}}
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">ตั้งค่า</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -57,12 +57,14 @@
                     </div>
                     <div class="col-6 ">
                         <label for="">จำนวน :</label>
-                        <input required type="number" name="" id="qty" name="time"
+                        <input required type="number" id="qty" name="time"
                             style="border: 0.2px solid #DADDD8;border-radius: 5px;width:80px">
                     </div>
                     <div class="col-6">
-                        <label for="" class="ml-2">หน่วย :</label><select class="ml-2 p-1" name=""
-                            id="" style="border: 0.2px solid #DADDD8;border-radius: 5px;font-size:13px">
+                        <input type="hidden" id="id_form" name="id_form">
+                        <label for="" class="ml-2">หน่วย :</label>
+                        <select class="ml-2 p-1" name="unit" id="unit-select"
+                            style="border: 0.2px solid #DADDD8;border-radius: 5px;font-size:13px">
                             <option value="1">ชั่วโมง</option>
                             <option value="2">วัน</option>
                             <option value="3">เดือน</option>
@@ -81,18 +83,48 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
+    <script type="text/javascript">
+        $('#formsetting').on('submit', function(e) {
+            e.preventDefault();
+            let time = $('#qty').val();
+            let unit = $('#unit-select').val();
+            let id_form = $('#id_form').val();
+            $.ajax({
+                url: "edit-setting",
+                type: "POST",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    time: time,
+                    unit: unit,
+                    id_form: id_form,
+                },
+                success: function(response) {
+                    Swal.fire({
+                        icon:'success',
+                        title:'Success !!',
+                        
+                    })
+                },
+                // error: function(response) {
+
+                // },
+            });
+        })
+    </script>
     <script>
         function showModal(id) {
             var dataSetting = @json($time);
-            console.log(dataSetting);
             var idset = '';
+            var dataset = '';
             dataSetting.forEach(el => {
-                if(el.id == id){
+                if (el.id == id) {
                     idset = el.id
+                    dataset = el.time
+                    $('#unit-select').val(el.unit);
                 }
             });
-            $('#qty').val(dataSetting[0].time);
-            $('#idformSetting').val(idset);
+            $('#qty').val(dataset);
+            $('#id_form').val(idset);
             $('#exampleModal').modal('toggle');
         }
 

@@ -70,6 +70,7 @@ Route::group(
         Route::post('approve-out', [\App\Http\Controllers\backend\ManagementAdminController::class, 'aprove_out'])->name('updateout');
         Route::get('cancel/{id}/{note}', [\App\Http\Controllers\backend\Bookingcontroller::class, 'cancle']);
         Route::post('admin/booking', [\App\Http\Controllers\backend\Bookingcontroller::class, 'store'])->name('send-booking');
+        Route::post('edit-setting', [\App\Http\Controllers\backend\SettingController::class, 'edit_time']);
 
     }
 );
