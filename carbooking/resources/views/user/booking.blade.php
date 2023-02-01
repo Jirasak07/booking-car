@@ -333,9 +333,11 @@
             });
 
             function edit_booking(id) {
+                var h = window.location.pathname
+                var s = h.split('/')
                 $.ajax({
                     type: 'GET',
-                    url: '/users/detail/' + id,
+                    url: '/' + s[2] + '/detail/' + id,
                     dataType: 'JSON',
                     success: function(res) {
                         $('#editdetail').modal('toggle');
@@ -355,12 +357,14 @@
             }
 
             function view_detail(id) {
+                var h = window.location.pathname
+                var s = h.split('/')
                 var status = '';
                 var car_detail;
                 console.log(id);
                 $.ajax({
                     type: 'GET',
-                    url: '/users/detail/' + id,
+                    url: '/' + s[2] + '/detail/' + id,
                     dataType: 'JSON',
                     success: function(res) {
                         moment.locale('th');
@@ -404,6 +408,8 @@
             }
 
             function alertCancel(id) {
+                var h = window.location.pathname
+                var s = h.split('/')
                 //alert(id)
                 var id = id;
                 console.log(id);
@@ -451,7 +457,7 @@
                                 if (result.value) {
                                     $.ajax({
                                         type: 'GET',
-                                        url: '/users/cancel/' + id + '/' + result.value,
+                                        url: '/' + s[2] + '/cancel/' + id + '/' + result.value,
                                         dataType: 'JSON',
                                         success: function(data) {
                                             if (data.status == 'success') {

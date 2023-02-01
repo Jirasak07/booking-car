@@ -100,7 +100,7 @@
                             <li class="nav-item">
                                 <a class="{{ 'admin/request' == request()->path() ? 'nav-link-sub text-primary' : 'nav-link-sub  ' }}"
                                     style="font-weight: 600;font-size:0.9rem"
-                                    href="{{ route('admin.booking_request') }}">
+                                    href="{{ route('users.view-booking') }}">
                                     <i class="fa-sharp fa-solid fa-circle-dot" style="font-size: 50%"></i>
                                     {{ __('รายการจองรถ') }}
                                 </a>
