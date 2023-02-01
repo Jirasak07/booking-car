@@ -64,7 +64,7 @@
 html {
     font-family: sans-serif;
     line-height: 1.15;
-
+    scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
     -ms-overflow-style: scrollbar;
@@ -20521,7 +20521,7 @@ a.nav-link-sub:hover {
         font-size: 0.8em;
     }
     .fc-toolbar {
-        font-size: 0.9em;
+        font-size: 9px;
 
     }
     .fc-toolbar-title {
@@ -20549,13 +20549,16 @@ a.nav-link-sub:hover {
         min-width: 375px;
     }
     .fc-header-toolbar.fc-toolbar.fc-toolbar-ltr{
-        display: flex;
-        flex-flow: column;
-        gap: 10px;
+        width: 100% !important;
+        font-size: 0.5rem !important;
     }
     .d-flex.mb-3.head-beforcalendar{
         font-size: 0.8em;
     }
+}
+.fc-header-toolbar.fc-toolbar.fc-toolbar-ltr{
+    width: 100% !important;
+    font-size: 0.9em ;
 }
 .fc-timegrid-slot-label-cushion.fc-scrollgrid-shrink-cushion {
     font-size: 0.8em !important;
