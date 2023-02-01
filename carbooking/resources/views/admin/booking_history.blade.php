@@ -41,8 +41,26 @@
             </table>
         </div>
     </div>
-
-
+    <template id="my-template">
+        <swal-html>
+            <div>
+                <swal-input-label>เลือกรถ</swal-input-label>
+                <select id="car-select" class="swal2-input" style="width: 80%;">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </div>
+            <div class="mt-2" >
+                <swal-input-label for="car-select">เลือกพนักงานขับ</swal-input-label>
+                <select id="car-select" class="swal2-input" style="width: 80%">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </div>
+        </swal-html>
+    </template>
 
     </div>
     @push('js')
@@ -52,6 +70,7 @@
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://momentjs.com/downloads/moment.min.js"></script>
         <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
+
         <script>
             $(document).ready(function() {
                 $('#tablehistory').DataTable({
@@ -87,22 +106,18 @@
 
         <script>
             var his = @json($hiss);
-            console.log(his)
         </script>
         <script>
             function showDetailHistory(id) {
                 var datenow = moment(new Date()).format('yyyy-MM-DD H:mm:ss')
-                console.log(datenow);
+
                 moment.locale('th');
                 $.ajax({
                     url: '/admin/history/' + id,
                     method: 'GET',
                     success: function(data) {
                         var detail = data.detail;
-                        if(detail[0].sdate >= datenow || detail[0].edate <= datenow){
-                            alert('ตรง')
-                        }
-                        console.log(data)
+                        console.log(detail)
                         var start = moment(detail[0].sdate).format('D MMM ' + (new Date(detail[0].sdate)
                             .getFullYear() + 543) + ' เวลา  H:mm น. - ')
                         var end = moment(detail[0].edate).format('D MMM ' + (new Date(detail[0].edate)
@@ -111,6 +126,12 @@
                         var driver = detail[0].driver;
                         var car = detail[0].car_detail + ' ทะเบียน ' + detail[0].car
                         var det = String(detail[0].booking_detail).split("~")
+                        var tf = ''
+                        if(status == 2){
+                            (detail[0].type_car == 1? (tf = true):(tf = false) )
+                        }else {
+                            tf = false
+                        }
                         Swal.fire({
                             title: '<div style="font-size:50%" > รายการจองของคุณ : ' + detail[0].name_user +
                                 ' </div>',
@@ -128,7 +149,7 @@
                                     status == 2 ? '-' : det[1]) + '</div> </div> </div>',
                             icon: (status == 2 ? 'success' : 'error'),
                             showCancelButton: (status == 2 ? true : false),
-                            showDenyButton: (status == 2 ? true : false),
+                            showDenyButton: (tf ? true : false),
                             confirmButtonText: '<i class="fa-solid fa-check"> ตกลง',
                             denyButtonText: '<i class="fa-solid fa-pen-to-square"> แก้ไข',
                             cancelButtonText: '<i class="fa-solid fa-ban"> ยกเลิกรายการ',
@@ -136,55 +157,79 @@
                             confirmButtonColor: '#06d6a0',
                             denyButtonColor: '#ffb703',
                             cancelButtonColor: '#ef476f',
+                            focusConfirm: false,
+
+                            showCloseButton: true,
                         }).then((res) => {
-                            console.log(res)
                             if (res.dismiss == 'cancel') {
-                                Swal.fire({
-                                    input: 'text',
-                                    icon: 'warning',
-                                    title: 'กรุณากรอกหมายเหตุการยกเลิก',
-                                    inputPlaceholder: 'หมายเหตุการยกเลิก',
-                                    confirmButtonText: 'บันทึก',
-                                    showCancelButton: true,
-                                    cancelButtonColor: '#ef476f',
-                                    confirmButtonColor: '#06d6a0',
-                                    cancelButtonText: 'ยกเลิก'
-                                }).then((resp) => {
-                                    if (resp.isConfirmed) {
-                                        if (resp.value) {
-                                            $.ajax({
-                                                type: 'GET',
-                                                url: '/admin/cancel/' + id + '/' + resp
-                                                    .value,
-                                                dataType: 'JSON',
-                                                success: function(data) {
-                                                    if (data.status == 'success') {
-                                                        Swal.fire({
-                                                            title: 'เสร็จสิ้น',
-                                                            icon: 'success',
-                                                            confirmButtonText: 'ok',
-                                                        }).then((data) => {
-                                                            window.location
-                                                                .reload();
-                                                        })
-                                                    } else {
-                                                        Swal.fire({
-                                                            title: 'เกิดข้อผิดพลาด',
-                                                            icon: 'error',
-                                                        })
-                                                    }
-                                                },
-                                            });
-                                        } else {
-                                            Swal.fire({
-                                                text: 'กรุณากรอกข้อมูล',
-                                                icon: 'error'
-                                            })
+                                if (detail[0].sdate > datenow) {
+                                    Swal.fire({
+                                        input: 'text',
+                                        icon: 'warning',
+                                        title: 'กรุณากรอกหมายเหตุการยกเลิก',
+                                        inputPlaceholder: 'หมายเหตุการยกเลิก',
+                                        confirmButtonText: 'บันทึก',
+                                        showCancelButton: true,
+                                        cancelButtonColor: '#ef476f',
+                                        confirmButtonColor: '#06d6a0',
+                                        cancelButtonText: 'ยกเลิก'
+                                    }).then((resp) => {
+                                        if (resp.isConfirmed) {
+                                            if (resp.value) {
+                                                $.ajax({
+                                                    type: 'GET',
+                                                    url: '/admin/cancel/' + id + '/' + resp
+                                                        .value,
+                                                    dataType: 'JSON',
+                                                    success: function(data) {
+                                                        if (data.status == 'success') {
+                                                            Swal.fire({
+                                                                title: 'เสร็จสิ้น',
+                                                                icon: 'success',
+                                                                confirmButtonText: 'ok',
+                                                            }).then((data) => {
+                                                                window.location
+                                                                    .reload();
+                                                            })
+                                                        } else {
+                                                            Swal.fire({
+                                                                title: 'เกิดข้อผิดพลาด',
+                                                                icon: 'error',
+                                                            })
+                                                        }
+                                                    },
+                                                });
+                                            } else {
+                                                Swal.fire({
+                                                    text: 'กรุณากรอกข้อมูล',
+                                                    icon: 'error'
+                                                })
+                                            }
                                         }
-                                    }
-                                })
-                            } else if (res.isDenied) {
-                                Swal.fire('deny')
+                                    })
+                                } else if (detail[0].sdate < datenow) {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'ไม่สามารถแก้ไข หรือยกเลิกรายการนี้',
+                                        text: 'เนื่องจากกำลังดำเนินการ'
+                                    })
+                                }
+
+                            } else if (res.isDenied == true) {
+                                if (detail[0].sdate > datenow) {
+                                    Swal.fire({
+                                        template: '#my-template',
+                                        title: 'แก้ไขรายละเอียดการจอง',
+                                    })
+                                } else if (detail[0].sdate < datenow) {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'ไม่สามารถแก้ไข หรือยกเลิกรายการนี้',
+                                        text: 'เนื่องจากกำลังดำเนินการ',
+
+                                    })
+                                }
+
                             }
                         })
                     }
