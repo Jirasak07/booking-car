@@ -12,7 +12,7 @@ class SettingController extends Controller
     //
     public function index(){
         $setting = timebookingModel::all();
-        return view('')->with(['time'=>$setting]);
+        return view('admin.setting')->with(['time'=>$setting]);
     }
 
     public function edit_time(Request $request){
