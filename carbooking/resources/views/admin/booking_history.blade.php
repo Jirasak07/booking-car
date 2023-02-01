@@ -91,12 +91,17 @@
         </script>
         <script>
             function showDetailHistory(id) {
+                var datenow = moment(new Date()).format('yyyy-MM-DD H:mm:ss')
+                console.log(datenow);
                 moment.locale('th');
                 $.ajax({
                     url: '/admin/history/' + id,
                     method: 'GET',
                     success: function(data) {
                         var detail = data.detail;
+                        if(detail[0].sdate >= datenow || detail[0].edate <= datenow){
+                            alert('ตรง')
+                        }
                         console.log(data)
                         var start = moment(detail[0].sdate).format('D MMM ' + (new Date(detail[0].sdate)
                             .getFullYear() + 543) + ' เวลา  H:mm น. - ')
