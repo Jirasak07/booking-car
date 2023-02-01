@@ -198,11 +198,5 @@ class ManagementAdminController extends Controller
         $booking_edit->save();
     }
 
-    public function edit_time(Request $request){
-        $id = $request->id_form;
-        $time = timebookingModel::find($id);
-        $time->time = $request->time;
-        $time->unit = $request->unit;
-        $time->save();
-    }
+ 
 }
