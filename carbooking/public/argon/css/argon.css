@@ -67,11 +67,18 @@ html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
-    -ms-overflow-style: scrollbar;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    overflow-x: hidden; 
+
+}
+element {
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+    overflow-y: scroll;
 }
 
+element::-webkit-scrollbar {
+    display: none; /* for Chrome, Safari, and Opera */
+}
 @-ms-viewport {
     width: device-width;
 }
@@ -90,6 +97,8 @@ section {
 }
 
 body {
+    scrollbar-width: none;
+    overflow-y: scroll;
     font-family: "Sarabun", sans-serif;
     font-size: 1rem;
     font-weight: 400;
@@ -101,7 +110,11 @@ body {
 
     color: #525f7f;
     background-color: #f8f9fe;
+    -ms-overflow-style: none;
 }
+body::-webkit-scrollbar {
+    display: none; /* for Chrome, Safari, and Opera */
+  }
 
 [tabindex="-1"]:focus {
     outline: 0 !important;
@@ -20500,20 +20513,21 @@ a.nav-link-sub:hover {
     cursor: pointer;
     border-radius: 5px;
 }
-.fc-button-primary.fc-button-active{
+.fc-button-primary.fc-button-active {
     background-color: #94d2bd !important;
     border: none !important;
 }
-.fc-button-primary{
+.fc-button-primary {
     background-color: #0a9396 !important;
     border: none !important;
 }
-#calendar1{
-    height: 150vh;
+#calendar1 {
+    height: 200vh;
 }
 @media screen and (max-width: 766px) {
-    #calendar1{
-        height: 200vh;
+    #calendar1 {
+        height: auto;
+        min-height: 250vh;
     }
     .fc-event-title {
         font-size: 0.8em;
@@ -20523,15 +20537,12 @@ a.nav-link-sub:hover {
     }
     .fc-toolbar {
         font-size: 9px;
-
     }
     .fc-toolbar-title {
         font-size: 1em !important;
-
     }
     .fc-button.fc-button-primary {
         font-size: 0.8em !important;
-
     }
 
     .fc-col-header-cell-cushion {
@@ -20542,6 +20553,7 @@ a.nav-link-sub:hover {
     }
     .fc-timegrid-slot-label-cushion.fc-scrollgrid-shrink-cushion {
         font-size: 0.8em !important;
+
     }
     .fc-listWeek-view.fc-view.fc-list.fc-list-sticky {
         font-size: 0.8em !important;
@@ -20549,17 +20561,17 @@ a.nav-link-sub:hover {
     .min-nav {
         min-width: 375px;
     }
-    .fc-header-toolbar.fc-toolbar.fc-toolbar-ltr{
+    .fc-header-toolbar.fc-toolbar.fc-toolbar-ltr {
         width: 100% !important;
         font-size: 0.5rem !important;
     }
-    .d-flex.mb-3.head-beforcalendar{
+    .d-flex.mb-3.head-beforcalendar {
         font-size: 0.8em;
     }
 }
-.fc-header-toolbar.fc-toolbar.fc-toolbar-ltr{
+.fc-header-toolbar.fc-toolbar.fc-toolbar-ltr {
     width: 100% !important;
-    font-size: 0.9em ;
+    font-size: 0.9em;
 }
 .fc-timegrid-slot-label-cushion.fc-scrollgrid-shrink-cushion {
     font-size: 0.8em !important;
@@ -20573,15 +20585,15 @@ a.nav-link-sub:hover {
     -webkit-backdrop-filter: blur(9.8px);
 }
 
-
-.btn-danger:hover {
+.btn-danger.logout:hover {
     box-shadow: 0px 0.1em 0.2em rgb(45 35 66 / 40%),
-        0px 0.4em 0.7em -0.1em rgb(45 35 66 / 30%), inset 0px -0.1em 0px var(--dark);
+        0px 0.4em 0.7em -0.1em rgb(45 35 66 / 30%),
+        inset 0px -0.1em 0px var(--dark);
     transform: translateY(-0.1em);
     color: white;
 }
 
-.btn-danger:active {
+.btn-danger.logout:active {
     box-shadow: inset 0px 0.1em 0.6em var(--red);
     transform: translateY(0em);
 }

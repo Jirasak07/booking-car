@@ -9,7 +9,7 @@
                     <table id="tablerequest" class="display responsive nowrap " style="width:100%;font-size:0.8em">
                         <thead class="table-dark">
                             <tr>
-                                <th class="d-grid d-sm-none" style="max-width: 20px"></th>
+                                <th class="d-grid d-md-none" style="max-width: 20px"></th>
                                 <th style="max-width: 30px">ลำดับ</th>
                                 <th>ผู้จอง</th>
                                 <th>วันเวลาเริ่มต้น</th>
@@ -27,7 +27,7 @@
                             @foreach ($booking as $bookings)
                                 @if ($bookings['booking_status'] == 1)
                                     <tr>
-                                        <td class="control d-grid d-sm-none"></td>
+                                        <td class="control d-grid d-md-none"></td>
                                         <td>{{ $i++ }}</td>
                                         <td>{{ $bookings['name'] }}</td>
 
@@ -223,9 +223,8 @@
 
     </div>
     @push('js')
-        <script src="https://momentjs.com/downloads/moment-with-locales.js">
-            < /scrip> <
-            script src = "https://code.jquery.com/jquery-3.5.1.js" >
+        <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
+        <script src = "https://code.jquery.com/jquery-3.5.1.js" >
         </script>
         <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
@@ -289,7 +288,7 @@
                             renderer: function(api, rowIdx, columns) {
                                 var data = $.map(columns, function(col, i) {
                                     return col.hidden ?
-                                        '<tr data-dt-row="' + col.rowIndex + '" data-dt-column="' +
+                                        '<tr style="font-size:10px" data-dt-row="' + col.rowIndex + '" data-dt-column="' +
                                         col.columnIndex + '">' +
                                         '<td>' + col.title + ':' + '</td> ' +
                                         '<td>' + col.data + '</td>' +
@@ -305,7 +304,7 @@
                     },
                     columnDefs: [{
                             responsivePriority: 1,
-                            targets: 0
+                            targets: 1
                         },
                         {
                             responsivePriority: 10001,

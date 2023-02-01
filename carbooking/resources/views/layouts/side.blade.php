@@ -105,13 +105,21 @@
                                     {{ __('รายการจองรถ') }}
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="{{ 'admin/request-all' == request()->path() ? 'nav-link-sub text-primary' : 'nav-link-sub  ' }}"
+                                    style="font-weight: 600;font-size:0.9rem"
+                                    href="{{ route('admin.booking_request') }}">
+                                    <i class="fa-sharp fa-solid fa-circle-dot" style="font-size: 50%"></i>
+                                    {{ __('รายการจองรถทั้งหมด') }}
+                                </a>
+                            </li>
 
                             <li class="nav-item">
                                 <a class="{{ 'admin/history' == request()->path() ? 'nav-link-sub text-primary ' : 'nav-link-sub ' }}"
                                     style="font-weight: 600;font-size:0.9rem"
                                     href="{{ route('admin.booking_history') }}">
                                     <i class="fa-sharp fa-solid fa-circle-dot" style="font-size: 50%"></i>
-                                    {{ __('ประวัติรายการ') }}
+                                    {{ __('ประวัติรายการทั้งหมด') }}
                                 </a>
                             </li>
                         </ul>
@@ -158,6 +166,6 @@
             @endif
             </ul>
         </div>
-        <a href="{{ route('logout') }}" class="btn btn-sm btn-danger   "><i class="fa-solid fa-person-walking-arrow-right"></i> ออกจากระบบ</a>
+        <a href="{{ route('logout') }}" class="btn btn-sm btn-danger logout   "><i class="fa-solid fa-person-walking-arrow-right"></i> ออกจากระบบ</a>
     </div>
 </nav>
