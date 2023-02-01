@@ -17,16 +17,27 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($time as $item)
                         <tr>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
+                            <td>{{$item->name}}</td>
+                            <td>{{$item->time}}</td>
+                            
+                            <td>
+                                @if($item->unit == 1)
+                                ชม.
+                                @elseif($item->unit == 2)
+                                วัน
+                                @else
+                                เดือน
+                            @endif
+                            </td>
                             <td>
                                 <div class="btn btn-info btn-sm" onclick="showModal()">
                                     Edit
                                 </div>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
