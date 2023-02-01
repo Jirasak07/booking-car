@@ -1,7 +1,7 @@
 <!-- box header booking pages -->
 <div class="container-fluid mt-4 ">
     <div class="d-flex flex-xl-row flex-column" style="gap: 10px;min-height:120px">
-        <div class="card w-100 rounded text-darker" style="background-color: #427AA1;border:1px solid #2F2F2F">
+        <div class="card w-100 rounded text-darker" style="background-color: #427AA1;">
             <div class=" rounded h-100 d-flex flex-row align-items-center"
                 style="min-height:120px;">
                 <div class="h-100 col icon-d-2 icon-circle text-white">
@@ -15,7 +15,7 @@
             </div>
         </div>
 
-        <div class=" card w-100 rounded" style="background-color: #FFB400;border:1px solid #ae9f00">
+        <div class=" card w-100 rounded" style="background-color: #FFB400;">
             <div class=" rounded h-100 d-flex flex-row align-items-center"
                 style="min-height:120px;">
                 <div class="h-100 col icon-d-2 icon-circle">
@@ -28,7 +28,7 @@
                 </div>
             </div>
         </div>
-        <div class=" card w-100 rounded" style="background-color: #00A878;border:1px solid #3B5249">
+        <div class=" card w-100 rounded" style="background-color: #00A878;">
             <div class="rounded h-100 d-flex flex-row align-items-center"style="min-height:120px;">
                 <div class="h-100 col icon-d-2 icon-circle">
                     <i class="fa-solid fa-circle-check icon-dashboard "></i>
@@ -41,7 +41,7 @@
             </div>
         </div>
 
-        <div class=" card w-100 rounded" style="background-color: #FF6B6B;border:1px solid red">
+        <div class=" card w-100 rounded" style="background-color: #FF6B6B;">
             <div class="rounded h-100 w-100 d-flex flex-row align-items-center"
                 style="min-height:120px;">
                 <div class=" h-100 icon-d-2 icon-circle col">

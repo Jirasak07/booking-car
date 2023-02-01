@@ -92,9 +92,9 @@
                         </a>
                     </li>
                     <li
-                        class="{{ 'admin/request' == request()->path() || 'admin/history' == request()->path() ? 'nav-item active-nav ' : 'nav-item ' }}">
+                        class="{{ 'admin/request' == request()->path() || 'admin/request-all' == request()->path() || 'admin/history' == request()->path() ? 'nav-item active-nav ' : 'nav-item ' }}">
                         <a class="{{ 'admin/request' == request()->path() || 'admin/history' == request()->path() ? 'nav-link text-darker' : 'nav-link ' }}"
-                            style="font-weight: 600;font-size:1rem" href="{{ route('admin.booking_request') }}">
+                            style="font-weight: 600;font-size:1rem" href="{{ route('users.view-booking') }}">
                             <i class="fa-solid fa-calendar-days"></i> {{ __('ข้อมูลการจอง') }} </a>
                         <ul class="sub-menu py-2 ">
                             <li class="nav-item">
