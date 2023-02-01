@@ -75,8 +75,8 @@
 
                         <div class="mb-2  row text-xl-center">
                             <div class="col-12 text-center mb-3" style="font-weight: 700">
-                                <label for="">รายการของคุณ :</label>
-                               
+                                <label for="name">รายการของคุณ :</label>
+                                <label class=" ml-2" style="font-size: 80%;" for="" id="name"></label>
                             </div>
                             <div class="col-12 col-sm-6">
                                 <label for="" class="form-label "
@@ -114,6 +114,7 @@
                                             class="d-flex flex-column align-items-center">
                                             @csrf
                                             <input type="hidden" id="idform" name="id_form">
+
                                             <input type="hidden" name="type" value="1">
                                             <div class=" mt-4">
                                                 <label for="select-car">เลือกรถที่ต้องการใช้</label>
@@ -376,10 +377,12 @@
                         detail.push(showBooking.booking_detail);
                     }
                 });
+
                 const bookstart = moment(JSON.stringify(start[0])).format('ddd ที่ D MMM ' + (new Date(start[0]).getFullYear() +
                     543) + ' เวลา HH:mm');
                 const bookend = moment(JSON.stringify(end[0])).format('ddd ที่ D MMM ' + (new Date(end[0]).getFullYear() +
                     543) + ' เวลา HH:mm');
+
                 document.getElementById('start_date').innerHTML = bookstart;
                 document.getElementById('end_date').innerHTML = bookend;
                 document.getElementById('name').innerHTML = name;

@@ -123,6 +123,7 @@ class ManagementAdminController extends Controller
     }
     public function aprove_in(Request $request)
     {
+      
         // dd($request->all());
         $id = $request->id_form;
 
