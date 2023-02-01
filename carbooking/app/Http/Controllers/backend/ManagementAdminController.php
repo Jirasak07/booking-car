@@ -7,6 +7,7 @@ use App\Models\BookingModel;
 use App\Models\CarModel;
 use App\Models\CaroutModel;
 use App\Models\DriverModel;
+use App\Models\timebookingModel;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -195,5 +196,13 @@ class ManagementAdminController extends Controller
         $booking_edit->license_plate = $request->license;
         $booking_edit->driver = $request->driver;
         $booking_edit->save();
+    }
+
+    public function edit_time(Request $request){
+        $id = $request->id_form;
+        $time = timebookingModel::find($id);
+        $time->time = $request->time;
+        $time->unit = $request->unit;
+        $time->save();
     }
 }
