@@ -136,7 +136,7 @@
                                 <a class="{{ 'admin/setting' == request()->path() ? 'nav-link-sub text-primary ' : 'nav-link-sub text-default  ' }}"
                                     style="font-weight: 600;font-size:0.85rem" href="{{ route('admin.setting') }}">
                                     <i class="fa-sharp fa-solid fa-circle-dot" style="font-size: 50%"></i>
-                                    {{ __('ตั้งค่าข้อมูล') }}
+                                    {{ __('ตั้งค่าพื้นฐานของระบบ') }}
                                 </a>
                             </li>
                             <li class="nav-item">
