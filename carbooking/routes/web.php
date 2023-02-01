@@ -41,7 +41,7 @@ Route::group(
         Route::get('detail/{id}', [\App\Http\Controllers\backend\UserBookingController::class, 'detail_booking']);
     }
 );
-Route::get('admin/request', [\App\Http\Controllers\backend\UserBookingController::class, 'show_booking'])->name('users.view-booking');
+Route::get('admin/request', [\App\Http\Controllers\backend\UserBookingController::class, 'show_booking']);
 Route::get('admin/detail/{id}', [\App\Http\Controllers\backend\UserBookingController::class, 'detail_booking']);
 Route::post('admin/edit', [\App\Http\Controllers\backend\Bookingcontroller::class, 'edit_booking'])->name('user.edit.booking');
 Route::group(
@@ -55,7 +55,6 @@ Route::group(
         Route::get('dashboard/refresh', [\App\Http\Controllers\backend\DashboardAdminController::class, 'refresh']);
         Route::get('dashboard/eventcalen', [\App\Http\Controllers\backend\DashboardAdminController::class, 'eventcalen']);
         Route::get('history/{id}', [\App\Http\Controllers\backend\DashboardAdminController::class, 'detail_history']);
-
         Route::get('request-all', [\App\Http\Controllers\backend\Bookingcontroller::class, 'index'])->name('admin.booking_request');
         Route::get('request/data', [\App\Http\Controllers\backend\Bookingcontroller::class, 'requestDataTable']);
         Route::get('manage-driver', [DriverController::class, 'index'])->name('admin.manage-driver');

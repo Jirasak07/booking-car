@@ -337,7 +337,7 @@
                 var s = h.split('/')
                 $.ajax({
                     type: 'GET',
-                    url: '/' + s[2] + '/detail/' + id,
+                    url: '/'+s[2]+'/detail/' + id,
                     dataType: 'JSON',
                     success: function(res) {
                         $('#editdetail').modal('toggle');
@@ -364,7 +364,7 @@
                 console.log(id);
                 $.ajax({
                     type: 'GET',
-                    url: '/' + s[2] + '/detail/' + id,
+                    url: '/'+s[2]+'/detail/' + id,
                     dataType: 'JSON',
                     success: function(res) {
                         moment.locale('th');
@@ -457,7 +457,7 @@
                                 if (result.value) {
                                     $.ajax({
                                         type: 'GET',
-                                        url: '/' + s[2] + '/cancel/' + id + '/' + result.value,
+                                        url: '/'+s[2]+'/cancel/' + id + '/' + result.value,
                                         dataType: 'JSON',
                                         success: function(data) {
                                             if (data.status == 'success') {

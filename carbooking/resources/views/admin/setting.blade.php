@@ -17,11 +17,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($time as $item)
+                            @foreach($time as $item)
                         <tr>
                             <td>{{$item->name}}</td>
                             <td>{{$item->time}}</td>
-                            
+
                             <td>
                                 @if($item->unit == 1)
                                 ชม.
@@ -32,13 +32,12 @@
                             @endif
                             </td>
                             <td>
-                                <div class="btn btn-info btn-sm" onclick="showModal()">
+                                <div class="btn btn-info btn-sm" onclick="showModal({{$item->id}})">
                                     Edit
                                 </div>
                             </td>
                         </tr>
                         @endforeach
-                    </tbody>
                 </table>
             </div>
 
@@ -47,6 +46,7 @@
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <form class="modal-content">
+                @csrf
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">ตั้งค่า</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -57,7 +57,7 @@
                     </div>
                     <div class="col-6 ">
                         <label for="">จำนวน :</label>
-                        <input required type="number" name="" id=""
+                        <input required type="number" name="" id="qty" name="time"
                             style="border: 0.2px solid #DADDD8;border-radius: 5px;width:80px">
                     </div>
                     <div class="col-6">
@@ -72,7 +72,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-success btn-sm">บันทึก</button>
-                    <button class="btn btn-danger btn-sm" onclick="closeModal()">ยกเลิก</button>
+                    <div class="btn btn-danger btn-sm" onclick="closeModal()">ยกเลิก</div>
                 </div>
             </form>
         </div>
@@ -80,13 +80,25 @@
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
     <script>
-        function showModal() {
+        function showModal(id) {
+            var dataSetting = @json($time);
+            console.log(dataSetting);
+            var idset = '';
+            dataSetting.forEach(el => {
+                if(el.id == id){
+                    idset = el.id
+                }
+            });
+            $('#qty').val(dataSetting[0].time);
+            $('#idformSetting').val(idset);
             $('#exampleModal').modal('toggle');
         }
 
         function closeModal() {
             $('#exampleModal').modal('hide');
+
         }
     </script>
 @endsection

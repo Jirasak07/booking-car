@@ -110,7 +110,6 @@
         <script>
             function showDetailHistory(id) {
                 var datenow = moment(new Date()).format('yyyy-MM-DD H:mm:ss')
-
                 moment.locale('th');
                 $.ajax({
                     url: '/admin/history/' + id,
