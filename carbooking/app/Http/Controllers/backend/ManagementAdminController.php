@@ -10,6 +10,7 @@ use App\Models\DriverModel;
 use App\Models\timebookingModel;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 class ManagementAdminController extends Controller
@@ -150,8 +151,30 @@ class ManagementAdminController extends Controller
         $id = $request->id_form;
         $booking_update = BookingModel::find($id);
         $car_out = new CaroutModel();
-        $car_count = DB::table('tb_out_cars')->count();
+
         if ($booking_update->booking_status == 1) {
+            $car_lic = DB::table('tb_out_cars')->where('car_out_license','=', $request->car_out_license)->select('id')->get();
+      
+            $car = array();
+            foreach($car_lic as $item){
+             $car [] =[
+                 'id' => $item->id
+             ];
+            }
+            $cars_id = implode(', ', array_column($car, 'id'));
+        //    dd($cars_id);
+            $car_all = CaroutModel::all();
+            $cars = array();
+            foreach($car_all as $item){
+             $cars [] =[
+                 'license' => $item->car_out_license
+             ];
+            }
+            $cars_string = implode(', ', array_column($cars, 'license'));
+         //    dd($cars_string);
+          
+            $car_count = DB::table('tb_out_cars')->count();
+
             if ($car_count < 1) {
                 $car_out->id = 1;
                 $car_out->car_out_license = $request->car_out_license;
@@ -165,7 +188,14 @@ class ManagementAdminController extends Controller
                 $booking_update->type_car = "2";
                 $booking_update->booking_status = "2";
                 $booking_update->save();
-            } else {
+            } else if($request->car_out_license == $cars_string){
+                $booking_update->license_plate = $cars_id;
+            $booking_update->driver = $request->car_out_driver;
+            $booking_update->type_car = "2";
+            $booking_update->booking_status = "2";
+            $booking_update->save();   
+    
+            } else{
                 $car_out->id = $car_count + 1;
                 $car_out->car_out_license = $request->car_out_license;
                 $car_out->car_out_model = $request->brand . " " . $request->car_out_model;
@@ -178,9 +208,11 @@ class ManagementAdminController extends Controller
                 $booking_update->type_car = "2";
                 $booking_update->booking_status = "2";
                 $booking_update->save();
-
+               
+            
             }
-            return redirect()->back();
+    return redirect()->back();
+      
         } else {
             $booking_update->booking_status = $booking_update->booking_status;
             $booking_update->save();
