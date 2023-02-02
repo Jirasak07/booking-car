@@ -85,6 +85,7 @@
                             @csrf
                             <input type="hidden" name="id_form" id="id_form">
                             <input type="hidden" id="formtab1" value="1">
+                            <input type="hidden" name="type" value="1">
                             <label for="">เลือกรถ</label>
                             <select name="car_id" id="select-car" class="rounded form-control" required
                                 style="width: 100%; border:1px solid #6673af30 ">
@@ -99,6 +100,7 @@
                     <div class="mt-1 tab-pane p-3 " id="tab2">
                         <form action="" id="approve-out">
                             <input type="hidden" name="id_form" id="id_form2">
+                            <input type="hidden" name="type" value="2">
                             <label for="">เลือกรถ</label>
                             <select name="car_id" id="select-car" class="rounded form-control" required
                                 style="width: 100%; border:1px solid #6673af30 ">

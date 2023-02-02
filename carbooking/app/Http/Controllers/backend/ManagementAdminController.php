@@ -125,7 +125,7 @@ class ManagementAdminController extends Controller
     }
     public function aprove_in(Request $request)
     {
-      
+
         // dd($request->all());
         $id = $request->id_form;
 
@@ -186,8 +186,8 @@ class ManagementAdminController extends Controller
             $booking_update->driver = $request->car_out_driver;
             $booking_update->type_car = "2";
             $booking_update->booking_status = "2";
-            $booking_update->save();   
-    
+            $booking_update->save();
+
             } else{
                 $car_out->id = $car_count + 1;
                 $car_out->car_out_license = $request->car_out_license;
@@ -201,11 +201,11 @@ class ManagementAdminController extends Controller
                 $booking_update->type_car = "2";
                 $booking_update->booking_status = "2";
                 $booking_update->save();
-               
-            
+
+
             }
     return redirect()->back();
-      
+
         } else {
             $booking_update->booking_status = $booking_update->booking_status;
             $booking_update->save();
@@ -221,6 +221,12 @@ class ManagementAdminController extends Controller
         $booking_edit->license_plate = $request->license;
         $booking_edit->driver = $request->driver;
         $booking_edit->save();
+        if( $booking_edit->save()){
+            return response()->json(['success'=>'Success !!']);
+        }else{
+            return response()->json(['error'=>'Error !!']);
+        }
+
     }
 
     public function autocomplete(Request $request)
@@ -233,9 +239,9 @@ class ManagementAdminController extends Controller
         //   return response()->json($filterResult);
 
           $query = $request->get('term','');
-        
+
           $car=CaroutModel::where('license_plate','LIKE','%'.$query.'%')->get();
-              
+
           $data=array();
           foreach ($car as $cars) {
               $data[]=array('value'=>$cars->license_plate,'id'=>$cars->id);
@@ -245,5 +251,5 @@ class ManagementAdminController extends Controller
           else
               return ['value'=>'No Result Found','id'=>''];
     }
- 
+
 }
