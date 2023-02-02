@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Events\BookingNotification;
+use App\Events\StoreNotification;
 use App\Http\Controllers\Controller;
 use App\Models\BookingModel;
 use App\Models\CaroutModel;
@@ -268,6 +269,7 @@ class Bookingcontroller extends Controller
         $bookingcar->booking_detail = $request->location;
         $bookingcar->booking_status = '1';
         //dd($bookingcar);
+        event(new StoreNotification('has new car booking!!'));
         $bookingcar->save();
 
         return redirect()->back()->with('success', 'การจองสำเร็จ');

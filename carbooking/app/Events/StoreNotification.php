@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class BookingNotification implements ShouldBroadcast
+class StoreNotification implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
     public $message;
@@ -31,7 +31,7 @@ class BookingNotification implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('booking-channel');
+        return new Channel('store-channel');
     }
 
     /**
@@ -41,6 +41,6 @@ class BookingNotification implements ShouldBroadcast
      */
     public function broadcastAs()
     {
-        return 'users-booking';
+        return 'store-booking';
     }
 }

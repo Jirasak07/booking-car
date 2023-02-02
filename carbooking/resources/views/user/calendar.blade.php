@@ -34,7 +34,7 @@
                 },
                 handleWindowResize: true,
                 expandRows: true,
-                 height: '100%',
+                height: '100%',
                 aspectRatio: 2,
                 eventTimeFormat: { // like '14:30:00'
                     hour: '2-digit',
@@ -127,16 +127,19 @@
                             text: 'โปรดจองก่อนเวลาเดินทาง 5 ชั่วโมง',
                         })
                     } else {
-                        $('#bookingModal').modal('toggle');
                         $('#booking_start').html(booking_start);
                         $('#booking_end').html(booking_end);
                         document.getElementById('date_start').value = booking_start;
                         document.getElementById('date_end').value = booking_end;
+
+                        document.getElementById('location').focus();
                         //tag input datetime-local เลือกวันย้อนหลังไม่ได้
                         var now_utc = Date.now()
                         var today = new Date(now_utc).toISOString().substring(0, 16);
                         document.getElementById("date_start").setAttribute("min", today);
                         document.getElementById("date_end").setAttribute("min", today);
+                        $('#bookingModal').modal('toggle');
+
                     }
                 }
             });
@@ -236,8 +239,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" name="saveBooking" value="" id="saveBooking" class="btn text-lighter"
-                        style="background-color: #2B59C3">ยืนยัน</button>
+                    <button type="submit" name="saveBooking" value="" id="saveBooking"
+                        class="btn btn-primary text-white">ยืนยัน</button>
                     <button type="button" class="btn grey btn-danger"data-bs-dismiss="modal" {{-- onclick="window.location.reload()" --}}
                         data-dismiss="modal">{{ __('ยกเลิก') }}</button>
                 </div>
