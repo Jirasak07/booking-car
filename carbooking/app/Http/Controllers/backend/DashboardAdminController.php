@@ -272,11 +272,5 @@ class DashboardAdminController extends Controller
 
 
 
-    public function autocomplete(Request $request)
-    {
-          $query = $request->get('query');
-          $filterResult = CaroutModel::where('license_plate', 'LIKE', '%'. $query. '%')->get();
-          return response()->json($filterResult);
-    }
 
 }
