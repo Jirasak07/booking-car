@@ -236,9 +236,9 @@ class Bookingcontroller extends Controller
             'location' => 'required',
         ], [
             'date_start.after' => 'โปรดจองก่อนเดินทาง '.$timeafter->time.' '.$timeafter->unit_th.'',
-            'date_start.before' => 'โปรดจองก่อนเดินทาง '.$timebefore->time.' '.$timebefore->unit_th.'',
+            'date_start.before' => 'โปรดจองล่วงหน้าก่อนเดินทางได้ไม่เกิน '.$timebefore->time.' '.$timebefore->unit_th.'',
             'date_end.after' => 'โปรดระบุเวลาการเดินทางอย่างน้อย '.$timemin->time.' '.$timemin->unit_th.'',
-            'date_end.before' => 'โปรดระบุเวลาการเดินทางอย่างน้อย '.$timemax->time.' '.$timemax->unit_th.'',
+            'date_end.before' => 'โปรดระบุเวลาการเดินทางได้ไม่เกิน '.$timemax->time.' '.$timemax->unit_th.'',
             'location.required' => 'โปรดระบุรายละเอียดและสถานที่ที่จะไป',
 
         ]);
