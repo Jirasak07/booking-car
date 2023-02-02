@@ -198,5 +198,27 @@ class ManagementAdminController extends Controller
         $booking_edit->save();
     }
 
+    public function autocomplete(Request $request)
+    {
+        //   $query = $request->get('query');
+        //   $filterResult = CaroutModel::where('license_plate', 'LIKE', '%'. $query. '%')->get();
+
+
+
+        //   return response()->json($filterResult);
+
+          $query = $request->get('term','');
+        
+          $car=CaroutModel::where('license_plate','LIKE','%'.$query.'%')->get();
+              
+          $data=array();
+          foreach ($car as $cars) {
+              $data[]=array('value'=>$cars->license_plate,'id'=>$cars->id);
+          }
+          if(count($data))
+              return $data;
+          else
+              return ['value'=>'No Result Found','id'=>''];
+    }
  
 }
