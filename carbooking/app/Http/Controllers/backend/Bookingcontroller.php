@@ -226,16 +226,19 @@ class Bookingcontroller extends Controller
     public function store(Request $request)
     {
         $timeafter = timebookingModel::find(1);
+        $timebefore = timebookingModel::find(2);
         $timemin = timebookingModel::find(3);
-
-
+        $timemax = timebookingModel::find(4);
+        
         $varlidate = $request->validate([
-            'date_start' => 'required|date|after:now + '.$timeafter->time.' hours',
-            'date_end' => 'required|date|after: '.$request->date_start.' + '.$timemin->time.' hours',
+            'date_start' => 'required|date|after:now + '.$timeafter->time.' '.$timeafter->unit.'|before:now + '.$timebefore->time.' '.$timebefore->unit.'',
+            'date_end' => 'required|date|after: '.$request->date_start.' + '.$timemin->time.' '.$timemin->unit.'|before:'.$request->date_start.' + '.$timemax->time.' '.$timemax->unit.'',
             'location' => 'required',
         ], [
-            'date_start.after:now + '.$timeafter->time.' hours' => 'โปรดจองก่อนเดินทาง '.$timeafter->time.' ชั่วโมง',
-            'date_start.after:'.$request->date_start.' + '.$timemin->time.' hours' => 'โปรดระบุเวลาการเดินทางอย่างน้อย '.$timemin->time.' นาที',
+            'date_start.after' => 'โปรดจองก่อนเดินทาง '.$timeafter->time.' ชั่วโมง',
+            'date_start.before' => 'โปรดจองก่อนเดินทาง '.$timebefore->time.' ชั่วโมง',
+            'date_end.after' => 'โปรดระบุเวลาการเดินทางอย่างน้อย '.$timemin->time.' ชั่วโมง',
+            'date_end.before' => 'โปรดระบุเวลาการเดินทางอย่างน้อย '.$timemax->time.' ชั่วโมง',
             'location.required' => 'โปรดระบุรายละเอียดและสถานที่ที่จะไป',
 
         ]);
