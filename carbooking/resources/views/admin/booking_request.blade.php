@@ -99,16 +99,43 @@
                     </div>
                     <div class="mt-1 tab-pane p-3 " id="tab2">
                         <form action="" id="approve-out">
+                            @csrf
                             <input type="hidden" name="id_form" id="id_form2">
                             <input type="hidden" name="type" value="2">
-                            <label for="">เลือกรถ</label>
-                            <select name="car_id" id="select-car" class="rounded form-control" required
-                                style="width: 100%; border:1px solid #6673af30 ">
-                            </select>
-                            <label class="mt-2" for="">เลือกพนักงานขับ</label>
-                            <select name="driver_id" id="select-driver" class=" rounded form-control" required
-                                style="width: 100%; border:1px solid #6673af30 ">
-                            </select>
+                            <div class="row">
+                                <div class="col-md-6 col-12 mt-1 text-left">
+                                    <label for="lplate">ทะเบียน</label>
+                                    <input required class="form-control rounded" type="text" name="car_out_license"
+                                        id="lplate" style="width: 100%; border:1px solid #6673af30 ">
+                                </div>
+                                <div class="col-md-6 col-12 mt-1 text-left">
+                                    <label for="brand">ยี่ห้อ</label>
+                                    <input required class="form-control rounded" type="text" name="brand"
+                                        id="brand" style="width: 100%; border:1px solid #6673af30 ">
+                                </div>
+                                <div class="col-md-6 col-12 mt-1 text-left">
+                                    <label for="model">รุ่น</label>
+                                    <input required class="form-control rounded" type="text" name="car_out_model"
+                                        id="model" style="width: 100%; border:1px solid #6673af30 ">
+                                </div>
+                                <div class="col-md-6 col-12 mt-1 text-left">
+                                    <label for="driver">คนขับ</label>
+                                    <input required class="form-control rounded" type="text" name="car_out_driver"
+                                        id="driver" style="width: 100%; border:1px solid #6673af30 ">
+                                </div>
+                                <div class="col-md-6 col-12 mt-1 text-left">
+                                    <label for="owner">เจ้าของรถ</label>
+                                    <input required class="form-control rounded" type="text" name="owner"
+                                        id="owner" style="width: 100%; border:1px solid #6673af30 ">
+                                </div>
+                                <div class="col-md-6 col-12 mt-1 text-left">
+                                    <label for="phone">เบอร์โทรศัพท์</label>
+                                    <input required class="form-control rounded" type="text" name="car_out_tel"
+                                        id="phone" style="width: 100%; border:1px solid #6673af30 ">
+                                </div>
+                            </div>
+
+
                         </form>
 
                     </div>
@@ -246,7 +273,27 @@
                             });
 
                         } else {
+
                             var frm = $('#approve-out').serialize();
+                            $.ajax({
+                                url: "{{ route('updateout') }}",
+                                type: "POST",
+                                data: frm,
+                                success: function(response) {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'อนุมัติเสร็จสิ้น !!',
+                                    }).then((res) => {
+                                        window.location.reload()
+                                    })
+                                },
+                                error: function(response) {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'กรุณากรอกข้อมูลให้ถูกต้อง'
+                                    })
+                                },
+                            });
                         }
                     }
                 })
