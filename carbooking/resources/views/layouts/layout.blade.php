@@ -43,12 +43,12 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@100;200;300;400;500;600;700;800;900&display=swap');
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
-        integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
-        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.0/css/toastr.css" rel="stylesheet" />
+
+    <!-- JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.0/js/toastr.js"></script>
+
     {{-- datefns --}}
     <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
     <script>
@@ -61,7 +61,12 @@
 
         var channel_booking_cancel = pusher.subscribe('booking-channel');
         channel_booking_cancel.bind('users-booking', function(data) {
-            toastr.success(JSON.stringify(data.message) + ' has cancel')
+            alert(JSON.stringify(data.message) + ' has cancel')
+        });
+
+        var channel_booking_store = pusher.subscribe('store-channel');
+        channel_booking_store.bind('store-booking', function(data) {
+            alert(JSON.stringify(data.message))
         });
     </script>
 </head>
