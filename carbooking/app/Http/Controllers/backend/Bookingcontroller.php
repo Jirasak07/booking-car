@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use App\Models\BookingModel;
 use App\Models\CaroutModel;
+use App\Models\timebookingModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -224,13 +225,16 @@ class Bookingcontroller extends Controller
     }
     public function store(Request $request)
     {
+        $timeafter = timebookingModel::find(1);
+        $timemin = timebookingModel::find(3);
+
 
         $varlidate = $request->validate([
-            'date_start' => 'required|date|after:now + 5 hours',
+            'date_start' => 'required|date|after:now + '.$timeafter->time.' hours',
             'date_end' => 'required|date|after:date_start + 30 minutes',
             'location' => 'required',
         ], [
-            'date_start.after:now + 5 hours' => 'โปรดจองก่อนเดินทาง 5 ชั่วโมง',
+            'date_start.after:now + '.$timeafter->time.' hours' => 'โปรดจองก่อนเดินทาง '.$timeafter->time.' ชั่วโมง',
             'date_start.after:date_start + 30 minutes' => 'โปรดระบุเวลาการเดินทางอย่างน้อย 30 นาที',
             'location.required' => 'โปรดระบุรายละเอียดและสถานที่ที่จะไป',
 
