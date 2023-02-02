@@ -43,27 +43,36 @@
     </div>
 
     <div>
-        <form action="" id="comment">
-            <input type="text" name="test1" id="test1">
-            <button type="submit" class="btn btn-info">บันทึก</button>
+        <form id="myForm">
+            @csrf
+            <input type="text" name="name" required>
+            <input type="email" name="email" required>
+            <button type="submit">Submit</button>
         </form>
     </div>
 
     <script>
-        $('#comment').on('submit', function(e) {
-            e.preventDefault();
-            var test1 = $('#test1').val();
-            $.ajax({
-                type: "POST",
-                url: 'admin/edit-setting',
-                data: {
-                    test1: test1,
-                },
-                success: function(msg) {
-                    alert(msg);
-                }
+        $(document).ready(function() {
+            $("#myForm").submit(function(e) {
+                e.preventDefault();
+
+                // Get the form data
+                var formData = $(this).serialize();
+
+                // Send the data using post
+                $.ajax({
+                    type: "POST",
+                    url: "{{url('admin/edit-setting')}}",
+                    data: formData,
+                    success: function(data) {
+                        console.log("Success:", data);
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.error("Error:", errorThrown);
+                    }
+                });
             });
-        })
+        });
     </script>
 
     <template id="my-template">

@@ -23,9 +23,9 @@
                                 <td>{{ $item->time }}</td>
 
                                 <td>
-                                    @if ($item->unit == 1)
-                                        ชม.
-                                    @elseif($item->unit == 2)
+                                    @if ($item->unit == 'hours')
+                                        ชั่วโมง
+                                    @elseif($item->unit == 'day')
                                         วัน
                                     @else
                                         เดือน
@@ -65,9 +65,9 @@
                         <label for="" class="ml-2">หน่วย :</label>
                         <select class="ml-2 p-1" name="unit" id="unit-select"
                             style="border: 0.2px solid #DADDD8;border-radius: 5px;font-size:13px">
-                            <option value="1">ชั่วโมง</option>
-                            <option value="2">วัน</option>
-                            <option value="3">เดือน</option>
+                            <option value="hours">ชั่วโมง</option>
+                            <option value="day">วัน</option>
+                            <option value="month">เดือน</option>
                         </select>
                     </div>
 
