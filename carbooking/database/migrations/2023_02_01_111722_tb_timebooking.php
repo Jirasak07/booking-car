@@ -17,7 +17,7 @@ class TbTimebooking extends Migration
         Schema::create('tb_timebooking',function(Blueprint $table){
             $table->string('id');//รหัสเวลา
             $table->string('name');
-            $table->string('time');//เวลา
+            $table->integer('time');//เวลา
             $table->string('unit');//หน่วยเวลา
             $table->string('unit_th');//หน่วยเวลา
             $table->timestamps();
