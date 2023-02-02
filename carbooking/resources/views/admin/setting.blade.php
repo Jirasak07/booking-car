@@ -110,9 +110,12 @@
                                     window.location.reload()
                                 })
                             },
-                            // error: function(response) {
-
-                            // },
+                             error: function(response) {
+                                Swal.fire({
+                                    icon:'error',
+                                    title:'กรุณากรอกข้อมูลให้ถูกต้อง'
+                                })
+                             },
                         });
                     }
                     let unit = $('#unit-select').val();

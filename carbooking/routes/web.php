@@ -31,7 +31,7 @@ Route::group(
         'middleware' => ['Isuser'],
     ],
     function () {
-       
+
         Route::get('dashboard', [\App\Http\Controllers\backend\Bookingcontroller::class, 'showcalendar'])->name('users.dashboard');
         Route::get('dashboard/refresh', [\App\Http\Controllers\backend\BookingController::class, 'refresh_calendar']);
         Route::get('booking', [\App\Http\Controllers\backend\UserBookingController::class, 'show_booking'])->name('users.view-booking');
@@ -72,6 +72,7 @@ Route::group(
         Route::get('cancel/{id}/{note}', [\App\Http\Controllers\backend\Bookingcontroller::class, 'cancle']);
         Route::post('admin/booking', [\App\Http\Controllers\backend\Bookingcontroller::class, 'store'])->name('send-booking');
         Route::post('edit-setting', [\App\Http\Controllers\backend\SettingController::class, 'edit_time']);
+        Route::post('edit-book',[\App\Http\Controllers\backend\ManagementAdminController::class, 'edit_booking']);
 
     }
 );

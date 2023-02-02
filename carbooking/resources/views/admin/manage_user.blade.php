@@ -24,8 +24,8 @@
                                 <td>{{ $Users->email }}</td>
                                 <td>
                                     <div class="row" style="width: 100px">
-                                        <div class="justify-content-center badge d-flex align-items-center rounded-0 text-white bg-default"
-                                            style="width: 50px">
+                                        <div class="justify-content-center  d-flex align-items-center rounded-0  {{$Users->role_user == 1 ? 'text-danger':'text-dark'}} "
+                                            style="width: 50px;font-weight:800;">
                                             {{ $Users->role_user == 1 ? 'Admin' : 'User' }}
 
                                         </div>

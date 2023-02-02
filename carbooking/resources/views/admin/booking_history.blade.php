@@ -43,17 +43,21 @@
     </div>
     <template id="my-template">
         <swal-html>
-            <input type="hidden" name="id_form" id="id_form">
-            <div>
-                <swal-input-label>เลือกรถ</swal-input-label>
-                <select id="car-select" class="swal2-input" style="width: 80%;">
-                </select>
-            </div>
-            <div class="mt-2">
-                <swal-input-label for="driver-select">เลือกพนักงานขับ</swal-input-label>
-                <select id="driver-select" class="swal2-input" style="width: 80%">
-                </select>
-            </div>
+            <form action="" id="formedit">
+                @csrf
+                <input type="hidden" name="id_form" id="id_form">
+                <div>
+                    <swal-input-label>เลือกรถ</swal-input-label>
+                    <select id="car-select" class="swal2-input" name="license" style="width: 80%;font-size:14px">
+                    </select>
+                </div>
+                <div class="mt-2">
+                    <swal-input-label for="driver-select">เลือกพนักงานขับ</swal-input-label>
+                    <select id="driver-select" class="swal2-input" name="driver" style="width: 80%;font-size:14px">
+                    </select>
+                </div>
+            </form>
+
         </swal-html>
     </template>
 
@@ -134,7 +138,7 @@
                                 ' </div><div  class="text-left" style="font-size:0.9rem;" >รายละเอียด : ' +
                                 det[0] +
                                 '</div><div class="text-left" style="font-size:0.9rem" >พนักงานขับ : ' +
-                                driver +
+                                (status == 2 ? driver : '-') +
                                 '</div><div class="text-left" style="font-size:0.9rem"> รถที่ใช้ : ' + (
                                     status == 2 ? car : '-') +
                                 ' </div> <div  class="text-left" style="font-size:0.9rem">สถานะ : ' + (
@@ -152,7 +156,6 @@
                             denyButtonColor: '#ffb703',
                             cancelButtonColor: '#ef476f',
                             focusConfirm: false,
-
                             showCloseButton: true,
                         }).then((res) => {
                             if (res.dismiss == 'cancel') {
@@ -208,7 +211,6 @@
                                         text: 'เนื่องจากกำลังดำเนินการ'
                                     })
                                 }
-
                             } else if (res.isDenied == true) {
                                 if (detail[0].sdate > datenow) {
                                     $.ajax({
@@ -249,6 +251,30 @@
                                         cancelButtonText: 'cancel',
                                         cancelButtonColor: '#ef476f',
                                         focusCancel: false,
+                                    }).then((res) => {
+                                        if (res.isConfirmed) {
+                                            var frm = $('#formedit').serialize();
+                                            console.log(frm)
+                                            $.ajax({
+                                                url: "edit-book",
+                                                type: "POST",
+                                                data: frm,
+                                                success: function(response) {
+                                                    Swal.fire({
+                                                        icon: 'success',
+                                                        title: 'แก้ไขเสร็จสิ้น !!',
+                                                    }).then((res) => {
+                                                        window.location.reload()
+                                                    })
+                                                },
+                                                error: function(response) {
+                                                    Swal.fire({
+                                                        icon: 'error',
+                                                        title: 'กรุณากรอกข้อมูลให้ถูกต้อง'
+                                                    })
+                                                },
+                                            });
+                                        }
                                     })
                                 } else if (detail[0].sdate < datenow) {
                                     Swal.fire({

@@ -17,7 +17,6 @@ class SettingController extends Controller
 
     public function edit_time(Request $request)
     {
-
         $id = $request->id_form;
         $time = timebookingModel::find($id);
         $time->time = $request->time;
@@ -30,6 +29,11 @@ class SettingController extends Controller
             $time->unit_th = 'เดือน';
         }
         $time->save();
-        return response()->json(['success' => 'Successfully']);
+        if(!$time->save()){
+        return response()->json(['error' => 'Error']);
+        }else{
+             return response()->json(['success' => 'Successfully']);
+        }
+
     }
 }
