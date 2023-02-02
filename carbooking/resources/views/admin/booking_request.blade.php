@@ -54,144 +54,45 @@
         </div>
         <!-- Button trigger modal -->
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog ">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">การอนุมัติคำขอ</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-
-                        <div class="mb-2  row text-xl-center">
-                            <div class="col-12 text-center mb-3" style="font-weight: 700">
-                                <label for="name">รายการของคุณ :</label>
-                                <label class=" ml-2" style="font-size: 80%;" for="" id="name"></label>
-                            </div>
-                            <div class="col-12 col-sm-6">
-                                <label for="" class="form-label "
-                                    style="line-height:50%;font-weight: 700">วันเวลาที่เริ่มต้น</label>
-                                </br>
-                                <label class=" ml-2" style="font-size: 80%;" for="" id="start_date"></label>
-                            </div>
-                            <div class="col-12 col-sm-6">
-                                <label for="" class="form-label"
-                                    style="line-height:50%;font-weight: 700">วันเวลาที่สิ้นสุด</label>
-                                </br>
-                                <label class=" ml-2" style="font-size: 80%;" for="" id="end_date"></label>
-                            </div>
-                            <div class="col-12 col-sm-6">
-                                <label for="" class="form-label"
-                                    style="line-height:50%;font-weight: 700">รายละเอียดการจอง</label>
-                                </br>
-                                <label class=" ml-2" style="font-size: 80%;" for="" id="detail">11012543</label>
-                            </div>
-                        </div>
-                        <div class="d-grid  justify-content-center row">
-                            <div class="container">
-                                <ul class="nav nav-tabs d-flex justify-content-center">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" data-toggle="tab" href="#tab1">ใช้รถภายใน</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" data-toggle="tab" href="#tab2">ใช้รถภายนอก</a>
-                                    </li>
-                                </ul>
-                                <div class="tab-content">
-                                    <div class="tab-pane active" id="tab1">
-                                        <form method="POST" action="{{ route('update') }}"
-                                            class="d-flex flex-column align-items-center">
-                                            @csrf
-                                            <input type="hidden" id="idform" name="id_form">
-                                            <input type="hidden" name="type" value="1">
-                                            <div class=" mt-4">
-                                                <label for="select-car">เลือกรถที่ต้องการใช้</label>
-                                                <select name="car_id" id="select-car" class="rounded form-control" required
-                                                    style="width: 250px; border:1px solid #6673af30 ">
-                                                </select>
-                                            </div>
-                                            <div>
-                                                <label for="select-driver">เลือกพนักงานขับรถ</label>
-                                                <select name="driver_id" id="select-driver" class="rounded form-control"
-                                                    required style="width: 250px;  border:1px solid #6673af30 ">
-                                                </select>
-                                            </div>
-                                            <div class="d-flex align-self-end justify-content-end w-100 mt-4 ">
-                                                <button type="submit" class="btn btn-md btn-success "><i
-                                                        class="fa-sharp fa-solid fa-floppy-disk"></i> บันทึก</button>
-                                                <button type="button" class="btn btn-md btn-outline-danger "
-                                                    data-bs-dismiss="modal" aria-label="Close" onclick="closeModal()"><i
-                                                        class="fa-solid fa-circle-xmark"></i> ยกเลิก</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="tab-pane pt-5" id="tab2">
-                                        <div class="card card-body">
-                                            <div class="alert alert-danger print-error-msg" style="display:none">
-                                                <ul></ul>
-                                            </div>
-                                            <form method="POST" action="{{ route('updateout') }}">
-                                                @csrf
-                                                <input type="hidden" id="idform2" name="id_form">
-                                                <input type="hidden" name="type" value="2">
-                                                <div class="form-group row mt-2 d-flex flex-column flex-md-row ">
-                                                    <div class="col-6 "> <label for="out-model">ยี่ห้อ</label>
-                                                        <input required type="text" id="out-model" name="brand"
-                                                            title="กรุณากรอเบอร์โทรให้ถูกต้อง" class="form-control">
-                                                    </div>
-                                                    <div class="col-6 ">
-                                                        <label for="out-license"> ป้ายทะเบียน </label> <input require
-                                                            name="car_out_license" type="text" id="out-license"
-                                                            class="form-control">
-                                                    </div>
-                                                    <div class="col-12 "> <label for="out-model">รายละเอียด/รุ่น</label>
-                                                        <input require type="text" id="out-model" name="car_out_model"
-                                                            class="form-control">
-                                                    </div>
-                                                    <div class="col-12 "> <label for="out-driver">คนขับ</label>
-                                                        <input require type="text" id="out-driver"
-                                                            name="car_out_driver" class="form-control">
-                                                    </div>
-                                                    <div class="col-12 ">
-                                                        <label for="out-own"> เจ้าของรถ </label> <input require
-                                                            type="text" id="out-own" class="form-control"
-                                                            name="owner">
-                                                    </div>
-                                                    <div class="col-12 "> <label for="out-tell"> เบอร์โทรติดต่อ
-                                                        </label>
-                                                        <input require type="number" id="out-tell"
-                                                            pattern="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$"
-                                                            title="กรุณากรอเบอร์โทรให้ถูกต้อง" class="form-control"
-                                                            name="car_out_tel" />
-                                                    </div>
-                                                </div>
-                                                <div class="d-flex justify-content-end mt-2">
-                                                    <button id="frm1-approve" type="submit"
-                                                        class=" btn  btn-success "><i
-                                                            class="fa-sharp fa-solid fa-floppy-disk"></i> บันทึก</button>
-                                                    <button type="button" class="btn  btn-outline-danger "
-                                                        data-bs-dismiss="modal" aria-label="Close"><i
-                                                            class="fa-solid fa-circle-xmark"></i> ยกเลิก</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <template id="approve">
+            <swal-title>
+                <div style="font-size: 0.6em">
+                    รายการจองของคุณ : <label for="" id="name"></label>
                 </div>
-            </div>
-        </div>
+            </swal-title>
+
+            <swal-html>
+                <div style="font-size: 13px" class="d-flex flex-column align-items-start">
+                    <div>
+                        <strong>วันเวลา : </strong> <label for="" id="start_date"></label> - <label for=""
+                            id="end_date"></label> <br>
+                    </div>
+                    <div>
+                        <strong>รายละเอียด : </strong> <label for="" id="detail"></label>
+                    </div>
+
+                </div>
+                <div class="mt-3">
+                     <select name="car_id" id="select-car" class="rounded form-control" required
+                    style="width: 250px; border:1px solid #6673af30 ">
+                </select>
+                <select name="driver_id" id="select-driver" class="rounded form-control" required
+                    style="width: 250px; border:1px solid #6673af30 ">
+                </select>
+                </div>
+
+            </swal-html>
+
+        </template>
     </div>
     </div>
     </div>
     @push('js')
         <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
-        <script src = "https://code.jquery.com/jquery-3.5.1.js" >
-        </script>
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         <script>
             function printErrorMsg(msg) {
@@ -216,7 +117,8 @@
                             renderer: function(api, rowIdx, columns) {
                                 var data = $.map(columns, function(col, i) {
                                     return col.hidden ?
-                                        '<tr style="font-size:10px" data-dt-row="' + col.rowIndex + '" data-dt-column="' +
+                                        '<tr style="font-size:10px" data-dt-row="' + col.rowIndex +
+                                        '" data-dt-column="' +
                                         col.columnIndex + '">' +
                                         '<td>' + col.title + ':' + '</td> ' +
                                         '<td>' + col.data + '</td>' +
@@ -260,10 +162,42 @@
             });
 
             function modal(val) {
-                document.querySelectorAll('#select-car option').forEach(option => option.remove())
-                document.querySelectorAll('#select-driver option').forEach(option => option.remove())
                 const data = @json($booking);
                 var carselect = @json($car);
+                // ใช้แสดงข้อมูลรายละเอียดการจอง บน Modal
+                const bookdata = [];
+                moment.locale('th');
+                const start = [];
+                const end = [];
+                const detail = [];
+                const name = [];
+                data.forEach(showBooking => {
+                    if (showBooking.id == val) {
+                        start.push(showBooking.booking_start);
+                        name.push(showBooking.name);
+                        end.push(showBooking.booking_end);
+                        detail.push(showBooking.booking_detail);
+                    }
+                });
+                Swal.fire({
+                    template: '#approve',
+                })
+                document.querySelectorAll('#select-car option').forEach(option => option.remove())
+                document.querySelectorAll('#select-driver option').forEach(option => option.remove())
+                $('#name').text(name);
+                const bookstart = moment(JSON.stringify(start[0])).format('ddd ที่ D MMM ' + (new Date(start[0]).getFullYear() +
+                    543) + ' เวลา HH:mm');
+                const bookend = moment(JSON.stringify(end[0])).format('ddd ที่ D MMM ' + (new Date(end[0]).getFullYear() +
+                    543) + ' เวลา HH:mm');
+
+                document.getElementById('start_date').innerHTML = bookstart;
+                document.getElementById('end_date').innerHTML = bookend;
+                document.getElementById('detail').innerHTML = detail[0];
+                // //<================================================================>//
+                // // กำหนด id ของการจองให้กับ form รถภายในและภายนอก
+                // document.getElementById('idform').value = val;
+                // document.getElementById('idform2').value = val;
+                //<================================================================>//
                 $.ajax({
                     type: 'GET',
                     url: '/admin/manage/' + val,
@@ -289,36 +223,7 @@
                     },
                     //<================================================================>//
                 })
-                // ใช้แสดงข้อมูลรายละเอียดการจอง บน Modal
-                const bookdata = [];
-                moment.locale('th');
-                const start = [];
-                const end = [];
-                const detail = [];
-                const name = [];
-                data.forEach(showBooking => {
-                    if (showBooking.id == val) {
-                        start.push(showBooking.booking_start);
-                        name.push(showBooking.name);
-                        end.push(showBooking.booking_end);
-                        detail.push(showBooking.booking_detail);
-                    }
-                });
 
-                const bookstart = moment(JSON.stringify(start[0])).format('ddd ที่ D MMM ' + (new Date(start[0]).getFullYear() +
-                    543) + ' เวลา HH:mm');
-                const bookend = moment(JSON.stringify(end[0])).format('ddd ที่ D MMM ' + (new Date(end[0]).getFullYear() +
-                    543) + ' เวลา HH:mm');
-
-                document.getElementById('start_date').innerHTML = bookstart;
-                document.getElementById('end_date').innerHTML = bookend;
-                document.getElementById('name').innerHTML = name;
-                document.getElementById('detail').innerHTML = detail[0];
-                //<================================================================>//
-                // กำหนด id ของการจองให้กับ form รถภายในและภายนอก
-                document.getElementById('idform').value = val;
-                document.getElementById('idform2').value = val;
-                //<================================================================>//
             }
         </script>
         <script>
