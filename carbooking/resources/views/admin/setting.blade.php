@@ -100,9 +100,10 @@
                 },
                 success: function(response) {
                     Swal.fire({
-                        icon:'success',
-                        title:'Success !!',
-                        
+                        icon: 'success',
+                        title: 'ตั้งค่าเสร็จสิ้น !!',
+                    }).then((res) => {
+                        window.location.reload()
                     })
                 },
                 // error: function(response) {
@@ -130,7 +131,6 @@
 
         function closeModal() {
             $('#exampleModal').modal('hide');
-
         }
     </script>
 @endsection

@@ -41,22 +41,42 @@
             </table>
         </div>
     </div>
+
+    <div>
+        <form action="" id="comment">
+            <input type="text" name="test1" id="test1">
+            <button type="submit" class="btn btn-info">บันทึก</button>
+        </form>
+    </div>
+
+    <script>
+        $('#comment').on('submit', function(e) {
+            e.preventDefault();
+            var test1 = $('#test1').val();
+            $.ajax({
+                type: "POST",
+                url: 'admin/edit-setting',
+                data: {
+                    test1: test1,
+                },
+                success: function(msg) {
+                    alert(msg);
+                }
+            });
+        })
+    </script>
+
     <template id="my-template">
         <swal-html>
+            <input type="hidden" name="id_form" id="id_form">
             <div>
                 <swal-input-label>เลือกรถ</swal-input-label>
                 <select id="car-select" class="swal2-input" style="width: 80%;">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
                 </select>
             </div>
-            <div class="mt-2" >
-                <swal-input-label for="car-select">เลือกพนักงานขับ</swal-input-label>
-                <select id="car-select" class="swal2-input" style="width: 80%">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
+            <div class="mt-2">
+                <swal-input-label for="driver-select">เลือกพนักงานขับ</swal-input-label>
+                <select id="driver-select" class="swal2-input" style="width: 80%">
                 </select>
             </div>
         </swal-html>
@@ -126,9 +146,9 @@
                         var car = detail[0].car_detail + ' ทะเบียน ' + detail[0].car
                         var det = String(detail[0].booking_detail).split("~")
                         var tf = ''
-                        if(status == 2){
-                            (detail[0].type_car == 1? (tf = true):(tf = false) )
-                        }else {
+                        if (status == 2) {
+                            (detail[0].type_car == 1 ? (tf = true) : (tf = false))
+                        } else {
                             tf = false
                         }
                         Swal.fire({
@@ -216,9 +236,44 @@
 
                             } else if (res.isDenied == true) {
                                 if (detail[0].sdate > datenow) {
+                                    $.ajax({
+                                        type: 'GET',
+                                        url: '/admin/manage/' + id,
+                                        dataType: 'JSON',
+                                        success: function(data) {
+                                            console.log(data.driver)
+                                            var car = data.car
+                                            var driver = data.driver
+                                            // เช็ครถว่างหรือไม่ว่างใน Select option ตอนกดอนุมัติ
+                                            car.forEach(carsel => {
+                                                $('#car-select').append($('<option>', {
+                                                    value: carsel.id,
+                                                    text: carsel.car_model +
+                                                        ' ทะเบียน ' + carsel
+                                                        .car_license
+                                                }))
+                                            })
+                                            driver.forEach(driver => {
+                                                $('#driver-select').append($(
+                                                    '<option>', {
+                                                        value: driver.id,
+                                                        text: driver
+                                                            .driver_fullname
+                                                    }))
+                                            })
+                                            $('#id_form').val(id);
+                                        },
+                                    })
                                     Swal.fire({
                                         template: '#my-template',
                                         title: 'แก้ไขรายละเอียดการจอง',
+                                        confirmButtonText: 'Save',
+                                        confirmButtonColor: '#06d6a0',
+                                        focusConfirm: false,
+                                        showCancelButton: true,
+                                        cancelButtonText: 'cancel',
+                                        cancelButtonColor: '#ef476f',
+                                        focusCancel: false,
                                     })
                                 } else if (detail[0].sdate < datenow) {
                                     Swal.fire({
@@ -233,7 +288,6 @@
                         })
                     }
                 })
-
             }
         </script>
     @endpush

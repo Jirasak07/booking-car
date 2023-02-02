@@ -2,7 +2,6 @@
 @section('content')
     @include('layouts.header')
     <div class="" id="re">
-
         <div class="container-fulid mx-3 ">
             <div class="container-md pt-3 pb-3 ">
                 <div class=" card shadow-table p-3  ">
@@ -16,13 +15,11 @@
                                 <th>วันเวลาสิ้นสุด</th>
                                 <th>รายละเอียด</th>
                                 <th>จัดการ</th>
-
                             </tr>
                         </thead>
                         <tbody>
                             @php
                                 $i = 1;
-
                             @endphp
                             @foreach ($booking as $bookings)
                                 @if ($bookings['booking_status'] == 1)
@@ -47,7 +44,6 @@
                                                 onclick="alertCancel({{ $bookings['id'] }})"> <i
                                                     class="fa-solid fa-ban"></i> ยกเลิก</a>
                                         </td>
-
                                     </tr>
                                 @endif
                             @endforeach
@@ -55,14 +51,8 @@
                     </table>
                 </div>
             </div>
-
-
-
-            {{-- @include('layouts.footers.auth') --}}
         </div>
         <!-- Button trigger modal -->
-
-
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog ">
@@ -107,18 +97,15 @@
                                         <a class="nav-link" data-toggle="tab" href="#tab2">ใช้รถภายนอก</a>
                                     </li>
                                 </ul>
-
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="tab1">
                                         <form method="POST" action="{{ route('update') }}"
                                             class="d-flex flex-column align-items-center">
                                             @csrf
                                             <input type="hidden" id="idform" name="id_form">
-
                                             <input type="hidden" name="type" value="1">
                                             <div class=" mt-4">
                                                 <label for="select-car">เลือกรถที่ต้องการใช้</label>
-
                                                 <select name="car_id" id="select-car" class="rounded form-control" required
                                                     style="width: 250px; border:1px solid #6673af30 ">
                                                 </select>
@@ -129,9 +116,6 @@
                                                     required style="width: 250px;  border:1px solid #6673af30 ">
                                                 </select>
                                             </div>
-
-
-
                                             <div class="d-flex align-self-end justify-content-end w-100 mt-4 ">
                                                 <button type="submit" class="btn btn-md btn-success "><i
                                                         class="fa-sharp fa-solid fa-floppy-disk"></i> บันทึก</button>
@@ -139,11 +123,9 @@
                                                     data-bs-dismiss="modal" aria-label="Close" onclick="closeModal()"><i
                                                         class="fa-solid fa-circle-xmark"></i> ยกเลิก</button>
                                             </div>
-
                                         </form>
                                     </div>
                                     <div class="tab-pane pt-5" id="tab2">
-
                                         <div class="card card-body">
                                             <div class="alert alert-danger print-error-msg" style="display:none">
                                                 <ul></ul>
@@ -157,29 +139,23 @@
                                                         <input required type="text" id="out-model" name="brand"
                                                             title="กรุณากรอเบอร์โทรให้ถูกต้อง" class="form-control">
                                                     </div>
-
                                                     <div class="col-6 ">
                                                         <label for="out-license"> ป้ายทะเบียน </label> <input require
                                                             name="car_out_license" type="text" id="out-license"
                                                             class="form-control">
-
                                                     </div>
                                                     <div class="col-12 "> <label for="out-model">รายละเอียด/รุ่น</label>
                                                         <input require type="text" id="out-model" name="car_out_model"
                                                             class="form-control">
-
                                                     </div>
-
                                                     <div class="col-12 "> <label for="out-driver">คนขับ</label>
                                                         <input require type="text" id="out-driver"
                                                             name="car_out_driver" class="form-control">
-
                                                     </div>
                                                     <div class="col-12 ">
                                                         <label for="out-own"> เจ้าของรถ </label> <input require
                                                             type="text" id="out-own" class="form-control"
                                                             name="owner">
-
                                                     </div>
                                                     <div class="col-12 "> <label for="out-tell"> เบอร์โทรติดต่อ
                                                         </label>
@@ -187,9 +163,7 @@
                                                             pattern="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$"
                                                             title="กรุณากรอเบอร์โทรให้ถูกต้อง" class="form-control"
                                                             name="car_out_tel" />
-
                                                     </div>
-
                                                 </div>
                                                 <div class="d-flex justify-content-end mt-2">
                                                     <button id="frm1-approve" type="submit"
@@ -199,28 +173,18 @@
                                                         data-bs-dismiss="modal" aria-label="Close"><i
                                                             class="fa-solid fa-circle-xmark"></i> ยกเลิก</button>
                                                 </div>
-
                                             </form>
                                         </div>
-
-
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-
-
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
-
     </div>
-
-
     </div>
     @push('js')
         <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
@@ -230,42 +194,6 @@
         <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
 
         <script>
-            // $("#frm1-approve").click(function(e) {
-            //     e.preventDefault();
-            //     var _token = $("input[name='_token']").val();
-            //     var type = $("input[name='type']").val();
-            //     var idform = $("input[id='idform']").val();
-            //     var brand = $("input[name='brand']").val();
-            //     var car_out_license = $("input[name='car_out_license']").val();
-            //     var car_out_model = $("input[name='car_out_model']").val();
-            //     var car_out_driver = $("input[name='car_out_driver']").val();
-            //     var owner = $("input[name='owner']").val();
-            //     var car_out_tel = $("input[name='car_out_tel']").val();
-
-            //     $.ajax({
-            //         url: "{{ route('updateout') }}",
-            //         type: 'POST',
-            //         data: {
-            //             _token: _token,
-            //             type: type,
-            //             idform: idform,
-            //             brand: brand,
-            //             car_out_license: car_out_license,
-            //             car_out_model: car_out_model,
-            //             car_out_driver: car_out_driver,
-            //             owner: owner,
-            //             car_out_tel: car_out_tel
-            //         },
-            //         success: function(data) {
-            //             if ($.isEmptyObject(data.error)) {
-            //                 alert(data.success);
-            //             } else {
-            //                 printErrorMsg(data.error);
-            //             }
-            //         }
-            //     })
-            // })
-
             function printErrorMsg(msg) {
                 $(".print-error-msg").find("ul").html('');
                 $(".print-error-msg").css('display', 'block');
