@@ -22,6 +22,13 @@ class SettingController extends Controller
         $time = timebookingModel::find($id);
         $time->time = $request->time;
         $time->unit = $request->unit;
+        if($request->unit == 'hours'){
+            $time->unit_th = 'ชม.';
+        }else if($request->unit == 'day'){
+            $time->unit_th = 'วัน';
+        }else{
+            $time->unit_th = 'เดือน';
+        }
         $time->save();
         return response()->json(['success' => 'Successfully']);
     }

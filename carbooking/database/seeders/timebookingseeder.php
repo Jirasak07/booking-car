@@ -18,25 +18,28 @@ class timebookingseeder extends Seeder
             [   'id' => '1',
                 'name' => 'การจองล่วงหน้าขั้นต่ำ',
                 'time'    => '5',
-                'unit' => '1',
+                'unit' => 'hours',
+                'unit_th' => 'ชม.',
                
             ],  ['id' => '2',
             'name' => 'จองล่วงหน้านานสุด',
             'time'    => '1',
-            'unit' => '3',
+            'unit' => 'days',
+            'unit_th' => 'วัน',
          
         ],
             ['id' => '3',
                 'name' => 'ระยะเวลาในการจองขั้นต่ำ',
                 'time'    => '3',
-                'unit' => '2',
+                'unit' => 'month',
+                'unit_th' => 'เดือน',
               
             ],
             ['id' => '4',
                 'name' => 'ระยะเวลาในการจองขั้นสูงสุด',
-                'time'    => '',
-                'unit' => '2',
-             
+                'time'    => '3',
+                'unit' => 'hours',
+                'unit_th' => 'ชม.',
             ],
           
           

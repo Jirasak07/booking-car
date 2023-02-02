@@ -19,6 +19,7 @@ class TbTimebooking extends Migration
             $table->string('name');
             $table->string('time');//เวลา
             $table->string('unit');//หน่วยเวลา
+            $table->string('unit_th');//หน่วยเวลา
             $table->timestamps();
         });
     }
