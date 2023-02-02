@@ -41,40 +41,6 @@
             </table>
         </div>
     </div>
-
-    <div>
-        <form id="myForm">
-            @csrf
-            <input type="text" name="name" required>
-            <input type="email" name="email" required>
-            <button type="submit">Submit</button>
-        </form>
-    </div>
-
-    <script>
-        $(document).ready(function() {
-            $("#myForm").submit(function(e) {
-                e.preventDefault();
-
-                // Get the form data
-                var formData = $(this).serialize();
-
-                // Send the data using post
-                $.ajax({
-                    type: "POST",
-                    url: "{{url('admin/edit-setting')}}",
-                    data: formData,
-                    success: function(data) {
-                        console.log("Success:", data);
-                    },
-                    error: function(jqXHR, textStatus, errorThrown) {
-                        console.error("Error:", errorThrown);
-                    }
-                });
-            });
-        });
-    </script>
-
     <template id="my-template">
         <swal-html>
             <input type="hidden" name="id_form" id="id_form">
