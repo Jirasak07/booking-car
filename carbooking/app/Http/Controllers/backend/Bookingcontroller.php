@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\Events\BookingNotification;
 use App\Http\Controllers\Controller;
 use App\Models\BookingModel;
 use App\Models\CaroutModel;
@@ -216,12 +217,14 @@ class Bookingcontroller extends Controller
     }
     public function cancle($id, $note)
     {
+
         //dd($request->all());
         $canclebooking = BookingModel::find($id);
         $canclebooking->booking_status = ('3');
         $canclebooking->booking_detail =  $canclebooking->booking_detail."~".$note;
+        event(new BookingNotification('users-booking please refresh pages'));
         $canclebooking->save();
-        return response()->json(['status' => 'success']);
+       return response()->json(['status' => 'success']);
     }
     public function store(Request $request)
     {

@@ -13,6 +13,7 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
         "phattarachai/thaidate": "^12.1",
+        "pusher/pusher-php-server": "^7.2",
         "realrashid/sweet-alert": "^5.1"
     },
     "require-dev": {
