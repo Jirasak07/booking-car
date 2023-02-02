@@ -10,6 +10,10 @@
                     icon: 'success',
                     title: 'การจองสำเร็จ',
                     text: 'โปรดรอแอดมินอนุมัติ',
+                }).then((result)=>{
+                    if (result.isConfirmed) {
+                        window.open('{{ route("users.view-booking") }}','_self')
+                    }
                 });
             </script>
         @endif
