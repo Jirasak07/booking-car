@@ -36,8 +36,7 @@
                                         </td>
                                         <td>{{ $bookings['booking_detail'] }}</td>
                                         <td>
-                                            <div class="btn btn-success btn-sm" onclick="modal({{ $bookings['id'] }})"
-                                                data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                            <div class="btn btn-success btn-sm" onclick="modal({{ $bookings['id'] }})">
                                                 <i class="fa-solid fa-check"></i> อนุมัติ
                                             </div>
                                             <a class="text-white btn btn-danger btn-sm "
@@ -72,14 +71,47 @@
                     </div>
 
                 </div>
-                <div class="mt-3">
-                     <select name="car_id" id="select-car" class="rounded form-control" required
-                    style="width: 250px; border:1px solid #6673af30 ">
-                </select>
-                <select name="driver_id" id="select-driver" class="rounded form-control" required
-                    style="width: 250px; border:1px solid #6673af30 ">
-                </select>
+                <ul class="nav nav-tabs mt-2">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#tab1" onclick="tab(1)">ใช้รถภายใน</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#tab2" onclick="tab(2)">ใช้รถภายนอก</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="mt-1 tab-pane active p-3 " id="tab1">
+                        <form action="" id="approveform">
+                            @csrf
+                            <input type="hidden" name="id_form" id="id_form">
+                            <input type="hidden" id="formtab1" value="1">
+                            <label for="">เลือกรถ</label>
+                            <select name="car_id" id="select-car" class="rounded form-control" required
+                                style="width: 100%; border:1px solid #6673af30 ">
+                            </select>
+                            <label class="mt-2" for="">เลือกพนักงานขับ</label>
+                            <select name="driver_id" id="select-driver" class=" rounded form-control" required
+                                style="width: 100%; border:1px solid #6673af30 ">
+                            </select>
+                        </form>
+
+                    </div>
+                    <div class="mt-1 tab-pane p-3 " id="tab2">
+                        <form action="" id="approve-out">
+                            <input type="hidden" name="id_form" id="id_form2">
+                            <label for="">เลือกรถ</label>
+                            <select name="car_id" id="select-car" class="rounded form-control" required
+                                style="width: 100%; border:1px solid #6673af30 ">
+                            </select>
+                            <label class="mt-2" for="">เลือกพนักงานขับ</label>
+                            <select name="driver_id" id="select-driver" class=" rounded form-control" required
+                                style="width: 100%; border:1px solid #6673af30 ">
+                            </select>
+                        </form>
+
+                    </div>
                 </div>
+
 
             </swal-html>
 
@@ -87,6 +119,8 @@
     </div>
     </div>
     </div>
+
+
     @push('js')
         <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
         <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -94,20 +128,16 @@
         <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+
         <script>
-            function printErrorMsg(msg) {
-                $(".print-error-msg").find("ul").html('');
-                $(".print-error-msg").css('display', 'block');
-                $.each(msg, function(key, value) {
-                    $(".print-error-msg").find("ul").append('<li>' + value + '</li>');
-                });
+            function tab(val) {
+                if (val == 1) {
+                    $('#formtab1').val(1)
+                } else {
+                    $('#formtab1').val(0)
+                }
+
             }
-        </script>
-        <script>
-            $('.nav-tabs a').on('click', function(e) {
-                e.preventDefault()
-                $(this).tab('show')
-            });
             $(document).ready(function() {
                 $('#tablerequest').DataTable({
                     responsive: {
@@ -181,6 +211,42 @@
                 });
                 Swal.fire({
                     template: '#approve',
+                    showCancelButton: true,
+                    focusConfirm: false,
+                    confirmButtonColor: '#06d6a0',
+                    cancelButtonColor: '#ef476f',
+                    confirmButtonText: '<i class="fa-sharp fa-solid fa-floppy-disk"> บันทึก',
+                    cancelButtonText: '<i class="fa-solid fa-circle-xmark"> ยกเลิก',
+                }).then((res) => {
+                    if (res.isConfirmed) {
+                        var formid = $('#formtab1').val()
+                        if (formid == 1) {
+                            var frm = $('#approveform').serialize();
+                            console.log(frm)
+                            $.ajax({
+                                url: "{{ route('update') }}",
+                                type: "POST",
+                                data: frm,
+                                success: function(response) {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'อนุมัติเสร็จสิ้น !!',
+                                    }).then((res) => {
+                                        window.location.reload()
+                                    })
+                                },
+                                error: function(response) {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'กรุณากรอกข้อมูลให้ถูกต้อง'
+                                    })
+                                },
+                            });
+
+                        } else {
+                            var frm = $('#approve-out').serialize();
+                        }
+                    }
                 })
                 document.querySelectorAll('#select-car option').forEach(option => option.remove())
                 document.querySelectorAll('#select-driver option').forEach(option => option.remove())
@@ -190,14 +256,12 @@
                 const bookend = moment(JSON.stringify(end[0])).format('ddd ที่ D MMM ' + (new Date(end[0]).getFullYear() +
                     543) + ' เวลา HH:mm');
 
-                document.getElementById('start_date').innerHTML = bookstart;
-                document.getElementById('end_date').innerHTML = bookend;
-                document.getElementById('detail').innerHTML = detail[0];
-                // //<================================================================>//
-                // // กำหนด id ของการจองให้กับ form รถภายในและภายนอก
-                // document.getElementById('idform').value = val;
-                // document.getElementById('idform2').value = val;
-                //<================================================================>//
+                // document.getElementById('start_date').innerHTML = bookstart;
+                $('#start_date').text(bookstart)
+                $('#end_date').text(bookend)
+                $('#detail').text(detail[0])
+                $('#id_form').val(val);
+                $('#id_form2').val(val);
                 $.ajax({
                     type: 'GET',
                     url: '/admin/manage/' + val,
