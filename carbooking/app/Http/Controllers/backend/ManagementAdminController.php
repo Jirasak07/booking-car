@@ -155,34 +155,17 @@ class ManagementAdminController extends Controller
         if ($booking_update->booking_status == 1) {
             $car_lic = DB::table('tb_out_cars')->where('car_out_license','=', $request->car_out_license)
             ->where('car_out_driver','=', $request->car_out_driver)->select('id')->get();
-      
             $car = array();
             foreach($car_lic as $item){
              $car [] =[
-                 'id' => $item->id
+                 'id' => $item->id,
+                 'license' => $item->car_out_license,
+                 'driver' => $item->car_out_driver
              ];
             }
             $cars_id = implode(', ', array_column($car, 'id'));
-        //    dd($cars_id);
-            $car_all = DB::table('tb_out_cars')->where('car_out_license','=', $request->car_out_license)
-            ->where('car_out_driver','=', $request->car_out_driver)->select('car_out_license')->get();
-            $cars = array();
-            foreach($car_all as $item){
-             $cars [] =[
-                 'license' => $item->car_out_license
-             ];
-            }
-            $cars_string = implode(', ', array_column($cars, 'license'));
-         //    dd($cars_string);
-         $driver_all = DB::table('tb_out_cars')->where('car_out_license','=', $request->car_out_license)
-         ->where('car_out_driver','=', $request->car_out_driver)->select('car_out_driver')->get();
-         $driver = array();
-         foreach($driver_all as $item){
-          $driver [] =[
-              'driver' => $item->car_out_driver
-          ];
-         }
-         $driver_string = implode(', ', array_column($driver, 'driver'));
+            $cars_string = implode(', ', array_column($car, 'license'));
+            $driver_string = implode(', ', array_column($car, 'driver'));
             $car_count = DB::table('tb_out_cars')->count();
 
             if ($car_count < 1) {
