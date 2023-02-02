@@ -153,7 +153,8 @@ class ManagementAdminController extends Controller
         $car_out = new CaroutModel();
 
         if ($booking_update->booking_status == 1) {
-            $car_lic = DB::table('tb_out_cars')->where('car_out_license','=', $request->car_out_license)->select('id')->get();
+            $car_lic = DB::table('tb_out_cars')->where('car_out_license','=', $request->car_out_license)
+            ->where('car_out_driver','=', $request->car_out_driver)->select('id')->get();
       
             $car = array();
             foreach($car_lic as $item){
@@ -163,7 +164,8 @@ class ManagementAdminController extends Controller
             }
             $cars_id = implode(', ', array_column($car, 'id'));
         //    dd($cars_id);
-            $car_all = CaroutModel::all();
+            $car_all = DB::table('tb_out_cars')->where('car_out_license','=', $request->car_out_license)
+            ->where('car_out_driver','=', $request->car_out_driver)->select('car_out_license')->get();
             $cars = array();
             foreach($car_all as $item){
              $cars [] =[
@@ -172,7 +174,15 @@ class ManagementAdminController extends Controller
             }
             $cars_string = implode(', ', array_column($cars, 'license'));
          //    dd($cars_string);
-          
+         $driver_all = DB::table('tb_out_cars')->where('car_out_license','=', $request->car_out_license)
+         ->where('car_out_driver','=', $request->car_out_driver)->select('car_out_driver')->get();
+         $driver = array();
+         foreach($driver_all as $item){
+          $driver [] =[
+              'driver' => $item->car_out_driver
+          ];
+         }
+         $driver_string = implode(', ', array_column($driver, 'driver'));
             $car_count = DB::table('tb_out_cars')->count();
 
             if ($car_count < 1) {
@@ -188,7 +198,7 @@ class ManagementAdminController extends Controller
                 $booking_update->type_car = "2";
                 $booking_update->booking_status = "2";
                 $booking_update->save();
-            } else if($request->car_out_license == $cars_string){
+            } else if($request->car_out_license == $cars_string and $request->car_out_driver == $driver_string){
                 $booking_update->license_plate = $cars_id;
             $booking_update->driver = $request->car_out_driver;
             $booking_update->type_car = "2";
