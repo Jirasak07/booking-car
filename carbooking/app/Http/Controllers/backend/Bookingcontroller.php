@@ -220,6 +220,8 @@ class Bookingcontroller extends Controller
 
         //dd($request->all());
         $canclebooking = BookingModel::find($id);
+        $canclebooking->driver = '-';
+        $canclebooking->license_plate = '-';
         $canclebooking->booking_status = ('3');
         $canclebooking->booking_detail =  $canclebooking->booking_detail."~".$note;
         event(new BookingNotification('users-booking please refresh pages'));
