@@ -10,17 +10,24 @@
                             <td style="max-width: 30px">ลำดับ</td>
                             <td>รายชื่อ</td>
                             <td>สถานะ</td>
+                            <td>จัดการ</td>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($driver as $item)
-                            <tr>
-                                <td>{{ $item['id'] }}</td>
-                                <td>{{ $item['driver_fullname'] }}</td>
-                                <td>
-                                    <div class='{{ $item['driver_status'] == 1 ? 'btn btn-success btn-sm ' : 'btn btn-danger btn-sm' }}'
+                            <tr >
+                                <td style="width: 150px">{{ $item['id'] }}</td>
+                                <td style="width: 150px">{{ $item['driver_fullname'] }}</td>
+                                <td style="width: 100px" >
+                                    <div class='{{ $item['driver_status'] == 1 ? 'text-success ' : 'text-danger' }}'
                                         style="width: 80px" onclick="changeStatus({{ $item['id'] }})">
                                         {{ $item['driver_status'] == 1 ? 'ว่าง' : 'ไม่ว่าง' }}</div>
+                                </td>
+                                <td style="width: 150px" >
+                                    <div class="btn-sm btn text-white btn-warning border-0"
+                                        style="width: 90px;background-color:#ffca3a;"
+                                        onclick="changeStatus({{ $item['id'] }})" style="width: 80px">
+                                       <i class="fa-solid fa-pen-to-square"></i> แก้ไข</div>
                                 </td>
                             </tr>
                         @endforeach
@@ -75,8 +82,8 @@
                                             title: 'เปลี่ยนสถานะเสร็จสิ้น',
                                             showConfirmButton: false,
                                             timer: 1500
-                                        }).then((res)=>{
-window.location.reload();
+                                        }).then((res) => {
+                                            window.location.reload();
                                         })
                                     } else {
                                         Swal.fire({

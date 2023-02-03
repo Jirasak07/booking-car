@@ -26,8 +26,8 @@
                                     {{ $item->unit_th }}
                                 </td>
                                 <td>
-                                    <div class="btn btn-info btn-sm" onclick="showModal({{ $item->id }})">
-                                        Edit
+                                    <div class="btn text-white btn-sm" style="background-color: #ffca3a;width: 90px" onclick="showModal({{ $item->id }})">
+                                        <i class="fa-solid fa-pen-to-square"></i>   แก้ไข
                                     </div>
                                 </td>
                             </tr>

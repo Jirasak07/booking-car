@@ -11,6 +11,7 @@
                             <th>ชื่อ</th>
                             <th>Email</th>
                             <th>Role</th>
+                            <th>Manage</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -24,16 +25,23 @@
                                 <td>{{ $Users->email }}</td>
                                 <td>
                                     <div class="row" style="width: 100px">
-                                        <div class="justify-content-center  d-flex align-items-center rounded-0  {{$Users->role_user == 1 ? 'text-danger':'text-dark'}} "
+                                        <div class="justify-content-center  d-flex align-items-center rounded-0  {{ $Users->role_user == 1 ? 'text-danger' : 'text-dark' }} "
                                             style="width: 50px;font-weight:800;">
                                             {{ $Users->role_user == 1 ? 'Admin' : 'User' }}
 
                                         </div>
-                                        <i class="fa-solid fa-pen-to-square rounded-0 btn btn-warning btn-sm"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="btn-sm btn text-white btn-warning border-0"
+                                    style="width: 90px;background-color:#ffca3a;">
+                                        <i class="fa-solid fa-pen-to-square" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                             onclick='changeRole({{ $Users->role_user }},{{ $Users->id }})'>
                                         </i>
+                                        แก้ไข
                                     </div>
+
                                 </td>
                             </tr>
                         @endforeach
