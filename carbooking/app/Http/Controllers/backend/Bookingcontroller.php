@@ -225,7 +225,7 @@ class Bookingcontroller extends Controller
         $canclebooking->license_plate = '-';
         $canclebooking->booking_status = ('3');
         $canclebooking->booking_detail =  $canclebooking->booking_detail."~".$note;
-        event(new BookingNotification('users-booking please refresh pages'));
+        //event(new BookingNotification('users-booking please refresh pages'));
         $canclebooking->save();
        return response()->json(['status' => 'success']);
     }
@@ -269,7 +269,7 @@ class Bookingcontroller extends Controller
         $bookingcar->booking_detail = $request->location;
         $bookingcar->booking_status = '1';
         //dd($bookingcar);
-        event(new StoreNotification('has new car booking!!'));
+        //event(new StoreNotification('has new car booking!!'));
         $bookingcar->save();
 
         return redirect()->back()->with('success', 'การจองสำเร็จ');

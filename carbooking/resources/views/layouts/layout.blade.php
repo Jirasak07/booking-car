@@ -44,12 +44,11 @@
         @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@100;200;300;400;500;600;700;800;900&display=swap');
     </style>
     <!-- CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.0/css/toastr.css" rel="stylesheet" />
+    {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.0/css/toastr.css" rel="stylesheet" />
 
     <!-- JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.0/js/toastr.js"></script>
 
-    {{-- datefns --}}
     <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
     <script>
         // Enable pusher logging - don't include this in production
@@ -83,7 +82,7 @@
         channel_booking_store.bind('store-booking', function(data) {
             alert(JSON.stringify(data.message))
         });
-    </script>
+    </script> --}}
 </head>
 
 <body class="" style="background-color: #ebebeb" style="min-width: 375px">
