@@ -215,7 +215,7 @@
                                 if (detail[0].sdate > datenow) {
                                     $.ajax({
                                         type: 'GET',
-                                        url: '/admin/manage/' + id,
+                                        url: '/admin/manage-carin/' + id,
                                         dataType: 'JSON',
                                         success: function(data) {
                                             console.log(data.driver)
