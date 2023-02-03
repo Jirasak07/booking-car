@@ -287,4 +287,9 @@ class Bookingcontroller extends Controller
         $booking->save();
         return redirect()->back()->with('success_edit', 'complete');
     }
+
+    function validate_booking(){
+       
+        return response()->json([ 'time' => timebookingModel::all()]);
+    }
 }
