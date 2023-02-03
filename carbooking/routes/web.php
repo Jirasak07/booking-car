@@ -40,6 +40,7 @@ Route::group(
         Route::post('edit', [\App\Http\Controllers\backend\Bookingcontroller::class, 'edit_booking'])->name('user.edit.booking');
         Route::get('cancel/{id}/{note}', [\App\Http\Controllers\backend\Bookingcontroller::class, 'cancle'])->name('users.booking_cancel');
         Route::get('detail/{id}', [\App\Http\Controllers\backend\UserBookingController::class, 'detail_booking']);
+        Route::get('validate_booking',[\App\Http\Controllers\backend\Bookingcontroller::class,'validate_booking']);
     }
 );
 Route::get('admin/request', [\App\Http\Controllers\backend\UserBookingController::class, 'show_booking']);
