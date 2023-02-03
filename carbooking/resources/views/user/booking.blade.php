@@ -26,6 +26,16 @@
                             });
                         </script>
                     @endif
+                    @if ($errors->any())
+                    <div class="alert alert-danger" id="ERROR_COPY" style="display:none;">
+                        <ul style="list-style: none;">
+                            @foreach ($errors->all() as $error)
+                                <!-- ทำการ วน Loop เพื่อแสดง Error ของ validation ขึ้นมาทั้งหมด -->
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                     <div class="table-responsive">
                         <table class="table  fw-bold w-100" id="booking_table">
                             <thead class="table-dark table-hover">
@@ -226,6 +236,18 @@
 @else
     @endif
     @push('js')
+    <script>
+        var has_error = {{ $errors->count() > 0 ? 'true' : 'false' }};
+        if (has_error) {
+            Swal.fire({
+                title: 'Error',
+                icon: 'error',
+                type: 'error',
+                html: jQuery("#ERROR_COPY").html(),
+                showCloseButton: true,
+            });
+        }
+    </script>
         <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
@@ -494,6 +516,8 @@
             }
 
             function updateEndTime() {
+                var h = window.location.pathname
+                var s = h.split('/')
                 moment.locale('th');
                 var nowDate = new moment();
                 var changeStart = $("#booking_start").val();
@@ -501,9 +525,8 @@
 
                 var b_start = moment(changeStart);
                 var b_end = moment(changeEnd);
-
                 $.ajax({
-                    url: '/users/validate_booking',
+                    url: '/' + s[2] + '/validate_booking',
                     method: 'GET',
                     success: function(res) {
                         console.log(res);

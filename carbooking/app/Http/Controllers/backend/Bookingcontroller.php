@@ -225,10 +225,10 @@ class Bookingcontroller extends Controller
         $canclebooking->license_plate = '-';
         $canclebooking->type_car = '-';
         $canclebooking->booking_status = ('3');
-        $canclebooking->booking_detail =  $canclebooking->booking_detail."~".$note;
+        $canclebooking->booking_detail =  $canclebooking->booking_detail . "~" . $note;
         //event(new BookingNotification('users-booking please refresh pages'));
         $canclebooking->save();
-       return response()->json(['status' => 'success']);
+        return response()->json(['status' => 'success']);
     }
     public function store(Request $request)
     {
@@ -237,14 +237,14 @@ class Bookingcontroller extends Controller
         $timemin = timebookingModel::find(3);
         $timemax = timebookingModel::find(4);
         $varlidate = $request->validate([
-            'date_start' => 'required|date|after:now + '.$timeafter->time.' '.$timeafter->unit.'|before:now + '.$timebefore->time.' '.$timebefore->unit.'',
-            'date_end' => 'required|date|after: '.$request->date_start.' + '.$timemin->time.' '.$timemin->unit.'|before:'.$request->date_start.' + '.$timemax->time.' '.$timemax->unit.'',
+            'date_start' => 'required|date|after:now + ' . $timeafter->time . ' ' . $timeafter->unit . '|before:now + ' . $timebefore->time . ' ' . $timebefore->unit . '',
+            'date_end' => 'required|date|after: ' . $request->date_start . ' + ' . $timemin->time . ' ' . $timemin->unit . '|before:' . $request->date_start . ' + ' . $timemax->time . ' ' . $timemax->unit . '',
             'location' => 'required',
         ], [
-            'date_start.after' => 'โปรดจองก่อนเดินทาง '.$timeafter->time.' '.$timeafter->unit_th.'',
-            'date_start.before' => 'โปรดจองล่วงหน้าก่อนเดินทางได้ไม่เกิน '.$timebefore->time.' '.$timebefore->unit_th.'',
-            'date_end.after' => 'โปรดระบุเวลาการเดินทางอย่างน้อย '.$timemin->time.' '.$timemin->unit_th.'',
-            'date_end.before' => 'โปรดระบุเวลาการเดินทางได้ไม่เกิน '.$timemax->time.' '.$timemax->unit_th.'',
+            'date_start.after' => 'โปรดจองก่อนเดินทาง ' . $timeafter->time . ' ' . $timeafter->unit_th . '',
+            'date_start.before' => 'โปรดจองล่วงหน้าก่อนเดินทางได้ไม่เกิน ' . $timebefore->time . ' ' . $timebefore->unit_th . '',
+            'date_end.after' => 'โปรดระบุเวลาการเดินทางอย่างน้อย ' . $timemin->time . ' ' . $timemin->unit_th . '',
+            'date_end.before' => 'โปรดระบุเวลาการเดินทางได้ไม่เกิน ' . $timemax->time . ' ' . $timemax->unit_th . '',
             'location.required' => 'โปรดระบุรายละเอียดและสถานที่ที่จะไป',
 
         ]);
@@ -276,7 +276,21 @@ class Bookingcontroller extends Controller
     }
     function edit_booking(Request $request)
     {
+        $timeafter = timebookingModel::find(1);
+        $timebefore = timebookingModel::find(2);
+        $timemin = timebookingModel::find(3);
+        $timemax = timebookingModel::find(4);
+        $varlidate = $request->validate([
+            'booking_start' => 'required|date|after:now + ' . $timeafter->time . ' ' . $timeafter->unit . '|before:now + ' . $timebefore->time . ' ' . $timebefore->unit . '',
+            'booking_end' => 'required|date|after: ' . $request->booking_start . ' + ' . $timemin->time . ' ' . $timemin->unit . '|before:' . $request->booking_start . ' + ' . $timemax->time . ' ' . $timemax->unit . '',
+        ], [
+            'booking_start.after' => 'โปรดจองก่อนเดินทาง ' . $timeafter->time . ' ' . $timeafter->unit_th . '',
+            'booking_start.before' => 'โปรดจองล่วงหน้าก่อนเดินทางได้ไม่เกิน ' . $timebefore->time . ' ' . $timebefore->unit_th . '',
+            'booking_end.after' => 'โปรดระบุเวลาการเดินทางอย่างน้อย ' . $timemin->time . ' ' . $timemin->unit_th . '',
+            'booking_end.before' => 'โปรดระบุเวลาการเดินทางได้ไม่เกิน ' . $timemax->time . ' ' . $timemax->unit_th . '',
+            'location.required' => 'โปรดระบุรายละเอียดและสถานที่ที่จะไป',
 
+        ]);
         $id = $request->id;
         $date_start = Carbon::parse($request->booking_start)->format('Y-m-d\TH:i:s');
         $date_end = Carbon::parse($request->booking_end)->format('Y-m-d\TH:i:s');
@@ -285,15 +299,18 @@ class Bookingcontroller extends Controller
         $booking->booking_end = $date_end;
         $booking->booking_detail = $request->booking_detail;
         $booking->save();
-
+        
         return redirect()->back()->with('success_edit', 'complete');
     }
 
-    function validate_booking(){
+    function validate_booking()
+    {
 
-        return response()->json([  'timeafter' => timebookingModel::find(1),
-        'timebefore' => timebookingModel::find(2),
-        'timemin' => timebookingModel::find(3),
-        'timemax' => timebookingModel::find(4),]);
+        return response()->json([
+            'timeafter' => timebookingModel::find(1),
+            'timebefore' => timebookingModel::find(2),
+            'timemin' => timebookingModel::find(3),
+            'timemax' => timebookingModel::find(4),
+        ]);
     }
 }
