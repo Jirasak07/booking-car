@@ -223,6 +223,7 @@ class Bookingcontroller extends Controller
         $canclebooking = BookingModel::find($id);
         $canclebooking->driver = '-';
         $canclebooking->license_plate = '-';
+        $canclebooking->type_car = '-';
         $canclebooking->booking_status = ('3');
         $canclebooking->booking_detail =  $canclebooking->booking_detail."~".$note;
         //event(new BookingNotification('users-booking please refresh pages'));
@@ -286,5 +287,13 @@ class Bookingcontroller extends Controller
         //dd($booking);
         $booking->save();
         return redirect()->back()->with('success_edit', 'complete');
+    }
+
+    function validate_booking(){
+       
+        return response()->json([  'timeafter' => timebookingModel::find(1),
+        'timebefore' => timebookingModel::find(2),
+        'timemin' => timebookingModel::find(3),
+        'timemax' => timebookingModel::find(4),]);
     }
 }
