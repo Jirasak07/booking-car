@@ -66,6 +66,7 @@ Route::group(
         Route::get('manage-user', [\App\Http\Controllers\backend\ManagementAdminController::class, 'index'])->name('admin.manage-user');
         Route::get('manage-role/{id}', [\App\Http\Controllers\backend\ManagementAdminController::class, 'edit_role']);
         Route::get('manage/{id}', [\App\Http\Controllers\backend\ManagementAdminController::class, 'caranddriver_aprove']);
+        Route::get('manage-carin/{id}', [\App\Http\Controllers\backend\ManagementAdminController::class, 'caranddriver_edit']);
         Route::get('history', [\App\Http\Controllers\backend\Bookingcontroller::class, 'history'])->name('admin.booking_history');
         Route::get('setting', [\App\Http\Controllers\backend\SettingController::class, 'index'])->name('admin.setting');
         Route::post('approve', [\App\Http\Controllers\backend\ManagementAdminController::class, 'aprove_in'])->name('update');
@@ -74,6 +75,7 @@ Route::group(
         Route::post('admin/booking', [\App\Http\Controllers\backend\Bookingcontroller::class, 'store'])->name('send-booking');
         Route::post('edit-setting', [\App\Http\Controllers\backend\SettingController::class, 'edit_time']);
         Route::post('edit-book', [\App\Http\Controllers\backend\ManagementAdminController::class, 'edit_booking']);
+        Route::post('edit-book', [\App\Http\Controllers\backend\ManagementAdminController::class, 'edit_']);
         Route::get('validate_booking', [\App\Http\Controllers\backend\Bookingcontroller::class, 'validate_booking']);
     }
 );
