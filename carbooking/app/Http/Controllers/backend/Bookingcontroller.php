@@ -290,6 +290,9 @@ class Bookingcontroller extends Controller
 
     function validate_booking(){
        
-        return response()->json([ 'time' => timebookingModel::all()]);
+        return response()->json([  'timeafter' => timebookingModel::find(1),
+        'timebefore' => timebookingModel::find(2),
+        'timemin' => timebookingModel::find(3),
+        'timemax' => timebookingModel::find(4),]);
     }
 }
