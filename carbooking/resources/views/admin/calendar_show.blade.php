@@ -92,11 +92,6 @@
                         iconHtml: (color[0] == 2 ?
                             '<i class="fa-solid fa-calendar-check" ></i>' :
                             '<i class="fa-solid fa-calendar-days"></i>'),
-
-
-
-
-
                         // title: moment(JSON.stringify(start[0])).format(
                         // 'ddd ที่ D MMM '+JSON.stringify((new Date(start[0]).getFullYear()+543))+
                         // ' เวลา HH:mm นาที'),
@@ -121,39 +116,80 @@
                     return true; */ // this time slot is valid for selection
                 },
                 select: function(info) {
+                    moment.locale('th');
                     var nowDate = new moment();
 
-                    var booking_start = moment(info.startStr).format('YYYY-MM-DD HH:mm:ss');
-                    var booking_end = moment(info.endStr).format('YYYY-MM-DD HH:mm:ss');
+                    var booking_start = moment(info.startStr).format('YYYY-MM-DD HH:mm');
+                    var booking_end = moment(info.endStr).format('YYYY-MM-DD HH:mm');
 
+                    var b_start = moment(info.startStr);
+                    var b_end = moment(info.endStr);
 
-                    var canbook = moment(nowDate, 'HH:mm:ss a').add('5', 'hours').format(
-                        'YYYY-MM-DD HH:mm:ss a');
-                    //var currect = moment(canbook).format('YYYY-MM-DD HH:mm:ss')
-                    // console.log(canbook);
-                    // console.log(booking_start);
-                    //console.log(currect);
-                    if (booking_start < canbook) {
-                        event.preventDefault();
-                        Swal.fire({
-                            icon: 'error',
-                            //title: 'Oops...',
-                            text: 'โปรดจองก่อนเวลาเดินทาง 5 ชั่วโมง',
-                        })
-                    } else {
-                        $('#bookingModal').modal('toggle');
-                        $('#booking_start').html(booking_start);
-                        $('#booking_end').html(booking_end);
+                    $.ajax({
+                        url: '/admin/validate_booking',
+                        method: 'GET',
+                        success: function(res) {
+                            console.log(res);
+                            var diffTimeMin = b_end.diff(b_start, res.timemin.unit);
+                            var diffTimeMax = b_end.diff(b_start, res.timemax.unit);
 
-                        document.getElementById('date_start').value = booking_start;
-                        document.getElementById('date_end').value = booking_end;
+                            var canbook_min = moment(nowDate, 'HH:mm:ss a').add(res
+                                    .timeafter.time, res.timeafter.unit)
+                                .format('YYYY-MM-DD HH:mm');
+                            //console.log(canbook_min);
+                            var canbook_max = moment.max(moment(nowDate, 'HH:mm:ss a').add(
+                                    res.timebefore.time, res.timebefore.unit + 's')
+                                .format('YYYY-MM-DD HH:mm'))
 
-                        //tag input datetime-local เลือกวันย้อนหลังไม่ได้
-                        var now_utc = Date.now()
-                        var today = new Date(now_utc).toISOString().substring(0, 16);
-                        document.getElementById("date_start").setAttribute("min", today);
-                        document.getElementById("date_end").setAttribute("min", today);
-                    }
+                            //console.log('can max : ', canbook_max);
+                            if (booking_start < canbook_min) {
+                                event.preventDefault();
+                                Swal.fire({
+                                    icon: 'error',
+                                    text: res.timeafter.name + ' ' + res.timeafter
+                                        .time + ' ' + res.timeafter.unit_th + '',
+                                })
+                            } else if (booking_start > canbook_max) {
+                                //console.log('max');
+                                event.preventDefault();
+                                Swal.fire({
+                                    icon: 'error',
+                                    text: res.timebefore.name + ' ' + res.timebefore
+                                        .time + ' ' + res.timebefore.unit_th + '',
+                                });
+                            } else if (diffTimeMin < res.timemin.time) {
+                                event.preventDefault();
+                                Swal.fire({
+                                    icon: 'error',
+                                    text: res.timemin.name + ' ' + res.timemin
+                                        .time + ' ' + res.timemin.unit_th + '',
+                                });
+                            } else if (diffTimeMax > res.timemax.time) {
+                                event.preventDefault();
+                                Swal.fire({
+                                    icon: 'error',
+                                    text: res.timemax.name + ' ' + res.timemax
+                                        .time + ' ' + res.timemax.unit_th + '',
+                                });
+                            } else {
+                                $('#booking_start').html(booking_start);
+                                $('#booking_end').html(booking_end);
+                                document.getElementById('date_start').value = booking_start;
+                                document.getElementById('date_end').value = booking_end;
+
+                                document.getElementById('location').focus();
+                                //tag input datetime-local เลือกวันย้อนหลังไม่ได้
+                                var now_utc = Date.now()
+                                var today = new Date(now_utc).toISOString().substring(0,
+                                    16);
+                                document.getElementById("date_start").setAttribute("min",
+                                    today);
+                                document.getElementById("date_end").setAttribute("min",
+                                    today);
+                                $('#bookingModal').modal('toggle');
+                            }
+                        }
+                    });
                 }
             });
             setInterval(() => {
@@ -164,27 +200,48 @@
         });
 
         function updateEndTime() {
-            var now = new moment();
-            console.log(now);
+            moment.locale('th');
+            var nowDate = new moment();
             var changeStart = $("#date_start").val();
             var changeEnd = $("#date_end").val();
-            var start = moment(changeStart);
-            var end = moment(changeEnd);
-            var diffHours = start.diff(now, 'hours');
-            var diffInMinutes = end.diff(start, 'minutes');
-            console.log(diffHours);
-            console.log(diffInMinutes);
-            if (diffHours < 5) {
-                $('#error').html('โปรดระบุเวลาออกเดินทางก่อน 5 ชั่วโมง');
-            } else {
-                $('#error').html(' ');
-            }
-            if (diffInMinutes < 30) {
-                $('#error_text').html('โปรดระบุช่วงเวลาอย่างน้อย 30 นาที');
-            } else {
-                $('#error_text').html(' ');
-            }
 
+            var b_start = moment(changeStart);
+            var b_end = moment(changeEnd);
+
+            $.ajax({
+                url: '/admin/validate_booking',
+                method: 'GET',
+                success: function(res) {
+                    console.log(res);
+                    var diffTimeMin = b_end.diff(b_start, res.timemin.unit);
+                    var diffTimeMax = b_end.diff(b_start, res.timemax.unit);
+
+                    var canbook_min = moment(nowDate, 'HH:mm:ss a').add(res
+                            .timeafter.time, res.timeafter.unit)
+                        .format('YYYY-MM-DD HH:mm');
+                    //console.log(canbook_min);
+                    var canbook_max = moment.max(moment(nowDate, 'HH:mm:ss a').add(
+                            res.timebefore.time, res.timebefore.unit + 's')
+                        .format('YYYY-MM-DD HH:mm'))
+
+                    //console.log('can max : ', canbook_max);
+                    if (changeStart < canbook_min) {
+                        $('#error').html(res.timeafter.name + ' ' + res.timeafter
+                            .time + ' ' + res.timeafter.unit_th);
+                    } else if (changeStart > canbook_max) {
+                        $('#error').html(res.timebefore.name + ' ' + res.timebefore
+                            .time + ' ' + res.timebefore.unit_th);
+                    } else if (diffTimeMin < res.timemin.time) {
+                        $('#error').html(res.timemin.name + ' ' + res.timemin
+                            .time + ' ' + res.timemin.unit_th);
+                    } else if (diffTimeMax > res.timemax.time) {
+                        $('#error').html(res.timemax.name + ' ' + res.timemax
+                            .time + ' ' + res.timemax.unit_th);
+                    } else {
+                        $('#error').html('');
+                    }
+                }
+            });
         }
     </script>
 @endpush
