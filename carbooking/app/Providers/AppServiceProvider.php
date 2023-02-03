@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
         DB::table('tb_booking')
             ->where('booking_status', '1')
             ->where('booking_start', '<', Carbon::now()->subMinutes(15))
-            ->update(['booking_status'=>'3']);
+            ->update(['booking_status'=>'3','booking_detail'=>'หมดเวลาการจองแล้ว']);
     }
     /**
      * Bootstrap any application services.
