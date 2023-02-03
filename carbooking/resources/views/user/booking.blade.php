@@ -180,6 +180,7 @@
                                     <div class="col-sm-10">
                                         <input type="text" disabled value="" readonly
                                             class="form-control-plaintext" id="username" name="username">
+                                            
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -207,7 +208,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" name="saveBooking" value="" id="EditBooking"
+                                <button type="submit"  value="" id="EditBooking"
                                     class="btn text-white" style="background-color: #06d6a0">บันทึก</button>
                                 <button type="button" class="btn grey btn-danger" style="background-color: #ef476f"
                                     data-bs-dismiss="modal"data-dismiss="modal">{{ __('ยกเลิก') }}</button>
@@ -346,13 +347,12 @@
                         var today = new Date(now_utc).toISOString().substring(0, 16);
                         $("#booking_start").attr("min", today);
                         $("#booking_end").attr("min", today);
-
                         $('#id').val(res.id);
                         $('#username').val(res.name);
                         $('#booking_start').val(res.booking_start);
                         $('#booking_end').val(res.booking_end);
                         $('#bdetail').val(res.booking_detail);
-                    }
+                    },
                 })
             }
 
