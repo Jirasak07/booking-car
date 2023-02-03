@@ -13,31 +13,32 @@
     <div class=" mt-3">
         @include('user.box_list_booking')
     </div>
-    @if (!$booking2->isEmpty())
-        <div class="container-fluid mt-3">
-            <div class="row mb-3">
-                <div class="col-xl-12">
-                    <div class="bg-white rounded shadow-xl m-dash p-2">
-                        @if ($message = Session::get('success_edit'))
-                            <script>
-                                Swal.fire({
-                                    icon: 'success',
-                                    text: 'แก้ไขการจองสำเร็จ',
-                                });
-                            </script>
-                        @endif
-                        <div class="table-responsive">
-                            <table class="table  fw-bold w-100" id="booking_table">
-                                <thead class="table-dark table-hover">
-                                    <tr align="center">
-                                        <th class="fw-bolder" style="font-size: 18px">ลำดับ</th>
-                                        <th class="fw-bolder" style="font-size: 18px">ช่วงวันที่</th>
-                                        <th class="fw-bolder text-wrap" style="font-size: 18px">สาเหตุ</th>
-                                        <th class="fw-bolder" style="font-size: 18px">รายละเอียดการจอง</th>
-                                        <th class="fw-bolder" style="font-size: 18px">สถานะการจอง</th>
-                                        <th class="fw-bolder" style="font-size: 18px">จัดการ</th>
-                                    </tr>
-                                </thead>
+
+    <div class="container-fluid mt-3">
+        <div class="row mb-3">
+            <div class="col-xl-12">
+                <div class="bg-white rounded shadow-xl m-dash p-2">
+                    @if ($message = Session::get('success_edit'))
+                        <script>
+                            Swal.fire({
+                                icon: 'success',
+                                text: 'แก้ไขการจองสำเร็จ',
+                            });
+                        </script>
+                    @endif
+                    <div class="table-responsive">
+                        <table class="table  fw-bold w-100" id="booking_table">
+                            <thead class="table-dark table-hover">
+                                <tr align="center">
+                                    <th class="fw-bolder" style="font-size: 18px">ลำดับ</th>
+                                    <th class="fw-bolder" style="font-size: 18px">ช่วงวันที่</th>
+                                    <th class="fw-bolder text-wrap" style="font-size: 18px">สาเหตุ</th>
+                                    <th class="fw-bolder" style="font-size: 18px">รายละเอียดการจอง</th>
+                                    <th class="fw-bolder" style="font-size: 18px">สถานะการจอง</th>
+                                    <th class="fw-bolder" style="font-size: 18px">จัดการ</th>
+                                </tr>
+                            </thead>
+                            @if (!$booking2->isEmpty())
                                 <tbody>
                                     @php
                                         $i = 1;
@@ -91,135 +92,138 @@
                                         </tr>
                                     @endforeach
                                 </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- View Detail Modal -->
-            <div class="modal fade" id="viewdetail" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h3 class="modal-title fs-5" id="staticBackdropLabel">รายละเอียดการจอง</h3>
-                            <button type="button" class="close" data-bs-dismiss="modal" data-dismiss="modal"
-                                aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row mb-3">
-                                <strong for="" class="col-sm-2 col-form-label">ชื่อผู้จอง</strong>
-                                <div class="col-sm-10">
-                                    <label type="text" disabled value="" readonly class="form-control-plaintext"
-                                        id="user_book" name="user_book">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <strong class="col-sm-2 col-form-label">สถานะการจอง</strong>
-                                <div class="col-sm-10">
-                                    <label class="form-control-plaintext" id="status_booking"></label>
-                                </div>
-                            </div>
-                            <div class="row mb-1">
-                                <strong for="" class="col-sm-2 col-form-label">ช่วงวันที่</strong>
-                                <div class="col-sm-10">
-                                    <label class="form-control-plaintext" id="date_booking"></label>
-                                </div>
-                            </div>
-                            <div class="row mb-1">
-                                <strong for="" class="col-sm-3 col-form-label">รายละเอียดรถและคนขับ</strong>
-                                <div class="col-sm-8">
-                                    <label name="" id="detail_car" cols="30" rows="3" readonly
-                                        class="form-control-plaintext"></label>
-                                </div>
-                            </div>
-                            <div class="row mb-1">
-                                <strong for="" class="col-sm-3 col-form-label">รายละเอียดการจอง</strong>
-                                <div class="col-sm-8">
-                                    <label name="" id="detail_booking" cols="30" disabled
-                                        rows="5"value="" readonly class="form-control-plaintext"></label>
-                                </div>
-                            </div>
-                            <div class="row mb-1" id="div-de-can">
-                                <strong for="" class="col-sm-3 col-form-label ">สาเหตุการยกเลิก</strong>
-                                <div class="col-sm-8">
-                                    <label name="" id="detail_booking_cancel" cols="30" disabled
-                                        rows="5"value="" readonly
-                                        class="form-control-plaintext text-red"></label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-bs-dismiss="modal">ปิด</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {{-- Edit detail booking modal --}}
-            <div class="modal fade" id="editdetail" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                aria-labelledby="viewdeLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-lg">
-                    <div class="modal-content ">
-                        <div class="modal-header">
-                            <h3 class="modal-title fs-5" id="viewdeLabel">แก้ไขรายละเอียดการจอง</h3>
-                            <button type="button" class="close" data-bs-dismiss="modal" data-dismiss="modal"
-                                aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <form method="POST" action="{{ route('user.edit.booking') }}">
-                            @csrf
-                            <div class="modal-body">
-                                <input type="hidden" name="id" id="id" value="" />
-                                <div class="row mb-3">
-                                    <strong for="" class="col-sm-2 col-form-label">ชื่อผู้จอง</strong>
-                                    <div class="col-sm-10">
-                                        <input type="text" disabled value="" readonly
-                                            class="form-control-plaintext" id="username" name="username">
-                                            
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <strong for="" class="col-sm-2 col-form-label">ช่วงวันที่</strong>
-                                    <div class="col-sm-10">
-                                        <div class="row g-3">
-                                            <div class="col-md-5">
-                                                <input type="datetime-local" name="booking_start"
-                                                    data-date-format="DD MM YYYY hh:mm:ss" id="booking_start"
-                                                    value="" class="form-control" min="">
-                                            </div>
-                                            <div class="col-md-5">
-                                                <input type="datetime-local" name="booking_end"
-                                                    data-date-format="DD MM YYYY hh:mm:ss" id="booking_end"
-                                                    value="" class="form-control" min="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <strong class="col-sm-3 col-form-label">รายละเอียดการจอง</strong>
-                                    <div class="col-sm-9">
-                                        <textarea name="booking_detail" id="bdetail" cols="30" rows="3" class=" form-control" required></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit"  value="" id="EditBooking"
-                                    class="btn text-white" style="background-color: #06d6a0">บันทึก</button>
-                                <button type="button" class="btn grey btn-danger" style="background-color: #ef476f"
-                                    data-bs-dismiss="modal"data-dismiss="modal">{{ __('ยกเลิก') }}</button>
-                            </div>
-                        </form>
-
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
-    @else
+
+        <!-- View Detail Modal -->
+        <div class="modal fade" id="viewdetail" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title fs-5" id="staticBackdropLabel">รายละเอียดการจอง</h3>
+                        <button type="button" class="close" data-bs-dismiss="modal" data-dismiss="modal"
+                            aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row mb-3">
+                            <strong for="" class="col-sm-2 col-form-label">ชื่อผู้จอง</strong>
+                            <div class="col-sm-10">
+                                <label type="text" disabled value="" readonly class="form-control-plaintext"
+                                    id="user_book" name="user_book">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <strong class="col-sm-2 col-form-label">สถานะการจอง</strong>
+                            <div class="col-sm-10">
+                                <label class="form-control-plaintext" id="status_booking"></label>
+                            </div>
+                        </div>
+                        <div class="row mb-1">
+                            <strong for="" class="col-sm-2 col-form-label">ช่วงวันที่</strong>
+                            <div class="col-sm-10">
+                                <label class="form-control-plaintext" id="date_booking"></label>
+                            </div>
+                        </div>
+                        <div class="row mb-1">
+                            <strong for="" class="col-sm-3 col-form-label">รายละเอียดรถและคนขับ</strong>
+                            <div class="col-sm-8">
+                                <label name="" id="detail_car" cols="30" rows="3" readonly
+                                    class="form-control-plaintext"></label>
+                            </div>
+                        </div>
+                        <div class="row mb-1">
+                            <strong for="" class="col-sm-3 col-form-label">รายละเอียดการจอง</strong>
+                            <div class="col-sm-8">
+                                <label name="" id="detail_booking" cols="30" disabled
+                                    rows="5"value="" readonly class="form-control-plaintext"></label>
+                            </div>
+                        </div>
+                        <div class="row mb-1" id="div-de-can">
+                            <strong for="" class="col-sm-3 col-form-label ">สาเหตุการยกเลิก</strong>
+                            <div class="col-sm-8">
+                                <label name="" id="detail_booking_cancel" cols="30" disabled
+                                    rows="5"value="" readonly
+                                    class="form-control-plaintext text-red"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-bs-dismiss="modal">ปิด</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- Edit detail booking modal --}}
+        <div class="modal fade" id="editdetail" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="viewdeLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content ">
+                    <div class="modal-header">
+                        <h3 class="modal-title fs-5" id="viewdeLabel">แก้ไขรายละเอียดการจอง</h3>
+                        <button type="button" class="close" data-bs-dismiss="modal" data-dismiss="modal"
+                            aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form method="POST" action="{{ route('user.edit.booking') }}">
+                        @csrf
+                        <div class="modal-body">
+                            <input type="hidden" name="id" id="id" value="" />
+                            <div class="row mb-3">
+                                <strong for="" class="col-sm-2 col-form-label">ชื่อผู้จอง</strong>
+                                <div class="col-sm-10">
+                                    <input type="text" disabled value="" readonly class="form-control-plaintext"
+                                        id="username" name="username">
+
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <strong for="" class="col-sm-2 col-form-label">ช่วงวันที่</strong>
+                                <div class="col-sm-10">
+                                    <div class="row g-3">
+                                        <div class="col-md-5">
+                                            <input type="datetime-local" name="booking_start"
+                                                data-date-format="DD MM YYYY HH:mm:ss" id="booking_start" value=""
+                                                class="form-control" min="" onchange="updateEndTime()">
+
+                                        </div>
+                                        <div class="col-md-5">
+                                            <input type="datetime-local" name="booking_end"
+                                                data-date-format="DD MM YYYY HH:mm:ss" id="booking_end" value=""
+                                                class="form-control" min="" onchange="updateEndTime()">
+                                        </div>
+
+                                    </div><label class="plaintext text-danger" style="font-size: 14px" id="error_t"
+                                        name="error_t"></label>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <strong class="col-sm-3 col-form-label">รายละเอียดการจอง</strong>
+                                <div class="col-sm-9">
+                                    <textarea name="booking_detail" id="bdetail" cols="30" rows="3" class=" form-control" required></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" value="" id="EditBooking" class="btn text-white"
+                                style="background-color: #06d6a0">บันทึก</button>
+                            <button type="button" class="btn grey btn-danger" style="background-color: #ef476f"
+                                data-bs-dismiss="modal"data-dismiss="modal">{{ __('ยกเลิก') }}</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+@else
     @endif
     @push('js')
         <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -338,7 +342,7 @@
                 var s = h.split('/')
                 $.ajax({
                     type: 'GET',
-                    url: '/'+s[2]+'/detail/' + id,
+                    url: '/' + s[2] + '/detail/' + id,
                     dataType: 'JSON',
                     success: function(res) {
                         $('#editdetail').modal('toggle');
@@ -364,7 +368,7 @@
                 console.log(id);
                 $.ajax({
                     type: 'GET',
-                    url: '/'+s[2]+'/detail/' + id,
+                    url: '/' + s[2] + '/detail/' + id,
                     dataType: 'JSON',
                     success: function(res) {
                         moment.locale('th');
@@ -457,7 +461,7 @@
                                 if (result.value) {
                                     $.ajax({
                                         type: 'GET',
-                                        url: '/'+s[2]+'/cancel/' + id + '/' + result.value,
+                                        url: '/' + s[2] + '/cancel/' + id + '/' + result.value,
                                         dataType: 'JSON',
                                         success: function(data) {
                                             if (data.status == 'success') {
@@ -487,6 +491,51 @@
                             }
                         })
                     })()
+            }
+
+            function updateEndTime() {
+                moment.locale('th');
+                var nowDate = new moment();
+                var changeStart = $("#booking_start").val();
+                var changeEnd = $("#booking_end").val();
+
+                var b_start = moment(changeStart);
+                var b_end = moment(changeEnd);
+
+                $.ajax({
+                    url: '/users/validate_booking',
+                    method: 'GET',
+                    success: function(res) {
+                        console.log(res);
+                        var diffTimeMin = b_end.diff(b_start, res.timemin.unit);
+                        var diffTimeMax = b_end.diff(b_start, res.timemax.unit);
+
+                        var canbook_min = moment(nowDate, 'HH:mm:ss a').add(res
+                                .timeafter.time, res.timeafter.unit)
+                            .format('YYYY-MM-DD HH:mm');
+                        console.log(canbook_min);
+                        var canbook_max = moment.max(moment(nowDate, 'HH:mm:ss a').add(
+                                res.timebefore.time, res.timebefore.unit + 's')
+                            .format('YYYY-MM-DD HH:mm'))
+
+                        //console.log('can max : ', canbook_max);
+                        if (changeStart < canbook_min) {
+                            $('#error_t').html(res.timeafter.name + ' ' + res.timeafter
+                                .time + ' ' + res.timeafter.unit_th);
+                        } else if (changeStart > canbook_max) {
+                            $('#error_t').html(res.timebefore.name + ' ' + res.timebefore
+                                .time + ' ' + res.timebefore.unit_th);
+                        } else if (diffTimeMin < res.timemin.time) {
+                            $('#error_t').html(res.timemin.name + ' ' + res.timemin
+                                .time + ' ' + res.timemin.unit_th);
+                        } else if (diffTimeMax > res.timemax.time) {
+                            $('#error_t').html(res.timemax.name + ' ' + res.timemax
+                                .time + ' ' + res.timemax.unit_th);
+                        } else {
+                            $('#error_t').html('');
+                        }
+                    }
+                });
             }
         </script>
     @endpush
