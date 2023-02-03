@@ -223,6 +223,7 @@ class Bookingcontroller extends Controller
         $canclebooking = BookingModel::find($id);
         $canclebooking->driver = '-';
         $canclebooking->license_plate = '-';
+        $canclebooking->type_car = '-';
         $canclebooking->booking_status = ('3');
         $canclebooking->booking_detail =  $canclebooking->booking_detail."~".$note;
         //event(new BookingNotification('users-booking please refresh pages'));
