@@ -54,14 +54,29 @@
     <script>
         // Enable pusher logging - don't include this in production
         Pusher.logToConsole = true;
-
         var pusher = new Pusher('8887bb11dae8777c30e0', {
             cluster: 'ap1'
         });
 
         var channel_booking_cancel = pusher.subscribe('booking-channel');
         channel_booking_cancel.bind('users-booking', function(data) {
-            alert(JSON.stringify(data.message) + ' has cancel')
+            // alert(JSON.stringify(data.message) + ' has cancel')
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon: 'success',
+                title: 'Signed in successfully'
+            })
         });
 
         var channel_booking_store = pusher.subscribe('store-channel');
