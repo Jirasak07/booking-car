@@ -34,10 +34,11 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <div class="btn-sm btn text-white btn-warning border-0"
-                                    style="width: 90px;background-color:#ffca3a;">
-                                        <i class="fa-solid fa-pen-to-square" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                            onclick='changeRole({{ $Users->role_user }},{{ $Users->id }})'>
+                                    <div onclick='changeRole({{ $Users->role_user }},{{ $Users->id }})'
+                                        class="btn-sm btn text-white btn-warning border-0"
+                                        style="width: 90px;background-color:#ffca3a;">
+                                        <i class="fa-solid fa-pen-to-square" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
                                         </i>
                                         แก้ไข
                                     </div>

@@ -721,44 +721,44 @@ var Charts = (function() {
 		}
 
 		// yAxes
-		Chart.scaleService.updateScaleDefaults('linear', {
-			gridLines: {
-				borderDash: [2],
-				borderDashOffset: [2],
-				color: (mode == 'dark') ? colors.gray[900] : colors.gray[300],
-				drawBorder: false,
-				drawTicks: false,
-				lineWidth: 0,
-				zeroLineWidth: 0,
-				zeroLineColor: (mode == 'dark') ? colors.gray[900] : colors.gray[300],
-				zeroLineBorderDash: [2],
-				zeroLineBorderDashOffset: [2]
-			},
-			ticks: {
-				beginAtZero: true,
-				padding: 10,
-				callback: function(value) {
-					if (!(value % 10)) {
-						return value
-					}
-				}
-			}
-		});
+		// Chart.scaleService.updateScaleDefaults('linear', {
+		// 	gridLines: {
+		// 		borderDash: [2],
+		// 		borderDashOffset: [2],
+		// 		color: (mode == 'dark') ? colors.gray[900] : colors.gray[300],
+		// 		drawBorder: false,
+		// 		drawTicks: false,
+		// 		lineWidth: 0,
+		// 		zeroLineWidth: 0,
+		// 		zeroLineColor: (mode == 'dark') ? colors.gray[900] : colors.gray[300],
+		// 		zeroLineBorderDash: [2],
+		// 		zeroLineBorderDashOffset: [2]
+		// 	},
+		// 	ticks: {
+		// 		beginAtZero: true,
+		// 		padding: 10,
+		// 		callback: function(value) {
+		// 			if (!(value % 10)) {
+		// 				return value
+		// 			}
+		// 		}
+		// 	}
+		// });
 
 		// xAxes
-		Chart.scaleService.updateScaleDefaults('category', {
-			gridLines: {
-				drawBorder: false,
-				drawOnChartArea: false,
-				drawTicks: false
-			},
-			ticks: {
-				padding: 20
-			},
-			maxBarThickness: 10
-		});
+	// 	Chart.scaleService.updateScaleDefaults('category', {
+	// 		gridLines: {
+	// 			drawBorder: false,
+	// 			drawOnChartArea: false,
+	// 			drawTicks: false
+	// 		},
+	// 		ticks: {
+	// 			padding: 20
+	// 		},
+	// 		maxBarThickness: 10
+	// 	});
 
-		return options;
+	// 	return options;
 
 	}
 
@@ -955,7 +955,7 @@ var OrdersChart = (function() {
 							}
 
 							content += '<span class="popover-body-value">' + yLabel + '</span>';
-							
+
 							return content;
 						}
 					}
