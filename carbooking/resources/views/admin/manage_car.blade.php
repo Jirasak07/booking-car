@@ -11,21 +11,25 @@
                             <th>หมายเลขทะเบียน</th>
                             <th>รายละเอียดรถ</th>
                             <th>สถานะ</th>
+                            <th>จัดการ</th>
                         </tr>
                     </thead>
                     <tbody>
                         @php
-                        $i = 1
+                            $i = 1;
                         @endphp
                         @foreach ($car as $cars)
                             <tr>
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $cars['car_license'] }}</td>
                                 <td>{{ $cars['car_model'] }}</td>
+                                <td class='{{ $cars['car_status'] == 1 ? 'text-success' : 'text-danger' }}'>
+                                    {{ $cars['car_status'] == 1 ? 'พร้อมใช้งาน' : 'ไม่พร้อมใช้งาน' }}
+                                </td>
                                 <td>
-                                    <div class='{{ $cars['car_status'] == 1 ? 'btn btn-success btn-sm ' : 'btn btn-danger btn-sm' }}'
-                                        style="width: 90px" onclick="changeStatus({{ $cars['id'] }})">
-                                        {{ $cars['car_status'] == 1 ? 'พร้อมใช้งาน' : 'ไม่พร้อมใช้งาน' }}</div>
+                                    <div class="btn-sm btn text-white btn-warning border-0" style="width: 90px;background-color:#ffca3a;" onclick="changeStatus({{ $cars['id'] }})">
+                                        <i class="fa-solid fa-pen-to-square"></i>  แก้ไข
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach
