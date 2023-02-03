@@ -346,13 +346,12 @@
                         var today = new Date(now_utc).toISOString().substring(0, 16);
                         $("#booking_start").attr("min", today);
                         $("#booking_end").attr("min", today);
-
                         $('#id').val(res.id);
                         $('#username').val(res.name);
                         $('#booking_start').val(res.booking_start);
                         $('#booking_end').val(res.booking_end);
                         $('#bdetail').val(res.booking_detail);
-                    }
+                    },
                 })
             }
 

@@ -236,7 +236,7 @@ class Bookingcontroller extends Controller
         $timebefore = timebookingModel::find(2);
         $timemin = timebookingModel::find(3);
         $timemax = timebookingModel::find(4);
-        
+
         $varlidate = $request->validate([
             'date_start' => 'required|date|after:now + '.$timeafter->time.' '.$timeafter->unit.'|before:now + '.$timebefore->time.' '.$timebefore->unit.'',
             'date_end' => 'required|date|after: '.$request->date_start.' + '.$timemin->time.' '.$timemin->unit.'|before:'.$request->date_start.' + '.$timemax->time.' '.$timemax->unit.'',
@@ -281,7 +281,7 @@ class Bookingcontroller extends Controller
         $timebefore = timebookingModel::find(2);
         $timemin = timebookingModel::find(3);
         $timemax = timebookingModel::find(4);
-        
+
         $varlidate = $request->validate([
             'date_start' => 'required|date|after:now + '.$timeafter->time.' '.$timeafter->unit.'|before:now + '.$timebefore->time.' '.$timebefore->unit.'',
             'date_end' => 'required|date|after: '.$request->date_start.' + '.$timemin->time.' '.$timemin->unit.'|before:'.$request->date_start.' + '.$timemax->time.' '.$timemax->unit.'',
@@ -303,11 +303,12 @@ class Bookingcontroller extends Controller
         $booking->booking_detail = $request->booking_detail;
         //dd($booking);
         $booking->save();
+        
         return redirect()->back()->with('success_edit', 'complete');
     }
 
     function validate_booking(){
-       
+
         return response()->json([  'timeafter' => timebookingModel::find(1),
         'timebefore' => timebookingModel::find(2),
         'timemin' => timebookingModel::find(3),
