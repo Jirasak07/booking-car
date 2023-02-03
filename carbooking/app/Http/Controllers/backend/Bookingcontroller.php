@@ -277,23 +277,7 @@ class Bookingcontroller extends Controller
     }
     function edit_booking(Request $request)
     {
-        $timeafter = timebookingModel::find(1);
-        $timebefore = timebookingModel::find(2);
-        $timemin = timebookingModel::find(3);
-        $timemax = timebookingModel::find(4);
 
-        $varlidate = $request->validate([
-            'date_start' => 'required|date|after:now + '.$timeafter->time.' '.$timeafter->unit.'|before:now + '.$timebefore->time.' '.$timebefore->unit.'',
-            'date_end' => 'required|date|after: '.$request->date_start.' + '.$timemin->time.' '.$timemin->unit.'|before:'.$request->date_start.' + '.$timemax->time.' '.$timemax->unit.'',
-            'location' => 'required',
-        ], [
-            'date_start.after' => 'โปรดจองก่อนเดินทาง '.$timeafter->time.' '.$timeafter->unit_th.'',
-            'date_start.before' => 'โปรดจองล่วงหน้าก่อนเดินทางได้ไม่เกิน '.$timebefore->time.' '.$timebefore->unit_th.'',
-            'date_end.after' => 'โปรดระบุเวลาการเดินทางอย่างน้อย '.$timemin->time.' '.$timemin->unit_th.'',
-            'date_end.before' => 'โปรดระบุเวลาการเดินทางได้ไม่เกิน '.$timemax->time.' '.$timemax->unit_th.'',
-            'location.required' => 'โปรดระบุรายละเอียดและสถานที่ที่จะไป',
-
-        ]);
         $id = $request->id;
         $date_start = Carbon::parse($request->booking_start)->format('Y-m-d\TH:i:s');
         $date_end = Carbon::parse($request->booking_end)->format('Y-m-d\TH:i:s');
@@ -301,9 +285,8 @@ class Bookingcontroller extends Controller
         $booking->booking_start = $date_start;
         $booking->booking_end = $date_end;
         $booking->booking_detail = $request->booking_detail;
-        //dd($booking);
         $booking->save();
-        
+
         return redirect()->back()->with('success_edit', 'complete');
     }
 
