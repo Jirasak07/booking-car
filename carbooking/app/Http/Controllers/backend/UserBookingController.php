@@ -16,17 +16,7 @@ class UserBookingController extends Controller
 
     function show_booking()
     {
-        /* $booking = DB::table('tb_booking')
-
-            ->join('users', 'tb_booking.username', '=', 'users.id')
-
-            ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
-            ->join('tb_out_cars', 'tb_booking.license_plate', '=', 'tb_out_cars.id')
-            ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
-            ->where('tb_booking.username','=', Auth::user()->id)
-            ->orderBy('booking_status')
-            ->select('car_out_license', 'car_out_model', 'car_out_driver', 'car_out_tel',  'driver_fullname', 'car_license', 'tb_booking.*', 'users.username')
-            ->get(); */
+  
 
         $booking_wait = DB::table('tb_booking')
             ->join('users', 'tb_booking.username', '=', 'users.id')
@@ -35,8 +25,7 @@ class UserBookingController extends Controller
 
             ->select('tb_booking.*', 'users.username')
             ->get();
-        // return dd($booking);
-        //dd($booking);
+
         $Alllist = DB::table('tb_booking')
             ->where('tb_booking.username', '=', Auth::user()->id)->count();
         $Alllistpending = DB::table('tb_booking')
@@ -45,7 +34,7 @@ class UserBookingController extends Controller
             ->where('tb_booking.username', '=', Auth::user()->id)->where('booking_status', '=', '2')->count();
         $Alllistcancle = DB::table('tb_booking')
             ->where('tb_booking.username', '=', Auth::user()->id)->where('booking_status', '=', '3')->count();
-        // dd($booking,$booking_wait,$Alllist,$Alllistpending,$Alllistapprove,$Alllistcancle,);
+       
         return view('user.booking')->with([/* 'booking' => $booking, */'booking2' => $booking_wait, 'Alllist' => $Alllist, 'Alllistpending' => $Alllistpending, 'Alllistapprove' => $Alllistapprove, 'Alllistcancle' => $Alllistcancle]);
     }
     function detail_booking($id)

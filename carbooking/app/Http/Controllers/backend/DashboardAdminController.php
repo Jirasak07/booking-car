@@ -5,14 +5,13 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use App\Models\BookingModel;
 use App\Models\CarModel;
-use App\Models\CaroutModel;
-use Carbon\Carbon;
-use DateTime;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Http;
 
-use function PHPSTORM_META\type;
+use DateTime;
+
+use Illuminate\Support\Facades\DB;
+
+
+
 
 class DashboardAdminController extends Controller
 {
@@ -54,7 +53,7 @@ class DashboardAdminController extends Controller
                 ];
             }
         }
-        // dd($format_date);
+        
         $booking_join1 = DB::table('tb_booking')
             ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
             ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
@@ -62,7 +61,7 @@ class DashboardAdminController extends Controller
             ->where('tb_booking.booking_status', '!=', '3')
             ->where('tb_booking.booking_status', '!=', '1')
             ->where('tb_booking.booking_end', '>', $format_date)
-        //->orderBy('booking_status')
+   
             ->select('driver_fullname', 'car_license', 'car_model', 'tb_booking.*')
             ->get();
         foreach ($booking_join1 as $item) {
@@ -115,7 +114,7 @@ class DashboardAdminController extends Controller
             ->where('type_car', '=', 1)
 
             ->groupBy('license_plate')->get();
-        // dd($bookingcarin);
+  
 
 
         $bookingcarAllin = DB::table('tb_booking') //จำนวนรถภายใน ทั้งหมด
@@ -145,10 +144,7 @@ class DashboardAdminController extends Controller
         $pending = DB::table('tb_booking')->where('booking_status', '=', 1)->count('id');
         $approve = DB::table('tb_booking')->where('booking_status', '=', 2)->count('id');
         $cancel = DB::table('tb_booking')->where('booking_status', '=', 3)->count('id');
-        //return view('admin.dashboard')->with(['car' => $car,'allbook'=>$allbooking,'pending'=>$pending ,'approve'=>$approve ,'cancel'=>$cancel]);
-
-        // $data = BookingModel::all()->Groupby("MONTH(booking_start)")->count('id');
-        //  return dd($bookingcarin);
+       
 
         $bookings = DB::table('tb_booking')
         ->join('users', 'tb_booking.username', '=', 'users.id')
@@ -174,7 +170,7 @@ class DashboardAdminController extends Controller
                 ];
             }
         }
-        // dd($format_date);
+     
         $booking_join1 = DB::table('tb_booking')
             ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
             ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
@@ -183,7 +179,7 @@ class DashboardAdminController extends Controller
             ->where('tb_booking.booking_status', '!=', '3')
             ->where('tb_booking.booking_status', '!=', '1')
             ->where('tb_booking.booking_end', '>', $format_date)
-        //->orderBy('booking_status')
+       
             ->select('driver_fullname', 'car_license', 'car_model', 'tb_booking.*','name')
             ->get();
         foreach ($booking_join1 as $item) {

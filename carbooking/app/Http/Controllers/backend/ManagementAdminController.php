@@ -7,10 +7,10 @@ use App\Models\BookingModel;
 use App\Models\CarModel;
 use App\Models\CaroutModel;
 use App\Models\DriverModel;
-use App\Models\timebookingModel;
+
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
+
 use Illuminate\Support\Facades\DB;
 
 class ManagementAdminController extends Controller
@@ -119,14 +119,14 @@ class ManagementAdminController extends Controller
                 })
                 ->get();
         }
-        // dd($unreserved_cars);
+   
         return response()->json(['car' => $unreserved_cars, 'driver' => $unreserved_driver]);
 
     }
     public function aprove_in(Request $request)
     {
       
-        // dd($request->all());
+   
         $id = $request->id_form;
 
         $booking_update = BookingModel::find($id);
@@ -164,7 +164,7 @@ class ManagementAdminController extends Controller
              ];
             }
             $cars_id = implode(', ', array_column($car, 'id'));
-        //    dd($cars_id);
+ 
             $car_all = DB::table('tb_out_cars')->where('car_out_license','=', $request->car_out_license)
             ->where('car_out_driver','=', $request->car_out_driver)->select('car_out_license')->get();
             $cars = array();
@@ -174,7 +174,7 @@ class ManagementAdminController extends Controller
              ];
             }
             $cars_string = implode(', ', array_column($cars, 'license'));
-         //    dd($cars_string);
+    
          $driver_all = DB::table('tb_out_cars')->where('car_out_license','=', $request->car_out_license)
          ->where('car_out_driver','=', $request->car_out_driver)->select('car_out_driver')->get();
          $driver = array();
@@ -318,32 +318,11 @@ class ManagementAdminController extends Controller
                 })
                 ->get();
         }
-        // dd($unreserved_cars);
+  
         return response()->json(['car' => $unreserved_cars, 'driver' => $unreserved_driver]);
 
     }
     
-    public function autocomplete(Request $request)
-    {
-        //   $query = $request->get('query');
-        //   $filterResult = CaroutModel::where('license_plate', 'LIKE', '%'. $query. '%')->get();
-
-
-
-        //   return response()->json($filterResult);
-
-          $query = $request->get('term','');
-        
-          $car=CaroutModel::where('license_plate','LIKE','%'.$query.'%')->get();
-              
-          $data=array();
-          foreach ($car as $cars) {
-              $data[]=array('value'=>$cars->license_plate,'id'=>$cars->id);
-          }
-          if(count($data))
-              return $data;
-          else
-              return ['value'=>'No Result Found','id'=>''];
-    }
+   
  
 }

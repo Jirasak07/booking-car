@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers\backend;
 
-use App\Events\BookingNotification;
-use App\Events\StoreNotification;
+
 use App\Http\Controllers\Controller;
 use App\Models\BookingModel;
-use App\Models\CaroutModel;
+
 use App\Models\timebookingModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use DateTime;
-use Illuminate\Support\Facades\Validator;
+
 
 class Bookingcontroller extends Controller
 {
@@ -46,9 +45,7 @@ class Bookingcontroller extends Controller
         $currentURL = request()->getHttpHost();
         $response = Http::get('http://' . $currentURL . '/index.php/api/booking');
         $his = Http::get('http://' . $currentURL . '/index.php/api/showhistory');
-        // $his2 = response()->json($his);
-        // dd($his2);
-        // dd($response->json());
+
         $jsonData = $response->json();
         $datahis = $his->json();
 
@@ -57,11 +54,7 @@ class Bookingcontroller extends Controller
 
     public function showcalendar()
     {
-        // $currentURL = request()->getHttpHost();
 
-        // $response = Http::get('http://'.$currentURL.'/index.php/api/calendar');
-
-        // $jsonData = $response->json();
         $datenow = new DateTime();
         $format_date = $datenow->format('Y-m-d H:i:s');
         $bookings = DB::table('tb_booking')
@@ -93,7 +86,7 @@ class Bookingcontroller extends Controller
             ->where('tb_booking.booking_status', '!=', '3')
             ->where('tb_booking.booking_status', '!=', '1')
             ->where('tb_booking.booking_end', '>', $format_date)
-            //->orderBy('booking_status')
+          
             ->select('driver_fullname', 'car_license', 'car_model', 'tb_booking.*')
             ->get();
         foreach ($booking_join1 as $item) {
@@ -132,11 +125,6 @@ class Bookingcontroller extends Controller
             ];
         }
 
-        //dd($booking->)
-        //dd($events, $booking_join1,$booking_join2, $booking->id);
-        // return response()->json([
-        //     'booking' => $events
-        // ]);
         return view('user.dashboard')->with(['booking' => $events]);
     }
 
@@ -173,7 +161,7 @@ class Bookingcontroller extends Controller
             ->where('tb_booking.booking_status', '!=', '3')
             ->where('tb_booking.booking_status', '!=', '1')
             ->where('tb_booking.booking_end', '>', $format_date)
-            //->orderBy('booking_status')
+    
             ->select('driver_fullname', 'car_license', 'car_model', 'tb_booking.*')
             ->get();
         foreach ($booking_join1 as $item) {
@@ -212,21 +200,20 @@ class Bookingcontroller extends Controller
             ];
         }
 
-        //dd($booking->)
-        //dd($events, $booking_join1,$booking_join2, $booking->id);
+ 
         return response()->json($events);
     }
     public function cancle($id, $note)
     {
 
-        //dd($request->all());
+
         $canclebooking = BookingModel::find($id);
         $canclebooking->driver = '-';
         $canclebooking->license_plate = '-';
         $canclebooking->type_car = '-';
         $canclebooking->booking_status = ('3');
         $canclebooking->booking_detail =  $canclebooking->booking_detail . "~" . $note;
-        //event(new BookingNotification('users-booking please refresh pages'));
+    
         $canclebooking->save();
         return response()->json(['status' => 'success']);
     }
@@ -251,7 +238,7 @@ class Bookingcontroller extends Controller
 
         $date_start = Carbon::parse($request->date_start)->format('Y-m-d\TH:i:s');
         $date_end = Carbon::parse($request->date_end)->format('Y-m-d\TH:i:s');
-        //dd($request->all(),$date_start,$date_end);
+        
 
         $bookingcar = new BookingModel();
         $cnt_booking = $bookingcar->count();
@@ -268,8 +255,7 @@ class Bookingcontroller extends Controller
         $bookingcar->type_car = '-';
         $bookingcar->booking_detail = $request->location;
         $bookingcar->booking_status = '1';
-        //dd($bookingcar);
-        //event(new StoreNotification('has new car booking!!'));
+      
         $bookingcar->save();
 
         return redirect()->back()->with('success', 'การจองสำเร็จ');
