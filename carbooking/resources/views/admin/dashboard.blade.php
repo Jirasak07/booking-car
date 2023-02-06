@@ -1,8 +1,24 @@
 @extends('layouts.layout')
 @section('content')
     @include('layouts.header')
-    <div class="container mt-3  " style="max-width: 1080px;min-width:375px">
 
+    <script>
+        function T(){
+            Swal.fire({
+                icon:'success',
+                showConfirmButton:false,
+                timer:1500,
+                toast: true,
+                position:'top-end',
+                grow:'row',
+            })
+        }
+    </script>
+
+    <div class="container mt-3  " style="max-width: 1080px;min-width:375px">
+        <div class="btn btn-info" onclick="T()">
+            ทดสอบ
+        </div>
         <div class="mx-5 my-3 text-default" style="font-weight: 700;font-size:1.2rem"> รายการจอง</div>
         <div class="d-flex flex-xl-row flex-column mx-3   " style="gap: 10px;min-height:120px">
 
@@ -111,13 +127,13 @@
             </div>
         @endif
         <div class="bg-white p-3 rounded ml-3 mr-3 ">
-            <div class="d-flex mb-3 head-beforcalendar"> หมายเหตุ <div class="ml-3 d-flex align-items-center" style="font-size: 14px;gap:5px"><i class="fa-solid fa-square"
-                        style="color: #06d6a0"></i>
-                      อนุมัติเรียบร้อย
+            <div class="d-flex mb-3 head-beforcalendar"> หมายเหตุ <div class="ml-3 d-flex align-items-center"
+                    style="font-size: 14px;gap:5px"><i class="fa-solid fa-square" style="color: #06d6a0"></i>
+                    อนุมัติเรียบร้อย
                 </div>
                 <div class="ml-3 d-flex align-items-center" style="font-size: 14px;gap:5px"><i class="fa-solid fa-square"
-                    style="color: #ffd166"></i>
-                  รอดำเนินการ</div>
+                        style="color: #ffd166"></i>
+                    รอดำเนินการ</div>
             </div>
             @include('admin.calendar_show')
 
