@@ -28,6 +28,6 @@ class SendEmailComponent extends Mailable
      */
     public function build()
     {
-        return $this->markdown('email.sendEmailComponent');
+        return $this->markdown('emails.sendEmailComponent');
     }
 }
