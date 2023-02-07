@@ -123,16 +123,16 @@ class ManagementAdminController extends Controller
         }
 
 
-    
-    
-   
+
+
+
         return response()->json(['car' => $unreserved_cars, 'driver' => $unreserved_driver]);
 
     }
     public function aprove_in(Request $request)
     {
-      
-   
+
+
         $id = $request->id_form;
 
         $booking_update = BookingModel::find($id);
@@ -153,7 +153,6 @@ class ManagementAdminController extends Controller
     }
     public function aprove_out(Request $request)
     {
-
         $id = $request->id_form;
         $booking_update = BookingModel::find($id);
         $car_out = new CaroutModel();
@@ -161,16 +160,16 @@ class ManagementAdminController extends Controller
         if ($booking_update->booking_status == 1) {
             $car_lic = DB::table('tb_out_cars')->where('car_out_license','=', $request->car_out_license)
             ->where('car_out_driver','=', $request->car_out_driver)->select('id')->get();
-      
+
             $car = array();
             foreach($car_lic as $item){
              $car [] =[
                  'id' => $item->id,
-                 
+
              ];
             }
             $cars_id = implode(', ', array_column($car, 'id'));
- 
+
             $car_all = DB::table('tb_out_cars')->where('car_out_license','=', $request->car_out_license)
             ->where('car_out_driver','=', $request->car_out_driver)->select('car_out_license')->get();
             $cars = array();
@@ -180,7 +179,7 @@ class ManagementAdminController extends Controller
              ];
             }
             $cars_string = implode(', ', array_column($cars, 'license'));
-    
+
          $driver_all = DB::table('tb_out_cars')->where('car_out_license','=', $request->car_out_license)
          ->where('car_out_driver','=', $request->car_out_driver)->select('car_out_driver')->get();
          $driver = array();
@@ -210,8 +209,8 @@ class ManagementAdminController extends Controller
             $booking_update->driver = $request->car_out_driver;
             $booking_update->type_car = "2";
             $booking_update->booking_status = "2";
-            $booking_update->save();   
-    
+            $booking_update->save();
+
             } else{
                 $car_out->id = $car_count + 1;
                 $car_out->car_out_license = $request->car_out_license;
@@ -225,30 +224,25 @@ class ManagementAdminController extends Controller
                 $booking_update->type_car = "2";
                 $booking_update->booking_status = "2";
                 $booking_update->save();
-               
-            
+
+
             }
             // $booking = DB::table('tb_booking')->where('id',$id)->join('users', 'tb_booking.username', '=', 'users.id')->select('email','username')->get();
-            // $data = [
-            //     'title' => 'การจองรถ BookingCar',
-            //     'body' => 'มีการจองรถโดยรายละเอียด ดังนี้'
-               
-            // ];
-            
+            $data = [
+                'title' => 'การจองรถ BookingCar',
+                'body' => 'มีการจองรถโดยรายละเอียด ดังนี้'.$request->car_out_license,
+
+            ];
+
             // // $user = [
             // //     'email' =>  $booking['username'],
             // // ];
-            
-            // // Mail::send('emails.user-update', $data, function ($message) use ($data) {
-            // //     $message->from('no-reply@example.com', 'Profile change');
-            // //     // $message->to('profilechange@example.com');
-               
-            // //     $message->subject('สถานะ: ' . $data['aprove']);
-            // // });
-            // Mail::to('merlinxi.5409@gmail.com')->send(new MailMail($data));
+
+          
+            Mail::to('merlinxi.5409@gmail.com')->send(new MailMail($data));
 
     return redirect()->back();
-      
+
         } else {
             $booking_update->booking_status = $booking_update->booking_status;
             $booking_update->save();
@@ -263,7 +257,7 @@ class ManagementAdminController extends Controller
         $data = [
             'title' => 'การจองรถ BookingCar',
             'body' => 'มีการจองรถโดยรายละเอียด ดังนี้'
-           
+
         ];
         Mail::to('merlinxi.5409@gmail.com')->send(new MailMail($data));
 
@@ -354,11 +348,11 @@ class ManagementAdminController extends Controller
                 })
                 ->get();
         }
-  
+
         return response()->json(['car' => $unreserved_cars, 'driver' => $unreserved_driver]);
 
     }
-    
-   
- 
+
+
+
 }
