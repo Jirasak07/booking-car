@@ -4,6 +4,7 @@ namespace App\Http\Controllers\backend;
 
 
 use App\Http\Controllers\Controller;
+use App\Mail\SendEmailComponent;
 use App\Models\BookingModel;
 
 use App\Models\timebookingModel;
@@ -12,7 +13,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use DateTime;
-
+use Illuminate\Support\Facades\Mail;
 
 class Bookingcontroller extends Controller
 {
@@ -259,7 +260,7 @@ class Bookingcontroller extends Controller
             
             'sdate' => $date_start,
             'edate' => $date_end,
-            'detail' =>   $request->$location,
+            'detail' => $request->location,
            
         ];
 
