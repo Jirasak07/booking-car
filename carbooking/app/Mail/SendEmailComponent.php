@@ -7,22 +7,16 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class mail extends Mailable
+class SendEmailComponent extends Mailable
 {
     use Queueable, SerializesModels;
-/**
-     * The order instance.
-     *
-     * @var \App\Models\Mail
-     */
-    public $data;
- 
+
     /**
      * Create a new message instance.
      *
-     * @param  \App\Models\Mail  $order
      * @return void
      */
+    public $data;
     public function __construct($data)
     {
         //
@@ -36,6 +30,6 @@ class mail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.email');
+        return $this->markdown('emails.sendEmailComponent');
     }
 }
