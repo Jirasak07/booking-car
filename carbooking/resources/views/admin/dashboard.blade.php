@@ -3,14 +3,14 @@
     @include('layouts.header')
 
     <script>
-        function T(){
+        function T() {
             Swal.fire({
-                icon:'success',
-                showConfirmButton:false,
-                timer:1500,
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 1500,
                 toast: true,
-                position:'top-end',
-                grow:'row',
+                position: 'top-end',
+                grow: 'row',
             })
         }
     </script>
@@ -111,8 +111,13 @@
             <script>
                 Swal.fire({
                     icon: 'success',
-                    title: 'การจองสำเร็จ',
+                    title: 'การจองสำเร็555',
                     text: 'โปรดรอการอนุมัติ',
+                }).then((res) => {
+                    $.ajax({
+                        url: "{{ route('send-mail') }}",
+                        type: "GET",
+                    });
                 });
             </script>
         @endif
