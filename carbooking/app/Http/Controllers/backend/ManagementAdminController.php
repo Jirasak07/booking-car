@@ -142,10 +142,9 @@ class ManagementAdminController extends Controller
             $booking_update->save();
 
 
+            // $data = [ 'title' => 'BookingCar(การจองรถ)',];
 
-            $data = [ 'title' => 'BookingCar(การจองรถ)',];
-
-            Mail::to('merlinxi.5409@gmail.com')->send(new SendEmailComponent($data));
+            // Mail::to('merlinxi.5409@gmail.com')->send(new SendEmailComponent($data));
             return redirect()->back()->with('idf',$id);
         } else {
             $booking_update->booking_status = $booking_update->booking_status;
@@ -360,7 +359,7 @@ class ManagementAdminController extends Controller
         ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
         ->select( 'car_out_license', 'car_out_model', 'car_out_driver', 'car_out_tel',  'driver_fullname', 'car_license','tb_booking.*')
         ->get();
-  
+
     }
 
 
