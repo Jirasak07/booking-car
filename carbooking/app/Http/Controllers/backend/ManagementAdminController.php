@@ -259,6 +259,7 @@ class ManagementAdminController extends Controller
                 'detail' =>  $booking_update->booking_detail,
             ];
 
+            
             // // $user = [
             // //     'email' =>  $booking['username'],
             // // ];
