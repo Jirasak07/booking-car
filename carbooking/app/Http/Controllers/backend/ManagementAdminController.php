@@ -144,12 +144,13 @@ class ManagementAdminController extends Controller
             $booking_update->booking_status = "2";
 
             $booking_update->save();
-           
+
             $detail = DB::table('tb_booking')
-            ->where('id',$id)
-            ->join('tb_cars', 'tb_booking.license_plate','=','tb_cars.id')
-            ->join('tb_driver','tb_booking.driver','=','tb_driver.id')
-            ->select('tb_driver.driver_fullname','car_license','car_model')->get();
+            ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
+            ->join('tb_out_cars', 'tb_booking.license_plate', '=', 'tb_out_cars.id')
+            ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
+            ->select( 'car_out_license', 'car_out_model', 'car_out_driver', 'car_out_tel',  'driver_fullname', 'car_license','tb_booking.*')
+            ->get();
             $data = [
                 'title' => 'BookingCar(การจองรถ)',
                 'license' => $detail->car_license,
@@ -158,10 +159,11 @@ class ManagementAdminController extends Controller
                 'sdate' => $detail->booking_start,
                 'edate' => $detail->booking_end,
                 'detail' =>  $detail->booking_detail,
-               
-            ];
 
-           
+            ];
+            dd($detail);
+
+
             Mail::to('merlinxi.5409@gmail.com')->send(new SendEmailComponent($data));
             return redirect()->back();
         } else {
@@ -248,7 +250,7 @@ class ManagementAdminController extends Controller
 
             }
             // $booking = DB::table('tb_booking')->where('id',$id)->join('users', 'tb_booking.username', '=', 'users.id')->select('email','username')->get();
-          
+
             $data = [
                 'title' => 'BookingCar(การจองรถ)',
                 'license' => $request->car_out_license,
@@ -259,12 +261,12 @@ class ManagementAdminController extends Controller
                 'detail' =>  $booking_update->booking_detail,
             ];
 
-            
+
             // // $user = [
             // //     'email' =>  $booking['username'],
             // // ];
 
-          
+
             Mail::to('merlinxi.5409@gmail.com')->send(new SendEmailComponent($data));
 
     return redirect()->back();
