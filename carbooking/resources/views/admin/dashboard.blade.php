@@ -1,18 +1,7 @@
 @extends('layouts.layout')
 @section('content')
     @include('layouts.header')
-
-    @if (session('alert'))
-        <div class="alert alert-success">
-            {{ session('alert') }}
-        </div>
-    @endif
-
-
     <div class="container mt-3  " style="max-width: 1080px;min-width:375px">
-        <button type="button" onclick="window.location='{{ url('/send-alert') }}'">
-            Send Alert
-        </button>
         <div class="mx-5 my-3 text-default" style="font-weight: 700;font-size:1.2rem"> รายการจอง</div>
         <div class="d-flex flex-xl-row flex-column mx-3   " style="gap: 10px;min-height:120px">
 
