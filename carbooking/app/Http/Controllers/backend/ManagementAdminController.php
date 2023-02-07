@@ -8,6 +8,7 @@ use App\Models\BookingModel;
 use App\Models\CarModel;
 use App\Models\CaroutModel;
 use App\Models\DriverModel;
+use App\Events\NewRowAdded;
 
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -238,7 +239,7 @@ class ManagementAdminController extends Controller
             // //     'email' =>  $booking['username'],
             // // ];
 
-          
+
             Mail::to('merlinxi.5409@gmail.com')->send(new MailMail($data));
 
     return redirect()->back();
@@ -259,7 +260,8 @@ class ManagementAdminController extends Controller
             'body' => 'มีการจองรถโดยรายละเอียด ดังนี้'
 
         ];
-        Mail::to('merlinxi.5409@gmail.com')->send(new MailMail($data));
+        event(new NewRowAdded($data));
+
 
     }
     public function edit_booking(Request $request)
