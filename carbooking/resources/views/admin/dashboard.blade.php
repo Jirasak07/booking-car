@@ -107,12 +107,7 @@
                     icon: 'success',
                     title: 'การจองสำเร็555',
                     text: 'โปรดรอการอนุมัติ',
-                }).then((res) => {
-                    $.ajax({
-                        url: "{{ route('send-mail') }}",
-                        type: "GET",
-                    });
-                });
+                })
             </script>
         @endif
         @if ($errors->any())

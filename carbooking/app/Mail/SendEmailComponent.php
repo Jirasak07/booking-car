@@ -19,11 +19,15 @@ class SendEmailComponent extends Mailable
      * @param  \App\Models\Mail  $order
      * @return void
      */
+    
+
+   
     public function __construct($data)
     {
         //
         $this->data = $data;
     }
+
 
     /**
      * Build the message.
