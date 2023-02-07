@@ -252,26 +252,29 @@
                         var frmid = $('#id_form').val()
                         if (formid == 1) {
                             var frm = $('#approveform').serialize();
-                            console.log(frm)
                             $.ajax({
                                 url: "{{ route('update') }}",
                                 type: "POST",
                                 data: frm,
                                 success: function(response) {
-
                                     Swal.fire({
                                         icon: 'success',
                                         title: 'อนุมัติเสร็จสิ้น',
                                         timer: 1500,
-                                        showConfirmButton:false,
+                                        showConfirmButton: false,
                                         timerProgressBar: true,
 
                                     }).then((res) => {
                                         $.ajax({
-                                            url:'/admin/send-in'+frm,
-                                            method:'GET'
+                                            type: 'GET',
+                                            url: '/admin/send-in/' + frmid,
+                                            dataType: 'JSON',
+                                            success: function(response) {
+                                                console.log(response);
+                                                // window.location.reload()
+                                            }
                                         })
-                                        // window.location.reload()
+
                                     })
                                 },
                                 error: function(response) {

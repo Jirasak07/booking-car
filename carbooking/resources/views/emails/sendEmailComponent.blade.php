@@ -1,7 +1,7 @@
 @component('mail::message')
 # Introduction
 
-<h1>{{ $data['title'] }}</h1>
+<h1>{{ $data['license'] }}</h1>
 <h1 style="color: teal">การจองนี้อนุมัติเรียบร้อย</h1>
 {{-- <h5>รถ :{{ $data['car'] }}</h5>
 <h5>ทะเบียน :{{ $data['license'] }}</h5>
