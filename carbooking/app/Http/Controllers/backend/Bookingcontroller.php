@@ -4,7 +4,6 @@ namespace App\Http\Controllers\backend;
 
 
 use App\Http\Controllers\Controller;
-use App\Mail\SendEmailComponent;
 use App\Models\BookingModel;
 
 use App\Models\timebookingModel;
@@ -13,7 +12,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use DateTime;
-use Illuminate\Support\Facades\Mail;
+
 
 class Bookingcontroller extends Controller
 {
@@ -255,16 +254,6 @@ class Bookingcontroller extends Controller
         $bookingcar->booking_status = '1';
 
         $bookingcar->save();
-       
-        $data = [
-            'title' => 'การจองรถ BookingCar',
-            'body' => 'มีการจองรถโดยรายละเอียด ดังนี้',
-            'sdate' => $date_start,
-            'edate' => $date_end,
-            'detail' =>  $request->location,
-
-        ];
-        Mail::to('wirunsak2003@gmail.com')->send(new SendEmailComponent($data));
 
         return redirect()->back()->with('success', 'การจองสำเร็จ');
     }

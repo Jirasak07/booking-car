@@ -4,11 +4,11 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use App\Mail\mail as MailMail;
-use App\Mail\SendEmailComponent;
 use App\Models\BookingModel;
 use App\Models\CarModel;
 use App\Models\CaroutModel;
 use App\Models\DriverModel;
+use App\Events\NewRowAdded;
 
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -144,25 +144,6 @@ class ManagementAdminController extends Controller
             $booking_update->booking_status = "2";
 
             $booking_update->save();
-           
-            $detail = DB::table('tb_booking')
-            ->where('id',$id)
-            ->join('tb_cars', 'tb_booking.license_plate','=','tb_cars.id')
-            ->join('tb_driver','tb_booking.driver','=','tb_driver.id')
-            ->select('tb_driver.driver_fullname','car_license','car_model')->get();
-            $data = [
-                'title' => 'BookingCar(การจองรถ)',
-                'license' => $detail->car_license,
-                'car' => $detail->car_model,
-                'driver' => $detail->driver_fullname,
-                'sdate' => $detail->booking_start,
-                'edate' => $detail->booking_end,
-                'detail' =>  $detail->booking_detail,
-               
-            ];
-
-           
-            Mail::to('merlinxi.5409@gmail.com')->send(new SendEmailComponent($data));
             return redirect()->back();
         } else {
             $booking_update->booking_status = $booking_update->booking_status;
@@ -248,15 +229,10 @@ class ManagementAdminController extends Controller
 
             }
             // $booking = DB::table('tb_booking')->where('id',$id)->join('users', 'tb_booking.username', '=', 'users.id')->select('email','username')->get();
-          
             $data = [
-                'title' => 'BookingCar(การจองรถ)',
-                'license' => $request->car_out_license,
-                'car' => $request->brand . " " . $request->car_out_model,
-                'driver' => $request->car_out_driver,
-                'sdate' => $booking_update->booking_start,
-                'edate' => $booking_update->booking_end,
-                'detail' =>  $booking_update->booking_detail,
+                'title' => 'การจองรถ BookingCar',
+                'body' => 'มีการจองรถโดยรายละเอียด ดังนี้'.$request->car_out_license,
+
             ];
 
             
@@ -264,8 +240,8 @@ class ManagementAdminController extends Controller
             // //     'email' =>  $booking['username'],
             // // ];
 
-          
-            Mail::to('merlinxi.5409@gmail.com')->send(new SendEmailComponent($data));
+
+            Mail::to('merlinxi.5409@gmail.com')->send(new MailMail($data));
 
     return redirect()->back();
 
@@ -278,6 +254,17 @@ class ManagementAdminController extends Controller
     }
 
 
+    public function sendmail(){
+
+        $data = [
+            'title' => 'การจองรถ BookingCar',
+            'body' => 'มีการจองรถโดยรายละเอียด ดังนี้'
+
+        ];
+        event(new NewRowAdded($data));
+
+
+    }
     public function edit_booking(Request $request)
     {
         $id = $request->id_form;

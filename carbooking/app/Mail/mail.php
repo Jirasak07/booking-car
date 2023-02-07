@@ -36,6 +36,6 @@ class mail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.email');
+        return $this->subject('Email from bookingcar')->view('email.email');
     }
 }
