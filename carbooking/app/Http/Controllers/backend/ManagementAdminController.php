@@ -231,8 +231,7 @@ class ManagementAdminController extends Controller
             $booking = DB::table('tb_booking')->where('id',$id)->join('users', 'tb_booking.username', '=', 'users.id')->select('email','username')->get();
             $data = [
                 'title' => 'การจองรถ BookingCar',
-                'body' => 'การจองรถได้อนุมัติแล้วโดยรายละเอียด ดังนี้'.'รายละเอียดรถ :'.$request->brand.''.$request->model.'ทะเบียนรถ :'.$request->car_out_license.'คนขับ :'.$request->car_out_driver,
-                
+                'body' => 'มีการจองรถโดยรายละเอียด ดังนี้'
                
             ];
             
@@ -246,7 +245,7 @@ class ManagementAdminController extends Controller
                
             //     $message->subject('สถานะ: ' . $data['aprove']);
             // });
-            Mail::to('wirunsak2003@gmail.com')->send(new MailMail($data));
+            Mail::to('merlinxi.5409@gmail.com')->send(new MailMail($data));
 
     return redirect()->back();
       
