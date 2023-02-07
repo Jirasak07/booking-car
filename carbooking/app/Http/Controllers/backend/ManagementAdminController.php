@@ -132,40 +132,21 @@ class ManagementAdminController extends Controller
     }
     public function aprove_in(Request $request)
     {
-
-
         $id = $request->id_form;
-
         $booking_update = BookingModel::find($id);
         if ($booking_update->booking_status == 1) {
             $booking_update->license_plate = $request->car_id;
             $booking_update->driver = $request->driver_id;
             $booking_update->type_car = $request->type;
             $booking_update->booking_status = "2";
-
             $booking_update->save();
 
-            $detail = DB::table('tb_booking')
-            ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
-            ->join('tb_out_cars', 'tb_booking.license_plate', '=', 'tb_out_cars.id')
-            ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
-            ->select( 'car_out_license', 'car_out_model', 'car_out_driver', 'car_out_tel',  'driver_fullname', 'car_license','tb_booking.*')
-            ->get();
-            $data = [
-                'title' => 'BookingCar(การจองรถ)',
-                'license' => $detail->car_license,
-                'car' => $detail->car_model,
-                'driver' => $detail->driver_fullname,
-                'sdate' => $detail->booking_start,
-                'edate' => $detail->booking_end,
-                'detail' =>  $detail->booking_detail,
 
-            ];
-            dd($detail);
 
+            $data = [ 'title' => 'BookingCar(การจองรถ)',];
 
             Mail::to('merlinxi.5409@gmail.com')->send(new SendEmailComponent($data));
-            return redirect()->back();
+            return redirect()->back()->with('idf',$id);
         } else {
             $booking_update->booking_status = $booking_update->booking_status;
             $booking_update->save();
@@ -371,6 +352,16 @@ class ManagementAdminController extends Controller
 
     }
 
+    public function sendmail($id){
+        $booking = DB::table('tb_booking')
+        ->where('tb_booking.id',$id)
+        ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
+        ->join('tb_out_cars', 'tb_booking.license_plate', '=', 'tb_out_cars.id')
+        ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
+        ->select( 'car_out_license', 'car_out_model', 'car_out_driver', 'car_out_tel',  'driver_fullname', 'car_license','tb_booking.*')
+        ->get();
+  
+    }
 
 
 }

@@ -77,8 +77,8 @@ Route::group(
         Route::post('edit-book', [\App\Http\Controllers\backend\ManagementAdminController::class, 'edit_booking']);
         Route::post('edit-book', [\App\Http\Controllers\backend\ManagementAdminController::class, 'edit_']);
         Route::get('validate_booking', [\App\Http\Controllers\backend\Bookingcontroller::class, 'validate_booking']);
-        Route::get('send-mail', [\App\Http\Controllers\backend\ManagementAdminController::class, 'sendmail'])->name('send-mail');
-        Route::get('/send-alert', [\App\Listeners\SendRowAddedAlert::class, 'handle']);
+        Route::get('send-in/{id}', [\App\Http\Controllers\backend\ManagementAdminController::class, 'sendmail']);
+
     }
 );
 

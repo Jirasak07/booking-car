@@ -249,6 +249,7 @@
                 }).then((res) => {
                     if (res.isConfirmed) {
                         var formid = $('#formtab1').val()
+                        var frmid = $('#id_form').val()
                         if (formid == 1) {
                             var frm = $('#approveform').serialize();
                             console.log(frm)
@@ -266,7 +267,11 @@
                                         timerProgressBar: true,
 
                                     }).then((res) => {
-                                        window.location.reload()
+                                        $.ajax({
+                                            url:'/admin/send-in'+frm,
+                                            method:'GET'
+                                        })
+                                        // window.location.reload()
                                     })
                                 },
                                 error: function(response) {
