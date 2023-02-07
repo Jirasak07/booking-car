@@ -254,6 +254,17 @@ class Bookingcontroller extends Controller
         $bookingcar->booking_status = '1';
 
         $bookingcar->save();
+        $data = [
+            'title' => 'BookingCar(การจองรถ)',
+            
+            'sdate' => $date_start,
+            'edate' => $date_end,
+            'detail' =>   $request->$location,
+           
+        ];
+
+       
+        Mail::to('merlinxi.5409@gmail.com')->send(new SendEmailComponent($data));
 
         return redirect()->back()->with('success', 'การจองสำเร็จ');
     }
