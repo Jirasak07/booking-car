@@ -4,6 +4,8 @@ namespace App\Http\Controllers\backend;
 
 
 use App\Http\Controllers\Controller;
+use App\Mail\EmailComponent;
+use App\Mail\mail as MailMail;
 use App\Mail\SendEmailComponent;
 use App\Models\BookingModel;
 
@@ -257,15 +259,14 @@ class Bookingcontroller extends Controller
         $bookingcar->save();
         $data = [
             'title' => 'BookingCar(การจองรถ)',
-            
             'sdate' => $date_start,
             'edate' => $date_end,
             'detail' => $request->location,
-           
+
         ];
 
-       
-        Mail::to('merlinxi.5409@gmail.com')->send(new SendEmailComponent($data));
+
+        Mail::to('merlinxi.5409@gmail.com')->send(new EmailComponent($data));
 
         return redirect()->back()->with('success', 'การจองสำเร็จ');
     }

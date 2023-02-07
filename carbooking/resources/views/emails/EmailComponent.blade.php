@@ -7,7 +7,7 @@
 <h1>{{ $data['edate'] }}</h1>
 <h1>{{ $data['detail'] }}</h1>
 
-@component('mail::button', ['url' => 'https://www.google.com'])
+@component('mail::button', ['url' => ''])
 Button Text
 @endcomponent
 
