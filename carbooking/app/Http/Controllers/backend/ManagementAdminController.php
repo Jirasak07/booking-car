@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Mail\mail as MailMail;
 use App\Models\BookingModel;
 use App\Models\CarModel;
 use App\Models\CaroutModel;
@@ -12,6 +13,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class ManagementAdminController extends Controller
 {
@@ -119,6 +121,10 @@ class ManagementAdminController extends Controller
                 })
                 ->get();
         }
+
+
+    
+    
    
         return response()->json(['car' => $unreserved_cars, 'driver' => $unreserved_driver]);
 
@@ -222,6 +228,26 @@ class ManagementAdminController extends Controller
                
             
             }
+            $booking = DB::table('tb_booking')->where('id',$id)->join('users', 'tb_booking.username', '=', 'users.id')->select('email','username')->get();
+            $data = [
+                'title' => 'การจองรถ BookingCar',
+                'body' => 'การจองรถได้อนุมัติแล้วโดยรายละเอียด ดังนี้'.'รายละเอียดรถ :'.$request->brand.''.$request->model.'ทะเบียนรถ :'.$request->car_out_license.'คนขับ :'.$request->car_out_driver,
+                
+               
+            ];
+            
+            // $user = [
+            //     'email' =>  $booking['username'],
+            // ];
+            
+            // Mail::send('emails.user-update', $data, function ($message) use ($data) {
+            //     $message->from('no-reply@example.com', 'Profile change');
+            //     // $message->to('profilechange@example.com');
+               
+            //     $message->subject('สถานะ: ' . $data['aprove']);
+            // });
+            Mail::to('wirunsak2003@gmail.com')->send(new MailMail($data));
+
     return redirect()->back();
       
         } else {
