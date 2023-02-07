@@ -228,24 +228,24 @@ class ManagementAdminController extends Controller
                
             
             }
-            $booking = DB::table('tb_booking')->where('id',$id)->join('users', 'tb_booking.username', '=', 'users.id')->select('email','username')->get();
-            $data = [
-                'title' => 'การจองรถ BookingCar',
-                'body' => 'มีการจองรถโดยรายละเอียด ดังนี้'
+            // $booking = DB::table('tb_booking')->where('id',$id)->join('users', 'tb_booking.username', '=', 'users.id')->select('email','username')->get();
+            // $data = [
+            //     'title' => 'การจองรถ BookingCar',
+            //     'body' => 'มีการจองรถโดยรายละเอียด ดังนี้'
                
-            ];
-            
-            // $user = [
-            //     'email' =>  $booking['username'],
             // ];
             
-            // Mail::send('emails.user-update', $data, function ($message) use ($data) {
-            //     $message->from('no-reply@example.com', 'Profile change');
-            //     // $message->to('profilechange@example.com');
+            // // $user = [
+            // //     'email' =>  $booking['username'],
+            // // ];
+            
+            // // Mail::send('emails.user-update', $data, function ($message) use ($data) {
+            // //     $message->from('no-reply@example.com', 'Profile change');
+            // //     // $message->to('profilechange@example.com');
                
-            //     $message->subject('สถานะ: ' . $data['aprove']);
-            // });
-            Mail::to('merlinxi.5409@gmail.com')->send(new MailMail($data));
+            // //     $message->subject('สถานะ: ' . $data['aprove']);
+            // // });
+            // Mail::to('merlinxi.5409@gmail.com')->send(new MailMail($data));
 
     return redirect()->back();
       
@@ -257,6 +257,17 @@ class ManagementAdminController extends Controller
 
     }
 
+
+    public function sendmail(){
+
+        $data = [
+            'title' => 'การจองรถ BookingCar',
+            'body' => 'มีการจองรถโดยรายละเอียด ดังนี้'
+           
+        ];
+        Mail::to('merlinxi.5409@gmail.com')->send(new MailMail($data));
+
+    }
     public function edit_booking(Request $request)
     {
         $id = $request->id_form;
