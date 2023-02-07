@@ -86,7 +86,7 @@ class Bookingcontroller extends Controller
             ->where('tb_booking.booking_status', '!=', '3')
             ->where('tb_booking.booking_status', '!=', '1')
             ->where('tb_booking.booking_end', '>', $format_date)
-          
+
             ->select('driver_fullname', 'car_license', 'car_model', 'tb_booking.*')
             ->get();
         foreach ($booking_join1 as $item) {
@@ -161,7 +161,7 @@ class Bookingcontroller extends Controller
             ->where('tb_booking.booking_status', '!=', '3')
             ->where('tb_booking.booking_status', '!=', '1')
             ->where('tb_booking.booking_end', '>', $format_date)
-    
+
             ->select('driver_fullname', 'car_license', 'car_model', 'tb_booking.*')
             ->get();
         foreach ($booking_join1 as $item) {
@@ -200,20 +200,17 @@ class Bookingcontroller extends Controller
             ];
         }
 
- 
+
         return response()->json($events);
     }
     public function cancle($id, $note)
     {
-
-
         $canclebooking = BookingModel::find($id);
         $canclebooking->driver = '-';
         $canclebooking->license_plate = '-';
         $canclebooking->type_car = '-';
         $canclebooking->booking_status = ('3');
         $canclebooking->booking_detail =  $canclebooking->booking_detail . "~" . $note;
-    
         $canclebooking->save();
         return response()->json(['status' => 'success']);
     }
@@ -238,7 +235,7 @@ class Bookingcontroller extends Controller
 
         $date_start = Carbon::parse($request->date_start)->format('Y-m-d\TH:i:s');
         $date_end = Carbon::parse($request->date_end)->format('Y-m-d\TH:i:s');
-        
+
 
         $bookingcar = new BookingModel();
         $cnt_booking = $bookingcar->count();
@@ -255,7 +252,7 @@ class Bookingcontroller extends Controller
         $bookingcar->type_car = '-';
         $bookingcar->booking_detail = $request->location;
         $bookingcar->booking_status = '1';
-      
+
         $bookingcar->save();
 
         return redirect()->back()->with('success', 'การจองสำเร็จ');
@@ -285,7 +282,7 @@ class Bookingcontroller extends Controller
         $booking->booking_end = $date_end;
         $booking->booking_detail = $request->booking_detail;
         $booking->save();
-        
+
         return redirect()->back()->with('success_edit', 'complete');
     }
 
