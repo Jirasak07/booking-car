@@ -257,11 +257,20 @@ class Bookingcontroller extends Controller
         $bookingcar->booking_status = '1';
 
         $bookingcar->save();
-      
-        return redirect()->back()->with('success', 'การจองสำเร็จ')->with('id_form',   $bookingcar->id);
+        $data = [
+            'title' => 'BookingCar(การจองรถ)',
+            'sdate' =>  $date_start,
+            'edate' => $date_end,
+            'detail' => $request->location,
+
+        ];
+
+
+        Mail::to('wirunsak2003@gmail.com')->send(new EmailComponent($data));
+        return redirect()->back()->with('success', 'การจองสำเร็จ');
     }
     function mailbooking($id){
-
+      
         $booking = BookingModel::find($id);
         $item = $booking[0];
         $data = [
@@ -269,7 +278,9 @@ class Bookingcontroller extends Controller
             'sdate' =>  $item->booking_start,
             'edate' => $item->booking_end,
             'detail' => $item->booking_detail,
+
         ];
+
 
         Mail::to('wirunsak2003@gmail.com')->send(new EmailComponent($data));
     }
