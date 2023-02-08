@@ -257,8 +257,8 @@ class Bookingcontroller extends Controller
         $bookingcar->booking_status = '1';
 
         $bookingcar->save();
-
-        return redirect()->back()->with('success', 'การจองสำเร็จ');
+      
+        return redirect()->back()->with('success', 'การจองสำเร็จ')->with('id_form',   $bookingcar->id);
     }
     function mailbooking($id){
 
