@@ -217,25 +217,9 @@ class ManagementAdminController extends Controller
                 $booking_update->save();
 
             }
-            // $booking = DB::table('tb_booking')->where('id',$id)->join('users', 'tb_booking.username', '=', 'users.id')->select('email','username')->get();
+          
 
-            $data = [
-                'title' => 'BookingCar(การจองรถ)',
-                'license' => $request->car_out_license,
-                'car' => $request->brand . " " . $request->car_out_model,
-                'driver' => $request->car_out_driver,
-                'sdate' => $booking_update->booking_start,
-                'edate' => $booking_update->booking_end,
-                'detail' => $booking_update->booking_detail,
-            ];
-
-            // // $user = [
-            // //     'email' =>  $booking['username'],
-            // // ];
-
-            Mail::to('wirunsak2003@gmail.com')->send(new SendEmailComponent($data));
-
-            return redirect()->back();
+            return redirect()->back()->with('idf', $id);
 
         } else {
             $booking_update->booking_status = $booking_update->booking_status;
@@ -353,6 +337,32 @@ class ManagementAdminController extends Controller
             'name'=> $item->name,
             'driver' => $item->driver_fullname,
             'car'=> $item->car_model,
+            'detail'=> $item->detail,
+            'sdate'=> $item->sdate,
+            'edate'=> $item->edate,
+        ];
+        Mail::to('wirunsak2003@gmail.com')->send(new SendEmailComponent($data));
+
+        return response()->json($item->driver_fullname);
+    }
+
+    public function sendmailout($id)
+    {
+
+        $booking = DB::table('tb_booking')
+            ->join('tb_out_cars', 'tb_booking.license_plate', '=', 'tb_out_cars.id')
+        
+            ->join('users', 'tb_booking.username', '=', 'users.id')
+            ->select('car_out_driver', 'car_out_license', 'tb_booking.booking_detail as detail',
+            'tb_booking.booking_start as sdate','tb_booking.booking_end as edate','car_out_model','users.name as name')
+            ->where('tb_booking.id', $id)
+            ->get();
+        $item= $booking[0];
+        $data = [
+            'license' => $item->car_out_license,
+            'name'=> $item->name,
+            'driver' => $item->car_out_driver,
+            'car'=> $item->car_out_model,
             'detail'=> $item->detail,
             'sdate'=> $item->sdate,
             'edate'=> $item->edate,

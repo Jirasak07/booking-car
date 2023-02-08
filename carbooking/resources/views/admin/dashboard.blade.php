@@ -90,15 +90,6 @@
                 @endforeach
             </div>
         </div>
-        @if ($message = Session::get('success'))
-            <script>
-                Swal.fire({
-                    icon: 'success',
-                    title: 'การจองสำเร็จ',
-                    text: 'โปรดรอการอนุมัติ',
-                })
-            </script>
-        @endif
         @if ($errors->any())
             <div class="alert alert-danger" id="ERROR_COPY" style="display:none;">
                 <ul style="list-style: none;">

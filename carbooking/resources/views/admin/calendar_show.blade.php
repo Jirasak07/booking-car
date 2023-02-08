@@ -311,7 +311,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <div class="btn btn-primary" onclick="show()" >บันทึก</div>
+                    <div class="btn btn-primary" onclick="show()">บันทึก</div>
                     <button type="button" class="btn grey btn-danger"data-bs-dismiss="modal" {{-- onclick="window.location.reload()" --}}
                         data-dismiss="modal">{{ __('ย้อนกลับ') }}</button>
                 </div>
@@ -323,32 +323,32 @@
 <!--End Modal Booking for Admin -->
 <button onclick="show()" class="btn btn-info">Button</button>
 <script>
-    function show(){
+    function show() {
         var didi = $('#didi').serialize()
-       console.log(didi)
-       $.ajax({
-        url:'{{ route('send-booking') }}',
-        type:"POST",
-        data:didi,
-        success:function(response){
-            // window.location.reload()
-            console.log(response)
-            var id = response.id_form
-            $.ajax({
-                url:'/admin/booking-mail/'+id,
-                type:'GET',
-                dataType:'JSON',
-                success:function(resp){
-                   Swal.fire({
-                    icon:'success',
-                    text:'การจองเสร็จสิ้น โปรดรอการอนุมัติ'
-                   }).then((res)=>{
-                    window.location.reload()
-                   })
-                }
+        console.log(didi)
+        $.ajax({
+            url: '{{ route('send-booking') }}',
+            type: "POST",
+            data: didi,
+            success: function(response) {
+                // window.location.reload()
+                var id = response.id_form
+                $.ajax({
+                    url: '/admin/booking-mail/' + id,
+                    type: 'GET',
+                    dataType: 'JSON',
+                })
+            }
+        }).then((dd) => {
+            Swal.fire({
+                icon: 'success',
+                text: 'การจองเสร็จสิ้น โปรดรอการอนุมัติ',
+                timer: 1200,
+                showConfirmButton: false,
+            }).then((res) => {
+                window.location.reload()
             })
-        }
-       })
+        })
     }
 </script>
 <div id='calendar1'></div>
