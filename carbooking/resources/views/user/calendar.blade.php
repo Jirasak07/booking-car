@@ -322,22 +322,22 @@
             data: frm,
             success: function(response) {
                 // window.location.reload()
-                console.log(response)
                 var id = response.id_form
                 $.ajax({
                     url: '/users/store-mail/' + id,
                     type: 'GET',
                     dataType: 'JSON',
-                    success: function(resp) {
-                        Swal.fire({
-                            icon: 'success',
-                            text: 'การจองเสร็จสิ้น โปรดรอการอนุมัติ'
-                        }).then((res) => {
-                            window.location.reload()
-                        })
-                    }
                 })
             }
+        }).then((dd) => {
+            Swal.fire({
+                icon: 'success',
+                text: 'การจองเสร็จสิ้น โปรดรอการอนุมัติ',
+                timer: 1200,
+                showConfirmButton: false,
+            }).then((res) => {
+                window.location.reload()
+            })
         })
     }
 </script>
