@@ -242,7 +242,7 @@
 <div class="modal fade" id="bookingModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="bookingModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
-        <form method="POST" action="{{ route('sendRe') }}">
+        <form method="POST" action="{{ route('sendRe') }}" id="booking-store">
             @csrf
             <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}" />
             <div class="modal-content">
@@ -303,8 +303,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" name="saveBooking" value="" id="saveBooking"
-                        class="btn btn-primary text-white">ยืนยัน</button>
+                    <div class="btn btn-primary" onclick="save_form()">ยืนยัน</div>
                     <button type="button" class="btn grey btn-danger"data-bs-dismiss="modal" {{-- onclick="window.location.reload()" --}}
                         data-dismiss="modal">{{ __('ยกเลิก') }}</button>
                 </div>
@@ -313,4 +312,33 @@
 
     </div>
 </div>
+<script>
+    function save_form() {
+        var frm = $('#booking-store').serialize()
+        console.log(frm)
+        $.ajax({
+            url: '{{ route('sendRe') }}',
+            type: "POST",
+            data: frm,
+            success: function(response) {
+                // window.location.reload()
+                console.log(response)
+                var id = response.id_form
+                $.ajax({
+                    url: '/users/store-mail/' + id,
+                    type: 'GET',
+                    dataType: 'JSON',
+                    success: function(resp) {
+                        Swal.fire({
+                            icon: 'success',
+                            text: 'การจองเสร็จสิ้น โปรดรอการอนุมัติ'
+                        }).then((res) => {
+                            window.location.reload()
+                        })
+                    }
+                })
+            }
+        })
+    }
+</script>
 <div id='calendar'></div>

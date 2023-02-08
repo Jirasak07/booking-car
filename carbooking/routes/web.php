@@ -41,6 +41,7 @@ Route::group(
         Route::get('cancel/{id}/{note}', [\App\Http\Controllers\backend\Bookingcontroller::class, 'cancle'])->name('users.booking_cancel');
         Route::get('detail/{id}', [\App\Http\Controllers\backend\UserBookingController::class, 'detail_booking']);
         Route::get('validate_booking', [\App\Http\Controllers\backend\Bookingcontroller::class, 'validate_booking']);
+        Route::get('store-mail/{id}', [\App\Http\Controllers\backend\Bookingcontroller::class, 'mailbooking']);
     }
 );
 Route::get('admin/request', [\App\Http\Controllers\backend\UserBookingController::class, 'show_booking']);
