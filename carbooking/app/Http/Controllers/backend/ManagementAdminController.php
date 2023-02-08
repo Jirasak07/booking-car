@@ -233,7 +233,7 @@ class ManagementAdminController extends Controller
             // //     'email' =>  $booking['username'],
             // // ];
 
-            Mail::to('merlinxi.5409@gmail.com')->send(new SendEmailComponent($data));
+            Mail::to('wirunsak2003@gmail.com')->send(new SendEmailComponent($data));
 
             return redirect()->back();
 
