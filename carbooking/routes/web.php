@@ -43,6 +43,7 @@ Route::group(
         Route::get('detail/{id}', [\App\Http\Controllers\backend\UserBookingController::class, 'detail_booking']);
         Route::get('validate_booking', [\App\Http\Controllers\backend\Bookingcontroller::class, 'validate_booking']);
         Route::get('store-mail/{id}', [\App\Http\Controllers\backend\Bookingcontroller::class, 'mailbooking']);
+        Route::get('message', [\App\Http\Controllers\backend\Bookingcontroller::class, 'shownoti']);
     }
 );
 Route::get('admin/request', [\App\Http\Controllers\backend\UserBookingController::class, 'show_booking']);

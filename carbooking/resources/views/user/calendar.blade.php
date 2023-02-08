@@ -336,6 +336,10 @@
                 timer: 1200,
                 showConfirmButton: false,
             }).then((res) => {
+                $.ajax({
+                    url: '/users/message',
+                    type: 'GET',
+                })
                 window.location.reload()
             })
         })
