@@ -135,7 +135,7 @@ class ManagementAdminController extends Controller
             $booking_update->booking_status = "2";
             $booking_update->save();
 
-           
+
             return redirect()->back()->with('idf', $id);
         } else {
             return redirect()->back()->with('success', "รายการนี้ถูกยกเลิกไปแล้ว");
@@ -350,9 +350,8 @@ class ManagementAdminController extends Controller
         $item= $booking[0];
         $data = [
             'license' => $item->car_license,
-          'name'=> $item->name,
+            'name'=> $item->name,
             'driver' => $item->driver_fullname,
-         
             'car'=> $item->car_model,
             'detail'=> $item->detail,
             'sdate'=> $item->sdate,
