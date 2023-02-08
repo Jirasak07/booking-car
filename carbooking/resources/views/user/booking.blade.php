@@ -490,7 +490,7 @@
                                                 Swal.fire({
                                                     title: 'เสร็จสิ้น',
                                                     icon: 'success',
-                                                    confirmButtonText: 'ok',
+                                                    confirmButtonText: 'ตกลง',
                                                 }).then((data) => {
                                                     window.location.reload();
                                                 })
