@@ -61,31 +61,33 @@
             var channel = pusher.subscribe('store-channel');
             channel.bind('store-booking', function(data) {
                 console.log(data)
-                const Toast = Swal.mixin({
-                    customClass: {
-                        confirmButton: 'btn btn-sm btn-warning',
-                        popup: 'text-sweet',
-                    },
-                    buttonsStyling: false,
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: true,
-                    confirmButtonText: 'คลิกเพื่อตรวจสอบ',
-                    timer: 3000,
-                    width: 400,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                })
+                toastr.warning(data['message'])
+                // const Toast = Swal.mixin({
+                //     customClass: {
+                //         confirmButton: 'btn btn-sm btn-warning',
+                //         popup: 'text-sweet',
+                //     },
+                //     buttonsStyling: false,
+                //     background:'#ffca3a',
+                //     toast: true,
+                //     position: 'top-end',
+                //     showConfirmButton: true,
+                //     confirmButtonText: 'คลิกเพื่อตรวจสอบ',
+                //     timer: 3000,
+                //     width: 400,
+                //     timerProgressBar: true,
+                //     didOpen: (toast) => {
+                //         toast.addEventListener('mouseenter', Swal.stopTimer)
+                //         toast.addEventListener('mouseleave', Swal.resumeTimer)
+                //     }
+                // })
 
-                Toast.fire({
-                    icon: 'warning',
-                    title: data['message']
-                }).then((res) => {
-                    console.log(res)
-                })
+                // Toast.fire({
+                //     icon: 'warning',
+                //     title: data['message']
+                // }).then((res) => {
+                //     console.log(res)
+                // })
             });
         }
     </script>
