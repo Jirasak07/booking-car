@@ -261,7 +261,7 @@ class Bookingcontroller extends Controller
         return redirect()->back()->with('success', 'การจองสำเร็จ');
     }
     function mailbooking($id){
-      
+
         $booking = BookingModel::find($id);
         $item = $booking[0];
         $data = [
