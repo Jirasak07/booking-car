@@ -242,6 +242,7 @@ class Bookingcontroller extends Controller
 
         $bookingcar = new BookingModel();
         $cnt_booking = $bookingcar->count();
+        $id_form = $cnt_booking+1;
         if ($cnt_booking < 1) {
             $bookingcar->id = 1;
         } else {
@@ -255,19 +256,11 @@ class Bookingcontroller extends Controller
         $bookingcar->type_car = '-';
         $bookingcar->booking_detail = $request->location;
         $bookingcar->booking_status = '1';
-
+        // dd($bookingcar->id);
         $bookingcar->save();
-        $data = [
-            'title' => 'BookingCar(การจองรถ)',
-            'sdate' =>  $date_start,
-            'edate' => $date_end,
-            'detail' => $request->location,
 
-        ];
+ return response()->json(['id_form'=>$id_form]);
 
-
-        Mail::to('wirunsak2003@gmail.com')->send(new EmailComponent($data));
-        return redirect()->back()->with('success', 'การจองสำเร็จ');
     }
     function mailbooking($id){
       
