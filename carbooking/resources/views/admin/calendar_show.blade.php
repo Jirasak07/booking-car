@@ -338,15 +338,16 @@
                     type: 'GET',
                     dataType: 'JSON',
                 })
-                Swal.fire({
-                    icon: 'success',
-                    text: 'การจองเสร็จสิ้น โปรดรอการอนุมัติ',
-                    timer: 1200,
-                    showConfirmButton: false,
-                }).then((res) => {
-                    window.location.reload()
-                })
             }
+        }).then((dd) => {
+            Swal.fire({
+                icon: 'success',
+                text: 'การจองเสร็จสิ้น โปรดรอการอนุมัติ',
+                timer: 1200,
+                showConfirmButton: false,
+            }).then((res) => {
+                window.location.reload()
+            })
         })
     }
 </script>
