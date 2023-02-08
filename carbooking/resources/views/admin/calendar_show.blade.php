@@ -333,6 +333,14 @@
         success:function(response){
             // window.location.reload()
             console.log(response)
+            $.ajax({
+                url:'/admin/booking-mail/'+id,
+                type:'GET',
+                dataType:'JSON',
+                success:function(resp){
+                    
+                }
+            })
         }
        })
     }
