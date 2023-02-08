@@ -136,12 +136,12 @@
                             var canbook_min = moment(nowDate, 'HH:mm:ss a').add(res
                                     .timeafter.time, res.timeafter.unit)
                                 .format('YYYY-MM-DD HH:mm');
-                            //console.log(canbook_min);
+
                             var canbook_max = moment.max(moment(nowDate, 'HH:mm:ss a').add(
                                     res.timebefore.time, res.timebefore.unit + 's')
                                 .format('YYYY-MM-DD HH:mm'))
 
-                            //console.log('can max : ', canbook_max);
+                           
                             if (booking_start < canbook_min) {
                                 event.preventDefault();
                                 Swal.fire({
