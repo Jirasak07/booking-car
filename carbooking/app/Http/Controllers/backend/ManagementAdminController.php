@@ -217,9 +217,9 @@ class ManagementAdminController extends Controller
                 $booking_update->save();
 
             }
-          
 
-            return redirect()->back()->with('idf', $id);
+
+            return response()->json(['idf'=> $id]);
 
         } else {
             $booking_update->booking_status = $booking_update->booking_status;
@@ -351,7 +351,7 @@ class ManagementAdminController extends Controller
 
         $booking = DB::table('tb_booking')
             ->join('tb_out_cars', 'tb_booking.license_plate', '=', 'tb_out_cars.id')
-        
+
             ->join('users', 'tb_booking.username', '=', 'users.id')
             ->select('car_out_driver', 'car_out_license', 'tb_booking.booking_detail as detail',
             'tb_booking.booking_start as sdate','tb_booking.booking_end as edate','car_out_model','users.name as name')

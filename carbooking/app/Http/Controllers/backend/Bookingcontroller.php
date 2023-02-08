@@ -263,7 +263,6 @@ class Bookingcontroller extends Controller
 
     }
     function mailbooking($id){
-
         $booking = BookingModel::find($id);
         $item = $booking;
         $data = [
@@ -273,7 +272,7 @@ class Bookingcontroller extends Controller
             'detail' => $item->booking_detail,
 
         ];
-        Mail::to('merlinxi.5409@gmail.com')->send(new EmailComponent($data));
+        Mail::to('wirunsak2003@gmail.com')->send(new EmailComponent($data));
         return response()->json('Success');
     }
     function edit_booking(Request $request)
