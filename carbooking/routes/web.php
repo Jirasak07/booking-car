@@ -78,7 +78,7 @@ Route::group(
         Route::post('edit-book', [\App\Http\Controllers\backend\ManagementAdminController::class, 'edit_']);
         Route::get('validate_booking', [\App\Http\Controllers\backend\Bookingcontroller::class, 'validate_booking']);
         Route::get('send-in/{id}', [\App\Http\Controllers\backend\ManagementAdminController::class, 'sendmail']);
-        Route::get('booking-mail/{id}', [\App\Http\Controllers\backend\ManagementAdminController::class, 'mailbooking']);
+        Route::get('booking-mail/{id}', [\App\Http\Controllers\backend\Bookingcontroller::class, 'mailbooking']);
 
     }
 );
