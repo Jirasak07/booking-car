@@ -136,12 +136,12 @@
                             var canbook_min = moment(nowDate, 'HH:mm:ss a').add(res
                                     .timeafter.time, res.timeafter.unit)
                                 .format('YYYY-MM-DD HH:mm');
-
+                            //console.log(canbook_min);
                             var canbook_max = moment.max(moment(nowDate, 'HH:mm:ss a').add(
                                     res.timebefore.time, res.timebefore.unit + 's')
                                 .format('YYYY-MM-DD HH:mm'))
 
-
+                            //console.log('can max : ', canbook_max);
                             if (booking_start < canbook_min) {
                                 event.preventDefault();
                                 Swal.fire({
@@ -250,7 +250,7 @@
 <div class="modal fade" id="bookingModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="bookingModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
-        <form id="frmbooking">
+        <form method="POST" action="{{ route('send-booking') }}">
             @csrf
             <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}" />
             <div class="modal-content">
@@ -311,32 +311,12 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <input  name="saveBooking" value="ยืนยัน" id="saveBooking" class="btn btn-primary" onclick="submit()">
+                    <input type="submit" name="saveBooking" value="ยืนยัน" id="saveBooking" class="btn btn-primary">
                     <button type="button" class="btn grey btn-danger"data-bs-dismiss="modal" {{-- onclick="window.location.reload()" --}}
                         data-dismiss="modal">{{ __('ย้อนกลับ') }}</button>
                 </div>
             </div>
         </form>
-        <script>
-            function submit() {
-                var frm = $('#frmbooking').serialize();
-                var frmid = $('#id_form').val()
-                $.ajax({
-                    url: "{{ route('send-booking') }}",
-                    type: "POST",
-                    data: frm,
-                    success:function(res){
-                          $.ajax({
-                        url:"",
-                        type:"GET",
-                        success:function(respons){
-
-                        }
-                    })
-                    }
-                })
-            }
-        </script>
 
     </div>
 </div>
