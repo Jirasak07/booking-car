@@ -271,11 +271,13 @@
                                             dataType: 'JSON',
                                             success: function(response) {
                                                 console.log(response);
-                                                // window.location.reload()
+                                                window.location.reload()
                                             }
                                         })
+                                        //    window.location.reload()
 
                                     })
+
                                 },
                                 error: function(response) {
                                     Swal.fire({

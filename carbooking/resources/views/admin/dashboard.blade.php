@@ -94,7 +94,7 @@
             <script>
                 Swal.fire({
                     icon: 'success',
-                    title: 'การจองสำเร็555',
+                    title: 'การจองสำเร็จ',
                     text: 'โปรดรอการอนุมัติ',
                 })
             </script>
