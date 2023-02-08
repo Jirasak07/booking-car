@@ -333,12 +333,18 @@
         success:function(response){
             // window.location.reload()
             console.log(response)
+            var id = response.id_form
             $.ajax({
                 url:'/admin/booking-mail/'+id,
                 type:'GET',
                 dataType:'JSON',
                 success:function(resp){
-                    
+                   Swal.fire({
+                    icon:'success',
+                    text:'การจองเสร็จสิ้น โปรดรอการอนุมัติ'
+                   }).then((res)=>{
+                    window.location.reload()
+                   })
                 }
             })
         }
