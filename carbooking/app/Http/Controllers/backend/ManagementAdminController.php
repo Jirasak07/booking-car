@@ -135,17 +135,7 @@ class ManagementAdminController extends Controller
             $booking_update->booking_status = "2";
             $booking_update->save();
 
-            $booking = DB::table('tb_booking')
-                ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
-                ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
-                ->select('driver_fullname', 'car_license', 'tb_booking.*')
-                ->where('tb_booking.id', $id)
-                ->get();
-            $data2 = $booking[0];
-            $data = [
-                'license' => $data2->driver_fullname,
-            ];
-            Mail::to('merlinxi.5409@gmail.com')->send(new SendEmailComponent($data));
+           
             return redirect()->back()->with('idf', $id);
         } else {
             return redirect()->back()->with('success', "รายการนี้ถูกยกเลิกไปแล้ว");
@@ -352,16 +342,25 @@ class ManagementAdminController extends Controller
         $booking = DB::table('tb_booking')
             ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
             ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
-            ->select('driver_fullname', 'car_license', 'tb_booking.*')
+            ->join('users', 'tb_booking.username', '=', 'users.id')
+            ->select('driver_fullname', 'car_license', 'tb_booking.booking_detail as detail',
+            'tb_booking.booking_start as sdate','tb_booking.booking_end as edate','car_model','users.name as name')
             ->where('tb_booking.id', $id)
             ->get();
-        $data2 = $booking[0];
+        $item= $booking[0];
         $data = [
-            'license' => $data2->driver_fullname,
+            'license' => $item->car_license,
+          'name'=> $item->name,
+            'driver' => $item->driver_fullname,
+         
+            'car'=> $item->car_model,
+            'detail'=> $item->detail,
+            'sdate'=> $item->sdate,
+            'edate'=> $item->edate,
         ];
-        Mail::to('merlinxi.5409@gmail.com')->send(new SendEmailComponent($data));
+        Mail::to('wirunsak2003@gmail.com')->send(new SendEmailComponent($data));
 
-        return response()->json($data2->driver_fullname);
+        return response()->json($item->driver_fullname);
     }
 
 }
