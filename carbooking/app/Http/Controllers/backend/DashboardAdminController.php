@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\Events\StoreNotification;
 use App\Http\Controllers\Controller;
 use App\Models\BookingModel;
 use App\Models\CarModel;
@@ -53,7 +54,7 @@ class DashboardAdminController extends Controller
                 ];
             }
         }
-        
+
         $booking_join1 = DB::table('tb_booking')
             ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
             ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
@@ -61,7 +62,7 @@ class DashboardAdminController extends Controller
             ->where('tb_booking.booking_status', '!=', '3')
             ->where('tb_booking.booking_status', '!=', '1')
             ->where('tb_booking.booking_end', '>', $format_date)
-   
+
             ->select('driver_fullname', 'car_license', 'car_model', 'tb_booking.*')
             ->get();
         foreach ($booking_join1 as $item) {
@@ -114,7 +115,7 @@ class DashboardAdminController extends Controller
             ->where('type_car', '=', 1)
 
             ->groupBy('license_plate')->get();
-  
+
 
 
         $bookingcarAllin = DB::table('tb_booking') //จำนวนรถภายใน ทั้งหมด
@@ -144,7 +145,7 @@ class DashboardAdminController extends Controller
         $pending = DB::table('tb_booking')->where('booking_status', '=', 1)->count('id');
         $approve = DB::table('tb_booking')->where('booking_status', '=', 2)->count('id');
         $cancel = DB::table('tb_booking')->where('booking_status', '=', 3)->count('id');
-       
+
 
         $bookings = DB::table('tb_booking')
         ->join('users', 'tb_booking.username', '=', 'users.id')
@@ -170,7 +171,7 @@ class DashboardAdminController extends Controller
                 ];
             }
         }
-     
+
         $booking_join1 = DB::table('tb_booking')
             ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
             ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
@@ -179,7 +180,7 @@ class DashboardAdminController extends Controller
             ->where('tb_booking.booking_status', '!=', '3')
             ->where('tb_booking.booking_status', '!=', '1')
             ->where('tb_booking.booking_end', '>', $format_date)
-       
+
             ->select('driver_fullname', 'car_license', 'car_model', 'tb_booking.*','name')
             ->get();
         foreach ($booking_join1 as $item) {
@@ -221,8 +222,6 @@ class DashboardAdminController extends Controller
 
             ];
         }
-
-
         return view('admin.dashboard')->with(['calenbook' => $events, 'data2' => $data2, 'data1' => $data1, 'allcar1' => $allcar1, 'allcar2' => $allcar2, 'bookingcarAllin' => $bookingcarAllin, 'bookingcarAllout' => $bookingcarAllout, 'car' => $car, 'allbook' => $allbooking, 'pending' => $pending, 'approve' => $approve, 'cancel' => $cancel, 'bookingcarin' => $bookingcarin])
 
         ;

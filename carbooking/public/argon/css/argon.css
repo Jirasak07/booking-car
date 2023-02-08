@@ -20597,3 +20597,7 @@ a.nav-link-sub:hover {
     box-shadow: inset 0px 0.1em 0.6em var(--red);
     transform: translateY(0em);
 }
+.text-sweet{
+    font-size: 12px !important;
+
+}

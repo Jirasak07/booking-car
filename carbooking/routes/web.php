@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\StoreNotification;
 use App\Http\Controllers\backend\DashboardAdminController;
 use App\Http\Controllers\backend\UserBookingController;
 use App\Http\Controllers\CarsController;
@@ -81,12 +82,13 @@ Route::group(
         Route::get('send-in/{id}', [\App\Http\Controllers\backend\ManagementAdminController::class, 'sendmail']);
         Route::get('send-out/{id}', [\App\Http\Controllers\backend\ManagementAdminController::class, 'sendmailout']);
         Route::get('booking-mail/{id}', [\App\Http\Controllers\backend\Bookingcontroller::class, 'mailbooking']);
+        Route::get('message', [\App\Http\Controllers\backend\Bookingcontroller::class, 'shownoti']);
+
 
     }
 );
 
 Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
 
 Route::get('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');

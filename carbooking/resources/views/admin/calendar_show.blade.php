@@ -321,7 +321,7 @@
     </div>
 </div>
 <!--End Modal Booking for Admin -->
-<button onclick="show()" class="btn btn-info">Button</button>
+
 <script>
     function show() {
         var didi = $('#didi').serialize()
@@ -346,7 +346,12 @@
                 timer: 1200,
                 showConfirmButton: false,
             }).then((res) => {
+                $.ajax({
+                    url: '/admin/message',
+                    type: 'GET',
+                })
                 window.location.reload()
+
             })
         })
     }

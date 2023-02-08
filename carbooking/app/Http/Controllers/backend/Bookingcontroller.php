@@ -2,19 +2,16 @@
 
 namespace App\Http\Controllers\backend;
 
-
+use App\Events\StoreNotification;
 use App\Http\Controllers\Controller;
 use App\Mail\EmailComponent;
-use App\Mail\mail as MailMail;
-use App\Mail\SendEmailComponent;
 use App\Models\BookingModel;
-
 use App\Models\timebookingModel;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
-use DateTime;
 use Illuminate\Support\Facades\Mail;
 
 class Bookingcontroller extends Controller
@@ -78,7 +75,7 @@ class Bookingcontroller extends Controller
                     'end' => $booking->booking_end,
                     'color' => $color,
                     'type' => '1',
-                    'description' => '-'
+                    'description' => '-',
                 ];
             }
         }
@@ -102,7 +99,7 @@ class Bookingcontroller extends Controller
                 'end' => $item->booking_end,
                 'color' => $color,
                 'type' => '2',
-                'description' => $car . ' ทะเบียนรถ ' .  ' ' . $item->car_license . ' คนขับรถ ' . $item->driver_fullname,
+                'description' => $car . ' ทะเบียนรถ ' . ' ' . $item->car_license . ' คนขับรถ ' . $item->driver_fullname,
             ];
         }
         $booking_join2 = DB::table('tb_booking')
@@ -124,7 +121,7 @@ class Bookingcontroller extends Controller
                 'end' => $item2->booking_end,
                 'color' => $color,
                 'type' => '2',
-                'description' => $car . ' ทะเบียนรถ ' .  ' ' . $item2->car_out_license . ' คนขับรถ ' . $item2->car_out_driver . ' เบอร์โทร ' . $item2->car_out_tel,
+                'description' => $car . ' ทะเบียนรถ ' . ' ' . $item2->car_out_license . ' คนขับรถ ' . $item2->car_out_driver . ' เบอร์โทร ' . $item2->car_out_tel,
             ];
         }
 
@@ -153,7 +150,7 @@ class Bookingcontroller extends Controller
                     'end' => $booking->booking_end,
                     'color' => $color,
                     'type' => '1',
-                    'description' => '-'
+                    'description' => '-',
                 ];
             }
         }
@@ -177,7 +174,7 @@ class Bookingcontroller extends Controller
                 'end' => $item->booking_end,
                 'color' => $color,
                 'type' => '2',
-                'description' => $car . ' ทะเบียนรถ ' .  ' ' . $item->car_license . ' คนขับรถ ' . $item->driver_fullname,
+                'description' => $car . ' ทะเบียนรถ ' . ' ' . $item->car_license . ' คนขับรถ ' . $item->driver_fullname,
             ];
         }
         $booking_join2 = DB::table('tb_booking')
@@ -199,10 +196,9 @@ class Bookingcontroller extends Controller
                 'end' => $item2->booking_end,
                 'color' => $color,
                 'type' => '2',
-                'description' => $car . ' ทะเบียนรถ ' .  ' ' . $item2->car_out_license . ' คนขับรถ ' . $item2->car_out_driver . ' เบอร์โทร ' . $item2->car_out_tel,
+                'description' => $car . ' ทะเบียนรถ ' . ' ' . $item2->car_out_license . ' คนขับรถ ' . $item2->car_out_driver . ' เบอร์โทร ' . $item2->car_out_tel,
             ];
         }
-
 
         return response()->json($events);
     }
@@ -213,7 +209,7 @@ class Bookingcontroller extends Controller
         $canclebooking->license_plate = '-';
         $canclebooking->type_car = '-';
         $canclebooking->booking_status = ('3');
-        $canclebooking->booking_detail =  $canclebooking->booking_detail . "~" . $note;
+        $canclebooking->booking_detail = $canclebooking->booking_detail . "~" . $note;
         $canclebooking->save();
         return response()->json(['status' => 'success']);
     }
@@ -239,10 +235,9 @@ class Bookingcontroller extends Controller
         $date_start = Carbon::parse($request->date_start)->format('Y-m-d\TH:i:s');
         $date_end = Carbon::parse($request->date_end)->format('Y-m-d\TH:i:s');
 
-
         $bookingcar = new BookingModel();
         $cnt_booking = $bookingcar->count();
-        $id_form = $cnt_booking+1;
+        $id_form = $cnt_booking + 1;
         if ($cnt_booking < 1) {
             $bookingcar->id = 1;
         } else {
@@ -259,15 +254,21 @@ class Bookingcontroller extends Controller
         // dd($bookingcar->id);
         $bookingcar->save();
 
- return response()->json(['id_form'=>$id_form]);
+        return response()->json(['id_form' => $id_form]);
 
     }
-    function mailbooking($id){
+    public function shownoti()
+    {
+        sleep(3);
+        event(new StoreNotification('มีรายการจองใหม่'));
+    }
+    public function mailbooking($id)
+    {
         $booking = BookingModel::find($id);
         $item = $booking;
         $data = [
             'title' => 'BookingCar(การจองรถ)',
-            'sdate' =>  $item->booking_start,
+            'sdate' => $item->booking_start,
             'edate' => $item->booking_end,
             'detail' => $item->booking_detail,
 
@@ -275,7 +276,7 @@ class Bookingcontroller extends Controller
         Mail::to('wirunsak2003@gmail.com')->send(new EmailComponent($data));
         return response()->json('Success');
     }
-    function edit_booking(Request $request)
+    public function edit_booking(Request $request)
     {
         $timeafter = timebookingModel::find(1);
         $timebefore = timebookingModel::find(2);
@@ -304,7 +305,7 @@ class Bookingcontroller extends Controller
         return redirect()->back()->with('success_edit', 'complete');
     }
 
-    function validate_booking()
+    public function validate_booking()
     {
 
         return response()->json([
