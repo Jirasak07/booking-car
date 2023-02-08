@@ -66,7 +66,9 @@
             <!-- Navigation -->
             <div class="text-center pb-3 d-block d-sm-none" style="font-weight: 700"> {{ Auth::user()->name }}</div>
             @if (Auth::user()->role_user == '2')
+
                 <ul class="navbar-nav  ">
+
                     <li class="{{ 'users/booking' == request()->path() ? 'nav-item active-nav ' : 'nav-item ' }}">
                         <a class="{{ 'users/booking' == request()->path() ? 'nav-link text-darker' : 'nav-link ' }}"
                             style="font-weight: 600;font-size:1rem"
@@ -95,7 +97,7 @@
                         class="{{ 'admin/request' == request()->path() || 'admin/request-all' == request()->path() || 'admin/history' == request()->path() ? 'nav-item active-nav ' : 'nav-item ' }}">
                         <a class="{{ 'admin/request' == request()->path() || 'admin/history' == request()->path() ? 'nav-link text-darker' : 'nav-link ' }}"
                             style="font-weight: 600;font-size:1rem" href="{{ route('users.view-booking') }}">
-                            <i class="fa-solid fa-calendar-days"></i> {{ __('ข้อมูลการจอง') }} </a>
+                            <i class="fa-solid fa-calendar-days"></i> {{ __('ข้อมูลการจอง') }}  </a>
                         <ul class="sub-menu py-2 ">
                             <li class="nav-item">
                                 <a class="{{ 'admin/request' == request()->path() ? 'nav-link-sub text-primary' : 'nav-link-sub  ' }}"

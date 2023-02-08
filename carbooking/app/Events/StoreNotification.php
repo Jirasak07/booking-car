@@ -13,7 +13,7 @@ use Illuminate\Queue\SerializesModels;
 class StoreNotification implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    public $message;
+    public $message ;
     /**
      * Create a new event instance.
      *
