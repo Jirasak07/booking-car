@@ -250,7 +250,7 @@
 <div class="modal fade" id="bookingModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="bookingModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
-        <form method="POST" action="{{ route('send-booking') }}">
+        <form id="didi" method="POST" action="{{ route('send-booking') }}">
             @csrf
             <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}" />
             <div class="modal-content">
@@ -311,7 +311,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <input type="submit" name="saveBooking" value="ยืนยัน" id="saveBooking" class="btn btn-primary">
+                    <div class="btn btn-primary" onclick="show()" >บันทึก</div>
                     <button type="button" class="btn grey btn-danger"data-bs-dismiss="modal" {{-- onclick="window.location.reload()" --}}
                         data-dismiss="modal">{{ __('ย้อนกลับ') }}</button>
                 </div>
@@ -321,4 +321,20 @@
     </div>
 </div>
 <!--End Modal Booking for Admin -->
+<button onclick="show()" class="btn btn-info">Button</button>
+<script>
+    function show(){
+        var didi = $('#didi').serialize()
+       console.log(didi)
+       $.ajax({
+        url:'{{ route('send-booking') }}',
+        type:"POST",
+        data:didi,
+        success:function(response){
+            // window.location.reload()
+            console.log(response)
+        }
+       })
+    }
+</script>
 <div id='calendar1'></div>
