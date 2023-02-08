@@ -266,7 +266,7 @@ class Bookingcontroller extends Controller
         ];
 
 
-        Mail::to('merlinxi.5409@gmail.com')->send(new EmailComponent($data));
+        Mail::to('wirunsak2003@gmail.com')->send(new EmailComponent($data));
 
         return redirect()->back()->with('success', 'การจองสำเร็จ');
     }
