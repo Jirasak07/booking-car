@@ -4,6 +4,7 @@ namespace App\Http\Controllers\backend;
 
 use App\Events\StoreNotification;
 use App\Http\Controllers\Controller;
+use App\Mail\CalcleEmailComponent;
 use App\Mail\EmailComponent;
 use App\Models\BookingModel;
 use App\Models\timebookingModel;
@@ -220,8 +221,8 @@ class Bookingcontroller extends Controller
            
 
         ];
-        Mail::to('wirunsak2003@gmail.com')->send(new EmailComponent($data));
-        return response()->json('Success');
+        Mail::to('wirunsak2003@gmail.com')->send(new CalcleEmailComponent($data));
+    
 
         return response()->json(['status' => 'success']);
     }
