@@ -211,6 +211,18 @@ class Bookingcontroller extends Controller
         $canclebooking->booking_status = ('3');
         $canclebooking->booking_detail = $canclebooking->booking_detail . "~" . $note;
         $canclebooking->save();
+
+
+      
+        $data = [
+            'title' => 'BookingCar(การจองรถ)',
+            'detail' =>  'การจองรายการนี้ได้ถูกยกเลิกไปแล้ว',
+           
+
+        ];
+        Mail::to('wirunsak2003@gmail.com')->send(new EmailComponent($data));
+        return response()->json('Success');
+
         return response()->json(['status' => 'success']);
     }
     public function store(Request $request)

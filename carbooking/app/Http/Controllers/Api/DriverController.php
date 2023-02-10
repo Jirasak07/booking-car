@@ -13,9 +13,18 @@ class DriverController extends Controller
         $driver = DriverModel::All();
         return response()->json($driver);
     }   
-    function changestatus($id)
+    public function changeStatus($id)
     {
-        
+       
+      $driver = DriverModel::find($id);
+      if($driver->driver_status == 1){
+        $driver->driver_status = ('2');
+        $driver->save();
+      }else if($driver->driver_status == 2){
+        $driver->driver_status = ('1');
+        $driver->save();
+      }
+     return response()->json(['status'=>'success']);
     }
 
 }
