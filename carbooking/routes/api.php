@@ -62,6 +62,6 @@ Route::get('send-mail/bookingout/{id_out}',[Emailapi::class,'sendmailout']);
 
 
 Route::get('show/setting',[Settingapi::class,'showsetting']);
-Route::patch('edit/setting',[Settingapi::class,'showsetting']);
+Route::patch('edit/setting',[Settingapi::class,'edit_time']);
 Route::get('change-status/driver/{id}',[Settingapi::class,'DriverchangeStatus']);
 Route::get('change-status/car/{id}',[Settingapi::class,'CarchangeStatus']);

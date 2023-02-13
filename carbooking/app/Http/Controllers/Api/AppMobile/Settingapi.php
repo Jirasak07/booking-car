@@ -21,7 +21,7 @@ class Settingapi extends Controller
 
     public function edit_time(Request $request)
     {
-        $id = $request->id_form;
+        $id = $request->id;
         $time = timebookingModel::find($id);
         $time->time = $request->time;
         $time->unit = $request->unit;
@@ -33,11 +33,9 @@ class Settingapi extends Controller
             $time->unit_th = 'เดือน';
         }
         $time->save();
-        if(!$time->save()){
-        return response()->json(['error']);
-        }else{
-             return response()->json([201]);
-        }
+      
+             return response()->json($time);
+        
 
     }
 
