@@ -48,20 +48,20 @@ Route::get('caranddrive/edit/{id}',[ShowDataBookingapi::class,'caranddriver_edit
 Route::get('Validates',[Bookingapi::class,'Validates']);
 
 Route::post('booking/add',[Bookingapi::class,'bookingcar']);
-Route::post('booking/edit',[Bookingapi::class,'edit_booking']);
-Route::post('booking/edit/aproved',[Bookingapi::class,'edit_bookingin']);
-Route::post('cancle/{id}/{note}',[Bookingapi::class,'cancle']);
+Route::patch('booking/edit/{id}',[Bookingapi::class,'edit_booking']);
+Route::patch('booking/edit/aproved/{id}',[Bookingapi::class,'edit_bookingin']);
+Route::patch('cancle/{id}/{note}',[Bookingapi::class,'cancle']);
 
-Route::post('Aprove/car/in',[Aproveapi::class,'Aprove_in']);
-Route::post('Aprove/car/out',[Aproveapi::class,'Aprove_out']);
+Route::patch('Aprove/car/in/{id}',[Aproveapi::class,'Aprove_in']);
+Route::patch('Aprove/car/out/{id}',[Aproveapi::class,'Aprove_out']);
 
 
-Route::get('send-mail/booking/{id}',[Emailapi::class,'sendEmail']);
+Route::get('send-mail/booking/{id}',[Emailapi::class,'mailbooking']);
 Route::get('send-mail/bookingin/{id_in}',[Emailapi::class,'sendEmail']);
 Route::get('send-mail/bookingout/{id_out}',[Emailapi::class,'sendmailout']);
-Route::get('send-mail/cancle/booking/{id}',[Emailapi::class,'sendmailout']);
+
 
 Route::get('show/setting',[Settingapi::class,'showsetting']);
-Route::post('edit/setting',[Settingapi::class,'showsetting']);
+Route::patch('edit/setting',[Settingapi::class,'showsetting']);
 Route::get('change-status/driver/{id}',[Settingapi::class,'DriverchangeStatus']);
 Route::get('change-status/car/{id}',[Settingapi::class,'CarchangeStatus']);

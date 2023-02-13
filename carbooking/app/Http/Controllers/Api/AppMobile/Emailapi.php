@@ -35,7 +35,7 @@ class Emailapi extends Controller
         ];
         Mail::to('wirunsak2003@gmail.com')->send(new SendEmailComponent($data));
 
-        return response()->json( $data,201);
+        return response()->json($data,201);
     }
 
     public function sendmailout($id_out)

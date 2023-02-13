@@ -44,13 +44,13 @@ class Bookingapi extends Controller
         ]);
         $booking = new BookingModel();
         $cnt_booking = $booking->count();
-     
+        
         if ($cnt_booking < 1) {
             $booking->id = 1;
         } else {
             $booking->id = $cnt_booking + 1;
         }
-        $booking->username = $request->user_id;
+        $booking->username = $request->input('user_id');
         $booking->license_plate = '-';
         $booking->driver = '-';
         $booking->type_car = '-';
@@ -58,7 +58,7 @@ class Bookingapi extends Controller
         $booking->booking_end = $validatedData['booking_end'];
         $booking->booking_detail = $validatedData['booking_detail'];
         $booking->booking_status = 1;
-        $booking->save();
+        $booking_new=BookingModel::create($booking);
     
         return response()->json(['booking' => $booking], 201);
     }
