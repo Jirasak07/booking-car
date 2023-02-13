@@ -31,7 +31,7 @@ class ShowDataBookingapi extends Controller
         return response()->json($data);
     }
 
-    public function detail_history($id)
+    public function detail_booking($id)
     {
 
         $booking = BookingModel::find($id);

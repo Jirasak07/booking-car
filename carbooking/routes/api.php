@@ -37,31 +37,31 @@ Route::get('showhistory',[BookingController::class,'showhistory']);
 
 
 //Mobile
-Route::get('show/car',[ShowDataBookingapi::class,'showcar']);
-Route::get('show/driver',[ShowDataBookingapi::class,'showdriver']);
+Route::get('show/car',[ShowDataBookingapi::class,'showcar']);//แสดงรถทั้งหมด
+Route::get('show/driver',[ShowDataBookingapi::class,'showdriver']);//แสดงคนขับทั้งหมด
 Route::get('show/booking',[ShowDataBookingapi::class,'showbooking']);//show before aprove
 Route::get('show/booking/{id}',[ShowDataBookingapi::class,'show_booking']);//show การจองฝั่ง User
-Route::get('show/history',[ShowDataBookingapi::class,'showhistory']);
-Route::get('show/history/detail/{id}',[ShowDataBookingapi::class,'detail_history']);
-Route::get('caranddrive/aprove/{id}',[ShowDataBookingapi::class,'caranddriver_aprove']);
-Route::get('caranddrive/edit/{id}',[ShowDataBookingapi::class,'caranddriver_edit']);
-Route::get('Validates',[Bookingapi::class,'Validates']);
+Route::get('show/history',[ShowDataBookingapi::class,'showhistory']);//ประวัติการจอง
+Route::get('show/booking/detail/{id}',[ShowDataBookingapi::class,'detail_booking']);//รายละเอียดการจอง
+Route::get('caranddrive/aprove/{id}',[ShowDataBookingapi::class,'caranddriver_aprove']);//เช็คเงื่อนไขรถภาย ตอนAprove.
+Route::get('caranddrive/edit/{id}',[ShowDataBookingapi::class,'caranddriver_edit']);//เช็คเงื่อนไขรถภาย ตอนEdit after Aprove.
+// Route::get('Validates',[Bookingapi::class,'Validates']);
 
-Route::post('booking/add',[Bookingapi::class,'bookingcar']);
-Route::patch('booking/edit',[Bookingapi::class,'edit_booking']);
-Route::patch('booking/edit/aproved',[Bookingapi::class,'edit_bookingin']);
-Route::patch('cancle/{id}',[Bookingapi::class,'cancle']);
+Route::post('booking/add',[Bookingapi::class,'bookingcar']);//booking car
+Route::patch('booking/edit',[Bookingapi::class,'edit_booking']);//edit booking
+Route::patch('booking/edit/aproved',[Bookingapi::class,'edit_bookingin']);//edit booking หลังaprove
+Route::patch('cancle/{id}',[Bookingapi::class,'cancle']);//ยกเลิก/ไม่อนุมัติ พร้อมส่งเมล
 
-Route::patch('Aprove/car/in/{id}',[Aproveapi::class,'Aprove_in']);
-Route::patch('Aprove/car/out/{id}',[Aproveapi::class,'Aprove_out']);
-
-
-Route::get('send-mail/booking/{id}',[Emailapi::class,'mailbooking']);
-Route::get('send-mail/bookingin/{id_in}',[Emailapi::class,'sendEmail']);
-Route::get('send-mail/bookingout/{id_out}',[Emailapi::class,'sendmailout']);
+Route::patch('Aprove/car/in/{id}',[Aproveapi::class,'Aprove_in']);//อนุมัติ รถภายใน
+Route::patch('Aprove/car/out/{id}',[Aproveapi::class,'Aprove_out']);// อนุมัติ รถภายนอก
 
 
-Route::get('show/setting',[Settingapi::class,'showsetting']);
-Route::patch('edit/setting',[Settingapi::class,'edit_time']);
-Route::get('change-status/driver/{id}',[Settingapi::class,'DriverchangeStatus']);
-Route::get('change-status/car/{id}',[Settingapi::class,'CarchangeStatus']);
+Route::get('send-mail/booking/{id}',[Emailapi::class,'mailbooking']);//ส่งเมล การจอง
+Route::get('send-mail/bookingin/{id_in}',[Emailapi::class,'sendEmail']);//ส่งเมล อนุมัติ รถภายใน
+Route::get('send-mail/bookingout/{id_out}',[Emailapi::class,'sendmailout']);//ส่งเมล อนุมัติ รถภายนอก
+
+
+Route::get('show/setting',[Settingapi::class,'showsetting']);//จัดการเวลา
+Route::patch('edit/setting',[Settingapi::class,'edit_time']);//แก้ไขเวลา
+Route::get('change-status/driver/{id}',[Settingapi::class,'DriverchangeStatus']);//เปลี่ยนสถานะคนขับ
+Route::get('change-status/car/{id}',[Settingapi::class,'CarchangeStatus']);//เปลี่ยนสถานะรถ
