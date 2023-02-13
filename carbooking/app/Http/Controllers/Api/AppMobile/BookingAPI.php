@@ -42,25 +42,37 @@ class Bookingapi extends Controller
             'location.required' => 'โปรดระบุรายละเอียดและสถานที่ที่จะไป',
 
         ]);
-        $booking = new BookingModel();
-        $cnt_booking = $booking->count();
-        
+       
+        $cnt_booking = DB::table('tb_booking')->count();
         if ($cnt_booking < 1) {
-            $booking->id = 1;
+            $booking_new = BookingModel::create([
+                "id"=>  '1',
+                "username"=> $request['user_id'],
+                "license_plate"=> '-',
+                "driver"=> '-',
+                "type_car"=> '-',
+                "booking_start"=> $validatedData['booking_start'],
+                "booking_end"=>  $validatedData['booking_end'],
+                "booking_detail"=> $validatedData['booking_detail'],
+                "booking_status"=> 1,
+            ]);
+           
         } else {
-            $booking->id = $cnt_booking + 1;
+            $booking_new = BookingModel::create([
+            "id"=> $cnt_booking + 1,
+            "username"=> $request['user_id'],
+            "license_plate"=> '-',
+            "driver"=> '-',
+            "type_car"=> '-',
+            "booking_start"=> $validatedData['booking_start'],
+            "booking_end"=>  $validatedData['booking_end'],
+            "booking_detail"=> $validatedData['booking_detail'],
+            "booking_status"=> 1,
+        ]);
         }
-        $booking->username = $request->input('user_id');
-        $booking->license_plate = '-';
-        $booking->driver = '-';
-        $booking->type_car = '-';
-        $booking->booking_start = $validatedData['booking_start'];
-        $booking->booking_end = $validatedData['booking_end'];
-        $booking->booking_detail = $validatedData['booking_detail'];
-        $booking->booking_status = 1;
-        $booking->save();
+        
     
-        return response()->json(['booking' => $booking], 201);
+        return response()->json('success',201);
     }
 
 

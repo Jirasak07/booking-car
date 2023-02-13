@@ -10,11 +10,16 @@ class BookingModel extends Model
     use HasFactory;
     protected $table = 'tb_booking';
     protected $fileable = [
-        'booking_id',
-        'car_license'
+        'id','booking_start', 'booking_end',
+        'license_plate', 'username',
+        'driver',
+       
+       
+        
+        'type_car' ,
+        'booking_detail' ,
+        'booking_status'
     ];
-    function booking(){
-        return static::join('tb_cars','tb_booking.license_plate','=','tb_cars.id');
-        }
+   
 
 }

@@ -10,7 +10,7 @@ class DriverModel extends Model
     use HasFactory;
     protected $table ="tb_driver";
     protected $fileable =[
-        'driver_id',
+        'id',
         'driver_fullname',
         'deriver_status'
     ];
