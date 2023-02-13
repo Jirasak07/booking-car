@@ -133,4 +133,13 @@ public function cancle($id, $note)
 
     return response()->json(201);
 }
+
+public function Validates(){
+    return response()->json([
+        'timeafter' => timebookingModel::find(1),
+        'timebefore' => timebookingModel::find(2),
+        'timemin' => timebookingModel::find(3),
+        'timemax' => timebookingModel::find(4),
+    ]);
+}
 }

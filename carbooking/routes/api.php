@@ -44,6 +44,7 @@ Route::get('show/history',[ShowDataBookingapi::class,'showhistory']);
 Route::get('show/history/detail/{id}',[ShowDataBookingapi::class,'detail_history']);
 Route::get('caranddrive/aprove/{id}',[ShowDataBookingapi::class,'caranddriver_aprove']);
 Route::get('caranddrive/edit/{id}',[ShowDataBookingapi::class,'caranddriver_edit']);
+Route::get('Validates',[Bookingapi::class,'Validates']);
 
 Route::post('booking/add',[Bookingapi::class,'bookingcar']);
 Route::post('booking/edit',[Bookingapi::class,'edit_booking']);
