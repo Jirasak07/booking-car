@@ -48,9 +48,9 @@ Route::get('caranddrive/edit/{id}',[ShowDataBookingapi::class,'caranddriver_edit
 Route::get('Validates',[Bookingapi::class,'Validates']);
 
 Route::post('booking/add',[Bookingapi::class,'bookingcar']);
-Route::patch('booking/edit/{id}',[Bookingapi::class,'edit_booking']);
-Route::patch('booking/edit/aproved/{id}',[Bookingapi::class,'edit_bookingin']);
-Route::patch('cancle/{id}/{note}',[Bookingapi::class,'cancle']);
+Route::patch('booking/edit',[Bookingapi::class,'edit_booking']);
+Route::patch('booking/edit/aproved',[Bookingapi::class,'edit_bookingin']);
+Route::patch('cancle/{id}',[Bookingapi::class,'cancle']);
 
 Route::patch('Aprove/car/in/{id}',[Aproveapi::class,'Aprove_in']);
 Route::patch('Aprove/car/out/{id}',[Aproveapi::class,'Aprove_out']);
