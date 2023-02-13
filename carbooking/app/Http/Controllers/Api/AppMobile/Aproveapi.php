@@ -107,11 +107,11 @@ class Aproveapi extends Controller
             }
 
 
-            return response()->json([' $car_out'=> $ $car_out,'booking_update' => $booking_update,'id_out' =>$id],201);
+            return response()->json(201);
 
         } else {
           
-            return response()->json('รายการนี้ถูกยกเลิกไปแล้ว');
+            return response()->json('error',400);
         }
 
     }
