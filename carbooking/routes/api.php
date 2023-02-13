@@ -4,6 +4,7 @@ use App\Http\Controllers\api\AppMobile\Aproveapi;
 use App\Http\Controllers\Api\AppMobile\Bookingapi;
 use App\Http\Controllers\api\AppMobile\Emailapi;
 use App\Http\Controllers\Api\AppMobile\ManageBookingAPI;
+use App\Http\Controllers\api\AppMobile\Settingapi;
 use App\Http\Controllers\api\AppMobile\ShowDataBookingapi;
 use App\Http\Controllers\Api\BookingController;
 use App\Http\Controllers\APi\CarControllers;
@@ -62,5 +63,5 @@ Route::get('send-mail/cancle/booking/{id}',[Emailapi::class,'sendmailout']);
 
 Route::get('show/setting',[Settingapi::class,'showsetting']);
 Route::post('edit/setting',[Settingapi::class,'showsetting']);
-Route::get('change-status/driver',[Settingapi::class,'DriverchangeStatus']);
-Route::get('change-status/car',[Settingapi::class,'CarchangeStatus']);
+Route::get('change-status/driver/{id}',[Settingapi::class,'DriverchangeStatus']);
+Route::get('change-status/car/{id}',[Settingapi::class,'CarchangeStatus']);

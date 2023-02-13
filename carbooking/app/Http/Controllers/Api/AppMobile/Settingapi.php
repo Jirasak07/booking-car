@@ -16,7 +16,7 @@ class Settingapi extends Controller
     public function showsetting()
     {
        
-        return response()->json(['setting' => timebookingModel::all()]);
+        return response()->json(['setting' => timebookingModel::all(),]);
     }
 
     public function edit_time(Request $request)
@@ -52,7 +52,7 @@ class Settingapi extends Controller
         $driver->driver_status = ('1');
         $driver->save();
       }
-     return response()->json(['status'=>'success']);
+     return response()->json(['success']);
     }
 
     public function CarchangeStatus($id)

@@ -64,33 +64,23 @@ class ShowDataBookingapi extends Controller
             'detail' => $detail,
         ]);
     }
-    function show_booking()
+    function show_booking($id)
     {
 
 
         $booking = DB::table('tb_booking')
             ->join('users', 'tb_booking.username', '=', 'users.id')
-            ->where('tb_booking.username', '=', Auth::user()->id)
+            ->where('tb_booking.username',  $id)
             ->orderBy('booking_status')
 
             ->select('tb_booking.*', 'users.username')
             ->get();
 
-        $Alllist = DB::table('tb_booking')
-            ->where('tb_booking.username', '=', Auth::user()->id)->count();
-        $Alllistpending = DB::table('tb_booking')
-            ->where('tb_booking.username', '=', Auth::user()->id)->where('booking_status', '=', '1')->count();
-        $Alllistapprove = DB::table('tb_booking')
-            ->where('tb_booking.username', '=', Auth::user()->id)->where('booking_status', '=', '2')->count();
-        $Alllistcancle = DB::table('tb_booking')
-            ->where('tb_booking.username', '=', Auth::user()->id)->where('booking_status', '=', '3')->count();
+      
 
         return response()->json([
             'booking' => $booking,
-            'Alllist' => $Alllist,
-            'Alllistpending' => $Alllistpending,
-            'Alllistapprove' => $Alllistapprove,
-            'Alllistcancle' => $Alllistcancle
+            
         ]);
     }
 
