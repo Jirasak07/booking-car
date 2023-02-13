@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\AppMobile\Bookingapi;
+use App\Http\Controllers\Api\AppMobile\ManageBookingAPI;
 use App\Http\Controllers\Api\BookingController;
 use App\Http\Controllers\APi\CarControllers;
 use App\Http\Controllers\APi\DriverController;
@@ -26,3 +28,5 @@ Route::get('booking',[BookingController::class,'index']);
 Route::get('calendar',[BookingController::class,'showcalendar']);
 Route::get('pageupdate',[BookingController::class,'pageupdate']);
 Route::get('showhistory',[BookingController::class,'showhistory']);
+Route::get('/cardrive/{id}',[Bookingapi::class,'caranddriver_edit']);
+

@@ -57,6 +57,9 @@ class ManagementAdminController extends Controller
                             $query->Where('tb_booking.booking_end', '>', $sdate)
                                 ->Where('tb_booking.booking_start', '<', $sdate);
 
+                        })  ->orWhere(function ($query) use ($sdate, $edate) {
+                            $query->where('tb_booking.booking_start', '>', $sdate)
+                                ->Where('tb_booking.booking_start', '<', $edate);
                         })->orWhere(function ($query) use ($edate) {
                         $query->where('tb_booking.booking_start', '>', $edate)
                             ->Where('tb_booking.booking_end', '<', $edate);
@@ -245,14 +248,17 @@ class ManagementAdminController extends Controller
         $edate = $date->booking_end;
         $reserved_cars = DB::table('tb_cars')
             ->leftJoin('tb_booking', 'tb_cars.id', '=', 'tb_booking.license_plate')
-            ->where('tb_booking.id', '!=', $id)
+            ->where('tb_booking.id', '<>', $id)
             ->where(function ($query) use ($sdate, $edate) {
                 $query->where(function ($query) use ($sdate, $edate) {
-                    $query->where('tb_booking.booking_status', '==', '2')
+                    $query->where('tb_booking.booking_status', '=', '2')
                         ->orWhere(function ($query) use ($sdate) {
                             $query->Where('tb_booking.booking_end', '>', $sdate)
                                 ->Where('tb_booking.booking_start', '<', $sdate);
-
+                        })
+                        ->orWhere(function ($query) use ($sdate, $edate) {
+                            $query->where('tb_booking.booking_start', '>', $sdate)
+                                ->Where('tb_booking.booking_start', '<', $edate);
                         })->orWhere(function ($query) use ($edate) {
                         $query->where('tb_booking.booking_start', '>', $edate)
                             ->Where('tb_booking.booking_end', '<', $edate);
