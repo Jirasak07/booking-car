@@ -65,7 +65,7 @@ class Bookingapi extends Controller
         $bookingcar->booking_status = '1';
  
         $bookingcar->save();
-        return response()->json( $bookingcar);
+        return response()->json( $bookingcar->id,201);
     }
 
 
