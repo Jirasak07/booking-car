@@ -58,7 +58,7 @@ class Bookingapi extends Controller
         $booking->booking_end = $validatedData['booking_end'];
         $booking->booking_detail = $validatedData['booking_detail'];
         $booking->booking_status = 1;
-        $booking_new=BookingModel::create($booking);
+        $booking->save();
     
         return response()->json(['booking' => $booking], 201);
     }
