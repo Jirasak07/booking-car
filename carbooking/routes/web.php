@@ -93,5 +93,8 @@ Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->nam
 Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
 
 Route::get('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
-Route::get('/countcar1/{id}', [DashboardAdminController::class, 'detail_history'])->name('test');
+Route::get('/noti', [DashboardAdminController::class, 'noti_menu'])->name('test');
 Route::get('car/{id}', [\App\Http\Controllers\backend\ManagementAdminController::class, 'caranddriver_aprove']);
+
+
+
