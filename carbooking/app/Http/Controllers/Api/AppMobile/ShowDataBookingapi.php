@@ -243,4 +243,23 @@ class ShowDataBookingapi extends Controller
 
         return response()->json(['car' => $unreserved_cars, 'driver' => $unreserved_driver]);
     }
+
+
+    public function list_booking()
+    {
+
+        $bookingcarin = DB::table('tb_booking') //จำนวนรถภายในคันที่1 ทั้งหมด
+        ->select(DB::raw('COUNT(id) suppercarcare'), DB::raw('license_plate'))
+        ->where('booking_status', '=', 2)
+        ->where('type_car', '=', 1)
+        ->groupBy('license_plate')->get();
+
+        return response()->json([
+            'allbooking' => DB::table('tb_booking')->count('id'),
+            'pending' => DB::table('tb_booking')->where('booking_status', '=', 1)->count('id'),
+            'approve' => DB::table('tb_booking')->where('booking_status', '=', 2)->count('id'),
+            'cancel' => DB::table('tb_booking')->where('booking_status', '=', 3)->count('id'),
+            'car_in' => $bookingcarin
+        ]);
+    }
 }

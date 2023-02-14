@@ -37,6 +37,7 @@ Route::get('showhistory',[BookingController::class,'showhistory']);
 
 
 //Mobile
+Route::get('show/listdata',[ShowDataBookingapi::class,'list_booking']);//สรปุการจองแต่ละรายการ
 Route::get('show/car',[ShowDataBookingapi::class,'showcar']);//แสดงรถทั้งหมด
 Route::get('show/driver',[ShowDataBookingapi::class,'showdriver']);//แสดงคนขับทั้งหมด
 Route::get('show/booking',[ShowDataBookingapi::class,'showbooking']);//show before aprove
@@ -45,7 +46,7 @@ Route::get('show/history',[ShowDataBookingapi::class,'showhistory']);//ประ
 Route::get('show/booking/detail/{id}',[ShowDataBookingapi::class,'detail_booking']);//รายละเอียดการจอง
 Route::get('caranddrive/aprove/{id}',[ShowDataBookingapi::class,'caranddriver_aprove']);//เช็คเงื่อนไขรถภาย ตอนAprove.
 Route::get('caranddrive/edit/{id}',[ShowDataBookingapi::class,'caranddriver_edit']);//เช็คเงื่อนไขรถภาย ตอนEdit after Aprove.
-// Route::get('Validates',[Bookingapi::class,'Validates']);
+
 
 Route::post('booking/add',[Bookingapi::class,'bookingcar']);//booking car
 Route::patch('booking/edit',[Bookingapi::class,'edit_booking']);//edit booking
