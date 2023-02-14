@@ -264,7 +264,10 @@ class DashboardAdminController extends Controller
 
     }
 
-
+function noti_menu(){
+    $cnt_booking = BookingModel::where('booking_status',1)->get();
+    
+}
 
 
 
