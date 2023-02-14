@@ -61,10 +61,10 @@ Route::get('send-mail/booking/{id}',[Emailapi::class,'mailbooking']);//ส่ง
 Route::get('send-mail/bookingin/{id_in}',[Emailapi::class,'sendEmail']);//ส่งเมล อนุมัติ รถภายใน
 Route::get('send-mail/bookingout/{id_out}',[Emailapi::class,'sendmailout']);//ส่งเมล อนุมัติ รถภายนอก
 
-Route::get('show/setting2',('App\Http\Controllers\api\AppMobile\Settingapi@showsetting'));
+
 Route::get('show/setting',[Settingapi::class,'showsetting']);//จัดการเวลา
 Route::patch('edit/setting',[Settingapi::class,'edit_time']);//แก้ไขเวลา
 Route::get('change-status/driver/{id}',[Settingapi::class,'DriverchangeStatus']);//เปลี่ยนสถานะคนขับ
 Route::get('change-status/car/{id}',[Settingapi::class,'CarchangeStatus']);//เปลี่ยนสถานะรถ
 
-Route::get('chklogin',('App\Http\Controllers\api\AppMobile\Loginapi@login'));
+Route::get('chklogin',('App\Http\Controllers\api\AppMobile\Loginapi@login'));//check login
