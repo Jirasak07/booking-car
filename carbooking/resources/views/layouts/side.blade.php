@@ -104,7 +104,7 @@
                                     style="font-weight: 600;font-size:0.9rem"
                                     href="{{ url('admin/request') }}">
                                     <i class="fa-sharp fa-solid fa-circle-dot" style="font-size: 50%"></i>
-                                    {{ __('รายการจองรถ') }}
+                                    {{ __('รายการจองรถของฉัน') }}
                                 </a>
                             </li>
                             <li class="nav-item">
