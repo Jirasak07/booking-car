@@ -20452,7 +20452,7 @@ li {
     align-items: center;
     display: flex;
     font-size: 85%;
-    margin-left: 10px;
+
     gap: 10px;
     opacity: 0.8;
     color: var(--default);

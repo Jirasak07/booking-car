@@ -5,7 +5,8 @@
         color: rgb(0, 0, 0)
     }
 </style>
-<nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white shadow-box-login min-nav pb-md-5" id="sidenav-main" >
+<nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white shadow-box-login min-nav pb-md-5"
+    id="sidenav-main">
     <div class="container-fluid">
         <!-- Toggler -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main"
@@ -66,7 +67,6 @@
             <!-- Navigation -->
             <div class="text-center pb-3 d-block d-sm-none" style="font-weight: 700"> {{ Auth::user()->name }}</div>
             @if (Auth::user()->role_user == '2')
-
                 <ul class="navbar-nav  ">
 
                     <li class="{{ 'users/booking' == request()->path() ? 'nav-item active-nav ' : 'nav-item ' }}">
@@ -97,12 +97,11 @@
                         class="{{ 'admin/request' == request()->path() || 'admin/request-all' == request()->path() || 'admin/history' == request()->path() ? 'nav-item active-nav ' : 'nav-item ' }}">
                         <a class="{{ 'admin/request' == request()->path() || 'admin/history' == request()->path() ? 'nav-link text-darker' : 'nav-link ' }}"
                             style="font-weight: 600;font-size:1rem" href="{{ route('users.view-booking') }}">
-                            <i class="fa-solid fa-calendar-days"></i> {{ __('ข้อมูลการจอง') }}  </a>
+                            <i class="fa-solid fa-calendar-days"></i> {{ __('ข้อมูลการจอง') }} </a>
                         <ul class="sub-menu py-2 ">
                             <li class="nav-item">
                                 <a class="{{ 'admin/request' == request()->path() ? 'nav-link-sub text-primary' : 'nav-link-sub  ' }}"
-                                    style="font-weight: 600;font-size:0.9rem"
-                                    href="{{ url('admin/request') }}">
+                                    style="font-weight: 600;font-size:0.9rem" href="{{ url('admin/request') }}">
                                     <i class="fa-sharp fa-solid fa-circle-dot" style="font-size: 50%"></i>
                                     {{ __('รายการจองรถของฉัน') }}
                                 </a>
@@ -112,7 +111,9 @@
                                     style="font-weight: 600;font-size:0.9rem"
                                     href="{{ route('admin.booking_request') }}">
                                     <i class="fa-sharp fa-solid fa-circle-dot" style="font-size: 50%"></i>
-                                    {{ __('รายการจองรถทั้งหมด') }}
+                                    {{ __('รายการจองรถทั้งหมด') }} <div style="font-size: 12px" class="text-danger" >[ <label for="" id="request" ></label> ]</div>
+
+
                                 </a>
                             </li>
 
@@ -158,7 +159,8 @@
                             </li>
                             <li class="nav-item">
                                 <a class="{{ 'admin/manage-user' == request()->path() ? 'nav-link-sub text-primary ' : 'nav-link-sub text-default ' }}"
-                                    style="font-weight: 600;font-size:0.85rem" href="{{ route('admin.manage-user') }}">
+                                    style="font-weight: 600;font-size:0.85rem"
+                                    href="{{ route('admin.manage-user') }}">
                                     <i class="fa-sharp fa-solid fa-circle-dot" style="font-size: 50%"></i>
                                     {{ __('จัดการข้อมูลผู้ใช้') }}
                                 </a>
@@ -168,6 +170,7 @@
             @endif
             </ul>
         </div>
-        <a href="{{ route('logout') }}" class="btn btn-sm btn-danger logout   "><i class="fa-solid fa-person-walking-arrow-right"></i> ออกจากระบบ</a>
+        <a href="{{ route('logout') }}" class="btn btn-sm btn-danger logout   "><i
+                class="fa-solid fa-person-walking-arrow-right"></i> ออกจากระบบ</a>
     </div>
 </nav>
