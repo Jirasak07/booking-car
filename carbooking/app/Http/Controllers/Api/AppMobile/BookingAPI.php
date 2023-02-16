@@ -108,8 +108,8 @@ class Bookingapi extends Controller
     {
         $id = $request->id;
         $booking_edit = BookingModel::find($id);
-        $booking_edit->license_plate = $request->license;
-        $booking_edit->driver = $request->driver;
+        $booking_edit->license_plate = $request->car_id;
+        $booking_edit->driver = $request->driver_id;
         $booking_edit->save();
     }
 

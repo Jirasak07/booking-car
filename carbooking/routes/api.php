@@ -66,5 +66,6 @@ Route::get('show/setting',[Settingapi::class,'showsetting']);//จัดกา�
 Route::patch('edit/setting',[Settingapi::class,'edit_time']);//แก้ไขเวลา
 Route::get('change-status/driver/{id}',[Settingapi::class,'DriverchangeStatus']);//เปลี่ยนสถานะคนขับ
 Route::get('change-status/car/{id}',[Settingapi::class,'CarchangeStatus']);//เปลี่ยนสถานะรถ
+Route::get('change-role/user/{id}',[Settingapi::class,'edit_role']);//เปลี่ยนสถานะuser
 
 Route::get('chklogin',('App\Http\Controllers\api\AppMobile\Loginapi@login'));//check login
