@@ -11,9 +11,12 @@
             var calendarEl = document.getElementById('calendar1');
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 // themeSystem: 'bootstrap5',
+                slotMinTime:'08:30:00',
+                slotMaxTime:'16:30:00',
+                slotDuration:'00:10',
                 selectable: true,
-                expandRows: true,
-
+                // expandRows: true,
+                height:1300,
                 nowIndicator: true,
                 initialView: 'timeGridFourDay',
                 allDaySlot: false,

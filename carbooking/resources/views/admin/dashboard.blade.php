@@ -2,11 +2,11 @@
 @section('content')
     @include('layouts.header')
     <div class="container-fulid  " style="min-width:375px">
-        <div class=" text-default ml-3" style="font-weight: 700;font-size:1.2rem"> รายการจอง</div>
+        <div class=" text-default ml-3 mt-3" style="font-weight: 700;font-size:1rem"> รายการจอง</div>
         <div class="flex-column flex-xl-row d-flex">
-            <div class="col-12 col-xl-4 " style="padding:10px" >
+            <div class="col-12 col-xl-4 " style="padding:10px">
                 <div class=" d-flex flex-wrap" style="">
-                    <div class="rounded col-12 col-sm-6 " style="padding:5px" >
+                    <div class="rounded col-12 col-sm-6 " style="padding:5px">
                         <div class=" rounded h-100 booking-all d-flex flex-row align-items-center" style="min-height:120px">
                             <div class="h-100 col   icon-d-2  ">
                                 <i class="fa-solid fa-clipboard-list  icon-dashboard "></i>
@@ -56,19 +56,13 @@
                     </div>
                 </div>
 
-
-                <div class=" d-flex flex-column mx-1">
-                    <div class="mt-2">
-                        <canvas class="bg-white rounded col-12 w-100" style="min-height:300px;font-size:16px" id="Chart"></canvas>
-                    </div>
-                    <div class="mt-3">
-                        <canvas class=" bg-white rounded " style="min-height:300px " id="myChart"></canvas>
-                    </div>
-                </div>
                 <div class="d-flex flex-column justify-content-center align-items-center mb-3 ">
-                    <div class="flex-column flex-lg-row  d-flex justify-content-between  w-100  ">
+                    <div class="align-self-start ml-2 text-default  "style="font-weight: 700;font-size:1rem">จำนวนครั้งการใช้งานรถ</div>
+                    <div class="flex-column flex-lg-row  d-flex justify-content-between  flex-wrap w-100 "
+                        style="min-height: 300px">
+
                         @foreach ($car as $cars)
-                            <div class="col-12 col-lg  mt-3 w-100 ">
+                            <div class="col-12  px-0 py-2 w-100 ">
                                 <div class=" p-1 rounded d-flex flex-row   info-car " style="height: 110px;">
 
                                     <div class="logo-car  col  d-flex flex-column align-items-center justify-content-center"
@@ -90,8 +84,19 @@
                                 </div>
                             </div>
                         @endforeach
+
                     </div>
                 </div>
+                <div class=" d-flex flex-column mx-1">
+                    <div class="">
+                        <canvas class="bg-white rounded col-12 w-100" style="min-height:300px;font-size:16px"
+                            id="Chart"></canvas>
+                    </div>
+                    <div class="mt-3">
+                        <canvas class=" bg-white rounded col-12 w-100 " style="min-height:300px " id="myChart"></canvas>
+                    </div>
+                </div>
+
                 @if ($errors->any())
                     <div class="alert alert-danger" id="ERROR_COPY" style="display:none;">
                         <ul style="list-style: none;">
@@ -113,7 +118,10 @@
                                 class="fa-solid fa-square" style="color: #ffd166"></i>
                             รอดำเนินการ</div>
                     </div>
-                    @include('admin.calendar_show')
+                    <div  >
+                           @include('admin.calendar_show')
+                    </div>
+
 
                 </div>
             </div>
@@ -279,9 +287,9 @@
                         text: 'การใช้งานของรถภายในและรถภายนอกในปี 2565'
                     }
                 },
-                layout:{
-                        padding:3
-                    }
+                layout: {
+                    padding: 3
+                }
             }
         });
 

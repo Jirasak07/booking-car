@@ -27,10 +27,6 @@
                 <a class=" pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
                     <div class="media align-items-center ">
-                        <i class="fa-solid fa-bell mr-2 text-white position-relative" style="font-size: 20px"> <span
-                                class="position-absolute  badge bottom-2 right-2 bg-danger d-flex justify-content-center " style=" border-radius:50%;width:25px;height:25px;font-size:5px " >
-                                3
-                            </span> </i>
                         <h4 class="text-overflow m-0 text-light px-2">{{ Auth::user()->name }}</h4>
                         <span class="avatar avatar-sm rounded-circle " style="background-color:#F5A65B;">
                             {{-- <img alt="Image placeholder" src="{{ asset('assets/img/lanna-removebg-preview.png') }}"> --}}
