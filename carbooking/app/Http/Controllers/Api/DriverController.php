@@ -4,13 +4,15 @@ namespace App\Http\Controllers\APi;
 
 use App\Http\Controllers\Controller;
 use App\Models\DriverModel;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DriverController extends Controller
 {
     //
     function index(){
-        $driver = DriverModel::All();
+        $driver = DB::table('users')->where('role_user','3')->get();
         return response()->json($driver);
     }   
     public function changeStatus($id)

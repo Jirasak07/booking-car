@@ -82,13 +82,13 @@ class Bookingcontroller extends Controller
         }
         $booking_join1 = DB::table('tb_booking')
             ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
-            ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
+            ->join('users', 'tb_booking.driver', '=', 'users.id')
             ->where('tb_booking.type_car', '=', '1')
             ->where('tb_booking.booking_status', '!=', '3')
             ->where('tb_booking.booking_status', '!=', '1')
             ->where('tb_booking.booking_end', '>', $format_date)
 
-            ->select('driver_fullname', 'car_license', 'car_model', 'tb_booking.*')
+            ->select('name', 'car_license', 'car_model', 'tb_booking.*')
             ->get();
         foreach ($booking_join1 as $item) {
             $color = '#06d6a0';
@@ -100,7 +100,7 @@ class Bookingcontroller extends Controller
                 'end' => $item->booking_end,
                 'color' => $color,
                 'type' => '2',
-                'description' => $car . ' ทะเบียนรถ ' . ' ' . $item->car_license . ' คนขับรถ ' . $item->driver_fullname,
+                'description' => $car . ' ทะเบียนรถ ' . ' ' . $item->car_license . ' คนขับรถ ' . $item->name,
             ];
         }
         $booking_join2 = DB::table('tb_booking')
@@ -157,13 +157,13 @@ class Bookingcontroller extends Controller
         }
         $booking_join1 = DB::table('tb_booking')
             ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
-            ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
+            ->join('users', 'tb_booking.driver', '=', 'users.id')
             ->where('tb_booking.type_car', '=', '1')
             ->where('tb_booking.booking_status', '!=', '3')
             ->where('tb_booking.booking_status', '!=', '1')
             ->where('tb_booking.booking_end', '>', $format_date)
 
-            ->select('driver_fullname', 'car_license', 'car_model', 'tb_booking.*')
+            ->select('name', 'car_license', 'car_model', 'tb_booking.*')
             ->get();
         foreach ($booking_join1 as $item) {
             $color = '#06d6a0';
@@ -175,7 +175,7 @@ class Bookingcontroller extends Controller
                 'end' => $item->booking_end,
                 'color' => $color,
                 'type' => '2',
-                'description' => $car . ' ทะเบียนรถ ' . ' ' . $item->car_license . ' คนขับรถ ' . $item->driver_fullname,
+                'description' => $car . ' ทะเบียนรถ ' . ' ' . $item->car_license . ' คนขับรถ ' . $item->name,
             ];
         }
         $booking_join2 = DB::table('tb_booking')

@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\BookingModel;
 use App\Models\CarModel;
 use App\Models\DriverModel;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -41,9 +42,9 @@ class ShowDataBookingapi extends Controller
                 ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
 
                 ->join('users', 'tb_booking.username', '=', 'users.id')
-                ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
+                ->join('users', 'tb_booking.driver', '=', 'users.id')
                 ->where('tb_booking.id', '=', $id)
-                ->select('tb_driver.driver_fullname as driver', 'tb_cars.car_license as car', 'tb_cars.car_model as car_detail', 'booking_start as sdate', 'booking_end as edate', 'booking_detail', 'users.name as name_user', 'booking_status', 'type_car')
+                ->select('users.name as driver', 'tb_cars.car_license as car', 'tb_cars.car_model as car_detail', 'booking_start as sdate', 'booking_end as edate', 'booking_detail', 'users.name as name_user', 'booking_status', 'type_car')
                 ->get();
         } else if ($booking->type_car == '2') {
             $detail = DB::table('tb_booking')
@@ -91,7 +92,7 @@ class ShowDataBookingapi extends Controller
 
     function showdriver()
     {
-        return response()->json(['driver' => DriverModel::All()]);
+        return response()->json(['driver' => User::where('role_user','3')->get()]);
     }
 
     public function caranddriver_edit($id)
@@ -145,7 +146,7 @@ class ShowDataBookingapi extends Controller
         $count = BookingModel::where('booking_status', '2')->where('type_car', '1')->count();
         if ($count < 1) {
             $unreserved_cars = CarModel::all();
-            $unreserved_driver = DriverModel::all();
+            $unreserved_driver = DB::table('users')->where('role_user','3')->get();
         } else {
             $unreserved_cars = DB::table('tb_cars')
                 ->where('car_status', '1')
@@ -156,11 +157,11 @@ class ShowDataBookingapi extends Controller
                 })
                 ->get();
 
-            $unreserved_driver = DB::table('tb_driver')
-                ->where('driver_status', '1')
+            $unreserved_driver = DB::table('users')
+                ->where('status', '1')
                 ->where(function ($query) use ($driver) {
                     $query->where(function ($query) use ($driver) {
-                        $query->Where('tb_driver.id', '!=', $driver);
+                        $query->Where('users.id', '!=', $driver);
                     });
                 })
                 ->get();
@@ -220,7 +221,7 @@ class ShowDataBookingapi extends Controller
         $count = BookingModel::where('booking_status', '2')->where('type_car', '1')->count();
         if ($count < 1) {
             $unreserved_cars = CarModel::all();
-            $unreserved_driver = DriverModel::all();
+            $unreserved_driver = DB::table('users')->where('role_user','3')->get();
         } else {
             $unreserved_cars = DB::table('tb_cars')
                 ->where('car_status', '1')
@@ -231,11 +232,11 @@ class ShowDataBookingapi extends Controller
                 })
                 ->get();
 
-            $unreserved_driver = DB::table('tb_driver')
-                ->where('driver_status', '1')
+            $unreserved_driver = DB::table('users')
+                ->where('status', '1')
                 ->where(function ($query) use ($driver) {
                     $query->where(function ($query) use ($driver) {
-                        $query->Where('tb_driver.id', '!=', $driver);
+                        $query->Where('users.id', '!=', $driver);
                     });
                 })
                 ->get();

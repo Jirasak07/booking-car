@@ -17,9 +17,9 @@ class Emailapi extends Controller
     function sendEmail($id_in){
         $booking = DB::table('tb_booking')
             ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
-            ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
+            ->join('users', 'tb_booking.driver', '=', 'users.id')
             ->join('users', 'tb_booking.username', '=', 'users.id')
-            ->select('driver_fullname', 'car_license', 'tb_booking.booking_detail as detail',
+            ->select('name as driver', 'car_license', 'tb_booking.booking_detail as detail',
             'tb_booking.booking_start as sdate','tb_booking.booking_end as edate','car_model','users.name as name')
             ->where('tb_booking.id', $id_in)
             ->get();
@@ -27,7 +27,7 @@ class Emailapi extends Controller
         $data = [
             'license' => $item->car_license,
             'name'=> $item->name,
-            'driver' => $item->driver_fullname,
+            'driver' => $item->driver,
             'car'=> $item->car_model,
             'detail'=> $item->detail,
             'sdate'=> $item->sdate,

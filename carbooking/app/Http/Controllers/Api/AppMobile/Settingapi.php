@@ -43,12 +43,12 @@ class Settingapi extends Controller
     public function DriverchangeStatus($id)
     {
        
-      $driver = DriverModel::find($id);
-      if($driver->driver_status == 1){
-        $driver->driver_status = ('2');
+      $driver = User::find($id);
+      if($driver->status == 1){
+        $driver->status = ('2');
         $driver->save();
-      }else if($driver->driver_status == 2){
-        $driver->driver_status = ('1');
+      }else if($driver->status == 2){
+        $driver->status = ('1');
         $driver->save();
       }
      return response()->json(['success']);

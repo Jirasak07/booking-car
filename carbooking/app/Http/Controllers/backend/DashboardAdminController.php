@@ -57,13 +57,13 @@ class DashboardAdminController extends Controller
 
         $booking_join1 = DB::table('tb_booking')
             ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
-            ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
+            ->join('users', 'tb_booking.driver', '=', 'users.id')
             ->where('tb_booking.type_car', '=', '1')
             ->where('tb_booking.booking_status', '!=', '3')
             ->where('tb_booking.booking_status', '!=', '1')
             ->where('tb_booking.booking_end', '>', $format_date)
 
-            ->select('driver_fullname', 'car_license', 'car_model', 'tb_booking.*')
+            ->select('name', 'car_license', 'car_model', 'tb_booking.*')
             ->get();
         foreach ($booking_join1 as $item) {
             $color = '#06d6a0 ';
@@ -174,14 +174,14 @@ class DashboardAdminController extends Controller
 
         $booking_join1 = DB::table('tb_booking')
             ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
-            ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
+            ->join('users', 'tb_booking.driver', '=', 'users.id')
             ->join('users', 'tb_booking.username', '=', 'users.id')
             ->where('tb_booking.type_car', '=', '1')
             ->where('tb_booking.booking_status', '!=', '3')
             ->where('tb_booking.booking_status', '!=', '1')
             ->where('tb_booking.booking_end', '>', $format_date)
 
-            ->select('driver_fullname', 'car_license', 'car_model', 'tb_booking.*','name')
+            ->select('name', 'car_license', 'car_model', 'tb_booking.*','name')
             ->get();
         foreach ($booking_join1 as $item) {
             $color = '#06d6a0 ';
@@ -193,7 +193,7 @@ class DashboardAdminController extends Controller
                 'color' => '#06d6a0 ',
                 'data'=>$item->name,
                 'type'=>'2',
-                'titlee'=> ' รถภายใน : '. $item->car_model.'  ทะเบียน : '.$item->car_license.' พนักงานขับ : '.$item->driver_fullname
+                'titlee'=> ' รถภายใน : '. $item->car_model.'  ทะเบียน : '.$item->car_license.' พนักงานขับ : '.$item->name
 
             ];
         }
@@ -239,9 +239,9 @@ class DashboardAdminController extends Controller
                 ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
 
                 ->join('users', 'tb_booking.username', '=', 'users.id')
-                ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
+                ->join('users', 'tb_booking.driver', '=', 'users.id')
                 ->where('tb_booking.id', '=', $id)
-                ->select('tb_driver.driver_fullname as driver', 'tb_cars.car_license as car', 'tb_cars.car_model as car_detail', 'booking_start as sdate', 'booking_end as edate', 'booking_detail', 'users.name as name_user','booking_status','type_car')
+                ->select('users.name as driver', 'tb_cars.car_license as car', 'tb_cars.car_model as car_detail', 'booking_start as sdate', 'booking_end as edate', 'booking_detail', 'users.name as name_user','booking_status','type_car')
                 ->get();
         } else if ($booking->type_car == '2') {
             $detail = DB::table('tb_booking')

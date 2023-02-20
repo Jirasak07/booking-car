@@ -15,8 +15,9 @@ class BookingController extends Controller
         $booking = DB::table('tb_booking')
         ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
         ->join('tb_out_cars', 'tb_booking.license_plate', '=', 'tb_out_cars.id')
-        ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
-        ->select( 'car_out_license', 'car_out_model', 'car_out_driver', 'car_out_tel',  'driver_fullname', 'car_license','tb_booking.*')
+        ->join('users', 'tb_booking.driver', '=', 'users.id')
+        
+        ->select( 'car_out_license', 'car_out_model', 'car_out_driver', 'car_out_tel',  'name', 'car_license','tb_booking.*')
         ->get();
 
         return response()->json($booking);

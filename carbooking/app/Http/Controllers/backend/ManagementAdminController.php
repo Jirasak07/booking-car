@@ -111,11 +111,11 @@ class ManagementAdminController extends Controller
                 })
                 ->get();
 
-            $unreserved_driver = DB::table('tb_driver')
-                ->where('driver_status', '1')
+            $unreserved_driver = DB::table('users')
+                ->where('status', '1')
                 ->where(function ($query) use ($driver) {
                     $query->where(function ($query) use ($driver) {
-                        $query->Where('tb_driver.id', '!=', $driver);
+                        $query->Where('users.id', '!=', $driver);
 
                     })
                     ;
@@ -310,11 +310,11 @@ class ManagementAdminController extends Controller
                 })
                 ->get();
 
-            $unreserved_driver = DB::table('tb_driver')
-                ->where('driver_status', '1')
+            $unreserved_driver = DB::table('users')
+                ->where('status', '1')
                 ->where(function ($query) use ($driver) {
                     $query->where(function ($query) use ($driver) {
-                        $query->Where('tb_driver.id', '!=', $driver);
+                        $query->Where('users.id', '!=', $driver);
 
                     })
                     ;
@@ -331,9 +331,9 @@ class ManagementAdminController extends Controller
 
         $booking = DB::table('tb_booking')
             ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
-            ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
+            ->join('users', 'tb_booking.driver', '=', 'users.id')
             ->join('users', 'tb_booking.username', '=', 'users.id')
-            ->select('driver_fullname', 'car_license', 'tb_booking.booking_detail as detail',
+            ->select('name', 'car_license', 'tb_booking.booking_detail as detail',
             'tb_booking.booking_start as sdate','tb_booking.booking_end as edate','car_model','users.name as name')
             ->where('tb_booking.id', $id)
             ->get();
@@ -341,7 +341,7 @@ class ManagementAdminController extends Controller
         $data = [
             'license' => $item->car_license,
             'name'=> $item->name,
-            'driver' => $item->driver_fullname,
+            'driver' => $item->name,
             'car'=> $item->car_model,
             'detail'=> $item->detail,
             'sdate'=> $item->sdate,
@@ -349,7 +349,7 @@ class ManagementAdminController extends Controller
         ];
         Mail::to('wirunsak2003@gmail.com')->send(new SendEmailComponent($data));
 
-        return response()->json($item->driver_fullname);
+        return response()->json(201);
     }
 
     public function sendmailout($id)
@@ -375,7 +375,7 @@ class ManagementAdminController extends Controller
         ];
         Mail::to('wirunsak2003@gmail.com')->send(new SendEmailComponent($data));
 
-        return response()->json($item->driver_fullname);
+        return response()->json(201);
     }
 
 }

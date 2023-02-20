@@ -49,8 +49,8 @@ class UserBookingController extends Controller
                 if ($value->type_car == '1') {
                     $car = DB::table('tb_booking')
                         ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
-                        ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
-                        ->select('driver_fullname as name_driver', 'car_license as car_license', 'car_model as car_model', 'tb_booking.*')
+                        ->join('users', 'tb_booking.driver', '=', 'users.id')
+                        ->select('name as name_driver', 'car_license as car_license', 'car_model as car_model', 'tb_booking.*')
                         ->where('tb_booking.id', '=', $id)
                         ->get();
                 } elseif ($value->type_car == '2') {
