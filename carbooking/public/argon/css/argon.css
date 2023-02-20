@@ -20521,9 +20521,7 @@ a.nav-link-sub:hover {
     background-color: #0a9396 !important;
     border: none !important;
 }
-#calendar1 {
-    height: 200vh;
-}
+
 @media screen and (max-width: 766px) {
     #calendar1 {
         height: auto;

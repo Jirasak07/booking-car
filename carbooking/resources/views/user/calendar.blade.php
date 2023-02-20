@@ -11,6 +11,12 @@
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 //themeSystem: 'bootstrap5',
+                slotMinTime:'08:00:00',
+                slotMaxTime:'18:30:00',
+                slotDuration:'00:10',
+                selectable: true,
+                // expandRows: true,
+                height:1700,
                 selectable: true,
                 timeZone: 'Asia/bangkok',
                 locale: 'th',

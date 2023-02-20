@@ -1,117 +1,133 @@
 @extends('layouts.layout')
 @section('content')
     @include('layouts.header')
-    <div class="container mt-3  " style="max-width: 1080px;min-width:375px">
-        <div class="mx-5 my-3 text-default" style="font-weight: 700;font-size:1.2rem"> รายการจอง</div>
-        <div class="d-flex flex-xl-row flex-column mx-3   " style="gap: 10px;min-height:120px">
-
-            <div class=" w-100  rounded">
-                <div class=" rounded h-100 booking-all d-flex flex-row align-items-center" style="min-height:120px">
-                    <div class="h-100 col   icon-d-2  ">
-                        <i class="fa-solid fa-clipboard-list  icon-dashboard "></i>
-                    </div>
-                    <div class="col d-flex flex-column align-items-center ">
-                        <div class=" ">ทั้งหมด</div>
-                        <div style="font-size: 4rem;line-height: 80%;"id="all">0</div>
-                        <div class="">รายการ </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="w-100   rounded">
-                <div class=" rounded pending h-100 d-flex flex-row align-items-center  " style="min-height:120px;">
-                    <div class="h-100 col icon-d-2   "> <i class="fa-solid fa-hourglass-end icon-dashboard "></i>
-                    </div>
-                    <div class="col  d-flex flex-column align-items-center">
-                        <div>รอดำเนินการ</div>
-                        <div style="font-size: 4rem;line-height: 80%;" id="pending">0</div>
-                        <div>รายการ</div>
-                    </div>
-                </div>
-            </div>
-            <div class="w-100   rounded">
-                <div class="rounded  h-100 confirm d-flex flex-row align-items-center"style="min-height:120px">
-
-                    <div class="h-100  col icon-d-2   "><i class="fa-solid fa-circle-check icon-dashboard "></i>
-                    </div>
-                    <div class="col  d-flex flex-column align-items-center  ">
-                        <div>อนุมัติแล้ว</div>
-                        <div style="font-size: 4rem;line-height: 80%;" id="approve">0</div>
-                        <div>รายการ</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="w-100   rounded">
-                <div class=" bg-cancel rounded h-100 w-100 cancel  d-flex flex-row align-items-center"
-                    style="min-height:120px">
-
-                    <div class=" h-100 icon-d-2 col"><i class="fa-solid fa-circle-xmark icon-dashboard "></i>
-                    </div>
-                    <div class="col  d-flex flex-column align-items-center ">
-                        <div>ยกเลิกแล้ว</div>
-                        <div style="font-size: 4rem;line-height: 80%;" id="cancel">0</div>
-                        <div>รายการ</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class=" d-flex flex-column justify-content-between flex-lg-row pb-2  w-100">
-            <div class="mt-3   col-12 col-lg-8 ">
-                <canvas class="bg-white rounded  w-100 h-100 " style=" max-height: 520px;" id="Chart"></canvas>
-            </div>
-            <div class="mt-3  col-12 col-lg-4">
-                <canvas class=" bg-white rounded  w-100 " style=" max-height: 420px;" id="myChart"></canvas>
-            </div>
-        </div>
-        <div class="d-flex flex-column justify-content-center align-items-center mb-3 ">
-            <div class="flex-column flex-lg-row  d-flex justify-content-between  w-100  ">
-                @foreach ($car as $cars)
-                    <div class="col-12 col-lg  mt-3 w-100 ">
-                        <div class=" p-1 rounded d-flex flex-row   info-car " style="height: 110px;">
-
-                            <div class="logo-car  col  d-flex flex-column align-items-center justify-content-center"
-                                style="margin:0;">
-                                <i class="fa-solid fa-car-rear icon-car-dashboard my-1 " style="font-size: 4rem;"></i>
-                                <div class="lc_car " style="font-size: 0.8em;font-weight:500;">
-                                    {{ $cars['car_license'] }}</div>
+    <div class="container-fulid  " style="min-width:375px">
+        <div class=" text-default ml-3 mt-3" style="font-weight: 700;font-size:1rem"> รายการจอง</div>
+        <div class="flex-column flex-xl-row d-flex">
+            <div class="col-12 col-xl-4 " style="padding:10px">
+                <div class=" d-flex flex-wrap" style="">
+                    <div class="rounded col-12 col-sm-6 " style="padding:5px">
+                        <div class=" rounded h-100 booking-all d-flex flex-row align-items-center" style="min-height:120px">
+                            <div class="h-100 col   icon-d-2  ">
+                                <i class="fa-solid fa-clipboard-list  icon-dashboard "></i>
                             </div>
-                            <div class="title-cars col">
-                                <div class="brand-car  text-capitalize"
-                                    style="font-size: 0.8em;font-weight:500;line-height:100%">
-                                    {{ $cars['car_model'] }}</div>
-
-                                <div class="res_car  ml-3 " style="font-size:3rem;line-height:80%;"
-                                    id="tcar-{{ $cars['id'] }}">0</div>
-                                <div class=" ml-3" style="font-size: 0.8em"> รายการ</div>
+                            <div class="col d-flex flex-column align-items-center ">
+                                <div class=" ">ทั้งหมด</div>
+                                <div style="font-size: 4rem;line-height: 80%;"id="all">0</div>
+                                <div class="">รายการ </div>
                             </div>
                         </div>
                     </div>
-                @endforeach
-            </div>
-        </div>
-        @if ($errors->any())
-            <div class="alert alert-danger" id="ERROR_COPY" style="display:none;">
-                <ul style="list-style: none;">
-                    @foreach ($errors->all() as $error)
-                        <!-- ทำการ วน Loop เพื่อแสดง Error ของ validation ขึ้นมาทั้งหมด -->
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-        <div class="bg-white p-3 rounded ml-3 mr-3 ">
-            <div class="d-flex mb-3 head-beforcalendar"> หมายเหตุ <div class="ml-3 d-flex align-items-center"
-                    style="font-size: 14px;gap:5px"><i class="fa-solid fa-square" style="color: #06d6a0"></i>
-                    อนุมัติเรียบร้อย
+                    <div class=" rounded col-12 col-sm-6" style="padding:5px">
+                        <div class=" rounded pending h-100 d-flex flex-row align-items-center  " style="min-height:120px;">
+                            <div class="h-100 col icon-d-2   "> <i class="fa-solid fa-hourglass-end icon-dashboard "></i>
+                            </div>
+                            <div class="col  d-flex flex-column align-items-center">
+                                <div>รอดำเนินการ</div>
+                                <div style="font-size: 4rem;line-height: 80%;" id="pending">0</div>
+                                <div>รายการ</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rounded col-12 col-sm-6" style="padding:5px">
+                        <div class="rounded  h-100 confirm d-flex flex-row align-items-center"style="min-height:120px">
+                            <div class="h-100  col icon-d-2   "><i class="fa-solid fa-circle-check icon-dashboard "></i>
+                            </div>
+                            <div class="col  d-flex flex-column align-items-center  ">
+                                <div>อนุมัติแล้ว</div>
+                                <div style="font-size: 4rem;line-height: 80%;" id="approve">0</div>
+                                <div>รายการ</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class=" rounded col-12 col-sm-6" style="padding:5px">
+                        <div class=" bg-cancel rounded h-100 w-100 cancel  d-flex flex-row align-items-center"
+                            style="min-height:120px">
+
+                            <div class=" h-100 icon-d-2 col"><i class="fa-solid fa-circle-xmark icon-dashboard "></i>
+                            </div>
+                            <div class="col  d-flex flex-column align-items-center ">
+                                <div>ยกเลิกแล้ว</div>
+                                <div style="font-size: 4rem;line-height: 80%;" id="cancel">0</div>
+                                <div>รายการ</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="ml-3 d-flex align-items-center" style="font-size: 14px;gap:5px"><i class="fa-solid fa-square"
-                        style="color: #ffd166"></i>
-                    รอดำเนินการ</div>
+
+                <div class="d-flex flex-column justify-content-center align-items-center mb-3 ">
+                    <div class="align-self-start ml-2 text-default  "style="font-weight: 700;font-size:1rem">จำนวนครั้งการใช้งานรถ</div>
+                    <div class="flex-column flex-lg-row  d-flex justify-content-between  flex-wrap w-100 "
+                        style="min-height: 300px">
+
+                        @foreach ($car as $cars)
+                            <div class="col-12  px-0 py-2 w-100 ">
+                                <div class=" p-1 rounded d-flex flex-row   info-car " style="height: 110px;">
+
+                                    <div class="logo-car  col  d-flex flex-column align-items-center justify-content-center"
+                                        style="margin:0;">
+                                        <i class="fa-solid fa-car-rear icon-car-dashboard my-1 "
+                                            style="font-size: 4rem;"></i>
+                                        <div class="lc_car " style="font-size: 0.8em;font-weight:500;">
+                                            {{ $cars['car_license'] }}</div>
+                                    </div>
+                                    <div class="title-cars col">
+                                        <div class="brand-car  text-capitalize"
+                                            style="font-size: 0.8em;font-weight:500;line-height:100%">
+                                            {{ $cars['car_model'] }}</div>
+
+                                        <div class="res_car  ml-3 " style="font-size:3rem;line-height:80%;"
+                                            id="tcar-{{ $cars['id'] }}">0</div>
+                                        <div class=" ml-3" style="font-size: 0.8em"> รายการ</div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+
+                    </div>
+                </div>
+                <div class=" d-flex flex-column mx-1">
+                    <div class="">
+                        <canvas class="bg-white rounded col-12 w-100" style="min-height:300px;font-size:16px"
+                            id="Chart"></canvas>
+                    </div>
+                    <div class="mt-3">
+                        <canvas class=" bg-white rounded col-12 w-100 " style="min-height:300px " id="myChart"></canvas>
+                    </div>
+                </div>
+
+                @if ($errors->any())
+                    <div class="alert alert-danger" id="ERROR_COPY" style="display:none;">
+                        <ul style="list-style: none;">
+                            @foreach ($errors->all() as $error)
+                                <!-- ทำการ วน Loop เพื่อแสดง Error ของ validation ขึ้นมาทั้งหมด -->
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
             </div>
-            @include('admin.calendar_show')
+            <div class="col-xl-8 col-12" style="padding:10px">
+                <div class="bg-white  rounded  p-3">
+                    <div class="d-flex mb-3 head-beforcalendar"> หมายเหตุ <div class="ml-3 d-flex align-items-center"
+                            style="font-size: 14px;gap:5px"><i class="fa-solid fa-square" style="color: #06d6a0"></i>
+                            อนุมัติเรียบร้อย
+                        </div>
+                        <div class="ml-3 d-flex align-items-center" style="font-size: 14px;gap:5px"><i
+                                class="fa-solid fa-square" style="color: #ffd166"></i>
+                            รอดำเนินการ</div>
+                    </div>
+                    <div  >
+                           @include('admin.calendar_show')
+                    </div>
+
+
+                </div>
+            </div>
 
         </div>
+
         <div class="mb-5"></div>
     </div>
     @push('js')
@@ -192,12 +208,14 @@
                             display: true,
                             text: 'สัดส่วนการใช้งานของรถภายในและรถภายนอก'
                         }
-                    }
+                    },
+
                 }
             });
 
 
         })
+
         var ctx = document.getElementById('Chart');
         const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep',
             'Oct', 'Nov', 'Dec'
@@ -268,6 +286,9 @@
                         display: true,
                         text: 'การใช้งานของรถภายในและรถภายนอกในปี 2565'
                     }
+                },
+                layout: {
+                    padding: 3
                 }
             }
         });
