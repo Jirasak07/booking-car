@@ -14,14 +14,14 @@ class Emailapi extends Controller
 {
     //
 
-    function sendEmail($id){
+    function sendEmail($id_in){
         $booking = DB::table('tb_booking')
             ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
             ->join('tb_driver', 'tb_booking.driver', '=', 'tb_driver.id')
             ->join('users', 'tb_booking.username', '=', 'users.id')
             ->select('driver_fullname', 'car_license', 'tb_booking.booking_detail as detail',
             'tb_booking.booking_start as sdate','tb_booking.booking_end as edate','car_model','users.name as name')
-            ->where('tb_booking.id', $id)
+            ->where('tb_booking.id', $id_in)
             ->get();
         $item= $booking[0];
         $data = [
@@ -38,7 +38,7 @@ class Emailapi extends Controller
         return response()->json($data,201);
     }
 
-    public function sendmailout($id)
+    public function sendmailout($id_out)
     {
 
         $booking = DB::table('tb_booking')
@@ -47,7 +47,7 @@ class Emailapi extends Controller
             ->join('users', 'tb_booking.username', '=', 'users.id')
             ->select('car_out_driver', 'car_out_license', 'tb_booking.booking_detail as detail',
             'tb_booking.booking_start as sdate','tb_booking.booking_end as edate','car_out_model','users.name as name')
-            ->where('tb_booking.id', $id)
+            ->where('tb_booking.id', $id_out)
             ->get();
         $item= $booking[0];
         $data = [
