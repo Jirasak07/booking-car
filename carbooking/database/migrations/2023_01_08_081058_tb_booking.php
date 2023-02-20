@@ -23,6 +23,8 @@ class TbBooking extends Migration
             $table->string('type_car')->nullable();//ประเภทรถภานนอก/ภายใน
             $table->text('booking_detail');//วัตถุประสงค์
             $table->string('booking_status');//สถานะการจอง
+            $table->string('comment')->nullable();
+            $table->integer('point_booking')->nullable();
             $table->timestamps();
 
         });
