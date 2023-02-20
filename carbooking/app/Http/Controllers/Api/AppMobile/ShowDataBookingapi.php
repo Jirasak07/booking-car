@@ -38,16 +38,33 @@ class ShowDataBookingapi extends Controller
         $booking = BookingModel::find($id);
 
         if ($booking->type_car == '1') {
-            $detail = DB::table('tb_booking')
+            $detail1 = DB::table('tb_booking')
                 ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
-
                 ->join('users', 'tb_booking.username', '=', 'users.id')
-                ->join('users', 'tb_booking.driver', '=', 'users.id')
                 ->where('tb_booking.id', '=', $id)
-                ->select('users.name as driver', 'tb_cars.car_license as car', 'tb_cars.car_model as car_detail', 'booking_start as sdate', 'booking_end as edate', 'booking_detail', 'users.name as name_user', 'booking_status', 'type_car')
+                ->select('tb_cars.car_license as car', 'tb_cars.car_model as car_detail', 'booking_start as sdate', 'booking_end as edate', 'booking_detail', 'users.name as name_user', 'booking_status', 'type_car')
                 ->get();
+            $detail2=DB::table('tb_booking')
+            ->join('users', 'tb_booking.driver', '=', 'users.id')
+            ->where('tb_booking.id', '=', $id)
+            ->select('users.name as driver', 'tb_cars.car_license as car', 'tb_cars.car_model as car_detail', 'booking_start as sdate', 'booking_end as edate', 'booking_detail', 'users.name as name_user', 'booking_status', 'type_car')
+            ->get();
+        
+            $Detail = [
+                'car' =>  $detail1->car,
+                'car_detail' => $detail1->car_detail,
+                'driver' => $detail2->driver,
+                'sdate' => $detail1->sdate,
+                'edate' => $detail1->edate,
+                'booking_detail' => $detail1->booking_detail,
+                'name_user' => $detail1->name_user,
+                'booking_status' => $detail1->booking_status,
+                'type_car' => $detail1->type_car,
+               
+            ];
+
         } else if ($booking->type_car == '2') {
-            $detail = DB::table('tb_booking')
+            $Detail = DB::table('tb_booking')
 
                 ->join('users', 'tb_booking.username', '=', 'users.id')
                 ->join('tb_out_cars', 'tb_booking.license_plate', '=', 'tb_out_cars.id')
@@ -55,14 +72,14 @@ class ShowDataBookingapi extends Controller
                 ->select('car_out_license as car', 'car_out_model as car_detail', 'car_out_driver as driver', 'car_out_tel as tel', 'owner', 'booking_start as sdate', 'booking_end as edate', 'booking_detail', 'type_car', 'users.name as name_user', 'booking_status')
                 ->get();
         } else {
-            $detail = DB::table('tb_booking')
+            $Detail = DB::table('tb_booking')
                 ->join('users', 'tb_booking.username', '=', 'users.id')
                 ->where('tb_booking.id', '=', $id)
                 ->select('booking_start as sdate', 'booking_end as edate', 'booking_detail', 'type_car', 'driver', 'license_plate as car', 'users.name as name_user', 'booking_status', 'type_car')
                 ->get();
         }
         return response()->json([
-            'detail' => $detail,
+            'detail' => $Detail,
         ]);
     }
     function show_booking($id)

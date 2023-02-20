@@ -331,17 +331,26 @@ class ManagementAdminController extends Controller
 
         $booking = DB::table('tb_booking')
             ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
-            ->join('users', 'tb_booking.driver', '=', 'users.id')
+            
             ->join('users', 'tb_booking.username', '=', 'users.id')
-            ->select('name', 'car_license', 'tb_booking.booking_detail as detail',
+            ->select('car_license', 'tb_booking.booking_detail as detail',
             'tb_booking.booking_start as sdate','tb_booking.booking_end as edate','car_model','users.name as name')
+            ->where('tb_booking.id', $id)
+            ->get();
+
+            $driver = DB::table('tb_booking')
+
+            ->join('users', 'tb_booking.driver', '=', 'users.id')
+            
+            ->select('name', 'car_license', 'tb_booking.booking_detail as detail',
+            'tb_booking.booking_start as sdate','tb_booking.booking_end as edate','car_model')
             ->where('tb_booking.id', $id)
             ->get();
         $item= $booking[0];
         $data = [
             'license' => $item->car_license,
             'name'=> $item->name,
-            'driver' => $item->name,
+            'driver' => $driver->name,
             'car'=> $item->car_model,
             'detail'=> $item->detail,
             'sdate'=> $item->sdate,
