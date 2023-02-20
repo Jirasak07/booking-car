@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\Http\Controllers\Api\AppMobile\Bookingapi;
 use App\Http\Controllers\Controller;
 use App\Mail\SendEmailComponent;
 use App\Models\BookingModel;
@@ -392,6 +393,15 @@ class ManagementAdminController extends Controller
         Mail::to('wirunsak2003@gmail.com')->send(new SendEmailComponent($data));
 
         return response()->json(201);
+    }
+
+    function comment(Request $request){
+        $id = $request->id_form;
+        $comment_booking = BookingModel::find($id);
+        $comment_booking->comment = $request->comment;
+        $comment_booking->point_booking = $request->star;
+        $comment_booking->save();
+        return redirect()->back();
     }
 
 }
