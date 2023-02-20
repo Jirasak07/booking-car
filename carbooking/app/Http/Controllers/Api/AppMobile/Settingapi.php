@@ -50,9 +50,6 @@ class Settingapi extends Controller
       }else if($driver->status == 2){
         $driver->status = ('3');
         $driver->save();
-      }else if($driver->status == 3){
-        $driver->status = ('1');
-        $driver->save();
       }
      return response()->json(['success']);
     }
@@ -87,9 +84,13 @@ class Settingapi extends Controller
                 return response()->json(['status' => 'error']);
             }
         } else if ($user->role_user == 2) {
-            $user->role_user = 1;
+            $user->role_user = 3;
             $user->save();
             return response()->json(['status' => 'success']);
-        }
+        }else if ($user->role_user == 3) {
+          $user->role_user = 1;
+          $user->save();
+          return response()->json(['status' => 'success']);
+      }
     }
 }

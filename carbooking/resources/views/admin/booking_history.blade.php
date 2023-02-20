@@ -235,7 +235,7 @@
                                                     '<option>', {
                                                         value: driver.id,
                                                         text: driver
-                                                            .driver_fullname
+                                                            .name
                                                     }))
                                             })
                                             $('#id_form').val(id);

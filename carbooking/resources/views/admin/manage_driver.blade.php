@@ -17,11 +17,11 @@
                         @foreach ($driver as $item)
                             <tr >
                                 <td style="width: 150px">{{ $item['id'] }}</td>
-                                <td style="width: 150px">{{ $item['driver_fullname'] }}</td>
+                                <td style="width: 150px">{{ $item['name'] }}</td>
                                 <td style="width: 100px" >
-                                    <div class='{{ $item['driver_status'] == 1 ? 'text-success ' : 'text-danger' }}'
+                                    <div class='{{ $item['status'] == 1 ? 'text-success ' : 'text-danger' }}'
                                         style="width: 80px" onclick="changeStatus({{ $item['id'] }})">
-                                        {{ $item['driver_status'] == 1 ? 'ว่าง' : 'ไม่ว่าง' }}</div>
+                                        {{ $item['status'] == 1 ? 'ว่าง' : 'ไม่ว่าง' }}</div>
                                 </td>
                                 <td style="width: 150px" >
                                     <div class="btn-sm btn text-white btn-warning border-0"

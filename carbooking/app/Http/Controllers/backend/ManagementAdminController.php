@@ -31,13 +31,20 @@ class ManagementAdminController extends Controller
         if ($user->role_user == 1) {
             if ($findSumAdmin > 1) {
                 $user->role_user = 2;
+                $user->status = 0;
                 $user->save();
                 return response()->json(['status' => 'success']);
             } else {
                 return response()->json(['status' => 'error']);
             }
         } else if ($user->role_user == 2) {
+            $user->role_user = 3;
+            $user->status = 1;
+            $user->save();
+            return response()->json(['status' => 'success']);
+        }else if ($user->role_user == 3) {
             $user->role_user = 1;
+            $user->status = 0;
             $user->save();
             return response()->json(['status' => 'success']);
         }
@@ -98,7 +105,7 @@ class ManagementAdminController extends Controller
         $count = BookingModel::where('booking_status', '2')->where('type_car', '1')->count();
         if ($count < 1) {
             $unreserved_cars = CarModel::all();
-            $unreserved_driver = DriverModel::all();
+            $unreserved_driver = DB::table('users')->where('role_user',3)->where('status',1)->get();
         } else {
             $unreserved_cars = DB::table('tb_cars')
                 ->where('car_status', '1')
@@ -297,7 +304,7 @@ class ManagementAdminController extends Controller
         $count = BookingModel::where('booking_status', '2')->where('type_car', '1')->count();
         if ($count < 1) {
             $unreserved_cars = CarModel::all();
-            $unreserved_driver = DriverModel::all();
+            $unreserved_driver = DB::table('users')->where('role_user','3')->where('status',1)->get();
         } else {
             $unreserved_cars = DB::table('tb_cars')
                 ->where('car_status', '1')

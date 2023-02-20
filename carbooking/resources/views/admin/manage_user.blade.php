@@ -27,8 +27,14 @@
                                     <div class="row" style="width: 100px">
                                         <div class="justify-content-center  d-flex align-items-center rounded-0  {{ $Users->role_user == 1 ? 'text-danger' : 'text-dark' }} "
                                             style="width: 50px;font-weight:800;">
-                                            {{ $Users->role_user == 1 ? 'Admin' : 'User' }}
-
+                                            <!-- {{ $Users->role_user == 1 ? 'Admin' : 'User' }} -->
+                                            @if($Users->role_user == 1)
+                                            {{__('Admin')}}
+                                            @elseif($Users->role_user == 2)
+                                            {{__('User')}}
+                                            @elseif($Users->role_user == 3)
+                                            {{__('Driver')}}
+                                            @endif
                                         </div>
 
                                     </div>
@@ -89,11 +95,14 @@
                     const name = e;
                     var role = 0;
                     if (e == 2) {
-                        var namerole = 'Admin';
-                        role = 1;
+                        var namerole = 'Driver';
+                        role = 3;
                     } else if (e == 1) {
                         var namerole = 'User';
                         role = 2;
+                    }else if (e == 3) {
+                        var namerole = 'Admin';
+                        role = 1;
                     }
                     Swal.fire({
                         title: 'ต้องการเปลี่ยนเป็น' + namerole + 'หรือไม่ ?',

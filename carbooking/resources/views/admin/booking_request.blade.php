@@ -358,7 +358,7 @@
                         driver.forEach(driver => {
                             $('#select-driver').append($('<option>', {
                                 value: driver.id,
-                                text: driver.driver_fullname
+                                text: driver.name
                             }))
                         })
 
