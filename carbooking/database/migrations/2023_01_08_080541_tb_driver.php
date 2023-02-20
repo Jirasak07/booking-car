@@ -13,12 +13,12 @@ class TbDriver extends Migration
      */
     public function up()
     {
-        Schema::create('tb_driver', function (Blueprint $table) {
-            $table->string('id')->primary(); //รหัสชื่อคนขับรถภายใน
-            $table->string('driver_fullname'); //ชื่อ-สกุล คนขับรถภายใน
-            $table->string('driver_status'); //สถานะคนขับรถภายใน
-            $table->timestamps();
-        });
+        // Schema::create('tb_driver', function (Blueprint $table) {
+        //     $table->string('id')->primary(); //รหัสชื่อคนขับรถภายใน
+        //     $table->string('driver_fullname'); //ชื่อ-สกุล คนขับรถภายใน
+        //     $table->string('driver_status'); //สถานะคนขับรถภายใน
+        //     $table->timestamps();
+        // });
     }
 
 
