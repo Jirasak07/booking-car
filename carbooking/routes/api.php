@@ -67,4 +67,4 @@ Route::patch('edit/setting',[Settingapi::class,'edit_time']);//แก้ไข�
 Route::get('change-status/driver/{id}',[Settingapi::class,'DriverchangeStatus']);//เปลี่ยนสถานะคนขับ
 Route::get('change-status/car/{id}',[Settingapi::class,'CarchangeStatus']);//เปลี่ยนสถานะรถ
 
-Route::get('chklogin',('App\Http\Controllers\api\AppMobile\Loginapi@login'));//check login
+Route::post('chklogin',('App\Http\Controllers\api\AppMobile\Loginapi@login'));//check login

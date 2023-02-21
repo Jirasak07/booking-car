@@ -34,7 +34,7 @@ class Settingapi extends Controller
         }
         $time->save();
       
-             return response()->json($time);
+             return response()->json(['status'=>'edit_success'],201);
         
 
     }
@@ -50,7 +50,7 @@ class Settingapi extends Controller
         $driver->driver_status = ('1');
         $driver->save();
       }
-     return response()->json(['success']);
+     return response()->json(['status'=>'success'],201);
     }
 
     public function CarchangeStatus($id)
@@ -65,6 +65,6 @@ class Settingapi extends Controller
         $car->car_status = ('1');
         $car->save();
       }
-     return response()->json(['status'=>'success']);
+     return response()->json(['status'=>'success'],201);
     }
 }

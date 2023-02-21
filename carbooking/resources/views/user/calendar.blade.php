@@ -242,7 +242,7 @@
 <div class="modal fade" id="bookingModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="bookingModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
-        <form method="POST" action="{{ route('sendRe') }}" id="booking-store">
+        <form method="POST"id="booking-store">
             @csrf
             <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}" />
             <div class="modal-content">

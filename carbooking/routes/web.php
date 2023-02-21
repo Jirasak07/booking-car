@@ -96,5 +96,7 @@ Route::get('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logou
 Route::get('/noti', [DashboardAdminController::class, 'noti_menu'])->name('test');
 Route::get('car/{id}', [\App\Http\Controllers\backend\ManagementAdminController::class, 'caranddriver_aprove']);
 
-
+Route::get('driver', function () {
+    return view('driver.index');
+})->name('driver.index');
 

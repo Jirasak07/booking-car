@@ -373,8 +373,8 @@ class ManagementAdminController extends Controller
             'sdate'=> $item->sdate,
             'edate'=> $item->edate,
         ];
-        Mail::to('wirunsak2003@gmail.com')->send(new SendEmailComponent($data));
-
+        // Mail::to('wirunsak2003@gmail.com')->send(new SendEmailComponent($data));
+        dd($data)
         return response()->json($item->driver_fullname);
     }
 
