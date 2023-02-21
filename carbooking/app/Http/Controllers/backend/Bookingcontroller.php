@@ -8,6 +8,7 @@ use App\Mail\CalcleEmailComponent;
 use App\Mail\EmailComponent;
 use App\Models\BookingModel;
 use App\Models\timebookingModel;
+use App\Models\User;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -327,5 +328,40 @@ class Bookingcontroller extends Controller
             'timemin' => timebookingModel::find(3),
             'timemax' => timebookingModel::find(4),
         ]);
+    }
+   
+    public function noti_booking()
+    {
+        $token = User::whereNotNull('token_device')->where('role_user',1)->pluck('token_device')->all();
+        $from = "AAAAaxjJHUA:APA91bHLdfsZ_7JfjQEbgDKY49kG21k_OrbGepMG4F-7fq0QN3iaVrS1pXrsyTsmx2ptEvtOGs-lurR8MH_o4RpLUpV5FNCNmrfRQ1504-15_Cg5us3rJ4xA601T9MM842NO7Fz0EUgv";
+        $msg = array(
+            'body'  => "มีรายการจองใหม่",
+            'title' => "BookingCar Lannacom",
+            'receiver' => 'erw',
+            // 'icon'  => "https://image.flaticon.com/icons/png/512/270/270014.png",/*Default Icon*/
+            // 'sound' => 'mySound'/*Default sound*/
+        );
+
+        $fields = array(
+            'to'        => $token,
+            'notification'  => $msg
+        );
+
+        $headers = array(
+            'Authorization: key=' . $from,
+            'Content-Type: application/json'
+        );
+        //#Send Reponse To FireBase Server 
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+        $result = curl_exec($ch );
+        dd($result);
+        curl_close( $ch );
+    
     }
 }
