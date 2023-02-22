@@ -1,4 +1,4 @@
-@extends('layouts.layout');
+@extends('layouts.layout')
 <link href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet">
 @section('content')
     @include('layouts.header')
@@ -41,7 +41,7 @@
                                         <i
                                             class="fa-regular fa-clock"style="font-size: 14px;color:#fff;background-color:#FF8B13;padding:4px 4px 4px 4px;border-radius:.375rem;"></i>
                                     @elseif ($item->booking_status == 4)
-                                        44
+                                        <i class="fa-solid fa-car" style="color: #FF6E31;font-size:24px"></i>
                                     @elseif ($item->booking_status == 5)
                                         <i class="fa-solid fa-square-check" style="color: green;font-size:24px"></i>
                                     @endif
@@ -138,8 +138,27 @@
                     selector: 'td:nth-child(2)'
                 },
                 responsive: true,
+                columnDefs: [{
+                            responsivePriority: 1,
+                            targets: 0
+                        },
+                        {
+                            responsivePriority: 2,
+                            targets: 2
+                        },
 
+                    ],
+                    lengthMenu: [10, 20, 50, 100, ],
+                    language: {
+                        lengthMenu: "แสดง _MENU_ รายการ",
+                        search: "ค้นหาข้อมูลในตาราง",
+                        info: "แสดงข้อมูล _END_ จากทั้งหมด _TOTAL_ รายการ",
+                        paginate: {
+                            previous: "ก่อนหน้า",
+                            next: "ถัดไป",
 
+                        },
+                    },
             });
         });
 
@@ -162,14 +181,14 @@
                     } else if (res.booking_status == '5') {
                         status = 'ดำเนินการเสร็จสิ้น';
                         $('#status_booking').css("color", "green");
-                    } else if(res.booking_status == '2') {
+                    } else if (res.booking_status == '2') {
                         status = 'รอดำเนินการ';
                         $('#status_booking').css("color", "#FFB100");
                     }
                     if (res.car_license == '-') {
                         car_detail = '-';
                     } else {
-                        car_detail = 'คนขับ ' + res.name_driver + ' ทะเบียนรถ ' + res.car_license +
+                        car_detail = ' ทะเบียนรถ ' + res.car_license +
                             ' ' + res
                             .car_model;
                     }
