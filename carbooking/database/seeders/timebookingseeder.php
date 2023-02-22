@@ -16,7 +16,7 @@ class timebookingseeder extends Seeder
     {
         $user = [
             [   'id' => '1',
-                'name' => 'การจองล่วงหน้าขั้นต่ำ',
+                'name' => 'จองล่วงหน้าขั้นต่ำ',
                 'time'    => '5',
                 'unit' => 'hours',
                 'unit_th' => 'ชม.',
@@ -29,14 +29,14 @@ class timebookingseeder extends Seeder
          
         ],
             ['id' => '3',
-                'name' => 'ระยะเวลาในการจองขั้นต่ำ',
+                'name' => 'จองขั้นต่ำ',
                 'time'    => '2',
                 'unit' => 'hours',
                 'unit_th' => 'ชม.',
               
             ],
             ['id' => '4',
-                'name' => 'ระยะเวลาในการจองขั้นสูงสุด',
+                'name' => 'จองสูงสุด',
                 'time'    => '3',
                 'unit' => 'day',
                 'unit_th' => 'วัน.',
