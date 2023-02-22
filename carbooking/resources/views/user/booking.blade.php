@@ -49,65 +49,67 @@
                                     <th class="fw-bolder" style="font-size: 18px">จัดการ</th>
                                 </tr>
                             </thead>
-                            @if (!$booking2->isEmpty())
-                                <tbody>
-                                    @php
-                                        $i = 1;
-                                    @endphp
-                                    @foreach ($booking2 as $item)
-                                        <tr>
-                                            <td id="row-id" align="center" style="font-size:18px;font-weight:500">
-                                                {{ $i++ }}</td>
-                                            <td style="font-size:16px" id="date_range">
-                                                @php
-                                                    echo thaidate('วันที่ d M Y เวลา H:i', $item->booking_start) . '&nbsp;-&nbsp;' . thaidate('วันที่ d M Y เวลา H:i', $item->booking_end);
-                                                @endphp
-                                            </td>
-                                            <td style="font-size:16px" id="booking_detail">
-                                                @php
-                                                    $detail = explode('~', $item->booking_detail);
-                                                @endphp
-                                                {!! Str::limit("$detail[0]", 50, ' ...') !!}
-                                            </td>
-                                            <td align="center" id="view-de">
-                                                <a class="btn btn-primary btn-sm text-white"
-                                                    onclick="view_detail({{ $item->id }})">
-                                                    <i class="fa-solid fa-eye"></i>
-                                                </a>
-                                            </td>
-                                            <td align="center" id="booking_status">
-                                                @if ($item->booking_status == '1')
-                                                    <i
-                                                        class="fa-regular fa-clock"style="font-size: 14px;color:#fff;background-color:#FF8B13;padding:4px 4px 4px 4px;border-radius:.375rem;"></i>
-                                                @elseif ($item->booking_status == '2')
-                                                    <i class="fa-solid fa-square-check"
-                                                        style="color: green;font-size:24px"></i>
-                                                @else
-                                                    <i class="fa-sharp fa-solid fa-rectangle-xmark"
-                                                        style="color: red;font-size:24px"></i>
-                                                @endif
-                                            </td>
-                                            <td align="center" id="manage">
-                                                @if ($item->booking_status == '1')
-                                                    <button class="btn bg-yellow btn-sm me-2 text-white"
-                                                        style="font-size: 13px" onclick="edit_booking({{ $item->id }})">
-                                                        <i class="fa-regular fa-pen-to-square"></i><span>แก้ไข</span>
-                                                    </button>
-                                                    <button class="btn btn-danger btn-sm" style="font-size: 13px"
-                                                        onclick="alertCancel({{ $item->id }})">
-                                                        <i class="fa-solid fa-rectangle-xmark"></i><span>ยกเลิก</span>
-                                                    </button>
-                                                @elseif($item->booking_status == '2')
+
+                            <tbody>
+                                @php
+                                    $i = 1;
+                                @endphp
+                                @foreach ($booking2 as $item)
+                                    <tr>
+                                        <td id="row-id" align="center" style="font-size:18px;font-weight:500">
+                                            {{ $i++ }}</td>
+                                        <td style="font-size:16px" id="date_range">
+                                            @php
+                                                echo thaidate('วันที่ d M Y เวลา H:i', $item->booking_start) . '&nbsp;-&nbsp;' . thaidate('วันที่ d M Y เวลา H:i', $item->booking_end);
+                                            @endphp
+                                        </td>
+                                        <td style="font-size:16px" id="booking_detail">
+                                            @php
+                                                $detail = explode('~', $item->booking_detail);
+                                            @endphp
+                                            {!! Str::limit("$detail[0]", 50, ' ...') !!}
+                                        </td>
+                                        <td align="center" id="view-de">
+                                            <a class="btn btn-primary btn-sm text-white"
+                                                onclick="view_detail({{ $item->id }})">
+                                                <i class="fa-solid fa-eye"></i>
+                                            </a>
+                                        </td>
+                                        <td align="center" id="booking_status">
+                                            @if ($item->booking_status == '1')
+                                                <i
+                                                    class="fa-regular fa-clock"style="font-size: 14px;color:#fff;background-color:#FF8B13;padding:4px 4px 4px 4px;border-radius:.375rem;"></i>
+                                            @elseif ($item->booking_status == '2')
+                                                <i class="fa-solid fa-square-check" style="color: green;font-size:24px"></i>
+                                            @else
+                                                <i class="fa-sharp fa-solid fa-rectangle-xmark"
+                                                    style="color: red;font-size:24px"></i>
+                                            @endif
+                                        </td>
+                                        <td align="center" id="manage">
+                                            @if ($item->booking_status == '1')
+                                                <button class="btn bg-yellow btn-sm me-2 text-white" style="font-size: 13px"
+                                                    onclick="edit_booking({{ $item->id }})">
+                                                    <i class="fa-regular fa-pen-to-square"></i><span>แก้ไข</span>
+                                                </button>
+                                                <button class="btn btn-danger btn-sm" style="font-size: 13px"
+                                                    onclick="alertCancel({{ $item->id }})">
+                                                    <i class="fa-solid fa-rectangle-xmark"></i><span>ยกเลิก</span>
+                                                </button>
+                                            @elseif($item->booking_status == '2')
+                                                @if ($item->comment == null && $item->point_booking == null)
                                                     <button class="btn btn-info btn-sm me-2 text-white"
                                                         style="font-size: 13px" onclick="comments({{ $item->id }})">
                                                         <i class="fa-regular fa-comment"></i><span>ประเมิน</span>
                                                     </button>
                                                 @else
                                                 @endif
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
+                                            @else
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -252,10 +254,10 @@
                         </button>
                     </div>
 
-                    <form method="POST" action="{{route('users.comment_booking')}}">
+                    <form method="POST" action="{{ route('users.comment_booking') }}">
                         @csrf
                         <div class="modal-body">
-                            <input type="hidden" name="id_form" id="id_form" value=""/>
+                            <input type="hidden" name="id_form" id="id_form" value="" />
                             <div class="row mb-3">
                                 <strong for="" class="col-sm-2 col-form-label">ชื่อผู้จอง</strong>
                                 <div class="col-sm-10">
@@ -325,8 +327,7 @@
         </div>
 
     </div>
-@else
-    @endif
+
     @push('js')
         <script>
             var has_error = {{ $errors->count() > 0 ? 'true' : 'false' }};
