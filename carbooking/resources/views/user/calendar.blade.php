@@ -124,6 +124,8 @@
                     var b_start = moment(info.startStr);
                     var b_end = moment(info.endStr);
 
+                    var booking_e = moment(b_end,'HH:mm:ss a').add(1,'minutes').format('YYYY-MM-DD HH:mm')
+                    //console.log('booking_e :'+booking_e);
                     $.ajax({
                         url: '/users/validate_booking',
                         method: 'GET',
@@ -171,8 +173,8 @@
                                         .time + ' ' + res.timemax.unit_th + '',
                                 });
                             } else {
-                                $('#booking_start').html(booking_start);
-                                $('#booking_end').html(booking_end);
+                                // $('#booking_start').html(booking_start);
+                                // $('#booking_end').html(booking_end);
                                 document.getElementById('date_start').value = booking_start;
                                 document.getElementById('date_end').value = booking_end;
 
