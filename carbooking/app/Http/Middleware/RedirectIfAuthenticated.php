@@ -26,6 +26,8 @@ class RedirectIfAuthenticated
                 return redirect()->route('admin.dashboard');
             } elseif (Auth::guard($guard)->check() && Auth::user()->role_user == 2) {
                 return redirect()->route('users.view-booking');
+            }elseif (Auth::guard($guard)->check() && Auth::user()->role_user == 3) {
+                return redirect()->route('driver.dashboard');
             }
         }
 
