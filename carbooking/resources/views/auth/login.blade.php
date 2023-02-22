@@ -42,7 +42,7 @@
 
             <form role="form" method="POST" action="{{ route('login') }}">
                 @csrf
-
+                <input type="hidden" name="token_deivice" id="token_deivice" value=""/>
                 <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }} mb-3">
                     <div class="input-group input-group-alternative">
                         <div class="input-group-prepend">

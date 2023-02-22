@@ -1,5 +1,6 @@
 @section('title', 'ข้อมูลการจอง')
 <link href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet">
+<link type="text/css" href="{{ asset('argon/css/ratestar.css') }}" rel=" stylesheet" />
 @extends('layouts.layout')
 <style>
     .custom-class {
@@ -27,15 +28,15 @@
                         </script>
                     @endif
                     @if ($errors->any())
-                    <div class="alert alert-danger" id="ERROR_COPY" style="display:none;">
-                        <ul style="list-style: none;">
-                            @foreach ($errors->all() as $error)
-                                <!-- ทำการ วน Loop เพื่อแสดง Error ของ validation ขึ้นมาทั้งหมด -->
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+                        <div class="alert alert-danger" id="ERROR_COPY" style="display:none;">
+                            <ul style="list-style: none;">
+                                @foreach ($errors->all() as $error)
+                                    <!-- ทำการ วน Loop เพื่อแสดง Error ของ validation ขึ้นมาทั้งหมด -->
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <div class="table-responsive">
                         <table class="table  fw-bold w-100" id="booking_table">
                             <thead class="table-dark table-hover">
@@ -95,6 +96,11 @@
                                                     <button class="btn btn-danger btn-sm" style="font-size: 13px"
                                                         onclick="alertCancel({{ $item->id }})">
                                                         <i class="fa-solid fa-rectangle-xmark"></i><span>ยกเลิก</span>
+                                                    </button>
+                                                @elseif($item->booking_status == '2')
+                                                    <button class="btn btn-info btn-sm me-2 text-white"
+                                                        style="font-size: 13px" onclick="comments({{ $item->id }})">
+                                                        <i class="fa-regular fa-comment"></i><span>ประเมิน</span>
                                                     </button>
                                                 @else
                                                 @endif
@@ -232,22 +238,112 @@
                 </div>
             </div>
         </div>
+
+        {{-- comments modal --}}
+        <div class="modal fade" id="comments" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="viewdeLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content ">
+                    <div class="modal-header">
+                        <h3 class="modal-title fs-5" id="viewdeLabel">Comment</h3>
+                        <button type="button" class="close" data-bs-dismiss="modal" data-dismiss="modal"
+                            aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <form method="POST">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="row mb-3">
+                                <strong for="" class="col-sm-2 col-form-label">ชื่อผู้จอง</strong>
+                                <div class="col-sm-10">
+                                    <label type="text" disabled value="" readonly class="form-control-plaintext"
+                                        id="user_d" name="user_d">
+                                </div>
+                            </div>
+                            <div class="row mb-1">
+                                <strong for="" class="col-sm-2 col-form-label">ช่วงวันที่</strong>
+                                <div class="col-sm-10">
+                                    <label class="form-control-plaintext" id="date_d"></label>
+                                </div>
+                            </div>
+                            <div class="row mb-1">
+                                <strong for="" class="col-sm-3 col-form-label">รายละเอียดรถและคนขับ</strong>
+                                <div class="col-sm-8">
+                                    <label name="" id="car_d" cols="30" rows="3" readonly
+                                        class="form-control-plaintext"></label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <strong for="" class="col-sm-3 col-form-label">รายละเอียดการจอง</strong>
+                                <div class="col-sm-8">
+                                    <label name="" id="booking_d" cols="30" disabled
+                                        rows="5"value="" readonly class="form-control-plaintext"></label>
+                                </div>
+                            </div>
+
+                            <div class="row mb-1">
+                                <strong class="col-sm-2 col-form-label ">Review</strong>
+                                <div class="col-sm-4">
+                                    <input class="star star-5" value="5" id="star-5" type="radio"
+                                        name="star" />
+                                    <label class="star star-5" for="star-5"></label>
+                                    <input class="star star-4" value="4" id="star-4" type="radio"
+                                        name="star" />
+                                    <label class="star star-4" for="star-4"></label>
+                                    <input class="star star-3" value="3" id="star-3" type="radio"
+                                        name="star" />
+                                    <label class="star star-3" for="star-3"></label>
+                                    <input class="star star-2" value="2" id="star-2" type="radio"
+                                        name="star" />
+                                    <label class="star star-2" for="star-2"></label>
+                                    <input class="star star-1" value="1" id="star-1" type="radio"
+                                        name="star" />
+                                    <label class="star star-1" for="star-1"></label>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+
+                                <div class="col">
+                                    <textarea class="form-control" name="comment" rows="6 " placeholder="Comment" maxlength="200"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" value="" id="EditBooking" class="btn text-white"
+                                style="background-color: #06d6a0">บันทึก</button>
+                            <button type="button" class="btn grey btn-danger" style="background-color: #ef476f"
+                                data-bs-dismiss="modal"data-dismiss="modal">{{ __('ยกเลิก') }}</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
     </div>
 @else
     @endif
     @push('js')
-    <script>
-        var has_error = {{ $errors->count() > 0 ? 'true' : 'false' }};
-        if (has_error) {
-            Swal.fire({
-                title: 'Error',
-                icon: 'error',
-                type: 'error',
-                html: jQuery("#ERROR_COPY").html(),
-                showCloseButton: true,
+        <script>
+            var has_error = {{ $errors->count() > 0 ? 'true' : 'false' }};
+            if (has_error) {
+                Swal.fire({
+                    title: 'Error',
+                    icon: 'error',
+                    type: 'error',
+                    html: jQuery("#ERROR_COPY").html(),
+                    showCloseButton: true,
+                });
+            }
+        </script>
+        <script>
+            $('#addStar').change('.star', function(e) {
+                $(this).submit();
             });
-        }
-    </script>
+        </script>
         <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
@@ -287,76 +383,6 @@
 
                 });
 
-                /* setInterval(() => {
-                    var table = $('#booking_table').DataTable();
-                    //$('#view-de').css();
-                    $.ajax({
-                        url: '/users/booking/refresh',
-                        method: 'GET',
-                        success: function(data) {
-                            console.log(data);
-                            $('#alllist').html(data.Alllist);
-                            $('#alllistapprove').html(data.Alllistapprove);
-                            $('#alllistcancle').html(data.Alllistcancle);
-                            $('#alllistpending').html(data.Alllistpending);
-                            //var i = 1;
-                            table.clear().draw();
-                            $("tbody").html("");
-                            var i = 1;
-                            $.each(data.res, function(key, item) {
-                                // console.log(item);
-                                var date_start = new Date(item.booking_start);
-                                var date_end = new Date(item.booking_end);
-                                let getMonths = date_start.toLocaleString('th', {
-                                    month: 'short',
-                                });
-                                let getMonthe = date_end.toLocaleString('th', {
-                                    month: 'short',
-                                });
-                                var booking_detail = item.booking_detail;
-                                var short = booking_detail.substring(0, 50);
-                                if (booking_detail.length > short.length) {
-                                    short += "...";
-                                }
-                                var detail =
-                                    "<a class='btn btn-info btn-sm text-darker'onclick='view_detail(" +
-                                    item.id + ")'><i class='fa-solid fa-eye'></i></a>";
-                                var date_range = moment(item.booking_start).format(
-                                        'วันที่ D ' + getMonths + " " + (new Date(item
-                                            .booking_start).getFullYear() + 543) +
-                                        ' เวลา HH:mm') + " - " +
-                                    moment(item.booking_end).format('วันที่ D ' +
-                                        getMonthe + " " + (new Date(item.booking_end)
-                                            .getFullYear() + 543) + ' เวลา HH:mm');
-                                if (item.booking_status == '1') {
-                                    status =
-                                        "<i class='fa-regular fa-clock'style='font-size: 14px;color:#fff;background-color:#FF8B13;padding:4px 4px 4px 4px;border-radius:.375rem;'></i>";
-                                    manage =
-                                        "<button class='btn btn-yellow btn-sm me-2' style='font-size: 13px'onclick='edit_booking(" +
-                                        item.id + ")'>" +
-                                        "<i class='fa-regular fa-pen-to-square'></i><span>แก้ไข</span>" +
-                                        "</button>" +
-                                        "<button class='btn btn-danger btn-sm' style='font-size: 13px'onclick='alertCancel(" +
-                                        item.id + ")'>" +
-                                        "<i class='fa-solid fa-rectangle-xmark'></i><span>ยกเลิก</span>" +
-                                        "</button>";
-                                } else if (item.booking_status == '2') {
-                                    status =
-                                        "<i class = 'fa-solid fa-square-check'style = 'color: green;font-size:24px'> </i>";
-                                    manage = "";
-                                } else {
-                                    status =
-                                        "<i class = 'fa-sharp fa-solid fa-rectangle-xmark'style = 'color: red;font-size:24px' > </i>";
-                                    manage = "";
-                                }
-                                table.row.add([
-                                    (i++), date_range, short, detail, status, manage
-                                ]).draw();
-
-                            });
-                        }
-                    })
-                }, 15000); */
             });
 
             function edit_booking(id) {
@@ -557,6 +583,42 @@
                         } else {
                             $('#error_t').html('');
                         }
+                    }
+                });
+            }
+
+            function comments(id) {
+                var h = window.location.pathname
+                var s = h.split('/')
+                var status = '';
+                var car_detail;
+                var url = '/' + s[2] + '/detail/' + id;
+                //console.log(url);
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    dataType: 'JSON',
+                    success: function(res) {
+                        //console.log(res);
+                        moment.locale('th');
+
+                        if (res.car_license == '-') {
+                            car_detail = '-';
+                        } else {
+                            car_detail = 'คนขับ ' + res.name_driver + ' ทะเบียนรถ ' + res.car_license +
+                                ' ' + res.car_model;
+                        }
+                        var detail_booking = res.booking_detail;
+
+                        var start = moment(res.booking_start).add(543, 'year').format(
+                            'ddd ที่ D MMM YYYY เวลา HH:mm')
+                        var end = moment(res.booking_end).add(543, 'year').format('ddd ที่ D MMM YYYY เวลา HH:mm')
+                        var s_detail = detail_booking;
+                        $('#user_d').html(res.name);
+                        $('#date_d').html(start + ' - ' + end);
+                        $('#car_d').html(car_detail);
+                        $('#booking_d').html(s_detail);
+                        $('#comments').modal('toggle');
                     }
                 });
             }

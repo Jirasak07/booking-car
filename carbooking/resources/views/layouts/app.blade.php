@@ -25,7 +25,7 @@
 
     <link type="text/css" href="{{ asset('argon') }}/css/argon.css?v=1.0.0" rel="stylesheet">
 
-   
+
 
 
     <!-- firebase integration started -->
@@ -95,18 +95,17 @@ const messaging = firebase.messaging();
 	messaging
 .requestPermission()
 .then(function () {
-//MsgElem.innerHTML = "Notification permission granted." 
+//MsgElem.innerHTML = "Notification permission granted."
 	console.log("Notification permission granted.");
 
      // get the token in the form of promise
 	return messaging.getToken()
 })
 .then(function(token) {
- // print the token on the HTML page     
+ // print the token on the HTML page
   console.log(token);
- 
-  
-  
+  $('#token_deivice').val(token)
+
 })
 .catch(function (err) {
 	console.log("Unable to get permission to notify.", err);
@@ -125,7 +124,7 @@ messaging.onMessage(function(payload) {
 
     //firebase.initializeApp(config);
 var database = firebase.database().ref().child("/users/");
-   
+
 database.on('value', function(snapshot) {
     renderUI(snapshot.val());
 });
@@ -135,7 +134,7 @@ database.on('child_added', function(data) {
 	console.log("Comming");
     if(Notification.permission!=='default'){
         var notify;
-         
+
         notify= new Notification('CodeWife - '+data.val().username,{
             'body': data.val().message,
             'icon': 'bell.png',
@@ -149,7 +148,7 @@ database.on('child_added', function(data) {
     }
 });
 
-self.addEventListener('notificationclick', function(event) {       
+self.addEventListener('notificationclick', function(event) {
     event.notification.close();
 });
 </script>

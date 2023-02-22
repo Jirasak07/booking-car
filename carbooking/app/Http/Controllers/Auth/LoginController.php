@@ -42,7 +42,7 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-    public function login(Request $request/* ,$token */)
+    public function login(Request $request)
     {
         if ($request->email == "" || $request->password == "") {
             return redirect('/');
@@ -91,16 +91,16 @@ class LoginController extends Controller
                     } else {
                         $user->role_user = "2";
                     }
-                        //$user->token_deivice = $token;
+                    $user->token_device = $request->token_deivice;
                     $user->save();
                 }
 
 
                 $this->guard()->login($user, true);
-            //    $id =  Auth::id();
-            //    $token_user = User::find($id);
-            //    $token_user->token_device = $token;
-            //    $token_user->save();
+                $id =  Auth::id();
+                $token_user = User::find($id);
+                $token_user->token_device = $request->token_deivice;
+                $token_user->save();
                 //Alert::success('Login Successful!!!');
                 return redirect()->route("admin.dashboard");
                 //dd(auth()->user());
