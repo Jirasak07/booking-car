@@ -19,7 +19,7 @@ class ShowDataBookingapi extends Controller
     function showbooking()
     {
         return response()->json([
-            'showbooking' => BookingModel::where('booking_status', 1)->Orderby('booking_start', 'desc')->get()
+            'showbooking' => DB::table('tb_booking')-> where('booking_status', 1)->join('users','tb_booking.username','=','users.id')->Orderby('booking_start', 'desc')->get()
         ]);
     }
 
