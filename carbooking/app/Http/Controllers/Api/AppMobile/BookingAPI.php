@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\AppMobile;
 
 use App\Http\Controllers\Controller;
 use App\Mail\CalcleEmailComponent;
+use App\Mail\EmailComponent;
 use App\Mail\SendEmailComponent;
 use App\Models\BookingModel;
 use App\Models\CarModel;
@@ -65,6 +66,17 @@ class Bookingapi extends Controller
         $bookingcar->booking_status = '1';
  
         $bookingcar->save();
+
+      
+        $data = [
+            'title' => 'BookingCar(การจองรถ)',
+            'sdate' => $date_start,
+            'edate' => $date_end,
+            'detail' => $validatedData['booking_detail'],
+
+        ];
+        Mail::to('wirunsak2003@gmail.com')->send(new EmailComponent($data));
+        return response()->json('Success');
         return response()->json( $bookingcar->id,201);
     }
 
