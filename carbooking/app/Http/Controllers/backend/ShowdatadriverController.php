@@ -16,8 +16,8 @@ class ShowdatadriverController extends Controller
         $id = Auth::id();
         $booking = DB::table('tb_booking')->where('booking_status','>',1)->where('driver',$id)->get();
 
-        $sumbooking = BookingModel::count();
-        $padding = BookingModel::where('booking_status',2)->count();
+        $sumbooking = BookingModel::where('driver',$id)->count();
+        $padding = BookingModel::where('booking_status',2)->where('driver',$id)->count();
          return view('driver.index')->with(['booking'=>$booking,'sumbooking'=>$sumbooking,'padding'=>$padding]);
     }
     public function compleace($id){
