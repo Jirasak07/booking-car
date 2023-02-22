@@ -116,8 +116,8 @@ class Bookingapi extends Controller
     
 
     
-public function cancle($id,Request $request)
-{
+public function cancle(Request $request)
+{$id = $request->id;
     $canclebooking = BookingModel::find($id);
     $canclebooking->driver = '-';
     $canclebooking->license_plate = '-';

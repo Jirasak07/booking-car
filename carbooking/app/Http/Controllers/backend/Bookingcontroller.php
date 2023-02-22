@@ -214,15 +214,15 @@ class Bookingcontroller extends Controller
         $canclebooking->save();
 
 
-      
+
         $data = [
             'title' => 'BookingCar(การจองรถ)',
             'detail' =>  'การจองรายการนี้ได้ถูกยกเลิกไปแล้ว',
-           
+
 
         ];
         Mail::to('wirunsak2003@gmail.com')->send(new CalcleEmailComponent($data));
-    
+
 
         return response()->json(['status' => 'success']);
     }
@@ -327,5 +327,14 @@ class Bookingcontroller extends Controller
             'timemin' => timebookingModel::find(3),
             'timemax' => timebookingModel::find(4),
         ]);
+    }
+    public function comment_booking(Request $request){
+        dd($request->all());
+        $id = $request->id_form;
+        $comment = BookingModel::find($id);
+        $comment->comment_booking = $request->comment;
+        $comment->point_booking = $request->star;
+        $comment->save();
+        return redirect()->back();
     }
 }

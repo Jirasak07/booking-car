@@ -13,7 +13,7 @@ class Aproveapi extends Controller
     //
 
     function Aprove_in(Request $request){
-        $id = $request->id_form;
+        $id = $request->id;
         $booking_update = BookingModel::find($id);
         if ($booking_update->booking_status == 1) {
             $booking_update->license_plate = $request->car_id;
@@ -23,7 +23,7 @@ class Aproveapi extends Controller
             $booking_update->save();
 
 
-            return response()->json(['$booking_update'=> $ $booking_update,'id_in' =>$id_form],201);
+            return response()->json($booking_update,201);
         } else {
             return  response()->json('รายการนี้ถูกยกเลิกไปแล้ว');
         }
@@ -32,7 +32,7 @@ class Aproveapi extends Controller
 
     public function Aprove_out(Request $request)
     {
-        $id = $request->id_form;
+        $id = $request->id;
         $booking_update = BookingModel::find($id);
         $car_out = new CaroutModel();
 

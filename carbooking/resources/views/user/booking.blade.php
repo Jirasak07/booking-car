@@ -14,7 +14,7 @@
     <div class=" mt-3">
         @include('user.box_list_booking')
     </div>
-<a class="btn btn-primary btn-sm mt-3" href="{{route('driver.index')}}">หน้าคนขับรถ</a>
+    <a class="btn btn-primary btn-sm mt-3" href="{{ route('driver.index') }}">หน้าคนขับรถ</a>
     <div class="container-fluid mt-3">
         <div class="row mb-3">
             <div class="col-xl-12">
@@ -252,9 +252,10 @@
                         </button>
                     </div>
 
-                    <form method="POST">
+                    <form method="POST" action="{{route('users.comment-booking')}}">
                         @csrf
                         <div class="modal-body">
+                            <input type="hidden" name="id_form" id="id_form" value="" />
                             <div class="row mb-3">
                                 <strong for="" class="col-sm-2 col-form-label">ชื่อผู้จอง</strong>
                                 <div class="col-sm-10">
@@ -305,7 +306,6 @@
                             </div>
 
                             <div class="row mb-3">
-
                                 <div class="col">
                                     <textarea class="form-control" name="comment" rows="6 " placeholder="Comment" maxlength="200"></textarea>
                                 </div>
@@ -616,6 +616,7 @@
                             'ddd ที่ D MMM YYYY เวลา HH:mm')
                         var end = moment(res.booking_end).add(543, 'year').format('ddd ที่ D MMM YYYY เวลา HH:mm')
                         var s_detail = detail_booking;
+                        $('#id_form').val(id);
                         $('#user_d').html(res.name);
                         $('#date_d').html(start + ' - ' + end);
                         $('#car_d').html(car_detail);

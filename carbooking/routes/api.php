@@ -51,10 +51,10 @@ Route::get('caranddrive/edit/{id}',[ShowDataBookingapi::class,'caranddriver_edit
 Route::post('booking/add',[Bookingapi::class,'bookingcar']);//booking car
 Route::patch('booking/edit',[Bookingapi::class,'edit_booking']);//edit booking
 Route::patch('booking/edit/aproved',[Bookingapi::class,'edit_bookingin']);//edit booking หลังaprove
-Route::patch('cancle/{id}',[Bookingapi::class,'cancle']);//ยกเลิก/ไม่อนุมัติ พร้อมส่งเมล
+Route::patch('cancle',[Bookingapi::class,'cancle']);//ยกเลิก/ไม่อนุมัติ พร้อมส่งเมล
 
-Route::patch('Aprove/car/in/{id}',[Aproveapi::class,'Aprove_in']);//อนุมัติ รถภายใน
-Route::patch('Aprove/car/out/{id}',[Aproveapi::class,'Aprove_out']);// อนุมัติ รถภายนอก
+Route::patch('Aprove/car/in',[Aproveapi::class,'Aprove_in']);//อนุมัติ รถภายใน
+Route::patch('Aprove/car/out',[Aproveapi::class,'Aprove_out']);// อนุมัติ รถภายนอก
 
 
 Route::get('send-mail/booking/{id}',[Emailapi::class,'mailbooking']);//ส่งเมล การจอง
