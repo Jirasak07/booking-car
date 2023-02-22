@@ -79,11 +79,11 @@
                                             @if ($item->booking_status == '1')
                                                 <i
                                                     class="fa-regular fa-clock"style="font-size: 14px;color:#fff;background-color:#FF8B13;padding:4px 4px 4px 4px;border-radius:.375rem;"></i>
-                                            @elseif ($item->booking_status == '2')
-                                                <i class="fa-solid fa-square-check" style="color: green;font-size:24px"></i>
-                                            @else
+                                            @elseif ($item->booking_status == '3')
                                                 <i class="fa-sharp fa-solid fa-rectangle-xmark"
                                                     style="color: red;font-size:24px"></i>
+                                            @else
+                                                <i class="fa-solid fa-square-check" style="color: green;font-size:24px"></i>
                                             @endif
                                         </td>
                                         <td align="center" id="manage">
@@ -96,7 +96,7 @@
                                                     onclick="alertCancel({{ $item->id }})">
                                                     <i class="fa-solid fa-rectangle-xmark"></i><span>ยกเลิก</span>
                                                 </button>
-                                            @elseif($item->booking_status == '2')
+                                            @elseif($item->booking_status == '5')
                                                 @if ($item->comment == null && $item->point_booking == null)
                                                     <button class="btn btn-info btn-sm me-2 text-white"
                                                         style="font-size: 13px" onclick="comments({{ $item->id }})">

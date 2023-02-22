@@ -109,8 +109,9 @@ Route::group(
         'middleware' => ['IsDriver'],
     ],
     function () {
-      
-        Route::get('dashboard', [\App\Http\Controllers\backend\ShowdatadriverController::class, 'showbooking']);
-        Route::get('compleace',[\App\Http\Controllers\backend\ShowdatadriverController::class, 'compleace']);
+
+        Route::get('dashboard', [\App\Http\Controllers\backend\ShowdatadriverController::class, 'showbooking'])->name('driver.dashboard');
+        Route::get('compleace/{id}',[\App\Http\Controllers\backend\ShowdatadriverController::class, 'compleace']);
+        Route::get('detail/{id}', [\App\Http\Controllers\backend\ShowdataController::class, 'detail_booking']);
     }
 );

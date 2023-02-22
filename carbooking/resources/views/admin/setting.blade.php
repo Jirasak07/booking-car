@@ -81,7 +81,7 @@
             var title = '';
             Swal.fire({
                 template: '#template',
-                confirmButtonText: 'ยืนยัน5555',
+                confirmButtonText: 'ยืนยัน',
                 cancelButtonText: 'ยกเลิก',
                 title: 'ตั้งค่า',
                 showCancelButton: true,
