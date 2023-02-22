@@ -18,7 +18,7 @@ class Aproveapi extends Controller
         if ($booking_aprove->booking_status == 1) {
             $booking_aprove->license_plate = $request->car_id;
             $booking_aprove->driver = $request->driver_id;
-            $booking_aprove->type_car = $request->type_car;
+            $booking_aprove->type_car = $request->type;
             $booking_aprove->booking_status = "2";
             $booking_aprove->save();
 
