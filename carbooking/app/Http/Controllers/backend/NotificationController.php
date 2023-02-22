@@ -65,7 +65,7 @@ class NotificationController extends Controller
 
         $token_device = DB::table('users')->where('role_user',3)->get();
         foreach($token_device as $item){
-            $token = $$item->token_device;
+            $token = $item->token_device;
             $from = "AAAAaxjJHUA:APA91bHLdfsZ_7JfjQEbgDKY49kG21k_OrbGepMG4F-7fq0QN3iaVrS1pXrsyTsmx2ptEvtOGs-lurR8MH_o4RpLUpV5FNCNmrfRQ1504-15_Cg5us3rJ4xA601T9MM842NO7Fz0EUgv";
             $msg = array(
                 'body'  => "มีรายการจองใหม่",
