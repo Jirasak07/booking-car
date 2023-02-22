@@ -42,5 +42,6 @@ class AppServiceProvider extends ServiceProvider
     {
         // //
         $this->autocancle();
+        $this->autobooking();
     }
 }
