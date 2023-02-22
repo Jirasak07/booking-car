@@ -86,8 +86,6 @@ Route::group(
         Route::get('send-out/{id}', [\App\Http\Controllers\backend\EmailController::class, 'sendmailout']);
         Route::get('booking-mail/{id}', [\App\Http\Controllers\backend\EmailController::class, 'mailbooking']);
         Route::get('message', [\App\Http\Controllers\backend\Bookingcontroller::class, 'shownoti']);
-
-
     }
 );
 
@@ -100,3 +98,14 @@ Route::get('car/{id}', [\App\Http\Controllers\backend\ManagementAdminController:
 
 
 
+Route::group(
+    [
+        'prefix' => 'driver',
+        'middleware' => ['IsDriver'],
+    ],
+    function () {
+        Route::get('dashboard',function(){
+            return view('driver.index');
+        })->name('driver.dashboard');
+    }
+);

@@ -85,6 +85,19 @@
 
                 </ul>
             @endif
+            @if (Auth::user()->role_user == '3')
+                <ul class="navbar-nav  ">
+
+                    <li class="{{ 'driver/dashboard' == request()->path() ? 'nav-item active-nav ' : 'nav-item ' }}">
+                        <a class="{{ 'driver/dashboard' == request()->path() ? 'nav-link text-darker' : 'nav-link ' }}"
+                            style="font-weight: 600;font-size:1rem"
+                            href="{{ route('users.view-booking', Auth::user()->id) }}">
+                            <i class="fa-solid fa-calendar-days"></i> {{ __('Dashboard') }}
+                        </a>
+                    </li>
+
+                </ul>
+            @endif
             @if (Auth::user()->role_user == '1')
                 <ul class="navbar-nav  ">
                     <li class="{{ 'admin/dashboard' == request()->path() ? 'nav-item active-nav ' : 'nav-item ' }}">
