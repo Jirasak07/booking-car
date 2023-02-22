@@ -46,6 +46,7 @@ Route::group(
         Route::get('validate_booking', [\App\Http\Controllers\backend\Bookingcontroller::class, 'validate_booking']);
         Route::get('store-mail/{id}', [\App\Http\Controllers\backend\Bookingcontroller::class, 'mailbooking']);
         Route::get('message', [\App\Http\Controllers\backend\Bookingcontroller::class, 'shownoti']);
+        Route::post('comment',[\App\Http\Controllers\backend\ManagementAdminController::class,'comment'])->name('users.comment_booking');
     }
 );
 Route::get('admin/request', [\App\Http\Controllers\backend\ShowdataController::class, 'show_booking']);

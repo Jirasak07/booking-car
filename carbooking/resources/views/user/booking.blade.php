@@ -252,9 +252,10 @@
                         </button>
                     </div>
 
-                    <form method="POST">
+                    <form method="POST" action="{{route('users.comment_booking')}}">
                         @csrf
                         <div class="modal-body">
+                            <input type="hidden" name="id_form" id="id_form" value=""/>
                             <div class="row mb-3">
                                 <strong for="" class="col-sm-2 col-form-label">ชื่อผู้จอง</strong>
                                 <div class="col-sm-10">
@@ -307,12 +308,12 @@
                             <div class="row mb-3">
 
                                 <div class="col">
-                                    <textarea class="form-control" name="comment" rows="6 " placeholder="Comment" maxlength="200"></textarea>
+                                    <textarea class="form-control" name="comment" rows="5 " placeholder="Comment" maxlength="200"></textarea>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" value="" id="EditBooking" class="btn text-white"
+                            <button type="submit" value="" id="CommentBooking" class="btn text-white"
                                 style="background-color: #06d6a0">บันทึก</button>
                             <button type="button" class="btn grey btn-danger" style="background-color: #ef476f"
                                 data-bs-dismiss="modal"data-dismiss="modal">{{ __('ยกเลิก') }}</button>
@@ -614,6 +615,7 @@
                             'ddd ที่ D MMM YYYY เวลา HH:mm')
                         var end = moment(res.booking_end).add(543, 'year').format('ddd ที่ D MMM YYYY เวลา HH:mm')
                         var s_detail = detail_booking;
+                        $('#id_form').val(id);
                         $('#user_d').html(res.name);
                         $('#date_d').html(start + ' - ' + end);
                         $('#car_d').html(car_detail);
