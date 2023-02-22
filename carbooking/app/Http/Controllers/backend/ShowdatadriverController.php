@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\Http\Controllers\Api\AppMobile\Bookingapi;
 use App\Http\Controllers\Controller;
 use App\Models\BookingModel;
 use Illuminate\Http\Request;
@@ -14,7 +15,10 @@ class ShowdatadriverController extends Controller
     public function showbooking(){
         $id = Auth::id();
         $booking = DB::table('tb_booking')->where('booking_status','>',1)->where('driver',$id)->get();
-        return view('driver.index')->with(['booking'=>$booking]);
+
+        $sumbooking = BookingModel::count();
+        $padding = BookingModel::where('booking_status',2)->count();
+         return view('driver.index')->with(['booking'=>$booking,'sumbooking'=>$sumbooking,'padding'=>$padding]);
     }
     public function compleace($id){
         $booking_compleace = BookingModel::find($id);
