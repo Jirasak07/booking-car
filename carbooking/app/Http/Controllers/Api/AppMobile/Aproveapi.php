@@ -23,8 +23,7 @@ class Aproveapi extends Controller
             $booking_aprove->save();
 
 
-            return response()->json(['$booking_update'=> $ $booking_aprove//,'id_in' =>$id_form
-        ],201);
+            return response()->json(201);
         } else {
             return  response()->json('รายการนี้ถูกยกเลิกไปแล้ว');
         }
