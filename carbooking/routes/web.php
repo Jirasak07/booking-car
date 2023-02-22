@@ -108,8 +108,8 @@ Route::group(
         'middleware' => ['IsDriver'],
     ],
     function () {
-        Route::get('dashboard',function(){
-            return view('driver.index');
-        })->name('driver.dashboard');
+      
+        Route::get('dashboard', [\App\Http\Controllers\backend\ShowdatadriverController::class, 'showbooking']);
+        Route::get('compleace',[\App\Http\Controllers\backend\ShowdatadriverController::class, 'compleace']);
     }
 );
