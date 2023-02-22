@@ -276,20 +276,7 @@ class Bookingcontroller extends Controller
         sleep(3);
         event(new StoreNotification('มีรายการจองใหม่'));
     }
-    public function mailbooking($id)
-    {
-        $booking = BookingModel::find($id);
-        $item = $booking;
-        $data = [
-            'title' => 'BookingCar(การจองรถ)',
-            'sdate' => $item->booking_start,
-            'edate' => $item->booking_end,
-            'detail' => $item->booking_detail,
-
-        ];
-        Mail::to('wirunsak2003@gmail.com')->send(new EmailComponent($data));
-        return response()->json('Success');
-    }
+   
     public function edit_booking(Request $request)
     {
         $timeafter = timebookingModel::find(1);
