@@ -12,6 +12,26 @@ class AproveController extends Controller
 {
     //
 
+
+    public function aprove_in(Request $request)
+    {
+
+        $id = $request->id_form;
+        $booking_update = BookingModel::find($id);
+        if ($booking_update->booking_status == 1) {
+            $booking_update->license_plate = $request->car_id;
+            $booking_update->driver = $request->driver_id;
+            $booking_update->type_car = $request->type;
+            $booking_update->booking_status = "2";
+            $booking_update->save();
+
+
+            return redirect()->back()->with('idf', $id);
+        } else {
+            return redirect()->back()->with('success', "รายการนี้ถูกยกเลิกไปแล้ว");
+        }
+
+    }
     public function aprove_out(Request $request)
     {
         $id = $request->id_form;
