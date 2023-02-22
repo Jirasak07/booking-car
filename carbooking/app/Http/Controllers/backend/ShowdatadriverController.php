@@ -24,5 +24,6 @@ class ShowdatadriverController extends Controller
         $booking_compleace = BookingModel::find($id);
         $booking_compleace->booking_status = 5;
         $booking_compleace->save();
+        return response('success');
     }
 }
