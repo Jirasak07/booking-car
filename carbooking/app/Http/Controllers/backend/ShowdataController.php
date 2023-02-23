@@ -433,29 +433,34 @@ class ShowdataController extends Controller
 
         if ($booking->type_car == '1') {
             $detail1 = DB::table('tb_booking')
-            ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
-            ->join('users', 'tb_booking.username', '=', 'users.id')
+           ->join('users','tb_booking.driver','=','users.id')
+            ->join('tb_cars','tb_booking.license_plate','=','tb_cars.id')
             ->where('tb_booking.id', '=', $id)
-            ->select('tb_cars.car_license as car', 'tb_cars.car_model as car_detail', 'booking_start as sdate', 'booking_end as edate', 'booking_detail', 'users.name as name_user', 'booking_status', 'type_car')
+            ->select( 'users.name as driver','car_license','booking_start', 'booking_end', 'booking_detail',  'booking_status', 'type_car')
             ->get();
-        $detail2=DB::table('tb_booking')
-        ->join('users', 'tb_booking.driver', '=', 'users.id')
-        ->where('tb_booking.id', '=', $id)
-        ->select('users.name as driver', 'tb_cars.car_license as car', 'tb_cars.car_model as car_detail', 'booking_start as sdate', 'booking_end as edate', 'booking_detail', 'users.name as name_user', 'booking_status', 'type_car')
-        ->get();
-    
-        $Detail = [
-            'car' =>  $detail1->car,
-            'car_detail' => $detail1->car_detail,
-            'driver' => $detail2->driver,
-            'sdate' => $detail1->sdate,
-            'edate' => $detail1->edate,
-            'booking_detail' => $detail1->booking_detail,
-            'name_user' => $detail1->name_user,
-            'booking_status' => $detail1->booking_status,
-            'type_car' => $detail1->type_car,
+            $detail2 = DB::table('tb_booking')
+            ->join('users','tb_booking.username','=','users.id')
+         
+             ->where('tb_booking.id', '=', $id)
+             ->select( 'users.name as user')
+             ->get();
+
+
+             $row= $detail2[0];
+        $item = $detail1[0];
+        $Detail[] = [
+            'user'=> $row->user,
+            'driver'=> $item->driver,
+          'car'=> $item->car_license,
+            'sdate' => $item->booking_start,
+            'edate' => $item->booking_end,
+            'booking_detail' => $item->booking_detail,
+       
+            'booking_status' => $item->booking_status,
+            'type_car' => $item->type_car,
            
         ];
+
         } else if ($booking->type_car == '2') {
             $Detail = DB::table('tb_booking')
 
@@ -471,9 +476,9 @@ class ShowdataController extends Controller
                 ->select('booking_start as sdate', 'booking_end as edate', 'booking_detail', 'type_car', 'driver', 'license_plate as car', 'users.name as name_user','booking_status','type_car')
                 ->get();
         }
-        return response()->json([
-            'detail' => $Detail,
-        ]);
+        return response()->json(
+            $Detail
+        );
 
     }
     function show_booking()
