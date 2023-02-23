@@ -432,9 +432,12 @@
                         }else if (res.booking_status == '5') {
                             status = 'ดำเนินการเสร็จสิ้น';
                             $('#status_booking').css("color", "green");
-                        } else {
+                        } else if (res.booking_status == '3') {
                             status = 'ยกเลิกการจอง';
                             $('#status_booking').css("color", "red");
+                        }else{
+                            status = 'กำลังดำเนินการ';
+                            $('#status_booking').css("color", "#FFB100");
                         }
                         if (res.car_license == '-') {
                             car_detail = '-';
