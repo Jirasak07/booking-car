@@ -123,8 +123,10 @@
                                 <a class="{{ 'admin/request-all' == request()->path() ? 'nav-link-sub text-primary' : 'nav-link-sub  ' }}"
                                     style="font-weight: 600;font-size:0.9rem"
                                     href="{{ route('admin.booking_request') }}">
-                                    <i class="fa-sharp fa-solid fa-circle-dot" style="font-size: 50%"></i>
-                                    {{ __('รายการจองรถทั้งหมด') }} <div style="font-size: 12px" class="text-danger" >[ <label for="" id="request" ></label> ]</div>
+                                    <i class="fa-sharp fa-solid fa-circle-dot" style="font-size: 40%"></i>
+                                    {{ __('รายการจองรถทั้งหมด') }} <div style="font-size: 12px" class="text-danger">[
+                                        <label for="" id="request"></label> ]
+                                    </div>
 
 
                                 </a>
@@ -157,7 +159,8 @@
                             </li>
                             <li class="nav-item">
                                 <a class="{{ 'admin/manage-car' == request()->path() ? 'nav-link-sub text-primary ' : 'nav-link-sub text-default  ' }}"
-                                    style="font-weight: 600;font-size:0.85rem" href="{{ route('admin.manage-car') }}">
+                                    style="font-weight: 600;font-size:0.85rem"
+                                    href="{{ route('admin.manage-car') }}">
                                     <i class="fa-sharp fa-solid fa-circle-dot" style="font-size: 50%"></i>
                                     {{ __('จัดการข้อมูลรถภายใน') }}
                                 </a>
@@ -187,3 +190,18 @@
                 class="fa-solid fa-person-walking-arrow-right"></i> ออกจากระบบ</a>
     </div>
 </nav>
+@push('js')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $.ajax({
+                type: 'GET',
+                url: "{{ route('test') }}",
+                dataType: 'JSON',
+                success: function(res) {
+                    console.log(res.booking);
+                    $('#request').html(res.booking);
+                }
+            });
+        });
+    </script>
+@endpush

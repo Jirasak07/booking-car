@@ -336,9 +336,9 @@ class ShowdataController extends Controller
 
 
         $bookings = DB::table('tb_booking')
-        ->join('users', 'tb_booking.username', '=', 'users.id')
+            ->join('users', 'tb_booking.username', '=', 'users.id')
             ->where('tb_booking.booking_end', '>', $format_date)
-            ->select('tb_booking.*','name')
+            ->select('tb_booking.*', 'name')
             ->get();
         $events = array();
 
@@ -352,9 +352,9 @@ class ShowdataController extends Controller
                     'start' => $booking->booking_start,
                     'end' => $booking->booking_end,
                     'color' => '#ffd166',
-                    'data'=>$booking->name,
-                    'type'=>'1',
-                    'titlee'=>'-'
+                    'data' => $booking->name,
+                    'type' => '1',
+                    'titlee' => '-'
 
                 ];
             }
@@ -367,10 +367,10 @@ class ShowdataController extends Controller
             ->where('tb_booking.booking_status', '!=', '3')
             ->where('tb_booking.booking_status', '!=', '1')
             ->where('tb_booking.booking_end', '>', $format_date)
-            ->select('car_license', 'car_model', 'tb_booking.*','name')
+            ->select('car_license', 'car_model', 'tb_booking.*', 'name')
             ->get();
 
-            $driver =DB::table('tb_booking')
+        $driver = DB::table('tb_booking')
 
             ->join('users', 'tb_booking.driver', '=', 'users.id')
             ->where('tb_booking.type_car', '=', '1')
@@ -388,9 +388,9 @@ class ShowdataController extends Controller
                 'start' => $item->booking_start,
                 'end' => $item->booking_end,
                 'color' => '#06d6a0 ',
-                'data'=>$item->name,
-                'type'=>'2',
-                'titlee'=> ' รถภายใน : '. $item->car_model.'  ทะเบียน : '.$item->car_license.' พนักงานขับ : '//---
+                'data' => $item->name,
+                'type' => '2',
+                'titlee' => ' รถภายใน : ' . $item->car_model . '  ทะเบียน : ' . $item->car_license . ' พนักงานขับ : ' //---
 
             ];
         }
@@ -401,7 +401,7 @@ class ShowdataController extends Controller
             ->where('tb_booking.booking_status', '!=', '3')
             ->where('tb_booking.booking_status', '!=', '1')
             ->where('tb_booking.booking_end', '>', $format_date)
-            ->select('car_out_license', 'car_out_model', 'car_out_driver', 'car_out_tel', 'tb_booking.*','name')
+            ->select('car_out_license', 'car_out_model', 'car_out_driver', 'car_out_tel', 'tb_booking.*', 'name')
             ->get();
         $carevents = "รถภายนอก";
         foreach ($booking_join2 as $item2) {
@@ -413,15 +413,13 @@ class ShowdataController extends Controller
                 'start' => $item2->booking_start,
                 'end' => $item2->booking_end,
                 'color' => '#06d6a0 ',
-                'data'=>$item2->name,
-                'type'=>'2',
-                'titlee'=>' รถภายนอก : '.$item2->car_out_model.' ทะเบียน : '.$item2->car_out_license .' เบอร์โทรติดต่อ : '.$item2->car_out_tel ,
+                'data' => $item2->name,
+                'type' => '2',
+                'titlee' => ' รถภายนอก : ' . $item2->car_out_model . ' ทะเบียน : ' . $item2->car_out_license . ' เบอร์โทรติดต่อ : ' . $item2->car_out_tel,
 
             ];
         }
-        return view('admin.dashboard')->with(['calenbook' => $events, 'data2' => $data2, 'data1' => $data1, 'allcar1' => $allcar1, 'allcar2' => $allcar2, 'bookingcarAllin' => $bookingcarAllin, 'bookingcarAllout' => $bookingcarAllout, 'car' => $car, 'allbook' => $allbooking, 'pending' => $pending, 'approve' => $approve, 'cancel' => $cancel, 'bookingcarin' => $bookingcarin])
-
-        ;
+        return view('admin.dashboard')->with(['calenbook' => $events, 'data2' => $data2, 'data1' => $data1, 'allcar1' => $allcar1, 'allcar2' => $allcar2, 'bookingcarAllin' => $bookingcarAllin, 'bookingcarAllout' => $bookingcarAllout, 'car' => $car, 'allbook' => $allbooking, 'pending' => $pending, 'approve' => $approve, 'cancel' => $cancel, 'bookingcarin' => $bookingcarin]);
     }
 
 
@@ -432,52 +430,51 @@ class ShowdataController extends Controller
 
         if ($booking->type_car == '1') {
             $detail1 = DB::table('tb_booking')
-           ->join('users','tb_booking.driver','=','users.id')
-            ->join('tb_cars','tb_booking.license_plate','=','tb_cars.id')
-            ->where('tb_booking.id', '=', $id)
-            ->select( 'users.name as driver','car_license','booking_start', 'booking_end', 'booking_detail',  'booking_status', 'type_car')
-            ->get();
+                ->join('users', 'tb_booking.driver', '=', 'users.id')
+                ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
+                ->where('tb_booking.id', '=', $id)
+                ->select('users.name as driver', 'car_license','car_model as car_detail', 'booking_start', 'booking_end', 'booking_detail',  'booking_status', 'type_car')
+                ->get();
             $detail2 = DB::table('tb_booking')
-            ->join('users','tb_booking.username','=','users.id')
+                ->join('users', 'tb_booking.username', '=', 'users.id')
 
-             ->where('tb_booking.id', '=', $id)
-             ->select( 'users.name as user')
-             ->get();
+                ->where('tb_booking.id', '=', $id)
+                ->select('users.name as user')
+                ->get();
 
 
-             $row= $detail2[0];
-        $item = $detail1[0];
-        $Detail[] = [
-            'user'=> $row->user,
-            'driver'=> $item->driver,
-          'car'=> $item->car_license,
-            'sdate' => $item->booking_start,
-            'edate' => $item->booking_end,
-            'booking_detail' => $item->booking_detail,
+            $row = $detail2[0];
+            $item = $detail1[0];
+            $Detail[] = [
+                'user' => $row->user,
+                'driver' => $item->driver,
+                'car' => $item->car_license,
+                'sdate' => $item->booking_start,
+                'edate' => $item->booking_end,
+                'booking_detail' => $item->booking_detail,
+                'car_detail'=>$item->car_detail,
+                'booking_status' => $item->booking_status,
+                'type_car' => $item->type_car,
 
-            'booking_status' => $item->booking_status,
-            'type_car' => $item->type_car,
-
-        ];
+            ];
         } else if ($booking->type_car == '2') {
             $Detail = DB::table('tb_booking')
 
                 ->join('users', 'tb_booking.username', '=', 'users.id')
                 ->join('tb_out_cars', 'tb_booking.license_plate', '=', 'tb_out_cars.id')
                 ->where('tb_booking.id', '=', $id)
-                ->select('car_out_license as car', 'car_out_model as car_detail', 'car_out_driver as driver', 'car_out_tel as tel', 'owner', 'booking_start as sdate', 'booking_end as edate', 'booking_detail', 'type_car', 'users.name as user','booking_status')
+                ->select('car_out_license as car', 'car_out_model as car_detail', 'car_out_driver as driver', 'car_out_tel as tel', 'owner', 'booking_start as sdate', 'booking_end as edate', 'booking_detail', 'type_car', 'users.name as user', 'booking_status')
                 ->get();
         } else {
             $Detail = DB::table('tb_booking')
                 ->join('users', 'tb_booking.username', '=', 'users.id')
                 ->where('tb_booking.id', '=', $id)
-                ->select('booking_start as sdate', 'booking_end as edate', 'booking_detail', 'type_car', 'driver', 'license_plate as car', 'users.name as name_user','booking_status','type_car')
+                ->select('booking_start as sdate', 'booking_end as edate', 'booking_detail', 'type_car', 'driver', 'license_plate as car', 'users.name as user', 'booking_status', 'type_car')
                 ->get();
         }
         return response()->json([
             'detail' => $Detail,
         ]);
-
     }
     function show_booking()
     {
@@ -579,7 +576,7 @@ class ShowdataController extends Controller
         }
 
         return response()->json([
-            'res'=>$res,
+            'res' => $res,
             'Alllist' => DB::table('tb_booking')
                 ->where('tb_booking.username', '=', Auth::user()->id)->count(),
             'Alllistpending' => DB::table('tb_booking')
@@ -597,19 +594,21 @@ class ShowdataController extends Controller
         return view('admin.manage_user', ['user' => $user]);
     }
 
-    function show_driver(){
+    function show_driver()
+    {
         $currentURL = request()->getHttpHost();
-        $response = Http::get('http://'.$currentURL.'/index.php/api/driver');
+        $response = Http::get('http://' . $currentURL . '/index.php/api/driver');
 
 
-      $jsonData = $response->json();
+        $jsonData = $response->json();
         return view('admin.manage_driver')->with(['driver' => $jsonData]);
     }
-    function show_car(){
+    function show_car()
+    {
         $currentURL = request()->getHttpHost();
-      $response = Http::get('http://'.$currentURL.'/index.php/api/car');
+        $response = Http::get('http://' . $currentURL . '/index.php/api/car');
 
-      $jsonData = $response->json();
+        $jsonData = $response->json();
         return view('admin.manage_car')->with(['car' => $jsonData]);
     }
 
@@ -628,26 +627,23 @@ class ShowdataController extends Controller
                         ->orWhere(function ($query) use ($sdate) {
                             $query->Where('tb_booking.booking_end', '>', $sdate)
                                 ->Where('tb_booking.booking_start', '<', $sdate);
-
-                        })  ->orWhere(function ($query) use ($sdate, $edate) {
+                        })->orWhere(function ($query) use ($sdate, $edate) {
                             $query->where('tb_booking.booking_start', '>', $sdate)
                                 ->Where('tb_booking.booking_start', '<', $edate);
                         })->orWhere(function ($query) use ($edate) {
-                        $query->where('tb_booking.booking_start', '>', $edate)
-                            ->Where('tb_booking.booking_end', '<', $edate);
-                    })->orWhere(function ($query) use ($sdate, $edate) {
-                        $query->where('tb_booking.booking_start', '>', $sdate)
-                            ->Where('tb_booking.booking_end', '<', $edate);
-                    })->orWhere(function ($query) use ($sdate, $edate) {
-                        $query->where('tb_booking.booking_start', '<', $sdate)
-                            ->Where('tb_booking.booking_end', '>', $edate);
-                    })->orWhere(function ($query) use ($sdate, $edate) {
-                        $query->where('tb_booking.booking_start', '=', $sdate)
-                            ->Where('tb_booking.booking_end', '=', $edate);
-                    })
-                    ;
-                })
-                ;
+                            $query->where('tb_booking.booking_start', '>', $edate)
+                                ->Where('tb_booking.booking_end', '<', $edate);
+                        })->orWhere(function ($query) use ($sdate, $edate) {
+                            $query->where('tb_booking.booking_start', '>', $sdate)
+                                ->Where('tb_booking.booking_end', '<', $edate);
+                        })->orWhere(function ($query) use ($sdate, $edate) {
+                            $query->where('tb_booking.booking_start', '<', $sdate)
+                                ->Where('tb_booking.booking_end', '>', $edate);
+                        })->orWhere(function ($query) use ($sdate, $edate) {
+                            $query->where('tb_booking.booking_start', '=', $sdate)
+                                ->Where('tb_booking.booking_end', '=', $edate);
+                        });
+                });
             })
             ->select('tb_booking.license_plate', 'tb_booking.driver')
             ->orderBy('tb_booking.booking_start')
@@ -657,29 +653,25 @@ class ShowdataController extends Controller
             $car[] = [
                 'id' => $item->license_plate,
             ];
-
         }
         $driver = array();
         foreach ($reserved_cars as $item) {
             $driver[] = [
                 'id' => $item->driver,
             ];
-
         }
 
         $count = BookingModel::where('booking_status', '2')->where('type_car', '1')->count();
         if ($count < 1) {
             $unreserved_cars = CarModel::all();
-            $unreserved_driver = DB::table('users')->where('role_user',3)->where('status',1)->get();
+            $unreserved_driver = DB::table('users')->where('role_user', 3)->where('status', 1)->get();
         } else {
             $unreserved_cars = DB::table('tb_cars')
                 ->where('car_status', '1')
                 ->where(function ($query) use ($car) {
                     $query->where(function ($query) use ($car) {
                         $query->Where('tb_cars.id', '!=', $car);
-
-                    })
-                    ;
+                    });
                 })
                 ->get();
 
@@ -688,15 +680,12 @@ class ShowdataController extends Controller
                 ->where(function ($query) use ($driver) {
                     $query->where(function ($query) use ($driver) {
                         $query->Where('users.id', '!=', $driver);
-
-                    })
-                    ;
+                    });
                 })
                 ->get();
         }
 
         return response()->json(['car' => $unreserved_cars, 'driver' => $unreserved_driver]);
-
     }
 
 
@@ -722,21 +711,19 @@ class ShowdataController extends Controller
                             $query->where('tb_booking.booking_start', '>', $sdate)
                                 ->Where('tb_booking.booking_start', '<', $edate);
                         })->orWhere(function ($query) use ($edate) {
-                        $query->where('tb_booking.booking_start', '>', $edate)
-                            ->Where('tb_booking.booking_end', '<', $edate);
-                    })->orWhere(function ($query) use ($sdate, $edate) {
-                        $query->where('tb_booking.booking_start', '>', $sdate)
-                            ->Where('tb_booking.booking_end', '<', $edate);
-                    })->orWhere(function ($query) use ($sdate, $edate) {
-                        $query->where('tb_booking.booking_start', '<', $sdate)
-                            ->Where('tb_booking.booking_end', '>', $edate);
-                    })->orWhere(function ($query) use ($sdate, $edate) {
-                        $query->where('tb_booking.booking_start', '=', $sdate)
-                            ->Where('tb_booking.booking_end', '=', $edate);
-                    })
-                    ;
-                })
-                ;
+                            $query->where('tb_booking.booking_start', '>', $edate)
+                                ->Where('tb_booking.booking_end', '<', $edate);
+                        })->orWhere(function ($query) use ($sdate, $edate) {
+                            $query->where('tb_booking.booking_start', '>', $sdate)
+                                ->Where('tb_booking.booking_end', '<', $edate);
+                        })->orWhere(function ($query) use ($sdate, $edate) {
+                            $query->where('tb_booking.booking_start', '<', $sdate)
+                                ->Where('tb_booking.booking_end', '>', $edate);
+                        })->orWhere(function ($query) use ($sdate, $edate) {
+                            $query->where('tb_booking.booking_start', '=', $sdate)
+                                ->Where('tb_booking.booking_end', '=', $edate);
+                        });
+                });
             })
             ->select('tb_booking.license_plate', 'tb_booking.driver')
             ->orderBy('tb_booking.booking_start')
@@ -746,29 +733,25 @@ class ShowdataController extends Controller
             $car[] = [
                 'id' => $item->license_plate,
             ];
-
         }
         $driver = array();
         foreach ($reserved_cars as $item) {
             $driver[] = [
                 'id' => $item->driver,
             ];
-
         }
 
         $count = BookingModel::where('booking_status', '2')->where('type_car', '1')->count();
         if ($count < 1) {
             $unreserved_cars = CarModel::all();
-            $unreserved_driver = DB::table('users')->where('role_user','3')->where('status',1)->get();
+            $unreserved_driver = DB::table('users')->where('role_user', '3')->where('status', 1)->get();
         } else {
             $unreserved_cars = DB::table('tb_cars')
                 ->where('car_status', '1')
                 ->where(function ($query) use ($car) {
                     $query->where(function ($query) use ($car) {
                         $query->Where('tb_cars.id', '!=', $car);
-
-                    })
-                    ;
+                    });
                 })
                 ->get();
 
@@ -777,20 +760,17 @@ class ShowdataController extends Controller
                 ->where(function ($query) use ($driver) {
                     $query->where(function ($query) use ($driver) {
                         $query->Where('users.id', '!=', $driver);
-
-                    })
-                    ;
+                    });
                 })
                 ->get();
         }
 
         return response()->json(['car' => $unreserved_cars, 'driver' => $unreserved_driver]);
-
     }
 
-    function noti_menu(){
-        $cnt_booking = BookingModel::where('booking_status',1)->count();
-        return response()->json(['booking' => $cnt_booking ]);
+    function noti_menu()
+    {
+        $cnt_booking = BookingModel::where('booking_status', 1)->count();
+        return response()->json(['booking' => $cnt_booking]);
     }
-
 }

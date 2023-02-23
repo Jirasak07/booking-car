@@ -127,7 +127,7 @@
 
                     var b_start = moment(info.startStr);
                     var b_end = moment(info.endStr);
-
+                    var booking_e = moment(b_end,'HH:mm:ss a').add(1,'minutes').format('YYYY-MM-DD HH:mm');
                     $.ajax({
                         url: '/admin/validate_booking',
                         method: 'GET',
@@ -178,7 +178,7 @@
                                 $('#booking_start').html(booking_start);
                                 $('#booking_end').html(booking_end);
                                 document.getElementById('date_start').value = booking_start;
-                                document.getElementById('date_end').value = booking_end;
+                                document.getElementById('date_end').value = booking_e;
 
                                 document.getElementById('location').focus();
                                 //tag input datetime-local เลือกวันย้อนหลังไม่ได้
@@ -253,7 +253,7 @@
 <div class="modal fade" id="bookingModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="bookingModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
-        <form id="didi" method="POST" action="{{ route('send-booking') }}">
+        <form id="didi" method="POST" >
             @csrf
             <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}" />
             <div class="modal-content">
