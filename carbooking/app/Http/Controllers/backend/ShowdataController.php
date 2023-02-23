@@ -486,7 +486,8 @@ class ShowdataController extends Controller
         $booking_wait = DB::table('tb_booking')
             ->join('users', 'tb_booking.username', '=', 'users.id')
             ->where('tb_booking.username', '=', Auth::user()->id)
-            ->ORDERBY('booking_status', 5, 1, 4,2)
+            ->ORDERBY('comment', 'ASC')
+            ->ORDERBY('booking_status', 'desc')
             ->select('tb_booking.*', 'users.username')
             ->get();
 
