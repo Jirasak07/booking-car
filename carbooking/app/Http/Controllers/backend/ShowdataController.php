@@ -627,23 +627,39 @@ class ShowdataController extends Controller
                         ->orWhere(function ($query) use ($sdate) {
                             $query->Where('tb_booking.booking_end', '>', $sdate)
                                 ->Where('tb_booking.booking_start', '<', $sdate);
-                        })->orWhere(function ($query) use ($sdate, $edate) {
+                        })  ->orWhere(function ($query) use ($sdate, $edate) {
                             $query->where('tb_booking.booking_start', '>', $sdate)
                                 ->Where('tb_booking.booking_start', '<', $edate);
                         })->orWhere(function ($query) use ($edate) {
-                            $query->where('tb_booking.booking_start', '>', $edate)
-                                ->Where('tb_booking.booking_end', '<', $edate);
-                        })->orWhere(function ($query) use ($sdate, $edate) {
-                            $query->where('tb_booking.booking_start', '>', $sdate)
-                                ->Where('tb_booking.booking_end', '<', $edate);
-                        })->orWhere(function ($query) use ($sdate, $edate) {
-                            $query->where('tb_booking.booking_start', '<', $sdate)
-                                ->Where('tb_booking.booking_end', '>', $edate);
-                        })->orWhere(function ($query) use ($sdate, $edate) {
-                            $query->where('tb_booking.booking_start', '=', $sdate)
-                                ->Where('tb_booking.booking_end', '=', $edate);
-                        });
-                });
+                        $query->where('tb_booking.booking_start', '>', $edate)
+                            ->Where('tb_booking.booking_end', '<', $edate);
+                    })->orWhere(function ($query) use ($sdate, $edate) {
+                        $query->where('tb_booking.booking_start', '>', $sdate)
+                            ->Where('tb_booking.booking_end', '<', $edate);
+                    })->orWhere(function ($query) use ($sdate, $edate) {
+                        $query->where('tb_booking.booking_start', '<', $sdate)
+                            ->Where('tb_booking.booking_end', '>', $edate);
+                    })->orWhere(function ($query) use ($sdate, $edate) {
+                        $query->where('tb_booking.booking_start', '=', $sdate)
+                            ->Where('tb_booking.booking_end', '=', $edate);
+                    })->orWhere(function ($query) use ($sdate, $edate) {
+                        $query->where('tb_booking.booking_start', '=', $sdate)
+                            ->Where('tb_booking.booking_end', '<', $edate);
+                    })->orWhere(function ($query) use ($sdate, $edate) {
+                        $query->where('tb_booking.booking_start', '=', $sdate)
+                            ->Where('tb_booking.booking_end', '<', $edate);
+                    })
+                    ->orWhere(function ($query) use ($sdate, $edate) {
+                        $query->where('tb_booking.booking_start', '<', $sdate)
+                            ->Where('tb_booking.booking_end', '=', $edate);
+                    })
+                    ->orWhere(function ($query) use ($sdate, $edate) {
+                        $query->where('tb_booking.booking_start', '>', $sdate)
+                            ->Where('tb_booking.booking_end', '=', $edate);
+                    })
+                    ;
+                })
+                ;
             })
             ->select('tb_booking.license_plate', 'tb_booking.driver')
             ->orderBy('tb_booking.booking_start')
@@ -653,25 +669,29 @@ class ShowdataController extends Controller
             $car[] = [
                 'id' => $item->license_plate,
             ];
+
         }
         $driver = array();
         foreach ($reserved_cars as $item) {
             $driver[] = [
                 'id' => $item->driver,
             ];
+
         }
 
         $count = BookingModel::where('booking_status', '2')->where('type_car', '1')->count();
         if ($count < 1) {
             $unreserved_cars = CarModel::all();
-            $unreserved_driver = DB::table('users')->where('role_user', 3)->where('status', 1)->get();
+            $unreserved_driver = DB::table('users')->where('role_user',3)->where('status',1)->get();
         } else {
             $unreserved_cars = DB::table('tb_cars')
                 ->where('car_status', '1')
                 ->where(function ($query) use ($car) {
                     $query->where(function ($query) use ($car) {
                         $query->Where('tb_cars.id', '!=', $car);
-                    });
+
+                    })
+                    ;
                 })
                 ->get();
 
@@ -680,15 +700,16 @@ class ShowdataController extends Controller
                 ->where(function ($query) use ($driver) {
                     $query->where(function ($query) use ($driver) {
                         $query->Where('users.id', '!=', $driver);
-                    });
+
+                    })
+                    ;
                 })
                 ->get();
         }
 
         return response()->json(['car' => $unreserved_cars, 'driver' => $unreserved_driver]);
+
     }
-
-
 
 
 
@@ -699,30 +720,43 @@ class ShowdataController extends Controller
         $edate = $date->booking_end;
         $reserved_cars = DB::table('tb_cars')
             ->leftJoin('tb_booking', 'tb_cars.id', '=', 'tb_booking.license_plate')
-            ->where('tb_booking.id', '<>', $id)
+            ->where('tb_booking.id', '!=', $id)
             ->where(function ($query) use ($sdate, $edate) {
                 $query->where(function ($query) use ($sdate, $edate) {
-                    $query->where('tb_booking.booking_status', '=', '2')
+                    $query->where('tb_booking.booking_status', '==', '2')
                         ->orWhere(function ($query) use ($sdate) {
                             $query->Where('tb_booking.booking_end', '>', $sdate)
                                 ->Where('tb_booking.booking_start', '<', $sdate);
-                        })
-                        ->orWhere(function ($query) use ($sdate, $edate) {
+                        })  ->orWhere(function ($query) use ($sdate, $edate) {
                             $query->where('tb_booking.booking_start', '>', $sdate)
                                 ->Where('tb_booking.booking_start', '<', $edate);
                         })->orWhere(function ($query) use ($edate) {
-                            $query->where('tb_booking.booking_start', '>', $edate)
-                                ->Where('tb_booking.booking_end', '<', $edate);
-                        })->orWhere(function ($query) use ($sdate, $edate) {
-                            $query->where('tb_booking.booking_start', '>', $sdate)
-                                ->Where('tb_booking.booking_end', '<', $edate);
-                        })->orWhere(function ($query) use ($sdate, $edate) {
-                            $query->where('tb_booking.booking_start', '<', $sdate)
-                                ->Where('tb_booking.booking_end', '>', $edate);
-                        })->orWhere(function ($query) use ($sdate, $edate) {
-                            $query->where('tb_booking.booking_start', '=', $sdate)
-                                ->Where('tb_booking.booking_end', '=', $edate);
-                        });
+                        $query->where('tb_booking.booking_start', '>', $edate)
+                            ->Where('tb_booking.booking_end', '<', $edate);
+                    })->orWhere(function ($query) use ($sdate, $edate) {
+                        $query->where('tb_booking.booking_start', '>', $sdate)
+                            ->Where('tb_booking.booking_end', '<', $edate);
+                    })->orWhere(function ($query) use ($sdate, $edate) {
+                        $query->where('tb_booking.booking_start', '<', $sdate)
+                            ->Where('tb_booking.booking_end', '>', $edate);
+                    })->orWhere(function ($query) use ($sdate, $edate) {
+                        $query->where('tb_booking.booking_start', '=', $sdate)
+                            ->Where('tb_booking.booking_end', '=', $edate);
+                    })->orWhere(function ($query) use ($sdate, $edate) {
+                        $query->where('tb_booking.booking_start', '=', $sdate)
+                            ->Where('tb_booking.booking_end', '<', $edate);
+                    })->orWhere(function ($query) use ($sdate, $edate) {
+                        $query->where('tb_booking.booking_start', '=', $sdate)
+                            ->Where('tb_booking.booking_end', '<', $edate);
+                    })
+                    ->orWhere(function ($query) use ($sdate, $edate) {
+                        $query->where('tb_booking.booking_start', '<', $sdate)
+                            ->Where('tb_booking.booking_end', '=', $edate);
+                    })
+                    ->orWhere(function ($query) use ($sdate, $edate) {
+                        $query->where('tb_booking.booking_start', '>', $sdate)
+                            ->Where('tb_booking.booking_end', '=', $edate);
+                    });
                 });
             })
             ->select('tb_booking.license_plate', 'tb_booking.driver')
