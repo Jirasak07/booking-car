@@ -647,7 +647,7 @@ class ShowdataController extends Controller
                             ->Where('tb_booking.booking_end', '<', $edate);
                     })->orWhere(function ($query) use ($sdate, $edate) {
                         $query->where('tb_booking.booking_start', '=', $sdate)
-                            ->Where('tb_booking.booking_end', '<', $edate);
+                            ->Where('tb_booking.booking_end', '>', $edate);
                     })
                     ->orWhere(function ($query) use ($sdate, $edate) {
                         $query->where('tb_booking.booking_start', '<', $sdate)
@@ -696,6 +696,7 @@ class ShowdataController extends Controller
                 ->get();
 
             $unreserved_driver = DB::table('users')
+            ->where('role_user',3)
                 ->where('status', '1')
                 ->where(function ($query) use ($driver) {
                     $query->where(function ($query) use ($driver) {

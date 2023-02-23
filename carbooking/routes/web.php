@@ -10,7 +10,7 @@ use App\Http\Controllers\DriverController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -95,7 +95,7 @@ Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'login'
 
 Route::get('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 Route::get('/noti', [\App\Http\Controllers\backend\ShowdataController::class, 'noti_menu'])->name('test');
-Route::get('car/{id}', [\App\Http\Controllers\backend\ManagementAdminController::class, 'caranddriver_aprove']);
+Route::get('car/{id}', [HomeController::class, 'caranddriver_aprove']);
 Route::get('noti_aprove/{id_booking}', [\App\Http\Controllers\backend\NotificationController::class, 'noti_aprove']);
 Route::get('noti_booking', [\App\Http\Controllers\backend\NotificationController::class, 'noti_booking']);
 Route::get('/no2', function () {

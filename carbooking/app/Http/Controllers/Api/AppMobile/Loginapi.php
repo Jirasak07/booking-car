@@ -71,6 +71,8 @@ class Loginapi extends Controller
                     return response()->json(['role'=>'admin','status'=>'success','id'=>$user->id]);
                 }else if($user->role_user == "2"){
                     return response()->json(['role'=>'user','status'=>'success','id'=>$user->id]);
+                }else if($user->role_user == "3"){
+                    return response()->json(['role'=>'Driver','status'=>'success','id'=>$user->id]);
                 }
                 
                
