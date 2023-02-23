@@ -68,11 +68,11 @@ class Loginapi extends Controller
                 }
                
                 if($user->role_user == "1"){
-                    return response()->json(['role'=>'admin','status'=>'success','id'=>$user->id]);
+                    return response()->json(['role'=>'admin','status'=>'success','id'=>$user->id,'name'=>$user->name]);
                 }else if($user->role_user == "2"){
-                    return response()->json(['role'=>'user','status'=>'success','id'=>$user->id]);
+                    return response()->json(['role'=>'user','status'=>'success','id'=>$user->id,'name'=>$user->name]);
                 }else if($user->role_user == "3"){
-                    return response()->json(['role'=>'Driver','status'=>'success','id'=>$user->id]);
+                    return response()->json(['role'=>'Driver','status'=>'success','id'=>$user->id,'name'=>$user->name]);
                 }
                 
                
