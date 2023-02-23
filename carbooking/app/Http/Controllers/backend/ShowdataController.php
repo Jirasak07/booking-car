@@ -471,7 +471,7 @@ class ShowdataController extends Controller
             $Detail = DB::table('tb_booking')
                 ->join('users', 'tb_booking.username', '=', 'users.id')
                 ->where('tb_booking.id', '=', $id)
-                ->select('booking_start as sdate', 'booking_end as edate', 'booking_detail', 'type_car', 'driver', 'license_plate as car', 'users.name as name_user','booking_status','type_car')
+                ->select('booking_start as sdate', 'booking_end as edate', 'booking_detail', 'type_car', 'driver', 'license_plate as car', 'users.name as user','booking_status','type_car')
                 ->get();
         }
         return response()->json([
