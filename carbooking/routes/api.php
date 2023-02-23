@@ -32,6 +32,7 @@ Route::get('booking',[BookingController::class,'index']);
 Route::get('calendar',[BookingController::class,'showcalendar']);
 Route::get('pageupdate',[BookingController::class,'pageupdate']);
 Route::get('showhistory',[BookingController::class,'showhistory']);
+Route::get('showhidetail/{id}',[BookingController::class,'detail_history']);
 
 
 
