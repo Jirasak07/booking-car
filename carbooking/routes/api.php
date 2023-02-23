@@ -70,4 +70,4 @@ Route::get('change-status/driver/{id}',[Settingapi::class,'DriverchangeStatus'])
 Route::get('change-status/car/{id}',[Settingapi::class,'CarchangeStatus']);//เปลี่ยนสถานะรถ
 Route::get('change-role/user/{id}',[Settingapi::class,'edit_role']);//เปลี่ยนสถานะuser
 
-Route::get('chklogin',('App\Http\Controllers\api\AppMobile\Loginapi@login'));//check login
+Route::post('chklogin',('App\Http\Controllers\api\AppMobile\Loginapi@login'));//check login
