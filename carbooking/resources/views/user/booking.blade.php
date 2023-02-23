@@ -423,10 +423,13 @@
                     success: function(res) {
                         moment.locale('th');
                         if (res.booking_status == '1') {
-                            status = 'กำลังดำเนินการ';
+                            status = 'กำลังดำเนินการจอง';
                             $('#status_booking').css("color", "#FFB100");
                             //status.css("color":"red");
                         } else if (res.booking_status == '2') {
+                            status = 'ดำเนินการจองเสร็จสิ้น';
+                            $('#status_booking').css("color", "green");
+                        }else if (res.booking_status == '5') {
                             status = 'ดำเนินการเสร็จสิ้น';
                             $('#status_booking').css("color", "green");
                         } else {
