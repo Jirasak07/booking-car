@@ -448,6 +448,7 @@
                         }
                         var detail_booking = res.booking_detail;
                         var s_detail = detail_booking.split('~');
+                        console.log(s_detail);
                         if (s_detail.length == 2) {
                             $('#detail_booking_cancel').html(s_detail[1]);
                         } else {
