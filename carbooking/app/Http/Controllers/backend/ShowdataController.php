@@ -30,10 +30,10 @@ class ShowdataController extends Controller
     public function history()
     {
         $currentURL = request()->getHttpHost();
-        
+
         $his = Http::get('http://' . $currentURL . '/index.php/api/showhistory');
 
-       
+
         $datahis = $his->json();
 
         return view('admin.booking_history')->with(['hiss' => $datahis]);
@@ -126,9 +126,9 @@ class ShowdataController extends Controller
         return response()->json(['data' => $jsonData]);
     }
 
-   
 
-   
+
+
 
     public function refresh_calendar()
     {
@@ -371,7 +371,7 @@ class ShowdataController extends Controller
             ->get();
 
             $driver =DB::table('tb_booking')
-    
+
             ->join('users', 'tb_booking.driver', '=', 'users.id')
             ->where('tb_booking.type_car', '=', '1')
             ->where('tb_booking.booking_status', '!=', '3')
@@ -439,7 +439,7 @@ class ShowdataController extends Controller
             ->get();
             $detail2 = DB::table('tb_booking')
             ->join('users','tb_booking.username','=','users.id')
-         
+
              ->where('tb_booking.id', '=', $id)
              ->select( 'users.name as user')
              ->get();
@@ -454,10 +454,10 @@ class ShowdataController extends Controller
             'sdate' => $item->booking_start,
             'edate' => $item->booking_end,
             'booking_detail' => $item->booking_detail,
-       
+
             'booking_status' => $item->booking_status,
             'type_car' => $item->type_car,
-           
+
         ];
         } else if ($booking->type_car == '2') {
             $Detail = DB::table('tb_booking')
@@ -481,7 +481,7 @@ class ShowdataController extends Controller
     }
     function show_booking()
     {
-  
+
 
         $booking_wait = DB::table('tb_booking')
             ->join('users', 'tb_booking.username', '=', 'users.id')
@@ -496,10 +496,10 @@ class ShowdataController extends Controller
         $Alllistpending = DB::table('tb_booking')
             ->where('tb_booking.username', '=', Auth::user()->id)->where('booking_status', '=', '1')->count();
         $Alllistapprove = DB::table('tb_booking')
-            ->where('tb_booking.username', '=', Auth::user()->id)->where('booking_status', '=', '2')->count();
+            ->where('tb_booking.username', '=', Auth::user()->id)->where('booking_status', '!=', '1')->where('booking_status', '!=', '3')->count();
         $Alllistcancle = DB::table('tb_booking')
             ->where('tb_booking.username', '=', Auth::user()->id)->where('booking_status', '=', '3')->count();
-       
+
         return view('user.booking')->with([/* 'booking' => $booking, */'booking2' => $booking_wait, 'Alllist' => $Alllist, 'Alllistpending' => $Alllistpending, 'Alllistapprove' => $Alllistapprove, 'Alllistcancle' => $Alllistcancle]);
     }
     function detail_booking($id)
@@ -698,10 +698,10 @@ class ShowdataController extends Controller
         return response()->json(['car' => $unreserved_cars, 'driver' => $unreserved_driver]);
 
     }
- 
-  
 
- 
+
+
+
 
     public function caranddriver_edit($id)
     {
