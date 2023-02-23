@@ -89,12 +89,12 @@ class HomeController extends Controller
             ->get();
         $car = array();
         foreach ($reserved_cars as $item) {
-            $car[] = [
+            $car []= [
                 'id' => $item->license_plate,
             ];
 
         }
-       
+        // $cars_id = implode(', ', array_column($car, 'id'));
         $driver = array();
         foreach ($reserved_cars as $item) {
             $driver[] = [
@@ -102,36 +102,30 @@ class HomeController extends Controller
             ];
 
         }
-       
+
         $count = BookingModel::where('booking_status', '2')->where('type_car', '1')->count();
         if ($count < 1) {
             $unreserved_cars = CarModel::all();
             $unreserved_driver = DB::table('users')->where('role_user',3)->where('status',1)->get();
         } else {
+          
             $unreserved_cars = DB::table('tb_cars')
                 ->where('car_status', '1')
-                ->where(function ($query) use ($car) {
-                    $query->where(function ($query) use ($car) {
-                        $query->Where('tb_cars.id', '!=', $car);
+               
+                        ->whereNotIn('tb_cars.id', $car)
 
-                    })
-                    ;
-                })
+                
+                    
                 ->get();
 
             $unreserved_driver = DB::table('users')
             ->where('role_user',3)
                 ->where('status', '1')
-                ->where(function ($query) use ($driver) {
-                    $query->where(function ($query) use ($driver) {
-                        $query->Where('users.id', '!=', $driver);
-
-                    })
-                    ;
-                })
+                ->whereNotIn('users.id', $driver)
                 ->get();
         }
-        dd($unreserved_driver);
+ 
+
         return response()->json(['car' => $unreserved_cars, 'driver' => $unreserved_driver]);
 
     }

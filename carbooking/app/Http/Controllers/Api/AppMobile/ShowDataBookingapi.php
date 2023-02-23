@@ -190,22 +190,19 @@ class ShowDataBookingapi extends Controller
             $unreserved_driver = DB::table('users')->where('role_user','3')->get();
         } else {
             $unreserved_cars = DB::table('tb_cars')
-                ->where('car_status', '1')
-                ->where(function ($query) use ($car) {
-                    $query->where(function ($query) use ($car) {
-                        $query->Where('tb_cars.id', '!=', $car);
-                    });
-                })
-                ->get();
+            ->where('car_status', '1')
+           
+                    ->whereNotIn('tb_cars.id', $car)
 
-            $unreserved_driver = DB::table('users')
-                ->where('status', '1')
-                ->where(function ($query) use ($driver) {
-                    $query->where(function ($query) use ($driver) {
-                        $query->Where('users.id', '!=', $driver);
-                    });
-                })
-                ->get();
+            
+                
+            ->get();
+
+        $unreserved_driver = DB::table('users')
+        ->where('role_user',3)
+            ->where('status', '1')
+            ->whereNotIn('users.id', $driver)
+            ->get();
         }
 
         return response()->json(['car' => $unreserved_cars, 'driver' => $unreserved_driver]);
@@ -279,23 +276,19 @@ class ShowDataBookingapi extends Controller
             $unreserved_driver = DB::table('users')->where('role_user','3')->get();
         } else {
             $unreserved_cars = DB::table('tb_cars')
-                ->where('car_status', '1')
-                ->where(function ($query) use ($car) {
-                    $query->where(function ($query) use ($car) {
-                        $query->Where('tb_cars.id', '!=', $car);
-                    });
-                })
-                ->get();
+            ->where('car_status', '1')
+           
+                    ->whereNotIn('tb_cars.id', $car)
 
-            $unreserved_driver = DB::table('users')
-                ->where('role_user',3)
+            
+                
+            ->get();
+
+        $unreserved_driver = DB::table('users')
+        ->where('role_user',3)
             ->where('status', '1')
-                ->where(function ($query) use ($driver) {
-                    $query->where(function ($query) use ($driver) {
-                        $query->Where('users.id', '!=', $driver);
-                    });
-                })
-                ->get();
+            ->whereNotIn('users.id', $driver)
+            ->get();
         }
 
         return response()->json(['car' => $unreserved_cars, 'driver' => $unreserved_driver]);
