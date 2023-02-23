@@ -131,7 +131,7 @@
                             tf = false
                         }
                         Swal.fire({
-                            title: '<div style="font-size:50%" > รายการจองของคุณ : ' + detail[0].name_user +
+                            title: '<div style="font-size:50%" > รายการจองของคุณ : ' + detail[0].user +
                                 ' </div>',
                             html: '<div class=" d-flex justify-content-center "> <div style="width: max-content;"><div class="text-left" style="font-size:0.9rem;">ระยะเวลา : ' +
                                 start + end +

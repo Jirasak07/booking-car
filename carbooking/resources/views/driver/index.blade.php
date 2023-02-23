@@ -8,6 +8,7 @@
     </div>
     <div class="container-fluid mt-4">
         <div class="bg-white rounded shadow-xl m-dash p-2">
+            
             <div class="table-responsive">
                 <table class="table  fw-bold w-100" id="dr_table">
                     <thead class="table-dark table-hover">
@@ -249,7 +250,7 @@
                             namecancel[0].booking_detail + ' </div> </div></div>',
                         icon: 'question',
                         showCancelButton: true,
-                        confirmButtonColor: '#4E31AA',
+                        confirmButtonColor: '#00b4d8',
                         cancelButtonColor: '#ef476f',
                         confirmButtonText: 'ยืนยัน',
                         cancelButtonText: 'ยกเลิก',
