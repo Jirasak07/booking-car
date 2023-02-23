@@ -1,4 +1,4 @@
-@section('title', 'Dashboard')
+
 @extends('layouts.layout')
 @section('content')
     @include('layouts.header')

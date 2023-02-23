@@ -310,7 +310,7 @@
                             <div class="row mb-3">
 
                                 <div class="col">
-                                    <textarea class="form-control" name="comment" rows="5 " placeholder="Comment" maxlength="200"></textarea>
+                                    <textarea class="form-control" name="comment" rows="5 " placeholder="Comment" maxlength="200" required></textarea>
                                 </div>
                             </div>
                         </div>
@@ -392,7 +392,7 @@
                 var s = h.split('/')
                 $.ajax({
                     type: 'GET',
-                    url: '/' + s[2] + '/detail/' + id,
+                    url: '/' + s[1] + '/detail/' + id,
                     dataType: 'JSON',
                     success: function(res) {
                         $('#editdetail').modal('toggle');
@@ -418,7 +418,7 @@
                 console.log(id);
                 $.ajax({
                     type: 'GET',
-                    url: '/' + s[2] + '/detail/' + id,
+                    url: '/' + s[1] + '/detail/' + id,
                     dataType: 'JSON',
                     success: function(res) {
                         moment.locale('th');
@@ -518,7 +518,7 @@
                                 if (result.value) {
                                     $.ajax({
                                         type: 'GET',
-                                        url: '/' + s[2] + '/cancel/' + id + '/' + result.value,
+                                        url: '/' + s[1] + '/cancel/' + id + '/' + result.value,
                                         dataType: 'JSON',
                                         success: function(data) {
                                             if (data.status == 'success') {
@@ -561,7 +561,7 @@
                 var b_start = moment(changeStart);
                 var b_end = moment(changeEnd);
                 $.ajax({
-                    url: '/' + s[2] + '/validate_booking',
+                    url: '/' + s[1] + '/validate_booking',
                     method: 'GET',
                     success: function(res) {
                         console.log(res);
@@ -601,7 +601,7 @@
                 var s = h.split('/')
                 var status = '';
                 var car_detail;
-                var url = '/' + s[2] + '/detail/' + id;
+                var url = '/' + s[1] + '/detail/' + id;
                 //console.log(url);
                 $.ajax({
                     type: 'GET',
