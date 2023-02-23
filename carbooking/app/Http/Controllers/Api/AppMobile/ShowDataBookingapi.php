@@ -28,6 +28,7 @@ class ShowDataBookingapi extends Controller
     {
         $data = DB::table('tb_booking')
             ->join('users', 'tb_booking.username', '=', 'users.id')
+            ->where('booking_status','<>',1)
             ->orderBy('tb_booking.updated_at', 'DESC')
             ->select('tb_booking.id', 'type_car', 'users.name', 'booking_start', 'booking_end', 'booking_status')->get();
         return response()->json($data);
