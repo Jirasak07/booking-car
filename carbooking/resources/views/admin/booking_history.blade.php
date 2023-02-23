@@ -19,14 +19,14 @@
                         $i = 1;
                     @endphp
                     @foreach ($hiss as $history)
-                        @if ($history['booking_status'] == 2 || $history['booking_status'] == 3)
+                        @if ($history['booking_status'] != 1)
                             <tr>
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $history['name'] }}</td>
                                 <td>{{ thaidate('l ที่ j F Y เวลา G:i นาที', strtotime($history['booking_start'])) }}</td>
                                 <td>{{ thaidate('l ที่ j F Y เวลา G:i นาที', strtotime($history['booking_end'])) }}</td>
                                 <td>
-                                    <i class='{{ $history['booking_status'] == 2 ? 'fa-solid fa-square-check text-success' : 'fa-solid fa-square-xmark text-danger ' }}'
+                                    <i class='{{ $history['booking_status'] == 3 ? 'fa-solid fa-square-xmark text-danger ' : 'fa-solid fa-square-check text-success' }}'
                                         style="font-size: 2em"></i>
                                 </td>
                                 <td>
@@ -125,7 +125,7 @@
                         var car = detail[0].car_detail + ' ทะเบียน ' + detail[0].car
                         var det = String(detail[0].booking_detail).split("~")
                         var tf = ''
-                        if (status == 2) {
+                        if (status != 3) {
                             (detail[0].type_car == 1 ? (tf = true) : (tf = false))
                         } else {
                             tf = false
@@ -138,14 +138,14 @@
                                 ' </div><div  class="text-left" style="font-size:0.9rem;" >รายละเอียด : ' +
                                 det[0] +
                                 '</div><div class="text-left" style="font-size:0.9rem" >พนักงานขับ : ' +
-                                (status == 2 ? driver : '-') +
+                                (status != 3 ? driver : '-') +
                                 '</div><div class="text-left" style="font-size:0.9rem"> รถที่ใช้ : ' + (
-                                    status == 2 ? car : '-') +
+                                    status != 3 ? car : '-') +
                                 ' </div> <div  class="text-left" style="font-size:0.9rem">สถานะ : ' + (
-                                    status == 2 ? 'อนุมัติ' : 'ยกเลิก') +
+                                    status != 3 ? 'อนุมัติ' : 'ยกเลิก') +
                                 '</div> <div  class="text-left" style="font-size:0.9rem">หมายเหตุ : ' + (
-                                    status == 2 ? '-' : det[1]) + '</div> </div> </div>',
-                            icon: (status == 2 ? 'success' : 'error'),
+                                    status != 3 ? '-' : det[1]) + '</div> </div> </div>',
+                            icon: (status != 3 ? 'success' : 'error'),
                             showCancelButton: (status == 2 ? true : false),
                             showDenyButton: (tf ? true : false),
                             confirmButtonText: '<i class="fa-solid fa-check"> ตกลง',

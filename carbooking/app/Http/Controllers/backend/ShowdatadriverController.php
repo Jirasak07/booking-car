@@ -17,8 +17,8 @@ class ShowdatadriverController extends Controller
         $id = Auth::user()->id;
         $booking = DB::table('tb_booking')->where('booking_status', '>', 1)->where('type_car', 1)->where('driver', $id)->get();
 
-        $sumbooking = DB::table('tb_booking')->where('type_car', 1)->where('driver', $id)->where('booking_status','>',1)->count();
-        $padding = DB::table('tb_booking')->where('type_car', 1)->where('driver', $id)->where('booking_status','=',2)->count();
+        $sumbooking = DB::table('tb_booking')->where('type_car', 1)->where('driver', $id)->where('booking_status', '>', 1)->count();
+        $padding = DB::table('tb_booking')->where('type_car', 1)->where('driver', $id)->where('booking_status', '=', 2)->count();
         //return response()->json(['booking' => $booking, 'sumbooking' => $sumbooking, 'padding' => $padding]);
         return view('driver.index')->with(['booking' => $booking, 'sumbooking' => $sumbooking, 'padding' => $padding]);
     }
@@ -27,6 +27,6 @@ class ShowdatadriverController extends Controller
         $booking_compleace = BookingModel::find($id);
         $booking_compleace->booking_status = 5;
         $booking_compleace->save();
-        return response('success');
+        return response()->json(['status' => 'success']);
     }
 }
