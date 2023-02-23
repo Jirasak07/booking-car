@@ -371,13 +371,13 @@ class ShowdataController extends Controller
             ->get();
 
             $driver =DB::table('tb_booking')
-            ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
+    
             ->join('users', 'tb_booking.driver', '=', 'users.id')
             ->where('tb_booking.type_car', '=', '1')
             ->where('tb_booking.booking_status', '!=', '3')
             ->where('tb_booking.booking_status', '!=', '1')
             ->where('tb_booking.booking_end', '>', $format_date)
-            ->select('name', 'car_license', 'car_model', 'tb_booking.*')
+            ->select('name',  'tb_booking.*')
             ->get();
 
         foreach ($booking_join1 as $item) {
@@ -390,7 +390,7 @@ class ShowdataController extends Controller
                 'color' => '#06d6a0 ',
                 'data'=>$item->name,
                 'type'=>'2',
-                'titlee'=> ' รถภายใน : '. $item->car_model.'  ทะเบียน : '.$item->car_license.' พนักงานขับ : '.$driver->name
+                'titlee'=> ' รถภายใน : '. $item->car_model.'  ทะเบียน : '.$item->car_license.' พนักงานขับ : '//---
 
             ];
         }
