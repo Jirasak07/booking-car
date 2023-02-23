@@ -46,9 +46,6 @@ class SettingController extends Controller
         $driver->status = ('2');
         $driver->save();
       }else if($driver->status == 2){
-        $driver->status = ('3');
-        $driver->save();
-      }else if($driver->status == 3){
         $driver->status = ('1');
         $driver->save();
       }

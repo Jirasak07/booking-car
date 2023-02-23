@@ -41,6 +41,7 @@ Route::get('showhidetail/{id}',[BookingController::class,'detail_history']);
 Route::get('show/listdata',[ShowDataBookingapi::class,'list_booking']);//สรปุการจองแต่ละรายการ
 Route::get('show/car',[ShowDataBookingapi::class,'showcar']);//แสดงรถทั้งหมด
 Route::get('show/driver',[ShowDataBookingapi::class,'showdriver']);//แสดงคนขับทั้งหมด
+Route::get('show/user',[ShowDataBookingapi::class,'showuser']);//แสดง Usermั้งหมด
 Route::get('show/booking',[ShowDataBookingapi::class,'showbooking']);//show before aprove
 Route::get('show/booking/{id}',[ShowDataBookingapi::class,'show_booking']);//show การจองฝั่ง User
 Route::get('show/history',[ShowDataBookingapi::class,'showhistory']);//ประวัติการจอง

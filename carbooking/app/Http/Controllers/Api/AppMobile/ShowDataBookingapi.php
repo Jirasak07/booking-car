@@ -118,6 +118,10 @@ class ShowDataBookingapi extends Controller
         return response()->json(['driver' => User::where('role_user','3')->get()]);
     }
 
+    function showuser(){
+        return response()->json(['user'=> User::All()]);
+    }
+
     public function caranddriver_edit($id)
     {
         $date = BookingModel::find($id);
