@@ -15,7 +15,7 @@ class Aproveapi extends Controller
     //
 
     function Aprove_in(Request $request){
-        $id = $request->id_form;
+        $id = $request->id;
         $booking_aprove = BookingModel::find($id);
         if ($booking_aprove->booking_status == 1) {
             $booking_aprove->license_plate = $request->car_id;
@@ -24,18 +24,20 @@ class Aproveapi extends Controller
             $booking_aprove->booking_status = "2";
             $booking_aprove->save();
             
+     
             $booking = DB::table('tb_booking')
             ->join('tb_cars', 'tb_booking.license_plate', '=', 'tb_cars.id')
             ->join('users', 'tb_booking.driver', '=', 'users.id')
-            ->join('users', 'tb_booking.username', '=', 'users.id')
+
             ->select('name as driver', 'car_license', 'tb_booking.booking_detail as detail',
-            'tb_booking.booking_start as sdate','tb_booking.booking_end as edate','car_model','users.name as name')
+            'tb_booking.booking_start as sdate','tb_booking.booking_end as edate','car_model')
             ->where('tb_booking.id', $id)
             ->get();
-        $item= $booking[0];
+
+            $item = $booking[0];
         $data = [
             'license' => $item->car_license,
-            'name'=> $item->name,
+          
             'driver' => $item->driver,
             'car'=> $item->car_model,
             'detail'=> $item->detail,
