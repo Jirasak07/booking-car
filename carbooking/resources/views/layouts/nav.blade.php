@@ -24,7 +24,7 @@
         <ul class="navbar-nav  align-items-center d-none d-md-flex">
 
             <li class="nav-item dropdown">
-                <a class=" pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                <div class=" pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
                     <div class="media align-items-center ">
                         <h4 class="text-overflow m-0 text-light px-2">{{ Auth::user()->name }}</h4>
@@ -38,7 +38,7 @@
                             <span class="mb-0 text-sm  font-weight-bold">{{-- {{ auth()->user()->name }} --}}</span>
                         </div>
                     </div>
-                </a>
+                </div>
 
             </li>
         </ul>
