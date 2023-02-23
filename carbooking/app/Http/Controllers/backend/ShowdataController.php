@@ -30,13 +30,13 @@ class ShowdataController extends Controller
     public function history()
     {
         $currentURL = request()->getHttpHost();
-        $response = Http::get('http://' . $currentURL . '/index.php/api/booking');
+        
         $his = Http::get('http://' . $currentURL . '/index.php/api/showhistory');
 
-        $jsonData = $response->json();
+       
         $datahis = $his->json();
 
-        return view('admin.booking_history')->with(['history' => $jsonData, 'hiss' => $datahis]);
+        return view('admin.booking_history')->with(['hiss' => $datahis]);
     }
 
     public function showcalendar()

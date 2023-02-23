@@ -12,11 +12,11 @@
                 <table class="table  fw-bold w-100" id="dr_table">
                     <thead class="table-dark table-hover">
                         <tr align="center">
-                            <th class="fw-bolder" style="font-size: 18px">ลำดับ</th>
-                            <th class="fw-bolder" style="font-size: 18px">ช่วงวันที่</th>
-                            <th class="fw-bolder" style="font-size: 18px">รายละเอียด</th>
-                            <th class="fw-bolder" style="font-size: 18px">สถานะ</th>
-                            <th class="fw-bolder" style="font-size: 18px">จัดการ</th>
+                            <th class="fw-bolder" style="font-size: 16px">ลำดับ</th>
+                            <th class="fw-bolder" style="font-size: 16px">ช่วงวันที่</th>
+                            <th class="fw-bolder" style="font-size: 16px">รายละเอียด</th>
+                            <th class="fw-bolder" style="font-size: 16px">สถานะ</th>
+                            <th class="fw-bolder" style="font-size: 16px">จัดการ</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -46,10 +46,10 @@
                                         <i class="fa-solid fa-square-check" style="color: green;font-size:24px"></i>
                                     @endif
                                 </td>
-                                <td>
+                                <td align="center">
                                     @if ($item->booking_status == 4)
-                                        <button class="btn btn-success btn-sm"
-                                            onclick="complete({{ $item->id }})">ดำเนิการเสร็จสิ้น</button>
+                                        <button class="btn btn-success btn-sm" onclick="complete({{ $item->id }})"
+                                            style="font-size: 13px">ดำเนินการเสร็จสิ้น</button>
                                     @endif
                                 </td>
 
@@ -111,7 +111,8 @@
                             <strong for="" class="col-sm-3 col-form-label ">สาเหตุการยกเลิก</strong>
                             <div class="col-sm-8">
                                 <label name="" id="detail_booking_cancel" cols="30" disabled
-                                    rows="5"value="" readonly class="form-control-plaintext text-red"></label>
+                                    rows="5"value="" readonly
+                                    class="form-control-plaintext text-red"></label>
                             </div>
                         </div>
                     </div>
@@ -139,26 +140,26 @@
                 },
                 responsive: true,
                 columnDefs: [{
-                            responsivePriority: 1,
-                            targets: 0
-                        },
-                        {
-                            responsivePriority: 2,
-                            targets: 2
-                        },
-
-                    ],
-                    lengthMenu: [10, 20, 50, 100, ],
-                    language: {
-                        lengthMenu: "แสดง _MENU_ รายการ",
-                        search: "ค้นหาข้อมูลในตาราง",
-                        info: "แสดงข้อมูล _END_ จากทั้งหมด _TOTAL_ รายการ",
-                        paginate: {
-                            previous: "ก่อนหน้า",
-                            next: "ถัดไป",
-
-                        },
+                        responsivePriority: 1,
+                        targets: 0
                     },
+                    {
+                        responsivePriority: 2,
+                        targets: 2
+                    },
+
+                ],
+                lengthMenu: [10, 20, 50, 100, ],
+                language: {
+                    lengthMenu: "แสดง _MENU_ รายการ",
+                    search: "ค้นหาข้อมูลในตาราง",
+                    info: "แสดงข้อมูล _END_ จากทั้งหมด _TOTAL_ รายการ",
+                    paginate: {
+                        previous: "ก่อนหน้า",
+                        next: "ถัดไป",
+
+                    },
+                },
             });
         });
 
@@ -216,19 +217,72 @@
         function complete(id) {
             var h = window.location.pathname
             var s = h.split('/')
-            var status = '';
-            var car_detail;
-            var url = '/' + s[2] + '/detail/' + id;
-            //console.log(url);
-            $.ajax({
-                type: 'GET',
-                url: url,
-                dataType: 'JSON',
-                success: function(res) {
-                    console.log(res);
-                    moment.locale('th');
-                }
-            });
+            const data = @json($booking);
+            const namecancel = [];
+
+            data.forEach(show => {
+                    if (show.id == id) {
+                        namecancel.push(show);
+                    }
+                }),
+                (async () => {
+                    moment.locale('th')
+                    const bstart = moment(JSON.stringify(namecancel[0].booking_start)).format(' D MMM ' + (new Date(
+                            namecancel[0].booking_start)
+                        .getFullYear() +
+                        543) + ' เวลา HH:mm');
+                    const bend = moment(JSON.stringify(namecancel[0].booking_end)).format(' D MMM ' + (new Date(
+                            namecancel[0].booking_end)
+                        .getFullYear() +
+                        543) + ' เวลา HH:mm');
+                    console.log(namecancel)
+                    const {
+                        value: text
+                    } = await Swal.fire({
+                        title: '<h2 class="text-darker">ยืนยันการดำเนินการเสร็จสิ้นใช่หรือไม่</h2>',
+
+                        // inputLabel: '<div>jjj</div>รายการจองของ ' + namecancel[0].name,
+                        html: '<div class="col-10" ><div style="width: max-content;">' +
+                            '<div style="font-size:1rem;" ><span style="font-weight:800">ระหว่างวันที่ :</span> ' +
+                            bstart + ' - ' + bend +
+                            '</div><div class="text-left" style="font-size:1rem"><span style="font-weight:800">รายละเอียด : </span>' +
+                            namecancel[0].booking_detail + ' </div> </div></div>',
+                        icon: 'question',
+                        showCancelButton: true,
+                        confirmButtonColor: '#4E31AA',
+                        cancelButtonColor: '#ef476f',
+                        confirmButtonText: 'ยืนยัน',
+                        cancelButtonText: 'ยกเลิก',
+
+                    }).then((result) => {
+                        console.log(result)
+                        if (result.isConfirmed) {
+                            if (result.value) {
+                                $.ajax({
+                                    type: 'GET',
+                                    url: '/' + s[2] + '/compleace/' + id,
+                                    dataType: 'JSON',
+                                    success: function(data) {
+                                        if (data.status == 'success') {
+                                            Swal.fire({
+                                                title: 'เสร็จสิ้น',
+                                                icon: 'success',
+                                                confirmButtonText: 'ตกลง',
+                                            }).then((data) => {
+                                                window.location.reload();
+                                            })
+                                        } else {
+                                            Swal.fire({
+                                                title: 'Error',
+                                                icon: 'error',
+                                            })
+                                        }
+                                    },
+                                });
+                            }
+                        }
+                    })
+                })()
         }
     </script>
 @endpush
