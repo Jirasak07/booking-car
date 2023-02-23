@@ -465,7 +465,7 @@ class ShowdataController extends Controller
                 ->join('users', 'tb_booking.username', '=', 'users.id')
                 ->join('tb_out_cars', 'tb_booking.license_plate', '=', 'tb_out_cars.id')
                 ->where('tb_booking.id', '=', $id)
-                ->select('car_out_license as car', 'car_out_model as car_detail', 'car_out_driver as driver', 'car_out_tel as tel', 'owner', 'booking_start as sdate', 'booking_end as edate', 'booking_detail', 'type_car', 'users.name as name_user','booking_status')
+                ->select('car_out_license as car', 'car_out_model as car_detail', 'car_out_driver as driver', 'car_out_tel as tel', 'owner', 'booking_start as sdate', 'booking_end as edate', 'booking_detail', 'type_car', 'users.name as user','booking_status')
                 ->get();
         } else {
             $Detail = DB::table('tb_booking')
