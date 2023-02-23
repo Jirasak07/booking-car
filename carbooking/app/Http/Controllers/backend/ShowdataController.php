@@ -428,7 +428,6 @@ class ShowdataController extends Controller
 
     public function detail_history($id)
     {
-
         $booking = BookingModel::find($id);
 
         if ($booking->type_car == '1') {
@@ -460,7 +459,6 @@ class ShowdataController extends Controller
             'type_car' => $item->type_car,
            
         ];
-
         } else if ($booking->type_car == '2') {
             $Detail = DB::table('tb_booking')
 
@@ -476,9 +474,9 @@ class ShowdataController extends Controller
                 ->select('booking_start as sdate', 'booking_end as edate', 'booking_detail', 'type_car', 'driver', 'license_plate as car', 'users.name as name_user','booking_status','type_car')
                 ->get();
         }
-        return response()->json(
-            $Detail
-        );
+        return response()->json([
+            'detail' => $Detail,
+        ]);
 
     }
     function show_booking()
