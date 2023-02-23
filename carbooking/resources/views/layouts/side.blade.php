@@ -92,7 +92,7 @@
                         <a class="{{ 'driver/dashboard' == request()->path() ? 'nav-link text-darker' : 'nav-link ' }}"
                             style="font-weight: 600;font-size:1rem"
                             href="{{ route('users.view-booking', Auth::user()->id) }}">
-                            <i class="fa-solid fa-calendar-days"></i> {{ __('Dashboard') }}
+                            <i class="fa-solid fa-gauge-high "></i> {{ __('Dashboard') }}
                         </a>
                     </li>
 
