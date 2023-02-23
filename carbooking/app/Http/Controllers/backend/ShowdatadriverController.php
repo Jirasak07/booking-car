@@ -15,7 +15,7 @@ class ShowdatadriverController extends Controller
     public function showbooking()
     {
         $id = Auth::user()->id;
-        $booking = DB::table('tb_booking')->where('booking_status', '>', 1)->where('type_car', 1)->where('driver', $id)->Orderby('booking_status','Asc')->get();
+        $booking = DB::table('tb_booking')->where('booking_status', '>', 1)->where('type_car', 1)->where('driver', $id)->get();
 
         $sumbooking = DB::table('tb_booking')->where('type_car', 1)->where('driver', $id)->where('booking_status','>',1)->count();
         $padding = DB::table('tb_booking')->where('type_car', 1)->where('driver', $id)->where('booking_status','=',2)->count();
