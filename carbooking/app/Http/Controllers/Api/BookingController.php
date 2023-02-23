@@ -114,4 +114,14 @@ class BookingController extends Controller
         );
 
     }
+
+
+    public function showbooking($id){
+        // $id = Auth::id();
+        $booking = DB::table('tb_booking')->where('booking_status','>',1)->where('type_car',1)->where('driver',$id)->get();
+
+        $sumbooking = BookingModel::where('driver',$id)->count();
+        $padding = BookingModel::where('booking_status',2)->where('driver',$id)->count();
+         return response(['booking'=>$booking,'sumbooking'=>$sumbooking,'padding'=>$padding]);
+    }
 }

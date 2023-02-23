@@ -12,8 +12,8 @@ use Illuminate\Support\Facades\DB;
 class ShowdatadriverController extends Controller
 {
     //
-    public function showbooking(){
-        $id = Auth::id();
+    public function showbooking($id){
+        // $id = Auth::id();
         $booking = DB::table('tb_booking')->where('booking_status','>',1)->where('type_car',1)->where('driver',$id)->get();
 
         $sumbooking = BookingModel::where('driver',$id)->count();
