@@ -35,7 +35,7 @@ class Settingapi extends Controller
         }
         $time->save();
       
-             return response()->json($time);
+        return response()->json(201);
         
 
     }

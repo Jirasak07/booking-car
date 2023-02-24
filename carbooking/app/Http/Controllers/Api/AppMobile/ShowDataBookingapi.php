@@ -119,6 +119,7 @@ class ShowDataBookingapi extends Controller
     }
 
     function showuser(){
+        
         return response()->json(['user'=> User::All()]);
     }
 
